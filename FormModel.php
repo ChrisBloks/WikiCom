@@ -85,5 +85,3 @@ class FormModel //extends BaseModel
         }
     }
 }
-$test = new FormModel();
-print_r($test->getForm("contact"));
