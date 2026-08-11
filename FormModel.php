@@ -19,68 +19,26 @@ class FormModel //extends BaseModel
     //     return $result;
     // }
     // }
-    public function getForm($page_value)
+    public function getFieldInfo($page_value)
     {
         if ($page_value == "login") {
             return [
-                "login" => '<form method="post">
-                            <label for="username" class="">Naam:</label>
-                            <div>
-                            <input type="text" class="" name="uname" value = "" id ="username">
-                            </div>
-                            <label for="ww" class="">Wachtwoord:</label>
-                            <div>
-                            <input type="password" class="" name= "ww" value = """ id ="ww">
-                            </div>
-                            <a class="one" href="index.php?page=Register">Maak nieuw account aan</a>
-                            <div>     
-                            <button type="submit" class="" name="page" value="Login"> Login </button>
-                            </div>
-                            </form>'
+                "name"=> "text",
+                "password"=> "password",
+                "message"=> "text",
             ];
         } elseif ($page_value == 'register') {
             return [
-                'register' => '<form method="post">
-                                <label for="username" class="">Naam:</label>
-                                <div>
-                                <input type="text" class="" name="uname" value = "" id ="username">
-                                </div>
-                                <label for="email" class="">Email:</label>
-                                <div>
-                                    <input type="email" class="" name="email" value="" id="email">
-                                </div>
-                                <label for="ww" class="">Wachtwoord:</label>
-                                <div>
-                                <input type="password" class="" name= "ww" value = """ id ="ww">
-                                </div>
-                                <label for="hww" class="">Herhaal Wachtwoord:</label>
-                                <div>
-                                <input type="password" class="" name="hww" value="" id="hww">
-                                </div>
-                                <div>
-                                <button type="submit" class="" name="page" value="register"> Register </button>
-                                </div>
-                                </form>'
+                "name"=> "text",
+                "email"=> "email",
+                "password"=> "password",
+                "verifypassword"=> "password",
             ];
         } elseif ($page_value == 'contact') {
             return [
-                'contact' => '<form method="post">
-                            <label for="username" class="">Naam:</label>
-                            <div>
-                            <input type="text" class="" name="uname" value = "" id ="username">
-                            </div>
-                            <label for="email" class="">Email:</label>
-                            <div>
-                            <input type="email" class="" name= "email" value = "" id ="email">
-                            </div>
-                            <label for="bericht" class="">Bericht:</label>
-                            <div>
-                            <textarea class="" name= "bericht" value = "" id ="bericht"></textarea>
-                            </div>
-                            <div>     
-                            <button type="submit" class="" name="page" value="message"> Verstuur bericht </button>
-                            </div>
-                            </form>'
+                "name"=> "text",
+                "email"=> "email",
+                "message"=> "textarea",
             ];
         }
     }
