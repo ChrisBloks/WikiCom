@@ -12,11 +12,12 @@ abstract class ModelSelector
     public static function __callStatic($method, $args)
     {
         $model = substr($method, 3);
-        require_once "Model/$model.php";
+        require_once "./src/models/$model.php";
         return self::initializeModel($model);
     }
     public static function callModel($page)
     {
+        $page = ucfirst($page);
         if (array_key_exists($page, self::$modelinfo));
         {
             $function = self::$modelinfo[$page];

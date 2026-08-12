@@ -16,7 +16,7 @@ require_once "./src/views/Form.php";
 
 require_once "./src/views/fields/select.php";
 require_once "./src/views/fields/CheckBox.php";
-require_once "./src/models/FormModel.php";
+require_once "./src/models/ModelSelector.php";
 require_once "./src/models/Crud.php";
 require_once "./src/models/BaseModel.php";
 
@@ -75,8 +75,8 @@ $form_info = [
 
 //             ]
 // ];
-$FormModel = new FormModel();
-$form_fields = $FormModel->getFieldInfo("login");
+
+$form_fields = ModelSelector::callModel("form") -> getFieldInfo("login");
 
 $formFactory = new FormFactory();
 $form = $formFactory->createForm($form_info, $form_fields);
