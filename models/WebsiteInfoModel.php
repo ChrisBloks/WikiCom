@@ -1,4 +1,14 @@
 <?php
+$user = $_ENV["USERDOMAIN"];
+switch ($user) {
+        case "DANNY":
+                include_once "../config/danny.php";
+                break;
+        case "":
+                break;
+        case "":
+                break;
+}
 require_once "Crud.php";
 require_once "BaseModel.php";
 
@@ -8,27 +18,42 @@ class WebsiteInfoModel extends BaseModel
     public function getBodyText($page_value, $user_id = '')
     {
         if ($page_value == 'home') {
-            $sql = "SELECT bodytext FROM website_info WHERE name=:page";
+            $sql = "SELECT bodytext FROM website_info 
+                    WHERE name=:page";
             $params = ["page" => $page_value];
-            $stmt = $this->crudTemp-> db->prepare($sql);
+            $stmt = $this->crudTemp->db->prepare($sql);
             $stmt->execute($params);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result;
-        } elseif ( $page_value == "about") {
-            $sql = "SELECT name,description,imgFileName FROM user WHERE id=:userid";
+        } elseif ($page_value == "about") {
+            $sql = "SELECT name,description,imgFileName FROM user 
+                    WHERE id=:userid";
             $params = ["userid" => $user_id];
-            $stmt = $this->crudTemp -> db->prepare($sql);
+            $stmt = $this->crudTemp->db->prepare($sql);
             $stmt->execute($params);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result;
-        }
-        else {
+        } else {
             return false;
         }
 
     }
+
+    public function saveContact(string $name, string $email, string $message)
+    {
+        $sql = "INSERT INTO contact_messages (name,message,email,date) 
+                VALUES (:name,:message,:email,:date)";
+        $params = [
+            "name" => $name,
+            "message" => $message,
+            "email" => $email,
+            "date" => date('Y-m-d'),
+        ];
+        $stmt = $this->crudTemp->db->prepare($sql);
+        $stmt->execute($params);
+        return $this->crudTemp->db->lastInsertId();
+    }
 }
 
 $test = new WebsiteInfoModel();
-print_r($test->getBodyText("home",'Danny'));
-print_r($test->getBodyText("about",1));
+print_r($test->saveContact("about", "test","test"));
