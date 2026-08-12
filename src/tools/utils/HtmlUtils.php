@@ -1,0 +1,20 @@
+<?php
+
+class HtmlUtils
+{
+
+
+
+    public static function printLabel(string $id, string $label)
+    {
+        return
+            '<label for="' . $id . '">' . $label . '</label>';
+    }
+
+    public static function dump(string $var_name, mixed $var_value, bool $as_code = false): void
+    {
+        echo '<h3>' . $var_name . '</h3><' . ($as_code ? 'code' : 'pre') . '>';
+        is_array($var_value) ? print_r($var_value) : var_dump($var_value);
+        echo '</' . ($as_code ? 'code' : 'pre') . '>';
+    }
+}
