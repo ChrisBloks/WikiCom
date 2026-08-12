@@ -10,7 +10,12 @@ class TextAreaField extends BaseField implements iElement {
         parent::__construct($name, $label, $class);
 
         // rows and cols should be variable eventually
-        $this->html .= '<textarea rows="5" cols="56" name="'.$name.'" class="'.$class.'">'.self::$instance_count.'</textarea><br>';
+        $this->html .= '<textarea rows="5" 
+                                cols="56" 
+                                name="'.$name.'" 
+                                class="'.$class.'">'
+                                .$this->id.'
+                                </textarea><br>';
     }
 
     public function show(): string {

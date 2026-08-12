@@ -1,6 +1,6 @@
 <?php
 require_once "./src/tools/traits/tElementContainer.php";
-
+require_once "./src/tools/interfaces/iElement.php";
 class ContainerElement implements iElement{
 
 
