@@ -8,9 +8,7 @@ class UserInfoModel extends BaseModel
                 $sql = "SELECT id,name,password FROM user 
                         WHERE name=:username";
                 $params = ["username" => $username];
-                $stmt = $this->crudTemp->db->prepare($sql);
-                $stmt->execute($params);
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $result = $this->crudTemp->selectOne($sql, $params);
 
                 if ($result and $result["password"] == $password) {
                         return ["id" => $result["id"], "name" => $result["name"]];
@@ -22,9 +20,7 @@ class UserInfoModel extends BaseModel
                 $sql = "SELECT email FROM user 
                         WHERE email=:email";
                 $params = ["email"=> $email];
-                $stmt = $this->crudTemp->db->prepare($sql);
-                $stmt->execute($params);
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $result = $this->crudTemp->selectOne($sql, $params);
                 return empty($result);
         }
 
@@ -39,9 +35,7 @@ class UserInfoModel extends BaseModel
                             "imgFileName" => $imgFileName,
                             "description" => $description
                 ];
-                $stmt = $this->crudTemp->db->prepare($sql);
-                $stmt->execute($params);
-                return $this->crudTemp->db->lastInsertId();
+                return $this->crudTemp->insert($sql, $params);
         }
 
         public function fetchUserInfoById (int $user_id)
@@ -49,10 +43,7 @@ class UserInfoModel extends BaseModel
                 $sql = "SELECT * FROM user 
                         WHERE id=:user_id";
                 $params = ['user_id' => $user_id];
-                $stmt = $this->crudTemp->db->prepare($sql);
-                $stmt->execute($params);
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                return $result;
+                return $this->crudTemp->selectOne($sql, $params);
         }
 
 }

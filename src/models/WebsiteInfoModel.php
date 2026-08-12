@@ -21,18 +21,12 @@ class WebsiteInfoModel extends BaseModel
             $sql = "SELECT bodytext FROM website_info 
                     WHERE name=:page";
             $params = ["page" => $page_value];
-            $stmt = $this->crudTemp->db->prepare($sql);
-            $stmt->execute($params);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result;
+            return $this->crudTemp->selectOne($sql, $params);
         } elseif ($page_value == "about") {
             $sql = "SELECT name,description,imgFileName FROM user 
                     WHERE id=:userid";
             $params = ["userid" => $user_id];
-            $stmt = $this->crudTemp->db->prepare($sql);
-            $stmt->execute($params);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result;
+            return $this->crudTemp->selectOne($sql, $params);
         } else {
             return false;
         }
@@ -49,11 +43,6 @@ class WebsiteInfoModel extends BaseModel
             "email" => $email,
             "date" => date('Y-m-d'),
         ];
-        $stmt = $this->crudTemp->db->prepare($sql);
-        $stmt->execute($params);
-        return $this->crudTemp->db->lastInsertId();
+        return $this->crudTemp->insert($sql, $params);
     }
 }
-
-$test = new WebsiteInfoModel();
-print_r($test->saveContact("about", "test","test"));

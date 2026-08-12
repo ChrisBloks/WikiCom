@@ -20,20 +20,17 @@ class RatingModel extends BaseModel
         $sql = "SELECT `AVGrating` as AVGrating FROM v_article_avg_rating 
                 WHERE id=:article_id";
         $params = ["article_id" => $article_id];
-        $stmt = $this->crudTemp-> db->prepare($sql);
-        $stmt->execute($params);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+        return $this->crudTemp->selectOne($sql, $params);
     }
 
     public function saveRating(int $user_id,int $article_id, int $rating)
     {
         $sql = "INSERT INTO rating (user_id,article_id, rating) 
-                VALUES (:user_id,:article_id,:rating)";
+                VALUES (:user_id,:article_id,:rating)
+                ON DUPLICATE KEY UPDATE rating=:rating";
         $params = ["user_id"=> $user_id,"article_id"=> $article_id,"rating"=> $rating];
-        $stmt = $this->crudTemp->db->prepare($sql);
         try {
-        $stmt->execute($params);
+        $this->crudTemp->prepareAndExecute($sql,$params);
         return true;
         }
         catch (PDOException $e) {
@@ -42,6 +39,3 @@ class RatingModel extends BaseModel
     }
 }
 
-
-$test = new RatingModel();
-print_r($test->saveRating(1,1,3));

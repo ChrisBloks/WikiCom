@@ -16,6 +16,9 @@ require_once "./src/views/Form.php";
 
 require_once "./src/views/fields/select.php";
 require_once "./src/views/fields/CheckBox.php";
+require_once "./src/models/FormModel.php";
+require_once "./src/models/Crud.php";
+require_once "./src/models/BaseModel.php";
 
 
  $page = new BasePage();
@@ -37,41 +40,44 @@ $form_info = [
             "method" => "POST",
             "submit_caption" => "Send message"
             ];
-$form_fields = [
-            [
-              "type"=> "text",
-              "name"=> "name",
-              "class"=> "text-input",
-              "label"=> "Your name"
-            ],
-            [
-              "type"=> "email",
-              "name"=> "email",
-              "class"=> "text-input",
-              "label"=> "Your email"
-            ],
-            [
-              "type"=> "textarea",
-              "name"=> "message",
-              "class"=> "text-input",
-              "label"=> "Your message"
-            ],
-            [
-              "type"=> "checkboxgroup",
-              "name"=> "contact-by",
-              "class"=> "checkbox_group",
-              "label"=> "Contact-methode:",
-              "options"=> [
-                          "mail"=> "per email",
-                          "post"=> "per brief",
-                          "tel" => "telefonish",
-                          "pidgeon" => "per postduif"
-              ]
-            ],
-            [
+// $form_fields = [
+//             [
+//               "type"=> "text",
+//               "name"=> "name",
+//               "class"=> "text-input",
+//               "label"=> "Your name"
+//             ],
+//             [
+//               "type"=> "email",
+//               "name"=> "email",
+//               "class"=> "text-input",
+//               "label"=> "Your email"
+//             ],
+//             [
+//               "type"=> "textarea",
+//               "name"=> "message",
+//               "class"=> "text-input",
+//               "label"=> "Your message"
+//             ],
+//             [
+//               "type"=> "checkboxgroup",
+//               "name"=> "contact-by",
+//               "class"=> "checkbox_group",
+//               "label"=> "Contact-methode:",
+//               "options"=> [
+//                           "mail"=> "per email",
+//                           "post"=> "per brief",
+//                           "tel" => "telefonish",
+//                           "pidgeon" => "per postduif"
+//               ]
+//             ],
+//             [
 
-            ]
-];
+//             ]
+// ];
+$FormModel = new FormModel();
+$form_fields = $FormModel->getFieldInfo("login");
+
 $formFactory = new FormFactory();
 $form = $formFactory->createForm($form_info, $form_fields);
 
