@@ -30,63 +30,6 @@ require_once "./src/views/fields/CheckBox.php";
 
 
 
-// forms
-// ToDo:
-// instantiate FormController
-// page (contact, login, register)
-
-//examples 
-// start form
-// get Field info from database
-// $form_element = new Form(
-//                         action: "test.php",
-//                         method: "POST",
-//                         submit_caption: "Submit"
-//                     );
-
-
-
-// $options = [
-//   "dog"         =>"Dog",             
-//   "cat"         =>"Cat",             
-//   "hamster"     =>"Hamster",     
-//   "parrot"      =>"Parrot",       
-//   "spider"      =>"Spider",       
-//   "goldfish"    =>"Goldfish"   
-// ];
-
-
-// // checkbox text
-// $checkbox_field = new CheckBoxGroup(
-//                                 name:"animals",
-//                                 label: "checkbox_animal",
-//                                 class: "checkboxes",
-//                                 options: $options
-// );
-// $checkbox_field->setValue(["dog"]);
-// $form_element->addElement($checkbox_field);
-
-
-
-// // search test
-// $search_field = new InputField(
-//                         type: "submit", 
-//                         name: "Upload_image",
-//                         class: "search_button",
-//                         label: "Zoeke:");
-// $search_field->setValue("Zoek een bestand");
-// $form_element->addElement($search_field);
-// // select dropdown
-// $select_field = new select(
-//                             name: "animals",
-//                             label: "Choose to kill",
-//                             class: "death-roulettte",
-//                             options: $options
-// );
-// $form_element->addElement($select_field);
-
-
-
 
 // formfactory testing
 $form_info = [
