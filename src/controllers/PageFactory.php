@@ -12,7 +12,7 @@ require_once("./src/tools/traits/tErrorMessageCollector.php");
  *$tag_ids;
  *$sortBy;
  */
-class PageFactory_v1
+class PageFactory
 {
     use tErrorMessageCollector;
     private string $page;
@@ -36,7 +36,7 @@ class PageFactory_v1
                 
         */
         if ($this->hasErrors()==true) {
-            $htmlpage ->addtobodycontent(new AtomicElement(HtmlUtils::dump("Errors",$this->getErrors())));
+            HtmlUtils::dump("Errors",$this->getErrors());
         }
         
         

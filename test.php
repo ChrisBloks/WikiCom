@@ -23,12 +23,16 @@ require_once "./src/tools/utils/HtmlUtils.php";
 
 
 require_once "./src/controllers/PageFactory.php";
+require_once "./src/controllers/PageController.php";
 require_once "./src/controllers/FormFactory.php";
 require_once "./src/controllers/MenuFactory.php";
 
 //models
 require_once "./src/models/ModelSelector.php";
 
-$page_factory = new PageFactory_v1('search',true);
-$htmlpage = $page_factory->getElementsByPage();
-$htmlpage->show();
+// $page_factory = new PageFactory('search',true);
+// $htmlpage = $page_factory->getElementsByPage();
+// $htmlpage->show();
+
+$controller = new PageController();
+$controller->showResponse();
