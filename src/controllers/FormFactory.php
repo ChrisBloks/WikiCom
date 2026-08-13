@@ -1,7 +1,7 @@
 <?php
 require_once "./src/controllers/FieldFactory.php";
 require_once "./src/tools/interfaces/iElement.php";
-require_once "./src/views/Form.php";
+require_once "./src/views/containers/Form.php";
 require_once "./src/views/fields/InputField.php";
 require_once "./src/views/fields/TextAreaField.php";
 class FormFactory

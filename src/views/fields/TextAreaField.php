@@ -1,4 +1,8 @@
 <?php
+	/* Textarea field
+	*  Marius 08-2026
+	*  Class able to draw textarea's
+	*/
 require_once "./src/views/fields/BaseField.php";
 
 require_once "./src/tools/interfaces/iElement.php";
