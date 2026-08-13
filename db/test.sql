@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 aug 2026 om 13:31
+-- Gegenereerd op: 13 aug 2026 om 17:09
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -109,13 +109,14 @@ INSERT INTO `fields_per_page` (`website_info_id`, `field_info_id`) VALUES
 (3, 1),
 (3, 2),
 (3, 4),
-(4, 1),
 (4, 2),
 (4, 3),
-(4, 4),
-(4, 5),
-(4, 6),
-(4, 7);
+(5, 1),
+(5, 2),
+(5, 3),
+(5, 6),
+(6, 7),
+(6, 8);
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,8 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `display_order`, `class`, `label
 (4, 'message', 'textarea', 4, 'text-input', 'Your message', 0),
 (5, 'contact-by', 'checkboxgroup', 5, 'text-input', 'Contact-methode', 1),
 (6, 'verifypassword', 'password', 3, 'text-input', 'Verify Password', 0),
-(7, 'Author', 'select', 6, 'filter-author', 'filter_by_author', 2);
+(7, 'Author', 'select', 6, 'filter-author', 'filter_by_author', 2),
+(8, 'contact-by', 'checkboxgroup', 4, 'text-input', 'filter_by_tag', 1);
 
 -- --------------------------------------------------------
 
@@ -164,13 +166,13 @@ CREATE TABLE `menu_items` (
 --
 
 INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
-(1, 'Home', 'href\' => \'index.php?page=home\']', 0),
-(2, 'About', 'href\' => \'index.php?page=about\']', 1),
-(3, 'Contact', 'href\' => \'index.php?page=contact\']', 2),
-(4, 'Search', 'href\' => \'index.php?page=search\']', 3),
-(5, 'Register', 'href\' => \'index.php?page=register\']', 4),
-(6, 'Login', 'href\' => \'index.php?page=login\']', 5),
-(7, 'Dashboard', 'href\' => \'index.php?page=dashboard\']', 6);
+(1, 'Home', '?page=home', 0),
+(2, 'About', '?page=about', 1),
+(3, 'Contact', '?page=contact', 2),
+(4, 'Search', '?page=search', 3),
+(5, 'Register', '?page=register', 4),
+(6, 'Login', '?page=login', 5),
+(7, 'Dashboard', '?page=dashboard', 6);
 
 -- --------------------------------------------------------
 
@@ -261,7 +263,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny', 'Password', 'danny@email.com', 'image.jpg', 'This is the description of Danny'),
+(1, 'Danny', 'Password', 'danny@email.com', 'image.jpg', 'This is the description of user from database'),
 (2, 'user2', 'asdfsd', 'dadfa@adfaf.com', 'user2.jpg', 'the description of user2'),
 (3, 'Danny3', 'Password', 'danny@email1.com', '', ''),
 (5, 'Danny5', 'Password', 'danny@email12.com', '', '');
@@ -294,10 +296,12 @@ CREATE TABLE `website_info` (
 --
 
 INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
-(1, 'home', 'This is the bodytext for home'),
+(1, 'home', 'This is the bodytext for home from the database'),
 (2, 'about', ''),
 (3, 'contact', ''),
-(4, 'login', '');
+(4, 'login', ''),
+(5, 'register', ''),
+(6, 'search', '');
 
 -- --------------------------------------------------------
 
@@ -409,7 +413,7 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT voor een tabel `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT voor een tabel `menu_items`
@@ -427,7 +431,7 @@ ALTER TABLE `page_elements`
 -- AUTO_INCREMENT voor een tabel `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT voor een tabel `text`
@@ -445,7 +449,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT voor een tabel `website_info`
 --
 ALTER TABLE `website_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
