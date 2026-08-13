@@ -26,6 +26,12 @@ require_once "./src/controllers/PageFactory.php";
 require_once "./src/controllers/FormFactory.php";
 require_once "./src/controllers/MenuFactory.php";
 
+//models
+require_once "./src/models/ModelSelector.php";
+
 $page_factory = new PageFactory_v1('search',true);
 $htmlpage = $page_factory->getElementsByPage();
-$htmlpage->show();
+
+ModelSelector::callModel('article')-> addNewTag("tag82");
+
+HtmlUtils::dump("getError",ModelSelector::callModel('article')-> getErrors());

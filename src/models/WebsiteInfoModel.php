@@ -29,6 +29,7 @@ class WebsiteInfoModel extends BaseModel
             $params = ["userid" => $user_id];
             return $this->crudTemp->selectOne($sql, $params);
         } else {
+            $this -> logError("Page has no Body text");
             return false;
         }
 

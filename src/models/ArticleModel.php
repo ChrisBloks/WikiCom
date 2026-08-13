@@ -2,9 +2,10 @@
 $user = $_ENV["USERDOMAIN"];
 switch ($user) {
         case "DANNY":
-                include_once "../config/danny.php";
+                include_once "./config/danny.php";
                 break;
-        case "":
+        case "MARUISPC":
+            include_once "./config/marius.php";
                 break;
         case "":
                 break;
@@ -129,6 +130,7 @@ class ArticleModel extends BaseModel
                         $this->crudTemp->prepareAndExecute($sql,$params);
                         return true;
                 } catch (PDOException $e) {
+                        $this->logError($e);
                         return false;
                 }
         }
