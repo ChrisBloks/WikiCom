@@ -2,7 +2,7 @@
 require_once "./src/tools/interfaces/iElement.php";
 require_once "./src/views/fields/BaseField.php";
 
-class select extends BaseField{
+class Select extends BaseField{
 
 protected array $options =[];
 
