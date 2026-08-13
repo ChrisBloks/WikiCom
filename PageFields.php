@@ -58,8 +58,8 @@ class PageFields
                     ]
                 ];
 
-            case'register':
-                                return [
+            case 'register':
+                return [
                     'form_info' => [
                         "action"         => "login.php",
                         "method"         => "POST",
@@ -78,13 +78,13 @@ class PageFields
                             "class" => "text-input",
                             "label" => "Password"
                         ],
-                                                [
+                        [
                             "type"  => "password",
                             "name"  => "password",
                             "class" => "text-input",
                             "label" => "Password"
                         ],
-                                                [
+                        [
                             "type"  => "password",
                             "name"  => "verifypassword",
                             "class" => "text-input",
@@ -92,9 +92,43 @@ class PageFields
                         ]
                     ]
                 ];
-            // case 'search':
-            // case 'editArticle':
-            // ToDo
+            case 'search':
+                return [
+                    'form_info' =>[
+                    "action"         => "articles.php",
+                    "method"         => "GET",
+                    "submit_caption" => "Filter"
+                ],
+
+                'form_fields' => [
+                    [
+                        "type"    => "checkboxgroup",
+                        "name"    => "tags",
+                        "class"   => "filter-tags",
+                        "label"   => "Filter by tag",
+                        "options" => [
+                            "php"  => "PHP",
+                            "oop"  => "OOP",
+                            "wiki" => "Wiki",
+                            // eventually pulled from a DB query of distinct tags
+                        ]
+                    ],
+                    [
+                        "type"    => "select",
+                        "name"    => "author",
+                        "class"   => "filter-author",
+                        "label"   => "Filter by author",
+                        "options" => [
+                            ""      => "Any author",
+                            "jdoe"  => "J. Doe",
+                            "asmith" => "A. Smith",
+                            // eventually pulled from a DB query of distinct authors
+                        ]
+                    ]
+                ]
+                ];
+
+
 
             default:
                 throw new \LogicException("No form fields defined for page: '$page'");

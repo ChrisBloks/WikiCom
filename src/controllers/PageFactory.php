@@ -22,7 +22,7 @@ class PageFactory_v1
     }
 
 
-    public function getElementsByPage()
+    public function getElementsByPage(): BasePage
     {
 
         // start and header page
@@ -61,7 +61,7 @@ class PageFactory_v1
         $htmlpage->addToBodyContent(new AtomicElement("Menu (isLoggedIn = false) ===== <br><br>"));
         $menuFactory = new MenuFactory();
         $menu = $menuFactory->createMenu($menu_items, false);
-
+        $htmlpage->addToBodyContent($menu);
         $htmlpage->addToBodyContent(new AtomicElement('----- Collected errors -----<br><br>'));
         if ($menuFactory->hasErrors()) {
             foreach ($menuFactory->getErrors() as $error) {
@@ -70,7 +70,7 @@ class PageFactory_v1
         } else {
             $htmlpage->addToBodyContent(new AtomicElement("(none)<br>"));
         }
-        $htmlpage->addToBodyContent($menu);
+        
         // tErrorMessage  ... eventually
         // tNoticeMessage ... eventually
 
@@ -100,11 +100,11 @@ class PageFactory_v1
             //case 'article':
             //    // ToDo:
             //    break;
-            //case 'search':
-            //    // Todo:
-            //    // get $form_info and $form_fields from db method here
-            //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));                
-            //    break;
+            case 'search':
+               // Todo:
+                $data = $pageFields->getFieldsForPage($this->page);
+                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $data['form_fields'], []));          
+                break;
             //case 'dashboard':
             //    // get $form_info and $form_fields from db method here
             //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
@@ -116,6 +116,6 @@ class PageFactory_v1
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
         }
         $htmlpage->addToBodyContent(new Footer("Footer text"));
-        $htmlpage->show();
+        return $htmlpage;
     }
 }
