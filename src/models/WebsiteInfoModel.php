@@ -2,9 +2,10 @@
 $user = $_ENV["USERDOMAIN"];
 switch ($user) {
         case "DANNY":
-                include_once "../config/danny.php";
+                include_once "./config/danny.php";
                 break;
-        case "":
+        case "MARUISPC":
+            include_once "./config/marius.php";
                 break;
         case "":
                 break;
@@ -44,5 +45,49 @@ class WebsiteInfoModel extends BaseModel
             "date" => date('Y-m-d'),
         ];
         return $this->crudTemp->insert($sql, $params);
+    }
+
+    public function getMenuItems($isLoggedIn)
+    {
+        if ($isLoggedIn==FALSE) {
+            $sql = "SELECT mi.label, mi.href
+                    FROM menu_items mi
+                    Where mi.label != 'Dashboard'
+                    ORDER BY mi.display_order";
+            $result = $this->crudTemp->selectMany($sql,NULL);
+            $author = $this->getAuthor();
+            $authorlist =[];
+            foreach ($author as $id => $name) 
+            {
+                $authorlist[]=["label"=> $name,"href"=> 'index.php?page=about&author='.$id.''];
+            }
+            $result[1] = array_merge($result[1],["submenu" => $authorlist]);
+    
+            return $result;     
+        }
+        else {
+            $sql = "SELECT mi.label, mi.href
+                    FROM menu_items mi
+                    Where mi.label != 'Register'
+                    AND mi.label != 'Login'
+                    ORDER BY mi.display_order";
+            $result = $this->crudTemp->selectMany($sql,NULL);
+            $author = $this->getAuthor();
+            $authorlist =[];
+            foreach ($author as $id => $name) 
+            {
+                $authorlist[]=["label"=> $name,"href"=> 'index.php?page=about&author='.$id.''];
+            }
+            $result[1] = array_merge($result[1],["submenu" => $authorlist]);
+    
+            return $result;   
+
+        }
+    }
+
+    public function getAuthor()
+    {
+        $sql = "SELECT id,name FROM user ORDER BY user.name";
+        return $this->crudTemp->selectMany($sql,NULL,PDO::FETCH_KEY_PAIR);
     }
 }

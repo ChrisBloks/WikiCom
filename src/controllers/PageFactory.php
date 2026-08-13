@@ -2,7 +2,7 @@
 // common parameters:
 // Todo: save all commands as string and loop
 // is instance of: checken voor interface class
-
+require_once("./src/models/ModelSelector.php");
 /* values to obtain from outside:
  *$isloggedIn;
  *$page_value;
@@ -13,12 +13,12 @@
  */
 class PageFactory_v1
 {
-    private array $pagecontainer = [];
-    // get page from the page controller;
     private string $page;
-    public function __construct(string $page)
+    protected bool $isLoggedIn;
+    public function __construct(string $page, bool $isLoggedIn = false)
     {
         $this->page = $page;
+        $this->isLoggedIn = $isLoggedIn;
     }
 
 
@@ -36,26 +36,9 @@ class PageFactory_v1
         // menu items
 
         // temporary hardcoded information for menu
-        $menu_items = [
-            ['label' => 'Home', 'href' => 'index.php?page=home'],
-            [
-                'label' => 'About',
-                'href' => 'index.php?page=about',
-                'submenu' => [
-                    ['label' => 'Author One', 'href' => 'index.php?page=about&author=1'],
-                    ['label' => 'Author Two', 'href' => 'index.php?page=about&author=2'],
-                ]
-            ],
-            ['label' => 'Search', 'href' => 'index.php?page=search'],
-            ['label' => 'Article', 'href' => 'index.php?page=article'],
-            ['label' => 'Contact', 'href' => 'index.php?page=contact'],
-            ['label' => 'Login', 'href' => 'index.php?page=login', 'guest_only' => true],
-            ['label' => 'Register', 'href' => 'index.php?page=register', 'guest_only' => true],
-            ['label' => 'Dashboard', 'href' => 'index.php?page=dashboard', 'auth_only' => true],
-            ['label' => 'Logout', 'href' => 'index.php?page=logout', 'auth_only' => true],
-            // test for tErrorMessageCollector malformed, to test the error collector:
-            ['label' => 'Broken Item'],
-        ];
+
+        $menu_items = ModelSelector::callModel('website')->getMenuItems($this -> isLoggedIn);
+       
 
         // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
         $htmlpage->addToBodyContent(new AtomicElement("Menu (isLoggedIn = false) ===== <br><br>"));

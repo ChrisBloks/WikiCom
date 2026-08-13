@@ -21,13 +21,6 @@ class MenuFactory
         // login/auth checks
         foreach ($menu_items as $item) {
             try {
-                if (!empty($item['guest_only']) && $isLoggedIn) {
-                    continue;
-                }
-                if (!empty($item['auth_only']) && !$isLoggedIn) {
-                    continue;
-                }
-
                 $menu->addElement($this->buildMenuItem($item, $isLoggedIn));
             } catch (\InvalidArgumentException $e) {
                 $this->logError($e->getMessage());
@@ -40,9 +33,7 @@ class MenuFactory
     private function buildMenuItem(array $item, bool $isLoggedIn)
     {
         if (empty($item['label']) || empty($item['href'])) {
-            throw new \InvalidArgumentException(
-                "Menu item missing required 'label' or 'href': " . json_encode($item)
-            );
+                $this-> logError("Menu item missing required 'label' or 'href': ");
         }
 
         $menuItem = new MenuItem($item['label'], $item['href']);

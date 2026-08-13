@@ -26,6 +26,6 @@ require_once "./src/controllers/PageFactory.php";
 require_once "./src/controllers/FormFactory.php";
 require_once "./src/controllers/MenuFactory.php";
 
-$page_factory = new PageFactory_v1('search');
+$page_factory = new PageFactory_v1('search',true);
 $htmlpage = $page_factory->getElementsByPage();
 $htmlpage->show();
