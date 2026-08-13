@@ -1,14 +1,4 @@
 <?php
-$user = $_ENV["USERDOMAIN"];
-switch ($user) {
-        case "DANNY":
-                include_once "../config/danny.php";
-                break;
-        case "":
-                break;
-        case "":
-                break;
-}
 require_once "Crud.php";
 require_once "BaseModel.php";
 
@@ -20,7 +10,12 @@ class RatingModel extends BaseModel
         $sql = "SELECT `AVGrating` as AVGrating FROM v_article_avg_rating 
                 WHERE id=:article_id";
         $params = ["article_id" => $article_id];
-        return $this->crudTemp->selectOne($sql, $params);
+        $result = $this->crudTemp->selectOne($sql, $params);
+        if (empty($result)) {
+            $this->logError("No average rating for article id");
+            $result = false;
+        }
+        return $result;
     }
 
     public function saveRating(int $user_id,int $article_id, int $rating)
@@ -34,7 +29,8 @@ class RatingModel extends BaseModel
         return true;
         }
         catch (PDOException $e) {
-            return false;
+                $this->logError($e->getMessage());
+                return false;
         }
     }
 }

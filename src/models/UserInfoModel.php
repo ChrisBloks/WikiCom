@@ -5,6 +5,7 @@ class UserInfoModel extends BaseModel
 {
         public function loginUser(string $username, string $password)
         {
+
                 $sql = "SELECT id,name,password FROM user 
                         WHERE name=:username";
                 $params = ["username" => $username];
@@ -35,7 +36,12 @@ class UserInfoModel extends BaseModel
                             "imgFileName" => $imgFileName,
                             "description" => $description
                 ];
-                return $this->crudTemp->insert($sql, $params);
+                $result = $this->crudTemp->insert($sql, $params);
+                if (empty($result)) {
+                $this->logError("registration failed");
+                $result = false;
+                }
+                return $result;
         }
 
         public function fetchUserInfoById (int $user_id)
@@ -43,7 +49,12 @@ class UserInfoModel extends BaseModel
                 $sql = "SELECT * FROM user 
                         WHERE id=:user_id";
                 $params = ['user_id' => $user_id];
-                return $this->crudTemp->selectOne($sql, $params);
+                $result = $this->crudTemp->selectOne($sql, $params);
+                if (empty($result)) {
+                $this->logError("No user with this id");
+                $result = false;
+                }
+                return $result;
         }
 
 }
