@@ -22,19 +22,58 @@ class PageFactory_v1
     }
 
 
-    public function getElementsByPage(): iElement
+    public function getElementsByPage()
     {
 
         // start and header page
         $htmlpage = new BasePage();
         $htmlpage->addtoHeadContent(new AtomicElement("<title> Testpage </title>"));
 
+
+        // title
+        $htmlpage->addToBodyContent(new Header("<h1> Website </h1>"));
+
         // menu items
-        // $menu_items = websiteModel->getMenuItems()       
-        //  $htmlpage->addToHeadContent($menu_items)
+
+        // temporary hardcoded information for menu
+        $menu_items = [
+            ['label' => 'Home', 'href' => 'index.php?page=home'],
+            [
+                'label' => 'About',
+                'href' => 'index.php?page=about',
+                'submenu' => [
+                    ['label' => 'Author One', 'href' => 'index.php?page=about&author=1'],
+                    ['label' => 'Author Two', 'href' => 'index.php?page=about&author=2'],
+                ]
+            ],
+            ['label' => 'Search', 'href' => 'index.php?page=search'],
+            ['label' => 'Article', 'href' => 'index.php?page=article'],
+            ['label' => 'Contact', 'href' => 'index.php?page=contact'],
+            ['label' => 'Login', 'href' => 'index.php?page=login', 'guest_only' => true],
+            ['label' => 'Register', 'href' => 'index.php?page=register', 'guest_only' => true],
+            ['label' => 'Dashboard', 'href' => 'index.php?page=dashboard', 'auth_only' => true],
+            ['label' => 'Logout', 'href' => 'index.php?page=logout', 'auth_only' => true],
+            // test for tErrorMessageCollector malformed, to test the error collector:
+            ['label' => 'Broken Item'],
+        ];
+
+        // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
+        $htmlpage->addToBodyContent(new AtomicElement("Menu (isLoggedIn = false) ===== <br><br>"));
+        $menuFactory = new MenuFactory();
+        $menu = $menuFactory->createMenu($menu_items, false);
+
+        $htmlpage->addToBodyContent(new AtomicElement('----- Collected errors -----<br><br>'));
+        if ($menuFactory->hasErrors()) {
+            foreach ($menuFactory->getErrors() as $error) {
+                $htmlpage->addToBodyContent(new AtomicElement("- $error <br> ====================<br>"));
+            }
+        } else {
+            $htmlpage->addToBodyContent(new AtomicElement("(none)<br>"));
+        }
+        $htmlpage->addToBodyContent($menu);
         // tErrorMessage  ... eventually
         // tNoticeMessage ... eventually
-        $htmlpage->addToBodyContent(new Header("Website"));
+
         $formFactory = new FormFactory();
         $pageFields = new PageFields();
 
@@ -75,10 +114,8 @@ class PageFactory_v1
             //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
-
         }
         $htmlpage->addToBodyContent(new Footer("Footer text"));
         $htmlpage->show();
     }
-
 }
