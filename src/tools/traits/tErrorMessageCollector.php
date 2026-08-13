@@ -19,4 +19,8 @@ trait tErrorMessageCollector
     {
         return $this->errors;
     }
+    public function emptyErrors(): void
+    {
+        unset($this->errors);
+    }
 }

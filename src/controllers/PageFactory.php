@@ -3,6 +3,7 @@
 // Todo: save all commands as string and loop
 // is instance of: checken voor interface class
 require_once("./src/models/ModelSelector.php");
+require_once("./src/tools/traits/tErrorMessageCollector.php");
 /* values to obtain from outside:
  *$isloggedIn;
  *$page_value;
@@ -13,6 +14,7 @@ require_once("./src/models/ModelSelector.php");
  */
 class PageFactory_v1
 {
+    use tErrorMessageCollector;
     private string $page;
     protected bool $isLoggedIn;
     public function __construct(string $page, bool $isLoggedIn = false)
@@ -29,6 +31,16 @@ class PageFactory_v1
         $htmlpage = new BasePage();
         $htmlpage->addtoHeadContent(new AtomicElement("<title> Testpage </title>"));
 
+        /*
+        * Errors van instances worden niet opgeslagen in pagefactory errors.
+                
+        */
+        if ($this->hasErrors()==true) {
+            $htmlpage ->addtobodycontent(new AtomicElement(HtmlUtils::dump("Errors",$this->getErrors())));
+        }
+        
+        
+        // tNoticeMessage ... eventually
 
         // title
         $htmlpage->addToBodyContent(new Header("<h1> Website </h1>"));
@@ -54,8 +66,6 @@ class PageFactory_v1
             $htmlpage->addToBodyContent(new AtomicElement("(none)<br>"));
         }
         
-        // tErrorMessage  ... eventually
-        // tNoticeMessage ... eventually
 
         $formFactory = new FormFactory();
         $pageFields = new PageFields();

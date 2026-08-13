@@ -31,7 +31,4 @@ require_once "./src/models/ModelSelector.php";
 
 $page_factory = new PageFactory_v1('search',true);
 $htmlpage = $page_factory->getElementsByPage();
-
-ModelSelector::callModel('article')-> addNewTag("tag82");
-
-HtmlUtils::dump("getError",ModelSelector::callModel('article')-> getErrors());
+$htmlpage->show();
