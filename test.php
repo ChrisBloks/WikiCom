@@ -7,6 +7,7 @@ require_once "./src/views/BasePage.php";
 require_once "./src/views/containers/ContainerElement.php";
 require_once "./src/views/containers/Header.php";
 require_once "./src/views/containers/Footer.php";
+require_once "./src/views/containers/BodyText.php";
 require_once "./src/views/HtmlDoc.php";
 require_once "./src/views/containers/AtomicElement.php";
 require_once "./src/views/containers/Form.php";
@@ -36,3 +37,5 @@ require_once "./src/models/ModelSelector.php";
 
 $controller = new PageController();
 $controller->showResponse();
+
+// htmlutils::dump("test",ModelSelector::callModel("form")->getFieldInfo("logine"));

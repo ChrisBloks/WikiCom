@@ -1,77 +1,98 @@
 <?php
-$user = $_ENV["USERDOMAIN"];
-switch ($user) {
-        case "DANNY":
-                include_once "./config/danny.php";
-                break;
-        case "MARUISPC":
-            include_once "./config/marius.php";
-                break;
-        case "":
-                break;
-}
 require_once "Crud.php";
 require_once "BaseModel.php";
-
 class ArticleModel extends BaseModel
 {
+        private static $sort_values = [
+                "rating" => "AVGrating",
+                "AVGrating" => "AVGrating",
+                "datum" => "article.lastEdit"
+        ];
 
         public function fetchArticleById($article_id)
         {
                 $sql = "SELECT * FROM article 
                         WHERE id=:article_id";
                 $params = ['article_id' => $article_id];
-                return $this->crudTemp->selectOne($sql, $params);
+                $result = $this->crudTemp->selectOne($sql, $params);
+                if (empty($result)) {
+                        $result = false;
+                }
+                return $result;
         }
 
         public function fetchArticleByUserId($user_id)
         {
-                $sql = "SELECT * FROM user 
-                        WHERE id=:user_id";
+                $sql = "SELECT * FROM article 
+                        WHERE user_id=:user_id";
                 $params = ['user_id' => $user_id];
-                return $this->crudTemp->selectOne($sql, $params);
+                $result = $this->crudTemp->selectMany($sql, $params);
+                if (empty($result)) {
+                        $result = false;
+                }
+                return $result;
         }
 
         public function fetchArticleBySearch($user_ids = [], $tag_ids = [], $sortBy = "")
         {
-                $sql_start = "SELECT DISTINCT article.title, article.summary, article.lastEdit";
-                $sql_body = "";
+                $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
+                [$joins, $where, $extra_query, $params] = $this->buildSearchQuery($user_ids, $tag_ids);
+
+                $sql = "SELECT DISTINCT article.title, article.summary, article.lastEdit"
+                        . $extra_query
+                        . " FROM article"
+                        . $joins
+                        . (!empty($where) ? " WHERE " . implode(" AND ", $where) : "")
+                        . " ORDER BY " . $sortBy . ";";
+
+
+                return $this->crudTemp->selectMany($sql, $params);
+
+        }
+
+
+        private function buildSearchQuery(array $user_ids, array $tag_ids)
+        {
+                $joins = " JOIN v_article_avg_rating as vr ON vr.id = article.id";
+                $extra_query = ", COALESCE(vr.AVGrating, 0) AS AVGrating";
+                $where = [];
                 $params = [];
-                $where_strings = [];
 
                 if (!empty($tag_ids)) {
-                        $sql_body .= " JOIN article_to_tag att ON att.article_id = article.id ";
-                        $sql_body .= " JOIN tag ON tag.id = att.tag_id  ";
-                        $placeholder = str_repeat('?,', count($tag_ids) - 1) . '?';
-                        $where_strings[] = "att.tag_id IN ($placeholder)";
-                        $params = array_merge($params, $tag_ids);
+                        $joins .= " JOIN article_to_tag att ON att.article_id = article.id"
+                                . " JOIN tag ON tag.id = att.tag_id  ";
+                        [$clause, $tagParams] = $this->inClause('att.tag_id', $tag_ids, 'tag');
+                        $where[] = $clause;
+                        $params = array_merge($params, $tagParams);
                 }
 
                 if (!empty($user_ids)) {
-                        $sql_start .= " ,user.name as author ";
-                        $sql_body .= " JOIN user ON user.id = article.user_id ";
-                        $placeholder = str_repeat('?,', count($user_ids) - 1) . '?';
-                        $where_strings[] = "article.user_id IN ($placeholder)";
-                        $params = array_merge($params, $user_ids);
+                        $extra_query .= " ,user.name as author";
+                        $joins .= " JOIN user ON user.id = article.user_id ";
+                        [$clause, $tagParams] = $this->inClause('article.user_id', $user_ids, 'user');
+                        $where[] = $clause;
+                        $params = array_merge($params, $tagParams);
                 }
 
-                $sql_start .= " ,COALESCE(vr.AVGrating,0) as AVrating ";
-                $sql_body .= " JOIN v_article_avg_rating as vr ON vr.id = article.id ";
-
-                if (!empty($where_strings)) {
-                        $sql_body .= " WHERE " . implode(" AND ", $where_strings);
-                }
-
-                $sql_start .= " FROM article ";
-                $sql_end = " ORDER BY $sortBy; ";
-
-                $sql = $sql_start . $sql_body . $sql_end;
-                return $this->crudTemp->selectOne($sql, $params);
-
+                return [$joins, $where, $extra_query, $params];
         }
+
+        private function inClause(string $reference, array $values, string $prefix)
+        {
+                $placeholders = [];
+                $params = [];
+                foreach (array_values($values) as $i => $value) {
+                        $key = $prefix . '_' . $i;
+                        $placeholders[] = ':' . $key;
+                        $params[$key] = $value;
+                }
+                $result = $reference . ' IN (' . implode(',', $placeholders) . ')';
+                return [$result, $params];
+        }
+
         public function saveNewArticleInfo($article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
         {
-                $sql = "INSERT INTO article (article.title,article.summary,article.codeBlock,article.imgFileName,article.user_id,article.lastEdit)
+                $sql = "INSERT INTO article (title, summary, codeBlock, imgFileName, user_id, lastEdit)
                         VALUES (:title,:summary,:codeBlock,:imgFileName,:user_id,:lastEdit)";
                 $params = [
                         ':title' => $article_title,
@@ -81,7 +102,12 @@ class ArticleModel extends BaseModel
                         ':user_id' => $user_id,
                         ':lastEdit' => date('Y-m-d'),
                 ];
-                return $this->crudTemp->insert($sql, $params);
+                $result = $this->crudTemp->insert($sql, $params);
+                if (empty($result)) {
+                        $this->logError("Saving article didn't work idk");
+                        $result = false;
+                }
+                return $result;
         }
 
         public function saveExistingArticleInfo($article_id, $article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
@@ -105,9 +131,10 @@ class ArticleModel extends BaseModel
                 ];
 
                 try {
-                        $this->crudTemp->prepareAndExecute($sql,$params);
+                        $this->crudTemp->prepareAndExecute($sql, $params);
                         return true;
                 } catch (PDOException $e) {
+                        $this->logError($e->getMessage());
                         return false;
                 }
         }
@@ -127,10 +154,10 @@ class ArticleModel extends BaseModel
                         VALUES (:tag_name)";
                 $params = ["tag_name" => $tag_name];
                 try {
-                        $this->crudTemp->prepareAndExecute($sql,$params);
+                        $this->crudTemp->prepareAndExecute($sql, $params);
                         return true;
                 } catch (PDOException $e) {
-                        $this->logError($e);
+                        $this->logError($e->getMessage());
                         return false;
                 }
         }
@@ -141,30 +168,12 @@ class ArticleModel extends BaseModel
                         VALUES (:article_id,:tag_id)";
                 $params = ["article_id" => $article_id, "tag_id" => $tag_id];
                 try {
-                        $this->crudTemp->prepareAndExecute($sql,$params);
+                        $this->crudTemp->prepareAndExecute($sql, $params);
                         return true;
                 } catch (PDOException $e) {
+                        $this->logError($e->getMessage());
                         return false;
                 }
         }
 }
 
-// echo exec('whoami');
-//     echo get_current_user();
-
-// $test = new ArticleModel();
-// //print_r($test->fetchArticleByUserId(2));
-// // print_r($test->fetchArticleById(2));
-// print_r($test->fetchArticleBySearch(user_ids:[1,2],sortBy:'AVGrating'));
-
-
-
-
-
-//$test = new ArticleModel();
-// $mail = "danny@email12.com";
-// if ($test -> checkEmail($mail)) {
-//         print_r($test->registerUser("Danny", "Password",$mail,"",""));
-// }
-//print_r($test->saveExistingArticleInfo(4, "testaaa", "test2ddd", "test3dd", "test.jpg", 1));
-// print_r($test->addTagToArticle(1, 5));

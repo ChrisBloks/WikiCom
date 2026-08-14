@@ -1,15 +1,4 @@
 <?php
-$user = $_ENV["USERDOMAIN"];
-switch ($user) {
-        case "DANNY":
-                include_once "./config/danny.php";
-                break;
-        case "MARUISPC":
-            include_once "./config/marius.php";
-                break;
-        case "":
-                break;
-}
 require_once "Crud.php";
 require_once "BaseModel.php";
 
@@ -18,21 +7,23 @@ class WebsiteInfoModel extends BaseModel
 
     public function getBodyText($page_value, $user_id = '')
     {
-        if ($page_value == 'home') {
-            $sql = "SELECT bodytext FROM website_info 
-                    WHERE name=:page";
-            $params = ["page" => $page_value];
-            return $this->crudTemp->selectOne($sql, $params);
-        } elseif ($page_value == "about") {
+        if ($page_value == 'about') {
             $sql = "SELECT name,description,imgFileName FROM user 
                     WHERE id=:userid";
             $params = ["userid" => $user_id];
-            return $this->crudTemp->selectOne($sql, $params);
-        } else {
+            $result = $this->crudTemp->selectOne($sql, $params);
+        } 
+        else  {
+            $sql = "SELECT bodytext FROM website_info 
+                    WHERE name=:page";
+            $params = ["page" => $page_value];
+            $result = $this->crudTemp->selectOne($sql, $params);
+        }
+        if (empty($result)){
             $this -> logError("Page has no Body text");
             return false;
         }
-
+        return $result;
     }
 
     public function saveContact(string $name, string $email, string $message)
@@ -49,42 +40,31 @@ class WebsiteInfoModel extends BaseModel
     }
 
     public function getMenuItems($isLoggedIn)
-    {
-        if ($isLoggedIn==FALSE) {
-            $sql = "SELECT mi.label, mi.href
-                    FROM menu_items mi
-                    Where mi.label != 'Dashboard'
-                    ORDER BY mi.display_order";
-            $result = $this->crudTemp->selectMany($sql,NULL);
-            $author = $this->getAuthor();
-            $authorlist =[];
-            foreach ($author as $id => $name) 
-            {
-                $authorlist[]=["label"=> $name,"href"=> 'index.php?page=about&author='.$id.''];
-            }
-            $result[1] = array_merge($result[1],["submenu" => $authorlist]);
-    
-            return $result;     
-        }
-        else {
-            $sql = "SELECT mi.label, mi.href
-                    FROM menu_items mi
-                    Where mi.label != 'Register'
-                    AND mi.label != 'Login'
-                    ORDER BY mi.display_order";
-            $result = $this->crudTemp->selectMany($sql,NULL);
-            $author = $this->getAuthor();
-            $authorlist =[];
-            foreach ($author as $id => $name) 
-            {
-                $authorlist[]=["label"=> $name,"href"=> 'index.php?page=about&author='.$id.''];
-            }
-            $result[1] = array_merge($result[1],["submenu" => $authorlist]);
-    
-            return $result;   
+{
+    $excluded = $isLoggedIn ? ['Register', 'Login'] : ['Dashboard'];
+    $placeholders = implode(',', array_fill(0, count($excluded), '?'));
 
+    $sql = "SELECT mi.label, mi.href
+            FROM menu_items mi
+            WHERE mi.label NOT IN ($placeholders)
+            ORDER BY mi.display_order";
+    $result = $this->crudTemp->selectMany($sql, $excluded);
+
+    $authorlist = [];
+    foreach ($this->getAuthor() as $id => $name) {
+        $authorlist[] = ["label" => $name, "href" => "?page=about&author=".$id.""];
+    }
+
+    foreach ($result as &$item) {
+        if ($item['label'] === 'About') {
+            $item['submenu'] = $authorlist;
+            break;
         }
     }
+    unset($item);
+
+    return $result;
+}
 
     public function getAuthor()
     {

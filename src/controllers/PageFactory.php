@@ -48,7 +48,7 @@ class PageFactory
 
         // menu items
 
-        // temporary hardcoded information for menu
+        // menu items from database
 
         $menu_items = ModelSelector::callModel('website')->getMenuItems($this -> isLoggedIn);
        
@@ -73,19 +73,28 @@ class PageFactory
 
         switch ($this->page) {
             case 'home':
-                $htmlpage->addToBodyContent(new AtomicElement("<p> Test for body element </p>"));
+                $bodytext = ModelSelector::callModel('website')->getBodyText($this->page)["bodytext"];
+                $htmlpage->addToBodyContent(new BodyText($bodytext));
                 break;
             case 'about':
-                //  $htmlpage->addToBodyContent() <- here should be content dependant on the author you chose from the menu dropdown      
-                $htmlpage->addToBodyContent(new AtomicElement("<p> Test about </p>"));
+                $bodytext = ModelSelector::callModel('website')->getBodyText($this->page,1)["description"];
+                $htmlpage->addToBodyContent(new BodyText($bodytext)); 
                 break;
             case 'contact':
             case 'login':
             case 'register':
+                $form_fields = ModelSelector::callModel('form')->getFieldInfo($this->page);
+                $data = $pageFields->getFieldsForPage($this->page);
+                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $form_fields, []));
+                break;
+            //case 'article':
+            //    // ToDo:
+            //    break;
             case 'search':
                // Todo:
+                $form_fields = ModelSelector::callModel('form')->getFieldInfo($this->page);
                 $data = $pageFields->getFieldsForPage($this->page);
-                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $data['form_fields'], []));          
+                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $form_fields, []));          
                 break;
             //case 'article':
             //    // ToDo:

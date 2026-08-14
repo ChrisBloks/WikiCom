@@ -21,6 +21,6 @@ trait tErrorMessageCollector
     }
     public function emptyErrors(): void
     {
-        unset($this->errors);
+        $this->errors = [];
     }
 }
