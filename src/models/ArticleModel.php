@@ -1,4 +1,9 @@
 <?php
+/* ArticleModel
+*  Danny
+*  08/2026
+*  ArticleModel class gives al the methods needed to pull article information from database
+*/
 require_once "Crud.php";
 require_once "BaseModel.php";
 class ArticleModel extends BaseModel
@@ -11,8 +16,9 @@ class ArticleModel extends BaseModel
 
         public function fetchArticleById($article_id)
         {
-                $sql = "SELECT * FROM article 
-                        WHERE id=:article_id";
+                $sql = "SELECT article.title,user.name,article.summary,article.codeBlock,article.imgFileName,article.lastEdit FROM article 
+                        JOIN user ON article.user_id=user.id 
+                        WHERE article.id=:article_id";
                 $params = ['article_id' => $article_id];
                 $result = $this->crudTemp->selectOne($sql, $params);
                 if (empty($result)) {
@@ -23,7 +29,9 @@ class ArticleModel extends BaseModel
 
         public function fetchArticleByUserId($user_id)
         {
-                $sql = "SELECT * FROM article 
+                $sql = "SELECT article.title, 
+                               article.lastEdit 
+                        FROM article 
                         WHERE user_id=:user_id";
                 $params = ['user_id' => $user_id];
                 $result = $this->crudTemp->selectMany($sql, $params);
