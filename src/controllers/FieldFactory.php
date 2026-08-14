@@ -11,6 +11,7 @@ class FieldFactory
                 throw new InvalidArgumentException("Field definition missing for key: '$key'");
             }
         }
+        
         switch ($field_def['type']) {
             case 'textarea':
                 return new TextAreaField(

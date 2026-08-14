@@ -14,7 +14,7 @@ class MenuFactory
         return $this->buildMenu($menu_items, $isLoggedIn);
     }
 
-    private function buildMenu(array $menu_items, bool $isLoggedIn): Menu
+    protected function buildMenu(array $menu_items, bool $isLoggedIn): Menu
     {
         $menu = new Menu();
 
@@ -30,7 +30,7 @@ class MenuFactory
         return $menu;
     }
 
-    private function buildMenuItem(array $item, bool $isLoggedIn)
+    protected function buildMenuItem(array $item, bool $isLoggedIn)
     {
         if (empty($item['label']) || empty($item['href'])) {
                 $this-> logError("Menu item missing required 'label' or 'href': ");

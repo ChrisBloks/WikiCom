@@ -11,6 +11,7 @@ class PageController
         private array $response;
 
 
+        
         private function getRequestVar(string $key, bool $frompost, $default = '', bool $asnumber = false)
         {
                 if ($asnumber) {
@@ -28,7 +29,6 @@ class PageController
                 if ($raw === false || $raw === null) {
                         return $default;
                 }
-
                 return htmlspecialchars(strip_tags(trim($raw)), ENT_QUOTES, 'UTF-8');
         }
 
@@ -36,6 +36,7 @@ class PageController
 
 
         // validateRequest
+        // new ValidateRequestFactory();
 
 
 
@@ -45,7 +46,7 @@ class PageController
                 $posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
                 $this->response = [
                         'posted' => $posted,
-                        'page' => $this->getRequestVar('page', $posted, 'home')
+                        'page' => $this->getRequestVar('page', $posted, $posted ? '' : 'home')
 
                 ];
                 // set page to be displayed to NULL
@@ -53,7 +54,7 @@ class PageController
 
 
                 $PageFactory = new PageFactory($this->response['page'], false);
-                $response_page = $PageFactory->getElementsByPage();
+                $response_page = $PageFactory->createPage();
 
 
                 // if response page is not null -> show page
