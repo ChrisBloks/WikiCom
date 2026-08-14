@@ -24,7 +24,7 @@ class PageFactory
     }
 
 
-    public function getElementsByPage(): BasePage
+    public function createPage(): BasePage
     {
 
         // start and header page
@@ -35,11 +35,12 @@ class PageFactory
         * Errors van instances worden niet opgeslagen in pagefactory errors.
                 
         */
+
+        // ToDo: make error element, pass array with errors
         if ($this->hasErrors()==true) {
             HtmlUtils::dump("Errors",$this->getErrors());
         }
-        
-        
+                
         // tNoticeMessage ... eventually
 
         // title
@@ -79,25 +80,17 @@ class PageFactory
                 $htmlpage->addToBodyContent(new AtomicElement("<p> Test about </p>"));
                 break;
             case 'contact':
-                $data = $pageFields->getFieldsForPage($this->page);
-                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $data['form_fields'], []));
-                break;
             case 'login':
-                $data = $pageFields->getFieldsForPage($this->page);
-                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $data['form_fields'], []));
-                break;
             case 'register':
-                $data = $pageFields->getFieldsForPage($this->page);
-                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $data['form_fields'], []));
-                break;
-            //case 'article':
-            //    // ToDo:
-            //    break;
             case 'search':
                // Todo:
                 $data = $pageFields->getFieldsForPage($this->page);
                 $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $data['form_fields'], []));          
                 break;
+            //case 'article':
+            //    // ToDo:
+            //    break;
+
             //case 'dashboard':
             //    // get $form_info and $form_fields from db method here
             //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
