@@ -16,7 +16,7 @@ class Form extends ContainerElement{
     }
 
     public function addHiddenField(string $name, string $value): void{
-        $this->hiddenfields[] = new HiddenField($name, $value);
+        $this->addElement(new HiddenField($name, $value));
     }
 
 }

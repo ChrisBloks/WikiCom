@@ -35,7 +35,30 @@ require_once "./src/models/ModelSelector.php";
 // $htmlpage = $page_factory->getElementsByPage();
 // $htmlpage->show();
 
-$controller = new PageController();
-$controller->showResponse();
+//$controller = new PageController();
+//$controller->showResponse();
 
 // htmlutils::dump("test",ModelSelector::callModel("form")->getFieldInfo("logine"));
+
+require_once "./src/tools/interfaces/iElement.php";
+require_once "./src/tools/traits/tElementContainer.php";
+require_once "./src/views//containers/ContainerElement.php";
+require_once "./src/controllers/TableFactory.php";
+
+$columns = [
+    ['key' => 'title',       'label' => 'Title',       'type' => 'text'],
+    ['key' => 'last_edited', 'label' => 'Last edited', 'type' => 'date'],
+    ['key' => 'id',          'label' => 'Actions',     'type' => 'actions', 'class' => 'no-wrap'],
+];
+
+// standing in for $articleModel->getOwnedArticles($userId)
+$rows = [
+    ['id' => 1, 'title' => 'PHP OOP Basics',            'last_edited' => '2026-07-12'],
+    ['id' => 2, 'title' => 'Factory Pattern Deep Dive', 'last_edited' => '2026-08-01'],
+    ['id' => 3, 'title' => 'Draft: Untitled',           'last_edited' => '2026-08-10'],
+];
+
+$tableFactory = new TableFactory();
+$table = $tableFactory->createTable($columns, $rows);
+
+echo $table->show();
