@@ -50,7 +50,7 @@ class PageFactory
 
         // menu items from database
 
-        $menu_items = ModelSelector::callModel('website')->getMenuItems($this -> isLoggedIn);
+        $menu_items = ModelSelector::getWebsiteInfoModel()->getMenuItems($this -> isLoggedIn);
        
 
         // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
@@ -68,51 +68,47 @@ class PageFactory
         }
         
 
-        $formFactory = new FormFactory();
-        $pageFields = new PageFields();
 
         switch ($this->page) {
             case 'home':
-                $bodytext = ModelSelector::callModel('website')->getBodyText($this->page)["bodytext"];
+                $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page)["bodytext"];
                 $htmlpage->addToBodyContent(new BodyText($bodytext));
                 break;
             case 'about':
-                $bodytext = ModelSelector::callModel('website')->getBodyText($this->page,1)["description"];
+                $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page,1)["description"];
                 $htmlpage->addToBodyContent(new BodyText($bodytext)); 
                 break;
             case 'contact':
             case 'login':
             case 'register':
-                $form_fields = ModelSelector::callModel('form')->getFieldInfo($this->page);
-                $data = $pageFields->getFieldsForPage($this->page);
-                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $form_fields, []));
+            case 'search':
+                $formFactory = new FormFactory();
+                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
                 break;
             case 'article':
-                $bodyinfo = ModelSelector::callModel('article')->fetchArticleById(2);
+                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById(2);
                 foreach ($bodyinfo as $key => $value) {
                     $htmlpage->addToBodyContent(new BodyText($value)); 
                 }
                 break;
-            case 'search':
-               // Todo:
-                $form_fields = ModelSelector::callModel('form')->getFieldInfo($this->page);
-                $data = $pageFields->getFieldsForPage($this->page);
-                $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $form_fields, []));          
-                break;
             case 'dashboard':
-               $bodyinfo = ModelSelector::callModel('article')->fetchArticleByUserId(1);
-               $table = new ContainerElement('<table>','</table>');
-               foreach ($bodyinfo as $key => $value) {
-                    $tr = new ContainerElement('<tr>','</tr>');
-                    foreach ($value as $value2) {
-                        $td = new ContainerElement('<td>','</td>');
-                        $td-> addElement(new AtomicElement($value2));
-                        $tr ->addElement($td);
-                    }
-                $table-> addElement($tr);
-               }
+               $rows = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
+               $columns = ModelSelector::getWebsiteInfoModel()->getTableColumns();
+            //    print_r($columns);
+            //    $table = new ContainerElement('<table>','</table>');
+            //    foreach ($rows as $key => $value) {
+            //         $tr = new ContainerElement('<tr>','</tr>');
+            //         foreach ($value as $value2) {
+            //             $td = new ContainerElement('<td>','</td>');
+            //             $td-> addElement(new AtomicElement($value2));
+            //             $tr ->addElement($td);
+            //         }
+            //     $table-> addElement($tr);
+            //    }
                 
-               $htmlpage->addToBodyContent($table);
+            //    $htmlpage->addToBodyContent($table);
                break;
             //case 'editArticle':
             //    // get $form_info and $form_fields from db method here

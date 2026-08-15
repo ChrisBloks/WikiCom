@@ -1,6 +1,4 @@
 <?php
-// dont delete!
-require_once "./PageFields.php";
 
 // views
 require_once "./src/views/BasePage.php";

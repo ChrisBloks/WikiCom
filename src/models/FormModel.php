@@ -5,12 +5,12 @@ class FormModel extends BaseModel
 {
     public function getFieldInfo($page_value)
     {
-        $sql = "SELECT fi.type, fi.name,fi.class,fi.label,fi.options
+        $sql = "SELECT fi.type, fi.name, fi.class, fpp.label, fi.options
                 FROM field_info fi
                 JOIN fields_per_page fpp ON fpp.field_info_id = fi.id
                 JOIN website_info wi ON wi.id = fpp.website_info_id
                 WHERE wi.name = :page
-                ORDER BY fi.display_order";
+                ORDER BY fpp.display_order;";
         $params = ["page" => $page_value];
         $result = $this->crudTemp->selectMany($sql, $params);
 
@@ -31,6 +31,18 @@ class FormModel extends BaseModel
         }
 
         return $result;
+    }
+
+        public function getFormInfo($page_value)
+    {
+        $sql = "SELECT DISTINCT fo.action, fo.method, fo.submit_caption
+                FROM form_info fo
+                JOIN website_info wi ON fo.id = wi.form_info_id
+                WHERE wi.name = :page";
+        $params = ["page" => $page_value];
+        $result = $this->crudTemp->selectMany($sql, $params);
+
+        return $result[0];
     }
 
     public function getTag()

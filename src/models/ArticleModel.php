@@ -29,8 +29,9 @@ class ArticleModel extends BaseModel
 
         public function fetchArticleByUserId($user_id)
         {
-                $sql = "SELECT article.title, 
-                               article.lastEdit 
+                $sql = "SELECT  article.id,
+                                article.title, 
+                                article.lastEdit 
                         FROM article 
                         WHERE user_id=:user_id";
                 $params = ['user_id' => $user_id];
