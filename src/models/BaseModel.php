@@ -5,7 +5,8 @@ switch ($user) {
     case "DANNY":
         include_once "./config/danny.php";
         break;
-    case "":
+    case "MARUISPC":
+        include_once "./config/marius.php";
         break;
     case "":
         break;

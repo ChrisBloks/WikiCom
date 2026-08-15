@@ -17,4 +17,9 @@ class HtmlUtils
         is_array($var_value) ? print_r($var_value) : var_dump($var_value);
         echo '</' . ($as_code ? 'code' : 'pre') . '>';
     }
+
+    public static function addClassAttr(?string $class): string
+    {
+        return $class ? ' class="' . htmlspecialchars($class) . '"' : '';
+    }
 }
