@@ -87,23 +87,33 @@ class PageFactory
                 $data = $pageFields->getFieldsForPage($this->page);
                 $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $form_fields, []));
                 break;
-            //case 'article':
-            //    // ToDo:
-            //    break;
+            case 'article':
+                $bodyinfo = ModelSelector::callModel('article')->fetchArticleById(2);
+                foreach ($bodyinfo as $key => $value) {
+                    $htmlpage->addToBodyContent(new BodyText($value)); 
+                }
+                break;
             case 'search':
                // Todo:
                 $form_fields = ModelSelector::callModel('form')->getFieldInfo($this->page);
                 $data = $pageFields->getFieldsForPage($this->page);
                 $htmlpage->addToBodyContent($formFactory->createForm($data['form_info'], $form_fields, []));          
                 break;
-            //case 'article':
-            //    // ToDo:
-            //    break;
-
-            //case 'dashboard':
-            //    // get $form_info and $form_fields from db method here
-            //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
-            //    break;
+            case 'dashboard':
+               $bodyinfo = ModelSelector::callModel('article')->fetchArticleByUserId(1);
+               $table = new ContainerElement('<table>','</table>');
+               foreach ($bodyinfo as $key => $value) {
+                    $tr = new ContainerElement('<tr>','</tr>');
+                    foreach ($value as $value2) {
+                        $td = new ContainerElement('<td>','</td>');
+                        $td-> addElement(new AtomicElement($value2));
+                        $tr ->addElement($td);
+                    }
+                $table-> addElement($tr);
+               }
+                
+               $htmlpage->addToBodyContent($table);
+               break;
             //case 'editArticle':
             //    // get $form_info and $form_fields from db method here
             //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));

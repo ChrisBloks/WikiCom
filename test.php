@@ -6,6 +6,7 @@ require_once "./PageFields.php";
 require_once "./src/views/BasePage.php";
 require_once "./src/views/containers/ContainerElement.php";
 require_once "./src/views/containers/Header.php";
+require_once "./src/views/containers/Title.php";
 require_once "./src/views/containers/Footer.php";
 require_once "./src/views/containers/BodyText.php";
 require_once "./src/views/HtmlDoc.php";
