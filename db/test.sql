@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 aug 2026 om 17:09
+-- Gegenereerd op: 16 aug 2026 om 23:32
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -98,25 +98,27 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 
 CREATE TABLE `fields_per_page` (
   `website_info_id` int(11) NOT NULL,
-  `field_info_id` int(11) NOT NULL
+  `field_info_id` int(11) NOT NULL,
+  `display_order` int(11) NOT NULL DEFAULT 0,
+  `label` varchar(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `fields_per_page`
 --
 
-INSERT INTO `fields_per_page` (`website_info_id`, `field_info_id`) VALUES
-(3, 1),
-(3, 2),
-(3, 4),
-(4, 2),
-(4, 3),
-(5, 1),
-(5, 2),
-(5, 3),
-(5, 6),
-(6, 7),
-(6, 8);
+INSERT INTO `fields_per_page` (`website_info_id`, `field_info_id`, `display_order`, `label`) VALUES
+(3, 1, 0, 'Your name'),
+(3, 2, 1, 'Your email'),
+(3, 4, 2, 'Your message'),
+(4, 2, 0, 'Your email'),
+(4, 3, 1, 'Your password'),
+(5, 1, 0, 'Your name'),
+(5, 2, 1, 'Your email'),
+(5, 3, 2, 'Your password'),
+(5, 6, 3, 'Verify password'),
+(6, 7, 0, 'Filter by Author'),
+(6, 8, 1, 'Filter by Tag');
 
 -- --------------------------------------------------------
 
@@ -128,9 +130,7 @@ CREATE TABLE `field_info` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `display_order` int(11) NOT NULL,
   `class` varchar(255) NOT NULL,
-  `label` varchar(255) NOT NULL,
   `options` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -138,15 +138,37 @@ CREATE TABLE `field_info` (
 -- Gegevens worden geëxporteerd voor tabel `field_info`
 --
 
-INSERT INTO `field_info` (`id`, `name`, `type`, `display_order`, `class`, `label`, `options`) VALUES
-(1, 'name', 'text', 0, 'text-input', 'Your name', 0),
-(2, 'email', 'email', 1, 'text-input', 'Your email', 0),
-(3, 'password', 'password', 2, 'text-input', 'Your Password', 0),
-(4, 'message', 'textarea', 4, 'text-input', 'Your message', 0),
-(5, 'contact-by', 'checkboxgroup', 5, 'text-input', 'Contact-methode', 1),
-(6, 'verifypassword', 'password', 3, 'text-input', 'Verify Password', 0),
-(7, 'Author', 'select', 6, 'filter-author', 'filter_by_author', 2),
-(8, 'contact-by', 'checkboxgroup', 4, 'text-input', 'filter_by_tag', 1);
+INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `options`) VALUES
+(1, 'name', 'text', 'text-input', 0),
+(2, 'email', 'email', 'text-input', 0),
+(3, 'password', 'password', 'text-input', 0),
+(4, 'message', 'textarea', 'text-input', 0),
+(5, 'contact-by', 'checkboxgroup', 'text-input', 0),
+(6, 'verifypassword', 'password', 'text-input', 0),
+(7, 'Author', 'select', 'filter-author', 2),
+(8, 'Tag', 'select', 'filter-tag', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `form_info`
+--
+
+CREATE TABLE `form_info` (
+  `id` int(11) NOT NULL,
+  `action` varchar(255) NOT NULL,
+  `method` varchar(25) NOT NULL,
+  `submit_caption` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `form_info`
+--
+
+INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`) VALUES
+(1, 'contact.php', 'POST', 'Send message'),
+(2, 'login.php', 'POST', 'Log in'),
+(3, 'articles.php', 'GET', 'Filter');
 
 -- --------------------------------------------------------
 
@@ -208,6 +230,29 @@ INSERT INTO `rating` (`user_id`, `article_id`, `rating`) VALUES
 (2, 1, 1),
 (2, 2, 5),
 (3, 2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `table_columns`
+--
+
+CREATE TABLE `table_columns` (
+  `id` int(11) NOT NULL,
+  `column_key` varchar(255) NOT NULL,
+  `label` varchar(255) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `display_order` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `table_columns`
+--
+
+INSERT INTO `table_columns` (`id`, `column_key`, `label`, `type`, `display_order`) VALUES
+(1, 'title', 'Title', 'text', 0),
+(2, 'last_edited', 'Last edited', 'date', 1),
+(3, 'id', 'Actions', 'actions', 2);
 
 -- --------------------------------------------------------
 
@@ -288,20 +333,21 @@ CREATE TABLE `v_article_avg_rating` (
 CREATE TABLE `website_info` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `bodytext` text NOT NULL
+  `bodytext` text NOT NULL,
+  `form_info_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `website_info`
 --
 
-INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
-(1, 'home', 'This is the bodytext for home from the database'),
-(2, 'about', ''),
-(3, 'contact', ''),
-(4, 'login', ''),
-(5, 'register', ''),
-(6, 'search', '');
+INSERT INTO `website_info` (`id`, `name`, `bodytext`, `form_info_id`) VALUES
+(1, 'home', 'This is the bodytext for home from the database', NULL),
+(2, 'about', '', NULL),
+(3, 'contact', '', 1),
+(4, 'login', '', 2),
+(5, 'register', '', 2),
+(6, 'search', '', 3);
 
 -- --------------------------------------------------------
 
@@ -350,6 +396,12 @@ ALTER TABLE `field_info`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `form_info`
+--
+ALTER TABLE `form_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `menu_items`
 --
 ALTER TABLE `menu_items`
@@ -367,6 +419,13 @@ ALTER TABLE `page_elements`
 ALTER TABLE `rating`
   ADD PRIMARY KEY (`user_id`,`article_id`),
   ADD KEY `fk_rating_to_article_id` (`article_id`);
+
+--
+-- Indexen voor tabel `table_columns`
+--
+ALTER TABLE `table_columns`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `column_key_unique` (`column_key`);
 
 --
 -- Indexen voor tabel `tag`
@@ -391,7 +450,8 @@ ALTER TABLE `user`
 -- Indexen voor tabel `website_info`
 --
 ALTER TABLE `website_info`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `website_info_ibfk_1` (`form_info_id`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -413,7 +473,13 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT voor een tabel `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT voor een tabel `form_info`
+--
+ALTER TABLE `form_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `menu_items`
@@ -426,6 +492,12 @@ ALTER TABLE `menu_items`
 --
 ALTER TABLE `page_elements`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `table_columns`
+--
+ALTER TABLE `table_columns`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `tag`
@@ -472,8 +544,8 @@ ALTER TABLE `article_to_tag`
 -- Beperkingen voor tabel `fields_per_page`
 --
 ALTER TABLE `fields_per_page`
-  ADD CONSTRAINT `fields_per_page_ibfk_1` FOREIGN KEY (`field_info_id`) REFERENCES `field_info` (`id`),
-  ADD CONSTRAINT `fields_per_page_ibfk_2` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
+  ADD CONSTRAINT `fields_per_page_ibfk_1` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`),
+  ADD CONSTRAINT `fields_per_page_ibfk_2` FOREIGN KEY (`field_info_id`) REFERENCES `field_info` (`id`);
 
 --
 -- Beperkingen voor tabel `rating`
@@ -481,6 +553,12 @@ ALTER TABLE `fields_per_page`
 ALTER TABLE `rating`
   ADD CONSTRAINT `fk_rating_to_article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_rating_to_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
+
+--
+-- Beperkingen voor tabel `website_info`
+--
+ALTER TABLE `website_info`
+  ADD CONSTRAINT `website_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
