@@ -5,25 +5,31 @@ require_once "BaseModel.php";
 class WebsiteInfoModel extends BaseModel
 {
 
-    public function getBodyText($page_value, $user_id = '')
+    public function getBodyText($page_value)
     {
-        if ($page_value == 'about') {
-            $sql = "SELECT name,description,imgFileName FROM user 
-                    WHERE id=:userid";
-            $params = ["userid" => $user_id];
-            $result = $this->crudTemp->selectOne($sql, $params);
-        } 
-        else  {
-            $sql = "SELECT bodytext FROM website_info 
-                    WHERE name=:page";
-            $params = ["page" => $page_value];
-            $result = $this->crudTemp->selectOne($sql, $params);
-        }
+        $sql = "SELECT bodytext FROM website_info 
+                WHERE name=:page";
+        $params = ["page" => $page_value];
+        $result = $this->crudTemp->selectOne($sql, $params);
         if (empty($result)){
             $this -> logError("Page has no Body text");
             return false;
         }
         return $result;
+    }
+
+    public function getAuthorAboutInfo($user_id)
+    {
+        $sql = "SELECT name,description,imgFileName FROM user 
+                WHERE id=:userid";
+        $params = ["userid" => $user_id];
+        $result = $this->crudTemp->selectOne($sql, $params);
+        if (empty($result)){
+            $this -> logError("User has no info");
+            return false;
+        }
+        return $result;
+
     }
 
     public function saveContact(string $name, string $email, string $message)
@@ -41,8 +47,9 @@ class WebsiteInfoModel extends BaseModel
 
     public function getMenuItems($isLoggedIn)
 {
-    $excluded = $isLoggedIn ? ['Register', 'Login'] : ['Dashboard'];
+    $excluded = $isLoggedIn ? ['Register', 'Login'] : ['Dashboard','Logout'];
     $placeholders = implode(',', array_fill(0, count($excluded), '?'));
+
 
     $sql = "SELECT mi.label, mi.href
             FROM menu_items mi
@@ -62,6 +69,7 @@ class WebsiteInfoModel extends BaseModel
         }
     }
     unset($item);
+
 
     return $result;
 }

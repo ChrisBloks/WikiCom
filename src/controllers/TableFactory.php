@@ -47,13 +47,10 @@ class TableFactory
     private function buildCell(array $column, mixed $value, array $row_data, string $cell_type): TableCell
     {
         $cell = new TableCell(class: $column['class'] ?? null);
-
         switch ($column['type']) {
-
             case 'actions':
                 $cell->addElement(new ArticleActions($row_data['id']));
                 break;
-
             case 'text':
             default:
                 $cell->addElement(new AtomicElement((string)$value)); // add decorator class
