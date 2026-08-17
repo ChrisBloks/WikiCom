@@ -7,16 +7,14 @@ class ArticleActions extends ContainerElement
 {
     public function __construct(int|string $articleId)
     {
-        // no wrapper markup of its own - it just groups two elements
-        // together so a caller (like a TableCell) can add() it directly.
         parent::__construct('', '');
 
         $id = htmlspecialchars((string)$articleId);
 
-        // Edit: read-only navigation, a plain link is fine.
+        // Edit: read-only navigation, link is fine.
         $this->addElement(new AtomicElement("<a href=\"edit.php?id=$id\">Edit</a>"));
 
-        // Delete: mutates data, so it must be a POST form, never a link.
+        // Delete: mutates data, so it must be a POST form, never a link
         $deleteForm = new Form(
             action: "delete.php",
             method: "POST",

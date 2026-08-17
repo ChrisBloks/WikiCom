@@ -24,11 +24,11 @@ class TableFactory
         $headerRow = new TableRow();
 
         foreach ($columns as $column) {
+            // cell needs: column title(text), column display-type(articleActions for delete/edit), column display-class
             $cell = new TableCell(isHeader: true, class: $column['class'] ?? null);
             $cell->addElement(new AtomicElement(htmlspecialchars($column['label'])));
             $headerRow->addElement($cell);
         }
-
         return $headerRow;
     }
 
@@ -44,24 +44,19 @@ class TableFactory
         return $row;
     }
 
-    private function buildCell(array $column, mixed $value, array $row_data): TableCell
+    private function buildCell(array $column, mixed $value, array $row_data, string $cell_type): TableCell
     {
         $cell = new TableCell(class: $column['class'] ?? null);
 
         switch ($column['type']) {
 
-            case 'date':
-                $cell->addElement(new AtomicElement(
-                    htmlspecialchars(date('Y-m-d', strtotime((string)$value)))
-                ));
-                break;
             case 'actions':
                 $cell->addElement(new ArticleActions($row_data['id']));
                 break;
 
             case 'text':
             default:
-                $cell->addElement(new AtomicElement(htmlspecialchars((string)$value)));
+                $cell->addElement(new AtomicElement((string)$value)); // add decorator class
                 break;
         }
 
