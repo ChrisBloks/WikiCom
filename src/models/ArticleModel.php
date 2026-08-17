@@ -2,21 +2,35 @@
 /* ArticleModel
 *  Danny
 *  08/2026
-*  ArticleModel class gives al the methods needed to pull article information from database
+*  ArticleModel class gives al the methods needed to pull or insert article information from database
 */
 require_once "Crud.php";
 require_once "BaseModel.php";
 class ArticleModel extends BaseModel
 {
+        /*
+        *  @params array for ways to sort using the fetchArticlebySearch method
+        */ 
         private static $sort_values = [
                 "rating" => "AVGrating",
                 "AVGrating" => "AVGrating",
                 "datum" => "article.lastEdit"
         ];
 
+        /*
+        * Method that fetches the article with a certain id
+        *
+        * @param int that indicates the article id
+        */ 
         public function fetchArticleById($article_id)
         {
-                $sql = "SELECT article.title,user.name,article.summary,article.codeBlock,article.imgFileName,article.lastEdit FROM article 
+                $sql = "SELECT  article.title,
+                                user.name,
+                                article.summary,
+                                article.codeBlock,
+                                article.imgFileName,
+                                article.lastEdit 
+                        FROM article
                         JOIN user ON article.user_id=user.id 
                         WHERE article.id=:article_id";
                 $params = ['article_id' => $article_id];
@@ -27,6 +41,11 @@ class ArticleModel extends BaseModel
                 return $result;
         }
 
+        /*
+        * Method that fetches the article with the user id
+        *
+        * @param int that indicates the article id
+        */ 
         public function fetchArticleByUserId($user_id)
         {
                 $sql = "SELECT  article.id,
@@ -42,6 +61,13 @@ class ArticleModel extends BaseModel
                 return $result;
         }
 
+        /*
+        * Method that fetches the article based on arrays of filters
+        *
+        * @param $user_ids is an array of user ids that the article has to be in
+        * @param $tag_ids is an array of tag ids that he article has to be in
+        * @param $SortBy a string that indicates how the results should be ordered
+        */ 
         public function fetchArticleBySearch($user_ids = [], $tag_ids = [], $sortBy = "")
         {
                 $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
@@ -59,7 +85,12 @@ class ArticleModel extends BaseModel
 
         }
 
-
+        /*
+        * Method that adds to the search query for fetchArticleBySearch based on user_ids and tag_ids
+        *
+        * @param $user_ids is an array of user ids that the article has to be in
+        * @param $tag_ids is an array of tag ids that he article has to be in
+        */ 
         private function buildSearchQuery(array $user_ids, array $tag_ids)
         {
                 $joins = " JOIN v_article_avg_rating as vr ON vr.id = article.id";
@@ -86,6 +117,14 @@ class ArticleModel extends BaseModel
                 return [$joins, $where, $extra_query, $params];
         }
 
+        /*
+        * Method that adds the IN statement into the query: example given the inputs [a,b,c]
+        * It would build the following string = a in (c_1:c_1) with array [c_1 => b]
+        *
+        * @param $reference is the string for the before IN statement
+        * @param $values is an array that is used to eventually replace the placeholders in the query statements
+        * @param $prefix is a string that represents the name given to the placeholder
+        */ 
         private function inClause(string $reference, array $values, string $prefix)
         {
                 $placeholders = [];

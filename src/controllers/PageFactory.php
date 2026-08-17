@@ -96,19 +96,9 @@ class PageFactory
             case 'dashboard':
                $rows = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                $columns = ModelSelector::getWebsiteInfoModel()->getTableColumns();
-            //    print_r($columns);
-            //    $table = new ContainerElement('<table>','</table>');
-            //    foreach ($rows as $key => $value) {
-            //         $tr = new ContainerElement('<tr>','</tr>');
-            //         foreach ($value as $value2) {
-            //             $td = new ContainerElement('<td>','</td>');
-            //             $td-> addElement(new AtomicElement($value2));
-            //             $tr ->addElement($td);
-            //         }
-            //     $table-> addElement($tr);
-            //    }
-                
-            //    $htmlpage->addToBodyContent($table);
+               $tableFactory = new TableFactory();
+               $table = $tableFactory->createTable($columns, $rows);
+               $htmlpage ->addToBodyContent($table);
                break;
             //case 'editArticle':
             //    // get $form_info and $form_fields from db method here
