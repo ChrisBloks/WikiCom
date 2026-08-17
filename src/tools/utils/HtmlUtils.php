@@ -3,8 +3,6 @@
 class HtmlUtils
 {
 
-
-
     public static function printLabel(string $id, string $label)
     {
         return
