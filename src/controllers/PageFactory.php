@@ -103,9 +103,9 @@ class PageFactory
             case 'dashboard':
                $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
-               htmlutils::dump("testc",$columnsdata);
-               htmlutils::dump("testr",$rowsdata);
-               $tableFactory = new TableFactory($columnsdata, $rowsdata);
+               $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
+
+               print_r($tableFactory->createTable());
             //    $table = $tableFactory->createTable($columns, $rows);
             //    $htmlpage ->addToBodyContent($table);
                break;

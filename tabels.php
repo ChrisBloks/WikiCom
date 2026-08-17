@@ -1,91 +1,85 @@
 <?php
 require_once "./src/tools/utils/HtmlUtils.php";
-class Table
+class TableFactoryV2
 {
+    protected array $rows;
+    protected array $display_types;
+    protected array $class_types;
+    protected array $columnheaders;
 
 
-    public function makeTable()
+    public function __construct($columnsdata, $rowsdata)
     {
-        $this->startTable();
-        $this->buildHeadRow();
-        $this->buildRow();
-        $this->endTable();
+        $this->rows = $rowsdata;
+        $this->display_types = $columnsdata["types"];
+        $this->class_types = $columnsdata["classes"];
+        $this->columnheaders = $columnsdata["headers"];
+    }
+
+    public function createTable()
+    {
+        $str = "";
+        $str .= $this->startTable();
+        $str .= $this->buildHeadRow();
+        $str .= $this->buildRow();
+        $str .= $this->endTable();
+        return $str;
     }
 
 
 
     protected function startTable()
     {
-        echo "<table>";
+        return "<table>";
     }
 
     protected function buildHeadRow()
     {
-
-        $columns_headers = [
-            "id" => "first_cellTableHead",
-            "title" => "articletitleTableHead",
-            "last_edited" => "lastEditTableHead"
-        ];
-        echo '<tr' . HtmlUtils::addClassAttr("header_class").'>';
-        foreach ($columns_headers as $key => $value) {
-            echo '<th' . HtmlUtils::addClassAttr($value) . '>' . $key . '</th>';
+        $str = "";
+        $str .= '<tr' . HtmlUtils::addClassAttr("header_class") . '>';
+        foreach ($this->columnheaders as $key => $value) {
+            $str .= '<th' . HtmlUtils::addClassAttr($value) . '>' . $key . '</th>';
         }
-        echo '</tr>';
+        $str .= '</tr>';
+        return $str;
 
     }
 
     protected function buildRow()
     {
-        $rows = [
-            ['id' => 1, 'title' => 'PHP OOP Basics', 'last_edited' => '2026-07-12',],
-            ['id' => 2, 'title' => 'Factory Pattern Deep Dive', 'last_edited' => '2026-08-01'],
-            ['id' => 3, 'title' => 'Draft: Untitled', 'last_edited' => '2026-08-10'],
-        ];
-
-        $display_types = [
-            "id" => "first_cell",
-            "title" => "string",
-            "last_edited" => "date"
-        ];
-
-        $class_types = [
-            "id" => "first_cell",
-            "title" => "articletitle",
-            "last_edited" => "lastEdit"
-        ];
-        foreach ($rows as $row) {
-            echo '<tr>';
+        $str = '';
+        foreach ($this->rows as $row) {
+            $str .= '<tr>';
 
             foreach ($row as $key => $value) {
-                $display_type = $display_types[$key];
+                $display_type = $this->display_types[$key];
                 switch ($display_type) {
                     case 'first_cell':
-                        echo '<td>' .
-                            $this->_actionLink($value, '&#10000;', 'Update') .
-                            $this->_actionLink('-' . $value, '&#10060;', 'Delete') .
+                        $str .= '<td>' .
+                            '<a href=\"edit.php?id=$id\">' . $this->_actionLink($value, '&#10000;', 'EditPage', ) . '</a>'
+                            . $this->_actionLink('-' . $value, '&#10060;', 'Delete') .
                             '</td>';
                         break;
                     case "integer":
-                        echo '<td' . HtmlUtils::addClassAttr($class_types[$key]) . '> integer:' . $value . '</td>';
+                        $str .= '<td' . HtmlUtils::addClassAttr($this->class_types[$key]) . '> ' . $value . '</td>';
                         break;
                     case "string":
-                        echo '<td' . HtmlUtils::addClassAttr($class_types[$key]) . '> string:' . $value . '</td>';
+                        $str .= '<td' . HtmlUtils::addClassAttr($this->class_types[$key]) . '> ' . $value . '</td>';
                         break;
                     case "date":
-                        echo '<td' . HtmlUtils::addClassAttr($class_types[$key]) . '> date:' . $value . '</td>';
+                        $str .= '<td' . HtmlUtils::addClassAttr($this->class_types[$key]) . '> ' . $value . '</td>';
                         break;
                 }
             }
-            echo '</tr>';
+            $str .= '</tr>';
 
         }
-
+        return $str;
     }
 
     protected function endTable()
     {
-        echo '</table>';
+        return '</table>';
     }
 
     private function _actionLink(string $record_id, string $title, string $hint)
@@ -101,5 +95,3 @@ class Table
 
 }
 
-$table = new Table();
-$table->makeTable();
