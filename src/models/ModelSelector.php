@@ -1,14 +1,4 @@
 <?php
-$user = $_ENV["USERDOMAIN"];
-switch ($user) {
-    case "DANNY":
-        include_once "./config/danny.php";
-        break;
-    case "":
-        break;
-    case "":
-        break;
-}
 
 require_once "Crud.php";
 require_once "BaseModel.php";

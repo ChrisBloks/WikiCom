@@ -21,12 +21,10 @@ class TableFactoryV2
         $str = "";
         $str .= $this->startTable();
         $str .= $this->buildHeadRow();
-        $str .= $this->buildRow();
+        $str .= $this->buildRows();
         $str .= $this->endTable();
         return $str;
     }
-
-
 
     protected function startTable()
     {
@@ -36,7 +34,7 @@ class TableFactoryV2
     protected function buildHeadRow()
     {
         $str = "";
-        $str .= '<tr' . HtmlUtils::addClassAttr("header_class") . '>';
+        $str .= '<tr' . HtmlUtils::addClassAttr("table_header") . '>';
         foreach ($this->columnheaders as $key => $value) {
             $str .= '<th' . HtmlUtils::addClassAttr($value) . '>' . $key . '</th>';
         }
@@ -45,7 +43,7 @@ class TableFactoryV2
 
     }
 
-    protected function buildRow()
+    protected function buildRows()
     {
         $str = '';
         foreach ($this->rows as $row) {
@@ -55,6 +53,7 @@ class TableFactoryV2
                 $display_type = $this->display_types[$key];
                 switch ($display_type) {
                     case 'first_cell':
+                        // ToDo: implement ArticleActions
                         $str .= '<td>' .
                             '<a href=\"edit.php?id=$id\">' . $this->_actionLink($value, '&#10000;', 'EditPage', ) . '</a>'
                             . $this->_actionLink('-' . $value, '&#10060;', 'Delete') .
@@ -69,6 +68,10 @@ class TableFactoryV2
                     case "date":
                         $str .= '<td' . HtmlUtils::addClassAttr($this->class_types[$key]) . '> ' . $value . '</td>';
                         break;
+                    case 'rating':
+                        break;
+                    default:
+                        // throw exception
                 }
             }
             $str .= '</tr>';

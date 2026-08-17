@@ -29,7 +29,7 @@ $table = [
         "title" => "string",
         "last_edited" => "date"
     ],
-    $clases => [
+    $classes => [
         "id" => "first_cell",
         "title" => "articletitle",
         "last_edited" => "lastEdit"
@@ -41,3 +41,4 @@ $table = [
     ],
     $data => $rows
 ];
+
