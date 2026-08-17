@@ -82,7 +82,21 @@ class WebsiteInfoModel extends BaseModel
 
     public function getTableColumns()
     {
-        $sql = "SELECT `key`, label, type FROM table_columns ORDER BY display_order";
-        return $this->crudTemp->selectMany($sql, NULL, PDO::FETCH_ASSOC);
+        $sql = "SELECT `column_name`, `display_types`,`class_types`,`column_headers`FROM table_columns";
+        $result = $this->crudTemp->selectMany($sql, NULL, PDO::FETCH_ASSOC);
+
+        $types = [];
+        $classes = [];
+        $headers = [];
+
+        foreach ($result as $col) {
+            $name = $col['column_name'];
+            $types[$name]   = $col['display_types'];
+            $classes[$name]  = $col['class_types'];
+            $headers[$name] = $col['column_headers'];
+        }
+
+        return ["types" => $types, "classes" => $classes, "headers" => $headers];
+
     }
 }

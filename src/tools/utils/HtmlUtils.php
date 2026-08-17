@@ -8,7 +8,7 @@ class HtmlUtils
     public static function printLabel(string $id, string $label)
     {
         return
-            '<label for="' . $id . '">' . $label . '</label>';
+            '<label for="' . $id . '">' . $label . '</label><br>';
     }
 
     public static function dump(string $var_name, mixed $var_value, bool $as_code = false): void

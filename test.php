@@ -38,6 +38,8 @@ require_once "./src/models/ModelSelector.php";
 $controller = new PageController();
 $controller->showResponse();
 
+
+
 // htmlutils::dump("test",ModelSelector::callModel("form")->getFieldInfo("logine"));
 
 require_once "./src/tools/interfaces/iElement.php";

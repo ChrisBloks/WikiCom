@@ -101,11 +101,13 @@ class PageFactory
                 }
                 break;
             case 'dashboard':
-               $rows = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
-               $columns = ModelSelector::getWebsiteInfoModel()->getTableColumns();
-               $tableFactory = new TableFactory();
-               $table = $tableFactory->createTable($columns, $rows);
-               $htmlpage ->addToBodyContent($table);
+               $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
+               $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
+               htmlutils::dump("testc",$columnsdata);
+               htmlutils::dump("testr",$rowsdata);
+               $tableFactory = new TableFactory($columnsdata, $rowsdata);
+            //    $table = $tableFactory->createTable($columns, $rows);
+            //    $htmlpage ->addToBodyContent($table);
                break;
             //case 'editArticle':
             //    // get $form_info and $form_fields from db method here
