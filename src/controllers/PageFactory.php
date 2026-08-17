@@ -17,7 +17,7 @@ class PageFactory
     use tErrorMessageCollector;
     private string $page;
     protected bool $isLoggedIn;
-    public function __construct(string $page, bool $isLoggedIn = false)
+    public function __construct(string $page, bool $isLoggedIn = true)
     {
         $this->page = $page;
         $this->isLoggedIn = $isLoggedIn;
@@ -50,13 +50,13 @@ class PageFactory
 
         // menu items from database
 
-        $menu_items = ModelSelector::getWebsiteInfoModel()->getMenuItems($this -> isLoggedIn);
+        $menu_items = ModelSelector::getWebsiteInfoModel()->getMenuItems($this->isLoggedIn);
        
 
         // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
         $htmlpage->addToBodyContent(new AtomicElement("Menu (isLoggedIn = false) ===== <br><br>"));
         $menuFactory = new MenuFactory();
-        $menu = $menuFactory->createMenu($menu_items, false);
+        $menu = $menuFactory->createMenu($menu_items, true);
         $htmlpage->addToBodyContent($menu);
         $htmlpage->addToBodyContent(new AtomicElement('----- Collected errors -----<br><br>'));
         if ($menuFactory->hasErrors()) {
@@ -75,13 +75,20 @@ class PageFactory
                 $htmlpage->addToBodyContent(new BodyText($bodytext));
                 break;
             case 'about':
-                $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page,1)["description"];
+                if (empty($_GET["author"]))
+                {
+                    $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page)["bodytext"];
+                    $htmlpage->addToBodyContent(new BodyText($bodytext));
+                    break;
+                }
+                $bodytext = ModelSelector::getWebsiteInfoModel()->getAuthorAboutInfo($_GET["author"])['description'];
                 $htmlpage->addToBodyContent(new BodyText($bodytext)); 
                 break;
             case 'contact':
             case 'login':
             case 'register':
             case 'search':
+            case 'editArticle':
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);

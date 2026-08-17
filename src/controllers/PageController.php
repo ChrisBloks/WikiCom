@@ -53,7 +53,7 @@ class PageController
                 $response_page = NULL;
 
 
-                $PageFactory = new PageFactory($this->response['page'], false);
+                $PageFactory = new PageFactory($this->response['page'], true);
                 $response_page = $PageFactory->createPage();
 
 

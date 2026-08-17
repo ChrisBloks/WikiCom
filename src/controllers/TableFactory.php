@@ -47,18 +47,10 @@ class TableFactory
     private function buildCell(array $column, mixed $value, array $row_data): TableCell
     {
         $cell = new TableCell(class: $column['class'] ?? null);
-
         switch ($column['type']) {
-
-            case 'date':
-                $cell->addElement(new AtomicElement(
-                    htmlspecialchars(date('Y-m-d', strtotime((string)$value)))
-                ));
-                break;
             case 'actions':
                 $cell->addElement(new ArticleActions($row_data['id']));
                 break;
-
             case 'text':
             default:
                 $cell->addElement(new AtomicElement(htmlspecialchars((string)$value)));
