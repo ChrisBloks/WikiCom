@@ -8,13 +8,14 @@ class FormModel extends BaseModel
         $sql = "SELECT  fi.type, 
                         fi.name, 
                         fi.class, 
-                        fpp.label, 
-                        fi.options
+                        fi.label, 
+                        li.*
                 FROM field_info fi
-                JOIN fields_per_page fpp ON fpp.field_info_id = fi.id
-                JOIN website_info wi ON wi.id = fpp.website_info_id
+                JOIN form_info fo ON fi.form_info_id = fo.id
+                JOIN website_info wi ON wi.id = fo.website_info_id
+                LEFT JOIN lookup_info li on li.id = fi.lookup_info_id
                 WHERE wi.name = :page
-                ORDER BY fpp.display_order;";
+                ORDER BY fi.display_order;";
         $params = ["page" => $page_value];
         $result = $this->crudTemp->selectMany($sql, $params);
 
@@ -22,18 +23,13 @@ class FormModel extends BaseModel
             $this->logError("Page has no Form");
             return false;
         }
-
-        for ($i = 0; $i < count($result); $i++) {
-            if ($result[$i]["options"] == 1) {
-
-                $result[$i]["options"] = $this->getTag();
-            }
-            elseif ($result[$i]["options"] == 2) {
-
-                $result[$i]["options"] = $this->getAuthor();
-            }
+        foreach ($result as $key => $value) {
+            if (isset($value["id"])) {
+                $lookup = $this ->getLookupInfo($value["table_name"],$value["column_names"],$value["order_by"]);
+                $result[$key]["options"] = $lookup;
+        
         }
-
+        }
         return $result;
     }
 
@@ -43,7 +39,7 @@ class FormModel extends BaseModel
                                 fo.method, 
                                 fo.submit_caption
                 FROM form_info fo
-                JOIN website_info wi ON fo.id = wi.form_info_id
+                JOIN website_info wi ON fo.website_info_id = wi.id
                 WHERE wi.name = :page";
         $params = ["page" => $page_value];
         $result = $this->crudTemp->selectMany($sql, $params);
@@ -51,9 +47,9 @@ class FormModel extends BaseModel
         return $result[0];
     }
 
-    public function getTag()
+    public function getLookupInfo($table_name,$column_names,$order_by)
     {
-        $sql = "SELECT id,name FROM tag ORDER BY tag.name";
+        $sql = "SELECT $column_names FROM $table_name ORDER BY $order_by";
         $result = $this->crudTemp->selectMany($sql,NULL,PDO::FETCH_KEY_PAIR);
         if (empty($result)) {
             $this->logError("No tags");
@@ -62,14 +58,4 @@ class FormModel extends BaseModel
         return $result;
     }
 
-    public function getAuthor()
-    {
-        $sql = "SELECT id,name FROM user ORDER BY user.name";
-        $result = $this->crudTemp->selectMany($sql,NULL,PDO::FETCH_KEY_PAIR);
-        if (empty($result)) {
-            $this->logError("No authors");
-            $result = false;
-        }
-        return $result;
-    }
 }
