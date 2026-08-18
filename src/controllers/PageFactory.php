@@ -111,8 +111,9 @@ class PageFactory
                         $this->htmlpage->addToBodyContent($form);
                         break;                        
                     }
-                
+                else{
                 $this->htmlpage->addToBodyContent(new BodyText($bodytext)); 
+                }
                 break;
             case 'contact':
             case 'login':
@@ -122,7 +123,6 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
-                HtmlUtils::dump("field ino",$form_fields, false);
                 $this->htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
                 break;
             case 'article':
