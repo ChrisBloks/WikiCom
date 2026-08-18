@@ -25,7 +25,7 @@ class FormModel extends BaseModel
         }
         foreach ($result as $key => $value) {
             if (isset($value["id"])) {
-                $lookup = $this ->getLookupInfo($value["table_name"],$value["column_names"],$value["order_by"]);
+                $lookup = $this ->getLookupInfo($value["table_name"],$value["display_names"],$value["order_by"]);
                 $result[$key]["options"] = $lookup;
         
         }
