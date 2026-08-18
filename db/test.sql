@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2026 at 02:29 PM
+-- Generation Time: Aug 18, 2026 at 02:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -93,39 +93,6 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fields_per_page`
---
-
-CREATE TABLE `fields_per_page` (
-  `website_info_id` int(11) NOT NULL,
-  `field_info_id` int(11) NOT NULL,
-  `display_order` int(11) NOT NULL DEFAULT 0,
-  `label` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `fields_per_page`
---
-
-INSERT INTO `fields_per_page` (`website_info_id`, `field_info_id`, `display_order`, `label`) VALUES
-(3, 1, 0, 'Your name'),
-(3, 2, 1, 'Your email'),
-(3, 4, 2, 'Your message'),
-(4, 2, 0, 'Your email'),
-(4, 3, 1, 'Your password'),
-(5, 1, 0, 'Your name'),
-(5, 2, 1, 'Your email'),
-(5, 3, 2, 'Your password'),
-(5, 6, 3, 'Verify password'),
-(6, 7, 0, 'Filter by Author'),
-(6, 8, 1, 'Filter by Tag'),
-(7, 4, 0, 'Body Text:'),
-(7, 4, 1, 'Codeblock:'),
-(7, 9, 2, 'Upload File:');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `field_info`
 --
 
@@ -134,23 +101,33 @@ CREATE TABLE `field_info` (
   `name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `class` varchar(255) NOT NULL,
-  `options` int(11) NOT NULL
+  `lookup_info_id` int(11) DEFAULT NULL,
+  `form_info_id` int(11) NOT NULL,
+  `label` varchar(255) NOT NULL,
+  `display_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `field_info`
 --
 
-INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `options`) VALUES
-(1, 'name', 'text', 'text-input', 0),
-(2, 'email', 'email', 'text-input', 0),
-(3, 'password', 'password', 'text-input', 0),
-(4, 'message', 'textarea', 'text-input', 0),
-(5, 'contact-by', 'checkboxgroup', 'text-input', 0),
-(6, 'verifypassword', 'password', 'text-input', 0),
-(7, 'Author', 'select', 'filter-author', 2),
-(8, 'Tag', 'select', 'filter-tag', 1),
-(9, 'file', 'file', 'file_upload', 0);
+INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form_info_id`, `label`, `display_order`) VALUES
+(1, 'name', 'text', 'contact-name', NULL, 1, 'Your name:', 0),
+(2, 'email', 'email', 'contact-email', NULL, 1, 'Your email:', 1),
+(3, 'password', 'password', 'login-password', NULL, 2, 'Password:', 1),
+(4, 'abouttext', 'textarea', 'about-text', NULL, 5, 'About me:', 0),
+(6, 'verifypassword', 'password', 'register-verifypassword', NULL, 7, 'Verify password:', 0),
+(7, 'Author', 'select', 'filter-author', 2, 3, 'Filter by Author', 1),
+(8, 'Tag', 'select', 'filter-tag', 1, 3, 'Filter by Tag', 0),
+(9, 'aboutimg', 'file', 'about-img-file', NULL, 5, 'Upload file:', 1),
+(12, 'message', 'textarea', 'message-text', NULL, 1, 'Your message:', 2),
+(13, 'email', 'email', 'login-email', NULL, 2, 'Email:', 0),
+(14, 'name', 'text', 'register-name', NULL, 7, 'Your name:', 1),
+(15, 'email', 'email', 'register-email', NULL, 7, 'Your email:', 2),
+(16, 'password', 'password', 'register-password', NULL, 7, 'Password:', 3),
+(17, 'articletext', 'textarea', 'article-text', NULL, 6, 'Body text:', 0),
+(18, 'articlecodeblock', 'textarea', 'article-codeblock', NULL, 6, 'Codeblock:', 1),
+(19, 'articleimg', 'file', 'article-img-file', NULL, 6, 'Upload file:', 4);
 
 -- --------------------------------------------------------
 
@@ -162,18 +139,43 @@ CREATE TABLE `form_info` (
   `id` int(11) NOT NULL,
   `action` varchar(255) NOT NULL,
   `method` varchar(25) NOT NULL,
-  `submit_caption` varchar(255) NOT NULL
+  `submit_caption` varchar(255) NOT NULL,
+  `website_info_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `form_info`
 --
 
-INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`) VALUES
-(1, 'contact.php', 'POST', 'Send message'),
-(2, 'login.php', 'POST', 'Log in'),
-(3, 'articles.php', 'GET', 'Filter'),
-(4, 'editArticle.php', 'POST', 'SaveArticle\r\n');
+INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_info_id`) VALUES
+(1, 'contact.php', 'POST', 'Send message', 3),
+(2, 'login.php', 'POST', 'Log in', 4),
+(3, 'search.php', 'GET', 'Filter', 6),
+(4, 'editArticle.php', 'POST', 'SaveArticle\r\n', 7),
+(5, '\"\"', 'POST', 'Save About', 2),
+(6, 'test.php', 'POST', 'Create new article', 8),
+(7, 'register.php', 'POST', 'Register', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lookup_info`
+--
+
+CREATE TABLE `lookup_info` (
+  `id` int(11) NOT NULL,
+  `table_name` varchar(255) NOT NULL,
+  `column_names` varchar(255) NOT NULL,
+  `order_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lookup_info`
+--
+
+INSERT INTO `lookup_info` (`id`, `table_name`, `column_names`, `order_by`) VALUES
+(1, 'tag\r\n', 'id,name', 'tag.name'),
+(2, 'user', 'id,name', 'user.name');
 
 -- --------------------------------------------------------
 
@@ -246,7 +248,8 @@ INSERT INTO `rating` (`user_id`, `article_id`, `rating`) VALUES
 CREATE TABLE `table_columns` (
   `id` int(11) NOT NULL,
   `column_name` varchar(255) NOT NULL,
-  `display_types` varchar(255) NOT NULL,
+  `column_title` varchar(255) NOT NULL,
+  `display_type` varchar(255) NOT NULL,
   `class_types` varchar(255) NOT NULL,
   `column_headers` varchar(255) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -255,10 +258,10 @@ CREATE TABLE `table_columns` (
 -- Dumping data for table `table_columns`
 --
 
-INSERT INTO `table_columns` (`id`, `column_name`, `display_types`, `class_types`, `column_headers`) VALUES
-(1, 'title', 'string', 'articletitle', 'articletitleTableHead'),
-(2, 'lastEdit', 'date', 'lastEdit', 'lastEditTableHead'),
-(3, 'id', 'first_cell', 'first_cell', 'first_cellTableHead');
+INSERT INTO `table_columns` (`id`, `column_name`, `column_title`, `display_type`, `class_types`, `column_headers`) VALUES
+(1, 'id', 'Actions', 'first_cell', 'first_cell', 'first_cellTableHead'),
+(2, 'title', 'Title', 'string', 'articletitle', 'articletitleTableHead'),
+(3, 'lastEdit', 'Last edited', 'date', 'lastEdit', 'lastEditTableHead');
 
 -- --------------------------------------------------------
 
@@ -281,18 +284,6 @@ INSERT INTO `tag` (`id`, `name`) VALUES
 (3, 'tag3'),
 (4, 'tag4'),
 (5, 'tag82');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `text`
---
-
-CREATE TABLE `text` (
-  `id` int(11) NOT NULL,
-  `text` text NOT NULL,
-  `display_order` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -339,22 +330,22 @@ CREATE TABLE `v_article_avg_rating` (
 CREATE TABLE `website_info` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `bodytext` text NOT NULL,
-  `form_info_id` int(11) DEFAULT NULL
+  `bodytext` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `website_info`
 --
 
-INSERT INTO `website_info` (`id`, `name`, `bodytext`, `form_info_id`) VALUES
-(1, 'home', 'This is the bodytext for home from the database', NULL),
-(2, 'about', 'This is the bodytext for about from the database', NULL),
-(3, 'contact', '', 1),
-(4, 'login', '', 2),
-(5, 'register', '', 2),
-(6, 'search', '', 3),
-(7, 'editArticle', '', 4);
+INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
+(1, 'home', 'This is the bodytext for home from the database'),
+(2, 'about', 'This is the bodytext for about from the database'),
+(3, 'contact', ''),
+(4, 'login', ''),
+(5, 'register', ''),
+(6, 'search', ''),
+(7, 'editArticle', ''),
+(8, 'dashboard', '');
 
 -- --------------------------------------------------------
 
@@ -390,22 +381,23 @@ ALTER TABLE `contact_messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `fields_per_page`
---
-ALTER TABLE `fields_per_page`
-  ADD PRIMARY KEY (`website_info_id`,`field_info_id`,`label`),
-  ADD KEY `field_info_id` (`field_info_id`);
-
---
 -- Indexes for table `field_info`
 --
 ALTER TABLE `field_info`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `form_info_id` (`form_info_id`),
+  ADD KEY `lookup_info_id` (`lookup_info_id`);
 
 --
 -- Indexes for table `form_info`
 --
 ALTER TABLE `form_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lookup_info`
+--
+ALTER TABLE `lookup_info`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -442,12 +434,6 @@ ALTER TABLE `tag`
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `text`
---
-ALTER TABLE `text`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -457,8 +443,7 @@ ALTER TABLE `user`
 -- Indexes for table `website_info`
 --
 ALTER TABLE `website_info`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `website_info_ibfk_1` (`form_info_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -480,13 +465,19 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `form_info`
 --
 ALTER TABLE `form_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `lookup_info`
+--
+ALTER TABLE `lookup_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
@@ -504,19 +495,13 @@ ALTER TABLE `page_elements`
 -- AUTO_INCREMENT for table `table_columns`
 --
 ALTER TABLE `table_columns`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
-
---
--- AUTO_INCREMENT for table `text`
---
-ALTER TABLE `text`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -528,7 +513,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `website_info`
 --
 ALTER TABLE `website_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -548,11 +533,11 @@ ALTER TABLE `article_to_tag`
   ADD CONSTRAINT `fk_article_to_tag_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `fields_per_page`
+-- Constraints for table `field_info`
 --
-ALTER TABLE `fields_per_page`
-  ADD CONSTRAINT `fields_per_page_ibfk_1` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`),
-  ADD CONSTRAINT `fields_per_page_ibfk_2` FOREIGN KEY (`field_info_id`) REFERENCES `field_info` (`id`);
+ALTER TABLE `field_info`
+  ADD CONSTRAINT `field_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`),
+  ADD CONSTRAINT `field_info_ibfk_2` FOREIGN KEY (`lookup_info_id`) REFERENCES `lookup_info` (`id`);
 
 --
 -- Constraints for table `rating`
@@ -560,12 +545,6 @@ ALTER TABLE `fields_per_page`
 ALTER TABLE `rating`
   ADD CONSTRAINT `fk_rating_to_article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_rating_to_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `website_info`
---
-ALTER TABLE `website_info`
-  ADD CONSTRAINT `website_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
