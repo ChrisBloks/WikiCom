@@ -76,6 +76,7 @@ class PageFactory
         $menu_items = ModelSelector::getWebsiteInfoModel()->getMenuItems($this->isLoggedIn);
         // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
         $menuFactory = new MenuFactory();
+        //HtmlUtils::dump("menuitems", $menu_items);
         $menu = $menuFactory->createMenu($menu_items, true);
         $this->htmlpage->addToBodyContent($menu);
         if ($menuFactory->hasErrors()) {

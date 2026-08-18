@@ -59,7 +59,7 @@ class WebsiteInfoModel extends BaseModel
 
     $authorlist = [];
     foreach ($this->getAuthor() as $id => $name) {
-        $authorlist[] = ["label" => $name, "href" => "?page=about&author=".$id.""];
+        $authorlist[] = ["label" => $name, "href" => "about&author=".$id.""];
     }
 
     foreach ($result as &$item) {
