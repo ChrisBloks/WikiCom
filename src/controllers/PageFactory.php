@@ -99,8 +99,20 @@ class PageFactory
                     $this->htmlpage->addToBodyContent(new BodyText($bodytext));
                     break;
                 }
+
                 $bodytext = ModelSelector::getWebsiteInfoModel()->getAuthorAboutInfo($_GET["author"])['description'];
-                $this->htmlpage->addToBodyContent(new BodyText($bodytext));
+
+                if (true) // author equals user
+                    {
+                        $formFactory = new FormFactory();
+                        $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
+                        $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                        $form = $formFactory->createForm($form_info, $form_fields, [],$bodytext);
+                        $htmlpage->addToBodyContent($form);
+                        break;                        
+                    }
+                
+                $htmlpage->addToBodyContent(new BodyText($bodytext)); 
                 break;
             case 'contact':
             case 'login':
@@ -138,6 +150,20 @@ class PageFactory
             //case 'editArticle':
             //    // get $form_info and $form_fields from db method here
             //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
+               $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
+               $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
+               $tableFactory = new TableMaker($columnsdata,$rowsdata);
+
+               $table = new AtomicElement($tableFactory->createTable());
+
+               $htmlpage->addToBodyContent($table);
+
+                $formFactory = new FormFactory();
+                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                $htmlpage->addToBodyContent($formFactory->createForm($form_info, [], []));
+
+               break;
+
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
         }

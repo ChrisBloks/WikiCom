@@ -4,7 +4,7 @@ class FieldFactory
 {
 
 
-    public function createField(array $field_def): BaseField
+    public function createField(array $field_def,string $bodytext =""): BaseField
     {
         foreach (['type', 'name', 'class', 'label'] as $key) {
             if (!array_key_exists($key, $field_def)) {
@@ -17,7 +17,8 @@ class FieldFactory
                 return new TextAreaField(
                     name: $field_def["name"],
                     class: $field_def["class"],
-                    label: $field_def["label"]
+                    label: $field_def["label"],
+                    text: $bodytext,
                 );
             case 'checkboxgroup':
                 return new CheckBoxGroup(
