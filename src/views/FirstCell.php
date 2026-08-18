@@ -1,31 +1,36 @@
 <?php
 
-class FirstCell{
+class FirstCell
+{
 
     private int $page_id;
-
-    public function __construct(int $page_id){
+    public function __construct(int $page_id)
+    {
         $this->page_id = $page_id;
     }
 
 
-    public function returnFirstCellOptions():string
+    public function returnFirstCellOptions(): string
     {
         $str = '';
-        $str .= $this->_actionLink($this->page_id,'&#10000;','Update');
-        $str .= $this->_actionLink('-'.$this->page_id, '&#10060;' ,'Delete');
+        $str .= '<a href="'. $this->directNewPage() .'">' . $this->_actionLink($this->page_id, '&#10000;', 'Update') . '</a>';
+        $str .= $this->_actionLink('-' . $this->page_id, '&#10060;', 'Delete');
         return $str;
     }
 
 
-    private function _actionLink(string $page_id, string $title, string $hint) : string
+    private function _actionLink(string $page_id, string $title, string $hint): string
     {
         return '<span'
-        . ' class="gw_table_action"'
-        . ' id="'.$page_id.'"'
-        . ' title="'.$hint.'">'
-        . $title
-        . '</span>';        
-    }    
+            . ' class="wiki-table-action"'
+            . ' id="' . $page_id . '"'
+            . ' title="' . $hint . '">'
+            . $title
+            . '</span>';
+    }
 
+
+    private function directNewPage(){
+        return '?page="' . $editarticlemoethierterechtkomen .'&id=' . $this->page_id .'"';
+    }
 }

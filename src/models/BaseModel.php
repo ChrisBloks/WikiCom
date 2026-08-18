@@ -1,13 +1,14 @@
 <?php
 require_once "./src/tools/traits/tErrorMessageCollector.php";
-switch ("DANNY") {
+switch ($_ENV["USERDOMAIN"]) {
     case "DANNY":
         include_once "./config/danny.php";
         break;
     case "MARUISPC":
         include_once "./config/marius.php";
         break;
-    case "":
+    case "MARIUS":
+        include_once "./config/marius.php";
         break;
 }
 

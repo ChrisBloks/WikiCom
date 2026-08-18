@@ -9,7 +9,7 @@ class MenuItem extends ContainerElement
         $safe_href  = htmlspecialchars($href);
 
         parent::__construct(
-            "<li><a href=\"$safe_href\">$safe_label</a>",
+            '<li><a href="'. $safe_href .'">'.$safe_label.'</a>',
             "</li>"
         );
     }
