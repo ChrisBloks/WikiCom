@@ -27,6 +27,7 @@ require_once "./src/controllers/PageFactory.php";
 require_once "./src/controllers/PageController.php";
 require_once "./src/controllers/FormFactory.php";
 require_once "./src/controllers/MenuFactory.php";
+require_once "TableFactoryV2.php";
 
 //models
 require_once "./src/models/ModelSelector.php";

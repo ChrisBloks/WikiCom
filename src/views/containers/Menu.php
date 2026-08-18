@@ -9,7 +9,7 @@ class Menu extends ContainerElement{
 
     public function __construct()
     {
-        parent::__construct('<ul>','</ul>');
+        parent::__construct('<ul'. HtmlUtils::addClassAttr("nav") .'>','</ul>');
     }
 
 }
