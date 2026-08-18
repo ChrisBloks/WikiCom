@@ -23,22 +23,14 @@ $columns_headers = [
     "last_edited" => "lastEditTableHead"
 ];
 
-$table = [
-    $types => [
-        "id" => "first_cell",
-        "title" => "string",
-        "last_edited" => "date"
-    ],
-    $classes => [
-        "id" => "first_cell",
-        "title" => "articletitle",
-        "last_edited" => "lastEdit"
-    ],
-    $headers => [
-        "id" => "first_cellTableHead",
-        "title" => "articletitleTableHead",
-        "last_edited" => "lastEditTableHead"
-    ],
-    $data => $rows
+// per row:
+$tableinfo = [
+'name' => [
+'column_title' => 'Gebruiker', 
+'css_class'=> 'iets', 
+'display_type'=>'string'
+],
+'email' => [
+    
+]
 ];
-

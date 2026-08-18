@@ -83,7 +83,7 @@ class PageFactory
                 $this->htmlpage->addToBodyContent(new AtomicElement("- $error <br> ====================<br>"));
             }
         } else {
-            $this->htmlpage->addToBodyContent(new AtomicElement('<p '. HtmlUtils::addClassAttr("w3-xlarge") .'>(no menu errors)<br></p>'));
+            $this->htmlpage->addToBodyContent(new AtomicElement('<p ' . HtmlUtils::addClassAttr("w3-xlarge") . '>(no menu errors)<br></p>'));
         }
 
 
@@ -105,7 +105,6 @@ class PageFactory
             case 'contact':
             case 'login':
             case 'register':
-                
             case 'search':
             case 'editArticle':
                 $formFactory = new FormFactory();
@@ -120,12 +119,21 @@ class PageFactory
                 }
                 break;
             case 'dashboard':
-                $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
+                $columnsdata = [
+                    'title' => ['column_title' => 'Title', 'css_class' => 'col-title', 'display_type' => 'string'],
+                    'rating' => ['column_title' => 'Rating', 'display_type' => 'rating'],
+                    'last_edited' => ['column_title' => 'Last edited', 'display_type' => 'date'],
+                    'id' => ['column_title' => 'Actions', 'css_class' => 'no-wrap', 'display_type' => 'actions'],
+                ];
+
+                $rowsdata = [
+                    ['id' => 1, 'title' => 'PHP OOP Basics', 'rating' => 4.3, 'last_edited' => '2026-07-12'],
+                    ['id' => 2, 'title' => 'Factory Pattern Deep Dive', 'rating' => 5.0, 'last_edited' => '2026-08-01'],
+                    ['id' => 3, 'title' => 'Draft: Untitled', 'rating' => 0.0, 'last_edited' => '2026-08-10'],
+                    ['id' => 4, 'title' => '<script>alert(1)</script>', 'rating' => 2.7, 'last_edited' => '2026-06-30'],
+                ];
                 $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable()));
-                //    $table = $tableFactory->createTable($columns, $rows);
-                //    $htmlpage ->addToBodyContent($table);
                 break;
             //case 'editArticle':
             //    // get $form_info and $form_fields from db method here

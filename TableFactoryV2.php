@@ -1,98 +1,107 @@
 <?php
 require_once "./src/tools/utils/HtmlUtils.php";
+require_once "./src/views/containers/ArticleActions.php";
+require_once "./src/views/Rating.php";
+
+
 class TableFactoryV2
 {
+    protected array $columns;
     protected array $rows;
-    protected array $display_types;
-    protected array $class_types;
-    protected array $columnheaders;
 
-
-    public function __construct($columnsdata, $rowsdata)
+    public function __construct(array $columns, array $rows)
     {
-        // als er een rating type
-        $this->rows = $rowsdata;
-        $this->display_types = $columnsdata["types"];
-        $this->class_types = $columnsdata["classes"];
-        $this->columnheaders = $columnsdata["headers"];
+        $this->columns = $columns;
+        $this->rows = $rows;
     }
 
-    public function createTable()
+    public function createTable(?string $tableClass = null): string
     {
-        $str = "";
-        $str .= $this->startTable();
+        $str = $this->startTable($tableClass);
         $str .= $this->buildHeadRow();
         $str .= $this->buildRows();
         $str .= $this->endTable();
         return $str;
     }
 
-    protected function startTable()
+    protected function startTable(?string $tableClass): string
     {
-        return '<table'. HtmlUtils::addClassAttr("table") .' >';
+        return '<table' . HtmlUtils::addClassAttr($tableClass) . '>';
     }
 
-    protected function buildHeadRow()
-    {
-        $str = "";
-        $str .= '<tr' . HtmlUtils::addClassAttr("table_header") . '>';
-        foreach ($this->columnheaders as $key => $value) {
-            $str .= '<th' . HtmlUtils::addClassAttr($value) . '>' . $key . '</th>';
-        }
-        $str .= '</tr>';
-        return $str;
-
-    }
-
-    protected function buildRows()
-    {
-        $str = '';
-        foreach ($this->rows as $row) {
-            $str .= '<tr>';
-
-            foreach ($row as $key => $value) {
-                $display_type = $this->display_types[$key];
-                switch ($display_type) {
-                    case 'first_cell':
-                        // ToDo: implement ArticleActions -> form for delete
-                        $str .= '<td>' .
-                            '<a href=edit.php?id='. $row['id'] . '>' . $this->_actionLink($value, '&#10000;', 'EditPage', ) . '</a>'
-                            . $this->_actionLink('-' . $value, '&#10060;', 'Delete') .
-                            '</td>';
-                        break;
-                    case "integer":
-                        $str .= '<td' . HtmlUtils::addClassAttr($this->class_types[$key]) . '> ' . $value . '</td>';
-                        break;
-                    case "string":
-                        $str .= '<td' . HtmlUtils::addClassAttr($this->class_types[$key]) . '> ' . $value . '</td>';
-                        break;
-                    case "date":
-                        $str .= '<td' . HtmlUtils::addClassAttr($this->class_types[$key]) . '> ' . $value . '</td>';
-                        break;
-                    case 'rating':
-                        break;
-                    default:
-                        // throw exception
-                }
-            }
-            $str .= '</tr>';
-
-        }
-        return $str;
-    }
-
-    protected function endTable()
+    protected function endTable(): string
     {
         return '</table>';
     }
 
-    private function _actionLink(string $record_id, string $title, string $hint)
+    protected function buildHeadRow(): string
     {
-        return '<span' . HtmlUtils::addClassAttr("dashboard_column1")
-            . ' record-id="' . $record_id . '"'
-            . ' title="' . $hint . '">'
-            . $title
-            . '</span>';
+        $str = '<tr>';
+
+        foreach ($this->columns as $column) {
+            $str .= '<th' . HtmlUtils::addClassAttr($column['css_class'] ?? null) . '>'
+                  . htmlspecialchars($column['column_title'])
+                  . '</th>';
+        }
+
+        $str .= '</tr>';
+        return $str;
+    }
+
+    protected function buildRows(): string
+    {
+        $str = '';
+
+        foreach ($this->rows as $row_data) {
+            $str .= '<tr>';
+
+            //special loop for column rows
+            foreach ($this->columns as $identifier => $column) {
+                $value = $row_data[$identifier] ?? null;
+                $str .= $this->buildCell($column, $value, $row_data);
+            }
+
+        $str .= '</tr>';
+        }
+
+        return $str;
+    }
+
+    protected function buildCell(array $column, mixed $value, array $row_data): string
+    {
+        $classAttr = HtmlUtils::addClassAttr($column['css_class'] ?? null);
+
+        switch ($column['display_type']) {
+
+            case 'date':
+                $formatted = $value !== null ? date('Y-m-d', strtotime((string)$value)) : '';
+                return "<td$classAttr>" . htmlspecialchars($formatted) . '</td>';
+
+            case 'rating':
+                return "<td$classAttr>" . (new Rating((float)$value))->show() . '</td>';
+
+            case 'actions':
+                return "<td$classAttr>" . $this->buildActions($row_data) . '</td>';
+
+            case 'string':
+                return "<td$classAttr>" . htmlspecialchars((string)$value) . '</td>';
+
+            default:
+                throw new \InvalidArgumentException("Unknown display_type: '{$column['display_type']}'");
+        }
+    }
+
+    protected function buildActions(array $row_data): string
+    {
+        $id = htmlspecialchars((string)$row_data['id']);
+
+        $html = '<a href="edit.php?id=' . $id . '">Edit</a>';
+
+        $html .= '<form action="delete.php" method="POST">'
+               . '<input type="hidden" name="article_id" value="' . $id . '">'
+               . '<button type="submit" value="submit">Delete</button>'
+               . '</form>';
+
+        return $html;
     }
 }
-
