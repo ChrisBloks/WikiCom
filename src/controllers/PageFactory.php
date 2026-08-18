@@ -81,7 +81,19 @@ class PageFactory
                     $htmlpage->addToBodyContent(new BodyText($bodytext));
                     break;
                 }
+
                 $bodytext = ModelSelector::getWebsiteInfoModel()->getAuthorAboutInfo($_GET["author"])['description'];
+
+                if (true) // author equals user
+                    {
+                        $formFactory = new FormFactory();
+                        $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
+                        $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                        $form = $formFactory->createForm($form_info, $form_fields, [],$bodytext);
+                        $htmlpage->addToBodyContent($form);
+                        break;                        
+                    }
+                
                 $htmlpage->addToBodyContent(new BodyText($bodytext)); 
                 break;
             case 'contact':
@@ -103,15 +115,18 @@ class PageFactory
             case 'dashboard':
                $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
-               $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
+               $tableFactory = new TableMaker($columnsdata,$rowsdata);
 
-               print_r($tableFactory->createTable());
-            //    $table = $tableFactory->createTable($columns, $rows);
-            //    $htmlpage ->addToBodyContent($table);
+               $table = new AtomicElement($tableFactory->createTable());
+
+               $htmlpage->addToBodyContent($table);
+
+                $formFactory = new FormFactory();
+                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                $htmlpage->addToBodyContent($formFactory->createForm($form_info, [], []));
+
                break;
-            //case 'editArticle':
-            //    // get $form_info and $form_fields from db method here
-            //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
+
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
         }

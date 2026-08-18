@@ -1,6 +1,6 @@
 <?php
 require_once "./src/tools/utils/HtmlUtils.php";
-class TableFactoryV2
+class TableMaker
 {
     protected array $rows;
     protected array $display_types;
@@ -55,7 +55,7 @@ class TableFactoryV2
                     case 'first_cell':
                         // ToDo: implement ArticleActions
                         $str .= '<td>' .
-                            '<a href=\"edit.php?id=$id\">' . $this->_actionLink($value, '&#10000;', 'EditPage', ) . '</a>'
+                            '<a href=?page=editArticle&id='.$value.'>' . $this->_actionLink($value, '&#10000;', 'EditPage', ) . '</a>'
                             . $this->_actionLink('-' . $value, '&#10060;', 'Delete') .
                             '</td>';
                         break;

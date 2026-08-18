@@ -9,15 +9,17 @@ require_once "./src/tools/interfaces/iElement.php";
 class TextAreaField extends BaseField implements iElement {
 
     protected string $html;
+    protected string $text;
 
-    public function __construct(string $name, string $class, string $label = ""){
+    public function __construct(string $name, string $class, string $label = "",string $text = "") {
         parent::__construct($name, $label, $class);
+        $this -> text = $text;
 
         // rows and cols should be variable eventually
         $this->html .= '<textarea rows="5" 
                                 cols="56" 
                                 name="'.$name.'" 
-                                class="'.$class.'">
+                                class="'.$class.'">'.$text.'
                                 </textarea><br>';
     }
 
