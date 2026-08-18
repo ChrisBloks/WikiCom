@@ -122,6 +122,7 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                HtmlUtils::dump("field ino",$form_fields, false);
                 $this->htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
                 break;
             case 'article':
@@ -136,23 +137,6 @@ class PageFactory
                 $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable()));
                 break;
-            //case 'editArticle':
-            //    // get $form_info and $form_fields from db method here
-            //     $htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
-               $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
-               $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
-               $tableFactory = new TableMaker($columnsdata,$rowsdata);
-
-               $table = new AtomicElement($tableFactory->createTable());
-
-               $htmlpage->addToBodyContent($table);
-
-                $formFactory = new FormFactory();
-                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
-                $htmlpage->addToBodyContent($formFactory->createForm($form_info, [], []));
-
-               break;
-
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
         }

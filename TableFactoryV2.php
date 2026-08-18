@@ -8,6 +8,7 @@ class TableFactoryV2
 {
     protected array $columns;
     protected array $rows;
+    public string $page_value;
 
     public function __construct(array $columns, array $rows)
     {
