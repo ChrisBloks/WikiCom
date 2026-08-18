@@ -131,19 +131,8 @@ class PageFactory
                 }
                 break;
             case 'dashboard':
-                $columnsdata = [
-                    'title' => ['column_title' => 'Title', 'css_class' => 'col-title', 'display_type' => 'string'],
-                    'rating' => ['column_title' => 'Rating', 'display_type' => 'rating'],
-                    'last_edited' => ['column_title' => 'Last edited', 'display_type' => 'date'],
-                    'id' => ['column_title' => 'Actions', 'css_class' => 'no-wrap', 'display_type' => 'first_cell'],
-                ];
-
-                $rowsdata = [
-                    ['id' => 1, 'title' => 'PHP OOP Basics', 'rating' => 4.3, 'last_edited' => '2026-07-12'],
-                    ['id' => 2, 'title' => 'Factory Pattern Deep Dive', 'rating' => 5.0, 'last_edited' => '2026-08-01'],
-                    ['id' => 3, 'title' => 'Draft: Untitled', 'rating' => 0.0, 'last_edited' => '2026-08-10'],
-                    ['id' => 4, 'title' => 'Python', 'rating' => 2.7, 'last_edited' => '2026-06-30'],
-                ];
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
+                $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable()));
                 break;

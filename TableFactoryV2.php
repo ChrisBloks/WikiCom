@@ -80,8 +80,7 @@ class TableFactoryV2
                 return "<td$classAttr>" . (new Rating((float)$value))->show() . '</td>';
 
             case 'first_cell':
-                print_r($this->rows);
-                return "<td$classAttr>" . (new FirstCell($this->rows['id']))->returnFirstCellOptions() . '</td>';
+                return "<td$classAttr>" . (new FirstCell($row_data['id']))->returnFirstCellOptions() . '</td>';
 
             case 'string':
                 return "<td$classAttr>" . htmlspecialchars((string)$value) . '</td>';
