@@ -2,7 +2,7 @@
 require_once "./src/tools/utils/HtmlUtils.php";
 require_once "./src/views/containers/ArticleActions.php";
 require_once "./src/views/Rating.php";
-
+require_once "./src/views/FirstCell.php";
 
 class TableFactoryV2
 {
@@ -69,10 +69,9 @@ class TableFactoryV2
 
     protected function buildCell(array $column, mixed $value, array $row_data): string
     {
-        $classAttr = HtmlUtils::addClassAttr($column['css_class'] ?? null);
+        $classAttr = HtmlUtils::addClassAttr($column['class_type'] ?? null);
 
         switch ($column['display_type']) {
-
             case 'date':
                 $formatted = $value !== null ? date('Y-m-d', strtotime((string)$value)) : '';
                 return "<td$classAttr>" . htmlspecialchars($formatted) . '</td>';
@@ -80,8 +79,9 @@ class TableFactoryV2
             case 'rating':
                 return "<td$classAttr>" . (new Rating((float)$value))->show() . '</td>';
 
-            case 'actions':
-                return "<td$classAttr>" . $this->buildActions($row_data) . '</td>';
+            case 'first_cell':
+                print_r($this->rows);
+                return "<td$classAttr>" . (new FirstCell($this->rows['id']))->returnFirstCellOptions() . '</td>';
 
             case 'string':
                 return "<td$classAttr>" . htmlspecialchars((string)$value) . '</td>';
@@ -89,19 +89,5 @@ class TableFactoryV2
             default:
                 throw new \InvalidArgumentException("Unknown display_type: '{$column['display_type']}'");
         }
-    }
-
-    protected function buildActions(array $row_data): string
-    {
-        $id = htmlspecialchars((string)$row_data['id']);
-
-        $html = '<a href="edit.php?id=' . $id . '">Edit</a>';
-
-        $html .= '<form action="delete.php" method="POST">'
-               . '<input type="hidden" name="article_id" value="' . $id . '">'
-               . '<button type="submit" value="submit">Delete</button>'
-               . '</form>';
-
-        return $html;
     }
 }

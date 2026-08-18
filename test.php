@@ -14,7 +14,6 @@ require_once "./src/views/fields/select.php";
 require_once "./src/views/fields/CheckBoxGroup.php";
 require_once "./src/views/fields/InputField.php";
 require_once "./src/views/fields/TextAreaField.php";
-require_once "./src/views/TableMaker.php";
 
 
 //tools
