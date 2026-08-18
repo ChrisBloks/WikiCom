@@ -13,7 +13,7 @@ class FirstCell
     public function returnFirstCellOptions(): string
     {
         $str = '';
-        $str .= '<a href="'. $this->directNewPage() .'">' . $this->_actionLink($this->page_id, '&#10000;', 'Update') . '</a>';
+        $str .= '<a href="?page=editArticle'. $this->directNewPage() .'">' . $this->_actionLink($this->page_id, '&#10000;', 'Update') . '</a>';
         $str .= $this->_actionLink('-' . $this->page_id, '&#10060;', 'Delete');
         return $str;
     }
@@ -31,6 +31,6 @@ class FirstCell
 
 
     private function directNewPage(){
-        return '?page="' . $editarticlemoethierterechtkomen .'&id=' . $this->page_id .'"';
+
     }
 }
