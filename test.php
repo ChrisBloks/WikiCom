@@ -26,8 +26,7 @@ require_once "./src/controllers/PageFactory.php";
 require_once "./src/controllers/PageController.php";
 require_once "./src/controllers/FormFactory.php";
 require_once "./src/controllers/MenuFactory.php";
-require_once "./src/controllers/TableFactory.php";
-require_once "tabels.php";
+require_once "TableFactoryV2.php";
 
 //models
 require_once "./src/models/ModelSelector.php";
@@ -46,7 +45,6 @@ $controller->showResponse();
 require_once "./src/tools/interfaces/iElement.php";
 require_once "./src/tools/traits/tElementContainer.php";
 require_once "./src/views//containers/ContainerElement.php";
-require_once "./src/controllers/TableFactory.php";
 
 
 

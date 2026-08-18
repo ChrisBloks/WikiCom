@@ -10,6 +10,7 @@ class TableFactoryV2
 
     public function __construct($columnsdata, $rowsdata)
     {
+        // als er een rating type
         $this->rows = $rowsdata;
         $this->display_types = $columnsdata["types"];
         $this->class_types = $columnsdata["classes"];
@@ -28,7 +29,7 @@ class TableFactoryV2
 
     protected function startTable()
     {
-        return "<table>";
+        return '<table'. HtmlUtils::addClassAttr("table") .' >';
     }
 
     protected function buildHeadRow()
@@ -53,9 +54,9 @@ class TableFactoryV2
                 $display_type = $this->display_types[$key];
                 switch ($display_type) {
                     case 'first_cell':
-                        // ToDo: implement ArticleActions
+                        // ToDo: implement ArticleActions -> form for delete
                         $str .= '<td>' .
-                            '<a href=\"edit.php?id=$id\">' . $this->_actionLink($value, '&#10000;', 'EditPage', ) . '</a>'
+                            '<a href=edit.php?id='. $row['id'] . '>' . $this->_actionLink($value, '&#10000;', 'EditPage', ) . '</a>'
                             . $this->_actionLink('-' . $value, '&#10060;', 'Delete') .
                             '</td>';
                         break;
@@ -88,13 +89,10 @@ class TableFactoryV2
     private function _actionLink(string $record_id, string $title, string $hint)
     {
         return '<span' . HtmlUtils::addClassAttr("dashboard_column1")
-            . ' data-gw-record-id="' . $record_id . '"'
+            . ' record-id="' . $record_id . '"'
             . ' title="' . $hint . '">'
             . $title
             . '</span>';
     }
-
-
-
 }
 

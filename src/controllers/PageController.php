@@ -54,7 +54,7 @@ class PageController
 
 
                 $PageFactory = new PageFactory($this->response['page'], true);
-                $response_page = $PageFactory->createPage();
+                $response_page = $PageFactory->show();
 
 
                 // if response page is not null -> show page
