@@ -85,7 +85,7 @@ class PageFactory
         } else {
             $this->htmlpage->addToBodyContent(new AtomicElement('<p ' 
                                                             . HtmlUtils::addClassAttr("w3-xlarge") 
-                                                            . '>(no menu errors)<br></p>'));
+                                                            . '><br></p>'));
         }
 
         // page navigation
@@ -139,7 +139,7 @@ class PageFactory
                 break;
             case 'article':
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
-                foreach ($bodyinfo as $key => $value) {
+                foreach ($bodyinfo as $value) {
                     $this->htmlpage->addToBodyContent(new BodyText($value));
                 }
                 break;
@@ -147,7 +147,7 @@ class PageFactory
                 $this->htmlpage->addToBodyContent(new Title("Articles:"));
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
-                $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
+                $tableFactory = new Table($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table")));
                 break;
             default:
