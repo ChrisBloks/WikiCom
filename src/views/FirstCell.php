@@ -17,8 +17,8 @@ class FirstCell
 
     public function returnFirstCellOptions(): string
     {
-        
-        $editUrl = Url::to(['page' => $this->target_page, 'id' => $this->page_id]);
+
+        $editUrl = Url::buildUrl(['page' => $this->target_page, 'id' => $this->page_id]);
 
         $str  = '<a href="' . $editUrl . '">' . $this->_actionLink($this->page_id, '&#10000;', 'Update') . '</a>';
         $str .= $this->_buildDeleteForm();
@@ -28,7 +28,11 @@ class FirstCell
     // replace with get-request later on
     private function _buildDeleteForm(): string
     {
-        $form = new Form(action: '', method: 'POST', submit_caption: '&#10060;');
+        $form = new Form(
+                    action: '', 
+                    method: 'POST', 
+                    submit_caption: '&#10060;'
+                    );
         $form->addHiddenField('page', $this->delete_page);
         $form->addHiddenField('id', (string) $this->page_id);
         return $form->show();

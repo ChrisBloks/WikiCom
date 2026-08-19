@@ -36,7 +36,7 @@ class PageFactory
         return $this->htmlpage;
     }
 
-
+    
     private function addHead()
     {
         $this->htmlpage->addtoHeadContent(new AtomicElement("<title> Testpage </title>"));

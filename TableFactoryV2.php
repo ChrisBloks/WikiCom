@@ -80,6 +80,7 @@ class TableFactoryV2
             case 'rating':
                 return "<td$classAttr>" . (new Rating((float) $value))->show() . '</td>';
 
+            // replace editarticle with const from config file
             case 'first_cell':
                 return "<td$classAttr>" . (new FirstCell($row_data['id'], "editarticle", $row_data['id']))->returnFirstCellOptions() . '</td>';
             
