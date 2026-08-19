@@ -17,6 +17,7 @@ class FirstCell
 
     public function returnFirstCellOptions(): string
     {
+        
         $editUrl = Url::to(['page' => $this->target_page, 'id' => $this->page_id]);
 
         $str  = '<a href="' . $editUrl . '">' . $this->_actionLink($this->page_id, '&#10000;', 'Update') . '</a>';
@@ -24,6 +25,7 @@ class FirstCell
         return $str;
     }
 
+    // replace with get-request later on
     private function _buildDeleteForm(): string
     {
         $form = new Form(action: '', method: 'POST', submit_caption: '&#10060;');
