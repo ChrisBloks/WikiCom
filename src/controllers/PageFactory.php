@@ -84,7 +84,7 @@ class PageFactory
             }
         } else {
             $this->htmlpage->addToBodyContent(new AtomicElement('<p ' 
-                                                            . HtmlUtils::addClassAttr("w3-xlarge") 
+                                                            . HtmlUtils::addClassAttr("text-white bg-danger") 
                                                             . '>(no menu errors)<br></p>'));
         }
 
@@ -137,7 +137,7 @@ class PageFactory
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
-                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table")));
+                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable(".table-striped")));
                 break;
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
