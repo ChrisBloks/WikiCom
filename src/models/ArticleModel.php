@@ -14,7 +14,8 @@ class ArticleModel extends BaseModel
         private static $sort_values = [
                 "rating" => "AVGrating",
                 "AVGrating" => "AVGrating",
-                "datum" => "article.lastEdit"
+                "datum" => "article.lastEdit",
+                "date" => "article.lastEdit"
         ];
 
         /*

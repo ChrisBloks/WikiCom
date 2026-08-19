@@ -87,8 +87,6 @@ class PageFactory
             $this->htmlpage->addToBodyContent(new AtomicElement('<p ' . HtmlUtils::addClassAttr("w3-xlarge") . '>(no menu errors)<br></p>'));
         }
 
-
-
         switch ($this->page) {
             case 'home':
                 $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page)["bodytext"];
@@ -122,7 +120,7 @@ class PageFactory
             case 'search':
             case 'editArticle':
                 $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
+                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page,1);
                 $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
                 $this->htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
                 break;

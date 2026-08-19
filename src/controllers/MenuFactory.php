@@ -26,7 +26,6 @@ class MenuFactory
                 $this->logError($e->getMessage());
             }
         }
-
         return $menu;
     }
 
@@ -41,7 +40,6 @@ class MenuFactory
         if (!empty($item['submenu'])) {
             $menuItem->addElement($this->buildMenu($item['submenu'], $isLoggedIn));
         }
-
         return $menuItem;
     }
 }

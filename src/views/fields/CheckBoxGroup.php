@@ -16,12 +16,12 @@ protected array $options =[];
     public function show():string{
         
         $ret = '<div class="checkbox_group">';
-        $ret .= HtmlUtils::printLabel($this->id, $this->label)."<br>";
+        $ret .= HtmlUtils::printLabel($this->id, $this->label)."";
 
         foreach ($this->options as $value => $display){
             $checked = in_array($value, $this->value);
             $ret .= '<input type="checkbox"'. $this->baseAttribs(true, $value). 'value="'.$display.'"'. ($checked? 'checked' : '') .'>';
-            $ret .= HtmlUtils::printLabel($this->id, $display). "<br>";            
+            $ret .= HtmlUtils::printLabel($this->id, $display). "";            
         }
                     
         return $ret .= "</div>";

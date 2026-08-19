@@ -3,7 +3,7 @@ require_once "Crud.php";
 require_once "BaseModel.php";
 class FormModel extends BaseModel
 {
-    public function getFieldInfo($page_value)
+    public function getFieldInfo($page_value, $id = '')
     {
         $sql = "SELECT  fi.type, 
                         fi.name, 
@@ -23,17 +23,16 @@ class FormModel extends BaseModel
             $this->logError("Page has no Form");
             return false;
         }
-        foreach ($result as $key => $value) {
+        foreach ($result as &$value) {
             if (isset($value["id"])) {
-                $lookup = $this ->getLookupInfo($value["table_name"],$value["display_names"],$value["order_by"]);
-                $result[$key]["options"] = $lookup;
-        
+                $this->getLookupInfo($value, $id);
+            }
         }
-        }
+        unset($value);
         return $result;
     }
 
-        public function getFormInfo($page_value)
+    public function getFormInfo($page_value)
     {
         $sql = "SELECT DISTINCT fo.action, 
                                 fo.method, 
@@ -47,15 +46,34 @@ class FormModel extends BaseModel
         return $result[0];
     }
 
-    public function getLookupInfo($table_name,$column_names,$order_by)
+    public function getLookupInfo(&$value, $id)
     {
-        $sql = "SELECT $column_names FROM $table_name ORDER BY $order_by";
-        $result = $this->crudTemp->selectMany($sql,NULL,PDO::FETCH_KEY_PAIR);
-        if (empty($result)) {
-            $this->logError("No tags");
-            $result = false;
+        if (!empty($value["table_name"])) {
+            $sql = "SELECT {$value["display_names"]} FROM {$value['table_name']}";
+
+            if (!empty($value["value"])) {
+
+                if (!empty($value["bridgejoin"])) {
+                    [$main, $bridge] = explode(",", $value["bridgevalues"]);
+                    $sql .= " JOIN {$value["bridgejoin"]} ON {$main} = {$bridge}";
+                }
+                $sql .= " WHERE {$value['value']} = {$id}";
+
+                $sql .= " ORDER BY {$value['order_by']}";
+            }
+
+            $result = $this->crudTemp->selectMany($sql, NULL, PDO::FETCH_KEY_PAIR);
+            if (empty($result)) {
+                $this->logError("No lookup");
+                $result = false;
+            }
+
+            $value["options"] = $result;
+        } else {
+            $value["options"] = explode(",", $value["display_names"]);
         }
-        return $result;
+
+
     }
 
 }
