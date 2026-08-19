@@ -3,6 +3,8 @@ require_once "./src/views/containers/ContainerElement.php";
 require_once "./src/views/containers/AtomicElement.php";
 require_once "./src/views/containers/Form.php";
 
+
+// deprecated until i find a better way to add this, use FirstCell instead
 class ArticleActions extends ContainerElement
 {
     public function __construct(int|string $articleId)

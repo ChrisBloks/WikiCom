@@ -36,7 +36,7 @@ class PageFactory
         return $this->htmlpage;
     }
 
-
+    
     private function addHead()
     {
         $this->htmlpage->addtoHeadContent(new AtomicElement("<title> Testpage </title>"));
@@ -134,7 +134,7 @@ class PageFactory
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
-                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable()));
+                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table")));
                 break;
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");

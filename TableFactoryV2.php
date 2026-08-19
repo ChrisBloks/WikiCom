@@ -41,8 +41,8 @@ class TableFactoryV2
 
         foreach ($this->columns as $column) {
             $str .= '<th' . HtmlUtils::addClassAttr($column['css_class'] ?? null) . '>'
-                  . htmlspecialchars($column['column_title'])
-                  . '</th>';
+                . htmlspecialchars($column['column_title'])
+                . '</th>';
         }
 
         $str .= '</tr>';
@@ -62,7 +62,7 @@ class TableFactoryV2
                 $str .= $this->buildCell($column, $value, $row_data);
             }
 
-        $str .= '</tr>';
+            $str .= '</tr>';
         }
 
         return $str;
@@ -74,17 +74,18 @@ class TableFactoryV2
 
         switch ($column['display_type']) {
             case 'date':
-                $formatted = $value !== null ? date('Y-m-d', strtotime((string)$value)) : '';
+                $formatted = $value !== null ? date('Y-m-d', strtotime((string) $value)) : '';
                 return "<td$classAttr>" . htmlspecialchars($formatted) . '</td>';
 
             case 'rating':
-                return "<td$classAttr>" . (new Rating((float)$value))->show() . '</td>';
+                return "<td$classAttr>" . (new Rating((float) $value))->show() . '</td>';
 
+            // replace editarticle with const from config file
             case 'first_cell':
-                return "<td$classAttr>" . (new FirstCell($row_data['id']))->returnFirstCellOptions() . '</td>';
-
-            case 'string':
-                return "<td$classAttr>" . htmlspecialchars((string)$value) . '</td>';
+                return "<td$classAttr>" . (new FirstCell($row_data['id'], "editarticle", $row_data['id']))->returnFirstCellOptions() . '</td>';
+            
+                case 'string':
+                return "<td$classAttr>" . htmlspecialchars((string) $value) . '</td>';
 
             default:
                 throw new \InvalidArgumentException("Unknown display_type: '{$column['display_type']}'");
