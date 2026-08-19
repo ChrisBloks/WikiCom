@@ -53,9 +53,9 @@ class FormModel extends BaseModel
 
             if (!empty($value["value"])) {
 
-                if (!empty($value["bridgejoin"])) {
+                if (!empty($value["bridge_table"])) {
                     [$main, $bridge] = explode(",", $value["bridgevalues"]);
-                    $sql .= " JOIN {$value["bridgejoin"]} ON {$main} = {$bridge}";
+                    $sql .= " JOIN {$value["bridge_table"]} ON {$main} = {$bridge}";
                 }
                 $sql .= " WHERE {$value['value']} = {$id}";
 

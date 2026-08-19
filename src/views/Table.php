@@ -86,7 +86,7 @@ class Table
             case 'first_cell':
                 return "<td$classAttr>" . (new FirstCell(
                                                     page_id:$row_data['id'], 
-                                                    target_page: "editarticle", 
+                                                    target_page: "editArticle", 
                                                     delete_page: $row_data['id']))->returnFirstCellOptions() 
                                         . '</td>';
             
