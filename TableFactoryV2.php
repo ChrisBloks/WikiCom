@@ -78,11 +78,17 @@ class TableFactoryV2
                 return "<td$classAttr>" . htmlspecialchars($formatted) . '</td>';
 
             case 'rating':
-                return "<td$classAttr>" . (new Rating((float) $value))->show() . '</td>';
+                return "<td$classAttr>" . (new Rating(
+                                                rating: (float) $value
+                                                ))->show() . '</td>';
 
             // replace editarticle with const from config file
             case 'first_cell':
-                return "<td$classAttr>" . (new FirstCell($row_data['id'], "editArticle", $row_data['id']))->returnFirstCellOptions() . '</td>';
+                return "<td$classAttr>" . (new FirstCell(
+                                                    page_id:$row_data['id'], 
+                                                    target_page: "editarticle", 
+                                                    delete_page: $row_data['id']))->returnFirstCellOptions() 
+                                        . '</td>';
             
                 case 'string':
                 return "<td$classAttr>" . htmlspecialchars((string) $value) . '</td>';

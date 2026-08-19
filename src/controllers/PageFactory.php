@@ -69,14 +69,13 @@ class PageFactory
         // tNoticeMessage ... eventually
 
         // title
-        $this->htmlpage->addToBodyContent(new Header('<h1> Website </h1>'));
+        $this->htmlpage->addToBodyContent(new Header('<h1>'.ucfirst($this->page).'</h1>'));
 
         // menu items
         // menu items from database
-        $menu_items = ModelSelector::getWebsiteInfoModel()->getMenuItems($this->isLoggedIn);
         // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
+        $menu_items = ModelSelector::getWebsiteInfoModel()->getMenuItems($this->isLoggedIn);
         $menuFactory = new MenuFactory();
-        //HtmlUtils::dump("menuitems", $menu_items);
         $menu = $menuFactory->createMenu($menu_items, true);
         $this->htmlpage->addToBodyContent($menu);
         if ($menuFactory->hasErrors()) {
@@ -84,9 +83,12 @@ class PageFactory
                 $this->htmlpage->addToBodyContent(new AtomicElement("- $error <br> ====================<br>"));
             }
         } else {
-            $this->htmlpage->addToBodyContent(new AtomicElement('<p ' . HtmlUtils::addClassAttr("w3-xlarge") . '>(no menu errors)<br></p>'));
+            $this->htmlpage->addToBodyContent(new AtomicElement('<p ' 
+                                                            . HtmlUtils::addClassAttr("w3-xlarge") 
+                                                            . '>(no menu errors)<br></p>'));
         }
 
+        // page navigation
         switch ($this->page) {
             case 'home':
                 $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page)["bodytext"];
@@ -142,6 +144,7 @@ class PageFactory
                 }
                 break;
             case 'dashboard':
+                $this->htmlpage->addToBodyContent(new Title("Articles:"));
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
@@ -154,6 +157,6 @@ class PageFactory
 
     private function addFooter()
     {
-        $this->htmlpage->addToBodyContent(new Footer("Footer text"));
+        $this->htmlpage->addToBodyContent(new Footer('Christian, Danny, & Marius &copy' . date("Y")));
     }
 }
