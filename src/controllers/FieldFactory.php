@@ -34,6 +34,13 @@ class FieldFactory
                     label: $field_def["label"],
                     options: $field_def['options']                    
                 );
+            case 'button':
+                return new ButtonField(   
+                    type: $field_def['type'],
+                    name: $field_def["name"],
+                    class: $field_def["class"],
+                    label: $field_def["label"]
+                );
             default:
                 return new InputField(   
                     type: $field_def['type'],
