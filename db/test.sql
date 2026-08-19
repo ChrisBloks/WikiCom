@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2026 at 08:37 AM
+-- Generation Time: Aug 19, 2026 at 08:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -165,17 +165,18 @@ INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_in
 CREATE TABLE `lookup_info` (
   `id` int(11) NOT NULL,
   `table_name` varchar(255) NOT NULL,
-  `column_names` varchar(255) NOT NULL,
-  `order_by` varchar(255) NOT NULL
+  `display_names` varchar(255) NOT NULL,
+  `order_by` varchar(255) NOT NULL,
+  `values` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lookup_info`
 --
 
-INSERT INTO `lookup_info` (`id`, `table_name`, `column_names`, `order_by`) VALUES
-(1, 'tag\r\n', 'id,name', 'tag.name'),
-(2, 'user', 'id,name', 'user.name');
+INSERT INTO `lookup_info` (`id`, `table_name`, `display_names`, `order_by`, `values`) VALUES
+(1, 'tag\r\n', 'id,name', 'tag.name', ''),
+(2, 'user', 'id,name', 'user.name', '');
 
 -- --------------------------------------------------------
 
