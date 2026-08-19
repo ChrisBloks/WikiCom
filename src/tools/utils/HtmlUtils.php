@@ -20,4 +20,16 @@ class HtmlUtils
     {
         return $class ? ' class="' . htmlspecialchars($class) . '"' : '';
     }
+
+    public static function addAttrs(array $attrs): string
+    {
+        $out = '';
+        foreach ($attrs as $name => $value) {
+            if ($value === null || $value === false) {
+                continue;
+            }
+            $out .= ' ' . htmlspecialchars($name) . '="' . htmlspecialchars((string) $value) . '"';
+        }
+        return $out;
+    }
 }
