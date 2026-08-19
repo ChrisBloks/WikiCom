@@ -1,6 +1,7 @@
 <?php
 require_once "./src/tools/traits/tErrorMessageCollector.php";
-switch ("MARIUS") {
+$user = (isset($_ENV["USERDOMAIN"])) ? $_ENV["USERDOMAIN"] :"MARIUS";
+switch ($user) {
     case "DANNY":
         include_once "./config/danny.php";
         break;
