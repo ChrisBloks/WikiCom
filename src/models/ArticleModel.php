@@ -139,6 +139,12 @@ class ArticleModel extends BaseModel
                 return [$result, $params];
         }
 
+
+        /*
+        * Method that saves article to the database given the article info
+        *
+        * @params article info + user id
+        */ 
         public function saveNewArticleInfo($article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
         {
                 $sql = "INSERT INTO article (title, summary, codeBlock, imgFileName, user_id, lastEdit)
@@ -158,6 +164,12 @@ class ArticleModel extends BaseModel
                 }
                 return $result;
         }
+
+        /*
+        * Method that updates article based on new information
+        *
+        * @params article info + user id
+        */ 
 
         public function saveExistingArticleInfo($article_id, $article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
         {
@@ -188,6 +200,12 @@ class ArticleModel extends BaseModel
                 }
         }
 
+        /*
+        * Method that checks if tag already exists. If it does not exist give true
+        *
+        * @param tag name
+        */ 
+
         public function checkTag($tag_name)
         {
                 $sql = "SELECT name FROM tag 
@@ -197,6 +215,11 @@ class ArticleModel extends BaseModel
                 return empty($result);
         }
 
+        /*
+        * Method that adds a new tag to the database
+        *
+        * @param tag name
+        */ 
         public function addNewTag(string $tag_name)
         {
                 $sql = "INSERT INTO tag (name) 

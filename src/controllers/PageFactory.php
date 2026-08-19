@@ -84,8 +84,8 @@ class PageFactory
             }
         } else {
             $this->htmlpage->addToBodyContent(new AtomicElement('<p ' 
-                                                            . HtmlUtils::addClassAttr("text-white bg-danger") 
-                                                            . '>(no menu errors)<br></p>'));
+                                                            . HtmlUtils::addClassAttr("w3-xlarge") 
+                                                            . '><br></p>'));
         }
 
         // page navigation
@@ -108,7 +108,8 @@ class PageFactory
                         $formFactory = new FormFactory();
                         $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
                         $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
-                        $form = $formFactory->createForm($form_info, $form_fields, [],$bodytext);
+                        $form = $formFactory->createForm($form_info, $form_fields, [],["abouttext" =>$bodytext]);
+                        $form ->addHiddenField("user",$_GET["author"]);
                         $this->htmlpage->addToBodyContent($form);
                         break;                        
                     }
@@ -120,15 +121,25 @@ class PageFactory
             case 'login':
             case 'register':
             case 'search':
+                $formFactory = new FormFactory();
+                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page); 
+                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                $form = $formFactory->createForm($form_info, $form_fields, [],["articletext"=>"testtext","articlecodeblock" => "testcode"]);
+                $this->htmlpage->addToBodyContent($form);
+                break;
             case 'editArticle':
                 $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page,2); //give article tag
+                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page,$_GET["id"]); //give article tag
                 $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
-                $this->htmlpage->addToBodyContent($formFactory->createForm($form_info, $form_fields, []));
+                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
+
+                $form = $formFactory->createForm($form_info, $form_fields, [],$bodyinfo);
+                $form ->addHiddenField("user",$_GET["id"]); //give article tag
+                $this->htmlpage->addToBodyContent($form);
                 break;
             case 'article':
-                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById(2);
-                foreach ($bodyinfo as $key => $value) {
+                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
+                foreach ($bodyinfo as $value) {
                     $this->htmlpage->addToBodyContent(new BodyText($value));
                 }
                 break;
@@ -136,8 +147,8 @@ class PageFactory
                 $this->htmlpage->addToBodyContent(new Title("Articles:"));
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
-                $tableFactory = new TableFactoryV2($columnsdata, $rowsdata);
-                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable(".table-striped")));
+                $tableFactory = new Table($columnsdata, $rowsdata);
+                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table")));
                 break;
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");

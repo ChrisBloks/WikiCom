@@ -4,7 +4,7 @@ require_once "./src/views/containers/ArticleActions.php";
 require_once "./src/views/Rating.php";
 require_once "./src/views/FirstCell.php";
 
-class TableFactoryV2
+class Table
 {
     protected array $columns;
     protected array $rows;
@@ -86,7 +86,7 @@ class TableFactoryV2
             case 'first_cell':
                 return "<td$classAttr>" . (new FirstCell(
                                                     page_id:$row_data['id'], 
-                                                    target_page: "editarticle", 
+                                                    target_page: "editArticle", 
                                                     delete_page: $row_data['id']))->returnFirstCellOptions() 
                                         . '</td>';
             
