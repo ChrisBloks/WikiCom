@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2026 at 02:28 PM
+-- Generation Time: Aug 19, 2026 at 08:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -195,14 +195,14 @@ CREATE TABLE `menu_items` (
 --
 
 INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
-(1, 'Home', '?page=home', 0),
-(2, 'About', '?page=about', 1),
-(3, 'Contact', '?page=contact', 2),
-(4, 'Search', '?page=search', 3),
-(5, 'Register', '?page=register', 4),
-(6, 'Login', '?page=login', 5),
-(7, 'Dashboard', '?page=dashboard', 6),
-(8, 'Logout', '?page=logout', 7);
+(1, 'Home', 'home', 0),
+(2, 'About', 'about', 1),
+(3, 'Contact', 'contact', 2),
+(4, 'Search', 'search', 3),
+(5, 'Register', 'register', 4),
+(6, 'Login', 'login', 5),
+(7, 'Dashboard', 'dashboard', 6),
+(8, 'Logout', 'logout', 7);
 
 -- --------------------------------------------------------
 
