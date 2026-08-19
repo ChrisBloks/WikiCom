@@ -1,4 +1,9 @@
 <?php
+/* Crud
+*  Danny
+*  08/2026
+*  Crud class all database related operations
+*/
 class Crud
 {
 

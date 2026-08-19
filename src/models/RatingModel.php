@@ -1,10 +1,19 @@
 <?php
+/* RatingModel
+*  Danny
+*  08/2026
+*  RatingModel class gives al the methods needed to pull or insert Rating information from database
+*/
 require_once "Crud.php";
 require_once "BaseModel.php";
 
 class RatingModel extends BaseModel
 {
-
+    /*
+    * Method that fetches the avg rating based on a given article id
+    *
+    * @params $article_id
+    */ 
     public function fetchAvgRating($article_id)
     {
         $sql = "SELECT `AVGrating` as AVGrating FROM v_article_avg_rating 
@@ -17,7 +26,11 @@ class RatingModel extends BaseModel
         }
         return $result;
     }
-
+    /*
+    * Method that saves the rating from a user for an article
+    *
+    * @params user_id, article_id, rating
+    */ 
     public function saveRating(int $user_id,int $article_id, int $rating)
     {
         $sql = "INSERT INTO rating (user_id,article_id, rating) 

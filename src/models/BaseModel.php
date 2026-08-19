@@ -1,4 +1,9 @@
 <?php
+/* BaseModel
+*  Danny
+*  08/2026
+*  Base model class is where all other classes extend and it establishes connection with crud
+*/
 require_once "./src/tools/traits/tErrorMessageCollector.php";
 $user = (isset($_ENV["USERDOMAIN"])) ? $_ENV["USERDOMAIN"] :"MARIUS";
 switch ($user) {

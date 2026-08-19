@@ -1,15 +1,24 @@
 <?php
+/* WebsiteModel
+*  Danny
+*  08/2026
+*  WebsiteModel class gives al the methods needed to pull Website information from database
+*/
 require_once "Crud.php";
 require_once "BaseModel.php";
 
 class WebsiteInfoModel extends BaseModel
 {
-
-    public function getBodyText($page_value)
+    /*
+    * method gets body text based on the page name
+    *
+    * @params page name
+    */ 
+    public function getBodyText($page_name)
     {
         $sql = "SELECT bodytext FROM website_info 
                 WHERE name=:page";
-        $params = ["page" => $page_value];
+        $params = ["page" => $page_name];
         $result = $this->crudTemp->selectOne($sql, $params);
         if (empty($result)){
             $this -> logError("Page has no Body text");
@@ -18,6 +27,11 @@ class WebsiteInfoModel extends BaseModel
         return $result;
     }
 
+    /*
+    * method gets user info based on user id
+    *
+    * @params user id
+    */ 
     public function getAuthorAboutInfo($user_id)
     {
         $sql = "SELECT name,description,imgFileName FROM user 
@@ -31,7 +45,11 @@ class WebsiteInfoModel extends BaseModel
         return $result;
 
     }
-
+    /*
+    * method that saves contact name,email and message
+    *
+    * @params name, email , message
+    */ 
     public function saveContact(string $name, string $email, string $message)
     {
         $sql = "INSERT INTO contact_messages (name,message,email,date) 
@@ -44,7 +62,11 @@ class WebsiteInfoModel extends BaseModel
         ];
         return $this->crudTemp->insert($sql, $params);
     }
-
+    /*
+    * method that grabs the menu items from the database based on if the user is logged in
+    *
+    * @params isloggedIn bool that indicates if person is logged in
+    */ 
     public function getMenuItems($isLoggedIn)
 {
     $excluded = $isLoggedIn ? ['Register', 'Login'] : ['Dashboard','Logout'];
@@ -73,13 +95,19 @@ class WebsiteInfoModel extends BaseModel
 
     return $result;
 }
-
+    /*
+    * method that gets all authors
+    *
+    */ 
     public function getAuthor()
     {
         $sql = "SELECT id,name FROM user ORDER BY user.name";
         return $this->crudTemp->selectMany($sql,NULL,PDO::FETCH_KEY_PAIR);
     }
-
+    /*
+    * method that gets all table column info
+    *
+    */ 
     public function getTableColumns()
     {
         $sql = "SELECT `column_name`,`column_title`, `display_type`,`class_types`,`column_headers`FROM table_columns";
