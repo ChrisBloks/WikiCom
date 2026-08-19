@@ -64,8 +64,7 @@ class FormModel extends BaseModel
 
             $result = $this->crudTemp->selectMany($sql, NULL, PDO::FETCH_KEY_PAIR);
             if (empty($result)) {
-                $this->logError("No lookup");
-                $result = false;
+                $result = array();
             }
 
             $value["options"] = $result;

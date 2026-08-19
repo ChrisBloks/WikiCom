@@ -82,7 +82,7 @@ class TableFactoryV2
 
             // replace editarticle with const from config file
             case 'first_cell':
-                return "<td$classAttr>" . (new FirstCell($row_data['id'], "editarticle", $row_data['id']))->returnFirstCellOptions() . '</td>';
+                return "<td$classAttr>" . (new FirstCell($row_data['id'], "editArticle", $row_data['id']))->returnFirstCellOptions() . '</td>';
             
                 case 'string':
                 return "<td$classAttr>" . htmlspecialchars((string) $value) . '</td>';

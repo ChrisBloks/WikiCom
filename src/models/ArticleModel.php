@@ -139,6 +139,12 @@ class ArticleModel extends BaseModel
                 return [$result, $params];
         }
 
+
+        /*
+        * Method that saves article to the database given the article info
+        *
+        * @params article info + user id
+        */ 
         public function saveNewArticleInfo($article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
         {
                 $sql = "INSERT INTO article (title, summary, codeBlock, imgFileName, user_id, lastEdit)

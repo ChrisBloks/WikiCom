@@ -4,9 +4,14 @@ require_once "./src/views/fields/BaseField.php";
 class InputField extends BaseField implements iElement {
 
     protected string $type;
-    public function __construct(string $type, string $name, string $class, string $label = ""){
+    protected array $text;
+    protected string $name;
+    public function __construct(string $type, string $name, string $class, string $label = "", array $text = []){
         parent::__construct($name, $label, $class);
         $this->type = $type;
+        $this->text = $text;
+        $this->name = $name;
+        $this ->value = ((empty($this->text[$this->name])) ? '':$this->text[$this->name]);
     }
 
     public function show(): string {
