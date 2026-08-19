@@ -1,9 +1,20 @@
 <?php
+/* FormModel
+*  Danny
+*  08/2026
+*  FormModel class gives al the methods needed to pull information from database about forms
+*/
 require_once "Crud.php";
 require_once "BaseModel.php";
 class FormModel extends BaseModel
 {
-    public function getFieldInfo($page_value, $id = '')
+    /*
+    * Gets the necessary field information for a certain page. Some fields need an extray sub array as information
+    * so when lookup_id exists a second query will be run based on the info gotten from the first query.
+    *
+    * @params page_name = the page name and id is used for further query building using the lookupinfo
+    */ 
+    public function getFieldInfo($page_name, $id = '')
     {
         $sql = "SELECT  fi.type, 
                         fi.name, 
@@ -16,7 +27,7 @@ class FormModel extends BaseModel
                 LEFT JOIN lookup_info li on li.id = fi.lookup_info_id
                 WHERE wi.name = :page
                 ORDER BY fi.display_order;";
-        $params = ["page" => $page_value];
+        $params = ["page" => $page_name];
         $result = $this->crudTemp->selectMany($sql, $params);
 
         if (empty($result)) {
@@ -32,7 +43,12 @@ class FormModel extends BaseModel
         return $result;
     }
 
-    public function getFormInfo($page_value)
+    /*
+    * Gets the necessary form information for a certain page. 
+    *
+    * @params page_name = the page name
+    */ 
+    public function getFormInfo($page_name)
     {
         $sql = "SELECT DISTINCT fo.action, 
                                 fo.method, 
@@ -40,12 +56,18 @@ class FormModel extends BaseModel
                 FROM form_info fo
                 JOIN website_info wi ON fo.website_info_id = wi.id
                 WHERE wi.name = :page";
-        $params = ["page" => $page_value];
+        $params = ["page" => $page_name];
         $result = $this->crudTemp->selectMany($sql, $params);
 
         return $result[0];
     }
 
+    /*
+    * Method that builds and executes a query that relies on information gotten from the previously ran query
+    *
+    * @params $value = the information from the previous query given to this method to build the query
+    *         $id = id given for certain queries that need specific id example: finding the tag for a certain article needs article_id
+    */ 
     public function getLookupInfo(&$value, $id)
     {
         if (!empty($value["table_name"])) {

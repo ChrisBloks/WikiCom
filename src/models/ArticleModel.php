@@ -234,6 +234,11 @@ class ArticleModel extends BaseModel
                 }
         }
 
+        /*
+        * Method that adds tag to article
+        *
+        * @params article id and tag id
+        */ 
         public function addTagToArticle(int $article_id, int $tag_id)
         {
                 $sql = "INSERT INTO article_to_tag (article_id, tag_id) 
