@@ -15,17 +15,20 @@ class FirstCell
         $this->delete_page = $delete_page;
     }
 
+    // adds options to the first cell of each row: now only href to a page, and a form for delete
     public function returnFirstCellOptions(): string
     {
 
         $editUrl = Url::buildUrl(['page' => $this->target_page, 'id' => $this->page_id]);
 
-        $str  = '<a href="' . $editUrl . '">' . $this->_actionLink($this->page_id, '&#10000;', 'Update') . '</a>';
+        $str  = '<a href="' . $editUrl . '">' 
+                . $this->_actionLink($this->page_id, '&#10000;', 'Update') 
+                . '</a>';
         $str .= $this->_buildDeleteForm();
         return $str;
     }
 
-    // replace with get-request later on
+    // replace with get-request later on/ajax
     private function _buildDeleteForm(): string
     {
         $form = new Form(

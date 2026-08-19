@@ -5,7 +5,7 @@ class MenuItem extends ContainerElement
 {
     public function __construct(string $label, string $href)
     {
-        $safe_label = htmlspecialchars($label); //is sanitize-achtige functies nodig bij elke info van db?
+        $safe_label = htmlspecialchars($label); //sanitize functionaliteit voor info van database halen
         $safe_href  = htmlspecialchars($href);
 
         parent::__construct(
