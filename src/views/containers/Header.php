@@ -3,7 +3,7 @@
 require_once "./src/views/containers/WrappedText.php";
 
 class Header extends WrappedText{
-    public function __construct($text){
-        parent::__construct($text, "header");
+    public function __construct($text, string $class){
+        parent::__construct($text, 'header'. HtmlUtils::addClassAttr($class));
     }
 }

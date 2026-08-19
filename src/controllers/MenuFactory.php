@@ -38,18 +38,18 @@ class MenuFactory
 
         if (!empty($item['submenu'])) {
             $menuItem = new MenuItem(
-                $item['label'],
-                $item['href'],
-                $link_class . ' dropdown-toggle',
-                [
-                    'role' => 'button',
-                    'data-bs-toggle' => 'dropdown',
-                    'aria-expanded' => 'false',
-                ],
-                $li_class . ' dropdown'
+                label: $item['label'],
+                href: $item['href'],
+                class: $link_class . ' dropdown-toggle',
+                attrs: [
+                        'role' => 'button',
+                        'data-bs-toggle' => 'dropdown',
+                        'aria-expanded' => 'false',
+                    ],
+                li_class: $li_class . ' dropdown'
             );
 
-            $submenu = new Menu('dropdown-menu');
+            $submenu = new Menu(class: 'dropdown-menu');
             foreach ($item['submenu'] as $subitem) {
                 try {
                     $submenu->addElement($this->buildMenuItem($subitem, $isLoggedIn, 'dropdown-item', ''));
@@ -59,7 +59,12 @@ class MenuFactory
             }
             $menuItem->addElement($submenu);
         } else {
-            $menuItem = new MenuItem($item['label'], $item['href'], $link_class, [], $li_class);
+            $menuItem = new MenuItem(
+                                label: $item['label'], 
+                                href: $item['href'], 
+                                class: $link_class, 
+                                attrs: [], 
+                                li_class: $li_class);
         }
 
         return $menuItem;

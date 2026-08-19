@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2026 at 08:45 AM
+-- Generation Time: Aug 19, 2026 at 03:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -117,17 +117,25 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form
 (3, 'password', 'password', 'login-password', NULL, 2, 'Password:', 1),
 (4, 'abouttext', 'textarea', 'about-text', NULL, 5, 'About me:', 0),
 (6, 'verifypassword', 'password', 'register-verifypassword', NULL, 7, 'Verify password:', 0),
-(7, 'Author', 'select', 'filter-author', 2, 3, 'Filter by Author', 1),
-(8, 'Tag', 'select', 'filter-tag', 1, 3, 'Filter by Tag', 0),
+(7, 'Author', 'checkboxgroup', 'filter-author', 2, 3, 'Filter by Author', 1),
+(8, 'Tag', 'checkboxgroup', 'filter-tag', 1, 3, 'Filter by Tag', 0),
 (9, 'aboutimg', 'file', 'about-img-file', NULL, 5, 'Upload file:', 1),
 (12, 'message', 'textarea', 'message-text', NULL, 1, 'Your message:', 2),
 (13, 'email', 'email', 'login-email', NULL, 2, 'Email:', 0),
 (14, 'name', 'text', 'register-name', NULL, 7, 'Your name:', 1),
 (15, 'email', 'email', 'register-email', NULL, 7, 'Your email:', 2),
 (16, 'password', 'password', 'register-password', NULL, 7, 'Password:', 3),
-(17, 'articletext', 'textarea', 'article-text', NULL, 6, 'Body text:', 0),
-(18, 'articlecodeblock', 'textarea', 'article-codeblock', NULL, 6, 'Codeblock:', 1),
-(19, 'articleimg', 'file', 'article-img-file', NULL, 6, 'Upload file:', 4);
+(17, 'summary', 'textarea', 'article-text', NULL, 4, 'Body text:', 15),
+(18, 'codeBlock', 'textarea', 'article-codeblock', NULL, 4, 'Codeblock:', 16),
+(19, 'articleimg', 'file', 'article-img-file', NULL, 4, 'Upload file:', 17),
+(20, 'sortby', 'select', 'sort-by', 3, 3, 'Sort by', 3),
+(21, 'new tag', 'text', 'add-new-tag', NULL, 4, 'New tag name:', 0),
+(22, 'new tag button', 'button', 'add-new-tag-button', NULL, 4, 'Add new tag', 1),
+(23, 'Tag', 'select', 'add-tag', 1, 4, 'Tag to add', 2),
+(24, 'tag button', 'button', 'add--tag-button', NULL, 4, 'Add tag', 3),
+(25, 'title', 'text', 'article-title', NULL, 4, 'Article title:', 14),
+(26, 'Existing Tag', 'checkboxgroup', 'Existing-tag', 4, 4, 'Remove tag', 4),
+(27, 'existing tag button', 'button', 'remove--tag-button', NULL, 4, 'Remove tag', 5);
 
 -- --------------------------------------------------------
 
@@ -167,16 +175,20 @@ CREATE TABLE `lookup_info` (
   `table_name` varchar(255) NOT NULL,
   `display_names` varchar(255) NOT NULL,
   `order_by` varchar(255) NOT NULL,
-  `values` varchar(255) NOT NULL
+  `value` varchar(255) NOT NULL,
+  `bridge_table` varchar(255) NOT NULL,
+  `bridgevalues` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lookup_info`
 --
 
-INSERT INTO `lookup_info` (`id`, `table_name`, `display_names`, `order_by`, `values`) VALUES
-(1, 'tag\r\n', 'id,name', 'tag.name', ''),
-(2, 'user', 'id,name', 'user.name', '');
+INSERT INTO `lookup_info` (`id`, `table_name`, `display_names`, `order_by`, `value`, `bridge_table`, `bridgevalues`) VALUES
+(1, 'tag\r\n', 'id,name', 'tag.name', '', '', ''),
+(2, 'user', 'id,name', 'user.name', '', '', ''),
+(3, '', 'rating,date', '', '', '', ''),
+(4, 'tag\r\n', 'id,name', 'tag.name', 'article_id\n', 'article_to_tag', 'tag_id,tag.id');
 
 -- --------------------------------------------------------
 
@@ -308,7 +320,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
 (1, 'Danny', 'Password', 'danny@email.com', 'image.jpg', 'This is the description of user from database'),
 (2, 'user2', 'asdfsd', 'dadfa@adfaf.com', 'user2.jpg', 'the description of user2'),
-(3, 'Danny3', 'Password', 'danny@email1.com', '', ''),
+(3, 'Danny3', 'Password', 'danny@email1.com', '', 'hallo'),
 (5, 'Danny5', 'Password', 'danny@email12.com', '', '');
 
 -- --------------------------------------------------------
@@ -339,7 +351,7 @@ CREATE TABLE `website_info` (
 --
 
 INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
-(1, 'home', 'This is the bodytext for home from the database'),
+(1, 'home', 'Welkom op onze hoofdpagina.'),
 (2, 'about', 'This is the bodytext for about from the database'),
 (3, 'contact', ''),
 (4, 'login', ''),
@@ -466,7 +478,7 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `form_info`
@@ -478,7 +490,7 @@ ALTER TABLE `form_info`
 -- AUTO_INCREMENT for table `lookup_info`
 --
 ALTER TABLE `lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `menu_items`

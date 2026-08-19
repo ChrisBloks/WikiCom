@@ -18,11 +18,17 @@ class PageFactory
     private string $page;
     protected bool $isLoggedIn;
     private BasePage $htmlpage;
-    public function __construct(string $page, bool $isLoggedIn = true)
+    public function __construct(string $page, bool $isLoggedIn = false)
     {
         $this->page = $page;
         $this->isLoggedIn = $isLoggedIn;
         $this->htmlpage = new Basepage;
+        // check user loginstatus
+        if (isset($_SESSION['userName'])) {
+            $this->isLoggedIn = true;
+        } else {
+            $this->isLoggedIn = false;
+        }
     }
 
     public function show()
@@ -49,7 +55,11 @@ class PageFactory
                     rel="stylesheet">'));
         $this->htmlpage->addToHeadContent(new AtomicElement('
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>'));
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                    <script>hljs.highlightAll();</script>'
+                    ));
     }
 
 
@@ -63,14 +73,20 @@ class PageFactory
         // tNoticeMessage ... eventually
 
         // title
-        $this->htmlpage->addToBodyContent(new Header('<h1>' . ucfirst($this->page) . '</h1>'));
+        $this->htmlpage->addToBodyContent(new Header(ucfirst($this->page) , 
+                                                "fs-1 fw-bold text-center p-3 
+                                                bg-primary-subtle bg-opacity-10 
+                                                border border-info"));
 
         // menu items
         // menu items from database
         // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
         $menu_items = ModelSelector::getWebsiteInfoModel()->getMenuItems($this->isLoggedIn);
         $menuFactory = new MenuFactory();
-        $menu = $menuFactory->createMenu($menu_items, true, 'nav  justify-content-around');
+        $menu = $menuFactory->createMenu(
+                                    menu_items: $menu_items, 
+                                    isLoggedIn: $this->isLoggedIn, 
+                                    class: 'nav bg-body-secondary border-bottom justify-content-around');
         $this->htmlpage->addToBodyContent($menu);
         if ($menuFactory->hasErrors()) {
             foreach ($menuFactory->getErrors() as $error) {
@@ -86,7 +102,9 @@ class PageFactory
         switch ($this->page) {
             case 'home':
                 $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page)["bodytext"];
-                $this->htmlpage->addToBodyContent(new BodyText($bodytext));
+                $this->htmlpage->addToBodyContent(new BodyText(
+                                                text: $bodytext,
+                                                class: 'fs-2 text-center'));
                 break;
             case 'about':
                 if (empty($_GET["author"])) {
@@ -95,19 +113,22 @@ class PageFactory
                     break;
                 }
 
-                $bodytext = ModelSelector::getWebsiteInfoModel()->getAuthorAboutInfo($_GET["author"])['description'];
+                $bodytext = ModelSelector::getWebsiteInfoModel()->getAuthorAboutInfo($_GET["author"]);
 
-                if (true) // author equals user
+                if ($this->isLoggedIn === true) // author equals user
                 {
                     $formFactory = new FormFactory();
                     $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
                     $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
                     $form = $formFactory->createForm($form_info, $form_fields, [], ["abouttext" => $bodytext]);
+                    // @JJ-Danny-Hu kun je de username hier ook uit fetchen, dan kan die als title erbij?
                     $form->addHiddenField("user", $_GET["author"]);
                     $this->htmlpage->addToBodyContent($form);
                     break;
                 } else {
-                    $this->htmlpage->addToBodyContent(new BodyText($bodytext));
+                    // @JJ-Danny-Hu kun je de username hier ook uit fetchen, dan kan die als title erbij?
+                        $this->htmlpage->addToBodyContent(new Title($bodytext['name']));
+                        $this->htmlpage->addToBodyContent(new BodyText($bodytext['description']));
                 }
                 break;
             case 'contact':
@@ -117,7 +138,13 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
-                $form = $formFactory->createForm($form_info, $form_fields, [], ["articletext" => "testtext", "articlecodeblock" => "testcode"]);
+                $form = $formFactory->createForm(
+                                                form_info: $form_info, 
+                                                field_info: $form_fields, 
+                                                hidden_field_info: [], 
+                                                text: ["articletext" => "testtext", "articlecodeblock" => "testcode"]);
+                // @JJ-Danny-Hu idealiter geven we voor elk element ook een class-beschrijving mee
+                // dan kunnen we met een for loop ze ook aan de pagina toevoegen
                 $this->htmlpage->addToBodyContent($form);
                 break;
             case 'editArticle':
@@ -132,16 +159,28 @@ class PageFactory
                 break;
             case 'article':
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
-                foreach ($bodyinfo as $value) {
-                    $this->htmlpage->addToBodyContent(new BodyText($value));
-                }
+
+                // ToDo: add accordion functionality to body text and code element
+                $this->htmlpage->addToBodyContent(new Title($bodyinfo['title']));
+                $this->htmlpage->addToBodyContent(new AtomicElement(
+                                                html: "<h3> Author:" .$bodyinfo['name'] . "</h3>",
+                                                ));
+                $this->htmlpage->addToBodyContent(new BodyText(
+                                                text: "<p1>" . $bodyinfo['summary'] . "</p>",
+                                                class: 'accordion accordion-item'
+                ));
+                $this->htmlpage->addToBodyContent(new AtomicElement('<pre><code class="php">' 
+                                                                        . $bodyinfo['codeBlock']
+                                                                        . '</code></pre>'));
+
+
                 break;
             case 'dashboard':
                 $this->htmlpage->addToBodyContent(new Title("Articles:"));
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new Table($columnsdata, $rowsdata);
-                //HtmlUtils::dump('table', $tableFactory);
+                HtmlUtils::dump('table', $tableFactory);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
                                                                                                 table-hover 
                                                                                                 table-striped
@@ -154,6 +193,7 @@ class PageFactory
 
     private function addFooter()
     {
-        $this->htmlpage->addToBodyContent(new Footer('Christian, Danny, & Marius &copy' . date("Y")));
+        $this->htmlpage->addToBodyContent(new Footer('Christian, Danny, & Marius &copy' . date("Y") . '',
+                                                    'border-top fixed-bottom text-end bg-primary-subtle'));
     }
 }
