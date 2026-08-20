@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 20 aug 2026 om 13:50
+-- Gegenereerd op: 20 aug 2026 om 13:54
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -115,7 +115,8 @@ INSERT INTO `display_classes` (`id`, `website_info_id`, `class_name`, `class`) V
 (5, 9, 'author_class', 'text-center'),
 (6, 9, 'body_class', 'text-center'),
 (7, 9, 'codeblock_class', 'php text-center'),
-(8, 9, 'img_class', 'img-thumbnail');
+(8, 9, 'img_class', 'img-thumbnail'),
+(9, 2, 'img_class', 'img-thumbnail');
 
 -- --------------------------------------------------------
 
@@ -518,7 +519,7 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT voor een tabel `display_classes`
 --
 ALTER TABLE `display_classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT voor een tabel `field_info`

@@ -128,6 +128,10 @@ class PageFactory
                                                                     class: $aboutinfo['name_class']));
                         $this->htmlpage->addToBodyContent(new BodyText(text: $aboutinfo['description'],
                                                                        class: $aboutinfo['description_class']));
+                        $this->htmlpage->addToBodyContent(new Image(
+                                                        name: $aboutinfo['imgFileName'],
+                                                        class: $aboutinfo['img_class']
+                        ));
                 }
                 break;
             case 'contact':
