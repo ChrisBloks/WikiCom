@@ -31,7 +31,7 @@ class ArticleModel extends BaseModel
                                 article.codeBlock,
                                 article.imgFileName,
                                 article.lastEdit 
-                        FROM article
+                        FROM wiki_article as article
                         JOIN user ON article.user_id=user.id 
                         WHERE article.id=:article_id";
                 $params = ['article_id' => $article_id];
@@ -52,7 +52,7 @@ class ArticleModel extends BaseModel
                 $sql = "SELECT  article.id,
                                 article.title, 
                                 article.lastEdit 
-                        FROM article 
+                        FROM wiki_article as article
                         WHERE user_id=:user_id";
                 $params = ['user_id' => $user_id];
                 $result = $this->crudTemp->selectMany($sql, $params);
@@ -76,7 +76,7 @@ class ArticleModel extends BaseModel
 
                 $sql = "SELECT DISTINCT article.title, article.summary, article.lastEdit"
                         . $extra_query
-                        . " FROM article"
+                        . " FROM wiki_article as article"
                         . $joins
                         . (!empty($where) ? " WHERE " . implode(" AND ", $where) : "")
                         . " ORDER BY " . $sortBy . ";";

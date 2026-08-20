@@ -33,7 +33,7 @@ class RatingModel extends BaseModel
     */ 
     public function saveRating(int $user_id,int $article_id, int $rating)
     {
-        $sql = "INSERT INTO rating (user_id,article_id, rating) 
+        $sql = "INSERT INTO wiki_rating (user_id,article_id, rating) 
                 VALUES (:user_id,:article_id,:rating)
                 ON DUPLICATE KEY UPDATE rating=:rating";
         $params = ["user_id"=> $user_id,"article_id"=> $article_id,"rating"=> $rating];
