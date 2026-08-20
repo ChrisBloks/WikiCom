@@ -9,12 +9,13 @@ class FormFactory
     /*
     *
     */
-    public function createForm(array $form_info, array $field_info, array $hidden_field_info,array $text =[]): Form{
+    public function createForm(array $form_info, array $field_info, array $hidden_field_info,array $text =[],string $class =""): Form{
         $field_factory = new FieldFactory();
         $form = new Form(
                         action: $form_info['action'],
                         method: $form_info['method'],
                         submit_caption: $form_info['submit_caption'],
+                        class: $class,
                     );
 
         foreach ($hidden_field_info as $field_name => $field_value){

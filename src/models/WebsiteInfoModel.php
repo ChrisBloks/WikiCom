@@ -16,7 +16,8 @@ class WebsiteInfoModel extends BaseModel
     */ 
     public function getBodyText($page_name)
     {
-        $sql = "SELECT bodytext FROM website_info 
+        $sql = "SELECT bodytext
+                FROM website_info 
                 WHERE name=:page";
         $params = ["page" => $page_name];
         $result = $this->crudTemp->selectOne($sql, $params);
@@ -24,7 +25,11 @@ class WebsiteInfoModel extends BaseModel
             $this -> logError("Page has no Body text");
             return false;
         }
+
+        $result = array_merge($result,$this->getClasses($page_name));
+        
         return $result;
+        
     }
 
     /*
@@ -32,7 +37,7 @@ class WebsiteInfoModel extends BaseModel
     *
     * @params user id
     */ 
-    public function getAuthorAboutInfo($user_id)
+    public function getAuthorAboutInfo($user_id, $page_name ="about")
     {
         $sql = "SELECT name,description,imgFileName FROM user 
                 WHERE id=:userid";
@@ -42,6 +47,9 @@ class WebsiteInfoModel extends BaseModel
             $this -> logError("User has no info");
             return false;
         }
+
+        $result = array_merge($result,$this->getClasses($page_name));
+
         return $result;
 
     }
@@ -114,6 +122,26 @@ class WebsiteInfoModel extends BaseModel
         $result = $this->crudTemp->selectMany($sql, NULL, PDO::FETCH_UNIQUE|PDO::FETCH_ASSOC);
 
         return $result;
+
+    }
+
+    public function getClasses($page_name)
+    {
+        $sql = "SELECT class_name, class 
+                FROM display_classes as dc
+                JOIN  website_info as wi on wi.id = dc.website_info_id
+                WHERE wi.name = :page";
+        $params = ["page" => $page_name];
+        $classrows = $this->crudTemp->selectMany($sql, $params);
+
+        $classes = [];
+        foreach ($classrows as $row) {
+            $classes[$row['class_name']] = $row['class'];
+        }
+
+
+        return $classes;
+    
 
     }
 }

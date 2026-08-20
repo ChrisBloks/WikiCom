@@ -9,8 +9,8 @@ class Form extends ContainerElement{
     // properties
     protected array $hiddenfields;
 
-    public function __construct(string $action, string $method, string $submit_caption){
-        $this->html_before = '<form action="' . $action . '" method="' . $method . '">';
+    public function __construct(string $action, string $method, string $submit_caption, string $class =""){
+        $this->html_before = '<form action="' . $action . '" method="' . $method . '" '.HtmlUtils::addClassAttr($class).'>';
     
         $this->html_after = '<button type="submit" value="submit">'. $submit_caption . ' </button></form>';
     }

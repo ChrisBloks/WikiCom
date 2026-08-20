@@ -101,34 +101,33 @@ class PageFactory
         // page navigation
         switch ($this->page) {
             case 'home':
-                $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page)["bodytext"];
+                $pageinfo = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page);
                 $this->htmlpage->addToBodyContent(new BodyText(
-                                                text: $bodytext,
-                                                class: 'fs-2 text-center'));
+                                                text: $pageinfo["bodytext"],
+                                                class: $pageinfo["bodytext_class"]));
                 break;
             case 'about':
-                if (empty($_GET["author"])) {
-                    $bodytext = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page)["bodytext"];
-                    $this->htmlpage->addToBodyContent(new BodyText($bodytext));
-                    break;
-                }
-
-                $bodytext = ModelSelector::getWebsiteInfoModel()->getAuthorAboutInfo($_GET["author"]);
+                $aboutinfo = ModelSelector::getWebsiteInfoModel()->getAuthorAboutInfo($_GET["author"]);
 
                 if ($this->isLoggedIn === true) // author equals user
                 {
                     $formFactory = new FormFactory();
                     $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
                     $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
-                    $form = $formFactory->createForm($form_info, $form_fields, [], ["abouttext" => $bodytext]);
-                    // @JJ-Danny-Hu kun je de username hier ook uit fetchen, dan kan die als title erbij?
-                    $form->addHiddenField("user", $_GET["author"]);
+                    $form = $formFactory->createForm(form_info: $form_info, 
+                                                     field_info: $form_fields, 
+                                                     hidden_field_info: ["user" => $_GET["author"]], 
+                                                     text: ["description" => $aboutinfo["description"]],
+                                                     class: $form_info["display_class"]
+                                                     );
+                    $this->htmlpage->addToBodyContent(new Title(text:$aboutinfo['name']));
                     $this->htmlpage->addToBodyContent($form);
                     break;
                 } else {
-                    // @JJ-Danny-Hu kun je de username hier ook uit fetchen, dan kan die als title erbij?
-                        $this->htmlpage->addToBodyContent(new Title($bodytext['name']));
-                        $this->htmlpage->addToBodyContent(new BodyText($bodytext['description']));
+                        $this->htmlpage->addToBodyContent(new Title(text: $aboutinfo['name'],
+                                                                    class: $aboutinfo['name_class']));
+                        $this->htmlpage->addToBodyContent(new BodyText(text: $aboutinfo['description'],
+                                                                       class: $aboutinfo['description_class']));
                 }
                 break;
             case 'contact':
@@ -142,9 +141,10 @@ class PageFactory
                                                 form_info: $form_info, 
                                                 field_info: $form_fields, 
                                                 hidden_field_info: [], 
-                                                text: ["articletext" => "testtext", "articlecodeblock" => "testcode"]);
-                // @JJ-Danny-Hu idealiter geven we voor elk element ook een class-beschrijving mee
-                // dan kunnen we met een for loop ze ook aan de pagina toevoegen
+                                                text: [],
+                                                class: $form_info["display_class"]
+                                                );
+                                                
                 $this->htmlpage->addToBodyContent($form);
                 break;
             case 'editArticle':
@@ -153,25 +153,38 @@ class PageFactory
                 $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
 
-                $form = $formFactory->createForm($form_info, $form_fields, [], $bodyinfo);
-                $form->addHiddenField("user", $_GET["id"]); //give article tag
+                $form = $formFactory->createForm(form_info: $form_info, 
+                                                 field_info: $form_fields, 
+                                                 hidden_field_info: ["user" => $_GET["id"]], //give article tag
+                                                 class: $form_info["display_class"]);
+
                 $this->htmlpage->addToBodyContent($form);
                 break;
             case 'article':
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
-
+                $classes = ModelSelector::getWebsiteInfoModel()->getClasses($this->page);
                 // ToDo: add accordion functionality to body text and code element
-                $this->htmlpage->addToBodyContent(new Title($bodyinfo['title']));
-                $this->htmlpage->addToBodyContent(new AtomicElement(
-                                                html: "<h3> Author:" .$bodyinfo['name'] . "</h3>",
+                $this->htmlpage->addToBodyContent(new Title(
+                                                text: $bodyinfo['title'],
+                                                class: $classes['title_class']
+                                                ));
+                $this->htmlpage->addToBodyContent(new AuthorText(
+                                                text: "Author:" .$bodyinfo['name'] . "",
+                                                class: $classes['author_class']
                                                 ));
                 $this->htmlpage->addToBodyContent(new BodyText(
                                                 text: "<p1>" . $bodyinfo['summary'] . "</p>",
-                                                class: 'accordion accordion-item'
+                                                class: $classes['body_class']
                 ));
-                $this->htmlpage->addToBodyContent(new AtomicElement('<pre><code class="php">' 
-                                                                        . $bodyinfo['codeBlock']
-                                                                        . '</code></pre>'));
+                $this->htmlpage->addToBodyContent(new CodeBlock(
+                                                text: $bodyinfo['codeBlock'],
+                                                class: $classes['codeblock_class']
+                ));
+                $this->htmlpage->addToBodyContent(new Image(
+                                                name: $bodyinfo['imgFileName'],
+                                                class: $classes['img_class']
+                ));
+
 
 
                 break;
@@ -180,7 +193,6 @@ class PageFactory
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new Table($columnsdata, $rowsdata);
-                HtmlUtils::dump('table', $tableFactory);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
                                                                                                 table-hover 
                                                                                                 table-striped
@@ -193,7 +205,8 @@ class PageFactory
 
     private function addFooter()
     {
-        $this->htmlpage->addToBodyContent(new Footer('Christian, Danny, & Marius &copy' . date("Y") . '',
-                                                    'border-top fixed-bottom text-end bg-primary-subtle'));
+        $this->htmlpage->addToBodyContent(new Footer(
+                                                    text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
+                                                    class:'border-top text-end bg-primary-subtle mt-auto'));
     }
 }

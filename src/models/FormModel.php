@@ -52,7 +52,8 @@ class FormModel extends BaseModel
     {
         $sql = "SELECT DISTINCT fo.action, 
                                 fo.method, 
-                                fo.submit_caption
+                                fo.submit_caption,
+                                fo.display_class
                 FROM form_info fo
                 JOIN website_info wi ON fo.website_info_id = wi.id
                 WHERE wi.name = :page";
