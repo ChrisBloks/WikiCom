@@ -1,16 +1,16 @@
 <?php
 
 
-class MainController
+class MainController extends BaseController
 {
-    protected array $request;
-    protected array $response;
     protected bool $async;
     protected iController $handler;
 
-    public function __construct()
-    {
-        $this -> async =  isset($_SERVER['HTTP_X_REQUESTED_WITH']);
+    public function handleRequest()
+    {   
+        $this->async = parent::$async;
+        $this->chooseHandler();
+        $this -> handler-> handleRequest();
     }
 
     public function chooseHandler()
@@ -22,9 +22,5 @@ class MainController
         }
     }
 
-    public function handleRequest()
-    {   
-        $this->chooseHandler();
-        $this -> handler-> handleRequest();
-    }
+
 }

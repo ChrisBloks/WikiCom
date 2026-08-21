@@ -18,17 +18,17 @@ class PageFactory
     private string $page;
     protected bool $isLoggedIn;
     private BasePage $htmlpage;
-    public function __construct(string $page, bool $isLoggedIn = false)
+    public function __construct(array $response)
     {
-        $this->page = $page;
-        $this->isLoggedIn = $isLoggedIn;
+        $this->page = $response['page'];
+        $this->isLoggedIn = $response['isLoggedIn'];
         $this->htmlpage = new Basepage;
         // check user loginstatus
-        if (isset($_SESSION['userName'])) {
-            $this->isLoggedIn = true;
-        } else {
-            $this->isLoggedIn = false;
-        }
+        // if (isset($_SESSION['userName'])) {
+        //     $this->isLoggedIn = true;
+        // } else {
+        //     $this->isLoggedIn = false;
+        // }
     }
 
     public function show()

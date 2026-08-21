@@ -22,11 +22,14 @@ require_once "./src/views/containers/ContainerElement.php";
 require_once "./src/views/Table.php";
 
 //tools
+require_once "./src/tools/interfaces/iController.php";
 require_once "./src/tools/interfaces/iElement.php";
 require_once "./src/tools/traits/tElementContainer.php";
 require_once "./src/tools/utils/HtmlUtils.php";
+require_once "./src/tools/utils/Utils.php";
 
-
+require_once "./src/controllers/MainController.php";
+require_once "./src/controllers/BaseController.php";
 require_once "./src/controllers/PageFactory.php";
 require_once "./src/controllers/PageController.php";
 require_once "./src/controllers/FormFactory.php";
@@ -39,5 +42,5 @@ require_once "./src/models/ModelSelector.php";
 
 
 
-$controller = new PageController();
-$controller->showResponse();
+$controller = new MainController();
+$controller->handleRequest();
