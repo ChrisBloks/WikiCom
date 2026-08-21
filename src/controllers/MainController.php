@@ -3,19 +3,19 @@
 
 class MainController extends BaseController
 {
-    protected bool $async;
+    protected bool $action;
     protected iController $handler;
 
-    public function handleRequest()
+    public function handleRequest() : void
     {   
-        $this->async = parent::$async;
+        $this->action = parent::$async;
         $this->chooseHandler();
         $this -> handler-> handleRequest();
     }
 
     public function chooseHandler()
     {   
-        if ($this -> async) {
+        if ($this -> action) {
             $this -> handler = new AjaxController();
         } else {
             $this -> handler = new PageController();
