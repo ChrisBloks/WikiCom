@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 20 aug 2026 om 17:21
+-- Gegenereerd op: 21 aug 2026 om 13:23
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -94,9 +94,9 @@ CREATE TABLE `field_info` (
 INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form_info_id`, `label`, `display_order`) VALUES
 (1, 'name', 'text', 'contact-name form-control', NULL, 1, 'Your name:', 0),
 (2, 'email', 'email', 'contact-email form-control', NULL, 1, 'Your email:', 1),
-(3, 'password', 'password', 'login-password form-control', NULL, 2, 'Password:', 1),
+(3, 'password', 'password', 'login-password form-control', NULL, 2, 'Password:', 2),
 (4, 'description', 'textarea', 'about-text form-control', NULL, 5, 'About me:', 0),
-(6, 'verifypassword', 'password', 'register-verifypassword form-control', NULL, 7, 'Verify password:', 0),
+(6, 'verifypassword', 'password', 'register-verifypassword form-control', NULL, 7, 'Verify password:', 5),
 (7, 'Author', 'checkboxgroup', 'filter-author form-check-input', 2, 3, 'Filter by Author', 1),
 (8, 'Tag', 'checkboxgroup', 'filter-tag form-check-input', 1, 3, 'Filter by Tag', 0),
 (9, 'aboutimg', 'file', 'about-img-file form-control', NULL, 5, 'Upload file:', 1),
