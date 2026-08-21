@@ -41,6 +41,6 @@ require_once "./src/tools/traits/tElementContainer.php";
 require_once "./src/models/ModelSelector.php";
 
 
-
+session_start();
 $controller = new MainController();
 $controller->handleRequest();

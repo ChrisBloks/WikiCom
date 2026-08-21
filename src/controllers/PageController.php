@@ -38,6 +38,7 @@ class PageController extends BaseController
 
         protected function handlePostRequest()
         {
+                $this -> checkLogin($this->response);
                 $this -> updateResponse();
                 $PageFactory = new PageFactory($this->response);
                 $this->response_page = $PageFactory->show();
@@ -45,6 +46,12 @@ class PageController extends BaseController
 
         protected function handleGetRequest()
         {
+                switch ($this->response['page']) {
+                case 'logout':
+                        session_unset();
+                        session_destroy();
+                        $this->response['page'] = 'login';
+                }
                 $this -> updateResponse();
                 $PageFactory = new PageFactory($this->response);
                 $this->response_page = $PageFactory->show();
@@ -60,6 +67,19 @@ class PageController extends BaseController
         }
 
         protected function updateResponse(){
-                $this->response['isLoggedIn'] = false; // from session variable
+                $this->response['isLoggedIn'] = Utils::getSesVar('isLoggedIn',false); // from session variable
+        }
+
+        protected function checkLogin(&$response)
+        {
+                $response['email'] = Utils::getRequestVar('email', $response['posted']);
+                $response['password'] = Utils::getRequestVar('password', $response['posted']);
+                $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail($response['email']);
+                if (!empty($userinfo['password']) and ($response['password']===$userinfo['password'])) {
+                        $response['page'] = 'home';
+                        $_SESSION['isLoggedIn'] = true;
+                        $_SESSION['name'] = $userinfo['name'];
+                        $_SESSION['userID'] = $userinfo['id'];
+                }
         }
 }

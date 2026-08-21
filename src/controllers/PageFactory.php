@@ -144,7 +144,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                                                 form_info: $form_info, 
                                                 field_info: $form_fields, 
-                                                hidden_field_info: [], 
+                                                hidden_field_info: ['page' => $this->page], 
                                                 text: [],
                                                 class: $form_info["display_class"]
                                                 );

@@ -9,22 +9,23 @@ require_once "BaseModel.php";
 class UserInfoModel extends BaseModel
 {
         /*
-        * method that checks login of user if it's correct a username and id will be given otherwise false
+        * method that gives user info based on email
         *
-        * @params username, password
+        * @params email
         */ 
-        public function loginUser(string $username, string $password)
+        public function fetchUserInfoByEmail(string $email)
         {
 
                 $sql = "SELECT id,name,password FROM user 
-                        WHERE name=:username";
-                $params = ["username" => $username];
+                        WHERE email=:email";
+                $params = ["email" => $email];
                 $result = $this->crudTemp->selectOne($sql, $params);
 
-                if ($result and $result["password"] == $password) {
-                        return ["id" => $result["id"], "name" => $result["name"]];
+                if (empty($result)) {
+                $this->logError("no account with this email");
+                $result = false;
                 }
-                return false;
+                return $result;
         }
 
         /*

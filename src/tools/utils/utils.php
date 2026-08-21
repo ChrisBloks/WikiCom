@@ -20,4 +20,15 @@ public static function getRequestVar(string $key, bool $frompost, $default = '',
                 }
                 return htmlspecialchars(strip_tags(trim($raw)), ENT_QUOTES, 'UTF-8');
         }
+    public static function getValueFromArray(string $key, array $arr, mixed $default='') : mixed
+    {
+        return (isset($arr[$key])
+                ? $arr[$key]
+                : $default);
+    }        
+
+        public static function getSesVar(string $key, mixed $default="") : mixed
+    {
+        return self::getValueFromArray($key, $_SESSION, $default);
+    }   
 }
