@@ -5,8 +5,6 @@ class validateRequest
 
     private function validateRequest()
     {
-
-
         if ($this->request['posted']) {
 
             // validator nodig
