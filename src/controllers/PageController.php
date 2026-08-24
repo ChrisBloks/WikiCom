@@ -1,5 +1,5 @@
 <?php
-require_once "./src/controllers/PageFactory.php";
+require_once "./src/controllers/factories/PageFactory.php";
 require_once "./src/tools/traits/tErrorMessageCollector.php";
 // ToDo:
 // getRequest

@@ -1,26 +1,34 @@
 <?php
+require_once "./src/controllers/PageController.php";
 
-
-class MainController extends BaseController
+class MainController
 {
-    protected bool $action;
-    protected iController $handler;
+    private Crud $_crud;
 
-    public function handleRequest() : void
-    {   
-        $this->action = parent::$async;
-        $this->chooseHandler();
-        $this -> handler-> handleRequest();
+    public function __construct()
+    {
+        
     }
 
-    public function chooseHandler()
-    {   
-        if ($this -> action) {
-            $this -> handler = new AjaxController();
-        } else {
-            $this -> handler = new PageController();
-        }
+    // start new controller if request is of AJAX type
+    public function main(): void
+    {
+        $this->resolveHandler()->handleRequest();
     }
 
+    // if more request types are added, add them to the if-else loop
+    private function resolveHandler() 
+    {
+        // if ($this->isAjaxRequest()) {
+        //     return new AjaxController($this->_crud);
+        // }
 
+        return new PageController();
+    }
+
+    private function isAjaxRequest(): bool
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+    }
 }
