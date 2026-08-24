@@ -6,6 +6,7 @@ require_once "./src/tools/traits/tErrorMessageCollector.php";
 /**
  * PageController class for handling non-AJAX requests.
  * @uses tErrorMessageCollector
+ * @var bool $posted true if the page was requested through a POST request, otherwise false.
  * @var array $request Contains boolean 'posted' and string 'page'.
  * @var array $response Becomes equal to $request when method validateRequest() is reached.
  * @var BasePage $response_page page produced by the PageController.
@@ -18,11 +19,18 @@ class PageController implements iController
     private ?array $response;
     private ?BasePage $response_page = NULL;
 
+    /**
+     * __construct
+     */
     public function __construct()
     {
         $this->posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
     }
 
+    /**
+     * Calls the get, validate and show functions in sequence.
+     * @return void
+     */
     public function handleRequest(): void
     {
         $this->getRequest();
@@ -30,6 +38,10 @@ class PageController implements iController
         $this->showResponse();
     }
 
+    /**
+     * Extract the specified page from the request.
+     * @return void
+     */
     public function getRequest(): void
     {
         $this->request = [
@@ -43,6 +55,11 @@ class PageController implements iController
         ];
     }
 
+
+    /**
+     * Call the relevant validator based on the current request.
+     * @return void
+     */
     protected function validateRequest()
     {
         // validateRequest
@@ -51,6 +68,11 @@ class PageController implements iController
         ($this->request['posted']) ? $this->handlePostRequest() : $this->handleGetRequest();
     }
 
+    /**
+     * To Be Removed
+     *
+     * @return void
+     */
     protected function handlePostRequest()
     {
         $this->checkLogin($this->response);
@@ -59,6 +81,11 @@ class PageController implements iController
         $this->response_page = $PageFactory->show();
     }
 
+    /**
+     * To Be Removed
+     *
+     * @return void
+     */
     protected function handleGetRequest()
     {
         switch ($this->response['page']) {
@@ -72,6 +99,11 @@ class PageController implements iController
         $this->response_page = $PageFactory->show();
     }
 
+
+    /**
+     * If page generation was succesful, call its show function.
+     * @return void
+     */
     public function showResponse()
     {
         // if response page is not null -> show page

@@ -5,8 +5,6 @@ class validateRequest
 
     private function validateRequest()
     {
-
-
         if ($this->request['posted']) {
 
             // validator nodig
@@ -43,6 +41,7 @@ class validateRequest
                     // if ok -> send article info to db
                     break;
                 case 'contact':
+                    
                     // userhandler -> savecontactdata
                     break;
             }
