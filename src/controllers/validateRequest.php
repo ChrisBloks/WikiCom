@@ -34,12 +34,8 @@ class validateRequest
                     // This is actually an ajax function
                     break;
                 case 'newArticle':
-                    // href to editArticle without articleID
+                    // href to editArticle without articleID=0
 
-                    // or create new row in database for new article
-                    // delete row if 'saveArticle' is not pressed
-
-                    // temporarily save page in cache upon exit or cookie
                     break;
                 case 'saveArticle':
                     // check title against db
