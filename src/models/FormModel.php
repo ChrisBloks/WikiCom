@@ -14,7 +14,7 @@ class FormModel extends BaseModel
     *
     * @params page_name = the page name and id is used for further query building using the lookupinfo
     */ 
-    public function getFieldInfo($page_name, $id = '')
+    public function fetchFieldInfo($page_name, $id = '')
     {
         $sql = "SELECT  fi.type, 
                         fi.name, 
@@ -36,7 +36,7 @@ class FormModel extends BaseModel
         }
         foreach ($result as &$value) {
             if (isset($value["id"])) {
-                $this->getLookupInfo($value, $id);
+                $this->fetchLookupInfo($value, $id);
             }
         }
         unset($value);
@@ -48,7 +48,7 @@ class FormModel extends BaseModel
     *
     * @params page_name = the page name
     */ 
-    public function getFormInfo($page_name)
+    public function fetchFormInfo($page_name)
     {
         $sql = "SELECT DISTINCT fo.action, 
                                 fo.method, 
@@ -69,7 +69,7 @@ class FormModel extends BaseModel
     * @params $value = the information from the previous query given to this method to build the query
     *         $id = id given for certain queries that need specific id example: finding the tag for a certain article needs article_id
     */ 
-    public function getLookupInfo(&$value, $id)
+    public function fetchLookupInfo(&$value, $id)
     {
         if (!empty($value["table_name"])) {
             $sql = "SELECT {$value["display_names"]} FROM {$value['table_name']}";
