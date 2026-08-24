@@ -4,24 +4,18 @@
 *  08/2026
 *  Crud class all database related operations
 */
+
+require_once "./src/tools/traits/tSingleton.php";
+
 class Crud
 {
+    use tSingleton;
 
     public PDO $db;
-    private static $instance = null;
 
     public function __construct()
     {
         $this->db = $this->connectDB();
-    }
-
-    public static function getInstance()
-    {
-        $class = get_called_class();
-        if (self::$instance == null) {
-            self::$instance = new $class;
-        }
-        return self::$instance;
     }
 
     private static function connectDB()
