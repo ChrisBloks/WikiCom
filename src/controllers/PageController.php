@@ -3,13 +3,20 @@ require_once "./src/controllers/factories/PageFactory.php";
 require_once "./src/tools/traits/tErrorMessageCollector.php";
 // ToDo:
 // getRequest
-class PageController extends BaseController
+class PageController
 {
 
         use tErrorMessageCollector;
         private array $request;
         private array $response;
+        protected bool $posted;
         private ?BasePage $response_page = NULL;
+
+        public function __construct($posted)
+        {
+                $this -> posted = $posted;
+
+        }
 
         public function handleRequest() : void
         {
@@ -21,7 +28,7 @@ class PageController extends BaseController
 
         protected function getRequest()
         {
-                $posted = parent::$posted;
+                $posted = $this -> posted;
                 $this->request = [
                         'posted' => $posted,
                         'page' => Utils::getRequestVar('page', $posted, $posted ? '' : 'home')

@@ -3,11 +3,15 @@ require_once "./src/controllers/PageController.php";
 
 class MainController
 {
-    private Crud $_crud;
+    protected bool $posted;
+    protected bool $async;
+    protected string $action;     
 
     public function __construct()
     {
-        
+        $this -> posted = ($_SERVER['REQUEST_METHOD']=== 'POST');
+        $this -> async = isset($_SERVER['HTTP_X_REQUESTED_WITH']);
+        //$this -> action
     }
 
     // start new controller if request is of AJAX type
@@ -19,16 +23,12 @@ class MainController
     // if more request types are added, add them to the if-else loop
     private function resolveHandler() 
     {
-        // if ($this->isAjaxRequest()) {
+        // switch ($this->action)
+        // case ajax: {
         //     return new AjaxController($this->_crud);
+        //     break;
         // }
 
-        return new PageController();
-    }
-
-    private function isAjaxRequest(): bool
-    {
-        return isset($_SERVER['HTTP_X_REQUESTED_WITH'])
-            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+        return new PageController($this -> posted);
     }
 }
