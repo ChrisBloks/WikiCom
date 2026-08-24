@@ -6,15 +6,15 @@ abstract class BaseValidator implements iValidator
 {
     use tErrorMessageCollector;
 
-    protected array $field_inputs = [];
+    public array $field_inputs = [];
 
     public function validate(string $page_name): bool
     {
         // Get field names from the database
         $field_names = ModelSelector::getFormModel()->fetchFieldNames(page_name: $page_name);
-
         // Collect field values from the response
-        foreach ($field_names as $name) {
+        foreach ($field_names as $names) {
+            $name = $names['name'];
             $this->field_inputs[$name] = Utils::getRequestVar(
                 key: $name,
                 frompost: true

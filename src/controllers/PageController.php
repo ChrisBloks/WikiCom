@@ -75,6 +75,13 @@ class PageController implements iController
      */
     protected function handlePostRequest()
     {
+        switch ($this->response['page']){
+                case "contact":
+                        $validator = new ContactValidator();
+                        HtmlUtils::dump("empty check",$validator ->validate($this->response['page']));
+                        HtmlUtils::dump("field_inputs",$validator->field_inputs);
+                break;
+        }
         $this->checkLogin($this->response);
         $this->updateResponse();
         $PageFactory = new PageFactory($this->response);

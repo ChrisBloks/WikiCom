@@ -35,6 +35,8 @@ require_once "./src/controllers/factories/FormFactory.php";
 require_once "./src/controllers/factories/MenuFactory.php";
 require_once "./src/tools/interfaces/iElement.php";
 require_once "./src/tools/traits/tElementContainer.php";
+require_once "./src/controllers/validators/BaseValidator.php";
+require_once "./src/controllers/validators/ContactValidator.php";
 
 require_once "./src/tools/traits/tSingleton.php";
 
