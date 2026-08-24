@@ -54,11 +54,14 @@ class PageFactory
     {
         $this->htmlpage->addToHeadContent(new AtomicElement('
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
-                    rel="stylesheet">'));
+                    rel="stylesheet">
+                    <link href="./src//css/stylesheet.css" rel="stylesheet">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
+                    '));
+
         $this->htmlpage->addToHeadContent(new AtomicElement('
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
                     <script>hljs.highlightAll();</script>'
         ));
@@ -128,6 +131,10 @@ class PageFactory
                     $this->htmlpage->addToBodyContent($form);
                     break;
                 } else {
+                    $this->htmlpage->addToBodyContent(new Image(
+                        name: './img/authors/' . $aboutinfo['imgFileName'],
+                        class: $aboutinfo['img_class']
+                    ));
                     $this->htmlpage->addToBodyContent(new Title(
                         text: $aboutinfo['name'],
                         class: $aboutinfo['name_class']
@@ -135,10 +142,6 @@ class PageFactory
                     $this->htmlpage->addToBodyContent(new BodyText(
                         text: $aboutinfo['description'],
                         class: $aboutinfo['description_class']
-                    ));
-                    $this->htmlpage->addToBodyContent(new Image(
-                        name: $aboutinfo['imgFileName'],
-                        class: $aboutinfo['img_class']
                     ));
                 }
                 break;
@@ -217,7 +220,7 @@ class PageFactory
                     class: $classes['codeblock_class']
                 ));
                 $this->htmlpage->addToBodyContent(new Image(
-                    name: './img/article' . $bodyinfo['imgFileName'],
+                    name: './img/article/' . $bodyinfo['imgFileName'],
                     class: $classes['img_class']
                 ));
 
