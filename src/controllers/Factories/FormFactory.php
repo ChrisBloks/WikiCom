@@ -26,7 +26,7 @@ class FormFactory
             $text = (isset($field_text[$field_def['name']]) ? $field_text[$field_def['name']] : "");
             $form->addElement($field_factory->createField(
                                                     field_def: $field_def,
-                                                    bodytext:  $text));
+                                                    field_text:  $text));
         }
         return $form;
     }

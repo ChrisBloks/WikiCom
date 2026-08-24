@@ -19,7 +19,7 @@ class TextAreaField extends BaseField implements iElement {
         $this->html .= '<textarea rows="5" 
                                 cols="56" 
                                 name="'.$name.'" 
-                                class="'.$class.'">'. $this->$text .'
+                                class="'.$class.'">'. $this->text .'
                                 </textarea><br>';
     }
 
