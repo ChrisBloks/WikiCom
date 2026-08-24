@@ -14,7 +14,7 @@ class WebsiteInfoModel extends BaseModel
     *
     * @params page name
     */ 
-    public function getBodyText($page_name)
+    public function fetchBodyText($page_name)
     {
         $sql = "SELECT bodytext
                 FROM website_info 
@@ -26,7 +26,7 @@ class WebsiteInfoModel extends BaseModel
             return false;
         }
 
-        $result = array_merge($result,$this->getClasses($page_name));
+        $result = array_merge($result,$this->fetchClasses($page_name));
         
         return $result;
         
@@ -37,7 +37,7 @@ class WebsiteInfoModel extends BaseModel
     *
     * @params user id
     */ 
-    public function getAuthorAboutInfo($user_id, $page_name ="about")
+    public function fetchAuthorAboutInfo($user_id, $page_name ="about")
     {
         $sql = "SELECT name,description,imgFileName FROM user 
                 WHERE id=:userid";
@@ -48,7 +48,7 @@ class WebsiteInfoModel extends BaseModel
             return false;
         }
 
-        $result = array_merge($result,$this->getClasses($page_name));
+        $result = array_merge($result,$this->fetchClasses($page_name));
 
         return $result;
 
@@ -68,14 +68,14 @@ class WebsiteInfoModel extends BaseModel
             "email" => $email,
             "date" => date('Y-m-d'),
         ];
-        return $this->crudTemp->insert($sql, $params);
+        return $this->crudTemp->doInsert($sql, $params);
     }
     /*
     * method that grabs the menu items from the database based on if the user is logged in
     *
     * @params isloggedIn bool that indicates if person is logged in
     */ 
-    public function getMenuItems($isLoggedIn)
+    public function fetchMenuItems($isLoggedIn)
 {
     $excluded = $isLoggedIn ? ['Register', 'Login'] : ['Dashboard','Logout'];
     $placeholders = implode(',', array_fill(0, count($excluded), '?'));
@@ -88,7 +88,7 @@ class WebsiteInfoModel extends BaseModel
     $result = $this->crudTemp->selectMany($sql, $excluded);
 
     $authorlist = [];
-    foreach ($this->getAuthor() as $id => $name) {
+    foreach ($this->fetchAuthor() as $id => $name) {
         $authorlist[] = ["label" => $name, "href" => "about&author=".$id.""];
     }
 
@@ -107,7 +107,7 @@ class WebsiteInfoModel extends BaseModel
     * method that gets all authors
     *
     */ 
-    public function getAuthor()
+    public function fetchAuthor()
     {
         $sql = "SELECT id,name FROM user ORDER BY user.name";
         return $this->crudTemp->selectMany($sql,NULL,PDO::FETCH_KEY_PAIR);
@@ -116,7 +116,7 @@ class WebsiteInfoModel extends BaseModel
     * method that gets all table column info
     *
     */ 
-    public function getTableColumns($columns)
+    public function fetchTableColumns($columns)
     {
         $placeholders = implode(',', array_fill(0, count($columns), '?'));
         $sql = "SELECT `column_name`,
@@ -132,7 +132,7 @@ class WebsiteInfoModel extends BaseModel
 
     }
 
-    public function getClasses($page_name)
+    public function fetchClasses($page_name)
     {
         $sql = "SELECT class_name, class 
                 FROM display_classes as dc

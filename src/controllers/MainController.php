@@ -9,7 +9,6 @@ require_once "./src/controllers/PageController.php";
  */
 class MainController
 {
-
     protected bool $posted;
     protected bool $async;
     protected string $action;

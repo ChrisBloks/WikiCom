@@ -160,7 +160,7 @@ class ArticleModel extends BaseModel
                         ':user_id' => $user_id,
                         ':lastEdit' => date('Y-m-d'),
                 ];
-                $result = $this->crudTemp->insert($sql, $params);
+                $result = $this->crudTemp->doInsert($sql, $params);
                 if (empty($result)) {
                         $this->logError("Saving article didn't work idk");
                         $result = false;

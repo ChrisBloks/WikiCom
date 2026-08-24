@@ -83,7 +83,7 @@ class PageFactory
         // menu items
         // menu items from database
         // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
-        $menu_items = ModelSelector::getWebsiteInfoModel()->getMenuItems($this->isLoggedIn);
+        $menu_items = ModelSelector::getWebsiteInfoModel()->fetchMenuItems($this->isLoggedIn);
         $menuFactory = new MenuFactory();
         $menu = $menuFactory->createMenu(
                                     menu_items: $menu_items, 
@@ -102,19 +102,19 @@ class PageFactory
         // page building
         switch ($this->page) {
             case 'home':
-                $pageinfo = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page);
+                $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
                 $this->htmlpage->addToBodyContent(new BodyText(
                                                 text: $pageinfo["bodytext"],
                                                 class: $pageinfo["bodytext_class"]));
                 break;
             case 'about':
-                $aboutinfo = ModelSelector::getWebsiteInfoModel()->getAuthorAboutInfo($_GET["author"]);
+                $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($_GET["author"]);
 
                 if ($this->isLoggedIn === true) // author equals user
                 {
                     $formFactory = new FormFactory();
-                    $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
-                    $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                    $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
+                    $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                     $form = $formFactory->createForm(form_info: $form_info, 
                                                      field_info: $form_fields, 
                                                      hidden_field_info: ["user" => $_GET["author"]], 
@@ -139,8 +139,8 @@ class PageFactory
             case 'login':
             case 'register':
                 $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
-                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                 $form = $formFactory->createForm(
                                                 form_info: $form_info, 
                                                 field_info: $form_fields, 
@@ -153,8 +153,8 @@ class PageFactory
                 break;
             case 'search':
                 $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
-                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                 $form = $formFactory->createForm(
                                                 form_info: $form_info, 
                                                 field_info: $form_fields, 
@@ -165,7 +165,7 @@ class PageFactory
                                                 
                 $this->htmlpage->addToBodyContent($form);
 
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns(["title","lastEdit","rating"]);
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title","lastEdit","rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch();
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
@@ -175,8 +175,8 @@ class PageFactory
                 break;
             case 'editArticle':
                 $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page, $_GET["id"]); //give article tag
-                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $_GET["id"]); //give article tag
+                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
 
                 $form = $formFactory->createForm(form_info: $form_info, 
@@ -189,7 +189,7 @@ class PageFactory
                 break;
             case 'article':
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
-                $classes = ModelSelector::getWebsiteInfoModel()->getClasses($this->page);
+                $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 // ToDo: add accordion functionality to body text and code element
                 $this->htmlpage->addToBodyContent(new Title(
                                                 text: $bodyinfo['title'],
@@ -217,7 +217,7 @@ class PageFactory
                 break;
             case 'dashboard':
                 $this->htmlpage->addToBodyContent(new Title("Articles:"));
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns(["id","title","lastEdit"]);
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["id","title","lastEdit"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table

@@ -1,9 +1,9 @@
 <?php
 /* Crud
-*  Danny
-*  08/2026
-*  Crud class all database related operations
-*/
+ *  Danny
+ *  08/2026
+ *  Crud class all database related operations
+ */
 
 require_once "./src/tools/traits/tSingleton.php";
 
@@ -41,7 +41,7 @@ class Crud
         return $result;
     }
 
-    public function selectMany($sql, $params,$fetch = PDO::FETCH_ASSOC)
+    public function selectMany($sql, $params, $fetch = PDO::FETCH_ASSOC)
     {
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
@@ -49,7 +49,7 @@ class Crud
         return $result;
     }
 
-    public function insert($sql, $params)
+    public function doInsert($sql, $params)
     {
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
@@ -57,6 +57,12 @@ class Crud
     }
 
     public function prepareAndExecute($sql, $params)
+    {
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+    }
+
+    public function doDelete($sql, $params)
     {
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
