@@ -79,7 +79,6 @@ class PageController implements iController
                 case "contact":
                         $validator = new ContactValidator();
                         HtmlUtils::dump("empty check",$validator ->validate($this->response['page']));
-                        HtmlUtils::dump("field_inputs",$validator->field_inputs);
                 break;
         }
         $this->checkLogin($this->response);

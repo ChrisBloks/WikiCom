@@ -12,9 +12,10 @@ abstract class BaseValidator implements iValidator
     {
         // Get field names from the database
         $field_names = ModelSelector::getFormModel()->fetchFieldNames(page_name: $page_name);
+        print_r($field_names);
+        HtmlUtils::dump("Field names", $field_names);
         // Collect field values from the response
-        foreach ($field_names as $names) {
-            $name = $names['name'];
+        foreach ($field_names as $name) {
             $this->field_inputs[$name] = Utils::getRequestVar(
                 key: $name,
                 frompost: true
