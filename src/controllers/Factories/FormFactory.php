@@ -9,7 +9,7 @@ class FormFactory
     /*
     *
     */
-    public function createForm(array $form_info, array $field_info, array $hidden_field_info,array $text =[],string $class =""): Form{
+    public function createForm(array $form_info, array $field_info, array $hidden_field_info, array $field_text =[],string $class =""): Form{
         $field_factory = new FieldFactory();
         $form = new Form(
                         action: $form_info['action'],
@@ -23,7 +23,10 @@ class FormFactory
         }
 
         foreach ($field_info as $field_def){
-            $form->addElement($field_factory->createField($field_def,$text));
+            $text = (isset($field_text[$field_def['name']]) ? $field_text[$field_def['name']] : "");
+            $form->addElement($field_factory->createField(
+                                                    field_def: $field_def,
+                                                    field_text:  $text));
         }
         return $form;
     }

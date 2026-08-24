@@ -97,7 +97,7 @@ class PageFactory
                 . '><br></p>'));
         }
 
-        // page navigation
+        // page building
         switch ($this->page) {
             case 'home':
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page);
@@ -116,7 +116,7 @@ class PageFactory
                     $form = $formFactory->createForm(form_info: $form_info, 
                                                      field_info: $form_fields, 
                                                      hidden_field_info: ["user" => $_GET["author"]], 
-                                                     text: ["description" => $aboutinfo["description"]],
+                                                     field_text: ["description" => $aboutinfo["description"]],
                                                      class: $form_info["display_class"]
                                                      );
                     $this->htmlpage->addToBodyContent(new Title(text:$aboutinfo['name']));
@@ -143,7 +143,7 @@ class PageFactory
                                                 form_info: $form_info, 
                                                 field_info: $form_fields, 
                                                 hidden_field_info: ['page' => $this->page], 
-                                                text: [],
+                                                field_text: [],
                                                 class: $form_info["display_class"]
                                                 );
                                                 
@@ -157,7 +157,7 @@ class PageFactory
                                                 form_info: $form_info, 
                                                 field_info: $form_fields, 
                                                 hidden_field_info: ['page' => $this->page], 
-                                                text: [],
+                                                field_text: [],
                                                 class: $form_info["display_class"]
                                                 );
                                                 
@@ -181,7 +181,8 @@ class PageFactory
                                                  field_info: $form_fields,
                                                  text: $bodyinfo, 
                                                  hidden_field_info: ["user" => $_GET["id"]], //give article tag
-                                                 class: $form_info["display_class"]);
+                                                 class: $form_info["display_class"],
+                                                 field_text: $bodyinfo);
 
                 $this->htmlpage->addToBodyContent($form);
                 break;

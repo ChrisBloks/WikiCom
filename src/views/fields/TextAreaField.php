@@ -9,9 +9,9 @@ require_once "./src/tools/interfaces/iElement.php";
 class TextAreaField extends BaseField implements iElement {
 
     protected string $html;
-    protected array $text;
+    protected string $text;
 
-    public function __construct(string $name, string $class, string $label = "",array $text = []) {
+    public function __construct(string $name, string $class, string $label = "", string $text = "") {
         parent::__construct($name, $label, $class);
         $this -> text = $text;
 
@@ -19,7 +19,7 @@ class TextAreaField extends BaseField implements iElement {
         $this->html .= '<textarea rows="5" 
                                 cols="56" 
                                 name="'.$name.'" 
-                                class="'.$class.'">'.((empty($text[$name])) ? '':$text[$name]).'
+                                class="'.$class.'">'. $this->text .'
                                 </textarea><br>';
     }
 

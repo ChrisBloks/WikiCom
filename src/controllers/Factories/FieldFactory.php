@@ -4,7 +4,7 @@ class FieldFactory
 {
 
 
-    public function createField(array $field_def,array $bodytext =[]): BaseField
+    public function createField(array $field_def, ?string $field_text): BaseField
     {
         foreach (['type', 'name', 'class', 'label'] as $key) {
             if (!array_key_exists($key, $field_def)) {
@@ -18,7 +18,7 @@ class FieldFactory
                     name: $field_def["name"],
                     class: $field_def["class"],
                     label: $field_def["label"],
-                    text: $bodytext,
+                    text: $field_text,
                 );
             case 'checkboxgroup':
                 return new CheckBoxGroup(
@@ -47,7 +47,7 @@ class FieldFactory
                     name: $field_def["name"],
                     class: $field_def["class"],
                     label: $field_def["label"],
-                    text: $bodytext
+                    text: $field_text
                 );
         }
     }
