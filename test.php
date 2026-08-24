@@ -40,8 +40,6 @@ require_once "./src/tools/traits/tElementContainer.php";
 //models
 require_once "./src/models/ModelSelector.php";
 
-print_r($_ENV);
-
 session_start();
 $controller = new MainController();
 $controller->main();

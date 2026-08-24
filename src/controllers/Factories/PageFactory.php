@@ -98,7 +98,7 @@ class PageFactory
                 . '><br></p>'));
         }
 
-        // page navigation
+        // page building
         switch ($this->page) {
             case 'home':
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->getBodyText($this->page);
