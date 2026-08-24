@@ -1,40 +1,37 @@
 <?php
 require_once "./src/controllers/factories/PageFactory.php";
 require_once "./src/tools/traits/tErrorMessageCollector.php";
-// ToDo:
-// getRequest
-class PageController
-{
 
+
+/**
+ * PageController class for handling non-AJAX requests.
+ * @uses tErrorMessageCollector
+ * @var array $request Contains boolean 'posted' and string 'page'.
+ * @var array $response Becomes equal to $request when method validateRequest() is reached.
+ * @var BasePage $response_page page produced by the PageController.
+ */
+class PageController implements iController
+{
         use tErrorMessageCollector;
         private array $request;
-        private array $response;
-        protected bool $posted;
+        private ?array $response;
         private ?BasePage $response_page = NULL;
 
-        public function __construct($posted)
+        public function __construct(bool $posted, string $action)
         {
-                $this -> posted = $posted;
-
+                // Get request
+                $this->request = [
+                    'posted' => $posted,
+                    'page' => $action
+                ];
         }
 
         public function handleRequest() : void
         {
-                $this->getRequest();
                 $this->validateRequest();
                 $this->showResponse();
-
         }
 
-        protected function getRequest()
-        {
-                $posted = $this -> posted;
-                $this->request = [
-                        'posted' => $posted,
-                        'page' => Utils::getRequestVar('page', $posted, $posted ? '' : 'home')
-
-                ];
-        }
         protected function validateRequest()
         {
                 // validateRequest
