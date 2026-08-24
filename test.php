@@ -30,10 +30,10 @@ require_once "./src/tools/utils/Utils.php";
 
 require_once "./src/controllers/BaseController.php";
 require_once "./src/controllers/MainController.php";
-require_once "./src/controllers/PageFactory.php";
+require_once "./src/controllers/factories/PageFactory.php";
 require_once "./src/controllers/PageController.php";
-require_once "./src/controllers/FormFactory.php";
-require_once "./src/controllers/MenuFactory.php";
+require_once "./src/controllers/factories/FormFactory.php";
+require_once "./src/controllers/factories/MenuFactory.php";
 require_once "./src/tools/interfaces/iElement.php";
 require_once "./src/tools/traits/tElementContainer.php";
 
@@ -43,4 +43,4 @@ require_once "./src/models/ModelSelector.php";
 
 session_start();
 $controller = new MainController();
-$controller->handleRequest();
+$controller->main();
