@@ -16,6 +16,9 @@ switch ($user) {
     case "MARIUS":
         include_once "./config/marius.php";
         break;
+    case "WORKGROUP":
+        include_once "./config/christian.php";
+        break;
 }
 
 require_once "Crud.php";
