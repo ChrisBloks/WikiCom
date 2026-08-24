@@ -192,15 +192,15 @@ class PageFactory
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 // ToDo: add accordion functionality to body text and code element
                 $this->htmlpage->addToBodyContent(new Title(
-                                                text: $bodyinfo['title'],
+                                                text: ucfirst($bodyinfo['title']),
                                                 class: $classes['title_class']
                                                 ));
                 $this->htmlpage->addToBodyContent(new AuthorText(
-                                                text: "Author:" .$bodyinfo['name'] . "",
+                                                text: "Author: " . ucfirst($bodyinfo['name']) . "",
                                                 class: $classes['author_class']
                                                 ));
                 $this->htmlpage->addToBodyContent(new BodyText(
-                                                text: "<p1>" . $bodyinfo['summary'] . "</p>",
+                                                text: "<p1>" . ucfirst($bodyinfo['summary']) . "</p>",
                                                 class: $classes['body_class']
                 ));
                 $this->htmlpage->addToBodyContent(new CodeBlock(

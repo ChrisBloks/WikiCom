@@ -49,16 +49,18 @@ class UserInfoModel extends BaseModel
         */ 
         public function registerUser(string $username, string $password, string $email, string $imgFileName,string $description)
         {
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
                 $sql = "INSERT INTO user (name,password,email,imgFileName,description) 
                         VALUES (:username,:password,:email,:imgFileName,:description)";
                 $params = [
                             "username" => $username,
-                            "password" => $password,
+                            "password" => $hashed_password,
                             "email" => $email,
                             "imgFileName" => $imgFileName,
                             "description" => $description
                 ];
-                $result = $this->crudTemp->insert($sql, $params);
+                $result = $this->crudTemp->doInsert($sql, $params);
                 if (empty($result)) {
                 $this->logError("registration failed");
                 $result = false;
