@@ -43,6 +43,7 @@ class validateRequest
                     // if ok -> send article info to db
                     break;
                 case 'contact':
+                    
                     // userhandler -> savecontactdata
                     break;
             }
