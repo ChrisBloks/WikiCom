@@ -61,7 +61,7 @@ class PageFactory
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
                     <script>hljs.highlightAll();</script>'
-                    ));
+        ));
     }
 
 
@@ -75,10 +75,10 @@ class PageFactory
         // tNoticeMessage ... eventually
 
         // title
-        $this->htmlpage->addToBodyContent(new Header(ucfirst($this->page) , 
-                                                "fs-1 fw-bold text-center p-3 
-                                                bg-primary-subtle bg-opacity-10 
-                                                border border-info"));
+        $this->htmlpage->addToBodyContent(new Header(
+            ucfirst($this->page),
+            "fs-1 fw-bold text-center p-3 bg-primary-subtle bg-opacity-10 border border-info"
+        ));
 
         // menu items
         // menu items from database
@@ -86,8 +86,9 @@ class PageFactory
         $menu_items = ModelSelector::getWebsiteInfoModel()->fetchMenuItems($this->isLoggedIn);
         $menuFactory = new MenuFactory();
         $menu = $menuFactory->createMenu(
-                                    menu_items: $menu_items, 
-                                    class: 'nav bg-body-secondary border-bottom justify-content-around');
+            menu_items: $menu_items,
+            class: 'nav bg-body-secondary border-bottom justify-content-around'
+        );
         $this->htmlpage->addToBodyContent($menu);
         if ($menuFactory->hasErrors()) {
             foreach ($menuFactory->getErrors() as $error) {
@@ -104,8 +105,9 @@ class PageFactory
             case 'home':
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
                 $this->htmlpage->addToBodyContent(new BodyText(
-                                                text: $pageinfo["bodytext"],
-                                                class: $pageinfo["bodytext_class"]));
+                    text: $pageinfo["bodytext"],
+                    class: $pageinfo["bodytext_class"]
+                ));
                 break;
             case 'about':
                 $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($_GET["author"]);
@@ -115,24 +117,29 @@ class PageFactory
                     $formFactory = new FormFactory();
                     $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                     $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-                    $form = $formFactory->createForm(form_info: $form_info, 
-                                                     field_info: $form_fields, 
-                                                     hidden_field_info: ["user" => $_GET["author"]], 
-                                                     field_text: ["description" => $aboutinfo["description"]],
-                                                     class: $form_info["display_class"]
-                                                     );
-                    $this->htmlpage->addToBodyContent(new Title(text:$aboutinfo['name']));
+                    $form = $formFactory->createForm(
+                        form_info: $form_info,
+                        field_info: $form_fields,
+                        hidden_field_info: ["user" => $_GET["author"]],
+                        field_text: ["description" => $aboutinfo["description"]],
+                        class: $form_info["display_class"]
+                    );
+                    $this->htmlpage->addToBodyContent(new Title(text: $aboutinfo['name']));
                     $this->htmlpage->addToBodyContent($form);
                     break;
                 } else {
-                        $this->htmlpage->addToBodyContent(new Title(text: $aboutinfo['name'],
-                                                                    class: $aboutinfo['name_class']));
-                        $this->htmlpage->addToBodyContent(new BodyText(text: $aboutinfo['description'],
-                                                                       class: $aboutinfo['description_class']));
-                        $this->htmlpage->addToBodyContent(new Image(
-                                                        name: $aboutinfo['imgFileName'],
-                                                        class: $aboutinfo['img_class']
-                        ));
+                    $this->htmlpage->addToBodyContent(new Title(
+                        text: $aboutinfo['name'],
+                        class: $aboutinfo['name_class']
+                    ));
+                    $this->htmlpage->addToBodyContent(new BodyText(
+                        text: $aboutinfo['description'],
+                        class: $aboutinfo['description_class']
+                    ));
+                    $this->htmlpage->addToBodyContent(new Image(
+                        name: $aboutinfo['imgFileName'],
+                        class: $aboutinfo['img_class']
+                    ));
                 }
                 break;
             case 'contact':
@@ -142,13 +149,13 @@ class PageFactory
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                 $form = $formFactory->createForm(
-                                                form_info: $form_info, 
-                                                field_info: $form_fields, 
-                                                hidden_field_info: ['page' => $this->page], 
-                                                field_text: [],
-                                                class: $form_info["display_class"]
-                                                );
-                                                
+                    form_info: $form_info,
+                    field_info: $form_fields,
+                    hidden_field_info: ['page' => $this->page],
+                    field_text: [],
+                    class: $form_info["display_class"]
+                );
+
                 $this->htmlpage->addToBodyContent($form);
                 break;
             case 'search':
@@ -156,16 +163,16 @@ class PageFactory
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                 $form = $formFactory->createForm(
-                                                form_info: $form_info, 
-                                                field_info: $form_fields, 
-                                                hidden_field_info: ['page' => $this->page], 
-                                                field_text: [],
-                                                class: $form_info["display_class"]
-                                                );
-                                                
+                    form_info: $form_info,
+                    field_info: $form_fields,
+                    hidden_field_info: ['page' => $this->page],
+                    field_text: [],
+                    class: $form_info["display_class"]
+                );
+
                 $this->htmlpage->addToBodyContent($form);
 
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title","lastEdit","rating"]);
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch();
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
@@ -179,11 +186,13 @@ class PageFactory
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
 
-                $form = $formFactory->createForm(form_info: $form_info, 
-                                                 field_info: $form_fields,
-                                                 hidden_field_info: ["user" => $_GET["id"]], //give article tag
-                                                 class: $form_info["display_class"],
-                                                 field_text: $bodyinfo);
+                $form = $formFactory->createForm(
+                    form_info: $form_info,
+                    field_info: $form_fields,
+                    hidden_field_info: ["user" => $_GET["id"]], //give article tag
+                    class: $form_info["display_class"],
+                    field_text: $bodyinfo
+                );
 
                 $this->htmlpage->addToBodyContent($form);
                 break;
@@ -192,24 +201,24 @@ class PageFactory
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 // ToDo: add accordion functionality to body text and code element
                 $this->htmlpage->addToBodyContent(new Title(
-                                                text: ucfirst($bodyinfo['title']),
-                                                class: $classes['title_class']
-                                                ));
+                    text: ucfirst($bodyinfo['title']),
+                    class: $classes['title_class']
+                ));
                 $this->htmlpage->addToBodyContent(new AuthorText(
-                                                text: "Author: " . ucfirst($bodyinfo['name']) . "",
-                                                class: $classes['author_class']
-                                                ));
+                    text: "Author: " . ucfirst($bodyinfo['name']) . "",
+                    class: $classes['author_class']
+                ));
                 $this->htmlpage->addToBodyContent(new BodyText(
-                                                text: "<p1>" . ucfirst($bodyinfo['summary']) . "</p>",
-                                                class: $classes['body_class']
+                    text: "<p1>" . ucfirst($bodyinfo['summary']) . "</p>",
+                    class: $classes['body_class']
                 ));
                 $this->htmlpage->addToBodyContent(new CodeBlock(
-                                                text: $bodyinfo['codeBlock'],
-                                                class: $classes['codeblock_class']
+                    text: $bodyinfo['codeBlock'],
+                    class: $classes['codeblock_class']
                 ));
                 $this->htmlpage->addToBodyContent(new Image(
-                                                name: $bodyinfo['imgFileName'],
-                                                class: $classes['img_class']
+                    name: './img/article' . $bodyinfo['imgFileName'],
+                    class: $classes['img_class']
                 ));
 
 
@@ -217,7 +226,7 @@ class PageFactory
                 break;
             case 'dashboard':
                 $this->htmlpage->addToBodyContent(new Title("Articles:"));
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["id","title","lastEdit"]);
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["id", "title", "lastEdit"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
@@ -233,7 +242,8 @@ class PageFactory
     private function addFooter()
     {
         $this->htmlpage->addToBodyContent(new Footer(
-                                                    text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
-                                                    class:'border-top text-end bg-primary-subtle mt-auto'));
+            text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
+            class: 'border-top text-end bg-primary-subtle mt-auto'
+        ));
     }
 }
