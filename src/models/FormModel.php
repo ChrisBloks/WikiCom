@@ -25,9 +25,9 @@ class FormModel extends BaseModel
                 JOIN form_info fo ON fi.form_info_id = fo.id
                 JOIN website_info wi ON wi.id = fo.website_info_id
                 LEFT JOIN lookup_info li on li.id = fi.lookup_info_id
-                WHERE wi.name = :page
+                WHERE wi.name = :_page
                 ORDER BY fi.display_order;";
-        $params = ["page" => $page_name];
+        $params = ["_page" => $page_name];
         $result = $this->crudTemp->selectMany($sql, $params);
 
         if (empty($result)) {
@@ -56,8 +56,8 @@ class FormModel extends BaseModel
                                 fo.display_class
                 FROM form_info fo
                 JOIN website_info wi ON fo.website_info_id = wi.id
-                WHERE wi.name = :page";
-        $params = ["page" => $page_name];
+                WHERE wi.name = :_page";
+        $params = ["_page" => $page_name];
         $result = $this->crudTemp->selectMany($sql, $params);
 
         return $result[0];
@@ -96,6 +96,25 @@ class FormModel extends BaseModel
         }
 
 
+    }
+
+    public function fetchFieldNames($page_name)
+    {
+        $sql = "SELECT  fi.name 
+                FROM field_info fi
+                JOIN form_info fo ON fi.form_info_id = fo.id
+                JOIN website_info wi ON wi.id = fo.website_info_id
+                WHERE wi.name = :_page
+                ORDER BY fi.display_order;";
+        $params = ["_page" => $page_name];
+        $result = $this->crudTemp->selectMany($sql, $params);
+
+        if (empty($result)) {
+            $this->logError("Page has no Form");
+            return false;
+        }
+        unset($value);
+        return $result;
     }
 
 }
