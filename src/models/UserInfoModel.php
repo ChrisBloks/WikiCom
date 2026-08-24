@@ -1,9 +1,9 @@
 <?php
 /* UserModel
-*  Danny
-*  08/2026
-*  UserModel class gives al the methods needed to pull or insert User information from database
-*/
+ *  Danny
+ *  08/2026
+ *  UserModel class gives al the methods needed to pull or insert User information from database
+ */
 require_once "Crud.php";
 require_once "BaseModel.php";
 class UserInfoModel extends BaseModel

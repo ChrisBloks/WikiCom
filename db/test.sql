@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2026 at 09:09 AM
+-- Generation Time: Aug 24, 2026 at 04:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,15 +60,15 @@ CREATE TABLE `display_classes` (
 --
 
 INSERT INTO `display_classes` (`id`, `website_info_id`, `class_name`, `class`) VALUES
-(1, 1, 'bodytext_class', 'fs-2 text-center'),
+(1, 1, 'bodytext_class', 'text-center'),
 (2, 2, 'description_class', 'fs-2 text-center'),
 (3, 2, 'name_class', 'fs-2 text-center'),
 (4, 9, 'title_class', 'text-center'),
 (5, 9, 'author_class', 'text-center'),
-(6, 9, 'body_class', 'text-center'),
-(7, 9, 'codeblock_class', 'php text-center'),
-(8, 9, 'img_class', 'img-thumbnail'),
-(9, 2, 'img_class', 'img-thumbnail');
+(6, 9, 'body_class', 'container fs-4 text-center'),
+(7, 9, 'codeblock_class', 'container-lg fs-6 col-8'),
+(8, 9, 'img_class', 'rounded mx-auto d-block'),
+(9, 2, 'img_class', 'rounded-circle profile-pic d-flex justify-content-end');
 
 -- --------------------------------------------------------
 
@@ -259,7 +259,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny', 'Password', 'danny@email.com', 'image.jpg', 'This is the description of user from database'),
+(1, 'Danny', 'Password', 'danny@email.com', 'CBloks.jpg', 'Hoi ik ben Marius, een van de makers van deze website'),
 (2, 'user2', 'asdfsd', 'dadfa@adfaf.com', 'user2.jpg', 'the description of user2'),
 (3, 'Danny3', 'Password', 'danny@email1.com', '', 'hallo'),
 (5, 'Danny5', 'Password', 'danny@email12.com', '', '');
@@ -323,8 +323,8 @@ CREATE TABLE `wiki_article` (
 --
 
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
-(1, 'Article1', 1, 'The body text of article 1', 'The codeblock of article 1', 'Article1.jpg', '2026-08-11'),
-(2, 'article2', 2, 'the body text of article 2', 'The codeblock of article2', 'article2.jpg\r\n', '2026-08-12'),
+(1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11'),
+(2, 'article2', 2, 'the body text of article 2', '///\n... \n\nconst moveSnake = () => {\n    \n    /// Eerst stoppen we het hoofd in de variabele `head`\n    /// maar we tellen er eerst de richting van beweging bij op.\n    /// Initieel is dirX = PIXEL_SIZE, dus we schuiven naar rechts\n    /// Als verderop dirX of dirY wijzigen (als we op de pijltjes \n    /// drukken, schuift de kop in de betreffende richting\n    let head = {x: snake[0].x + dirX, y: snake[0].y + dirY}\n    \n    /// vervolgens voegen we de \"nieuwe\" kop toe aan het begin \n    /// van de snake-array:\n    snake.unshift(head)\n}', 'article2.jpg\r\n', '2026-08-12'),
 (4, 'testaaa', 1, 'test2ddd', 'test3dd', 'test.jpg', '2026-08-12');
 
 -- --------------------------------------------------------
