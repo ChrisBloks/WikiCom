@@ -28,7 +28,6 @@ require_once "./src/tools/traits/tElementContainer.php";
 require_once "./src/tools/utils/HtmlUtils.php";
 require_once "./src/tools/utils/Utils.php";
 
-require_once "./src/controllers/BaseController.php";
 require_once "./src/controllers/MainController.php";
 require_once "./src/controllers/factories/PageFactory.php";
 require_once "./src/controllers/PageController.php";

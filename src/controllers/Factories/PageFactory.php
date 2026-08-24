@@ -17,9 +17,11 @@ class PageFactory
     use tErrorMessageCollector;
     private string $page;
     protected bool $isLoggedIn;
+    protected array $response;
     private BasePage $htmlpage;
     public function __construct(array $response)
     {
+        $this->response = $response;
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
         $this->htmlpage = new Basepage;
