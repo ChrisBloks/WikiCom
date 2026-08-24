@@ -74,7 +74,10 @@ class ArticleModel extends BaseModel
                 $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
                 [$joins, $where, $extra_query, $params] = $this->buildSearchQuery($user_ids, $tag_ids);
 
-                $sql = "SELECT DISTINCT article.title, article.summary, article.lastEdit"
+                $sql = "SELECT DISTINCT article.id,
+                                        article.title, 
+                                        article.summary, 
+                                        article.lastEdit"
                         . $extra_query
                         . " FROM wiki_article as article"
                         . $joins
@@ -95,7 +98,7 @@ class ArticleModel extends BaseModel
         private function buildSearchQuery(array $user_ids, array $tag_ids)
         {
                 $joins = " JOIN v_article_avg_rating as vr ON vr.id = article.id";
-                $extra_query = ", COALESCE(vr.AVGrating, 0) AS AVGrating";
+                $extra_query = ", COALESCE(vr.AVGrating, 0) AS rating";
                 $where = [];
                 $params = [];
 

@@ -116,10 +116,17 @@ class WebsiteInfoModel extends BaseModel
     * method that gets all table column info
     *
     */ 
-    public function getTableColumns()
+    public function getTableColumns($columns)
     {
-        $sql = "SELECT `column_name`,`column_title`, `display_type`,`class_types`,`column_headers`FROM table_columns";
-        $result = $this->crudTemp->selectMany($sql, NULL, PDO::FETCH_UNIQUE|PDO::FETCH_ASSOC);
+        $placeholders = implode(',', array_fill(0, count($columns), '?'));
+        $sql = "SELECT `column_name`,
+                       `column_title`, 
+                       `display_type`,
+                       `class_types`,
+                       `column_headers`
+                       FROM table_columns
+                       WHERE column_name in ($placeholders)";
+        $result = $this->crudTemp->selectMany($sql, $columns, PDO::FETCH_UNIQUE|PDO::FETCH_ASSOC);
 
         return $result;
 

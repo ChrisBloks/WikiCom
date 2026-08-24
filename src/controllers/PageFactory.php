@@ -137,6 +137,19 @@ class PageFactory
             case 'contact':
             case 'login':
             case 'register':
+                $formFactory = new FormFactory();
+                $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->getFormInfo($this->page);
+                $form = $formFactory->createForm(
+                                                form_info: $form_info, 
+                                                field_info: $form_fields, 
+                                                hidden_field_info: ['page' => $this->page], 
+                                                text: [],
+                                                class: $form_info["display_class"]
+                                                );
+                                                
+                $this->htmlpage->addToBodyContent($form);
+                break;
             case 'search':
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->getFieldInfo($this->page);
@@ -150,6 +163,14 @@ class PageFactory
                                                 );
                                                 
                 $this->htmlpage->addToBodyContent($form);
+
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns(["title","lastEdit","rating"]);
+                $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch();
+                $tableFactory = new Table($columnsdata, $rowsdata);
+                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
+                                                                                                table-hover 
+                                                                                                table-striped
+                                                                                                table-bordered")));
                 break;
             case 'editArticle':
                 $formFactory = new FormFactory();
@@ -194,7 +215,7 @@ class PageFactory
                 break;
             case 'dashboard':
                 $this->htmlpage->addToBodyContent(new Title("Articles:"));
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns();
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->getTableColumns(["id","title","lastEdit"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
