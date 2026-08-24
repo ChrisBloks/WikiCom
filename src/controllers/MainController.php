@@ -1,13 +1,15 @@
 <?php
 require_once "./src/controllers/PageController.php";
 
+/**
+ * Controller class for initial request handling and forwarding request to the correct subcontroller.
+ */
 class MainController
 {
-    private Crud $_crud;
 
     public function __construct()
     {
-        
+        // Add something
     }
 
     // start new controller if request is of AJAX type
@@ -19,9 +21,9 @@ class MainController
     // if more request types are added, add them to the if-else loop
     private function resolveHandler() 
     {
-        // if ($this->isAjaxRequest()) {
-        //     return new AjaxController($this->_crud);
-        // }
+        if ($this->isAjaxRequest()) {
+            // return new AjaxController($this->_crud);
+        }
 
         return new PageController();
     }
