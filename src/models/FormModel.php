@@ -107,7 +107,7 @@ class FormModel extends BaseModel
                 WHERE wi.name = :_page
                 ORDER BY fi.display_order;";
         $params = ["_page" => $page_name];
-        $result = $this->crudTemp->selectMany($sql, $params);
+        $result = $this->crudTemp->selectMany($sql, $params,PDO::FETCH_COLUMN);
 
         if (empty($result)) {
             $this->logError("Page has no Form");
