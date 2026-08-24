@@ -2,12 +2,23 @@
 require_once "./src/tools/interfaces/iValidator.php";
 require_once "./src/tools/traits/tErrorMessageCollector.php";
 
+/**
+ * Base validation class that defines basic 1st line of defence validation. If succesful, calls more specific validation behaviour as defined in child classes.
+ * @uses tErrorMessageCollector
+ * @var array $field_inputs array containing user inputs
+ */
 abstract class BaseValidator implements iValidator
 {
     use tErrorMessageCollector;
 
     protected array $field_inputs = [];
 
+
+    /**
+     * Checks if all fields were correctly filled in an optionally calls more specific validation behaviour.
+     * @param string $page_name
+     * @return bool true if all validation steps were succesful, false otherwise.
+     */
     public function validate(string $page_name): bool
     {
         // Get field names from the database
@@ -33,5 +44,10 @@ abstract class BaseValidator implements iValidator
         }
     }
 
+    /**
+     * Page-specific validation behaviour.
+     * @param array $field_inputs user inputs
+     * @return bool
+     */
     abstract public function validate_fields(array $field_inputs): bool;
 }
