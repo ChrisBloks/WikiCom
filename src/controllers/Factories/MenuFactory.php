@@ -10,19 +10,19 @@ class MenuFactory
 {
     use tErrorMessageCollector;
 
-    public function createMenu(array $menu_items, bool $isLoggedIn, string $class = 'nav'): Menu
+    public function createMenu(array $menu_items, string $class = 'nav'): Menu
     {
-        return $this->buildMenu($menu_items, $isLoggedIn, $class);
+        return $this->buildMenu($menu_items, $class);
     }
 
-    protected function buildMenu(array $menu_items, bool $isLoggedIn, string $class = 'nav'): Menu
+    protected function buildMenu(array $menu_items, string $class = 'nav'): Menu
     {
         $menu = new Menu($class);
 
         // login/auth checks
         foreach ($menu_items as $item) {
             try {
-                $menu->addElement($this->buildMenuItem($item, $isLoggedIn));
+                $menu->addElement($this->buildMenuItem($item));
             } catch (\InvalidArgumentException $e) {
                 $this->logError($e->getMessage());
             }
@@ -30,7 +30,7 @@ class MenuFactory
         return $menu;
     }
 
-    protected function buildMenuItem(array $item, bool $isLoggedIn, string $link_class = 'nav-link', string $li_class = 'nav-item')
+    protected function buildMenuItem(array $item, string $link_class = 'nav-link', string $li_class = 'nav-item')
     {
         if (empty($item['label']) || empty($item['href'])) {
             $this->logError("Menu item missing required 'label' or 'href': ");
@@ -52,7 +52,7 @@ class MenuFactory
             $submenu = new Menu(class: 'dropdown-menu');
             foreach ($item['submenu'] as $subitem) {
                 try {
-                    $submenu->addElement($this->buildMenuItem($subitem, $isLoggedIn, 'dropdown-item', ''));
+                    $submenu->addElement($this->buildMenuItem($subitem, 'dropdown-item', ''));
                 } catch (\InvalidArgumentException $e) {
                     $this->logError($e->getMessage());
                 }

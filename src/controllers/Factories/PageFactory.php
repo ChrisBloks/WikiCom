@@ -36,7 +36,7 @@ class PageFactory
         $this->addHead();
         $this->addScripts();
 
-        $this->addBodyContent();
+        $this->addBody();
         $this->addFooter();
 
         return $this->htmlpage;
@@ -63,7 +63,7 @@ class PageFactory
     }
 
 
-    public function addBodyContent()
+    public function addBody()
     {
         // ToDo: make error element, pass array with errors
         if ($this->hasErrors() == true) {
@@ -85,7 +85,6 @@ class PageFactory
         $menuFactory = new MenuFactory();
         $menu = $menuFactory->createMenu(
                                     menu_items: $menu_items, 
-                                    isLoggedIn: $this->isLoggedIn, 
                                     class: 'nav bg-body-secondary border-bottom justify-content-around');
         $this->htmlpage->addToBodyContent($menu);
         if ($menuFactory->hasErrors()) {
@@ -179,7 +178,8 @@ class PageFactory
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
 
                 $form = $formFactory->createForm(form_info: $form_info, 
-                                                 field_info: $form_fields, 
+                                                 field_info: $form_fields,
+                                                 text: $bodyinfo, 
                                                  hidden_field_info: ["user" => $_GET["id"]], //give article tag
                                                  class: $form_info["display_class"]);
 
