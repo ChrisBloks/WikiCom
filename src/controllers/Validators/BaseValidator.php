@@ -7,11 +7,11 @@ require_once "./src/tools/traits/tErrorMessageCollector.php";
  * @uses tErrorMessageCollector
  * @var array $field_inputs array containing user inputs
  */
-abstract class BaseValidator implements iValidator
+class BaseValidator implements iValidator
 {
     use tErrorMessageCollector;
 
-    public array $field_inputs = [];
+    protected array $field_inputs = [];
 
     /**
      * Checks if all fields were correctly filled in an optionally calls more specific validation behaviour.
@@ -42,10 +42,21 @@ abstract class BaseValidator implements iValidator
         }
     }
 
+
     /**
-     * Page-specific validation behaviour.
+     * Retrieve the field inputs property
+     * @return array
+     */
+    public function getFieldInputs(): array {
+        return $this->field_inputs;
+    }
+
+    /**
+     * Page-specific validation behaviour. Should be overwritten by child classes.
      * @param array $field_inputs user inputs
      * @return bool
      */
-    abstract public function validate_fields(array $field_inputs): bool;
+    public function validateFields(array $field_inputs): bool {
+        return true;
+    }
 }

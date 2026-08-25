@@ -6,7 +6,7 @@ class UserHandler
     public function checkLogin(&$response, $validator)
     {
         $form_fields = ModelSelector::getFormModel()->fetchFormFields($response['page']);
-        $validator = new FormValidator($response,$form_fields);
+        $validator = new UserValidator($response, $form_fields);
         $result = $validator->validateLogin($response, $form_fields);
         if ($result['ok']) {
             $response['page'] = 'home';
@@ -34,16 +34,14 @@ class UserHandler
     public function checkContact(&$response, $validator)
     {
         if ($validator->validate($response['page'])) {
-            $result = $validator -> field_inputs;
+            $result = $validator->getFieldInputs();
             ModelSelector::getWebsiteInfoModel()->saveContact(
-                                                              name:$result['name'],
-                                                              email:$result['email'],
-                                                              message:$result['message']
+                name: $result['name'],
+                email: $result['email'],
+                message: $result['message']
             );
-        }
-        else
-        {
-            $response['error'] = $validator ->getErrors();
+        } else {
+            $response['error'] = $validator->getErrors();
         }
     }
 }
