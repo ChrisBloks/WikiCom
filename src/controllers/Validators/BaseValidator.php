@@ -13,7 +13,6 @@ abstract class BaseValidator implements iValidator
 
     public array $field_inputs = [];
 
-
     /**
      * Checks if all fields were correctly filled in an optionally calls more specific validation behaviour.
      * @param string $page_name
