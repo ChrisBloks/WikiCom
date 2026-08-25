@@ -47,7 +47,7 @@ class ValidateRequest
                     // if ok -> send article info to db
                     break;
                 case 'contact':
-                    $validator = new ContactValidator();
+                    $validator = new BaseValidator();
                     UserHandler::getInstance() -> checkContact($this->response,$validator);
                     break;
             }

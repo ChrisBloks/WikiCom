@@ -57,18 +57,21 @@ class PageController implements iController
 
 
     /**
-     * Call the relevant validator based on the current request.
+     * Call the relevant validator based on the current request. Should set $this->response_page before terminating
      * @return void
      */
-    protected function validateRequest()
+    protected function validateRequest(): void
     {
-        // validateRequest
-        // new ValidateRequestFactory();
-        $this->response = $this->request;
-        $validation = new ValidateRequest($this->response);
-        $this->response = $validation ->show();
+        // Get correct handler
+        $requestHandler =  ($this->request['posted'] ? new PostRequestHandler(): new GetRequestHandler());
+        
+        // Validate requets and retrieve page object
+        $this->response = $requestHandler->handle($this->request);
+        $this->response_page = $requestHandler->createPage();
 
-        ($this->request['posted']) ? $this->handlePostRequest() : $this->handleGetRequest();
+        // Sanity check - Christian
+        // Should be last line of validateRequest
+        assert(isset($this->response_page));
     }
 
     /**
@@ -76,7 +79,7 @@ class PageController implements iController
      *
      * @return void
      */
-    protected function handlePostRequest()
+    protected function handlePostRequest(): void
     {
         $this->checkLogin($this->response);
         $this->updateResponse();
@@ -89,7 +92,7 @@ class PageController implements iController
      *
      * @return void
      */
-    protected function handleGetRequest()
+    protected function handleGetRequest(): void
     {
         $this->updateResponse();
         $PageFactory = new PageFactory($this->response);
@@ -101,7 +104,7 @@ class PageController implements iController
      * If page generation was succesful, call its show function.
      * @return void
      */
-    public function showResponse()
+    public function showResponse(): void
     {
         // if response page is not null -> show page
         if (!is_null($this->response_page)) {

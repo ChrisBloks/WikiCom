@@ -38,7 +38,7 @@ class BaseValidator implements iValidator
         if ($this->hasErrors()) {
             return false;
         } else {
-            return $this->validate_fields(field_inputs: $this->field_inputs);
+            return $this->validateFields(field_inputs: $this->field_inputs);
         }
     }
 

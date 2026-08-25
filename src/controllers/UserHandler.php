@@ -6,7 +6,7 @@ class UserHandler
     public function checkLogin(&$response, $validator)
     {
         $form_fields = ModelSelector::getFormModel()->fetchFormFields($response['page']);
-        $validator = new UserValidator($response, $form_fields);
+        $validator = new Validator($response, $form_fields);
         $result = $validator->validateLogin($response, $form_fields);
         if ($result['ok']) {
             $response['page'] = 'home';
