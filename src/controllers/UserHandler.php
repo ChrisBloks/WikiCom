@@ -5,13 +5,20 @@ class UserHandler
     use tSingleton;
     public function checkLogin(&$response, $validator)
     {
-        $form_fields = ModelSelector::getFormModel()->fetchFormFields($response['page']);
-        $validator = new UserValidator($response, $form_fields);
-        $result = $validator->validateLogin($response, $form_fields);
-        if ($result['ok']) {
-            $response['page'] = 'home';
-            $_SESSION['username'] = $result['name'];
-            $_SESSION['userID'] = $result['id'];
+        if ($validator->validate($response['page'])) {
+            $result = $validator->getFieldInputs();
+            $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail($result['email']);
+            if (password_verify($result['password'],$userinfo['password'])) {
+                $response['page'] = 'home';
+                $_SESSION['isLoggedIn'] = true;
+                $_SESSION['name'] = $userinfo['name'];
+                $_SESSION['userID'] = $userinfo['id'];                
+            }
+            else{
+                $response['error'] = "Login email or password is wrong!";
+            }
+        } else {
+            $response['error'] = $validator->getErrors();
         }
     }
 

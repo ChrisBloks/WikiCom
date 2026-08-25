@@ -22,10 +22,8 @@ class ValidateRequest
                     UserHandler::getInstance() -> checkRegistration($this->response,$validator);
                     break;
                 case 'login':
-                    // new UserHandler
-                    // check email against database
-                    // check password against database
-                    // set session['userID']
+                    $validator = new BaseValidator();
+                    UserHandler::getInstance() -> checkLogin($this->response,$validator);
                     break;
                 case 'search':
                     // collect checkboxgroup van tags en authors
