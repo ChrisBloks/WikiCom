@@ -9,10 +9,7 @@ class UserHandler
             $result = $validator->getFieldInputs();
             $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail($result['email']);
             if (password_verify($result['password'],$userinfo['password'])) {
-                $response['page'] = 'home';
-                $_SESSION['isLoggedIn'] = true;
-                $_SESSION['name'] = $userinfo['name'];
-                $_SESSION['userID'] = $userinfo['id'];                
+                return $userinfo;              
             }
             else{
                 $response['error'] = "Login email or password is wrong!";

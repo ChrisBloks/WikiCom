@@ -8,10 +8,10 @@ class CheckBoxGroup extends BaseField{
 
 protected array $options =[];
 
-    public function __construct(string $name, string $label, string $class, array $options){
+    public function __construct(string $name, string $label, string $class, array $options,array $value){
         parent::__construct($name, $label, $class);    
         $this->options = $options;
-        $this->value = [];
+        $this->value = $value;
     }
 
 
@@ -21,7 +21,7 @@ protected array $options =[];
         $ret .= HtmlUtils::printLabel($this->id, $this->label)."";
 
         foreach ($this->options as $value => $display){
-            $checked = in_array($value, $this->value);
+            $checked = $this->value[$value];
             $ret .= '<input type="checkbox"'. $this->baseAttribs(true, $value). 'value="'.$display.'"'. ($checked? 'checked' : '') .'>';
             $ret .= HtmlUtils::printLabel($this->id, $display). "";            
         }

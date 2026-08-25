@@ -37,7 +37,7 @@ class ArticleModel extends BaseModel
                 $params = ['article_id' => $article_id];
                 $result = $this->crudTemp->selectOne($sql, $params);
                 if (empty($result)) {
-                        $result = false;
+                        $result = [];
                 }
                 return $result;
         }
@@ -214,6 +214,21 @@ class ArticleModel extends BaseModel
                 $sql = "SELECT name FROM tag 
                         WHERE name=:tag_name";
                 $params = ["tag_name" => $tag_name];
+                $result = $this->crudTemp->selectOne($sql, $params);
+                return empty($result);
+        }
+
+        /*
+        * Method that checks if title already exists. If it does not exist give true
+        *
+        * @param title name
+        */ 
+
+        public function checkTitle($title_name)
+        {
+                $sql = "SELECT title FROM wiki_article 
+                        WHERE title=:title_name";
+                $params = ["title_name" => $title_name];
                 $result = $this->crudTemp->selectOne($sql, $params);
                 return empty($result);
         }

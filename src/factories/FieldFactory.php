@@ -25,7 +25,8 @@ class FieldFactory
                     name: $field_def["name"],
                     class: $field_def["class"],
                     label: $field_def["label"],
-                    options: $field_def['options']
+                    options: $field_def['options'],
+                    value: $field_def['value']
                 );
             case 'select':
                 return new Select(
