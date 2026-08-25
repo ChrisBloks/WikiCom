@@ -1,5 +1,8 @@
 <?php
-require_once "./src/views/containers/ContainerElement.php";
+namespace Wiki\views\containers;
+
+use Wiki\views\containers\ContainerElement, Wiki\tools\utils\HtmlUtils;
+
 
 class SplitMenuItem extends ContainerElement
 {

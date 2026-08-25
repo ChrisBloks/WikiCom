@@ -1,7 +1,9 @@
 <?php
-require_once "./src/tools/interfaces/iElement.php";
+namespace Wiki\views;
 
-class Rating implements iElement
+use Wiki\tools\interfaces;
+
+class Rating implements interfaces\iElement
 {
     private float $rating;
     private int $roundedrating;

@@ -1,6 +1,8 @@
 <?php
-require_once "./src/tools/interfaces/iElement.php";
-require_once "./src/views/fields/BaseField.php";
+namespace Wiki\views\fields;
+
+use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
+
 
 class CheckBoxGroup extends BaseField{
 

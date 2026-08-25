@@ -1,5 +1,7 @@
 <?php
-require_once "./src/tools/interfaces/iElement.php";
+namespace Wiki\views\fields;
+
+use Wiki\tools\interfaces\iElement, Wiki\tools\utils\HtmlUtils;
 
 abstract class BaseField implements iElement
 {
@@ -22,7 +24,7 @@ abstract class BaseField implements iElement
         $this->class = $class;
         $this->html = '';
         if(($label === "")) {
-                throw new BadFunctionCallException("Label not set!");
+                throw new \BadFunctionCallException("Label not set!");
             }
             $this->html .= HtmlUtils::printLabel($this->id, $label);
         }

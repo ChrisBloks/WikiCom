@@ -1,8 +1,7 @@
 <?php
-require_once "./src/views/containers/ContainerElement.php";
-require_once "./src/views/containers/AtomicElement.php";
-require_once "./src/views/containers/Form.php";
+namespace Wiki\views\containers;
 
+use Wiki\views\containers;
 
 // deprecated until i find a better way to add this, use FirstCell instead
 class ArticleActions extends ContainerElement
@@ -14,10 +13,10 @@ class ArticleActions extends ContainerElement
         $id = htmlspecialchars((string)$articleId);
 
         // Edit: read-only navigation, link is fine.
-        $this->addElement(new AtomicElement("<a href=\"edit.php?id=$id\">Edit</a>"));
+        $this->addElement(new containers\AtomicElement("<a href=\"edit.php?id=$id\">Edit</a>"));
 
         // Delete: mutates data, so it must be a POST form, never a link
-        $deleteForm = new Form(
+        $deleteForm = new containers\Form(
             action: "delete.php",
             method: "POST",
             submit_caption: "Delete"

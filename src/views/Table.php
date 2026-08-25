@@ -1,8 +1,7 @@
 <?php
-require_once "./src/tools/utils/HtmlUtils.php";
-require_once "./src/views/containers/ArticleActions.php";
-require_once "./src/views/Rating.php";
-require_once "./src/views/FirstCell.php";
+namespace Wiki\views;
+
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Table

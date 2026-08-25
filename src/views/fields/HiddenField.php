@@ -1,5 +1,6 @@
 <?php
-
+namespace Wiki\views\fields;
+use Wiki\tools\interfaces\iElement;
 class HiddenField implements iElement {
 
     protected string $html;

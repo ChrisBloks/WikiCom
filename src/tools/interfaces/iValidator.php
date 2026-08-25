@@ -1,4 +1,5 @@
 <?php
+namespace Wiki\tools\interfaces;
 
 interface iValidator{
     public function validate(string $page_name): bool;

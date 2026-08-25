@@ -1,6 +1,9 @@
 <?php
-require_once "./src/tools/interfaces/iElement.php";
-class AtomicElement implements iElement{
+namespace Wiki\views\containers;
+
+use Wiki\tools\interfaces, Wiki\tools\utils;
+
+class AtomicElement implements interfaces\iElement{
     // properties
     private string $html;
     private string $class;
@@ -11,6 +14,6 @@ class AtomicElement implements iElement{
     }
 
     public function show(): string {
-        return $this->html. HtmlUtils::addClassAttr($this->class);
+        return $this->html. utils\HtmlUtils::addClassAttr($this->class);
     }
 }

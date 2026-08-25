@@ -1,7 +1,7 @@
 <?php
-require_once "./src/tools/utils/Url.php";
-require_once "./src/views/containers/Form.php";
+namespace Wiki\views;
 
+use Wiki\tools\utils;
 class FirstCell
 {
     private int $page_id;
@@ -19,7 +19,7 @@ class FirstCell
     public function returnFirstCellOptions(): string
     {
 
-        $editUrl = Url::buildUrl(['page' => $this->target_page, 'id' => $this->page_id]);
+        $editUrl = utils\Url::buildUrl(['page' => $this->target_page, 'id' => $this->page_id]);
 
         $str  = '<a href="' . $editUrl . '">' 
                 . $this->_actionLink($this->page_id, '&#10000;', 'Update') 
@@ -31,7 +31,7 @@ class FirstCell
     // replace with get-request later on/ajax
     private function _buildDeleteForm(): string
     {
-        $form = new Form(
+        $form = new containers\Form(
                     action: '', 
                     method: 'POST', 
                     submit_caption: '&#10060;'

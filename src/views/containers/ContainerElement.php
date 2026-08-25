@@ -1,10 +1,12 @@
 <?php
-require_once "./src/tools/traits/tElementContainer.php";
-require_once "./src/tools/interfaces/iElement.php";
-class ContainerElement implements iElement{
+namespace Wiki\views\containers;
+
+use Wiki\tools\interfaces, Wiki\tools\traits;
+
+class ContainerElement implements interfaces\iElement{
 
 
-    use tElementContainer;
+    use traits\tElementContainer;
 
     // properties
     protected string $html_before;

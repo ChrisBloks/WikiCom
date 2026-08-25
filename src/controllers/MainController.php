@@ -1,5 +1,6 @@
 <?php
-require_once "./src/controllers/PageController.php";
+namespace Wiki\controllers;
+use Wiki\tools\interfaces;
 
 /**
  * Controller class for initial request handling and forwarding request to the correct subcontroller.
@@ -30,9 +31,9 @@ class MainController
 
     /**
      * Get the relevant subcontroller based on the request. Default is PageController.
-     * @return iController
+     * @return interfaces\iController
      */
-    private function getHandler(): iController
+    private function getHandler(): interfaces\iController
     {   
         // Ajax request. Action is equal to a specific update
         if($this->async){

@@ -3,9 +3,10 @@
 	*  Marius 08-2026
 	*  Class able to draw textarea's
 	*/
-require_once "./src/views/fields/BaseField.php";
+namespace Wiki\views\fields;
 
-require_once "./src/tools/interfaces/iElement.php";
+use Wiki\views\fields\BaseField, Wiki\tools\interfaces\iElement;
+
 class TextAreaField extends BaseField implements iElement {
 
     protected string $html;
