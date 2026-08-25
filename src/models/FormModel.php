@@ -4,8 +4,9 @@
  *  08/2026
  *  FormModel class gives al the methods needed to pull information from database about forms
  */
-require_once "Crud.php";
-require_once "BaseModel.php";
+
+namespace Wiki\models;
+
 class FormModel extends BaseModel
 {
     /*
@@ -14,7 +15,7 @@ class FormModel extends BaseModel
      *
      * @params page_name = the page name and id is used for further query building using the lookupinfo
      */
-    public function fetchFieldInfo($page_name, $id = '')
+    public function fetchFieldInfo(string $page_name, string $id = ''): array|false
     {
         $sql = "SELECT  fi.type, 
                         fi.name, 
@@ -48,7 +49,7 @@ class FormModel extends BaseModel
      *
      * @params page_name = the page name
      */
-    public function fetchFormInfo($page_name)
+    public function fetchFormInfo(string $page_name): array
     {
         $sql = "SELECT DISTINCT fo.action, 
                                 fo.method, 
@@ -69,7 +70,9 @@ class FormModel extends BaseModel
      * @params $value = the information from the previous query given to this method to build the query
      *         $id = id given for certain queries that need specific id example: finding the tag for a certain article needs article_id
      */
-    public function fetchLookupInfo(&$value, $id)
+
+    // TODO refactor
+    public function fetchLookupInfo(array &$value, string $id): void
     {
         if (!empty($value["table_name"])) {
             $sql = "SELECT {$value["display_names"]} FROM {$value['table_name']}";
@@ -78,9 +81,8 @@ class FormModel extends BaseModel
             if (!empty($value["bridge_table"])) {
                 [$main, $bridge] = explode(",", $value["bridgevalues"]);
                 if (!empty($value["left_on"])) {
-                $sql .= "LEFT JOIN {$value["bridge_table"]} ON {$main} = {$bridge} AND {$value["left_on"]} ={$id} ";
-                }
-                else{
+                    $sql .= "LEFT JOIN {$value["bridge_table"]} ON {$main} = {$bridge} AND {$value["left_on"]} ={$id} ";
+                } else {
                     $sql .= "JOIN {$value["bridge_table"]} ON {$main} = {$bridge}";
                 }
             }
@@ -89,9 +91,9 @@ class FormModel extends BaseModel
             }
 
             $sql .= " ORDER BY {$value['order_by']}";
-            
 
-            $result = $this->crudTemp->selectMany($sql, NULL, PDO::FETCH_ASSOC);
+
+            $result = $this->crudTemp->selectMany($sql, NULL, \PDO::FETCH_ASSOC);
 
             if (empty($result)) {
                 $result = array();
@@ -99,8 +101,8 @@ class FormModel extends BaseModel
 
             $options = [];
             $marked = [];
-            foreach ($result as $row){
-                if (isset($row['marked'])){
+            foreach ($result as $row) {
+                if (isset($row['marked'])) {
                     $marked[$row['id']] = $row['marked'];
                 }
                 $options[$row['id']] = $row['name'];
@@ -111,11 +113,9 @@ class FormModel extends BaseModel
         } else {
             $value["options"] = explode(",", $value["display_names"]);
         }
-
-
     }
 
-    public function fetchFieldNames($page_name)
+    public function fetchFieldNames(string $page_name): array|false
     {
         $sql = "SELECT  fi.name 
                 FROM field_info fi
@@ -124,7 +124,7 @@ class FormModel extends BaseModel
                 WHERE wi.name = :_page
                 ORDER BY fi.display_order;";
         $params = ["_page" => $page_name];
-        $result = $this->crudTemp->selectMany($sql, $params, PDO::FETCH_COLUMN);
+        $result = $this->crudTemp->selectMany($sql, $params, \PDO::FETCH_COLUMN);
 
         if (empty($result)) {
             $this->logError("Page has no Form");
@@ -133,5 +133,4 @@ class FormModel extends BaseModel
         unset($value);
         return $result;
     }
-
 }

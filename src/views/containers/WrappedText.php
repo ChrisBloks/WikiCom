@@ -1,4 +1,5 @@
 <?php
+
 namespace Wiki\views\containers;
 
 use Wiki\tools\interfaces\iElement;
@@ -18,8 +19,8 @@ class WrappedText implements iElement
 
     public function show(): string
     {
-        return '<' . $this->wrapper . '>' .PHP_EOL
-            . $this->text .PHP_EOL
-            . '</' . $this->wrapper . '>' .PHP_EOL;
+        return '<' . $this->wrapper . '>' . PHP_EOL
+            . $this->text . PHP_EOL
+            . '</' . $this->wrapper . '>' . PHP_EOL;
     }
 }

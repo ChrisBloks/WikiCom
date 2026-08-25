@@ -1,6 +1,8 @@
 <?php
+
 namespace Wiki\tools\interfaces;
 
-interface iRequestHandler{
+interface iRequestHandler
+{
     public function handleRequest(array $response): array;
 }

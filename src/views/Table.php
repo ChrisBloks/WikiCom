@@ -1,4 +1,5 @@
 <?php
+
 namespace Wiki\views;
 
 use Wiki\tools\utils\HtmlUtils;
@@ -81,18 +82,19 @@ class Table
 
             case 'rating':
                 return "<td$classAttr>" . (new Rating(
-                                                rating: (float) $value
-                                                ))->show() . '</td>';
+                    rating: (float) $value
+                ))->show() . '</td>';
 
-            // replace editarticle with const from config file
+                // replace editarticle with const from config file
             case 'first_cell':
                 return "<td$classAttr>" . (new FirstCell(
-                                                    page_id:$row_data['id'], 
-                                                    target_page: "editArticle", 
-                                                    delete_page: $row_data['id']))->returnFirstCellOptions() 
-                                        . '</td>';
-            
-                case 'string':
+                    page_id: $row_data['id'],
+                    target_page: "editArticle",
+                    delete_page: $row_data['id']
+                ))->returnFirstCellOptions()
+                    . '</td>';
+
+            case 'string':
                 return "<td$classAttr>" . htmlspecialchars((string) $value) . '</td>';
 
             default:

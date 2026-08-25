@@ -1,5 +1,10 @@
 <?php
 
+namespace Wiki\controllers;
+
+use Wiki\controllers\validators\RegisterValidator,
+    Wiki\controllers\validators\BaseValidator;
+
 class ValidateRequest
 {
     protected array $response;
@@ -19,11 +24,11 @@ class ValidateRequest
 
                 case 'register':
                     $validator = new RegisterValidator();
-                    UserHandler::getInstance() -> checkRegistration($this->response,$validator);
+                    UserHandler::getInstance()->checkRegistration($this->response, $validator);
                     break;
                 case 'login':
                     $validator = new BaseValidator();
-                    UserHandler::getInstance() -> checkLogin($this->response,$validator);
+                    UserHandler::getInstance()->checkLogin($this->response, $validator);
                     break;
                 case 'search':
                     // collect checkboxgroup van tags en authors
@@ -43,7 +48,7 @@ class ValidateRequest
                     break;
                 case 'contact':
                     $validator = new BaseValidator();
-                    UserHandler::getInstance() -> checkContact($this->response,$validator);
+                    UserHandler::getInstance()->checkContact($this->response, $validator);
                     break;
             }
         } else {
@@ -57,13 +62,10 @@ class ValidateRequest
                     // getRequestVar['id']
                     // $this->response['id'] = getRequestVar['id']
             }
-
         }
-
-
     }
     public function show()
     {
-        return $this -> response;
+        return $this->response;
     }
 }

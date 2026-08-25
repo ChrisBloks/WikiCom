@@ -1,22 +1,30 @@
 <?php
+
 namespace Wiki\controllers;
 
-use Wiki\views, Wiki\tools\interfaces, Wiki\tools\traits;
+use Wiki\views\BasePage,
+    Wiki\tools\interfaces\iController,
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\utils\Utils,
+    Wiki\controllers\factories\PageFactory,
+    Wiki\controllers\requestHandlers\GetRequestHandler,
+    Wiki\controllers\requestHandlers\PostRequestHandler;
+
 /**
  * PageController class for handling non-AJAX requests.
  * @uses tErrorMessageCollector
  * @var bool $posted true if the page was requested through a POST request, otherwise false.
  * @var array $request Contains boolean 'posted' and string 'page'.
  * @var array $response Becomes equal to $request when method validateRequest() is reached.
- * @var views\BasePage $response_page page produced by the PageController.
+ * @var BasePage $response_page page produced by the PageController.
  */
-class PageController implements interfaces\iController
+class PageController implements iController
 {
-    use traits\tErrorMessageCollector;
+    use tErrorMessageCollector;
     private bool $posted;
     private array $request;
     private ?array $response;
-    private ?views\BasePage $response_page = NULL;
+    private ?BasePage $response_page = NULL;
 
     /**
      * __construct
@@ -51,7 +59,8 @@ class PageController implements interfaces\iController
                 default: ($this->posted ? '' : 'home'
                 )
             ),
-            'isLoggedIn' => isset($_SESSION['userID'])];
+            'isLoggedIn' => isset($_SESSION['userID'])
+        ];
     }
 
 
@@ -62,8 +71,8 @@ class PageController implements interfaces\iController
     protected function validateRequest(): void
     {
         // Get correct handler
-        $requestHandler =  ($this->request['posted'] ? new PostRequestHandler(): new GetRequestHandler());
-        
+        $requestHandler =  ($this->request['posted'] ? new PostRequestHandler() : new GetRequestHandler());
+
         // Validate requets and retrieve page object
         $this->response = $requestHandler->handleRequest($this->request);
 
@@ -84,7 +93,4 @@ class PageController implements interfaces\iController
             $this->response_page->show();
         }
     }
-
-
-
 }

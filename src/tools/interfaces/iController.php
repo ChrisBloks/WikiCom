@@ -1,7 +1,8 @@
 <?php
+
 namespace Wiki\tools\interfaces;
 
-interface iController{
+interface iController
+{
     public function handleRequest();
-
 }

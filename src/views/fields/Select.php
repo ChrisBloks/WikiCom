@@ -4,7 +4,7 @@ namespace Wiki\views\fields;
 
 use Wiki\tools\utils\HtmlUtils;
 
-class Selection extends BaseField
+class Select extends BaseField
 {
 
     protected array $options = [];

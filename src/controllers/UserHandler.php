@@ -1,5 +1,10 @@
 <?php
 
+namespace Wiki\controllers;
+
+use Wiki\tools\traits\tSingleton,
+    Wiki\models\ModelSelector;
+
 class UserHandler
 {
     use tSingleton;
@@ -8,10 +13,9 @@ class UserHandler
         if ($validator->validate($response['page'])) {
             $result = $validator->getFieldInputs();
             $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail($result['email']);
-            if (password_verify($result['password'],$userinfo['password'])) {
-                return $userinfo;              
-            }
-            else{
+            if (password_verify($result['password'], $userinfo['password'])) {
+                return $userinfo;
+            } else {
                 $response['error'] = "Login email or password is wrong!";
             }
         } else {
@@ -31,8 +35,7 @@ class UserHandler
                     imgFileName: '',
                     description: ''
                 );
-            }
-            else{
+            } else {
                 $response['error'] = "Email already exists!";
             }
         } else {

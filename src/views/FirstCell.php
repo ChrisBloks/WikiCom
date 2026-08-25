@@ -1,7 +1,9 @@
 <?php
+
 namespace Wiki\views;
 
 use Wiki\tools\utils;
+
 class FirstCell
 {
     private int $page_id;
@@ -21,9 +23,9 @@ class FirstCell
 
         $editUrl = utils\Url::buildUrl(['page' => $this->target_page, 'id' => $this->page_id]);
 
-        $str  = '<a href="' . $editUrl . '">' 
-                . $this->_actionLink($this->page_id, '&#10000;', 'Update') 
-                . '</a>';
+        $str  = '<a href="' . $editUrl . '">'
+            . $this->_actionLink($this->page_id, '&#10000;', 'Update')
+            . '</a>';
         $str .= $this->_buildDeleteForm();
         return $str;
     }
@@ -32,10 +34,10 @@ class FirstCell
     private function _buildDeleteForm(): string
     {
         $form = new containers\Form(
-                    action: '', 
-                    method: 'POST', 
-                    submit_caption: '&#10060;'
-                    );
+            action: '',
+            method: 'POST',
+            submit_caption: '&#10060;'
+        );
         $form->addHiddenField('page', $this->delete_page);
         $form->addHiddenField('id', (string) $this->page_id);
         return $form->show();

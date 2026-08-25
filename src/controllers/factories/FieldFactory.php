@@ -1,5 +1,14 @@
 <?php
 
+namespace Wiki\controllers\factories;
+
+use Wiki\views\fields\BaseField,
+    Wiki\views\fields\TextAreaField,
+    Wiki\views\fields\checkBoxGroup,
+    Wiki\views\fields\Select,
+    Wiki\views\fields\ButtonField,
+    Wiki\views\fields\InputField;
+
 class FieldFactory
 {
 
@@ -8,10 +17,10 @@ class FieldFactory
     {
         foreach (['type', 'name', 'class', 'label'] as $key) {
             if (!array_key_exists($key, $field_def)) {
-                throw new InvalidArgumentException("Field definition missing for key: '$key'");
+                throw new \InvalidArgumentException("Field definition missing for key: '$key'");
             }
         }
-        
+
         switch ($field_def['type']) {
             case 'textarea':
                 return new TextAreaField(
@@ -33,17 +42,17 @@ class FieldFactory
                     name: $field_def["name"],
                     class: $field_def["class"],
                     label: $field_def["label"],
-                    options: $field_def['options']                    
+                    options: $field_def['options']
                 );
             case 'button':
-                return new ButtonField(   
+                return new ButtonField(
                     type: $field_def['type'],
                     name: $field_def["name"],
                     class: $field_def["class"],
                     label: $field_def["label"]
                 );
             default:
-                return new InputField(   
+                return new InputField(
                     type: $field_def['type'],
                     name: $field_def["name"],
                     class: $field_def["class"],
@@ -52,5 +61,4 @@ class FieldFactory
                 );
         }
     }
-
 }

@@ -2,8 +2,6 @@
 // common parameters:
 // Todo: save all commands as string and loop
 // is instance of: checken voor interface class
-require_once("./src/models/ModelSelector.php");
-require_once("./src/tools/traits/tErrorMessageCollector.php");
 /* values to obtain from outside:
  *$isloggedIn;
  *$page_value;
@@ -12,6 +10,27 @@ require_once("./src/tools/traits/tErrorMessageCollector.php");
  *$tag_ids;
  *$sortBy;
  */
+
+namespace Wiki\controllers\factories;
+
+use Wiki\tools\utils\HtmlUtils,
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer;
+
+
+
 class PageFactory
 {
     use tErrorMessageCollector;
@@ -25,7 +44,6 @@ class PageFactory
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
         $this->htmlpage = new BasePage;
-
     }
 
     public function show()
@@ -54,7 +72,8 @@ class PageFactory
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
                     '));
 
-        $this->htmlpage->addToHeadContent(new AtomicElement('
+        $this->htmlpage->addToHeadContent(new AtomicElement(
+            '
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
@@ -186,7 +205,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
-                    hidden_field_info: ["articleID" => $this->response['editArticleID'],'page' => $this->page], //give article tag
+                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page], //give article tag
                     class: $form_info["display_class"],
                     field_text: $bodyinfo
                 );
@@ -232,14 +251,14 @@ class PageFactory
                                                                                                 table-bordered")));
 
                 $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page); 
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
 
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: [],
-                    hidden_field_info: ['page' => $this->page], 
+                    hidden_field_info: ['page' => $this->page],
                     class: $form_info["display_class"],
                     field_text: []
                 );

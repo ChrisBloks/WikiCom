@@ -4,8 +4,9 @@
  *  08/2026
  *  UserModel class gives al the methods needed to pull or insert User information from database
  */
-require_once "Crud.php";
-require_once "BaseModel.php";
+
+namespace Wiki\models;
+
 class UserInfoModel extends BaseModel
 {
     /*
@@ -13,7 +14,7 @@ class UserInfoModel extends BaseModel
     *
     * @params email
     */
-    public function fetchUserInfoByEmail(string $email)
+    public function fetchUserInfoByEmail(string $email): array|false
     {
 
         $sql = "SELECT id,name,password FROM user 
@@ -33,7 +34,7 @@ class UserInfoModel extends BaseModel
     *
     * @params email
     */
-    public function checkEmail(string $email)
+    public function checkEmail(string $email): bool
     {
         $sql = "SELECT email FROM user 
                         WHERE email=:email";
@@ -47,7 +48,7 @@ class UserInfoModel extends BaseModel
     *
     * @params username,password,email,imfilename,description
     */
-    public function registerUser(string $username, string $password, string $email, string $imgFileName, string $description)
+    public function registerUser(string $username, string $password, string $email, string $imgFileName, string $description): array|false
     {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -73,7 +74,7 @@ class UserInfoModel extends BaseModel
     *
     * @params user_id
     */
-    public function fetchUserInfoById(int $user_id)
+    public function fetchUserInfoById(int $user_id): array|false
     {
         $sql = "SELECT * FROM user 
                         WHERE id=:user_id";

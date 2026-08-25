@@ -1,4 +1,5 @@
 <?php
+
 namespace Wiki\views\containers;
 
 use Wiki\views\containers\ContainerElement, Wiki\tools\utils\HtmlUtils;

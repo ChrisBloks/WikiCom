@@ -1,4 +1,5 @@
 <?php
+
 namespace Wiki\views\containers;
 
 use Wiki\views\containers;
@@ -22,6 +23,6 @@ class ArticleActions extends ContainerElement
             submit_caption: "Delete"
         );
         $deleteForm->addHiddenField("article_id", (string)$articleId);
-        $this->addElement($deleteForm); 
+        $this->addElement($deleteForm);
     }
 }

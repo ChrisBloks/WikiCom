@@ -1,10 +1,17 @@
 <?php
 
+namespace Wiki\controllers\requestHandlers;
+
+use Wiki\tools\utils\Utils,
+    Wiki\controllers\validators\BaseValidator,
+    Wiki\controllers\validators\RegisterValidator,
+    Wiki\controllers\UserHandler;
+
 class PostRequestHandler extends BaseRequestHandler
 {
     public function handleRequest(array $request): array
     {
-        $this -> response = $request;
+        $this->response = $request;
         switch ($request['page']) {
             case 'register':
                 $validator = new RegisterValidator();
@@ -13,15 +20,15 @@ class PostRequestHandler extends BaseRequestHandler
             case 'login':
                 $validator = new BaseValidator();
                 $userinfo = UserHandler::getInstance()->checkLogin($request, $validator);
-                $this -> response['page'] = 'home';
+                $this->response['page'] = 'home';
                 $_SESSION['name'] = $userinfo['name'];
-                $_SESSION['userID'] = $userinfo['id'];  
-                $this -> response['isLoggedIn'] = isset($_SESSION['userID']);
+                $_SESSION['userID'] = $userinfo['id'];
+                $this->response['isLoggedIn'] = isset($_SESSION['userID']);
                 break;
             case 'search':
-            // collect checkboxgroup van tags en authors
-            // collect sortby rating/datum
-            // give collected checkboxes and sort to pagefactory
+                // collect checkboxgroup van tags en authors
+                // collect sortby rating/datum
+                // give collected checkboxes and sort to pagefactory
             case 'rateArticle':
                 // This is actually an ajax function
                 break;
@@ -42,7 +49,6 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
         }
 
-        return $this -> response;
+        return $this->response;
     }
-
 }
