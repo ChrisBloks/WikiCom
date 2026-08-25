@@ -1,9 +1,10 @@
 <?php
 include 'vendor/autoload.php';
 
-use Wiki\controllers\MainController;
+use ManKind\tools\dev\Logger;
+// use Wiki\controllers\MainController;
    
 
-session_start();
-$controller = new MainController();
-$controller->main();
+// session_start();
+// $controller = new MainController();
+// $controller->main();
