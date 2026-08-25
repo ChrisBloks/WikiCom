@@ -1,15 +1,21 @@
 <?php
 
-class validateRequest
+class ValidateRequest
 {
-
-    private function validateRequest()
+    protected array $response;
+    public function __construct(array $response)
     {
-        if ($this->request['posted']) {
+        $this->response = $response;
+        $this->validateRequest();
+    }
+
+    protected function validateRequest()
+    {
+        if ($this->response['posted']) {
 
             // validator nodig
 
-            switch ($this->request['action']) {
+            switch ($this->response['page']) {
 
                 case 'register':
                     // new UserHandler
@@ -41,12 +47,12 @@ class validateRequest
                     // if ok -> send article info to db
                     break;
                 case 'contact':
-                    
-                    // userhandler -> savecontactdata
+                    $validator = new ContactValidator();
+                    UserHandler::getInstance() -> checkContact($this->response,$validator);
                     break;
             }
         } else {
-            switch ($this->request['action']) {
+            switch ($this->response['page']) {
                 case 'logout':
                     // UserHandler->logoutUser();
                     break;
@@ -60,5 +66,9 @@ class validateRequest
         }
 
 
+    }
+    public function show()
+    {
+        return $this -> response;
     }
 }

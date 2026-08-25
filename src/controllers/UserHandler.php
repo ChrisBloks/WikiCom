@@ -2,6 +2,7 @@
 
 class UserHandler
 {
+    use tSingleton;
     public function checkLogin(&$response, $validator)
     {
         $form_fields = ModelSelector::getFormModel()->fetchFormFields($response['page']);
@@ -32,14 +33,17 @@ class UserHandler
 
     public function checkContact(&$response, $validator)
     {
-        $form_fields = ModelSelector::getFormModel()->fetchFormFields($response['page']);
-        $result = $validator->validateLogin($response, $form_fields);
-        if ($result['ok']) {
+        if ($validator->validate($response['page'])) {
+            $result = $validator -> field_inputs;
             ModelSelector::getWebsiteInfoModel()->saveContact(
                                                               name:$result['name'],
                                                               email:$result['email'],
                                                               message:$result['message']
             );
+        }
+        else
+        {
+            $response['error'] = $validator ->getErrors();
         }
     }
 }

@@ -65,6 +65,9 @@ class PageController implements iController
         // validateRequest
         // new ValidateRequestFactory();
         $this->response = $this->request;
+        $validation = new ValidateRequest($this->response);
+        $this->response = $validation ->show();
+
         ($this->request['posted']) ? $this->handlePostRequest() : $this->handleGetRequest();
     }
 
@@ -75,12 +78,6 @@ class PageController implements iController
      */
     protected function handlePostRequest()
     {
-        switch ($this->response['page']){
-                case "contact":
-                        $validator = new ContactValidator();
-                        HtmlUtils::dump("empty check",$validator ->validate($this->response['page']));
-                break;
-        }
         $this->checkLogin($this->response);
         $this->updateResponse();
         $PageFactory = new PageFactory($this->response);
@@ -94,12 +91,6 @@ class PageController implements iController
      */
     protected function handleGetRequest()
     {
-        switch ($this->response['page']) {
-            case 'logout':
-                session_unset();
-                session_destroy();
-                $this->response['page'] = 'login';
-        }
         $this->updateResponse();
         $PageFactory = new PageFactory($this->response);
         $this->response_page = $PageFactory->show();
