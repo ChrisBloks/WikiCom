@@ -1,7 +1,7 @@
 <?php
 namespace Wiki\views;
 
-use Wiki\tools\utils;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Table
@@ -29,7 +29,7 @@ class Table
 
     protected function startTable(?string $tableClass): string
     {
-        return '<table' . utils\HtmlUtils::addClassAttr($tableClass) . '>';
+        return '<table' . HtmlUtils::addClassAttr($tableClass) . '>';
     }
 
     protected function endTable(): string
@@ -42,7 +42,7 @@ class Table
         $str = '<tr>';
 
         foreach ($this->columns as $column) {
-            $str .= '<th' . utils\HtmlUtils::addClassAttr($column['css_class'] ?? null) . '>'
+            $str .= '<th' . HtmlUtils::addClassAttr($column['css_class'] ?? null) . '>'
                 . htmlspecialchars($column['column_title'])
                 . '</th>';
         }
@@ -72,7 +72,7 @@ class Table
 
     protected function buildCell(array $column, mixed $value, array $row_data): string
     {
-        $classAttr = utils\HtmlUtils::addClassAttr($column['class_type'] ?? null);
+        $classAttr = HtmlUtils::addClassAttr($column['class_type'] ?? null);
 
         switch ($column['display_type']) {
             case 'date':
