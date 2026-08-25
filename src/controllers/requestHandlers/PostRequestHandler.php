@@ -2,52 +2,47 @@
 
 class PostRequestHandler extends BaseRequestHandler
 {
-    public function handle(array $request): array
+    public function handleRequest(array $request): array
     {
-        $this->response = $request;
+        $this -> response = $request;
         switch ($request['page']) {
             case 'register':
-                // new UserHandler
-                // check email against database
-                // check password against verifypassword
-                // register user in database
-                // move user to login screen OR automatically log in user?
+                $validator = new RegisterValidator();
+                UserHandler::getInstance()->checkRegistration($request, $validator);
                 break;
             case 'login':
-                // new UserHandler
-                // check email against database
-                // check password against database
-                // set session['userID']
+                $validator = new BaseValidator();
+                $userinfo = UserHandler::getInstance()->checkLogin($request, $validator);
+                $this -> response['page'] = 'home';
+                $_SESSION['name'] = $userinfo['name'];
+                $_SESSION['userID'] = $userinfo['id'];  
+                $this -> response['isLoggedIn'] = isset($_SESSION['userID']);
                 break;
             case 'search':
-                // collect checkboxgroup van tags en authors
-                // collect sortby rating/datum
-                // give collected checkboxes and sort to pagefactory
+            // collect checkboxgroup van tags en authors
+            // collect sortby rating/datum
+            // give collected checkboxes and sort to pagefactory
             case 'rateArticle':
                 // This is actually an ajax function
                 break;
-            case 'newArticle':
-                // href to editArticle without articleID=0
-
+            case 'dashboard':
+                $this->response['page'] = 'editArticle';
+                $this->response['editArticleID'] = 0;
                 break;
-            case 'saveArticle':
-                // check title against db
+            case 'editArticle':
+                // add validator
+                print_r($_POST);
+                $this->response['editArticleID'] = 0;
                 // check user_id against db
                 // if ok -> send article info to db
                 break;
             case 'contact':
                 $validator = new BaseValidator();
-                UserHandler::getInstance()->checkContact($this->response, $validator);
+                UserHandler::getInstance()->checkContact($request, $validator);
                 break;
         }
 
-        $this->response['isLoggedIn'] = Utils::getSesVar('isLoggedIn', false);
-        return $this->response;
+        return $this -> response;
     }
 
-    public function createPage(): BasePage
-    {
-        
-        return (new PageFactory($this->response))->show();
-    }
 }

@@ -51,8 +51,8 @@ class PageController implements iController
                 frompost: $this->posted,
                 default: ($this->posted ? '' : 'home'
                 )
-            )
-        ];
+            ),
+            'isLoggedIn' => isset($_SESSION['userID'])];
     }
 
 
@@ -66,54 +66,26 @@ class PageController implements iController
         $requestHandler =  ($this->request['posted'] ? new PostRequestHandler(): new GetRequestHandler());
         
         // Validate requets and retrieve page object
-        $this->response = $requestHandler->handle($this->request);
-        $this->response_page = $requestHandler->createPage();
+        $this->response = $requestHandler->handleRequest($this->request);
+
 
         // Sanity check - Christian
         // Should be last line of validateRequest
-        assert(isset($this->response_page));
     }
-
-    /**
-     * To Be Removed
-     *
-     * @return void
-     */
-    protected function handlePostRequest(): void
-    {
-        $this->updateResponse();
-        $PageFactory = new PageFactory($this->response);
-        $this->response_page = $PageFactory->show();
-    }
-
-    /**
-     * To Be Removed
-     *
-     * @return void
-     */
-    protected function handleGetRequest(): void
-    {
-        $this->updateResponse();
-        $PageFactory = new PageFactory($this->response);
-        $this->response_page = $PageFactory->show();
-    }
-
-
     /**
      * If page generation was succesful, call its show function.
      * @return void
      */
     public function showResponse(): void
     {
+        $PageFactory = new PageFactory($this->response);
+        $this->response_page = $PageFactory->show();
         // if response page is not null -> show page
         if (!is_null($this->response_page)) {
             $this->response_page->show();
         }
     }
 
-    protected function updateResponse()
-    {
-        $this->response['isLoggedIn'] = Utils::getSesVar('isLoggedIn', false); // from session variable
-    }
+
 
 }
