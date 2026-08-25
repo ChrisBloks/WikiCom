@@ -1,23 +1,22 @@
 <?php
-require_once "./src/factories/PageFactory.php";
-require_once "./src/tools/traits/tErrorMessageCollector.php";
+namespace Wiki\controllers;
 
-
+use Wiki\views, Wiki\tools\interfaces, Wiki\tools\traits;
 /**
  * PageController class for handling non-AJAX requests.
  * @uses tErrorMessageCollector
  * @var bool $posted true if the page was requested through a POST request, otherwise false.
  * @var array $request Contains boolean 'posted' and string 'page'.
  * @var array $response Becomes equal to $request when method validateRequest() is reached.
- * @var BasePage $response_page page produced by the PageController.
+ * @var views\BasePage $response_page page produced by the PageController.
  */
-class PageController implements iController
+class PageController implements interfaces\iController
 {
-    use tErrorMessageCollector;
+    use traits\tErrorMessageCollector;
     private bool $posted;
     private array $request;
     private ?array $response;
-    private ?BasePage $response_page = NULL;
+    private ?views\BasePage $response_page = NULL;
 
     /**
      * __construct

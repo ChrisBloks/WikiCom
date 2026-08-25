@@ -1,5 +1,8 @@
 <?php
-require_once "./src/views/HtmlDoc.php";
+namespace Wiki\views;
+
+use Wiki\views\containers\ContainerElement;
+use Wiki\tools\interfaces;
 
 class BasePage extends HtmlDoc{
 
@@ -22,11 +25,11 @@ class BasePage extends HtmlDoc{
         echo $this->body_container->show();
     }
 
-    public function addToHeadContent(iElement $element): void{
+    public function addToHeadContent(interfaces\iElement $element): void{
         $this->head_container->addElement($element);
     }
 
-    public function addToBodyContent(iElement $element): void{
+    public function addToBodyContent(interfaces\iElement $element): void{
         $this->body_container->addElement($element);
     }
 

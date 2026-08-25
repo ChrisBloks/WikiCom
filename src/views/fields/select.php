@@ -1,6 +1,7 @@
 <?php
-require_once "./src/tools/interfaces/iElement.php";
-require_once "./src/views/fields/BaseField.php";
+namespace Wiki\views\fields;
+
+use Wiki\tools\utils\HtmlUtils;
 
 class Select extends BaseField{
 

@@ -1,4 +1,5 @@
 <?php
+namespace Wiki\tools\utils;
 
 class Url
 {

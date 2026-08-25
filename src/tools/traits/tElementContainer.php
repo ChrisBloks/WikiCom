@@ -1,10 +1,11 @@
 <?php
-
+namespace Wiki\tools\traits;
+use Wiki\tools\interfaces;
 trait tElementContainer{
 
     private array $collection = [];
 
-    public function addElement(iElement $element): void{
+    public function addElement(interfaces\iElement $element): void{
         $this->collection[] = $element;
     }
 

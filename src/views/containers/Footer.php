@@ -1,5 +1,7 @@
 <?php
-require_once "./src/views/containers/WrappedText.php";
+namespace Wiki\views\containers;
+
+use Wiki\tools\utils\HtmlUtils;
 
 class Footer extends WrappedText{
 

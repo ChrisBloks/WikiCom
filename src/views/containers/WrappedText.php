@@ -1,4 +1,8 @@
 <?php
+namespace Wiki\views\containers;
+
+use Wiki\tools\interfaces\iElement;
+
 class WrappedText implements iElement
 {
     // properties

@@ -1,6 +1,6 @@
 <?php
 //require_once "/tools/traits/tErrorMessageCollector.php";
-
+namespace Wiki\tools\traits;
 trait tErrorMessageCollector
 {
     private array $errors = [];

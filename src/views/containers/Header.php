@@ -1,6 +1,8 @@
 <?php
 // Creates header part of main page
-require_once "./src/views/containers/WrappedText.php";
+namespace Wiki\views\containers;
+
+use Wiki\tools\utils\HtmlUtils;
 
 class Header extends WrappedText{
     public function __construct($text, string $class){

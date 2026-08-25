@@ -6,6 +6,7 @@
  * @date jan 8 2020
  */
 
+namespace Wiki\tools\traits;
 trait tSingleton 
 {   
 // for inheritance, this needs to be an array! ;-)    

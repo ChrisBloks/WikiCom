@@ -1,4 +1,6 @@
 <?php
+namespace Wiki\tools\utils;
+
 class Utils
 {
     /**

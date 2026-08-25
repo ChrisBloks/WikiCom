@@ -1,4 +1,5 @@
 <?php
+namespace Wiki\views;
 
 abstract class HtmlDoc{
 
