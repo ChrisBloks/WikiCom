@@ -1,0 +1,7 @@
+
+{
+    "name": "mariusj98/monolog",
+    "require": {
+        "monolog/monolog": "3."
+    }
+}
