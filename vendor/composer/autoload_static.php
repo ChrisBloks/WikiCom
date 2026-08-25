@@ -14,6 +14,7 @@ class ComposerStaticInit2fce6d4c51b197abd9d935f366f3130e
         'M' =>
         array (
             'Monolog\\' => 8,
+            'Mariu\\Wiki\\' => 11,
         ),
     );
 
@@ -25,6 +26,10 @@ class ComposerStaticInit2fce6d4c51b197abd9d935f366f3130e
         'Monolog\\' =>
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Mariu\\Wiki\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 

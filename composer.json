@@ -1,7 +1,12 @@
-
 {
-    "name": "mariusj98/monolog",
+
     "require": {
-        "monolog/monolog": "3."
+        "monolog/monolog": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wiki\\": "src/"
+        }
     }
 }
+

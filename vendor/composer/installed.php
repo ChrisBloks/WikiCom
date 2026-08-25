@@ -1,28 +1,28 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'mariu/wiki',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b23b9b108c9ecb02a979e7895f0096e9c1438f3e',
+        'reference' => '90d325994c0bbb14c180fb6c07a1a5fe900f6a10',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        '__root__' => array(
+        'mariu/wiki' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b23b9b108c9ecb02a979e7895f0096e9c1438f3e',
+            'reference' => '90d325994c0bbb14c180fb6c07a1a5fe900f6a10',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'monolog/monolog' => array(
-            'pretty_version' => '3.0.0',
-            'version' => '3.0.0.0',
-            'reference' => '60ad5183b5e5d6c9d4047e9f3072d36071dcc161',
+            'pretty_version' => '3.10.0',
+            'version' => '3.10.0.0',
+            'reference' => 'b321dd6749f0bf7189444158a3ce785cc16d69b0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
