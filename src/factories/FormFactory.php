@@ -1,5 +1,5 @@
 <?php
-require_once "./src/controllers/factories/FieldFactory.php";
+require_once "./src/factories/FieldFactory.php";
 require_once "./src/tools/interfaces/iElement.php";
 require_once "./src/views/containers/Form.php";
 require_once "./src/views/fields/InputField.php";
