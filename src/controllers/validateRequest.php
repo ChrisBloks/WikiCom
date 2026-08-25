@@ -18,11 +18,8 @@ class ValidateRequest
             switch ($this->response['page']) {
 
                 case 'register':
-                    // new UserHandler
-                    // check email against database
-                    // check password against verifypassword
-                    // register user in database
-                    // move user to login screen OR automatically log in user?
+                    $validator = new RegisterValidator();
+                    UserHandler::getInstance() -> checkRegistration($this->response,$validator);
                     break;
                 case 'login':
                     // new UserHandler
@@ -47,7 +44,7 @@ class ValidateRequest
                     // if ok -> send article info to db
                     break;
                 case 'contact':
-                    $validator = new ContactValidator();
+                    $validator = new BaseValidator();
                     UserHandler::getInstance() -> checkContact($this->response,$validator);
                     break;
             }

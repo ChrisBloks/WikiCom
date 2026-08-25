@@ -17,19 +17,25 @@ class UserHandler
 
     public function checkRegistration(&$response, $validator)
     {
-        $form_fields = ModelSelector::getFormModel()->fetchFormFields($response['page']);
-        $result = $validator->validateLogin($response, $form_fields);
-        if ($result['ok']) {
-            $response['page'] = 'login';
-            ModelSelector::getUserInfoModel()->registerUser(
-                username: $result['username'],
-                password: $result['password'],
-                email: $result['email'],
-                imgFileName: $result['imgFileName'],
-                description: $result['description']
-            );
+        if ($validator->validate($response['page'])) {
+            $result = $validator->getFieldInputs();
+            if (ModelSelector::getUserInfoModel()->checkEmail($result['email'])) {
+                ModelSelector::getUserInfoModel()->registerUser(
+                    username: $result['name'],
+                    password: $result['password'],
+                    email: $result['email'],
+                    imgFileName: '',
+                    description: ''
+                );
+            }
+            else{
+                $response['error'] = "Email already exists!";
+            }
+        } else {
+            $response['error'] = $validator->getErrors();
         }
     }
+
 
     public function checkContact(&$response, $validator)
     {
