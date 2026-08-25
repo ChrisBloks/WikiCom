@@ -19,7 +19,6 @@ class MenuFactory
     {
         $menu = new Menu($class);
 
-        // login/auth checks
         foreach ($menu_items as $item) {
             try {
                 $menu->addElement($this->buildMenuItem($item));

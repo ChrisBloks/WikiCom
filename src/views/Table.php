@@ -4,6 +4,9 @@ require_once "./src/views/containers/ArticleActions.php";
 require_once "./src/views/Rating.php";
 require_once "./src/views/FirstCell.php";
 
+/**
+ * Table
+ */
 class Table
 {
     protected array $columns;
