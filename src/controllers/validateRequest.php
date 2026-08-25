@@ -18,17 +18,12 @@ class ValidateRequest
             switch ($this->response['page']) {
 
                 case 'register':
-                    // new UserHandler
-                    // check email against database
-                    // check password against verifypassword
-                    // register user in database
-                    // move user to login screen OR automatically log in user?
+                    $validator = new RegisterValidator();
+                    UserHandler::getInstance() -> checkRegistration($this->response,$validator);
                     break;
                 case 'login':
-                    // new UserHandler
-                    // check email against database
-                    // check password against database
-                    // set session['userID']
+                    $validator = new BaseValidator();
+                    UserHandler::getInstance() -> checkLogin($this->response,$validator);
                     break;
                 case 'search':
                     // collect checkboxgroup van tags en authors

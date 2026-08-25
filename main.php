@@ -34,11 +34,12 @@ require_once "./src/tools/traits/tSingleton.php";
 
 // Controllers
 require_once "./src/controllers/MainController.php";
-require_once "./src/controllers/factories/PageFactory.php";
+require_once "./src/factories/PageFactory.php";
 require_once "./src/controllers/PageController.php";
-require_once "./src/controllers/factories/FormFactory.php";
-require_once "./src/controllers/factories/MenuFactory.php";
+require_once "./src/factories/FormFactory.php";
+require_once "./src/factories/MenuFactory.php";
 require_once "./src/controllers/validators/BaseValidator.php";
+require_once "./src/controllers/validators/RegisterValidator.php";
 require_once "./src/controllers/ValidateRequest.php";
 require_once "./src/controllers/UserHandler.php";
 require_once "./src/controllers/requestHandlers/BaseRequestHandler.php";

@@ -1,5 +1,5 @@
 <?php
-require_once "./src/controllers/factories/PageFactory.php";
+require_once "./src/factories/PageFactory.php";
 require_once "./src/tools/traits/tErrorMessageCollector.php";
 
 
@@ -81,7 +81,6 @@ class PageController implements iController
      */
     protected function handlePostRequest(): void
     {
-        $this->checkLogin($this->response);
         $this->updateResponse();
         $PageFactory = new PageFactory($this->response);
         $this->response_page = $PageFactory->show();
@@ -117,16 +116,4 @@ class PageController implements iController
         $this->response['isLoggedIn'] = Utils::getSesVar('isLoggedIn', false); // from session variable
     }
 
-    protected function checkLogin(&$response)
-    {
-        $response['email'] = Utils::getRequestVar('email', $response['posted']);
-        $response['password'] = Utils::getRequestVar('password', $response['posted']);
-        $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail($response['email']);
-        if (!empty($userinfo['password']) and ($response['password'] === $userinfo['password'])) {
-            $response['page'] = 'home';
-            $_SESSION['isLoggedIn'] = true;
-            $_SESSION['name'] = $userinfo['name'];
-            $_SESSION['userID'] = $userinfo['id'];
-        }
-    }
 }

@@ -5,31 +5,44 @@ class UserHandler
     use tSingleton;
     public function checkLogin(&$response, $validator)
     {
-        $form_fields = ModelSelector::getFormModel()->fetchFormFields($response['page']);
-        $validator = new Validator($response, $form_fields);
-        $result = $validator->validateLogin($response, $form_fields);
-        if ($result['ok']) {
-            $response['page'] = 'home';
-            $_SESSION['username'] = $result['name'];
-            $_SESSION['userID'] = $result['id'];
+        if ($validator->validate($response['page'])) {
+            $result = $validator->getFieldInputs();
+            $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail($result['email']);
+            if (password_verify($result['password'],$userinfo['password'])) {
+                $response['page'] = 'home';
+                $_SESSION['isLoggedIn'] = true;
+                $_SESSION['name'] = $userinfo['name'];
+                $_SESSION['userID'] = $userinfo['id'];                
+            }
+            else{
+                $response['error'] = "Login email or password is wrong!";
+            }
+        } else {
+            $response['error'] = $validator->getErrors();
         }
     }
 
     public function checkRegistration(&$response, $validator)
     {
-        $form_fields = ModelSelector::getFormModel()->fetchFormFields($response['page']);
-        $result = $validator->validateLogin($response, $form_fields);
-        if ($result['ok']) {
-            $response['page'] = 'login';
-            ModelSelector::getUserInfoModel()->registerUser(
-                username: $result['username'],
-                password: $result['password'],
-                email: $result['email'],
-                imgFileName: $result['imgFileName'],
-                description: $result['description']
-            );
+        if ($validator->validate($response['page'])) {
+            $result = $validator->getFieldInputs();
+            if (ModelSelector::getUserInfoModel()->checkEmail($result['email'])) {
+                ModelSelector::getUserInfoModel()->registerUser(
+                    username: $result['name'],
+                    password: $result['password'],
+                    email: $result['email'],
+                    imgFileName: '',
+                    description: ''
+                );
+            }
+            else{
+                $response['error'] = "Email already exists!";
+            }
+        } else {
+            $response['error'] = $validator->getErrors();
         }
     }
+
 
     public function checkContact(&$response, $validator)
     {
