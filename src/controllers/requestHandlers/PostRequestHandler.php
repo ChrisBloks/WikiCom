@@ -3,9 +3,10 @@
 namespace Wiki\controllers\requestHandlers;
 
 use Wiki\tools\utils\Utils,
-Wiki\controllers\validators\BaseValidator,
-Wiki\controllers\validators\RegisterValidator,
-Wiki\controllers\UserHandler;
+    Wiki\tools\utils\HtmlUtils,
+    Wiki\controllers\validators\BaseValidator,
+    Wiki\controllers\validators\RegisterValidator,
+    Wiki\controllers\UserHandler;
 
 class PostRequestHandler extends BaseRequestHandler
 {
@@ -18,23 +19,30 @@ class PostRequestHandler extends BaseRequestHandler
                 UserHandler::getInstance()->checkRegistration($request, $validator);
                 break;
             case 'login':
+                // Validate user inputs and on succes: get logged-in user's info
                 $validator = new BaseValidator();
-                $userinfo = UserHandler::getInstance()->checkLogin($request, $validator);
-                if ($userinfo != false) {
-                    $this->response['page'] = 'home';
-                    $_SESSION['name'] = $userinfo['name'];
+                $userinfo = UserHandler::getInstance()->checkLogin($this->response, $validator);
+
+                // If log in was succesful
+                if ($userinfo !== false) {
+                    // Update session variables
+                    $_SESSION['userName'] = $userinfo['name'];
                     $_SESSION['userID'] = $userinfo['id'];
-                    $this->response['isLoggedIn'] = isset($_SESSION['userID']);
+
+                    // Update response
+                    $this->response['page'] = 'home';
+                    $this->response['isLoggedIn'] = true;
                 }
+
                 break;
             case 'about':
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
                 $this->response['userID'] = Utils::getSesVar('userID');
                 break;
             case 'search':
-            // collect checkboxgroup van tags en authors
-            // collect sortby rating/datum
-            // give collected checkboxes and sort to pagefactory
+                // collect checkboxgroup van tags en authors
+                // collect sortby rating/datum
+                // give collected checkboxes and sort to pagefactory
             case 'rateArticle':
                 // This is actually an ajax function
                 break;
