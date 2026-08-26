@@ -17,9 +17,11 @@ class UserHandler
                 return $userinfo;
             } else {
                 $response['error'] = "Login email or password is wrong!";
+                return false;
             }
         } else {
             $response['error'] = $validator->getErrors();
+            return false;
         }
     }
 
@@ -31,9 +33,7 @@ class UserHandler
                 ModelSelector::getUserInfoModel()->registerUser(
                     username: $result['name'],
                     password: $result['password'],
-                    email: $result['email'],
-                    imgFileName: '',
-                    description: ''
+                    email: $result['email']
                 );
             } else {
                 $response['error'] = "Email already exists!";
@@ -56,5 +56,8 @@ class UserHandler
         } else {
             $response['error'] = $validator->getErrors();
         }
+    }
+    public function changeAboutInfo(){
+        
     }
 }
