@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2026 at 04:13 PM
+-- Generation Time: Aug 26, 2026 at 09:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,14 @@ CREATE TABLE `contact_messages` (
 --
 
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
-(1, 'about', 'test', '2026-08-12', 'test');
+(1, 'about', 'test', '2026-08-12', 'test'),
+(2, 'Test', 'danny@hotmail.comasd', '2026-08-25', 'ads'),
+(3, 'asdf', 'danny@hotmail.com', '2026-08-25', 'ads                          a'),
+(4, 'Test', 'danny@hotmail.com', '2026-08-25', 'ads'),
+(5, 'Test', 'asd@gada.com', '2026-08-25', 'ads'),
+(6, 'ads', 'danny@hotmail.com', '2026-08-25', 'ads'),
+(7, 'ads', 'asd@gada.com', '2026-08-25', 'ad'),
+(8, 'test123', 'dddd@mail.com', '2026-08-25', 'adsadsa');
 
 -- --------------------------------------------------------
 
@@ -111,11 +118,8 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form
 (20, 'sortby', 'select', 'sort-by form-control', 3, 3, 'Sort by', 3),
 (21, 'new tag', 'text', 'add-new-tag form-control', NULL, 4, 'New tag name:', 0),
 (22, 'new tag button', 'button', 'add-new-tag-button btn btn-outline-secondary', NULL, 4, 'Add new tag', 1),
-(23, 'Tag', 'select', 'add-tag form-control', 1, 4, 'Tag to add', 2),
-(24, 'tag button', 'button', 'add--tag-button btn btn-outline-secondary', NULL, 4, 'Add tag', 3),
 (25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article title:', 14),
-(26, 'Existing Tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Remove tag', 4),
-(27, 'existing tag button', 'button', 'remove--tag-button btn btn-outline-secondary', NULL, 4, 'Remove tag', 5);
+(26, 'Existing Tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Change tags', 4);
 
 -- --------------------------------------------------------
 
@@ -137,13 +141,13 @@ CREATE TABLE `form_info` (
 --
 
 INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_info_id`, `display_class`) VALUES
-(1, 'contact.php', 'POST', 'Send message', 3, 'form-group'),
+(1, '', 'POST', 'Send message', 3, 'form-group'),
 (2, '', 'POST', 'Log in', 4, 'form-group'),
 (3, 'search.php', 'GET', 'Filter', 6, 'form-group'),
-(4, 'editArticle.php', 'POST', 'SaveArticle\r\n', 7, 'form-group'),
-(5, '\"\"', 'POST', 'Save About', 2, 'form-group'),
-(6, 'test.php', 'POST', 'Create new article', 8, 'form-group'),
-(7, 'register.php', 'POST', 'Register', 5, 'form-group');
+(4, '', 'POST', 'SaveArticle\r\n', 7, 'form-group'),
+(5, '', 'POST', 'Save About', 2, 'form-group'),
+(6, '?page=editArticle&id=0', 'POST', 'Create new article', 8, 'form-group'),
+(7, '', 'POST', 'Register', 5, 'form-group');
 
 -- --------------------------------------------------------
 
@@ -158,18 +162,19 @@ CREATE TABLE `lookup_info` (
   `order_by` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
   `bridge_table` varchar(255) NOT NULL,
-  `bridgevalues` varchar(255) NOT NULL
+  `bridgevalues` varchar(255) NOT NULL,
+  `left_on` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lookup_info`
 --
 
-INSERT INTO `lookup_info` (`id`, `table_name`, `display_names`, `order_by`, `value`, `bridge_table`, `bridgevalues`) VALUES
-(1, 'wiki_tag\n', 'id,name', 'wiki_tag.name', '', '', ''),
-(2, 'user', 'id,name', 'user.name', '', '', ''),
-(3, '', 'rating,date', '', '', '', ''),
-(4, 'wiki_tag\n', 'id,name', 'wiki_tag.name', 'article_id\n', 'wiki_article_to_tag', 'wiki_tag_id,wiki_tag.id');
+INSERT INTO `lookup_info` (`id`, `table_name`, `display_names`, `order_by`, `value`, `bridge_table`, `bridgevalues`, `left_on`) VALUES
+(1, 'wiki_tag\n', 'id,name', 'wiki_tag.name', '', '', '', ''),
+(2, 'user', 'id,name', 'user.name', '', '', '', ''),
+(3, '', 'rating,date', '', '', '', '', ''),
+(4, 'wiki_tag\n', 'id,name,!isnull(article_id) as marked', 'wiki_tag.name', '', 'wiki_article_to_tag', 'wiki_tag_id,wiki_tag.id', 'article_id');
 
 -- --------------------------------------------------------
 
@@ -259,10 +264,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny', 'Password', 'danny@email.com', 'CBloks.jpg', 'Hoi ik ben Marius, een van de makers van deze website'),
-(2, 'user2', 'asdfsd', 'dadfa@adfaf.com', 'user2.jpg', 'the description of user2'),
-(3, 'Danny3', 'Password', 'danny@email1.com', '', 'hallo'),
-(5, 'Danny5', 'Password', 'danny@email12.com', '', '');
+(1, 'Danny', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email.com', 'CBloks.jpg', 'Hoi ik ben Marius, een van de makers van deze website'),
+(2, 'user2', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'dadfa@adfaf.com', 'user2.jpg', 'the description of user2'),
+(3, 'Danny3', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email1.com', '', 'hallo'),
+(5, 'Danny5', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email12.com', '', ''),
+(7, 'christian', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -393,7 +399,8 @@ INSERT INTO `wiki_tag` (`id`, `name`) VALUES
 (2, 'tag2'),
 (3, 'tag3'),
 (4, 'tag4'),
-(5, 'tag82');
+(5, 'tag82'),
+(43, 'testTag');
 
 -- --------------------------------------------------------
 
@@ -508,7 +515,7 @@ ALTER TABLE `wiki_tag`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `display_classes`
@@ -556,7 +563,7 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `website_info`
@@ -574,7 +581,7 @@ ALTER TABLE `wiki_article`
 -- AUTO_INCREMENT for table `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables

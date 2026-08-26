@@ -48,16 +48,36 @@ class UserInfoModel extends BaseModel
     *
     * @params username,password,email,imfilename,description
     */
-    public function registerUser(string $username, string $password, string $email, string $imgFileName, string $description): array|false
+    public function registerUser(string $username, string $password, string $email): array|false
     {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO user (name,password,email,imgFileName,description) 
-                        VALUES (:username,:password,:email,:imgFileName,:description)";
+        $sql = "INSERT INTO user (name,password,email) 
+                        VALUES (:username,:password,:email)";
         $params = [
             "username" => $username,
             "password" => $hashed_password,
-            "email" => $email,
+            "email" => $email
+        ];
+        $result = $this->crudTemp->doInsert($sql, $params);
+        if (empty($result)) {
+            $this->logError("registration failed");
+            $result = false;
+        }
+        return $result;
+    }
+
+    /*
+    * method that changes and saves new user about description and image
+    *
+    * @params imfilename,description
+    */
+    public function saveUserAbout(string $imgFileName, string $description): array|false
+    {
+
+        $sql = "INSERT INTO user (imgFileName,description) 
+                        VALUES (:imgFileName,:description)";
+        $params = [
             "imgFileName" => $imgFileName,
             "description" => $description
         ];
