@@ -56,7 +56,7 @@ class BaseValidator implements iValidator
 
     /**
      * Page-specific validation behaviour. Should be overwritten by child classes.
-     * @param array $field_inputs user inputs
+     * @param ?array $field_inputs user inputs
      * @return bool
      */
     public function validateFields(array $field_inputs): bool

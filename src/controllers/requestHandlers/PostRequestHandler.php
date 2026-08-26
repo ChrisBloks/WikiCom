@@ -19,7 +19,7 @@ class PostRequestHandler extends BaseRequestHandler
             case 'register':
                 $validator = new Validator();
                 // Validate user inputs on the registration form
-                $userInfo = UserHandler::getInstance()->checkRegistration($request, $validator);
+                $userInfo = UserHandler::getInstance()->checkRegistration($this->response, $validator);
                 
                 // If validation was succesful, add new user to the database
                 if ($userInfo !== false){
@@ -35,7 +35,6 @@ class PostRequestHandler extends BaseRequestHandler
                 // Validate user inputs and on succes: get logged-in user's info
                 $validator = new Validator();
                 $userinfo = UserHandler::getInstance()->checkLogin($this->response, $validator);
-
                 // If log in was succesful
                 if ($userinfo !== false) {
                     // Update session variables
@@ -49,6 +48,13 @@ class PostRequestHandler extends BaseRequestHandler
 
                 break;
             case 'about':
+                $validator = new Validator();
+                $aboutinfo = UserHandler::getInstance()->checkAboutInfo($this->response,$validator);
+                $target_dir = \Config::AUTHORIMGPATH;
+                $target_file = $target_dir . basename($_FILES["aboutimg"]["name"]);
+                HtmlUtils::dump("about",$_FILES["aboutimg"]['tmp_name']);
+
+
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
                 $this->response['userID'] = Utils::getSesVar('userID');
                 break;
@@ -65,14 +71,13 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
             case 'editArticle':
                 // add validator
-                print_r($_POST);
                 $this->response['editArticleID'] = 0;
                 // check user_id against db
                 // if ok -> send article info to db
                 break;
             case 'contact':
-                $validator = new BaseValidator();
-                $contactInfo = UserHandler::getInstance()->checkContact($request, $validator);
+                $validator = new Validator();
+                $contactInfo = UserHandler::getInstance()->checkContact($this->response, $validator);
                 
                 // On succesful contact form validaiton, save input to the database
                 if ($contactInfo !== false){
