@@ -1,11 +1,12 @@
-
 /* Custom styling for profile picture */
 .profile-pic {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
 }
 
-main{
-  
+.main-content {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
 }

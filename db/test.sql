@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2026 at 09:24 AM
+-- Generation Time: Aug 26, 2026 at 04:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -69,12 +69,12 @@ CREATE TABLE `display_classes` (
 INSERT INTO `display_classes` (`id`, `website_info_id`, `class_name`, `class`) VALUES
 (1, 1, 'bodytext_class', 'text-center'),
 (2, 2, 'description_class', 'fs-2 text-center'),
-(3, 2, 'name_class', 'fs-2 text-center'),
+(3, 2, 'name_class', 'display-1 text-center border-bottom'),
 (4, 9, 'title_class', 'text-center'),
-(5, 9, 'author_class', 'text-center'),
-(6, 9, 'body_class', 'container fs-4 text-center'),
-(7, 9, 'codeblock_class', 'container-lg fs-6 col-8'),
-(8, 9, 'img_class', 'rounded mx-auto d-block'),
+(5, 9, 'author_class', 'text-center border-bottom'),
+(6, 9, 'body_class', 'container fs-4 text-start'),
+(7, 9, 'codeblock_class', 'container-lg fs-6 col-15'),
+(8, 9, 'img_class', 'rounded mx-auto d-flex ms-3'),
 (9, 2, 'img_class', 'rounded-circle profile-pic d-flex justify-content-end');
 
 -- --------------------------------------------------------
@@ -103,7 +103,7 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form
 (2, 'email', 'email', 'contact-email form-control', NULL, 1, 'Your email:', 1),
 (3, 'password', 'password', 'login-password form-control', NULL, 2, 'Password:', 2),
 (4, 'description', 'textarea', 'about-text form-control', NULL, 5, 'About me:', 0),
-(6, 'verifypassword', 'password', 'register-verifypassword form-control', NULL, 7, 'Verify password:', 5),
+(6, 'verifypassword', 'new_password', 'register-verifypassword form-control', NULL, 7, 'Verify password:', 5),
 (7, 'Author', 'checkboxgroup', 'filter-author form-check-input', 2, 3, 'Filter by Author', 1),
 (8, 'Tag', 'checkboxgroup', 'filter-tag form-check-input', 1, 3, 'Filter by Tag', 0),
 (9, 'aboutimg', 'file', 'about-img-file form-control', NULL, 5, 'Upload file:', 1),
@@ -111,7 +111,6 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form
 (13, 'email', 'email', 'login-email form-control', NULL, 2, 'Email:', 0),
 (14, 'name', 'text', 'register-name form-control', NULL, 7, 'Your name:', 1),
 (15, 'email', 'email', 'register-email form-control', NULL, 7, 'Your email:', 2),
-(16, 'password', 'password', 'register-password form-control', NULL, 7, 'Password:', 3),
 (17, 'summary', 'textarea', 'article-text form-control', NULL, 4, 'Body text:', 15),
 (18, 'codeBlock', 'textarea', 'article-codeblock form-control', NULL, 4, 'Codeblock:', 16),
 (19, 'articleimg', 'file', 'article-img-file form-control', NULL, 4, 'Upload file:', 17),
@@ -133,21 +132,22 @@ CREATE TABLE `form_info` (
   `method` varchar(25) NOT NULL,
   `submit_caption` varchar(255) NOT NULL,
   `website_info_id` int(11) NOT NULL,
-  `display_class` varchar(255) NOT NULL
+  `display_class` varchar(255) NOT NULL,
+  `enctype` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `form_info`
 --
 
-INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_info_id`, `display_class`) VALUES
-(1, '', 'POST', 'Send message', 3, 'form-group'),
-(2, '', 'POST', 'Log in', 4, 'form-group'),
-(3, 'search.php', 'GET', 'Filter', 6, 'form-group'),
-(4, '', 'POST', 'SaveArticle\r\n', 7, 'form-group'),
-(5, '', 'POST', 'Save About', 2, 'form-group'),
-(6, '?page=editArticle&id=0', 'POST', 'Create new article', 8, 'form-group'),
-(7, '', 'POST', 'Register', 5, 'form-group');
+INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_info_id`, `display_class`, `enctype`) VALUES
+(1, '', 'POST', 'Send message', 3, 'form-group', ''),
+(2, '', 'POST', 'Log in', 4, 'form-group', ''),
+(3, 'search.php', 'GET', 'Filter', 6, 'form-group', ''),
+(4, '', 'POST', 'SaveArticle\r\n', 7, 'form-group', 'multipart/form-data'),
+(5, '', 'POST', 'Save About', 2, 'form-group', 'multipart/form-data'),
+(6, '?page=editArticle&id=0', 'POST', 'Create new article', 8, 'form-group', ''),
+(7, '', 'POST', 'Register', 5, 'form-group', '');
 
 -- --------------------------------------------------------
 
@@ -330,7 +330,7 @@ CREATE TABLE `wiki_article` (
 
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
 (1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11'),
-(2, 'article2', 2, 'the body text of article 2', '///\n... \n\nconst moveSnake = () => {\n    \n    /// Eerst stoppen we het hoofd in de variabele `head`\n    /// maar we tellen er eerst de richting van beweging bij op.\n    /// Initieel is dirX = PIXEL_SIZE, dus we schuiven naar rechts\n    /// Als verderop dirX of dirY wijzigen (als we op de pijltjes \n    /// drukken, schuift de kop in de betreffende richting\n    let head = {x: snake[0].x + dirX, y: snake[0].y + dirY}\n    \n    /// vervolgens voegen we de \"nieuwe\" kop toe aan het begin \n    /// van de snake-array:\n    snake.unshift(head)\n}', 'article2.jpg\r\n', '2026-08-12'),
+(2, 'article2', 2, 'the body text of article 2', 'def process_image(nr: int) -> None:\n  dimension_images = \'1280x1024\'.split(\'x\')  file_name = f\'image_{str(nr).zfill(3)}.jpg\'\n  img = Image.open(f\'{file_name}\')\n  img = img.filter(ImageFilter.GaussianBlur(15))\n  img.thumbnail((int(dimension_images[0]), int(dimension_images[1])))\n  img.save(f\'processed_{file_name}\')\n  print(f\'- Processed {file_name}\')', 'article1.jpeg\n', '2026-08-12'),
 (4, 'testaaa', 1, 'test2ddd', 'test3dd', 'test.jpg', '2026-08-12');
 
 -- --------------------------------------------------------

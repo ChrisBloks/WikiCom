@@ -2,7 +2,7 @@
 // Creates header part of main page
 namespace Wiki\views\containers;
 
-use Wiki\tools\utils\HtmlUtils, Wiki\views\containers\WrappedText;
+use Wiki\tools\utils\HtmlUtils;
 
 
 class Title extends WrappedText
