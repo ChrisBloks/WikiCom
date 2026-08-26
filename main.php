@@ -1,6 +1,7 @@
 <?php
 include './vendor/autoload.php';
 include "./config/marius.php";
+include "./config/CONFIG.php";
 
 use Wiki\controllers\MainController, \ManKind\tools as TOOLS;
 
