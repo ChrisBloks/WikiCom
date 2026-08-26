@@ -1,0 +1,3 @@
+26-08-2026 9:56:47 | 127.0.0.1 | >>>>>> Error [0] on line 18 in file C:\xampp\htdocs\Educom\Wiki\main.php 
+26-08-2026 9:56:47 | 127.0.0.1 | >>>>>> Test error 
+26-08-2026 9:56:47 | 127.0.0.1 | #0 {main} 
