@@ -14,20 +14,22 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\tools\exceptions\PageNotFoundException,
-    Wiki\models\ModelSelector,
-    Wiki\controllers\factories\MenuFactory,
-    Wiki\views\BasePage,
-    Wiki\views\Table,
-    Wiki\views\containers\AtomicElement,
-    Wiki\views\containers\Header,
-    Wiki\views\containers\BodyText,
-    Wiki\views\containers\Title,
-    Wiki\views\containers\Image,
-    Wiki\views\containers\AuthorText,
-    Wiki\views\containers\CodeBlock,
-    Wiki\views\containers\Footer;
+Wiki\tools\traits\tErrorMessageCollector,
+Wiki\tools\exceptions\PageNotFoundException,
+Wiki\models\ModelSelector,
+Wiki\controllers\factories\MenuFactory,
+Wiki\views\BasePage,
+Wiki\views\Table,
+Wiki\views\containers\AtomicElement,
+Wiki\views\containers\Header,
+Wiki\views\containers\BodyText,
+Wiki\views\containers\Title,
+Wiki\views\containers\Image,
+Wiki\views\containers\AuthorText,
+Wiki\views\containers\CodeBlock,
+Wiki\views\containers\Footer,
+Wiki\views\containers\ContainerElement,
+Wiki\views\containers\MainElement;
 
 
 
@@ -52,7 +54,6 @@ class PageFactory
         $this->addScripts();
 
         $this->addBody();
-        $this->addFooter();
 
         return $this->htmlpage;
     }
@@ -117,17 +118,25 @@ class PageFactory
                 . '><br></p>'));
         }
 
+        $main = new MainElement();
         // page building
         switch ($this->page) {
             case 'home':
+
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
-                $this->htmlpage->addToBodyContent(new BodyText(
+                // get div styling from DB
+                $container = new ContainerElement('<div>', '</div>');
+                $container->addElement(new BodyText(
                     text: $pageinfo["bodytext"],
                     class: $pageinfo["bodytext_class"]
                 ));
+                $main->addElement($container);
                 break;
+
+
             case 'about':
                 $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
+                $container = new ContainerElement('<div>', '</div>');
                 if ($this->response['userID'] == $this->response['aboutID']) // author equals user
                 {
                     $formFactory = new FormFactory();
@@ -136,32 +145,37 @@ class PageFactory
                     $form = $formFactory->createForm(
                         form_info: $form_info,
                         field_info: $form_fields,
-                        hidden_field_info: ['user' => $this->response['aboutID'],
-                                            'page' => $this->page],
+                        hidden_field_info: [
+                            'user' => $this->response['aboutID'],
+                            'page' => $this->page
+                        ],
                         field_text: ["description" => $aboutinfo["description"]],
                         class: $form_info["display_class"]
                     );
-                    $this->htmlpage->addToBodyContent(new Title(text: $aboutinfo['name']));
-                    $this->htmlpage->addToBodyContent($form);
-                    break;
+                    $container->addElement(new Title(text: $aboutinfo['name']));
+                    $container->addElement($form);
+                    $main->addElement($container);
                 } else {
-                    $this->htmlpage->addToBodyContent(new Image(
+                    $container->addElement(new Image(
                         name: './img/authors/' . $aboutinfo['imgFileName'],
                         class: $aboutinfo['img_class']
                     ));
-                    $this->htmlpage->addToBodyContent(new Title(
+                    $container->addElement(new Title(
                         text: $aboutinfo['name'],
                         class: $aboutinfo['name_class']
                     ));
-                    $this->htmlpage->addToBodyContent(new BodyText(
+                    $container->addElement(new BodyText(
                         text: $aboutinfo['description'],
                         class: $aboutinfo['description_class']
                     ));
+
+                    $main->addElement($container);
                 }
                 break;
             case 'contact':
             case 'login':
             case 'register':
+                $container = new ContainerElement('<div>', '</div>');
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
@@ -173,9 +187,11 @@ class PageFactory
                     class: $form_info["display_class"]
                 );
 
-                $this->htmlpage->addToBodyContent($form);
+                $container->addElement($form);
+                $main->addElement($container);
                 break;
             case 'search':
+                $container = new ContainerElement('<div>', '</div>');
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
@@ -187,17 +203,19 @@ class PageFactory
                     class: $form_info["display_class"]
                 );
 
-                $this->htmlpage->addToBodyContent($form);
+                $container->addElement($form);
 
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch();
                 $tableFactory = new Table($columnsdata, $rowsdata);
-                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
+                $container->addElement(new AtomicElement($tableFactory->createTable("table
                                                                                                 table-hover 
                                                                                                 table-striped
                                                                                                 table-bordered")));
+                $main->addElement($container);
                 break;
             case 'editArticle':
+                $container = new ContainerElement('<div>', '</div>');
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
@@ -211,42 +229,45 @@ class PageFactory
                     field_text: $bodyinfo
                 );
 
-                $this->htmlpage->addToBodyContent($form);
+                $container->addElement($form);
+                $main->addElement($container);
                 break;
             case 'article':
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 // ToDo: add accordion functionality to body text and code element
-                $this->htmlpage->addToBodyContent(new Title(
+                $container = new ContainerElement("<div>", "</div>");
+                $container->addElement(new Title(
                     text: ucfirst($bodyinfo['title']),
                     class: $classes['title_class']
                 ));
-                $this->htmlpage->addToBodyContent(new AuthorText(
+                $container->addElement(new AuthorText(
                     text: "Author: " . ucfirst($bodyinfo['name']) . "",
                     class: $classes['author_class']
                 ));
-                $this->htmlpage->addToBodyContent(new BodyText(
+                $container->addElement(new BodyText(
                     text: "<p1>" . ucfirst($bodyinfo['summary']) . "</p>",
                     class: $classes['body_class']
                 ));
-                $this->htmlpage->addToBodyContent(new CodeBlock(
+                $container->addElement(new CodeBlock(
                     text: $bodyinfo['codeBlock'],
                     class: $classes['codeblock_class']
                 ));
-                $this->htmlpage->addToBodyContent(new Image(
+                $container->addElement(new Image(
                     name: './img/article/' . $bodyinfo['imgFileName'],
                     class: $classes['img_class']
                 ));
 
-
-
+                $main->addElement($container);
                 break;
             case 'dashboard':
-                $this->htmlpage->addToBodyContent(new Title("Articles:"));
+                $container = new ContainerElement("<div>", "</div>");
+                
+                $container->addElement(new Title("Articles:"));
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["id", "title", "lastEdit"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
                 $tableFactory = new Table($columnsdata, $rowsdata);
-                $this->htmlpage->addToBodyContent(new AtomicElement($tableFactory->createTable("table
+                $container->addElement(new AtomicElement($tableFactory->createTable("table
                                                                                                 table-hover 
                                                                                                 table-striped
                                                                                                 table-bordered")));
@@ -264,15 +285,18 @@ class PageFactory
                     field_text: []
                 );
 
-                $this->htmlpage->addToBodyContent($form);
+                $container->addElement($form);
+                $main->addElement($container);
                 break;
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
         }
-    }
+        
+        // end of switch statement
+        // add the <main> to the body content
+        $this->htmlpage->addToBodyContent($main);
 
-    private function addFooter()
-    {
+        // add the footer to the body content
         $this->htmlpage->addToBodyContent(new Footer(
             text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
             class: 'border-top text-end bg-primary-subtle mt-auto'
