@@ -15,6 +15,6 @@ class RegisterValidator extends BaseValidator
     public function validateFields(array $field_inputs): bool
     {
         //Check if password1 and password2 are equal
-        return $field_inputs['password'] === $field_inputs['verifypassword'];
+        return $field_inputs['password_1'] === $field_inputs['password_2'];
     }
 }
