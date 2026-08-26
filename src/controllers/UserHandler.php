@@ -7,14 +7,18 @@ use Wiki\tools\traits\tSingleton,
     Wiki\models\ModelSelector,
     Wiki\controllers\validators\BaseValidator;
 
+
+/**
+ * Handler (controller) class for validating contact, login, and registration form submissions.
+ * @uses tSingleton
+ */
 class UserHandler
 {
     use tSingleton;
 
-
     /**
      * Check if login fields were correctly filled in. 
-     * First performs basic validation, then attempts to match an email and password to the inputs.
+     * Performs basic validation, then attempts to match an email and password to the inputs.
      * Stores errors in the (passed by reference) $response parameter.
      * @param array $response array containing the source page (string)
      * @param BaseValidator $validator BaseValidator object for first line validation.
@@ -37,25 +41,40 @@ class UserHandler
             }
         // First line validation failed
         } else {
-            $response['error'] = $validator->getErrors();
+            $response['error'] = $validator->getErrors(); // Get why validation failed
             return false;
         }
     }
 
+    /**
+     * Check if registration fiels were filled in correctly.
+     * On success adds a new user to the database. 
+     * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
+     * @param array $response array containing the source page (string)
+     * @param BaseValidator $validator BaseValidator object for first line validation.
+     * @return void
+     */
     public function checkRegistration(array &$response, BaseValidator $validator): void
     {
+        // Check first line validation
         if ($validator->validate($response['page'])) {
             $result = $validator->getFieldInputs();
-            if (ModelSelector::getUserInfoModel()->checkEmail($result['email'])) {
-                ModelSelector::getUserInfoModel()->registerUser(
+            // Check if the email does NOT exist
+            if (!ModelSelector::getUserInfoModel()->checkEmailExists($result['email'])) {
+                // Add new user to the database
+                ModelSelector::getUserInfoModel()->saveUser(
                     username: $result['name'],
                     password: $result['password'],
                     email: $result['email']
                 );
-            } else {
+            }
+            // Email was found in the database 
+            else {
                 $response['error'] = "Email already exists!";
             }
-        } else {
+        }
+        // First line validation failed 
+        else {
             $response['error'] = $validator->getErrors();
         }
     }

@@ -34,13 +34,13 @@ class UserInfoModel extends BaseModel
     *
     * @params email
     */
-    public function checkEmail(string $email): bool
+    public function checkEmailExists(string $email): bool
     {
         $sql = "SELECT email FROM user 
                         WHERE email=:email";
         $params = ["email" => $email];
         $result = $this->crudTemp->selectOne($sql, $params);
-        return empty($result);
+        return $result;
     }
 
     /*
@@ -48,7 +48,7 @@ class UserInfoModel extends BaseModel
     *
     * @params username,password,email,imfilename,description
     */
-    public function registerUser(string $username, string $password, string $email): array|false
+    public function saveUser(string $username, string $password, string $email): array|false
     {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
