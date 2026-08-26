@@ -4,8 +4,9 @@ namespace Wiki\controllers;
 
 // use Wiki\tools\interfaces\iValidator;
 use Wiki\tools\traits\tSingleton,
-    Wiki\models\ModelSelector,
-    Wiki\controllers\validators\BaseValidator;
+Wiki\models\ModelSelector,
+Wiki\controllers\validators\BaseValidator,
+Wiki\controllers\validators\Validator;
 
 
 /**
@@ -21,28 +22,30 @@ class UserHandler
      * Performs basic validation, then attempts to match an email and password to the inputs.
      * Stores errors in the (passed by reference) $response parameter.
      * @param array $response array containing the source page (string)
-     * @param BaseValidator $validator BaseValidator object for first line validation.
+     * @param Validator $validator BaseValidator object for first line validation.
      * @return array|false
      */
-    public function checkLogin(array &$response, BaseValidator $validator): array|false
+    public function checkLogin(array &$response, Validator $validator): array|false
     {
+        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Check first line validation
-        if ($validator->validate($response['page'])) {
-            $result = $validator->getFieldInputs();
+        $result = $validator->useValidators($field_info);
+        if ($result) {
             $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail($result['email']);
             // If email exists AND the corresponding password matches 
             if ($userinfo !== false && password_verify($result['password'], $userinfo['password'])) {
                 return $userinfo;
-            } 
+            }
             // Email/Password could not be matched
             else {
                 $response['error'] = "Login email or password is wrong!";
                 return false;
             }
-        // First line validation failed
+            // First line validation failed
         } else {
             $response['error'] = $validator->getErrors(); // Get why validation failed
             return false;
+
         }
     }
 
@@ -100,5 +103,7 @@ class UserHandler
         }
     }
 
-    public function changeAboutInfo() {}
+    public function changeAboutInfo()
+    {
+    }
 }

@@ -1,8 +1,7 @@
 <?php
-namespace Wiki\config;
-class Config{
-    
-    public const AUTHORIMGPATH = "./img/authors/";
-    public const EDIT_ARTICLE = "editArticle";
 
-}
+// class Config{
+    
+//     const AUTHORIMGPATH = "./img/authors/";
+
+// }

@@ -20,24 +20,21 @@ class BaseValidator implements iValidator
 
     /**
      * Checks if all fields were correctly filled in an optionally calls more specific validation behaviour.
-     * @param string $page_name
+     * @param string $name
      * @return bool true if all validation steps were succesful, false otherwise.
      */
-    public function validate(string $page_name): bool
+    public function validate(string $name): bool
     {
-        // Get field names from the database
-        $field_names = ModelSelector::getFormModel()->fetchFieldNames(page_name: $page_name);
-        // Collect field values from the response
-        foreach ($field_names as $name) {
-            $this->field_inputs[$name] = Utils::getRequestVar(
-                key: $name,
-                frompost: true
-            );
-            // If field was left empty, log an error
-            if (empty($this->field_inputs[$name])) {
-                $this->logError(message: 'Field ' . $name . ' was not filled in!');
-            }
+        // Get post variable based on name given
+        $this->field_inputs[$name] = Utils::getRequestVar(
+            key: $name,
+            frompost: true
+        );
+        // If field was left empty, log an error
+        if (empty($this->field_inputs[$name])) {
+            $this->logError(message: 'Field ' . $name . ' was not filled in!');
         }
+        
 
         // If there are errors, return false, otherwise call the page-specific validator to check the values
         if ($this->hasErrors()) {
