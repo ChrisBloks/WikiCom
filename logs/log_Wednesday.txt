@@ -1,3 +1,18 @@
 26-08-2026 9:56:47 | 127.0.0.1 | >>>>>> Error [0] on line 18 in file C:\xampp\htdocs\Educom\Wiki\main.php 
 26-08-2026 9:56:47 | 127.0.0.1 | >>>>>> Test error 
 26-08-2026 9:56:47 | 127.0.0.1 | #0 {main} 
+26-08-2026 12:25:28 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+26-08-2026 12:25:28 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+26-08-2026 12:25:28 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 12:27:49 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+26-08-2026 12:27:49 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+26-08-2026 12:27:49 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 12:27:51 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+26-08-2026 12:27:51 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+26-08-2026 12:27:51 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 12:28:04 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+26-08-2026 12:28:04 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+26-08-2026 12:28:04 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 12:28:05 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+26-08-2026 12:28:05 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+26-08-2026 12:28:05 | ::1 | PHP 8.2.12 (WINNT) 

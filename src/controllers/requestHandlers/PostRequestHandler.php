@@ -7,6 +7,7 @@ use Wiki\tools\utils\Utils,
     Wiki\controllers\validators\BaseValidator,
     Wiki\controllers\validators\RegisterValidator,
     Wiki\controllers\UserHandler,
+    Wiki\controllers\validators\Validator,
     Wiki\models\ModelSelector;
 
 class PostRequestHandler extends BaseRequestHandler
@@ -32,7 +33,7 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
             case 'login':
                 // Validate user inputs and on succes: get logged-in user's info
-                $validator = new BaseValidator();
+                $validator = new Validator();
                 $userinfo = UserHandler::getInstance()->checkLogin($this->response, $validator);
 
                 // If log in was succesful

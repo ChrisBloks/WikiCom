@@ -8,5 +8,6 @@ class Config
 
 
     const LOGPATH = "./logs";
+    public const FIRST_CELL_TARGET = "editArticle";
 
 }
