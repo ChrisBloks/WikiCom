@@ -6,7 +6,8 @@ use Wiki\tools\utils\Utils,
     Wiki\tools\utils\HtmlUtils,
     Wiki\controllers\validators\BaseValidator,
     Wiki\controllers\validators\RegisterValidator,
-    Wiki\controllers\UserHandler;
+    Wiki\controllers\UserHandler,
+    Wiki\models\ModelSelector;
 
 class PostRequestHandler extends BaseRequestHandler
 {
@@ -15,8 +16,19 @@ class PostRequestHandler extends BaseRequestHandler
         $this->response = $request;
         switch ($request['page']) {
             case 'register':
+                // Validate user inputs on the registration form
                 $validator = new RegisterValidator();
-                UserHandler::getInstance()->checkRegistration($request, $validator);
+                $userInfo = UserHandler::getInstance()->checkRegistration($request, $validator);
+                
+                // If validation was succesful, add new user to the database
+                if ($userInfo !== false){
+                    $registrationResult = ModelSelector::getUserInfoModel()
+                        ->saveUser(
+                            username: $userInfo['name'],
+                            password: $userInfo['password'],
+                            email: $userInfo['email']
+                        );
+                }
                 break;
             case 'login':
                 // Validate user inputs and on succes: get logged-in user's info
@@ -59,7 +71,16 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
             case 'contact':
                 $validator = new BaseValidator();
-                UserHandler::getInstance()->checkContact($request, $validator);
+                $contactInfo = UserHandler::getInstance()->checkContact($request, $validator);
+                
+                // On succesful contact form validaiton, save input to the database
+                if ($contactInfo !== false){
+                    ModelSelector::getWebsiteInfoModel()->saveContact(
+                        name: $contactInfo['name'],
+                        email: $contactInfo['email'],
+                        message: $contactInfo['message']
+                    );
+                }
                 break;
         }
 

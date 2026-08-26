@@ -1,7 +1,7 @@
 <?php
 
-class Config{
+// class Config{
     
-    const AUTHORIMGPATH = "./img/authors/";
+//     const AUTHORIMGPATH = "./img/authors/";
 
-}
+// }

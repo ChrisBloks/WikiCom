@@ -6,4 +6,6 @@ class Config
     const PASSWORD = 'Pannekoek2!';
     const DB = 'test';
 
+    const LOGPATH = "./logs";
+
 }

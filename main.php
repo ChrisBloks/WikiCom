@@ -1,12 +1,15 @@
 <?php
 include './vendor/autoload.php';
-include "./config/marius.php";
+include "./config/christian.php";
 
 use Wiki\controllers\MainController, \ManKind\tools as TOOLS;
 
 
 
-// Todo: configfile with LOGpath for error writing
+// TODO : configfile with LOGpath for error writing
+// ToDo: dsdsdsd
+// @todo bfadb
+// FIXME bfdabf
 TOOLS\dev\ErrorHandler::init();
 TOOLS\dev\Logger::init(
     \Config::LOGPATH,
