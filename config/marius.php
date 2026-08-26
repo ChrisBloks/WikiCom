@@ -6,4 +6,7 @@ class Config
     const PASSWORD = '';
     const DB = 'test';
 
+
+    const LOGPATH = "./logs";
+
 }
