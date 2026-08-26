@@ -1,6 +1,9 @@
 <?php
 namespace Wiki\controllers\factories;
 
+use Wiki\tools\interfaces\iValidator,
+    Wiki\controllers\validators\BaseValidator;
+
 class Validator
 {
     protected array $validatorlist = [];
@@ -15,15 +18,22 @@ class Validator
         foreach ($field_info as $field){
             if (! array_key_exists($field['type'],$this->validatorlist))
                 {
-
+                    $this-> validatorlist[$field['type']] = ValidatorFactory::from($field['type'])->createValidator();
                 }
-
         }
     }
 
 }
 
-enum ValidatorFactory
+enum ValidatorFactory : string
 {
-    case 
+    case BASE_ = 'text';
+
+    public function createValidator() : iValidator
+    {
+        return match($this)
+        {
+        self::BASE_ => new BaseValidator()
+        };
+    }
 }
