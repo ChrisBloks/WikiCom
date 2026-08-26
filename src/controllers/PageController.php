@@ -75,11 +75,8 @@ class PageController implements iController
 
         // Validate requets and retrieve page object
         $this->response = $requestHandler->handleRequest($this->request);
-
-
-        // Sanity check - Christian
-        // Should be last line of validateRequest
     }
+    
     /**
      * If page generation was succesful, call its show function.
      * @return void
