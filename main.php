@@ -1,6 +1,20 @@
 <?php
 include './vendor/autoload.php';
-include "./config/marius.php";
+$user = (isset($_ENV["USERDOMAIN"])) ? $_ENV["USERDOMAIN"] : "MARIUS";
+switch ($user) {
+    case "DANNY":
+        include_once "./config/danny.php";
+        break;
+    case "MARUISPC":
+        include_once "./config/marius.php";
+        break;
+    case "MARIUS":
+        include_once "./config/marius.php";
+        break;
+    case "WORKGROUP":
+        include_once "./config/christian.php";
+        break;
+}
 
 use Wiki\controllers\MainController, \ManKind\tools as TOOLS;
 

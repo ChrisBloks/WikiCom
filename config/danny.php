@@ -6,4 +6,6 @@ class Config
     const PASSWORD = 'Password123!';
     const DB = 'test';
 
+    const LOGPATH = "./logs";
+
 }
