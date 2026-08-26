@@ -1,7 +1,7 @@
 <?php
 namespace Wiki\controllers\factories;
 
-class Validator
+class ValidatorFactory
 {
     protected array $validatorlist = [];
 
@@ -23,7 +23,7 @@ class Validator
 
 }
 
-enum ValidatorFactory
-{
-    case 
-}
+// enum ValidatorFactory
+// {
+//     case 
+// }
