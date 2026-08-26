@@ -5,7 +5,8 @@ class Config
     const USERNAME = 'root';
     const PASSWORD = 'Password123!';
     const DB = 'test';
-
     const LOGPATH = "./logs";
+    const AUTHORIMGPATH = "./img/authors/";
 
+    public const FIRST_CELL_TARGET = "editArticle";
 }

@@ -13,9 +13,9 @@ class Form extends ContainerElement
     // properties
     protected array $hiddenfields;
 
-    public function __construct(string $action, string $method, string $submit_caption, string $class = "")
+    public function __construct(string $action, string $method, string $submit_caption, string $class = "",string $enctype = "")
     {
-        $this->html_before = '<form action="' . $action . '" method="' . $method . '" ' . utils\HtmlUtils::addClassAttr($class) . '>';
+        $this->html_before = '<form action="' . $action . '" method="' . $method . '" ' . utils\HtmlUtils::addClassAttr($class) . 'enctype="'.$enctype.'">';
 
         $this->html_after = '<button type="submit" value="submit">' . $submit_caption . ' </button></form>';
     }

@@ -54,14 +54,15 @@ class UserHandler
      * On success adds a new user to the database. 
      * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
      * @param array $response array containing the source page (string)
-     * @param BaseValidator $validator BaseValidator object for first line validation.
-     * @return array|false
+     * @param Validator $validator BaseValidator object for first line validation.
+     * @return void
      */
-    public function checkRegistration(array &$response, BaseValidator $validator): array|false
+    public function checkRegistration(array &$response, Validator $validator): array|false
     {
+        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Check first line validation
-        if ($validator->validate($response['page'])) {
-            $result = $validator->getFieldInputs();
+        $result = $validator->useValidators($field_info);
+        if ($result) {
             // Check if the email does NOT exist
             if (!ModelSelector::getUserInfoModel()->checkEmailExists($result['email'])) {
                 return $result;
@@ -79,21 +80,22 @@ class UserHandler
         }
     }
 
-    
+
     /**
      * Checks if the contact form was correctly filled in and saves the contact to the database.
      * @param array $response array containing the source page (string)
-     * @param BaseValidator $validator BaseValidator object for first line validation.
+     * @param Validator $validator Validator object for first line validation.
      * @return array|false
      */
-    public function checkContact(array &$response, BaseValidator $validator): array|false
+    public function checkContact(array &$response, Validator $validator): array|false
     {
+        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Perform basic validation on contact fields
-        if ($validator->validate($response['page'])) {
-            $result = $validator->getFieldInputs();
+        $result = $validator->useValidators($field_info);
+        if ($result) {
             return $result;
-            
-        } 
+
+        }
         // If any contact field was not entered correctly
         else {
             $response['error'] = $validator->getErrors();
@@ -101,7 +103,20 @@ class UserHandler
         }
     }
 
-    public function changeAboutInfo()
+    public function checkAboutInfo(array &$response, Validator $validator): array|false
     {
+        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
+        
+        // Perform basic validation on contact fields
+        $result = $validator->useValidators($field_info);
+        if ($result) {
+            return $result;
+        }
+        // If any contact field was not entered correctly
+        else {
+            $response['error'] = $validator->getErrors();
+            print_r($response);
+            return false;
+        }
     }
 }
