@@ -79,7 +79,13 @@ class UserHandler
         }
     }
 
-
+    
+    /**
+     * Checks if the contact form was correctly filled in and saves the contact to the database.
+     * @param array $response array containing the source page (string)
+     * @param BaseValidator $validator BaseValidator object for first line validation.
+     * @return void
+     */
     public function checkContact(array &$response, BaseValidator $validator): void
     {
         if ($validator->validate($response['page'])) {
