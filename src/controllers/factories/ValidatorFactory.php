@@ -2,7 +2,8 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\interfaces\iValidator,
-Wiki\controllers\validators\BaseValidator;
+    Wiki\controllers\validators\BaseValidator,
+    Wiki\controllers\validators\NewPasswordValidator;
 
 enum ValidatorFactory: string
 {
@@ -17,7 +18,7 @@ enum ValidatorFactory: string
             self::VTEXT => new BaseValidator(),
             self::VEMAIL => new BaseValidator(),
             self::VPASSWORD => new BaseValidator(),
-            self::VNEWPASSWORD => new NewPasswordValidator()
+            self::VNEWPASS => new NewPasswordValidator()
         };
     }
 }

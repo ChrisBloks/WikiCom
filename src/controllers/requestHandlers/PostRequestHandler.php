@@ -16,8 +16,9 @@ class PostRequestHandler extends BaseRequestHandler
         $this->response = $request;
         switch ($request['page']) {
             case 'register':
-                $validator = new RegisterValidator();
-                UserHandler::getInstance()->checkRegistration($request, $validator);
+                $validator = new Validator();
+                UserHandler::getInstance()->checkRegistration($this->response, $validator);
+                print_r($this->response);
                 break;
             case 'login':
                 // Validate user inputs and on succes: get logged-in user's info
