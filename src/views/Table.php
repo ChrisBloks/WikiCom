@@ -2,7 +2,7 @@
 
 namespace Wiki\views;
 
-use Wiki\tools\utils\HtmlUtils;
+use Wiki\tools\utils\HtmlUtils, Wiki\config;
 
 /**
  * Table
@@ -89,7 +89,7 @@ class Table
             case 'first_cell':
                 return "<td$classAttr>" . (new FirstCell(
                     page_id: $row_data['id'],
-                    target_page: "editArticle",
+                    target_page: \CONFIG::FIRST_CELL_TARGET,
                     delete_page: $row_data['id']
                 ))->returnFirstCellOptions()
                     . '</td>';

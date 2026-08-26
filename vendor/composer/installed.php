@@ -13,7 +13,7 @@
         'educom/wikiproject' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd76af8a10247993d7b2eeb1731b2e4f66ef76d88',
+            'reference' => '93da70ecd74abf821cb71efa95a4680e8f7b6380',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

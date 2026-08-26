@@ -65,21 +65,18 @@ class UserHandler
         if ($result) {
             // Check if the email does NOT exist
             if (!ModelSelector::getUserInfoModel()->checkEmailExists($result['email'])) {
-                // Add new user to the database
-                ModelSelector::getUserInfoModel()->saveUser(
-                    username: $result['name'],
-                    password: $result['password'],
-                    email: $result['email']
-                );
+                return $result;
             }
             // Email was found in the database 
             else {
                 $response['error'] = "Email already exists!";
+                return false;
             }
         }
         // First line validation failed 
         else {
             $response['error'] = $validator->getErrors();
+            return false;
         }
     }
 
@@ -88,19 +85,20 @@ class UserHandler
      * Checks if the contact form was correctly filled in and saves the contact to the database.
      * @param array $response array containing the source page (string)
      * @param BaseValidator $validator BaseValidator object for first line validation.
-     * @return void
+     * @return array|false
      */
-    public function checkContact(array &$response, BaseValidator $validator): void
+    public function checkContact(array &$response, BaseValidator $validator): array|false
     {
+        // Perform basic validation on contact fields
         if ($validator->validate($response['page'])) {
             $result = $validator->getFieldInputs();
-            ModelSelector::getWebsiteInfoModel()->saveContact(
-                name: $result['name'],
-                email: $result['email'],
-                message: $result['message']
-            );
-        } else {
+            return $result;
+            
+        } 
+        // If any contact field was not entered correctly
+        else {
             $response['error'] = $validator->getErrors();
+            return false;
         }
     }
 
