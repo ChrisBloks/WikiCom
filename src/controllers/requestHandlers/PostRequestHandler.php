@@ -7,7 +7,8 @@ use Wiki\tools\utils\Utils,
     Wiki\controllers\validators\BaseValidator,
     Wiki\controllers\validators\RegisterValidator,
     Wiki\controllers\UserHandler,
-    Wiki\controllers\validators\Validator;
+    Wiki\controllers\validators\Validator,
+    Wiki\models\ModelSelector;
 
 class PostRequestHandler extends BaseRequestHandler
 {
@@ -16,14 +17,24 @@ class PostRequestHandler extends BaseRequestHandler
         $this->response = $request;
         switch ($request['page']) {
             case 'register':
-                $validator = new RegisterValidator();
-                UserHandler::getInstance()->checkRegistration($request, $validator);
+                $validator = new Validator();
+                // Validate user inputs on the registration form
+                $userInfo = UserHandler::getInstance()->checkRegistration($this->response, $validator);
+                
+                // If validation was succesful, add new user to the database
+                if ($userInfo !== false){
+                    $registrationResult = ModelSelector::getUserInfoModel()
+                        ->saveUser(
+                            username: $userInfo['name'],
+                            password: $userInfo['password'],
+                            email: $userInfo['email']
+                        );
+                }
                 break;
             case 'login':
                 // Validate user inputs and on succes: get logged-in user's info
                 $validator = new Validator();
                 $userinfo = UserHandler::getInstance()->checkLogin($this->response, $validator);
-
                 // If log in was succesful
                 if ($userinfo !== false) {
                     // Update session variables
@@ -37,6 +48,13 @@ class PostRequestHandler extends BaseRequestHandler
 
                 break;
             case 'about':
+                $validator = new Validator();
+                $aboutinfo = UserHandler::getInstance()->checkAboutInfo($this->response,$validator);
+                $target_dir = \Config::AUTHORIMGPATH;
+                $target_file = $target_dir . basename($_FILES["aboutimg"]["name"]);
+                HtmlUtils::dump("about",$_FILES["aboutimg"]['tmp_name']);
+
+
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
                 $this->response['userID'] = Utils::getSesVar('userID');
                 break;
@@ -53,14 +71,22 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
             case 'editArticle':
                 // add validator
-                print_r($_POST);
                 $this->response['editArticleID'] = 0;
                 // check user_id against db
                 // if ok -> send article info to db
                 break;
             case 'contact':
-                $validator = new BaseValidator();
-                UserHandler::getInstance()->checkContact($request, $validator);
+                $validator = new Validator();
+                $contactInfo = UserHandler::getInstance()->checkContact($this->response, $validator);
+                
+                // On succesful contact form validaiton, save input to the database
+                if ($contactInfo !== false){
+                    ModelSelector::getWebsiteInfoModel()->saveContact(
+                        name: $contactInfo['name'],
+                        email: $contactInfo['email'],
+                        message: $contactInfo['message']
+                    );
+                }
                 break;
         }
 

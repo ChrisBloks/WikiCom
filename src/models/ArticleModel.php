@@ -9,7 +9,11 @@ namespace Wiki\models;
 
 use Wiki\models\BaseModel;
 use Wiki\tools\utils\HtmlUtils;
+use Wiki\tools\utils\HtmlUtils;
 
+/**
+ * Model class for fetching and saving article-page info from and to the database.
+ */
 class ArticleModel extends BaseModel
 {
         /*
@@ -107,13 +111,12 @@ class ArticleModel extends BaseModel
                         $where[] = $clause;
                         $params = array_merge($params, $tagParams);
                 }
-
-                if (!empty($user_ids)) {
-                        $extra_query .= " ,user.name as author";
-                        $joins .= " JOIN user ON user.id = article.user_id ";
-                        [$clause, $tagParams] = $this->inClause('article.user_id', $user_ids, 'user');
-                        $where[] = $clause;
-                        $params = array_merge($params, $tagParams);
+                // check if any authors are given and build IN clause
+                if (!empty($author_ids)){
+                    $join_clause .= ' JOIN user ON user.id = article.user_id ';
+                    [$in_clause, $placeholder_mapping] = $this->buildInClause('article.user_id', $author_ids, 'user');
+                    $where_statements[] = $in_clause;
+                    $params = array_merge($params, $placeholder_mapping);
                 }
 
                 return [$joins, $where, $extra_query, $params];
@@ -172,34 +175,34 @@ class ArticleModel extends BaseModel
          * @params article info + user id
          */
 
-        public function saveExistingArticleInfo($article_id, $article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
-        {
-                $sql = "UPDATE  article
-                        SET     title = :title,
-                                summary = :summary,
-                                codeBlock = :codeBlock,
-                                imgFileName = :imgFileName,
-                                user_id = :user_id,
-                                lastEdit = :lastEdit
-                        WHERE   id = :id";
-                $params = [
-                        ":id" => $article_id,
-                        ':title' => $article_title,
-                        ':summary' => $article_summary,
-                        ':codeBlock' => $article_codeBlock,
-                        ':imgFileName' => $imgFileName,
-                        ':user_id' => $user_id,
-                        ':lastEdit' => date('Y-m-d'),
-                ];
+    public function saveExistingArticleInfo($article_id, $article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
+    {
+            $sql = "UPDATE  article
+                    SET     title = :title,
+                            summary = :summary,
+                            codeBlock = :codeBlock,
+                            imgFileName = :imgFileName,
+                            user_id = :user_id,
+                            lastEdit = :lastEdit
+                    WHERE   id = :id";
+            $params = [
+                    ":id" => $article_id,
+                    ':title' => $article_title,
+                    ':summary' => $article_summary,
+                    ':codeBlock' => $article_codeBlock,
+                    ':imgFileName' => $imgFileName,
+                    ':user_id' => $user_id,
+                    ':lastEdit' => date('Y-m-d'),
+            ];
 
-                try {
-                        $this->crudTemp->prepareAndExecute($sql, $params);
-                        return true;
-                } catch (\PDOException $e) {
-                        // $this->logError($e->getMessage());
-                        return false;
-                }
-        }
+            try {
+                    $this->crudTemp->prepareAndExecute($sql, $params);
+                    return true;
+            } catch (\PDOException $e) {
+                    // $this->logError($e->getMessage());
+                    return false;
+            }
+    }
 
         /*
          * Method that checks if tag already exists. If it does not exist give true
@@ -207,14 +210,14 @@ class ArticleModel extends BaseModel
          * @param tag name
          */
 
-        public function checkTag($tag_name)
-        {
-                $sql = "SELECT name FROM tag 
-                        WHERE name=:tag_name";
-                $params = ["tag_name" => $tag_name];
-                $result = $this->crudTemp->selectOne($sql, $params);
-                return empty($result);
-        }
+    public function checkTag($tag_name)
+    {
+            $sql = "SELECT name FROM tag 
+                    WHERE name=:tag_name";
+            $params = ["tag_name" => $tag_name];
+            $result = $this->crudTemp->selectOne($sql, $params);
+            return empty($result);
+    }
 
         /*
          * Method that checks if title already exists. If it does not exist give true

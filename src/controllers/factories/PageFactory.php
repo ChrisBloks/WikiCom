@@ -209,7 +209,9 @@ class PageFactory
                 $container->addElement($form);
 
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
-                $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch();
+                $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
+                    author_ids: [],
+                    tag_ids:    []);
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $container->addElement(new AtomicElement($tableFactory->createTable("table
                                                                                                 table-hover 

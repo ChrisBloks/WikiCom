@@ -16,7 +16,8 @@ class FormFactory
             action: $form_info['action'],
             method: $form_info['method'],
             submit_caption: $form_info['submit_caption'],
-            class: $class,
+            enctype: $form_info['enctype'],
+            
         );
 
         foreach ($hidden_field_info as $field_name => $field_value) {
