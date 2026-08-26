@@ -2,8 +2,6 @@
 // common parameters:
 // Todo: save all commands as string and loop
 // is instance of: checken voor interface class
-require_once("./src/models/ModelSelector.php");
-require_once("./src/tools/traits/tErrorMessageCollector.php");
 /* values to obtain from outside:
  *$isloggedIn;
  *$page_value;
@@ -12,6 +10,27 @@ require_once("./src/tools/traits/tErrorMessageCollector.php");
  *$tag_ids;
  *$sortBy;
  */
+
+namespace Wiki\controllers\factories;
+
+use Wiki\tools\utils\HtmlUtils,
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer;
+
+
+
 class PageFactory
 {
     use tErrorMessageCollector;
@@ -24,13 +43,7 @@ class PageFactory
         $this->response = $response;
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
-        $this->htmlpage = new Basepage;
-        // check user loginstatus
-        // if (isset($_SESSION['userName'])) {
-        //     $this->isLoggedIn = true;
-        // } else {
-        //     $this->isLoggedIn = false;
-        // }
+        $this->htmlpage = new BasePage;
     }
 
     public function show()
@@ -59,7 +72,8 @@ class PageFactory
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
                     '));
 
-        $this->htmlpage->addToHeadContent(new AtomicElement('
+        $this->htmlpage->addToHeadContent(new AtomicElement(
+            '
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
@@ -113,9 +127,8 @@ class PageFactory
                 ));
                 break;
             case 'about':
-                $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($_GET["author"]);
-
-                if ($this->isLoggedIn === true) // author equals user
+                $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
+                if ($this->response['userID'] == $this->response['aboutID']) // author equals user
                 {
                     $formFactory = new FormFactory();
                     $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
@@ -123,7 +136,7 @@ class PageFactory
                     $form = $formFactory->createForm(
                         form_info: $form_info,
                         field_info: $form_fields,
-                        hidden_field_info: ["user" => $_GET["author"]],
+                        hidden_field_info: ["user" => $this->response['aboutID']],
                         field_text: ["description" => $aboutinfo["description"]],
                         class: $form_info["display_class"]
                     );
@@ -185,14 +198,14 @@ class PageFactory
                 break;
             case 'editArticle':
                 $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $_GET["id"]); //give article tag
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
+                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
-                    hidden_field_info: ["user" => $_GET["id"]], //give article tag
+                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page], //give article tag
                     class: $form_info["display_class"],
                     field_text: $bodyinfo
                 );
@@ -200,7 +213,7 @@ class PageFactory
                 $this->htmlpage->addToBodyContent($form);
                 break;
             case 'article':
-                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($_GET["id"]);
+                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 // ToDo: add accordion functionality to body text and code element
                 $this->htmlpage->addToBodyContent(new Title(
@@ -236,6 +249,21 @@ class PageFactory
                                                                                                 table-hover 
                                                                                                 table-striped
                                                                                                 table-bordered")));
+
+                $formFactory = new FormFactory();
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
+
+                $form = $formFactory->createForm(
+                    form_info: $form_info,
+                    field_info: [],
+                    hidden_field_info: ['page' => $this->page],
+                    class: $form_info["display_class"],
+                    field_text: []
+                );
+
+                $this->htmlpage->addToBodyContent($form);
                 break;
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");

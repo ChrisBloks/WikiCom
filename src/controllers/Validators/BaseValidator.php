@@ -1,6 +1,11 @@
 <?php
-require_once "./src/tools/interfaces/iValidator.php";
-require_once "./src/tools/traits/tErrorMessageCollector.php";
+
+namespace Wiki\controllers\validators;
+
+use Wiki\tools\interfaces\iValidator,
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\models\ModelSelector,
+    Wiki\tools\utils\Utils;
 
 /**
  * Base validation class that defines basic 1st line of defence validation. If succesful, calls more specific validation behaviour as defined in child classes.
@@ -47,7 +52,8 @@ class BaseValidator implements iValidator
      * Retrieve the field inputs property
      * @return array
      */
-    public function getFieldInputs(): array {
+    public function getFieldInputs(): array
+    {
         return $this->field_inputs;
     }
 
@@ -56,7 +62,8 @@ class BaseValidator implements iValidator
      * @param array $field_inputs user inputs
      * @return bool
      */
-    public function validateFields(array $field_inputs): bool {
+    public function validateFields(array $field_inputs): bool
+    {
         return true;
     }
 }

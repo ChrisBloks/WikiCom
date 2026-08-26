@@ -4,8 +4,8 @@
 *  08/2026
 *  RatingModel class gives al the methods needed to pull or insert Rating information from database
 */
-require_once "Crud.php";
-require_once "BaseModel.php";
+
+namespace Wiki\models;
 
 class RatingModel extends BaseModel
 {
@@ -13,8 +13,8 @@ class RatingModel extends BaseModel
     * Method that fetches the avg rating based on a given article id
     *
     * @params $article_id
-    */ 
-    public function fetchAvgRating($article_id)
+    */
+    public function fetchAvgRating(string $article_id): string|false
     {
         $sql = "SELECT `AVGrating` as AVGrating FROM v_article_avg_rating 
                 WHERE id=:article_id";
@@ -30,21 +30,19 @@ class RatingModel extends BaseModel
     * Method that saves the rating from a user for an article
     *
     * @params user_id, article_id, rating
-    */ 
-    public function saveRating(int $user_id,int $article_id, int $rating)
+    */
+    public function saveRating(string $user_id, string $article_id, string $rating): bool
     {
         $sql = "INSERT INTO wiki_rating (user_id,article_id, rating) 
                 VALUES (:user_id,:article_id,:rating)
                 ON DUPLICATE KEY UPDATE rating=:rating";
-        $params = ["user_id"=> $user_id,"article_id"=> $article_id,"rating"=> $rating];
+        $params = ["user_id" => $user_id, "article_id" => $article_id, "rating" => $rating];
         try {
-        $this->crudTemp->prepareAndExecute($sql,$params);
-        return true;
-        }
-        catch (PDOException $e) {
-                $this->logError($e->getMessage());
-                return false;
+            $this->crudTemp->prepareAndExecute($sql, $params);
+            return true;
+        } catch (\PDOException $e) {
+            $this->logError($e->getMessage());
+            return false;
         }
     }
 }
-

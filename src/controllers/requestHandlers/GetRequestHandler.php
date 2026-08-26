@@ -1,29 +1,34 @@
 <?php
 
+namespace Wiki\controllers\requestHandlers;
+
+use Wiki\tools\utils\Utils;
+
 class GetRequestHandler extends BaseRequestHandler
 {
-    public function handle(array $request): array {
-        
+    public function handleRequest(array $request): array
+    {
+
         $this->response = $request;
 
-        switch($request['page']){
+        switch ($request['page']) {
             case 'logout':
                 $this->response['page'] = 'home';
-                // UserHandler->logoutUser();
+                $this->response['isLoggedIn'] = false;
+                session_unset();
                 break;
-            case 'Article':
+            case 'article':
+                $this->response['articleID'] = Utils::getRequestVar('id', false);
+                break;
             case 'editArticle':
-            case 'About';
-                // getRequestVar['id']
-                // $this->response['id'] = getRequestVar['id']
+                $this->response['editArticleID'] = Utils::getRequestVar('id', false);
+                break;
+            case 'about';
+                $this->response['aboutID'] = Utils::getRequestVar('author', false);
+                $this->response['userID'] = Utils::getSesVar('userID');
+                break;
         }
-        
-        $this->response['isLoggedIn'] = Utils::getSesVar('isLoggedIn', false);
-        return $this->response;
-    }
 
-    public function createPage(): BasePage{
-        
-        return (new PageFactory($this->response))->show();
+        return $this->response;
     }
 }

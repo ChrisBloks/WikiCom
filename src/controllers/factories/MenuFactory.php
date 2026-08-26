@@ -1,10 +1,11 @@
 <?php
 // src/controllers/MenuFactory.php
 
-require_once "./src/views//containers/Menu.php";
-require_once "./src/views//containers/MenuItem.php";
-require_once "./src/views//containers/SplitMenuItem.php";
-require_once "./src/tools/traits/tErrorMessageCollector.php";
+namespace Wiki\controllers\factories;
+
+use Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\views\containers\Menu,
+    Wiki\views\containers\Menuitem;
 
 class MenuFactory
 {
@@ -41,10 +42,10 @@ class MenuFactory
                 href: $item['href'],
                 class: $link_class . ' dropdown-toggle',
                 attrs: [
-                        'role' => 'button',
-                        'data-bs-toggle' => 'dropdown',
-                        'aria-expanded' => 'false',
-                    ],
+                    'role' => 'button',
+                    'data-bs-toggle' => 'dropdown',
+                    'aria-expanded' => 'false',
+                ],
                 li_class: $li_class . ' dropdown'
             );
 
@@ -59,11 +60,12 @@ class MenuFactory
             $menuItem->addElement($submenu);
         } else {
             $menuItem = new MenuItem(
-                                label: $item['label'], 
-                                href: $item['href'], 
-                                class: $link_class, 
-                                attrs: [], 
-                                li_class: $li_class);
+                label: $item['label'],
+                href: $item['href'],
+                class: $link_class,
+                attrs: [],
+                li_class: $li_class
+            );
         }
 
         return $menuItem;

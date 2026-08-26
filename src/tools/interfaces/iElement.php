@@ -1,8 +1,9 @@
 <?php
+
 namespace Wiki\tools\interfaces;
 
-interface iElement{
+interface iElement
+{
 
     public function show(): string;
-
 }

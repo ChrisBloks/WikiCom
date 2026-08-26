@@ -4,13 +4,16 @@
 *  08/2026
 *  ArticleModel class gives al the methods needed to pull or insert article information from database
 */
-require_once "Crud.php";
-require_once "BaseModel.php";
+
+namespace Wiki\models;
+
+use Wiki\models\BaseModel;
+
 class ArticleModel extends BaseModel
 {
         /*
         *  @params array for ways to sort using the fetchArticlebySearch method
-        */ 
+        */
         private static $sort_values = [
                 "rating" => "AVGrating",
                 "AVGrating" => "AVGrating",
@@ -22,7 +25,7 @@ class ArticleModel extends BaseModel
         * Method that fetches the article with a certain id
         *
         * @param int that indicates the article id
-        */ 
+        */
         public function fetchArticleById($article_id)
         {
                 $sql = "SELECT  article.title,
@@ -37,7 +40,7 @@ class ArticleModel extends BaseModel
                 $params = ['article_id' => $article_id];
                 $result = $this->crudTemp->selectOne($sql, $params);
                 if (empty($result)) {
-                        $result = false;
+                        $result = [];
                 }
                 return $result;
         }
@@ -46,7 +49,7 @@ class ArticleModel extends BaseModel
         * Method that fetches the article with the user id
         *
         * @param int that indicates the article id
-        */ 
+        */
         public function fetchArticleByUserId($user_id)
         {
                 $sql = "SELECT  article.id,
@@ -68,7 +71,7 @@ class ArticleModel extends BaseModel
         * @param $user_ids is an array of user ids that the article has to be in
         * @param $tag_ids is an array of tag ids that he article has to be in
         * @param $SortBy a string that indicates how the results should be ordered
-        */ 
+        */
         public function fetchArticleBySearch($user_ids = [], $tag_ids = [], $sortBy = "")
         {
                 $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
@@ -86,7 +89,6 @@ class ArticleModel extends BaseModel
 
 
                 return $this->crudTemp->selectMany($sql, $params);
-
         }
 
         /*
@@ -94,7 +96,7 @@ class ArticleModel extends BaseModel
         *
         * @param $user_ids is an array of user ids that the article has to be in
         * @param $tag_ids is an array of tag ids that he article has to be in
-        */ 
+        */
         private function buildSearchQuery(array $user_ids, array $tag_ids)
         {
                 $joins = " JOIN v_article_avg_rating as vr ON vr.id = article.id";
@@ -128,7 +130,7 @@ class ArticleModel extends BaseModel
         * @param $reference is the string for the before IN statement
         * @param $values is an array that is used to eventually replace the placeholders in the query statements
         * @param $prefix is a string that represents the name given to the placeholder
-        */ 
+        */
         private function inClause(string $reference, array $values, string $prefix)
         {
                 $placeholders = [];
@@ -147,7 +149,7 @@ class ArticleModel extends BaseModel
         * Method that saves article to the database given the article info
         *
         * @params article info + user id
-        */ 
+        */
         public function saveNewArticleInfo($article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
         {
                 $sql = "INSERT INTO article (title, summary, codeBlock, imgFileName, user_id, lastEdit)
@@ -172,7 +174,7 @@ class ArticleModel extends BaseModel
         * Method that updates article based on new information
         *
         * @params article info + user id
-        */ 
+        */
 
         public function saveExistingArticleInfo($article_id, $article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
         {
@@ -197,8 +199,8 @@ class ArticleModel extends BaseModel
                 try {
                         $this->crudTemp->prepareAndExecute($sql, $params);
                         return true;
-                } catch (PDOException $e) {
-                        $this->logError($e->getMessage());
+                } catch (\PDOException $e) {
+                        // $this->logError($e->getMessage());
                         return false;
                 }
         }
@@ -207,7 +209,7 @@ class ArticleModel extends BaseModel
         * Method that checks if tag already exists. If it does not exist give true
         *
         * @param tag name
-        */ 
+        */
 
         public function checkTag($tag_name)
         {
@@ -219,10 +221,25 @@ class ArticleModel extends BaseModel
         }
 
         /*
+        * Method that checks if title already exists. If it does not exist give true
+        *
+        * @param title name
+        */
+
+        public function checkTitle($title_name)
+        {
+                $sql = "SELECT title FROM wiki_article 
+                        WHERE title=:title_name";
+                $params = ["title_name" => $title_name];
+                $result = $this->crudTemp->selectOne($sql, $params);
+                return empty($result);
+        }
+
+        /*
         * Method that adds a new tag to the database
         *
         * @param tag name
-        */ 
+        */
         public function addNewTag(string $tag_name)
         {
                 $sql = "INSERT INTO tag (name) 
@@ -231,8 +248,8 @@ class ArticleModel extends BaseModel
                 try {
                         $this->crudTemp->prepareAndExecute($sql, $params);
                         return true;
-                } catch (PDOException $e) {
-                        $this->logError($e->getMessage());
+                } catch (\PDOException $e) {
+                        // $this->logError($e->getMessage());
                         return false;
                 }
         }
@@ -241,7 +258,7 @@ class ArticleModel extends BaseModel
         * Method that adds tag to article
         *
         * @params article id and tag id
-        */ 
+        */
         public function addTagToArticle(int $article_id, int $tag_id)
         {
                 $sql = "INSERT INTO article_to_tag (article_id, tag_id) 
@@ -250,10 +267,9 @@ class ArticleModel extends BaseModel
                 try {
                         $this->crudTemp->prepareAndExecute($sql, $params);
                         return true;
-                } catch (PDOException $e) {
-                        $this->logError($e->getMessage());
+                } catch (\PDOException $e) {
+                        // $this->logError($e->getMessage());
                         return false;
                 }
         }
 }
-

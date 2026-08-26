@@ -5,13 +5,15 @@
  *  Crud class all database related operations
  */
 
-require_once "./src/tools/traits/tSingleton.php";
+namespace Wiki\models;
+
+use Wiki\tools\traits\tSingleton;
 
 class Crud
 {
     use tSingleton;
 
-    public PDO $db;
+    public \PDO $db;
 
     public function __construct()
     {
@@ -25,7 +27,7 @@ class Crud
         $username = \Config::USERNAME;
         $password = \Config::PASSWORD;
 
-        return new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        return new \PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     }
 
     public function isConnected()
@@ -37,11 +39,11 @@ class Crud
     {
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function selectMany($sql, $params, $fetch = PDO::FETCH_ASSOC)
+    public function selectMany($sql, $params, $fetch = \PDO::FETCH_ASSOC)
     {
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
@@ -67,7 +69,4 @@ class Crud
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
     }
-
 }
-
-?>

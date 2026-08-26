@@ -1,7 +1,8 @@
 <?php
+
 namespace Wiki\views;
 
-use Wiki\tools\utils;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Table
@@ -29,7 +30,7 @@ class Table
 
     protected function startTable(?string $tableClass): string
     {
-        return '<table' . utils\HtmlUtils::addClassAttr($tableClass) . '>';
+        return '<table' . HtmlUtils::addClassAttr($tableClass) . '>';
     }
 
     protected function endTable(): string
@@ -42,7 +43,7 @@ class Table
         $str = '<tr>';
 
         foreach ($this->columns as $column) {
-            $str .= '<th' . utils\HtmlUtils::addClassAttr($column['css_class'] ?? null) . '>'
+            $str .= '<th' . HtmlUtils::addClassAttr($column['css_class'] ?? null) . '>'
                 . htmlspecialchars($column['column_title'])
                 . '</th>';
         }
@@ -72,7 +73,7 @@ class Table
 
     protected function buildCell(array $column, mixed $value, array $row_data): string
     {
-        $classAttr = utils\HtmlUtils::addClassAttr($column['class_type'] ?? null);
+        $classAttr = HtmlUtils::addClassAttr($column['class_type'] ?? null);
 
         switch ($column['display_type']) {
             case 'date':
@@ -81,18 +82,19 @@ class Table
 
             case 'rating':
                 return "<td$classAttr>" . (new Rating(
-                                                rating: (float) $value
-                                                ))->show() . '</td>';
+                    rating: (float) $value
+                ))->show() . '</td>';
 
-            // replace editarticle with const from config file
+                // replace editarticle with const from config file
             case 'first_cell':
                 return "<td$classAttr>" . (new FirstCell(
-                                                    page_id:$row_data['id'], 
-                                                    target_page: "editArticle", 
-                                                    delete_page: $row_data['id']))->returnFirstCellOptions() 
-                                        . '</td>';
-            
-                case 'string':
+                    page_id: $row_data['id'],
+                    target_page: "editArticle",
+                    delete_page: $row_data['id']
+                ))->returnFirstCellOptions()
+                    . '</td>';
+
+            case 'string':
                 return "<td$classAttr>" . htmlspecialchars((string) $value) . '</td>';
 
             default:

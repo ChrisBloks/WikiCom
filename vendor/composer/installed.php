@@ -1,20 +1,20 @@
 <?php return array(
     'root' => array(
-        'name' => 'mariu/wiki',
+        'name' => 'educom/wikiproject',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '90d325994c0bbb14c180fb6c07a1a5fe900f6a10',
-        'type' => 'library',
+        'reference' => 'dccc0a843fd74814ad8f34eb80648cfef7297473',
+        'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'mariu/wiki' => array(
+        'educom/wikiproject' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '90d325994c0bbb14c180fb6c07a1a5fe900f6a10',
-            'type' => 'library',
+            'reference' => 'dccc0a843fd74814ad8f34eb80648cfef7297473',
+            'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,

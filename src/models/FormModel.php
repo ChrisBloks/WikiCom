@@ -1,20 +1,21 @@
 <?php
 /* FormModel
-*  Danny
-*  08/2026
-*  FormModel class gives al the methods needed to pull information from database about forms
-*/
-require_once "Crud.php";
-require_once "BaseModel.php";
+ *  Danny
+ *  08/2026
+ *  FormModel class gives al the methods needed to pull information from database about forms
+ */
+
+namespace Wiki\models;
+
 class FormModel extends BaseModel
 {
     /*
-    * Gets the necessary field information for a certain page. Some fields need an extray sub array as information
-    * so when lookup_id exists a second query will be run based on the info gotten from the first query.
-    *
-    * @params page_name = the page name and id is used for further query building using the lookupinfo
-    */ 
-    public function fetchFieldInfo($page_name, $id = '')
+     * Gets the necessary field information for a certain page. Some fields need an extray sub array as information
+     * so when lookup_id exists a second query will be run based on the info gotten from the first query.
+     *
+     * @params page_name = the page name and id is used for further query building using the lookupinfo
+     */
+    public function fetchFieldInfo(string $page_name, string $id = ''): array|false
     {
         $sql = "SELECT  fi.type, 
                         fi.name, 
@@ -44,11 +45,11 @@ class FormModel extends BaseModel
     }
 
     /*
-    * Gets the necessary form information for a certain page. 
-    *
-    * @params page_name = the page name
-    */ 
-    public function fetchFormInfo($page_name)
+     * Gets the necessary form information for a certain page. 
+     *
+     * @params page_name = the page name
+     */
+    public function fetchFormInfo(string $page_name): array
     {
         $sql = "SELECT DISTINCT fo.action, 
                                 fo.method, 
@@ -64,41 +65,57 @@ class FormModel extends BaseModel
     }
 
     /*
-    * Method that builds and executes a query that relies on information gotten from the previously ran query
-    *
-    * @params $value = the information from the previous query given to this method to build the query
-    *         $id = id given for certain queries that need specific id example: finding the tag for a certain article needs article_id
-    */ 
-    public function fetchLookupInfo(&$value, $id)
+     * Method that builds and executes a query that relies on information gotten from the previously ran query
+     *
+     * @params $value = the information from the previous query given to this method to build the query
+     *         $id = id given for certain queries that need specific id example: finding the tag for a certain article needs article_id
+     */
+
+    // TODO refactor
+    public function fetchLookupInfo(array &$value, string $id): void
     {
         if (!empty($value["table_name"])) {
             $sql = "SELECT {$value["display_names"]} FROM {$value['table_name']}";
 
-            if (!empty($value["value"])) {
 
-                if (!empty($value["bridge_table"])) {
-                    [$main, $bridge] = explode(",", $value["bridgevalues"]);
-                    $sql .= " JOIN {$value["bridge_table"]} ON {$main} = {$bridge}";
+            if (!empty($value["bridge_table"])) {
+                [$main, $bridge] = explode(",", $value["bridgevalues"]);
+                if (!empty($value["left_on"])) {
+                    $sql .= "LEFT JOIN {$value["bridge_table"]} ON {$main} = {$bridge} AND {$value["left_on"]} ={$id} ";
+                } else {
+                    $sql .= "JOIN {$value["bridge_table"]} ON {$main} = {$bridge}";
                 }
+            }
+            if (!empty($value["value"])) {
                 $sql .= " WHERE {$value['value']} = {$id}";
-
-                $sql .= " ORDER BY {$value['order_by']}";
             }
 
-            $result = $this->crudTemp->selectMany($sql, NULL, PDO::FETCH_KEY_PAIR);
+            $sql .= " ORDER BY {$value['order_by']}";
+
+
+            $result = $this->crudTemp->selectMany($sql, NULL, \PDO::FETCH_ASSOC);
+
             if (empty($result)) {
                 $result = array();
             }
 
-            $value["options"] = $result;
+            $options = [];
+            $marked = [];
+            foreach ($result as $row) {
+                if (isset($row['marked'])) {
+                    $marked[$row['id']] = $row['marked'];
+                }
+                $options[$row['id']] = $row['name'];
+            }
+
+            $value["options"] = $options;
+            $value["value"] = $marked;
         } else {
             $value["options"] = explode(",", $value["display_names"]);
         }
-
-
     }
 
-    public function fetchFieldNames($page_name)
+    public function fetchFieldNames(string $page_name): array|false
     {
         $sql = "SELECT  fi.name 
                 FROM field_info fi
@@ -107,7 +124,7 @@ class FormModel extends BaseModel
                 WHERE wi.name = :_page
                 ORDER BY fi.display_order;";
         $params = ["_page" => $page_name];
-        $result = $this->crudTemp->selectMany($sql, $params,PDO::FETCH_COLUMN);
+        $result = $this->crudTemp->selectMany($sql, $params, \PDO::FETCH_COLUMN);
 
         if (empty($result)) {
             $this->logError("Page has no Form");
@@ -116,5 +133,4 @@ class FormModel extends BaseModel
         unset($value);
         return $result;
     }
-
 }

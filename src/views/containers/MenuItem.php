@@ -1,4 +1,5 @@
 <?php
+
 namespace Wiki\views\containers;
 
 use Wiki\tools\utils\HtmlUtils;
@@ -12,8 +13,8 @@ class Menuitem extends ContainerElement
 
         parent::__construct(
             '<li' . HtmlUtils::addClassAttr($li_class) . '>' .
-            '<a href="?page=' . $safe_href . '"' . HtmlUtils::addClassAttr($class) . HtmlUtils::addAttrs($attrs) . '>' .
-            $safe_label . '</a>',
+                '<a href="?page=' . $safe_href . '"' . HtmlUtils::addClassAttr($class) . HtmlUtils::addAttrs($attrs) . '>' .
+                $safe_label . '</a>',
             "</li>"
         );
     }

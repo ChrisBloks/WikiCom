@@ -1,20 +1,25 @@
 <?php
+
 namespace Wiki\tools\traits;
+
 use Wiki\tools\interfaces;
-trait tElementContainer{
+
+trait tElementContainer
+{
 
     private array $collection = [];
 
-    public function addElement(interfaces\iElement $element): void{
+    public function addElement(interfaces\iElement $element): void
+    {
         $this->collection[] = $element;
     }
 
-    public function showChildElements(): string{
+    public function showChildElements(): string
+    {
         $str = "";
-        foreach ($this->collection as $element){
+        foreach ($this->collection as $element) {
             $str .= $element->show();
         }
         return $str;
     }
-
 }

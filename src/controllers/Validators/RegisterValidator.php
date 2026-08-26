@@ -1,5 +1,7 @@
 <?php
 
+namespace Wiki\controllers\validators;
+
 /**
  * Validator class for the registration form.
  */

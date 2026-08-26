@@ -1,5 +1,7 @@
 <?php
+
 namespace Wiki\controllers;
+
 use Wiki\tools\interfaces;
 
 /**
@@ -34,9 +36,9 @@ class MainController
      * @return interfaces\iController
      */
     private function getHandler(): interfaces\iController
-    {   
+    {
         // Ajax request. Action is equal to a specific update
-        if($this->async){
+        if ($this->async) {
             // return new AjaxController();
         }
 
