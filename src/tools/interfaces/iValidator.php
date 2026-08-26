@@ -5,5 +5,6 @@ namespace Wiki\tools\interfaces;
 interface iValidator
 {
     public function validate(string $page_name): bool;
+    public function getFieldInputs(): array;
     public function validateFields(array $field_inputs): bool;
 }

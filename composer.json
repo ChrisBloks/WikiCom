@@ -1,4 +1,5 @@
 {
+
     "name": "educom/wikiproject",
     "type": "project",
     "require": {
@@ -8,7 +9,7 @@
     "autoload": {
         "psr-4": {
             "Wiki\\": "src/",
-            "ManKind\\": "C:/xampp/htdocs/WikiCom/vendor/ManKind"
+            "ManKind\\": "C:/xampp/htdocs/Educom/Wiki/vendor/ManKind/"
         }
     }
 }
