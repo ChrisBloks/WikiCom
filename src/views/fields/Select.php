@@ -25,6 +25,6 @@ class Select extends BaseField
             $ret .= '<option value="' . $display . '">' . $display . '</option>';
         }
 
-        return $ret .= "</select><br>";
+        return $ret .= "</select>";
     }
 }
