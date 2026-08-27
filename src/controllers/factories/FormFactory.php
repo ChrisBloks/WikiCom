@@ -9,6 +9,8 @@ class FormFactory
     /*
     *
     */
+    protected array $value = [];
+
     public function createForm(array $form_info, array $field_info, array $hidden_field_info, array $field_text = [], string $class = ""): Form
     {
         $field_factory = new FieldFactory();
@@ -32,5 +34,10 @@ class FormFactory
             ));
         }
         return $form;
+    }
+
+    public function setValue (array $value): void
+    {
+        $this->value = $value;
     }
 }

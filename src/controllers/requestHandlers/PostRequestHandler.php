@@ -33,7 +33,7 @@ class PostRequestHandler extends BaseRequestHandler
                         $this->response['page'] = 'login';
                     }
                     else{
-                        $this->response['error'] = ModelSelector::getUserInfoModel()->getErrors();
+                        $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
                     }
                 }
                 break;
@@ -68,7 +68,7 @@ class PostRequestHandler extends BaseRequestHandler
                     $target_dir = \Config::AUTHORIMGPATH;
                     $filevar = $_FILES[$aboutinfo['name']];
                     $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
-                    $filename = 'author_' . $this->response['aboutID'] . '_' . date('mY') . '.' . $filetype . '';
+                    $filename = 'author_' . $this->response['aboutID'] . '_' . date('Ymd') . '.' . $filetype . '';
                     $target_file = $target_dir . $filename;
 
                     // uploading image
@@ -79,20 +79,18 @@ class PostRequestHandler extends BaseRequestHandler
                             author_id: $this->response['aboutID']
                         );
                         if ($result == false) {
-                            $this->response['error'] = ModelSelector::getUserInfoModel()->getErrors();
+                            $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
                         }
                     } else {
-                        $this->response['error'] = "Sorry, there was an error uploading your file.";
+                        $this->response['userError'] = "Sorry, there was an error uploading your file.";
                     }
                 }
                 break;
             case 'search':
-                print_r($_POST);
                 $field_info = ModelSelector::getFormModel()->fetchFieldInfo($this->response['page']);
                 foreach ($field_info as $field) {
                     $this->response[$field['name']] = $_POST[$field['name']];
                 }
-                HtmlUtils::dump("test",$this->response);
 
             // collect checkboxgroup van tags en authors
             // collect sortby rating/datum
