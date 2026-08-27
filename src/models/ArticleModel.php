@@ -36,11 +36,11 @@ class ArticleModel extends BaseModel
     public function fetchArticleById(int $article_id): array|false
     {
         $sql = "SELECT  article.title,
-                            user.name,
-                            article.summary,
-                            article.codeBlock,
-                            article.imgFileName,
-                            article.lastEdit 
+                        user.name,
+                        article.summary,
+                        article.codeBlock,
+                        article.imgFileName,
+                        article.lastEdit 
                     FROM wiki_article as article
                     JOIN user ON article.user_id=user.id 
                     WHERE article.id=:article_id";

@@ -4,9 +4,32 @@
   height: 300px;
   object-fit: cover;
 }
-
+.dashboard-pic {
+  width: 120px;
+  height: 120px;
+}
 .main-content {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
+}
+
+.checkbox_group{
+  max-height: 250px;  
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  border: 1px solid;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.checkbox{
+  column-count: 3;
+
+}
+
+.sort-by{
+  border: 1px solid;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }

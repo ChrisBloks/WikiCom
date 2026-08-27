@@ -20,13 +20,14 @@ class FirstCell
     // adds options to the first cell of each row: now only href to a page, and a form for delete
     public function returnFirstCellOptions(): string
     {
-
         $editUrl = utils\Url::buildUrl(['page' => $this->target_page, 'id' => $this->page_id]);
 
-        $str  = '<a href="' . $editUrl . '">'
+        $str = '<div class="d-flex gap-2 align-items-center">';
+        $str .= '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">'
             . $this->_actionLink($this->page_id, '&#10000;', 'Update')
             . '</a>';
         $str .= $this->_buildDeleteForm();
+        $str .= '</div>';
         return $str;
     }
 
@@ -36,7 +37,8 @@ class FirstCell
         $form = new containers\Form(
             action: '',
             method: 'POST',
-            submit_caption: '&#10060;'
+            submit_caption: '&#10060;',
+            submit_class: 'btn btn-danger btn-sm'
         );
         $form->addHiddenField('page', $this->delete_page);
         $form->addHiddenField('id', (string) $this->page_id);
