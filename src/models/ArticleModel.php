@@ -72,19 +72,35 @@ class ArticleModel extends BaseModel
         return $result;
     }
 
-        /**
-         * Fetches articles based on array of filters.
-         * Dynamically builds an SQL query.
-         * Articles are returned if there is (ANY match on $user_ids) AND (ANY match on $tag_ids).
-         * @param array $author_ids array of ints.
-         * @param array $tag_ids array of ints.
-         * @param string $sortBy defines contents of the SORT BY clause.
-         * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
-         */
-        public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ""): array|false
-        {
-                // Check if sortBy is a valid sorting method
-                $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
+    /**
+     * Get all tags from the database associated with a given article
+     * @param int $article_id
+     * @return array|false array of tags (strings) or false on failure
+     */
+    public function fetchArticleTags(int $article_id): array|false
+    {
+        $sql = "SELECT `name`
+                FROM
+                    wiki_tag
+                JOIN wiki_article_to_tag ON wiki_article_to_tag.wiki_tag_id = wiki_tag.id
+                WHERE article_id =:article_id";
+        $params = ["article_id" => $article_id];
+        return $this->crudTemp->selectMany($sql, $params, \PDO::FETCH_COLUMN);
+    }
+
+    /**
+     * Fetches articles based on array of filters.
+     * Dynamically builds an SQL query.
+     * Articles are returned if there is (ANY match on $user_ids) AND (ANY match on $tag_ids).
+     * @param array $author_ids array of ints.
+     * @param array $tag_ids array of ints.
+     * @param string $sortBy defines contents of the SORT BY clause.
+     * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
+     */
+    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ""): array|false
+    {
+        // Check if sortBy is a valid sorting method
+        $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
 
 
         $base_select_clause = "SELECT DISTINCT 

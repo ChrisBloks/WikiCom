@@ -195,3 +195,9 @@ Stack trace:
 =======
 >>>>>>> 4610e3745cd770deab008f04e29ac94d34ccfa28
 >>>>>>> 8c9c9ab1251a8bfb1091c3cb64fe3d7a78d34218
+27-08-2026 11:29:53 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+27-08-2026 11:29:53 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+27-08-2026 11:29:53 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 11:33:23 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+27-08-2026 11:33:23 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+27-08-2026 11:33:23 | ::1 | PHP 8.2.12 (WINNT) 
