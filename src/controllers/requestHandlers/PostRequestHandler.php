@@ -29,6 +29,12 @@ class PostRequestHandler extends BaseRequestHandler
                             password: $userInfo['password_1'],
                             email: $userInfo['email']
                         );
+                    if ($registrationResult !== false) {
+                        $this->response['page'] = 'login';
+                    }
+                    else{
+                        $this->response['error'] = ModelSelector::getUserInfoModel()->getErrors();
+                    }
                 }
                 break;
             case 'login':
