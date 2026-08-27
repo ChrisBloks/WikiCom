@@ -16,667 +16,217 @@
 26-08-2026 12:28:05 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
 26-08-2026 12:28:05 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
 26-08-2026 12:28:05 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 16:16:30 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:16:30 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:16:30 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(145): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-26-08-2026 13:14:54 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:14:54 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:14:54 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:14:55 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:14:55 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:14:55 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:15:14 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:15:14 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:15:14 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:15:14 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(64): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(20): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:15:14 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:15:14 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:18:43 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:18:43 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:18:43 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:18:44 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:18:44 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:18:44 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:18:49 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:18:49 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:18:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:26:43 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:26:43 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:26:43 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:26:44 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:26:44 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:26:44 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:26:45 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:26:45 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:26:45 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:27:27 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
-26-08-2026 13:27:27 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
-26-08-2026 13:27:27 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:28:38 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\UserHandler::checkContact(): Argument #2 ($validator) must be of type Wiki\controllers\validators\BaseValidator, Wiki\controllers\validators\Validator given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 75 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php:90
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(75): Wiki\controllers\UserHandler->checkContact(Array, Object(Wiki\controllers\validators\Validator))
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#5 {main}
-  thrown 
-26-08-2026 13:28:38 | ::1 | Fatal error on line 90 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
-26-08-2026 13:28:38 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:29:29 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\UserHandler::checkContact(): Argument #2 ($validator) must be of type Wiki\controllers\validators\BaseValidator, Wiki\controllers\validators\Validator given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 75 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php:90
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(75): Wiki\controllers\UserHandler->checkContact(Array, Object(Wiki\controllers\validators\Validator))
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#5 {main}
-  thrown 
-26-08-2026 13:29:29 | ::1 | Fatal error on line 90 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
-26-08-2026 13:29:29 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:29:32 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\UserHandler::checkContact(): Argument #2 ($validator) must be of type Wiki\controllers\validators\BaseValidator, Wiki\controllers\validators\Validator given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 75 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php:90
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(75): Wiki\controllers\UserHandler->checkContact(Array, Object(Wiki\controllers\validators\Validator))
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#5 {main}
-  thrown 
-26-08-2026 13:29:32 | ::1 | Fatal error on line 90 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
-26-08-2026 13:29:32 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:46:39 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:46:39 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:46:39 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:46:39 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:46:39 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:46:39 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:46:54 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:46:54 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:46:54 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:46:54 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:46:54 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:46:54 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:48:01 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:48:01 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:48:01 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:48:01 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:48:01 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:48:01 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:50:11 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:50:11 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:50:11 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:50:11 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:50:11 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:50:11 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:50:40 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:50:40 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:50:40 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:50:40 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 31 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(31): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:50:40 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:50:40 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:52:52 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:52:52 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:52:52 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:52:52 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:52:52 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:52:52 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:53:10 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:53:10 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:53:10 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:53:10 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:53:10 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:53:10 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:55:12 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:55:12 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:55:12 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:55:12 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:55:12 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:55:12 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:55:30 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:55:30 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:55:30 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:55:30 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:55:30 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:55:30 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:56:41 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:56:41 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:56:41 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:56:41 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:56:41 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:56:41 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:57:04 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:57:04 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:57:04 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:57:04 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:57:04 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:57:04 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:57:32 | ::1 | Unknown error type: [2] Array to string conversion 
-26-08-2026 13:57:32 | ::1 | Fatal error on line 11 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\EmailValidator.php 
-26-08-2026 13:57:32 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:57:32 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:57:32 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:57:32 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:57:32 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:57:32 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:57:32 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:57:55 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:57:55 | ::1 | Fatal error on line 11 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\EmailValidator.php 
-26-08-2026 13:57:55 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:57:55 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:57:55 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:57:55 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:57:55 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:57:55 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:57:55 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:58:11 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 13:58:11 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 13:58:11 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:58:11 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 13:58:11 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 13:58:11 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 13:59:24 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\EmailValidator::validateFields(): Argument #1 ($field_inputs) must be of type array, string given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php on line 43 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\EmailValidator.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php(43): Wiki\controllers\validators\EmailValidator->validateFields('danny@hotmail.c...')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\BaseValidator->validate('email')
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main}
-  thrown 
-26-08-2026 13:59:24 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\EmailValidator.php 
-26-08-2026 13:59:24 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:01:49 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\BaseValidator::validateFields(): Argument #1 ($field_inputs) must be of type array, string given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php on line 43 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php:62
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php(43): Wiki\controllers\validators\BaseValidator->validateFields('test')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\BaseValidator->validate('password')
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main}
-  thrown 
-26-08-2026 14:01:49 | ::1 | Fatal error on line 62 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php 
-26-08-2026 14:01:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:02:47 | ::1 | Unknown error type: [2] Undefined array key "email" 
-26-08-2026 14:02:47 | ::1 | Fatal error on line 43 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php 
-26-08-2026 14:02:47 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:02:47 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\BaseValidator::validateFields(): Argument #1 ($field_inputs) must be of type array, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php on line 43 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php:62
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php(43): Wiki\controllers\validators\BaseValidator->validateFields(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\BaseValidator->validate('password')
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main}
-  thrown 
-26-08-2026 14:02:47 | ::1 | Fatal error on line 62 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php 
-26-08-2026 14:02:47 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:02:59 | ::1 | Unknown error type: [2] Undefined array key "email" 
-26-08-2026 14:02:59 | ::1 | Fatal error on line 43 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php 
-26-08-2026 14:02:59 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:06:25 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\EmailValidator::validateFields(): Argument #1 ($field_inputs) must be of type array, string given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php on line 43 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\EmailValidator.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\BaseValidator.php(43): Wiki\controllers\validators\EmailValidator->validateFields('danny@email.com')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\BaseValidator->validate('email')
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->useValidators(Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(37): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main}
-  thrown 
-26-08-2026 14:06:25 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\EmailValidator.php 
-26-08-2026 14:06:25 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:06:52 | ::1 | Unknown error type: [1] Uncaught Error: Undefined constant Config::FIRST_CELL_TARGET in C:\xampp\htdocs\Educom\Wiki\src\views\Table.php:92
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\views\Table.php(65): Wiki\views\Table->buildCell(Array, 1, Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\views\Table.php(26): Wiki\views\Table->buildRows()
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(270): Wiki\views\Table->createTable('table\r\n        ...')
+26-08-2026 15:31:31 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:31:31 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:31:31 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(246): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
 #5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
 #6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-<<<<<<< HEAD
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
 #8 {main} 
-26-08-2026 16:17:27 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:17:27 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:17:27 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(147): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-=======
-#8 {main}
-  thrown 
-26-08-2026 14:06:52 | ::1 | Fatal error on line 92 in file C:\xampp\htdocs\Educom\Wiki\src\views\Table.php 
-26-08-2026 14:06:52 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:07:15 | ::1 | Unknown error type: [1] Uncaught Error: Undefined constant Config::FIRST_CELL_TARGET in C:\xampp\htdocs\Educom\Wiki\src\views\Table.php:92
+26-08-2026 15:31:32 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:31:32 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:31:32 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(246): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:31:33 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:31:33 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:31:33 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(246): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:32:02 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:32:02 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:32:02 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(246): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:32:03 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:32:03 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:32:03 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(246): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:32:13 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:32:13 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:32:13 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(246): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:32:43 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:32:43 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:32:43 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(247): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:32:45 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:32:45 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:32:45 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(247): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:34:54 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:34:54 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:34:54 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:34:55 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:34:55 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:34:55 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:35:49 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:35:49 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:35:49 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:36:03 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:36:03 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:36:03 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectOne('SELECT NAME\r\n  ...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:37:23 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:37:23 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:37:23 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectOne('SELECT `name`\r\n...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:37:24 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:37:24 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:37:24 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectOne('SELECT `name`\r\n...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:38:09 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:38:09 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:38:09 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectOne('SELECT `name`\r\n...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:38:10 | 127.0.0.1 | >>>>>> Error [HY093] on line 41 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:38:10 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:38:10 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(41): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectOne('SELECT `name`\r\n...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:38:51 | 127.0.0.1 | >>>>>> Error [HY093] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:38:51 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:38:51 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectMany('SELECT `name`\r\n...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 15:38:52 | 127.0.0.1 | >>>>>> Error [HY093] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 15:38:52 | 127.0.0.1 | >>>>>> SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens 
+26-08-2026 15:38:52 | 127.0.0.1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(242): Wiki\models\Crud->selectMany('SELECT `name`\r\n...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(240): Wiki\models\ArticleModel->fetchArticleTags('1')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#8 {main} 
+26-08-2026 16:11:38 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:11:38 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:11:38 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:11:38 | 127.0.0.1 | Unknown error type: [1] Uncaught Error: Class "Wiki\views\containers\AccordionItem" not found in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php:287
 Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\views\Table.php(65): Wiki\views\Table->buildCell(Array, 1, Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\views\Table.php(26): Wiki\views\Table->buildRows()
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(270): Wiki\views\Table->createTable('table\r\n        ...')
->>>>>>> e012b8eeebbfb68090a56a1697cb70622b9d298d
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-<<<<<<< HEAD
-#8 {main} 
-26-08-2026 16:18:20 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:18:20 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:18:20 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(148): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-=======
-#8 {main}
-  thrown 
-26-08-2026 14:07:15 | ::1 | Fatal error on line 92 in file C:\xampp\htdocs\Educom\Wiki\src\views\Table.php 
-26-08-2026 14:07:15 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:07:20 | ::1 | Unknown error type: [1] Uncaught Error: Undefined constant Config::FIRST_CELL_TARGET in C:\xampp\htdocs\Educom\Wiki\src\views\Table.php:92
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\views\Table.php(65): Wiki\views\Table->buildCell(Array, 1, Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\views\Table.php(26): Wiki\views\Table->buildRows()
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(270): Wiki\views\Table->createTable('table\r\n        ...')
->>>>>>> e012b8eeebbfb68090a56a1697cb70622b9d298d
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-<<<<<<< HEAD
-#8 {main} 
-26-08-2026 16:19:00 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:19:00 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:19:00 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(148): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-=======
-#8 {main}
-  thrown 
-26-08-2026 14:07:20 | ::1 | Fatal error on line 92 in file C:\xampp\htdocs\Educom\Wiki\src\views\Table.php 
-26-08-2026 14:07:20 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:07:34 | ::1 | Unknown error type: [1] Uncaught Error: Undefined constant Config::FIRST_CELL_TARGET in C:\xampp\htdocs\Educom\Wiki\src\views\Table.php:92
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\views\Table.php(65): Wiki\views\Table->buildCell(Array, 1, Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\views\Table.php(26): Wiki\views\Table->buildRows()
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(270): Wiki\views\Table->createTable('table\r\n        ...')
->>>>>>> e012b8eeebbfb68090a56a1697cb70622b9d298d
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-<<<<<<< HEAD
-#8 {main} 
-26-08-2026 16:19:57 | ::1 | Unknown error type: [2] Array to string conversion 
-26-08-2026 16:19:57 | ::1 | Fatal error on line 133 in file C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php 
-26-08-2026 16:19:57 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 16:19:57 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:19:57 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:19:57 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(148): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main} 
-26-08-2026 16:20:30 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:20:30 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:20:30 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(148): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main} 
-26-08-2026 16:20:53 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:20:53 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:20:53 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(148): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main} 
-26-08-2026 16:21:27 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:21:27 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:21:27 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(148): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main} 
-26-08-2026 16:23:09 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:23:09 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:23:09 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(150): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main} 
-26-08-2026 16:23:28 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:23:28 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.article_to_tag' doesn't exist 
-26-08-2026 16:23:28 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(151): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main} 
-26-08-2026 16:24:37 | ::1 | >>>>>> Error [42S02] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:24:37 | ::1 | >>>>>> SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.tag' doesn't exist 
-26-08-2026 16:24:37 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(151): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main} 
-26-08-2026 16:26:04 | ::1 | >>>>>> Error [42S22] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
-26-08-2026 16:26:04 | ::1 | >>>>>> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'att.tag_id' in 'where clause' 
-26-08-2026 16:26:04 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php(151): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(209): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main} 
-=======
-#8 {main}
-  thrown 
-26-08-2026 14:07:34 | ::1 | Fatal error on line 92 in file C:\xampp\htdocs\Educom\Wiki\src\views\Table.php 
-26-08-2026 14:07:34 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:08:25 | ::1 | Unknown error type: [1] Uncaught ValueError: "file" is not a valid backing value for enum Wiki\controllers\factories\ValidatorFactory in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php:48
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(48): Wiki\controllers\factories\ValidatorFactory::from('file')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(24): Wiki\controllers\validators\Validator->getValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(110): Wiki\controllers\validators\Validator->useValidators(Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#8 {main}
-  thrown 
-26-08-2026 14:08:25 | ::1 | Fatal error on line 48 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 14:08:25 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:26:38 | ::1 | Unknown error type: [2] Undefined array key "articleimg" 
-26-08-2026 14:26:38 | ::1 | Fatal error on line 53 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
-26-08-2026 14:26:38 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:33:52 | ::1 | Unknown error type: [1] Uncaught Error: Undefined constant Config::AUTHORIMGPATH in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php:53
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#4 {main}
-  thrown 
-26-08-2026 14:33:52 | ::1 | Fatal error on line 53 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
-26-08-2026 14:33:52 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:54:36 | ::1 | Unknown error type: [2] Undefined array key "enctype" 
-26-08-2026 14:54:36 | ::1 | Fatal error on line 19 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FormFactory.php 
-26-08-2026 14:54:36 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 14:54:36 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\views\containers\Form::__construct(): Argument #5 ($enctype) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FormFactory.php on line 15 and defined in C:\xampp\htdocs\Educom\Wiki\src\views\containers\Form.php:16
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FormFactory.php(15): Wiki\views\containers\Form->__construct('', 'POST', 'Send message', '', NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(182): Wiki\controllers\factories\FormFactory->createForm(Array, Array, Array, Array, 'form-group')
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 14:54:36 | ::1 | Fatal error on line 16 in file C:\xampp\htdocs\Educom\Wiki\src\views\containers\Form.php 
-26-08-2026 14:54:36 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:10:00 | ::1 | Unknown error type: [1] Uncaught Error: Undefined constant Config::AUTHORIMGPATH in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php:53
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#4 {main}
-  thrown 
-26-08-2026 15:10:00 | ::1 | Fatal error on line 53 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
-26-08-2026 15:10:00 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:24:54 | ::1 | Unknown error type: [2] Undefined array key 0 
-26-08-2026 15:24:54 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
-26-08-2026 15:24:54 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:24:54 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\Validator::logError(): Argument #1 ($message) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php:9
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(30): Wiki\controllers\validators\Validator->logError(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#7 {main}
-  thrown 
-26-08-2026 15:24:54 | ::1 | Fatal error on line 9 in file C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tErrorMessageCollector.php 
-26-08-2026 15:24:54 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:46:36 | ::1 | >>>>>> Error [0] on line 292 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
-26-08-2026 15:46:36 | ::1 | >>>>>> No page defined for: '. '.' 
-26-08-2026 15:46:36 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
 #1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#5 {main} 
-26-08-2026 15:46:49 | ::1 | Unknown error type: [2] Undefined array key "name" 
-26-08-2026 15:46:49 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
-26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:46:49 | ::1 | Unknown error type: [2] Undefined array key "" 
-26-08-2026 15:46:49 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
-26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:46:49 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
-26-08-2026 15:46:49 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
-26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:46:49 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
-26-08-2026 15:46:49 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
-26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:46:49 | ::1 | Unknown error type: [2] Undefined array key "fileToUpload" 
-26-08-2026 15:46:49 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
-26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:46:49 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
-26-08-2026 15:46:49 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
-26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:46:49 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
-26-08-2026 15:46:49 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
-26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
-26-08-2026 15:46:49 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:32
-Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(32): getimagesize('')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
-#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
-#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
-#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
-#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
-#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
-#9 {main}
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
+#5 {main}
   thrown 
+<<<<<<< HEAD
 26-08-2026 15:46:49 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
 26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
 26-08-2026 15:47:37 | ::1 | Unknown error type: [2] Undefined array key "name" 
@@ -1057,3 +607,262 @@ Stack trace:
 #6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
 #7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #8 {main} 
+=======
+26-08-2026 16:11:38 | 127.0.0.1 | Fatal error on line 287 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:11:38 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:25 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:25 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:25 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:25 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:25 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:25 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:25 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:25 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:25 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:25 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:25 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:25 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:25 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:25 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:25 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:31 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:31 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:31 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:31 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:31 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:31 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:31 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:31 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:31 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:31 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:31 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:31 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:31 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:31 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:31 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:32 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:32 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:32 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:32 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:32 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:33 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:33 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:33 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:33 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:33 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:33 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:33 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:33 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:33 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:33 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:33 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:33 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:12:33 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:12:33 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:12:33 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:22 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:22 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:22 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:22 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:22 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:24 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:24 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:24 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:24 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:24 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:24 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:24 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:24 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:24 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:24 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:24 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:24 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:13:24 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:13:24 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:13:24 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:04 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:04 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:04 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:04 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:04 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:04 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:04 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:04 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:04 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:04 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:04 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:04 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:04 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:04 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:04 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:32 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:32 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:32 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:32 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:14:32 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:14:32 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:14:32 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:12 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:12 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:12 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:12 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:12 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:22 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:22 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:22 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:22 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:15:22 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:15:22 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:15:22 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:17:35 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:17:35 | 127.0.0.1 | Fatal error on line 251 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:17:35 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:17:35 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:17:35 | 127.0.0.1 | Fatal error on line 254 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:17:35 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:17:35 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:17:35 | 127.0.0.1 | Fatal error on line 257 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:17:35 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:17:35 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:17:35 | 127.0.0.1 | Fatal error on line 262 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:17:35 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:17:35 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:17:35 | 127.0.0.1 | Fatal error on line 265 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:17:35 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:21:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:21:12 | 127.0.0.1 | Fatal error on line 252 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:21:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:21:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:21:12 | 127.0.0.1 | Fatal error on line 256 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:21:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:21:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:21:12 | 127.0.0.1 | Fatal error on line 259 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:21:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:21:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:21:12 | 127.0.0.1 | Fatal error on line 265 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:21:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:21:12 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:21:12 | 127.0.0.1 | Fatal error on line 268 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:21:12 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:26:29 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:26:29 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:26:29 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:26:29 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:26:29 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:26:29 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:26:29 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:26:29 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:26:29 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:26:29 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:26:29 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:26:29 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:26:29 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:26:29 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:26:29 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:10 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:10 | 127.0.0.1 | Fatal error on line 285 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:10 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:10 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:10 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:10 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:10 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:10 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:10 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:10 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:10 | 127.0.0.1 | Fatal error on line 296 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:10 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:10 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:10 | 127.0.0.1 | Fatal error on line 299 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:10 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:28 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:28 | 127.0.0.1 | Fatal error on line 277 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:28 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:28 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:28 | 127.0.0.1 | Fatal error on line 280 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:28 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:28 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:28 | 127.0.0.1 | Fatal error on line 283 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:28 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:28 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:28 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:28 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:27:28 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:27:28 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:27:28 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:31:56 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:31:56 | 127.0.0.1 | Fatal error on line 277 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:31:56 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:31:56 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:31:56 | 127.0.0.1 | Fatal error on line 280 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:31:56 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:31:56 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:31:56 | 127.0.0.1 | Fatal error on line 283 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:31:56 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:31:56 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:31:56 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:31:56 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:31:56 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:31:56 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:31:56 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:32:13 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:32:13 | 127.0.0.1 | Fatal error on line 277 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:32:13 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:32:13 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:32:13 | 127.0.0.1 | Fatal error on line 280 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:32:13 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:32:13 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:32:13 | 127.0.0.1 | Fatal error on line 283 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:32:13 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:32:13 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:32:13 | 127.0.0.1 | Fatal error on line 288 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:32:13 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+26-08-2026 16:32:13 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
+26-08-2026 16:32:13 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+26-08-2026 16:32:13 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+>>>>>>> 7eae282d2eb059e89cb5e3037c44f786e967ff1e

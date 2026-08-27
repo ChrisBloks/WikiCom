@@ -29,7 +29,8 @@ Wiki\views\containers\AuthorText,
 Wiki\views\containers\CodeBlock,
 Wiki\views\containers\Footer,
 Wiki\views\containers\ContainerElement,
-Wiki\views\containers\MainElement;
+Wiki\views\containers\MainElement,
+Wiki\views\containers\AccordionItem;
 
 
 
@@ -115,7 +116,7 @@ class PageFactory
         } else {
             $this->htmlpage->addToBodyContent(new AtomicElement('<p '
                 . HtmlUtils::addClassAttr("w3-xlarge")
-                . '><br></p>'));
+                . '></p>'));
         }
 
         $main = new MainElement();
@@ -136,7 +137,8 @@ class PageFactory
 
             case 'about':
                 $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
-                $container = new ContainerElement('<div>', '</div>');
+                $main_container = new ContainerElement('<div class="d-flex align-items-center w-75 mx-auto">', '</div>');
+                $sub_container = new ContainerElement('<div class="flex-grow-1">', '</div>');
                 if ($this->response['userID'] == $this->response['aboutID']) // author equals user
                 {
                     $formFactory = new FormFactory();
@@ -152,24 +154,25 @@ class PageFactory
                         field_text: ["description" => $aboutinfo["description"]],
                         class: $form_info["display_class"]
                     );
-                    $container->addElement(new Title(text: $aboutinfo['name']));
-                    $container->addElement($form);
-                    $main->addElement($container);
+                    $main_container->addElement(new Title(text: $aboutinfo['name']));
+                    $main_container->addElement($form);
+                    $main->addElement($main_container);
                 } else {
-                    $container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: $aboutinfo['img_class']
-                    ));
-                    $container->addElement(new Title(
+
+                    $sub_container->addElement(new Title(
                         text: $aboutinfo['name'],
                         class: $aboutinfo['name_class']
                     ));
-                    $container->addElement(new BodyText(
+                    $sub_container->addElement(new BodyText(
                         text: $aboutinfo['description'],
                         class: $aboutinfo['description_class']
                     ));
-
-                    $main->addElement($container);
+                    $main_container->addElement($sub_container);
+                    $main_container->addElement(new Image(
+                        name: './img/authors/' . $aboutinfo['imgFileName'],
+                        class: $aboutinfo['img_class']
+                    ));
+                    $main->addElement($main_container);
                 }
                 break;
             case 'contact':
@@ -237,34 +240,52 @@ class PageFactory
             case 'article':
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
+                $tags = ModelSelector::getArticleModel()->fetchArticleTags($this->response['articleID']);
                 // ToDo: add accordion functionality to body text and code element
-                $container = new ContainerElement("<div>", "</div>");
-                $container->addElement(new Title(
+
+                // Outer Div: image + text-div 
+                $outer_container = new ContainerElement('<div class="d-flex align-items-center w-75 mx-auto">', '</div>');
+
+                // Inner text div: Title/Author/text/code
+                $text_container = new ContainerElement('<div class="flex-grow-1">', '</div>');
+
+                $text_container->addElement(new Title(
                     text: ucfirst($bodyinfo['title']),
                     class: $classes['title_class']
                 ));
-                $container->addElement(new AuthorText(
+                $text_container->addElement(new AuthorText(
                     text: "Author: " . ucfirst($bodyinfo['name']) . "",
                     class: $classes['author_class']
                 ));
-                $container->addElement(new BodyText(
-                    text: "<p1>" . ucfirst($bodyinfo['summary']) . "</p>",
+                $display_tags = '';
+                foreach ($tags as $key => $value) {
+                    $display_tags .= '<a>' . $value . ' </a>';
+                }
+                $text_container->addElement(new BodyText(
+                    text: $display_tags,
+                    class: 'border-bottom mb-3'
+                ));
+                $text_container->addElement(new BodyText(
+                    text: ucfirst($bodyinfo['summary']),
                     class: $classes['body_class']
                 ));
-                $container->addElement(new CodeBlock(
+                $text_container->addElement(new CodeBlock(
                     text: $bodyinfo['codeBlock'],
                     class: $classes['codeblock_class']
                 ));
-                $container->addElement(new Image(
+
+                // Assemble: text column first (left), image second (right)
+                $outer_container->addElement($text_container);
+                $outer_container->addElement(new Image(
                     name: './img/article/' . $bodyinfo['imgFileName'],
                     class: $classes['img_class']
                 ));
 
-                $main->addElement($container);
+                $main->addElement($outer_container);
                 break;
             case 'dashboard':
                 $container = new ContainerElement("<div>", "</div>");
-                
+
                 $container->addElement(new Title("Articles:"));
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["id", "title", "lastEdit"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
@@ -293,7 +314,7 @@ class PageFactory
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
         }
-        
+
         // end of switch statement
         // add the <main> to the body content
         $this->htmlpage->addToBodyContent($main);
