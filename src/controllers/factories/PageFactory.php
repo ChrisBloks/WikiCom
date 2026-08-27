@@ -14,23 +14,23 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-Wiki\tools\traits\tErrorMessageCollector,
-Wiki\tools\exceptions\PageNotFoundException,
-Wiki\models\ModelSelector,
-Wiki\controllers\factories\MenuFactory,
-Wiki\views\BasePage,
-Wiki\views\Table,
-Wiki\views\containers\AtomicElement,
-Wiki\views\containers\Header,
-Wiki\views\containers\BodyText,
-Wiki\views\containers\Title,
-Wiki\views\containers\Image,
-Wiki\views\containers\AuthorText,
-Wiki\views\containers\CodeBlock,
-Wiki\views\containers\Footer,
-Wiki\views\containers\ContainerElement,
-Wiki\views\containers\MainElement,
-Wiki\views\containers\AccordionItem;
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer,
+    Wiki\views\containers\ContainerElement,
+    Wiki\views\containers\MainElement,
+    Wiki\views\containers\AccordionItem;
 
 
 
@@ -249,16 +249,17 @@ class PageFactory
                 // ToDo: add accordion functionality to body text and code element
 
                 // Outer Div: image + text-div 
-                $outer_container = new ContainerElement('<div class="d-flex align-items-center w-75 mx-auto">', '</div>');
+                $outer_container = new ContainerElement('<div class="align-items-center w-75 mx-auto">', '</div>');
 
                 // Inner text div: Title/Author/text/code
-                $text_container = new ContainerElement('<div class="flex-grow-1">', '</div>');
+                $text_container = new ContainerElement('<div class="d-flex flex-grow-1">', '</div>');
 
-                $text_container->addElement(new Title(
+                // Top div with title, author, tags and decription title
+                $outer_container->addElement(new Title(
                     text: ucfirst($bodyinfo['title']),
                     class: $classes['title_class']
                 ));
-                $text_container->addElement(new AuthorText(
+                $outer_container->addElement(new AuthorText(
                     text: "Author: " . ucfirst($bodyinfo['name']) . "",
                     class: $classes['author_class']
                 ));
@@ -266,27 +267,42 @@ class PageFactory
                 foreach ($tags as $key => $value) {
                     $display_tags .= '<a>' . $value . ' </a>';
                 }
-                $text_container->addElement(new BodyText(
+
+                $outer_container->addElement(new BodyText(
                     text: $display_tags,
-                    class: 'border-bottom mb-3'
+                    class: 'border-bottom border-top mb-3'
                 ));
+                $outer_container->addElement(new Title(
+                    text: 'Description',
+                    class: "h4 mb-4"
+                ));
+
+                // Div with body text and image
                 $text_container->addElement(new BodyText(
                     text: ucfirst($bodyinfo['summary']),
                     class: $classes['body_class']
                 ));
-                $text_container->addElement(new CodeBlock(
+                $text_container->addElement(new Image(
+                    name: './img/article/' . $bodyinfo['imgFileName'],
+                    class: $classes['img_class']
+                ));
+                $outer_container->addElement($text_container);
+
+
+                // bottom div with codeblock
+                $bottom_container = new ContainerElement('<div class="align-items-center w-75 mx-auto mt-4">', '</div>');
+                $bottom_container->addElement(new Title(
+                    text: 'Code',
+                    class: "h4"
+                ));
+                $bottom_container->addElement(new CodeBlock(
                     text: $bodyinfo['codeBlock'],
                     class: $classes['codeblock_class']
                 ));
 
-                // Assemble: text column first (left), image second (right)
-                $outer_container->addElement($text_container);
-                $outer_container->addElement(new Image(
-                    name: './img/article/' . $bodyinfo['imgFileName'],
-                    class: $classes['img_class']
-                ));
-
                 $main->addElement($outer_container);
+                $main->addElement(new ContainerElement('<hr class="w-75 mx-auto my-4">', ''));
+                $main->addElement($bottom_container);
                 break;
             case 'dashboard':
                 $container = new ContainerElement("<div>", "</div>");
