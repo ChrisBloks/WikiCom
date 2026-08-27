@@ -74,6 +74,7 @@ class ArticleModel extends BaseModel
 
     /**
      * Fetches articles based on array of filters.
+     * Dynamically builds an SQL query.
      * Articles are returned if there is (ANY match on $user_ids) AND (ANY match on $tag_ids).
      * @param array $author_ids array of ints.
      * @param array $tag_ids array of ints.
@@ -156,7 +157,6 @@ class ArticleModel extends BaseModel
      */
     private function buildInClause(string $reference, array $values, string $prefix): array
     {
-
             $placeholders = []; // Will contain strings for binding variables
             $params = []; // Will contain a mapping of placeholders to variables
 

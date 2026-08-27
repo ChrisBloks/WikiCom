@@ -35,12 +35,12 @@ class FormModel extends BaseModel
             $this->logError("Page has no Form");
             return false;
         }
-        foreach ($result as &$value) {
-            if (isset($value["id"])) {
-                $this->fetchLookupInfo($value, $id);
+        foreach ($result as &$field_info) {
+            if (isset($field_info["id"])) {
+                $this->fetchLookupInfo($field_info, $id);
             }
         }
-        unset($value);
+        unset($field_info);
         return $result;
     }
 
@@ -73,30 +73,29 @@ class FormModel extends BaseModel
      */
 
     // TODO refactor
-    public function fetchLookupInfo(array &$value, string $id): void
+    public function fetchLookupInfo(array &$field_info, string $id): void
     {
-        if (!empty($value["table_name"])) {
-            $sql = "SELECT {$value["display_names"]} FROM {$value['table_name']}";
+        if (!empty($field_info["table_name"])) {
+            $sql = "SELECT {$field_info["display_names"]} FROM {$field_info['table_name']}";
 
-
-            if (!empty($value["bridge_table"])) {
-                [$main, $bridge] = explode(",", $value["bridgevalues"]);
-                if (!empty($value["left_on"])) {
-                    $sql .= "LEFT JOIN {$value["bridge_table"]} ON {$main} = {$bridge} AND {$value["left_on"]} ={$id} ";
+            if (!empty($field_info["bridge_table"])) {
+                [$main, $bridge] = explode(",", $field_info["bridgevalues"]);
+                if (!empty($field_info["left_on"])) {
+                    $sql .= "LEFT JOIN {$field_info["bridge_table"]} ON {$main} = {$bridge} AND {$field_info["left_on"]} ={$id} ";
                 } else {
-                    $sql .= "JOIN {$value["bridge_table"]} ON {$main} = {$bridge}";
+                    $sql .= "JOIN {$field_info["bridge_table"]} ON {$main} = {$bridge}";
                 }
             }
-            if (!empty($value["value"])) {
-                $sql .= " WHERE {$value['value']} = {$id}";
+            if (!empty($field_info["value"])) {
+                $sql .= " WHERE {$field_info['value']} = {$id}";
             }
 
-            $sql .= " ORDER BY {$value['order_by']}";
+            $sql .= " ORDER BY {$field_info['order_by']}";
 
 
             $result = $this->crudTemp->selectMany($sql, NULL, \PDO::FETCH_ASSOC);
 
-            if (empty($result)) {
+            if ($result === false) {
                 $result = array();
             }
 
@@ -109,10 +108,10 @@ class FormModel extends BaseModel
                 $options[$row['id']] = $row['name'];
             }
 
-            $value["options"] = $options;
-            $value["value"] = $marked;
+            $field_info["options"] = $options;
+            $field_info["value"] = $marked;
         } else {
-            $value["options"] = explode(",", $value["display_names"]);
+            $field_info["options"] = explode(",", $field_info["display_names"]);
         }
     }
 
