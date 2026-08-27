@@ -20,7 +20,7 @@ class UserInfoModel extends BaseModel
         $sql = "SELECT id,name,password FROM user 
                         WHERE email=:email";
         $params = ["email" => $email];
-        $result = $this->crudTemp->selectOne($sql, $params);
+        $result = $this->crud->selectOne($sql, $params);
 
         if (empty($result)) {
             $this->logError("no account with this email");
@@ -39,7 +39,7 @@ class UserInfoModel extends BaseModel
         $sql = "SELECT email FROM user 
                         WHERE email=:email";
         $params = ["email" => $email];
-        $result = $this->crudTemp->selectOne($sql, $params);
+        $result = $this->crud->selectOne($sql, $params);
         return $result;
     }
 
@@ -59,7 +59,7 @@ class UserInfoModel extends BaseModel
             "password" => $hashed_password,
             "email" => $email
         ];
-        $result = $this->crudTemp->doInsert($sql, $params);
+        $result = $this->crud->doInsert($sql, $params);
         if (empty($result)) {
             $this->logError("registration failed");
             $result = false;
@@ -85,7 +85,7 @@ class UserInfoModel extends BaseModel
             "imgFileName" => $imgFileName,
             "description" => $description
         ];
-        $result = $this->crudTemp->doInsert($sql, $params);
+        $result = $this->crud->doInsert($sql, $params);
         if (empty($result)) {
             $this->logError("registration failed");
             $result = false;
@@ -103,7 +103,7 @@ class UserInfoModel extends BaseModel
         $sql = "SELECT * FROM user 
                         WHERE id=:user_id";
         $params = ['user_id' => $user_id];
-        $result = $this->crudTemp->selectOne($sql, $params);
+        $result = $this->crud->selectOne($sql, $params);
         if (empty($result)) {
             $this->logError("No user with this id");
             $result = false;

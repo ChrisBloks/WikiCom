@@ -20,7 +20,7 @@ class WebsiteInfoModel extends BaseModel
                 FROM website_info 
                 WHERE name=:page";
         $params = ["page" => $page_name];
-        $result = $this->crudTemp->selectOne($sql, $params);
+        $result = $this->crud->selectOne($sql, $params);
         if (empty($result)) {
             $this->logError("Page has no Body text");
             return false;
@@ -41,7 +41,7 @@ class WebsiteInfoModel extends BaseModel
         $sql = "SELECT name,description,imgFileName FROM user 
                 WHERE id=:userid";
         $params = ["userid" => $user_id];
-        $result = $this->crudTemp->selectOne($sql, $params);
+        $result = $this->crud->selectOne($sql, $params);
         if (empty($result)) {
             $this->logError("User has no info");
             return false;
@@ -66,7 +66,7 @@ class WebsiteInfoModel extends BaseModel
             "email" => $email,
             "date" => date('Y-m-d'),
         ];
-        return $this->crudTemp->doInsert($sql, $params);
+        return $this->crud->doInsert($sql, $params);
     }
     /*
     * method that grabs the menu items from the database based on if the user is logged in
@@ -83,7 +83,7 @@ class WebsiteInfoModel extends BaseModel
             FROM menu_items mi
             WHERE mi.label NOT IN ($placeholders)
             ORDER BY mi.display_order";
-        $result = $this->crudTemp->selectMany($sql, $excluded);
+        $result = $this->crud->selectMany($sql, $excluded);
 
         $authorlist = [];
         foreach ($this->fetchAuthor() as $id => $name) {
@@ -108,7 +108,7 @@ class WebsiteInfoModel extends BaseModel
     public function fetchAuthor()
     {
         $sql = "SELECT id,name FROM user ORDER BY user.name";
-        return $this->crudTemp->selectMany($sql, NULL, \PDO::FETCH_KEY_PAIR);
+        return $this->crud->selectMany($sql, NULL, \PDO::FETCH_KEY_PAIR);
     }
     /*
     * method that gets all table column info
@@ -124,7 +124,7 @@ class WebsiteInfoModel extends BaseModel
                        `column_headers`
                        FROM table_columns
                        WHERE column_name in ($placeholders)";
-        $result = $this->crudTemp->selectMany($sql, $columns, \PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
+        $result = $this->crud->selectMany($sql, $columns, \PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
 
         return $result;
     }
@@ -136,7 +136,7 @@ class WebsiteInfoModel extends BaseModel
                 JOIN  website_info as wi on wi.id = dc.website_info_id
                 WHERE wi.name = :page";
         $params = ["page" => $page_name];
-        $classrows = $this->crudTemp->selectMany($sql, $params);
+        $classrows = $this->crud->selectMany($sql, $params);
 
         $classes = [];
         foreach ($classrows as $row) {

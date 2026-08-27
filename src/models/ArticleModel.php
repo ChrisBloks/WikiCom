@@ -45,7 +45,7 @@ class ArticleModel extends BaseModel
                     JOIN user ON article.user_id=user.id 
                     WHERE article.id=:article_id";
         $params = ['article_id' => $article_id];
-        $result = $this->crudTemp->selectOne(sql: $sql, params: $params);
+        $result = $this->crud->selectOne(sql: $sql, params: $params);
         if ($result === false) {
             $result = [];
         }
@@ -65,7 +65,7 @@ class ArticleModel extends BaseModel
                     FROM wiki_article as article
                     WHERE user_id=:user_id";
         $params = ['user_id' => $user_id];
-        $result = $this->crudTemp->selectMany(sql: $sql, params: $params);
+        $result = $this->crud->selectMany(sql: $sql, params: $params);
         if (empty($result)) {
             $result = false;
         }
@@ -85,7 +85,7 @@ class ArticleModel extends BaseModel
                 JOIN wiki_article_to_tag ON wiki_article_to_tag.wiki_tag_id = wiki_tag.id
                 WHERE article_id =:article_id";
         $params = ["article_id" => $article_id];
-        return $this->crudTemp->selectMany($sql, $params, \PDO::FETCH_COLUMN);
+        return $this->crud->selectMany($sql, $params, \PDO::FETCH_COLUMN);
     }
 
     /**
@@ -110,7 +110,7 @@ class ArticleModel extends BaseModel
                                 article.lastEdit";
 
         $extra_select_clause = ", COALESCE(vr.AVGrating, 0) AS rating" .
-            (!empty($author_ids) ? // If authors are specified
+            (!empty($author_ids) ? // (optional append) If authors are specified
                 " ,user.name as author" : // get the authors
                 ""); // get average rating
 
@@ -155,7 +155,7 @@ class ArticleModel extends BaseModel
             $where_clause .
             $order_by_clause;
 
-        return $this->crudTemp->selectMany(sql: $sql, params: $params);
+        return $this->crud->selectMany(sql: $sql, params: $params);
     }
 
     /**
@@ -213,7 +213,7 @@ class ArticleModel extends BaseModel
             ':user_id' => $user_id,
             ':lastEdit' => date(format: 'Y-m-d'),
         ];
-        $result = $this->crudTemp->doInsert(sql: $sql, params: $params);
+        $result = $this->crud->doInsert(sql: $sql, params: $params);
         if ($result === false) {
             $this->logError(message: "Failed to save article to the database.");
         }
@@ -250,7 +250,7 @@ class ArticleModel extends BaseModel
             ':lastEdit' => date('Y-m-d'),
         ];
 
-        return $this->crudTemp->doUpdate(sql: $sql, params: $params);
+        return $this->crud->doUpdate(sql: $sql, params: $params);
     }
 
 
@@ -264,7 +264,7 @@ class ArticleModel extends BaseModel
         $sql = "SELECT name FROM tag 
                     WHERE name=:tag_name";
         $params = ["tag_name" => $tag_name];
-        $result = $this->crudTemp->selectOne(sql: $sql, params: $params);
+        $result = $this->crud->selectOne(sql: $sql, params: $params);
         return !empty($result);
     }
 
@@ -278,8 +278,8 @@ class ArticleModel extends BaseModel
         $sql = "SELECT title FROM wiki_article 
                     WHERE title=:title_name";
         $params = ["title_name" => $title_name];
-        $result = $this->crudTemp->selectOne(sql: $sql, params: $params);
-        return empty($result);
+        $result = $this->crud->selectOne(sql: $sql, params: $params);
+        return !empty($result);
     }
 
     /**
@@ -292,7 +292,7 @@ class ArticleModel extends BaseModel
         $sql = "INSERT INTO tag (name) 
                     VALUES (:tag_name)";
         $params = ["tag_name" => $tag_name];
-        return $this->crudTemp->doInsert(sql: $sql, params: $params);
+        return $this->crud->doInsert(sql: $sql, params: $params);
     }
 
     /**
@@ -307,6 +307,6 @@ class ArticleModel extends BaseModel
         $sql = "INSERT INTO article_to_tag (article_id, tag_id) 
                     VALUES (:article_id,:tag_id)";
         $params = ["article_id" => $article_id, "tag_id" => $tag_id];
-        return $this->crudTemp->doInsert(sql: $sql, params: $params);
+        return $this->crud->doInsert(sql: $sql, params: $params);
     }
 }
