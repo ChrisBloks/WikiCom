@@ -137,10 +137,13 @@ class PageFactory
 
             case 'about':
                 $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
-                $main_container = new ContainerElement('<div class="d-flex align-items-center w-75 mx-auto">', '</div>');
-                $sub_container = new ContainerElement('<div class="flex-grow-1">', '</div>');
-                if ($this->response['userID'] == $this->response['aboutID']) // author equals user
-                {
+
+                if ($this->response['userID'] == $this->response['aboutID']) {
+                    // Editable view: title on top, image above form (column)
+                    $top_container = new ContainerElement('<div class="flex-grow-1">', '</div>');
+                    $main_container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', '</div>');
+                    $sub_container = new ContainerElement('<div>', '</div>');
+
                     $formFactory = new FormFactory();
                     $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                     $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
@@ -154,14 +157,25 @@ class PageFactory
                         field_text: ["description" => $aboutinfo["description"]],
                         class: $form_info["display_class"]
                     );
-                    $main_container->addElement(new Title(text: $aboutinfo['name']));
-                    $main_container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: $aboutinfo['img_class']
+
+                    $top_container->addElement(new Title(
+                        text: $aboutinfo['name'],
+                        class: "fs-1 text-center border-bottom"
                     ));
+
+                    $sub_container->addElement(new Image(
+                        name: './img/authors/' . $aboutinfo['imgFileName'],
+                        class: $aboutinfo['img_class'] . ' mb-3'
+                    ));
+
+                    $main->addElement($top_container);
+                    $main_container->addElement($sub_container);
                     $main_container->addElement($form);
                     $main->addElement($main_container);
                 } else {
+                    // Read-only view: text left, image right (row)
+                    $main_container = new ContainerElement('<div class="d-flex align-items-center w-75 mx-auto">', '</div>');
+                    $sub_container = new ContainerElement('<div class="flex-grow-1">', '</div>');
 
                     $sub_container->addElement(new Title(
                         text: $aboutinfo['name'],
@@ -171,11 +185,13 @@ class PageFactory
                         text: $aboutinfo['description'],
                         class: $aboutinfo['description_class']
                     ));
+
                     $main_container->addElement($sub_container);
                     $main_container->addElement(new Image(
                         name: './img/authors/' . $aboutinfo['imgFileName'],
                         class: $aboutinfo['img_class']
                     ));
+
                     $main->addElement($main_container);
                 }
                 break;
