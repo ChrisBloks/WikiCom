@@ -3,12 +3,12 @@
 namespace Wiki\controllers\requestHandlers;
 
 use Wiki\tools\utils\Utils,
-    Wiki\tools\utils\HtmlUtils,
-    Wiki\controllers\validators\BaseValidator,
-    Wiki\controllers\validators\RegisterValidator,
-    Wiki\controllers\UserHandler,
-    Wiki\controllers\validators\Validator,
-    Wiki\models\ModelSelector;
+Wiki\tools\utils\HtmlUtils,
+Wiki\controllers\validators\BaseValidator,
+Wiki\controllers\validators\RegisterValidator,
+Wiki\controllers\UserHandler,
+Wiki\controllers\validators\Validator,
+Wiki\models\ModelSelector;
 
 class PostRequestHandler extends BaseRequestHandler
 {
@@ -20,9 +20,9 @@ class PostRequestHandler extends BaseRequestHandler
                 $validator = new Validator();
                 // Validate user inputs on the registration form
                 $userInfo = UserHandler::getInstance()->checkRegistration($this->response, $validator);
-                
+
                 // If validation was succesful, add new user to the database
-                if ($userInfo !== false){
+                if ($userInfo !== false) {
                     $registrationResult = ModelSelector::getUserInfoModel()
                         ->saveUser(
                             username: $userInfo['name'],
@@ -48,20 +48,45 @@ class PostRequestHandler extends BaseRequestHandler
 
                 break;
             case 'about':
-                $validator = new Validator();
-                $aboutinfo = UserHandler::getInstance()->checkAboutInfo($this->response,$validator);
-                $target_dir = \Config::AUTHORIMGPATH;
-                $target_file = $target_dir . basename($_FILES["aboutimg"]["name"]);
-                HtmlUtils::dump("about",$_FILES["aboutimg"]['tmp_name']);
-
-
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
                 $this->response['userID'] = Utils::getSesVar('userID');
+
+                $validator = new Validator();
+                $aboutinfo = UserHandler::getInstance()->checkAboutInfo(
+                    response: $this->response,
+                    validator: $validator
+                );
+
+                if ($aboutinfo !== false) {
+                    // Collecting image information
+                    $target_dir = \Config::AUTHORIMGPATH;
+                    $filevar = $_FILES[$aboutinfo['name']];
+                    $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
+                    $filename = 'author_' . $this->response['aboutID'] . '_' . date('mY') . '.' . $filetype . '';
+                    $target_file = $target_dir . $filename;
+
+                    // uploading image
+                    if (move_uploaded_file($filevar["tmp_name"], $target_file)) {
+                        $result = ModelSelector::getUserInfoModel()->saveUserAboutInfo(
+                            imgFileName: $filename,
+                            description: $aboutinfo['description'],
+                            author_id: $this->response['aboutID']
+                        );
+                        if ($result == false) {
+                            $this->response['error'] = ModelSelector::getUserInfoModel()->getErrors();
+                        }
+                    } else {
+                        $this->response['error'] = "Sorry, there was an error uploading your file.";
+                    }
+                }
+
+
+
                 break;
             case 'search':
-                // collect checkboxgroup van tags en authors
-                // collect sortby rating/datum
-                // give collected checkboxes and sort to pagefactory
+            // collect checkboxgroup van tags en authors
+            // collect sortby rating/datum
+            // give collected checkboxes and sort to pagefactory
             case 'rateArticle':
                 // This is actually an ajax function
                 break;
@@ -78,9 +103,9 @@ class PostRequestHandler extends BaseRequestHandler
             case 'contact':
                 $validator = new Validator();
                 $contactInfo = UserHandler::getInstance()->checkContact($this->response, $validator);
-                
+
                 // On succesful contact form validaiton, save input to the database
-                if ($contactInfo !== false){
+                if ($contactInfo !== false) {
                     ModelSelector::getWebsiteInfoModel()->saveContact(
                         name: $contactInfo['name'],
                         email: $contactInfo['email'],
