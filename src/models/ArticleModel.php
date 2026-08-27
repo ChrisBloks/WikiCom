@@ -1,9 +1,9 @@
 <?php
 /* ArticleModel
- *  Danny
- *  08/2026
- *  ArticleModel class gives al the methods needed to pull or insert article information from database
- */
+*  Danny
+*  08/2026
+*  ArticleModel class gives al the methods needed to pull or insert article information from database
+*/
 
 namespace Wiki\models;
 
@@ -74,6 +74,7 @@ class ArticleModel extends BaseModel
 
         /**
          * Fetches articles based on array of filters.
+         * Dynamically builds an SQL query.
          * Articles are returned if there is (ANY match on $user_ids) AND (ANY match on $tag_ids).
          * @param array $author_ids array of ints.
          * @param array $tag_ids array of ints.
@@ -107,7 +108,7 @@ class ArticleModel extends BaseModel
 
                         // check if any tags are given and build IN clause
                         if (!empty($tag_ids)) {
-                                $join_clause .= ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
+                                $join_clause .=  ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
                                         ' JOIN wiki_tag ON wiki_tag.id = att.wiki_tag_id';
                                 [$in_clause, $placeholder_mapping] = $this->buildInClause('att.wiki_tag_id', $tag_ids, 'tag');
                                 $where_statements[] = $in_clause;
@@ -129,7 +130,7 @@ class ArticleModel extends BaseModel
                 $order_by_clause = ' ORDER BY ' . $sortBy . ';';
 
                 // Connect the clauses
-                $sql = $base_select_clause .
+                $sql =  $base_select_clause .
                         $extra_select_clause .
                         $from_clause .
                         $join_clause .
@@ -156,7 +157,6 @@ class ArticleModel extends BaseModel
          */
         private function buildInClause(string $reference, array $values, string $prefix): array
         {
-
                 $placeholders = []; // Will contain strings for binding variables
                 $params = []; // Will contain a mapping of placeholders to variables
 
@@ -175,10 +175,10 @@ class ArticleModel extends BaseModel
 
 
         /*
-         * Method that saves article to the database given the article info
-         *
-         * @params article info + user id
-         */
+    * Method that saves article to the database given the article info
+    *
+    * @params article info + user id
+    */
         public function saveNewArticleInfo($article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
         {
                 $sql = "INSERT INTO article (title, summary, codeBlock, imgFileName, user_id, lastEdit)
@@ -200,10 +200,10 @@ class ArticleModel extends BaseModel
         }
 
         /*
-         * Method that updates article based on new information
-         *
-         * @params article info + user id
-         */
+    * Method that updates article based on new information
+    *
+    * @params article info + user id
+    */
 
         public function saveExistingArticleInfo($article_id, $article_title, $article_summary, $article_codeBlock, $imgFileName, $user_id)
         {
@@ -235,10 +235,10 @@ class ArticleModel extends BaseModel
         }
 
         /*
-         * Method that checks if tag already exists. If it does not exist give true
-         *
-         * @param tag name
-         */
+    * Method that checks if tag already exists. If it does not exist give true
+    *
+    * @param tag name
+    */
 
         public function checkTag($tag_name)
         {
@@ -250,10 +250,10 @@ class ArticleModel extends BaseModel
         }
 
         /*
-         * Method that checks if title already exists. If it does not exist give true
-         *
-         * @param title name
-         */
+    * Method that checks if title already exists. If it does not exist give true
+    *
+    * @param title name
+    */
 
         public function checkTitle($title_name)
         {
@@ -264,23 +264,11 @@ class ArticleModel extends BaseModel
                 return empty($result);
         }
 
-        public function fetchArticleTags($article_id)
-        {
-                $sql = "SELECT `name`
-                        FROM
-                            wiki_tag
-                        JOIN wiki_article_to_tag ON wiki_article_to_tag.wiki_tag_id = wiki_tag.id
-                        WHERE article_id =:article_id";
-                $params = ["article_id" => $article_id];
-                $result = $this->crudTemp->selectMany($sql, $params, \PDO::FETCH_COLUMN);
-                return $result;
-        }
-
         /*
-         * Method that adds a new tag to the database
-         *
-         * @param tag name
-         */
+    * Method that adds a new tag to the database
+    *
+    * @param tag name
+    */
         public function addNewTag(string $tag_name)
         {
                 $sql = "INSERT INTO tag (name) 
@@ -295,11 +283,23 @@ class ArticleModel extends BaseModel
                 }
         }
 
+        public function fetchArticleTags(int $article_id)
+        {
+                $sql = "SELECT `name`
+                        FROM
+                            wiki_tag
+                        JOIN wiki_article_to_tag ON wiki_article_to_tag.wiki_tag_id = wiki_tag.id
+                        WHERE article_id =:article_id";
+                $params = ["article_id" => $article_id];
+                $result = $this->crudTemp->selectMany($sql, $params, \PDO::FETCH_COLUMN);
+                return $result;
+        }
+
         /*
-         * Method that adds tag to article
-         *
-         * @params article id and tag id
-         */
+    * Method that adds tag to article
+    *
+    * @params article id and tag id
+    */
         public function addTagToArticle(int $article_id, int $tag_id)
         {
                 $sql = "INSERT INTO article_to_tag (article_id, tag_id) 

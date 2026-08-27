@@ -226,6 +226,388 @@ Stack trace:
 #4 C:\xampp\htdocs\Educom\Wiki\main.php(33): Wiki\controllers\MainController->main()
 #5 {main}
   thrown 
+<<<<<<< HEAD
+26-08-2026 15:46:49 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:46:49 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:37 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:47:37 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:37 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:37 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:47:37 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:37 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:37 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:47:37 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:37 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:37 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:47:37 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:37 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:37 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:47:37 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:37 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:37 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:47:37 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:37 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:37 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:47:37 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:37 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:47 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:47:47 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:47 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:47 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:47:47 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:47 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:47 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:47:47 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:47 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:47 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:47:47 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:47 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:47 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:47:47 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:47 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:47 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:47:47 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:47 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:47:47 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:47:47 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:47:47 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:30 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:48:30 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:30 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:30 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:48:30 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:30 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:30 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:48:30 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:30 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:30 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:48:30 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:30 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:30 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:48:30 | ::1 | Fatal error on line 34 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:30 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:30 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:48:30 | ::1 | Fatal error on line 34 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:30 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:30 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:34
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(34): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:48:30 | ::1 | Fatal error on line 34 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:30 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:33 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:48:33 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:33 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:33 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:48:33 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:33 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:33 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:48:33 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:33 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:33 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:48:33 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:33 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:33 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:48:33 | ::1 | Fatal error on line 34 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:33 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:33 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:48:33 | ::1 | Fatal error on line 34 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:33 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:48:33 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:34
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(34): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:48:33 | ::1 | Fatal error on line 34 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:48:33 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:49:11 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:49:11 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:49:11 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:49:11 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:49:11 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:49:11 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:49:11 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:49:11 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:49:11 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:49:11 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:49:11 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:49:11 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:49:11 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:49:11 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:49:11 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:49:11 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:49:11 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:49:11 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:49:11 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:49:11 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:49:11 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:51:13 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:51:13 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:51:13 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:51:13 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:51:13 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:51:13 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:51:13 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:51:13 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:51:13 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:51:13 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:51:13 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:51:13 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:51:13 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:51:13 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:51:13 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:51:13 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:51:13 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:51:13 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:51:13 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:51:13 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:51:13 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:08 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:52:08 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:08 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:08 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:52:08 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:08 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:08 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:52:08 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:08 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:08 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:52:08 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:08 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:08 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:52:08 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:08 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:08 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:52:08 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:08 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:08 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:52:08 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:08 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:15 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:52:15 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:15 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:15 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:52:15 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:15 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:15 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:52:15 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:15 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:15 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:52:15 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:15 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:15 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:52:15 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:15 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:15 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:52:15 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:15 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:15 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:52:15 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:15 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:28 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:52:28 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:28 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:28 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:52:28 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:28 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:28 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:52:28 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:28 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:28 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:52:28 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:28 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:28 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:52:28 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:28 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:28 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:52:28 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:28 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:28 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:52:28 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:28 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:39 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:52:39 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:39 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:39 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:52:39 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:39 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:39 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:52:39 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:39 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:39 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:52:39 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:39 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:39 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:52:39 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:39 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:39 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:52:39 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:39 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:39 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:52:39 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:39 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:52:39 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:52:39 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:52:39 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:53:03 | ::1 | Unknown error type: [2] Undefined array key "name" 
+26-08-2026 15:53:03 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:53:03 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:53:03 | ::1 | Unknown error type: [2] Undefined array key "" 
+26-08-2026 15:53:03 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:53:03 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:53:03 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:53:03 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:53:03 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:53:03 | ::1 | Unknown error type: [8192] basename(): Passing null to parameter #1 ($path) of type string is deprecated 
+26-08-2026 15:53:03 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:53:03 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:53:03 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+26-08-2026 15:53:03 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:53:03 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:53:03 | ::1 | Unknown error type: [8192] getimagesize(): Passing null to parameter #1 ($filename) of type string is deprecated 
+26-08-2026 15:53:03 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:53:03 | ::1 | PHP 8.2.12 (WINNT) 
+26-08-2026 15:53:03 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:33
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(33): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(22): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\ImgValidator->validate('aboutimg')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(111): Wiki\controllers\validators\Validator->useValidators(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(52): Wiki\controllers\UserHandler->checkAboutInfo(Array, Object(Wiki\controllers\validators\Validator))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+26-08-2026 15:53:03 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+26-08-2026 15:53:03 | ::1 | PHP 8.2.12 (WINNT) 
+>>>>>>> e012b8eeebbfb68090a56a1697cb70622b9d298d
+26-08-2026 19:08:50 | ::1 | >>>>>> Error [42S22] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+26-08-2026 19:08:50 | ::1 | >>>>>> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fo.enctype' in 'field list' 
+26-08-2026 19:08:50 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(63): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(197): Wiki\models\FormModel->fetchFormInfo('search')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(56): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#8 {main} 
+=======
 26-08-2026 16:11:38 | 127.0.0.1 | Fatal error on line 287 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
 26-08-2026 16:11:38 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
 26-08-2026 16:12:25 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
@@ -483,3 +865,4 @@ Stack trace:
 26-08-2026 16:32:13 | 127.0.0.1 | Unknown error type: [2] Undefined array key "id" 
 26-08-2026 16:32:13 | 127.0.0.1 | Fatal error on line 291 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
 26-08-2026 16:32:13 | 127.0.0.1 | PHP 8.2.12 (WINNT) 
+>>>>>>> 7eae282d2eb059e89cb5e3037c44f786e967ff1e
