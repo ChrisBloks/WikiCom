@@ -115,7 +115,6 @@ class UserHandler
         // If any contact field was not entered correctly
         else {
             $response['error'] = $validator->getErrors();
-            print_r($response);
             return false;
         }
     }

@@ -72,12 +72,16 @@ class UserInfoModel extends BaseModel
     *
     * @params imfilename,description
     */
-    public function saveUserAbout(string $imgFileName, string $description): array|false
+    public function saveUserAboutInfo(string $imgFileName, string $description,string $author_id): string|false
     {
 
-        $sql = "INSERT INTO user (imgFileName,description) 
-                        VALUES (:imgFileName,:description)";
+        $sql = "UPDATE user 
+                SET imgFileName = :imgFileName,
+                    description = :description
+                WHERE id = :author_id";
+                
         $params = [
+            "author_id" => $author_id,
             "imgFileName" => $imgFileName,
             "description" => $description
         ];

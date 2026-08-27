@@ -72,19 +72,19 @@ class ArticleModel extends BaseModel
         return $result;
     }
 
-    /**
-     * Fetches articles based on array of filters.
-     * Dynamically builds an SQL query.
-     * Articles are returned if there is (ANY match on $user_ids) AND (ANY match on $tag_ids).
-     * @param array $author_ids array of ints.
-     * @param array $tag_ids array of ints.
-     * @param string $sortBy defines contents of the SORT BY clause.
-     * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
-     */
-    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ""): array|false
-    {
-        // Check if sortBy is a valid sorting method
-        $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
+        /**
+         * Fetches articles based on array of filters.
+         * Dynamically builds an SQL query.
+         * Articles are returned if there is (ANY match on $user_ids) AND (ANY match on $tag_ids).
+         * @param array $author_ids array of ints.
+         * @param array $tag_ids array of ints.
+         * @param string $sortBy defines contents of the SORT BY clause.
+         * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
+         */
+        public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ""): array|false
+        {
+                // Check if sortBy is a valid sorting method
+                $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
 
 
         $base_select_clause = "SELECT DISTINCT 
@@ -98,7 +98,7 @@ class ArticleModel extends BaseModel
                 " ,user.name as author" : // get the authors
                 ""); // get average rating
 
-        $from_clause = " FROM wiki_article as article";
+                $from_clause = " FROM wiki_article as article";
 
         // Building the JOIN and WHERE clauses
         // For storing mapping of placeholder to variables for PREPARED statement

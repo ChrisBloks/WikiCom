@@ -27,7 +27,7 @@ class ImgValidator extends BaseValidator
     public function validateFields(array $field_inputs): bool
     {
         $target_dir = \Config::AUTHORIMGPATH;
-        $filevar = $_FILES[$this->field_inputs['name']];
+        $filevar = $_FILES[$field_inputs['name']];
         $target_file = $target_dir . basename($filevar["name"]);
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
@@ -56,12 +56,6 @@ class ImgValidator extends BaseValidator
             return false;
         }
 
-        //todo Move this out of the validator into the handler
-        if (move_uploaded_file($filevar["tmp_name"], $target_file)) {
-            return true;
-        } else {
-            $this-> logError("Sorry, there was an error uploading your file.");
-            return false;
-        }
+        return true;
     }
 }
