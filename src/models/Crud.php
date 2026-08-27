@@ -62,7 +62,7 @@ class Crud
      * @param int $fetch_mode
      * @return array|false All rows matching the query or false on failure.
      */
-    public function selectMany(string $sql, array $params, int $fetch_mode = \PDO::FETCH_ASSOC): array|false
+    public function selectMany(string $sql, ?array $params, int $fetch_mode = \PDO::FETCH_ASSOC): array|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
         $result = $stmt->fetchAll(mode: $fetch_mode);
@@ -111,11 +111,12 @@ class Crud
      * @param array $params
      * @return \PDOStatement|false
      */
-    public function prepareAndExecute(string $sql, array $params): \PDOStatement|false
+    public function prepareAndExecute(string $sql, ?array $params): \PDOStatement|false
     {
         try {
             $stmt = $this->db->prepare(query: $sql);
-            return $stmt->execute(params: $params);
+            $stmt->execute(params: $params);
+            return $stmt;
         } catch (\PDOException $e) {
             $this->logError($e->getMessage());
             return false;
