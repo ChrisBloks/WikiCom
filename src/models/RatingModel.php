@@ -19,7 +19,7 @@ class RatingModel extends BaseModel
         $sql = "SELECT `AVGrating` as AVGrating FROM v_article_avg_rating 
                 WHERE id=:article_id";
         $params = ["article_id" => $article_id];
-        $result = $this->crudTemp->selectOne($sql, $params);
+        $result = $this->crud->selectOne($sql, $params);
         if (empty($result)) {
             $this->logError("No average rating for article id");
             $result = false;
@@ -38,7 +38,7 @@ class RatingModel extends BaseModel
                 ON DUPLICATE KEY UPDATE rating=:rating";
         $params = ["user_id" => $user_id, "article_id" => $article_id, "rating" => $rating];
         try {
-            $this->crudTemp->prepareAndExecute($sql, $params);
+            $this->crud->prepareAndExecute($sql, $params);
             return true;
         } catch (\PDOException $e) {
             $this->logError($e->getMessage());

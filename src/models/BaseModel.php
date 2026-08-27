@@ -10,13 +10,17 @@ namespace Wiki\models;
 use Wiki\tools\traits\tErrorMessageCollector;
 
 
+/**
+ * Model class that defines basic behaviour.
+ * @uses tErrorMessageCollector
+ */
 abstract class BaseModel
 {
     use tErrorMessageCollector;
-    protected Crud $crudTemp;
+    protected Crud $crud;
 
     public function __construct()
     {
-        $this->crudTemp = Crud::getInstance();
+        $this->crud = Crud::getInstance();
     }
 }

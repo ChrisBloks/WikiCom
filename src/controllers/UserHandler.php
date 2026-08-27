@@ -55,7 +55,7 @@ class UserHandler
      * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
      * @param array $response array containing the source page (string)
      * @param Validator $validator BaseValidator object for first line validation.
-     * @return void
+     * @return array|false
      */
     public function checkRegistration(array &$response, Validator $validator): array|false
     {

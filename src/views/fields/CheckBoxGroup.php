@@ -20,15 +20,17 @@ class CheckBoxGroup extends BaseField
 
     public function show(): string
     {
-
-        $ret = '<div class="checkbox_group">';
-        $ret .= HtmlUtils::printLabel($this->id, $this->label) . "";
-
+    
+        $ret = '<div class="fw-bold mb-1">' . HtmlUtils::printLabel($this->id, $this->label) . '</div>';
+        $ret .= '<div class="checkbox_group">';
+        $ret .= '<div style="column-count: 3;">'; // only the checkboxes go in the column container
         foreach ($this->options as $value => $display) {
             $checked = isset($this->value[$value]) ? $this->value[$value]:'';
             $ret .= '<input type="checkbox"' . $this->baseAttribs(true, $value) . 'value="' . $value . '"' . ($checked ? 'checked' : '') . '>';
             $ret .= HtmlUtils::printLabel($this->id, $display) . "";
+            $ret .= '</div>';
         }
+        $ret .= '</div>';
 
         return $ret .= "</div>";
     }
