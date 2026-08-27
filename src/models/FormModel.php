@@ -41,9 +41,9 @@ class FormModel extends BaseModel
         }
         foreach ($result as &$field_info) {
             if (isset($field_info["id"])) {
-                $field_info = $this->fetchLookupInfo(field_info: $field_info, id: $id);
+                $lookup_info = $this->fetchLookupInfo(field_info: $field_info, parent_id: $id);
 
-                $field_info["options"] = $lookup_info[]
+                $field_info = array_merge($field_info, $lookup_info);
             }
         }
         HtmlUtils::dump('result', $result);
@@ -86,7 +86,7 @@ class FormModel extends BaseModel
      */
 
     // TODO refactor
-    public function fetchLookupInfo(array &$field_info, string $id): void
+    public function fetchLookupInfo1(array &$field_info, string $id): void
     {
         // If a table name is given 
         if (!empty($field_info["table_name"])) {
@@ -203,7 +203,7 @@ class FormModel extends BaseModel
      * @param string $parent_id id of the parent object holding this container element
      * @return array see OUTPUT
      */
-    public function fetchLookupInfo1(array $field_info, string $parent_id): array
+    public function fetchLookupInfo(array $field_info, string $parent_id): array
     {
         // Basic SQL start
         $sql = "SELECT
@@ -235,16 +235,18 @@ class FormModel extends BaseModel
         // Execute the query
         $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE|\PDO::FETCH_ASSOC);
 
+        // format result
         $subcontainer_info = [];
-        // // Loop over table rows indexed by id
-        // foreach ($result as $id => $row){
-        //     // Fill with [id => value]
-        //     foreach($row as $column_name => $value){
-        //         $subcontainer_info[$column_name][$id] = $value; 
-        //     }
-        // }
-
-        $subcontainer_info = [];
+        $col_name_map = array_combine(
+                explode(',', $field_info['column_names']),
+                ['options', 'values']);
+        // Loop over table rows indexed by id
+        foreach ($result as $id => $row){
+            // Fill with [id => value]
+            foreach($row as $column_name => $value){
+                $subcontainer_info[$col_name_map[$column_name]][$id] = $value; 
+            }
+        }
 
         return $subcontainer_info;
         

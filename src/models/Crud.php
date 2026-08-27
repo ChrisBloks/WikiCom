@@ -9,6 +9,7 @@ namespace Wiki\models;
 
 use Wiki\tools\traits\tErrorMessageCollector;
 use Wiki\tools\traits\tSingleton;
+use Wiki\tools\utils\HtmlUtils;
 
 class Crud
 {
@@ -65,6 +66,7 @@ class Crud
     public function selectMany(string $sql, ?array $params, int $fetch_mode = \PDO::FETCH_ASSOC): array|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
+        // HtmlUtils::dump("stmt", $stmt);
         $result = $stmt->fetchAll(mode: $fetch_mode);
         return $result;
     }
