@@ -120,3 +120,23 @@ Stack trace:
 #5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
 #6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #7 {main} 
+27-08-2026 11:13:09 | ::1 | Unknown error type: [1] Uncaught Error: Call to undefined method Wiki\models\FormModel::getFieldInfo() in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php:85
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+27-08-2026 11:13:09 | ::1 | Fatal error on line 85 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+27-08-2026 11:13:09 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 11:17:33 | ::1 | Unknown error type: [1] Uncaught Error: Array callback must have exactly two elements in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php:87
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+27-08-2026 11:17:33 | ::1 | Fatal error on line 87 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+27-08-2026 11:17:33 | ::1 | PHP 8.2.12 (WINNT) 
