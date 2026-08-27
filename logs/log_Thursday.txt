@@ -296,6 +296,7 @@ Stack trace:
 27-08-2026 11:53:21 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
 27-08-2026 11:53:21 | ::1 | PHP 8.2.12 (WINNT) 
 <<<<<<< HEAD
+<<<<<<< HEAD
 27-08-2026 11:55:39 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
 27-08-2026 11:55:39 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
 27-08-2026 11:55:39 | ::1 | PHP 8.2.12 (WINNT) 
@@ -421,3 +422,5 @@ Stack trace:
   thrown 
 27-08-2026 16:52:57 | ::1 | Fatal error on line 70 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
 27-08-2026 16:52:57 | ::1 | PHP 8.2.12 (WINNT) 
+=======
+>>>>>>> c17d42ccdf45a01f714194e2db08d451646d50a7

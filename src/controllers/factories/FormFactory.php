@@ -33,4 +33,9 @@ class FormFactory
         }
         return $form;
     }
+
+    public function setValue (array $value): void
+    {
+        $this->value = $value;
+    }
 }

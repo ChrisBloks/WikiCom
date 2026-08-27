@@ -38,12 +38,12 @@ class UserHandler
             }
             // Email/Password could not be matched
             else {
-                $response['error'] = "Login email or password is wrong!";
+                $response['userError'] = "Login email or password is wrong!";
                 return false;
             }
             // First line validation failed
         } else {
-            $response['error'] = $validator->getErrors(); // Get why validation failed
+            $response['userError'] = $validator->getErrors(); // Get why validation failed
             return false;
 
         }
@@ -69,13 +69,13 @@ class UserHandler
             }
             // Email was found in the database 
             else {
-                $response['error'] = "Email already exists!";
+                $response['userError'] = "Email already exists!";
                 return false;
             }
         }
         // First line validation failed 
         else {
-            $response['error'] = $validator->getErrors();
+            $response['userError'] = $validator->getErrors();
             return false;
         }
     }
@@ -98,7 +98,7 @@ class UserHandler
         }
         // If any contact field was not entered correctly
         else {
-            $response['error'] = $validator->getErrors();
+            $response['userError'] = $validator->getErrors();
             return false;
         }
     }
@@ -114,7 +114,7 @@ class UserHandler
         }
         // If any contact field was not entered correctly
         else {
-            $response['error'] = $validator->getErrors();
+            $response['userError'] = $validator->getErrors();
             return false;
         }
     }
