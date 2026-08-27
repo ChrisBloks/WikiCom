@@ -26,9 +26,15 @@ class PostRequestHandler extends BaseRequestHandler
                     $registrationResult = ModelSelector::getUserInfoModel()
                         ->saveUser(
                             username: $userInfo['name'],
-                            password: $userInfo['password'],
+                            password: $userInfo['password_1'],
                             email: $userInfo['email']
                         );
+                    if ($registrationResult !== false) {
+                        $this->response['page'] = 'login';
+                    }
+                    else{
+                        $this->response['error'] = ModelSelector::getUserInfoModel()->getErrors();
+                    }
                 }
                 break;
             case 'login':
@@ -79,11 +85,15 @@ class PostRequestHandler extends BaseRequestHandler
                         $this->response['error'] = "Sorry, there was an error uploading your file.";
                     }
                 }
-
-
-
                 break;
             case 'search':
+                print_r($_POST);
+                $field_info = ModelSelector::getFormModel()->fetchFieldInfo($this->response['page']);
+                foreach ($field_info as $field) {
+                    $this->response[$field['name']] = $_POST[$field['name']];
+                }
+                HtmlUtils::dump("test",$this->response);
+
             // collect checkboxgroup van tags en authors
             // collect sortby rating/datum
             // give collected checkboxes and sort to pagefactory

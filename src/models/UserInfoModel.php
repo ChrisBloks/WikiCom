@@ -40,7 +40,7 @@ class UserInfoModel extends BaseModel
                         WHERE email=:email";
         $params = ["email" => $email];
         $result = $this->crud->selectOne($sql, $params);
-        return $result;
+        return !empty($result);
     }
 
     /*
@@ -48,7 +48,7 @@ class UserInfoModel extends BaseModel
     *
     * @params username,password,email,imfilename,description
     */
-    public function saveUser(string $username, string $password, string $email): array|false
+    public function saveUser(string $username, string $password, string $email): int|false
     {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -60,7 +60,7 @@ class UserInfoModel extends BaseModel
             "email" => $email
         ];
         $result = $this->crud->doInsert($sql, $params);
-        if (empty($result)) {
+        if ($result==false) {
             $this->logError("registration failed");
             $result = false;
         }
