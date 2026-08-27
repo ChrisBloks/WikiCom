@@ -26,7 +26,7 @@ class PostRequestHandler extends BaseRequestHandler
                     $registrationResult = ModelSelector::getUserInfoModel()
                         ->saveUser(
                             username: $userInfo['name'],
-                            password: $userInfo['password'],
+                            password: $userInfo['password_1'],
                             email: $userInfo['email']
                         );
                 }

@@ -185,3 +185,37 @@ Stack trace:
 #5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
 #6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #7 {main} 
+27-08-2026 11:40:01 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+27-08-2026 11:40:01 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+27-08-2026 11:40:01 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 11:40:11 | ::1 | Unknown error type: [2] Undefined array key "password" 
+27-08-2026 11:40:11 | ::1 | Fatal error on line 29 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+27-08-2026 11:40:11 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 11:40:11 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::saveUser(): Argument #2 ($password) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 27 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:51
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(27): Wiki\models\UserInfoModel->saveUser('Danny', NULL, 'danny@1email.co...')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+27-08-2026 11:40:11 | ::1 | Fatal error on line 51 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+27-08-2026 11:40:11 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 11:42:25 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+27-08-2026 11:42:25 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+27-08-2026 11:42:25 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 11:42:29 | ::1 | Unknown error type: [2] Undefined array key "password" 
+27-08-2026 11:42:29 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+27-08-2026 11:42:29 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 11:42:29 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::saveUser(): Argument #2 ($password) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 28 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:51
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(28): Wiki\models\UserInfoModel->saveUser('Danny', NULL, 'danny@1email.co...')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+27-08-2026 11:42:29 | ::1 | Fatal error on line 51 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+27-08-2026 11:42:29 | ::1 | PHP 8.2.12 (WINNT) 
