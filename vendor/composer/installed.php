@@ -3,7 +3,7 @@
         'name' => 'educom/wikiproject',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b2f7572352e9cb4d1b200adf4c6d88a2643aa315',
+        'reference' => 'bbc9034b675d2422a265fbaf1e471f2402f6e3f0',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'educom/wikiproject' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '93da70ecd74abf821cb71efa95a4680e8f7b6380',
+            'reference' => 'bbc9034b675d2422a265fbaf1e471f2402f6e3f0',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
