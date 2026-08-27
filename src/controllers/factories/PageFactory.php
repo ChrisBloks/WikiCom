@@ -155,6 +155,10 @@ class PageFactory
                         class: $form_info["display_class"]
                     );
                     $main_container->addElement(new Title(text: $aboutinfo['name']));
+                    $main_container->addElement(new Image(
+                        name: './img/authors/' . $aboutinfo['imgFileName'],
+                        class: $aboutinfo['img_class']
+                    ));
                     $main_container->addElement($form);
                     $main->addElement($main_container);
                 } else {
@@ -211,7 +215,8 @@ class PageFactory
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
                     author_ids: [],
-                    tag_ids:    []);
+                    tag_ids: []
+                );
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $container->addElement(new AtomicElement($tableFactory->createTable("table
                                                                                                 table-hover 
