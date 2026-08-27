@@ -1,0 +1,90 @@
+27-08-2026 9:48:04 | ::1 | >>>>>> Error [42S22] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+27-08-2026 9:48:04 | ::1 | >>>>>> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fo.enctype' in 'field list' 
+27-08-2026 9:48:04 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(63): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(184): Wiki\models\FormModel->fetchFormInfo('contact')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#8 {main} 
+27-08-2026 9:48:07 | ::1 | >>>>>> Error [42S22] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+27-08-2026 9:48:07 | ::1 | >>>>>> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fo.enctype' in 'field list' 
+27-08-2026 9:48:07 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(63): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(200): Wiki\models\FormModel->fetchFormInfo('search')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#8 {main} 
+27-08-2026 9:48:10 | ::1 | >>>>>> Error [42S22] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+27-08-2026 9:48:10 | ::1 | >>>>>> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fo.enctype' in 'field list' 
+27-08-2026 9:48:10 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(63): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(184): Wiki\models\FormModel->fetchFormInfo('register')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#8 {main} 
+27-08-2026 9:48:14 | ::1 | >>>>>> Error [42S22] on line 49 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+27-08-2026 9:48:14 | ::1 | >>>>>> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fo.enctype' in 'field list' 
+27-08-2026 9:48:14 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(63): Wiki\models\Crud->selectMany('SELECT DISTINCT...', Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(184): Wiki\models\FormModel->fetchFormInfo('login')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#8 {main} 
+27-08-2026 9:49:08 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+27-08-2026 9:49:08 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+27-08-2026 9:49:08 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 9:49:24 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+27-08-2026 9:49:24 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+27-08-2026 9:49:24 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 9:49:25 | ::1 | Unknown error type: [1] Uncaught Error: Unknown named parameter $author_ids in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php:213
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+27-08-2026 9:49:25 | ::1 | Fatal error on line 213 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+27-08-2026 9:49:25 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 9:49:54 | ::1 | Unknown error type: [1] Uncaught Error: Access to undeclared static property Wiki\models\ArticleModel::$sort_values in C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php:76
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(212): Wiki\models\ArticleModel->fetchArticleBySearch(Array, Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+27-08-2026 9:49:54 | ::1 | Fatal error on line 76 in file C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php 
+27-08-2026 9:49:54 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 9:54:10 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+27-08-2026 9:54:10 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+27-08-2026 9:54:10 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 9:54:12 | ::1 | Unknown error type: [1] Uncaught Error: Call to undefined method Wiki\models\ArticleModel::fetchArticleTags() in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php:243
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+27-08-2026 9:54:12 | ::1 | Fatal error on line 243 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+27-08-2026 9:54:12 | ::1 | PHP 8.2.12 (WINNT) 
+27-08-2026 9:55:06 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+27-08-2026 9:55:06 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+27-08-2026 9:55:06 | ::1 | PHP 8.2.12 (WINNT) 
