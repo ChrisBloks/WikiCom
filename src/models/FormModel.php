@@ -212,12 +212,12 @@ class FormModel extends BaseModel
 
         // If a bridge table is required
         if (!empty($field_info["bridge_table"])) {
-            [$bridge_table_column, $source_table_column] = explode(",", $field_info["bridgevalues"]);
+            [$bridge_table_column, $source_table_column] = explode(",", $field_info["bridge_values"]);
 
             $join_clause =  "JOIN {$field_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
             // If a LEFT JOIN is required
             if (!empty($field_info['left_join_on'])) {
-                $join_clause = "LEFT" . $join_clause . " AND {$field_info["left_join_on"]} = {$parent_id}";
+                $join_clause = "LEFT " . $join_clause . " AND {$field_info["left_join_on"]} = {$parent_id}";
             }
             $sql .= $join_clause;
         }
@@ -229,10 +229,10 @@ class FormModel extends BaseModel
 
         // Always add an ORDER BY clause
         $sql .= " ORDER BY {$field_info['order_by']}";
-        
 
         // Execute the query
         $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE|\PDO::FETCH_ASSOC);
+
 
         // format result
         $subcontainer_info = [];
