@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 28 aug 2026 om 10:43
+-- Gegenereerd op: 28 aug 2026 om 13:21
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -114,7 +114,7 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form
 (17, 'summary', 'textarea', 'article-text form-control', NULL, 4, 'Body text:', 15),
 (18, 'codeBlock', 'textarea', 'article-codeblock form-control', NULL, 4, 'Codeblock:', 16),
 (19, 'articleimg', 'file', 'article-img-file form-control', NULL, 4, 'Upload file:', 17),
-(20, 'sortby', 'select', 'sort-by form-select', NULL, 3, 'Sort by', 3),
+(20, 'sortby', 'select', 'sort-by form-select', 3, 3, 'Sort by', 3),
 (21, 'new tag', 'text', 'add-new-tag form-control', NULL, 4, 'New tag name:', 0),
 (22, 'new tag button', 'button', 'add-new-tag-button btn btn-outline-secondary', NULL, 4, 'Add new tag', 1),
 (25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article title:', 14),
@@ -173,7 +173,7 @@ CREATE TABLE `lookup_info` (
 INSERT INTO `lookup_info` (`id`, `source_table`, `column_names`, `order_by`, `where_value`, `bridge_table`, `bridge_values`, `left_join_on`) VALUES
 (1, 'wiki_tag\n', 'id,name', 'wiki_tag.name', '', '', '', ''),
 (2, 'user', 'id,name', 'user.name', '', '', '', ''),
-(3, '', 'rating,date', '', '', '', '', ''),
+(3, 'wiki_sortby_info', 'sortby_value,sortby_name', 'wiki_sortby_info.sortby_name', '', '', '', ''),
 (4, 'wiki_tag\n', 'id,name,!isnull(article_id) as marked', 'wiki_tag.name', '', 'wiki_article_to_tag', 'wiki_tag_id,wiki_tag.id', 'article_id');
 
 -- --------------------------------------------------------
@@ -383,6 +383,26 @@ INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `wiki_sortby_info`
+--
+
+CREATE TABLE `wiki_sortby_info` (
+  `id` int(11) NOT NULL,
+  `sortby_name` varchar(30) NOT NULL,
+  `sortby_value` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `wiki_sortby_info`
+--
+
+INSERT INTO `wiki_sortby_info` (`id`, `sortby_name`, `sortby_value`) VALUES
+(1, 'Rating', 'rating'),
+(2, 'Date', 'lastEdit');
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `wiki_tag`
 --
 
@@ -502,6 +522,12 @@ ALTER TABLE `wiki_rating`
   ADD KEY `fk_rating_to_article_id` (`article_id`);
 
 --
+-- Indexen voor tabel `wiki_sortby_info`
+--
+ALTER TABLE `wiki_sortby_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
@@ -577,6 +603,12 @@ ALTER TABLE `website_info`
 --
 ALTER TABLE `wiki_article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT voor een tabel `wiki_sortby_info`
+--
+ALTER TABLE `wiki_sortby_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT voor een tabel `wiki_tag`
