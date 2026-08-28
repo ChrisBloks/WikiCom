@@ -41,14 +41,8 @@ class FormModel extends BaseModel
         }
         foreach ($result as &$field_info) {
             if (isset($field_info["id"])) {
-<<<<<<< HEAD
-                $field_sub_info = $this->fetchLookupInfo1(field_info: $field_info, parent_id: $id);
+                $field_sub_info = $this->fetchLookupInfo(field_info: $field_info, parent_id: $id);
                 $field_info = array_merge($field_info, $field_sub_info);
-=======
-                $lookup_info = $this->fetchLookupInfo(field_info: $field_info, parent_id: $id);
-
-                $field_info = array_merge($field_info, $lookup_info);
->>>>>>> c05e1a5bd7c0d6445e53d74271614e08358f7635
             }
         }
         unset($field_info);
