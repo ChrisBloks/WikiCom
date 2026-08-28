@@ -237,12 +237,15 @@ class FormModel extends BaseModel
 
         // format result
         $subcontainer_info = [];
+        // Maps (column_name1 => 'options', column_name2 => 'values')
         $col_name_map = array_combine(
                 explode(',', $field_info['column_names']),
                 ['options', 'values']);
-        // Loop over table rows indexed by id
+
+        // Effectively transposes $result from [rows => [col = > value]] to [col => [row => value]]
+        // Loop rows
         foreach ($result as $id => $row){
-            // Fill with [id => value]
+            // Loop over columns
             foreach($row as $column_name => $value){
                 $subcontainer_info[$col_name_map[$column_name]][$id] = $value; 
             }
@@ -254,15 +257,20 @@ class FormModel extends BaseModel
 
 
 
+    /**
+     * Get all fields belonging to a given wiki page
+     * @param string $page_name
+     * @return array|false array of page names (strings) if query succesful, false otherwise
+     */
     public function fetchFieldNames(string $page_name): array|false
     {
         $sql = "SELECT  fi.name 
                 FROM field_info fi
                 JOIN form_info fo ON fi.form_info_id = fo.id
                 JOIN website_info wi ON wi.id = fo.website_info_id
-                WHERE wi.name = :_page
+                WHERE wi.name = :page
                 ORDER BY fi.display_order;";
-        $params = ["_page" => $page_name];
+        $params = ["page" => $page_name];
         $result = $this->crud->selectMany($sql, $params, \PDO::FETCH_COLUMN);
 
         if (empty($result)) {

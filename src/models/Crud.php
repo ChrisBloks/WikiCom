@@ -23,7 +23,11 @@ class Crud
         $this->db = $this->connectDB();
     }
 
-    private static function connectDB()
+    /**
+     * Configure and construct a PDO object
+     * @return \PDO
+     */
+    private static function connectDB(): \PDO
     {
         $servername = \Config::SERVERNAME;
         $dbname = \Config::DB;

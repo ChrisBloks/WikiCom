@@ -7,10 +7,15 @@
 
 namespace Wiki\models;
 
+/**
+ * Abstract class for initializing and accessing model objects.
+ * @var array $modellist array of currently initialized model ['model_name' => ModelObject]
+ * @var array $modelinfo array of mappings ['method_name' => 'model_class_name']
+ */
 abstract class ModelSelector
 {
-    protected static $modellist = [];
-    protected static $modelinfo = [
+    protected static array $modellist = [];
+    protected static array $modelinfo = [
         "getArticleModel" => "Wiki\models\ArticleModel",
         "getFormModel" => "Wiki\models\FormModel",
         "getWebsiteInfoModel" => "Wiki\models\WebsiteInfoModel",
@@ -18,30 +23,32 @@ abstract class ModelSelector
         "getUserInfoModel" => "Wiki\models\UserInfoModel"
     ];
 
-    /*
-    * __callstatic is a build in function that runs when one calls a static function from a class that doesn't exists. This
-    * function creates based on the look upinfo the correct model. This way you can call up a nonexisting function to start a instance of a class
-    *
-    * @params $method = the name of the function, $args are the arguments not needed here.
-    */
+    /**
+     * Overwrites the built-in __callStatic function to return a model object given one of the method names given in @var $this->modelinfo.
+     * EXAMPLE: ModelSelector::getArticleModel() wil result in an ArticleModel object despite the method 'getArticleModel' being undefined.
+     * @param string $method name of the function requesting a model (get[ModelName]).
+     * @param array $args arguments to give $method. Necessary parameter of __callStatic and not relevant here.
+     * @return BaseModel
+     */
     public static function __callStatic(string $method, array $args): BaseModel
     {
         if (array_key_exists($method, self::$modelinfo)); {
-            $model = substr($method, 3);
-            $file = self::$modelinfo[$method];
+            $model_name = self::$modelinfo[$method];
             // require_once "./src/models/$file.php";
-            return self::initializeModel($file);
+            return self::initializeModel($model_name);
         }
     }
 
-    /*
-    * singleton
-    */
-    public static function initializeModel(string $model): BaseModel
+    /**
+     * Initalizes the given model if it is not yet set and returns the model object.
+     * @param string $model_name
+     * @return BaseModel
+     */
+    public static function initializeModel(string $model_name): BaseModel
     {
-        if (isset(self::$modellist[$model]) === false) {
-            self::$modellist[$model] = new $model();
+        if (isset(self::$modellist[$model_name]) === false) {
+            self::$modellist[$model_name] = new $model_name();
         }
-        return self::$modellist[$model];
+        return self::$modellist[$model_name];
     }
 }

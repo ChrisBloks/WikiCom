@@ -1,0 +1,20 @@
+28-08-2026 10:05:11 | ::1 | Unknown error type: [2] Undefined array key "column_names" 
+28-08-2026 10:05:11 | ::1 | Fatal error on line 210 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:05:11 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:05:11 | ::1 | Unknown error type: [2] Undefined array key "source_table" 
+28-08-2026 10:05:11 | ::1 | Fatal error on line 212 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:05:11 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:05:11 | ::1 | Unknown error type: [1] Uncaught Error: Call to a member function fetchAll() on bool in C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php:74
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(236): Wiki\models\Crud->selectMany('SELECT\r\n       ...', Array, 196610)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(44): Wiki\models\FormModel->fetchLookupInfo(Array, '')
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(224): Wiki\models\FormModel->fetchFieldInfo('search')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#8 {main}
+  thrown 
+28-08-2026 10:05:11 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+28-08-2026 10:05:11 | ::1 | PHP 8.2.12 (WINNT) 
