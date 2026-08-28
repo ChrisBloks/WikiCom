@@ -223,6 +223,7 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+                
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
@@ -231,6 +232,7 @@ class PageFactory
                     class: $form_info["display_class"],
                 );
                 $container->addElement($form);
+
 
                 // create checkbox inputs for filtering
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);

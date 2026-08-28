@@ -2,6 +2,7 @@
 
 namespace Wiki\controllers\factories;
 
+use Wiki\tools\utils\HtmlUtils;
 use Wiki\views\containers\Form;
 
 class FormFactory
@@ -34,8 +35,5 @@ class FormFactory
         return $form;
     }
 
-    public function setValue (array $value): void
-    {
-        $this->value = $value;
-    }
+
 }

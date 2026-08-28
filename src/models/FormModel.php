@@ -41,12 +41,10 @@ class FormModel extends BaseModel
         }
         foreach ($result as &$field_info) {
             if (isset($field_info["id"])) {
-                $field_info = $this->fetchLookupInfo(field_info: $field_info, id: $id);
-
-                $field_info["options"] = $lookup_info[]
+                $field_sub_info = $this->fetchLookupInfo1(field_info: $field_info, parent_id: $id);
+                $field_info = array_merge($field_info, $field_sub_info);
             }
         }
-        HtmlUtils::dump('result', $result);
         unset($field_info);
         return $result;
     }
@@ -232,19 +230,33 @@ class FormModel extends BaseModel
         // Always add an ORDER BY clause
         $sql .= " ORDER BY {$field_info['order_by']}";
         
+
         // Execute the query
         $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE|\PDO::FETCH_ASSOC);
 
         $subcontainer_info = [];
+        // Loop over table rows indexed by id
+        foreach ($result as $id => $row){
+            // Fill with [id => value]
+            foreach($row as $column_name => $value){
+                $column_name = isset($subcontainer_info['options'][$id]) ? 'value' :'options';
+                $subcontainer_info[$column_name][$id] = $value; 
+            }
+        }
+
+        //         // format result
+        // $subcontainer_info = [];
+        // $col_name_map = array_combine(
+        //         explode(',', $field_info['column_names']),
+        //         ['options', 'values']);
         // // Loop over table rows indexed by id
         // foreach ($result as $id => $row){
         //     // Fill with [id => value]
         //     foreach($row as $column_name => $value){
-        //         $subcontainer_info[$column_name][$id] = $value; 
+        //         $subcontainer_info[$col_name_map[$column_name]][$id] = $value; 
         //     }
         // }
 
-        $subcontainer_info = [];
 
         return $subcontainer_info;
         

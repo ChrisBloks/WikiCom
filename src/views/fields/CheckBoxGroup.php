@@ -10,7 +10,7 @@ class CheckBoxGroup extends BaseField
 
     protected array $options = [];
 
-    public function __construct(string $name, string $label, string $class, array $options, array $value)
+    public function __construct(string $name, string $label, string $class, array $options, array $value = [])
     {
         parent::__construct($name, $label, $class);
         $this->options = $options;
@@ -28,7 +28,6 @@ class CheckBoxGroup extends BaseField
             $checked = isset($this->value[$value]) ? $this->value[$value]:'';
             $ret .= '<input type="checkbox"' . $this->baseAttribs(true, $value) . 'value="' . $value . '"' . ($checked ? 'checked' : '') . '>';
             $ret .= HtmlUtils::printLabel($this->id, $display) . "";
-            $ret .= '</div>';
         }
         $ret .= '</div>';
 
