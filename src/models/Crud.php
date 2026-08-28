@@ -71,7 +71,14 @@ class Crud
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
         // HtmlUtils::dump("stmt", $stmt);
-        $result = $stmt->fetchAll(mode: $fetch_mode);
+        try {
+            $result = $stmt->fetchAll(mode: $fetch_mode);
+        }
+        catch (\Throwable $e) {
+            $this->logError($e->getMessage());
+            $result = false;
+        }
+        
         return $result;
     }
 
