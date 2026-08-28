@@ -100,14 +100,14 @@ class ArticleModel extends BaseModel
     public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ""): array|false
     {
         // Check if sortBy is a valid sorting method
-        $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'article.lastEdit';
+        $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'lastEdit';
 
 
         $base_select_clause = "SELECT DISTINCT 
                                 article.id,
                                 article.title, 
                                 article.summary, 
-                                article.lastEdit";
+                                article.lastEdit AS lastEdit";
 
         $extra_select_clause = ", COALESCE(vr.AVGrating, 0) AS rating" .
             (!empty($author_ids) ? // (optional append) If authors are specified
