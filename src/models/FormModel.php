@@ -76,58 +76,6 @@ class FormModel extends BaseModel
         return $result;
     }
 
-    /*
-     * Method that builds and executes a query that relies on information gotten from the previously ran query
-     *
-     * @params $value = the information from the previous query given to this method to build the query
-     *         $id = id given for certain queries that need specific id example: finding the tag for a certain article needs article_id
-     */
-
-    // TODO refactor
-    public function fetchLookupInfo1(array &$field_info, string $id): void
-    {
-        // If a table name is given 
-        if (!empty($field_info["table_name"])) {
-            $sql = "SELECT {$field_info["display_names"]} FROM {$field_info['table_name']}";
-
-            if (!empty($field_info["bridge_table"])) {
-                [$main, $bridge] = explode(",", $field_info["bridgevalues"]);
-                if (!empty($field_info["left_on"])) {
-                    $sql .= "LEFT JOIN {$field_info["bridge_table"]} ON {$main} = {$bridge} AND {$field_info["left_on"]} = {$id} ";
-                } else {
-                    $sql .= "JOIN {$field_info["bridge_table"]} ON {$main} = {$bridge}";
-                }
-            }
-            if (!empty($field_info["value"])) {
-                $sql .= " WHERE {$field_info['value']} = {$id}";
-            }
-
-            $sql .= " ORDER BY {$field_info['order_by']}";
-
-
-            $result = $this->crud->selectMany($sql, NULL, \PDO::FETCH_ASSOC);
-
-            if ($result === false) {
-                $result = array();
-            }
-
-            $options = [];
-            $marked = [];
-            foreach ($result as $row) {
-                if (isset($row['marked'])) {
-                    $marked[$row['id']] = $row['marked'];
-                }
-                $options[$row['id']] = $row['name'];
-            }
-
-            $field_info["options"] = $options;
-            $field_info["value"] = $marked;
-        } else {
-            $field_info["options"] = explode(",", $field_info["display_names"]);
-        }
-    }
-
-
     /**
      * Find for a given container field the container names/values.
      * 

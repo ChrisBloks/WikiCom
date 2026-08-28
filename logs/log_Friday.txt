@@ -896,6 +896,16 @@ Stack trace:
 28-08-2026 10:41:58 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
 28-08-2026 10:41:58 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
 28-08-2026 10:41:58 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:39 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
+28-08-2026 10:46:39 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:46:39 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:39 | ::1 | Unknown error type: [8192] explode(): Passing null to parameter #2 ($string) of type string is deprecated 
+28-08-2026 10:46:39 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:46:39 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:39 | ::1 | Unknown error type: [2] Undefined array key 1 
+28-08-2026 10:46:39 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:46:39 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:39 | ::1 | Unknown error type: [1] Uncaught Error: Call to a member function fetchAll() on bool in C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php:74
 28-08-2026 10:45:37 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
 28-08-2026 10:45:37 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
 28-08-2026 10:45:37 | ::1 | PHP 8.2.12 (WINNT) 
@@ -917,6 +927,21 @@ Stack trace:
 #7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #8 {main}
   thrown 
+28-08-2026 10:46:39 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+28-08-2026 10:46:39 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:44 | ::1 | Unknown error type: [8192] Optional parameter $name declared before required parameter $class is implicitly treated as a required parameter 
+28-08-2026 10:46:44 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\NewPassword.php 
+28-08-2026 10:46:44 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:46 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
+28-08-2026 10:46:46 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:46:46 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:46 | ::1 | Unknown error type: [8192] explode(): Passing null to parameter #2 ($string) of type string is deprecated 
+28-08-2026 10:46:46 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:46:46 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:46 | ::1 | Unknown error type: [2] Undefined array key 1 
+28-08-2026 10:46:46 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:46:46 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:46:46 | ::1 | Unknown error type: [1] Uncaught Error: Call to a member function fetchAll() on bool in C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php:74
 28-08-2026 10:45:37 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
 28-08-2026 10:45:37 | ::1 | PHP 8.2.12 (WINNT) 
 28-08-2026 10:46:43 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
@@ -940,6 +965,20 @@ Stack trace:
 #7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #8 {main}
   thrown 
+28-08-2026 10:46:46 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+28-08-2026 10:46:46 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:47:55 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
+28-08-2026 10:47:55 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:47:55 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:47:55 | ::1 | Unknown error type: [8192] explode(): Passing null to parameter #2 ($string) of type string is deprecated 
+28-08-2026 10:47:55 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:47:55 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:47:55 | ::1 | Unknown error type: [2] Undefined array key 1 
+28-08-2026 10:47:55 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:47:55 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:47:55 | ::1 | Unknown error type: [1] Uncaught Error: Call to a member function fetchAll() on bool in C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php:74
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(235): Wiki\models\Crud->selectMany('SELECT\r\n       ...', Array, 196610)
 28-08-2026 10:46:43 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
 28-08-2026 10:46:43 | ::1 | PHP 8.2.12 (WINNT) 
 28-08-2026 10:46:48 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
@@ -963,6 +1002,50 @@ Stack trace:
 #7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #8 {main}
   thrown 
+28-08-2026 10:47:55 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+28-08-2026 10:47:55 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:50:32 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
+28-08-2026 10:50:32 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:50:32 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:50:32 | ::1 | Unknown error type: [8192] explode(): Passing null to parameter #2 ($string) of type string is deprecated 
+28-08-2026 10:50:32 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:50:32 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:50:32 | ::1 | Unknown error type: [2] Undefined array key 1 
+28-08-2026 10:50:32 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:50:32 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:50:32 | ::1 | Unknown error type: [1] Uncaught Error: Call to protected method Wiki\models\Crud::logError() from scope Wiki\models\FormModel in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:239
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(44): Wiki\models\FormModel->fetchLookupInfo(Array, '1')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(257): Wiki\models\FormModel->fetchFieldInfo('editArticle', '1')
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#6 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#7 {main}
+  thrown 
+28-08-2026 10:50:32 | ::1 | Fatal error on line 239 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:50:32 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:52:29 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
+28-08-2026 10:52:29 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:52:29 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:52:29 | ::1 | Unknown error type: [8192] explode(): Passing null to parameter #2 ($string) of type string is deprecated 
+28-08-2026 10:52:29 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:52:29 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:52:29 | ::1 | Unknown error type: [2] Undefined array key 1 
+28-08-2026 10:52:29 | ::1 | Fatal error on line 215 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:52:29 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:52:29 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+28-08-2026 10:52:29 | ::1 | Fatal error on line 245 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:52:29 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:52:29 | ::1 | Unknown error type: [2] Undefined array key "options" 
+28-08-2026 10:52:29 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php 
+28-08-2026 10:52:29 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:52:29 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\views\fields\CheckBoxGroup::__construct(): Argument #4 ($options) must be of type array, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php on line 34 and defined in C:\xampp\htdocs\Educom\Wiki\src\views\fields\CheckBoxGroup.php:13
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php(34): Wiki\views\fields\CheckBoxGroup->__construct('Existing Tag', 'Change tags', 'Existing-tag fo...', NULL, Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FormFactory.php(30): Wiki\controllers\factories\FieldFactory->createField(Array, '')
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(261): Wiki\controllers\factories\FormFactory->createForm(Array, Array, Array, Array, 'form-group')
 28-08-2026 10:46:48 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
 28-08-2026 10:46:48 | ::1 | PHP 8.2.12 (WINNT) 
 28-08-2026 10:47:14 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
@@ -986,6 +1069,28 @@ Stack trace:
 #7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #8 {main}
   thrown 
+28-08-2026 10:52:29 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\CheckBoxGroup.php 
+28-08-2026 10:52:29 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 11:26:54 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
+28-08-2026 11:26:54 | ::1 | Fatal error on line 163 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 11:26:54 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 11:26:54 | ::1 | Unknown error type: [8192] explode(): Passing null to parameter #2 ($string) of type string is deprecated 
+28-08-2026 11:26:54 | ::1 | Fatal error on line 163 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 11:26:54 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 11:26:54 | ::1 | Unknown error type: [2] Undefined array key 1 
+28-08-2026 11:26:54 | ::1 | Fatal error on line 163 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 11:26:54 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 11:26:54 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+28-08-2026 11:26:54 | ::1 | Fatal error on line 188 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 11:26:54 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 11:26:54 | ::1 | Unknown error type: [2] Undefined array key "options" 
+28-08-2026 11:26:54 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php 
+28-08-2026 11:26:54 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 11:26:54 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\views\fields\CheckBoxGroup::__construct(): Argument #4 ($options) must be of type array, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php on line 34 and defined in C:\xampp\htdocs\Educom\Wiki\src\views\fields\CheckBoxGroup.php:13
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php(34): Wiki\views\fields\CheckBoxGroup->__construct('Existing Tag', 'Change tags', 'Existing-tag fo...', NULL, Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FormFactory.php(30): Wiki\controllers\factories\FieldFactory->createField(Array, '')
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(261): Wiki\controllers\factories\FormFactory->createForm(Array, Array, Array, Array, 'form-group')
 28-08-2026 10:47:14 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
 28-08-2026 10:47:14 | ::1 | PHP 8.2.12 (WINNT) 
 28-08-2026 10:47:15 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
@@ -1009,6 +1114,8 @@ Stack trace:
 #7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #8 {main}
   thrown 
+28-08-2026 11:26:54 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\CheckBoxGroup.php 
+28-08-2026 11:26:54 | ::1 | PHP 8.2.12 (WINNT) 
 28-08-2026 10:47:15 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
 28-08-2026 10:47:15 | ::1 | PHP 8.2.12 (WINNT) 
 28-08-2026 10:48:33 | ::1 | Unknown error type: [2] Undefined array key "bridgevalues" 
