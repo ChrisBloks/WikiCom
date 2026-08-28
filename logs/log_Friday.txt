@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 28-08-2026 9:44:01 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
 28-08-2026 9:44:01 | ::1 | Fatal error on line 28 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FormFactory.php 
 28-08-2026 9:44:01 | ::1 | PHP 8.2.12 (WINNT) 
@@ -21,6 +22,18 @@ Stack trace:
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(236): Wiki\models\Crud->selectMany('SELECT\r\n       ...', Array, 196610)
 #1 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(44): Wiki\models\FormModel->fetchLookupInfo1(Array, '')
+=======
+28-08-2026 10:05:11 | ::1 | Unknown error type: [2] Undefined array key "column_names" 
+28-08-2026 10:05:11 | ::1 | Fatal error on line 210 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:05:11 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:05:11 | ::1 | Unknown error type: [2] Undefined array key "source_table" 
+28-08-2026 10:05:11 | ::1 | Fatal error on line 212 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+28-08-2026 10:05:11 | ::1 | PHP 8.2.12 (WINNT) 
+28-08-2026 10:05:11 | ::1 | Unknown error type: [1] Uncaught Error: Call to a member function fetchAll() on bool in C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php:74
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(236): Wiki\models\Crud->selectMany('SELECT\r\n       ...', Array, 196610)
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php(44): Wiki\models\FormModel->fetchLookupInfo(Array, '')
+>>>>>>> c05e1a5bd7c0d6445e53d74271614e08358f7635
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(224): Wiki\models\FormModel->fetchFieldInfo('search')
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
@@ -29,6 +42,7 @@ Stack trace:
 #7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #8 {main}
   thrown 
+<<<<<<< HEAD
 28-08-2026 9:46:09 | ::1 | Fatal error on line 68 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
 28-08-2026 9:46:09 | ::1 | PHP 8.2.12 (WINNT) 
 28-08-2026 9:46:51 | ::1 | Unknown error type: [2] Undefined array key "source_table" 
@@ -801,3 +815,7 @@ Stack trace:
   thrown 
 28-08-2026 10:39:58 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\CheckBoxGroup.php 
 28-08-2026 10:39:58 | ::1 | PHP 8.2.12 (WINNT) 
+=======
+28-08-2026 10:05:11 | ::1 | Fatal error on line 74 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+28-08-2026 10:05:11 | ::1 | PHP 8.2.12 (WINNT) 
+>>>>>>> c05e1a5bd7c0d6445e53d74271614e08358f7635

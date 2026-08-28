@@ -9,12 +9,13 @@ namespace Wiki\models;
 
 class RatingModel extends BaseModel
 {
-    /*
-    * Method that fetches the avg rating based on a given article id
-    *
-    * @params $article_id
-    */
-    public function fetchAvgRating(string $article_id): string|false
+
+    /**
+     * Fetches average rating of an article based on id
+     * @param int $article_id
+     * @return float|false
+     */
+    public function fetchAvgRating(int $article_id): float|false
     {
         $sql = "SELECT `AVGrating` as AVGrating FROM v_article_avg_rating 
                 WHERE id=:article_id";
@@ -26,12 +27,15 @@ class RatingModel extends BaseModel
         }
         return $result;
     }
-    /*
-    * Method that saves the rating from a user for an article
-    *
-    * @params user_id, article_id, rating
-    */
-    public function saveRating(string $user_id, string $article_id, string $rating): bool
+
+    /**
+     * Saves a user's article rating to the database
+     * @param int $user_id
+     * @param int $article_id
+     * @param int $rating
+     * @return bool
+     */
+    public function saveRating(int $user_id, int $article_id, int $rating): bool
     {
         $sql = "INSERT INTO wiki_rating (user_id,article_id, rating) 
                 VALUES (:user_id,:article_id,:rating)

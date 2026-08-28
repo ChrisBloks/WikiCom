@@ -11,7 +11,7 @@ use Wiki\tools\traits\tErrorMessageCollector;
 
 
 /**
- * Model class that defines basic behaviour.
+ * Defines basic model behaviour.
  * @uses tErrorMessageCollector
  */
 abstract class BaseModel
