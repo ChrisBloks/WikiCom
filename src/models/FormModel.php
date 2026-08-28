@@ -181,34 +181,21 @@ class FormModel extends BaseModel
         // Execute the query
         $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE|\PDO::FETCH_ASSOC);
 
-
         // format result
         $subcontainer_info = [];
-        // Loop over table rows indexed by id
+        // Effectively transposes the $result array from [row => [col => value]] to [col => [row => value]]
+        // Where 'col_name1' is replaced with 'options' and 'col_name2' is replaced with 'values'.
+        // Loop over rows
         foreach ($result as $id => $row){
-            // Fill with [id => value]
+            // Loop over columns
             foreach($row as $column_name => $value){
+                // If 'options' is already set, put column value under 'value' instead
                 $column_name = isset($subcontainer_info['options'][$id]) ? 'value' :'options';
                 $subcontainer_info[$column_name][$id] = $value; 
             }
         }
 
-        //         // format result
-        // $subcontainer_info = [];
-        // $col_name_map = array_combine(
-        //         explode(',', $field_info['column_names']),
-        //         ['options', 'values']);
-        // // Loop over table rows indexed by id
-        // foreach ($result as $id => $row){
-        //     // Fill with [id => value]
-        //     foreach($row as $column_name => $value){
-        //         $subcontainer_info[$col_name_map[$column_name]][$id] = $value; 
-        //     }
-        // }
-
-
         return $subcontainer_info;
-        
     }
 
 
