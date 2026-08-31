@@ -7,7 +7,7 @@ use Wiki\tools\utils\Utils;
 /**
  * Validator class for the registration form.
  */
-class NewPasswordValidator extends BaseValidator
+class NewPasswordValidator extends TextValidator
 {
     public function validate(string $name): bool
     {

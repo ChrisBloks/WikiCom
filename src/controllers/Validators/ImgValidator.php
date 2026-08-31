@@ -2,9 +2,12 @@
 
 namespace Wiki\controllers\validators;
 
+use Wiki\tools\interfaces\iValidator;
 
-class ImgValidator extends BaseValidator
+
+class ImgValidator implements iValidator
 {
+    protected array $field_inputs = [];
         public function validate(string $name): bool
     {
         // Save name of field in inputs
@@ -24,6 +27,12 @@ class ImgValidator extends BaseValidator
             return $this->validateFields(field_inputs: $this->field_inputs);
         }
     }
+
+    public function getFieldInputs(): array
+    {
+        return $this->field_inputs;
+    }
+
     public function validateFields(array $field_inputs): bool
     {
         $target_dir = \Config::AUTHORIMGPATH;

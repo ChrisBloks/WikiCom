@@ -5,7 +5,7 @@ namespace Wiki\controllers;
 // use Wiki\tools\interfaces\iValidator;
 use Wiki\tools\traits\tSingleton,
 Wiki\models\ModelSelector,
-Wiki\controllers\validators\BaseValidator,
+Wiki\controllers\validators\TextValidator,
 Wiki\controllers\validators\Validator;
 use Wiki\tools\utils\HtmlUtils;
 
@@ -22,7 +22,7 @@ class UserHandler
      * Performs basic validation, then attempts to match an email and password to the inputs.
      * Stores errors in the (passed by reference) $response parameter.
      * @param array $response array containing the source page (string)
-     * @param Validator $validator BaseValidator object for first line validation.
+     * @param Validator $validator TextValidator object for first line validation.
      * @return array|false
      */
     public function checkLogin(array &$response, Validator $validator): array|false
@@ -56,7 +56,7 @@ class UserHandler
      * On success adds a new user to the database. 
      * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
      * @param array $response array containing the source page (string)
-     * @param Validator $validator BaseValidator object for first line validation.
+     * @param Validator $validator TextValidator object for first line validation.
      * @return array|false
      */
     public function checkRegistration(array &$response, Validator $validator): array|false

@@ -704,3 +704,20 @@ Stack trace:
 31-08-2026 11:50:46 | ::1 | Unknown error type: [2] Undefined array key "name" 
 31-08-2026 11:50:46 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
 31-08-2026 11:50:46 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 13:20:45 | ::1 | Unknown error type: [1] Uncaught Error: Class "Wiki\controllers\validators\TextValidator" not found in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\EmailValidator.php:6
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\vendor\composer\ClassLoader.php(576): include()
+#1 C:\xampp\htdocs\Educom\Wiki\vendor\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\ValidatorFactory.php(28): Composer\Autoload\ClassLoader->loadClass('Wiki\\controller...')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(61): Wiki\controllers\factories\ValidatorFactory->createValidator()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(28): Wiki\controllers\validators\Validator->getValidators(Array)
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(32): Wiki\controllers\validators\Validator->validateFields(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(44): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#8 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#9 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#10 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#11 {main}
+  thrown 
+31-08-2026 13:20:45 | ::1 | Fatal error on line 6 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\EmailValidator.php 
+31-08-2026 13:20:45 | ::1 | PHP 8.2.12 (WINNT) 
