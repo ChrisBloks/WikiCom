@@ -4,9 +4,8 @@ namespace Wiki\controllers\requestHandlers;
 
 use Wiki\tools\utils\Utils,
 Wiki\tools\utils\HtmlUtils,
-Wiki\controllers\validators\BaseValidator,
-Wiki\controllers\validators\RegisterValidator,
 Wiki\controllers\UserHandler,
+Wiki\controllers\ArticleHandler,
 Wiki\controllers\validators\Validator,
 Wiki\models\ModelSelector;
 
@@ -51,6 +50,9 @@ class PostRequestHandler extends BaseRequestHandler
                     $this->response['page'] = 'home';
                     $this->response['isLoggedIn'] = true;
                 }
+                else{
+                    $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
+                }
 
                 break;
             case 'about':
@@ -87,10 +89,18 @@ class PostRequestHandler extends BaseRequestHandler
                 }
                 break;
             case 'search':
-                $field_info = ModelSelector::getFormModel()->fetchFieldInfo($this->response['page']);
-                foreach ($field_info as $field) {
-                    $this->response[$field['name']] = $_POST[$field['name']];
+                $validator = new Validator();
+                $search_info = ArticleHandler::getInstance()->checkSearch($this->response,$validator);
+
+                if ($search_info !== false) {
+                    // Update response
+                    $this->response = array_merge($this->response,$search_info);
                 }
+                else{
+                    $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
+                }
+
+
 
             // collect checkboxgroup van tags en authors
             // collect sortby rating/datum
