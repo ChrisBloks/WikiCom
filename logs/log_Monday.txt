@@ -825,3 +825,21 @@ Stack trace:
 31-08-2026 16:03:45 | ::1 | Unknown error type: [2] Undefined array key 2 
 31-08-2026 16:03:45 | ::1 | Fatal error on line 23 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
 31-08-2026 16:03:45 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 16:16:26 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 16:16:26 | ::1 | Fatal error on line 40 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 16:16:26 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 16:16:26 | ::1 | Unknown error type: [2] Undefined array key "email" 
+31-08-2026 16:16:26 | ::1 | Fatal error on line 35 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 16:16:26 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 16:16:26 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserInfoByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 35 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:20
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(35): Wiki\models\UserInfoModel->fetchUserInfoByEmail(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(47): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 16:16:26 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+31-08-2026 16:16:26 | ::1 | PHP 8.2.12 (WINNT) 

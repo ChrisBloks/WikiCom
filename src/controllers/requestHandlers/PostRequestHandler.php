@@ -18,87 +18,113 @@ class PostRequestHandler extends BaseRequestHandler
 
         switch ($request['page']) {
             case 'register':
-                $validator = new ValidationHandler();
+
                 // Validate user inputs on the registration form
-                [$validation_ok, $validation_err, $userInfo] = UserHandler::getInstance()->checkRegistration($this->response, $validator);
+                // contains keys ['ok', 'userErr', 'field_inputs']
+                $validation_result = UserHandler::getInstance()
+                    ->checkRegistration(
+                        response: $this->response,
+                        validator: new ValidationHandler()
+                    );
                 
                 // Add all (if any) error messages to the response array
-                $this->response['userError'] = array_merge($this->response['userError'], $validation_err);
+                $this->response['userError'] = array_merge($this->response['userError'], $validation_result['userErr']);
 
                 // If validation was succesful, add new user to the database
-                if ($validation_ok) {
+                if ($validation_result['ok']) {
+                    $user_info = $validation_result['field_inputs'];
                     $registrationResult = ModelSelector::getUserInfoModel()
                         ->saveUser(
-                            username: $userInfo['name'],
-                            password: $userInfo['password_1'],
-                            email: $userInfo['email']
+                            username: $user_info['name'],
+                            password: $user_info['password_1'],
+                            email: $user_info['email']
                         );
+                    // Registration was successful
                     if ($registrationResult !== false) {
                         $this->response['page'] = 'login';
                     }
+                    // Store model errors 
                     else{
                         $this->response['userError'] = array_merge($this->response['userError'], ModelSelector::getUserInfoModel()->getErrors());
                     }
                 }
                 break;
+
             case 'login':
                 // Validate user inputs and on succes: get logged-in user's info
-                $validator = new ValidationHandler();
-                $userinfo = UserHandler::getInstance()->checkLogin($this->response, $validator);
+                $validation_result = UserHandler::getInstance()
+                    ->checkLogin(
+                        response: $this->response,
+                        validator: new ValidationHandler()
+                    );
+
+                // Add all (if any) error messages to the response array
+                $this->response['userError'] = array_merge($this->response['userError'], $validation_result['userErr']);
+
                 // If log in was succesful, if the login was unsuccesful, errors are stored in $response
-                if ($userinfo !== false) {
+                if ($validation_result['ok'] !== false) {
+                    $user_info = $validation_result['field_inputs'];
                     // Update session variables
-                    $_SESSION['userName'] = $userinfo['name'];
-                    $_SESSION['userID'] = $userinfo['id'];
+                    $_SESSION['userName'] = $user_info['name'];
+                    $_SESSION['userID'] = $user_info['id'];
 
                     // Update response
                     $this->response['page'] = 'home';
                     $this->response['isLoggedIn'] = true;
                 }
                 break;
+
             case 'about':
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
                 $this->response['userID'] = Utils::getSesVar('userID');
 
-                $validator = new ValidationHandler();
-                $aboutinfo = UserHandler::getInstance()->checkAboutInfo(
-                    response: $this->response,
-                    validator: $validator
-                );
+                
+                $validation_result = UserHandler::getInstance()
+                    ->checkAboutInfo(
+                        response: $this->response,
+                        validator: new ValidationHandler()
+                    );
 
-                if ($aboutinfo !== false) {
-                    // Collecting image information
+                if ($validation_result['ok'] !== false) {
+                    $about_info = $validation_result['field_inputs'];
+
+                    // Construct image file path
                     $target_dir = \Config::AUTHORIMGPATH;
-                    $filevar = $_FILES[$aboutinfo['name']];
+                    $filevar = $_FILES[$about_info['name']];
                     $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
-                    $filename = 'author_' . $this->response['aboutID'] . '_' . date('Ymd') . '.' . $filetype . '';
+                    $filename = 'author_' . $this->response['aboutID'] . '.' . $filetype . '';
                     $target_file = $target_dir . $filename;
 
                     // uploading image
                     if (move_uploaded_file($filevar["tmp_name"], $target_file)) {
-                        $result = ModelSelector::getUserInfoModel()->saveUserAboutInfo(
-                            imgFileName: $filename,
-                            description: $aboutinfo['description'],
-                            author_id: $this->response['aboutID']
-                        );
+                        $result = ModelSelector::getUserInfoModel()
+                            ->saveUserAboutInfo(
+                                imgFileName: $filename,
+                                description: $about_info['description'],
+                                author_id: $this->response['aboutID']
+                            );
                         if ($result == false) {
-                            $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
+                            $this->response['userError'] = array_merge($this->response['userError'], ModelSelector::getUserInfoModel()->getErrors());
                         }
                     } else {
-                        $this->response['userError'] = "Sorry, there was an error uploading your file.";
+                        $this->response['userError'][] = "Sorry, there was an error uploading your file.";
                     }
                 }
                 break;
+
             case 'search':
-                $validator = new ValidationHandler();
-                $search_info = ArticleHandler::getInstance()->checkSearch($this->response,$validator);
+                $search_info = ArticleHandler::getInstance()
+                    ->checkSearch(
+                        response: $this->response, 
+                        validator: new ValidationHandler()
+                    );
 
                 if ($search_info !== false) {
                     // Update response
-                    $this->response = array_merge($this->response,$search_info);
+                    $this->response = array_merge($this->response, $search_info);
                 }
                 else{
-                    $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
+                    $this->response['userError'] = array_merge($this->response['userError'], ModelSelector::getUserInfoModel()->getErrors());
                 }
 
 
@@ -120,15 +146,20 @@ class PostRequestHandler extends BaseRequestHandler
                 // if ok -> send article info to db
                 break;
             case 'contact':
-                $validator = new ValidationHandler();
-                $contactInfo = UserHandler::getInstance()->checkContact($this->response, $validator);
+                // Contains ['ok', 'userErr', 'field_inputs']
+                $validation_result = UserHandler::getInstance()
+                    ->checkContact(
+                        response: $this->response, 
+                        validator: new ValidationHandler()
+                    );
 
                 // On succesful contact form validaiton, save input to the database
-                if ($contactInfo !== false) {
+                if ($validation_result['ok'] !== false) {
+                    $field_inputs = $validation_result['field_inputs'];
                     ModelSelector::getWebsiteInfoModel()->saveContact(
-                        name: $contactInfo['name'],
-                        email: $contactInfo['email'],
-                        message: $contactInfo['message']
+                        name: $field_inputs['name'],
+                        email: $field_inputs['email'],
+                        message: $field_inputs['message']
                     );
                 }
                 break;

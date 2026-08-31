@@ -25,9 +25,9 @@ class UserHandler
      * @param ValidationHandler $validator BaseValidator object for first line validation.
      * @return array|false
      */
-    public function checkLogin(array &$response, ValidationHandler $validator): array|false
+    public function checkLogin(array $response, ValidationHandler $validator): array|false
     {
-        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
+        $field_info = ModelSelector::getFormModel()->fetchFieldInfo(page_name: $response['page']);
         // Check first line validation
         $result = $validator->validateFields($field_info);
 
@@ -48,39 +48,6 @@ class UserHandler
             $response['userError'] = array_merge($response['userError'], $validator->getErrors()); // Get why validation failed
             return false;
 
-        }
-    }
-
-    /**
-     * Check if registration fiels were filled in correctly.
-     * On success adds a new user to the database. 
-     * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
-     * @param array $response array containing the source page (string)
-     * @param ValidationHandler $validator BaseValidator object for first line validation.
-     * @return array|false
-     */
-    public function checkRegistration1(array &$response, ValidationHandler $validator): array|false
-    {
-        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
-        // Check first line validation
-        $result = $validator->validateFields($field_info);
-        if ($result) {
-            // Check if the email does NOT exist
-            if (!ModelSelector::getUserInfoModel()->checkEmailExists($result['email'])) {
-                
-                // if model result -> false -> model
-                return $result;
-            }
-            // Email was found in the database 
-            else {
-                $response['userError'][] = "Email already exists!";
-                return false;
-            }
-        }
-        // First line validation failed 
-        else {
-            $response['userError'] = array_merge($response['userError'], $validator->getErrors());
-            return false;
         }
     }
 
@@ -135,7 +102,7 @@ class UserHandler
      * @param ValidationHandler $validator ValidationHandler object for first line validation.
      * @return array|false
      */
-    public function checkContact(array &$response, ValidationHandler $validator): array|false
+    public function checkContact(array $response, ValidationHandler $validator): array|false
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Perform basic validation on contact fields
@@ -152,7 +119,7 @@ class UserHandler
     }
 
     
-    public function checkAboutInfo(array &$response, ValidationHandler $validator): array|false
+    public function checkAboutInfo(array $response, ValidationHandler $validator): array|false
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         
