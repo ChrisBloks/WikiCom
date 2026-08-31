@@ -4,9 +4,13 @@ namespace Wiki\controllers\validators;
 use Wiki\controllers\factories\ValidatorFactory,
     Wiki\tools\traits\tErrorMessageCollector,
     Wiki\tools\utils\HtmlUtils;
+use Wiki\tools\traits\tElementContainer;
+use Wiki\tools\traits\tSingleton;
+
 class Validator
 {
     use tErrorMessageCollector;
+    use tSingleton;
     protected array $validatorlist = [];
     protected array $field_inputs = [];
 
