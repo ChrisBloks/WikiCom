@@ -35,7 +35,7 @@ class ArticleHandler
         if ($result) {
             return $result;
         } else {
-            $response['userError'] = $validator->getErrors(); // Get why validation failed
+            $response['userError'] = array_merge($response['userError'], $validator->getErrors()); // Get why validation failed
             return false;
 
         }
