@@ -2,12 +2,14 @@
 
 namespace Wiki\controllers\validators;
 
-use Wiki\tools\interfaces\iValidator;
-use wiki\tools\utils\Utils;
+use Wiki\tools\interfaces\iValidator,
+    Wiki\tools\utils\Utils,
+    Wiki\tools\traits\tErrorMessageCollector;
 
 
 class CheckBoxValidator implements iValidator
 {    
+    use tErrorMessageCollector;
     protected array $field_inputs = [];
 
     public function validate(string $name): bool

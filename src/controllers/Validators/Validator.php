@@ -2,8 +2,8 @@
 namespace Wiki\controllers\validators;
 
 use Wiki\controllers\factories\ValidatorFactory,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\tools\utils\HtmlUtils;
+Wiki\tools\traits\tErrorMessageCollector,
+Wiki\tools\utils\HtmlUtils;
 use Wiki\tools\traits\tElementContainer;
 use Wiki\tools\traits\tSingleton;
 
@@ -29,19 +29,20 @@ class Validator
 
         // Loop through the fields and uses the correct validator
         foreach ($field_info as $field) {
-            $validation_result = $this->validatorlist[$field['type']]->validate($field['name']);
-            // If validation is succesful
-            if ($validation_result) {
-                // Collect the user's inputs
-                $this->field_inputs = array_merge($this->field_inputs, $this->validatorlist[$field['type']]->getFieldInputs());
-            } 
-            // If validation failed
-            else {
-                // Get all errors
-                foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message){
-                    $this->logError("{$field_info['name']}: {$error_message}");
+                $validation_result = $this->validatorlist[$field['type']]->validate($field['name']);
+
+                // If validation is succesful
+                if ($validation_result) {
+                    // Collect the user's inputs
+                    $this->field_inputs = array_merge($this->field_inputs, $this->validatorlist[$field['type']]->getFieldInputs());
                 }
-            }
+                // If validation failed
+                else {
+                    // Get all errors
+                    foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message) {
+                        $this->logError("{$field_info['name']}: {$error_message}");
+                    }
+                }
         }
         if ($this->hasErrors()) {
             return false;
@@ -58,7 +59,7 @@ class Validator
     {
         foreach ($field_info as $field) {
             if (!array_key_exists($field['type'], $this->validatorlist)) {
-                $this->validatorlist[$field['type']] = ValidatorFactory::from($field['type'])->createValidator();
+                $this->validatorlist[$field['type']] = ValidatorFactory::From($field['type'])->createValidator();
             }
         }
     }

@@ -265,7 +265,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
-                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page], //give article tag
+                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => "saveArticle"], //give article tag
                     class: $form_info["display_class"],
                     field_text: $bodyinfo
                 );

@@ -6,6 +6,7 @@ use Wiki\tools\interfaces\iValidator,
     Wiki\tools\traits\tErrorMessageCollector,
     Wiki\models\ModelSelector,
     Wiki\tools\utils\Utils;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Text validation class that defines basic 1st line of defence validation. If succesful, calls more specific validation behaviour as defined in child classes.
