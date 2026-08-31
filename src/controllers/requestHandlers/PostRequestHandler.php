@@ -6,7 +6,7 @@ use Wiki\tools\utils\Utils,
 Wiki\tools\utils\HtmlUtils,
 Wiki\controllers\UserHandler,
 Wiki\controllers\ArticleHandler,
-Wiki\controllers\validators\Validator,
+Wiki\controllers\ValidationHandler,
 Wiki\models\ModelSelector;
 
 class PostRequestHandler extends BaseRequestHandler
@@ -18,11 +18,12 @@ class PostRequestHandler extends BaseRequestHandler
 
         switch ($request['page']) {
             case 'register':
-                $validator = new Validator();
+                $validator = new ValidationHandler();
                 // Validate user inputs on the registration form
                 [$validation_ok, $validation_err, $userInfo] = UserHandler::getInstance()->checkRegistration($this->response, $validator);
-
-                HtmlUtils::dump('userInfo', $userInfo);
+                
+                // Add all (if any) error messages to the response array
+                $this->response['userError'] = array_merge($this->response['userError'], $validation_err);
 
                 // If validation was succesful, add new user to the database
                 if ($validation_ok) {
@@ -36,13 +37,13 @@ class PostRequestHandler extends BaseRequestHandler
                         $this->response['page'] = 'login';
                     }
                     else{
-                        $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
+                        $this->response['userError'] = array_merge($this->response['userError'], ModelSelector::getUserInfoModel()->getErrors());
                     }
                 }
                 break;
             case 'login':
                 // Validate user inputs and on succes: get logged-in user's info
-                $validator = new Validator();
+                $validator = new ValidationHandler();
                 $userinfo = UserHandler::getInstance()->checkLogin($this->response, $validator);
                 // If log in was succesful, if the login was unsuccesful, errors are stored in $response
                 if ($userinfo !== false) {
@@ -59,7 +60,7 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
                 $this->response['userID'] = Utils::getSesVar('userID');
 
-                $validator = new Validator();
+                $validator = new ValidationHandler();
                 $aboutinfo = UserHandler::getInstance()->checkAboutInfo(
                     response: $this->response,
                     validator: $validator
@@ -89,7 +90,7 @@ class PostRequestHandler extends BaseRequestHandler
                 }
                 break;
             case 'search':
-                $validator = new Validator();
+                $validator = new ValidationHandler();
                 $search_info = ArticleHandler::getInstance()->checkSearch($this->response,$validator);
 
                 if ($search_info !== false) {
@@ -119,7 +120,7 @@ class PostRequestHandler extends BaseRequestHandler
                 // if ok -> send article info to db
                 break;
             case 'contact':
-                $validator = new Validator();
+                $validator = new ValidationHandler();
                 $contactInfo = UserHandler::getInstance()->checkContact($this->response, $validator);
 
                 // On succesful contact form validaiton, save input to the database

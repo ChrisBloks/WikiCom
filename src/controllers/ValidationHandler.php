@@ -1,10 +1,10 @@
 <?php
-namespace Wiki\controllers\validators;
+namespace Wiki\controllers;
 
 use Wiki\controllers\factories\ValidatorFactory,
     Wiki\tools\traits\tErrorMessageCollector,
     Wiki\tools\utils\HtmlUtils;
-class Validator
+class ValidationHandler
 {
     use tErrorMessageCollector;
     protected array $validatorlist = [];
@@ -39,7 +39,7 @@ class Validator
                 foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message){
                     $this->logError("{$field_info['name']}: {$error_message}");
                 }
-                // All errors have been saved to the Validator
+                // All errors have been saved to the ValidationHandler
                 $this->validatorlist[$field['type']]->emptyErrors();
             }
         }

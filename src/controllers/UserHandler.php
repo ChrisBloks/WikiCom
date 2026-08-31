@@ -6,7 +6,7 @@ namespace Wiki\controllers;
 use Wiki\tools\traits\tSingleton,
 Wiki\models\ModelSelector,
 Wiki\controllers\validators\BaseValidator,
-Wiki\controllers\validators\Validator;
+Wiki\controllers\validationHandler;
 use Wiki\tools\utils\HtmlUtils;
 
 /**
@@ -22,10 +22,10 @@ class UserHandler
      * Performs basic validation, then attempts to match an email and password to the inputs.
      * Stores errors in the (passed by reference) $response parameter.
      * @param array $response array containing the source page (string)
-     * @param Validator $validator BaseValidator object for first line validation.
+     * @param ValidationHandler $validator BaseValidator object for first line validation.
      * @return array|false
      */
-    public function checkLogin(array &$response, Validator $validator): array|false
+    public function checkLogin(array &$response, ValidationHandler $validator): array|false
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Check first line validation
@@ -56,10 +56,10 @@ class UserHandler
      * On success adds a new user to the database. 
      * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
      * @param array $response array containing the source page (string)
-     * @param Validator $validator BaseValidator object for first line validation.
+     * @param ValidationHandler $validator BaseValidator object for first line validation.
      * @return array|false
      */
-    public function checkRegistration1(array &$response, Validator $validator): array|false
+    public function checkRegistration1(array &$response, ValidationHandler $validator): array|false
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Check first line validation
@@ -89,10 +89,10 @@ class UserHandler
      * On success adds a new user to the database. 
      * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
      * @param array $response array containing the source page (string)
-     * @param Validator $validator BaseValidator object for first line validation.
+     * @param ValidationHandler $validator BaseValidator object for first line validation.
      * @return array|false
      */
-    public function checkRegistration(array $response, Validator $validator): array|false
+    public function checkRegistration(array $response, ValidationHandler $validator): array|false
     {
         // Validate page fields
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
@@ -132,10 +132,10 @@ class UserHandler
     /**
      * Checks if the contact form was correctly filled in and saves the contact to the database.
      * @param array $response array containing the source page (string)
-     * @param Validator $validator Validator object for first line validation.
+     * @param ValidationHandler $validator ValidationHandler object for first line validation.
      * @return array|false
      */
-    public function checkContact(array &$response, Validator $validator): array|false
+    public function checkContact(array &$response, ValidationHandler $validator): array|false
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Perform basic validation on contact fields
@@ -152,7 +152,7 @@ class UserHandler
     }
 
     
-    public function checkAboutInfo(array &$response, Validator $validator): array|false
+    public function checkAboutInfo(array &$response, ValidationHandler $validator): array|false
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         

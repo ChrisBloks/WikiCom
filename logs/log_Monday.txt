@@ -70,7 +70,7 @@
 31-08-2026 8:56:04 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #1 ($page_name) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(29): Wiki\models\FormModel->fetchFieldInfo(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(91): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(91): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -93,7 +93,7 @@ Stack trace:
 31-08-2026 8:57:00 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #1 ($page_name) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(29): Wiki\models\FormModel->fetchFieldInfo(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(91): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(91): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -108,7 +108,7 @@ Stack trace:
 31-08-2026 8:57:22 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #1 ($page_name) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(29): Wiki\models\FormModel->fetchFieldInfo(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(91): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(91): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -123,7 +123,7 @@ Stack trace:
 31-08-2026 8:58:05 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #1 ($page_name) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(29): Wiki\models\FormModel->fetchFieldInfo(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(91): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(91): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -132,19 +132,19 @@ Stack trace:
   thrown 
 31-08-2026 8:58:05 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
 31-08-2026 8:58:05 | ::1 | PHP 8.2.12 (WINNT) 
-31-08-2026 8:58:47 | ::1 | Unknown error type: [1] Uncaught ValueError: "checkboxgroup" is not a valid backing value for enum Wiki\controllers\factories\ValidatorFactory in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php:48
+31-08-2026 8:58:47 | ::1 | Unknown error type: [1] Uncaught ValueError: "checkboxgroup" is not a valid backing value for enum Wiki\controllers\factories\ValidatorFactory in C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php:48
 Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(48): Wiki\controllers\factories\ValidatorFactory::from('checkboxgroup')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(24): Wiki\controllers\validators\Validator->getValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(31): Wiki\controllers\validators\Validator->useValidators(Array)
-#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(90): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validators\Validator))
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php(48): Wiki\controllers\factories\ValidatorFactory::from('checkboxgroup')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php(24): Wiki\controllers\validationHandler->getValidators(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(31): Wiki\controllers\validationHandler->useValidators(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(90): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validationHandler))
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
 #7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #8 {main}
   thrown 
-31-08-2026 8:58:47 | ::1 | Fatal error on line 48 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 8:58:47 | ::1 | Fatal error on line 48 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 8:58:47 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 9:04:49 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, string given 
 31-08-2026 9:04:49 | ::1 | Fatal error on line 23 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
@@ -154,9 +154,9 @@ Stack trace:
 31-08-2026 9:04:49 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 9:04:49 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\SortValidator::validate(): Return value must be of type bool, none returned in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\SortValidator.php:18
 Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\SortValidator->validate('sortby')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(31): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(90): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validators\Validator))
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php(27): Wiki\controllers\validators\SortValidator->validate('sortby')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(31): Wiki\controllers\validationHandler->useValidators(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(90): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validationHandler))
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -173,9 +173,9 @@ Stack trace:
 31-08-2026 9:05:20 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 9:05:20 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\validators\SortValidator::validate(): Return value must be of type bool, none returned in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\SortValidator.php:18
 Stack trace:
-#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php(27): Wiki\controllers\validators\SortValidator->validate('sortby')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(31): Wiki\controllers\validators\Validator->useValidators(Array)
-#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(90): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validators\Validator))
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php(27): Wiki\controllers\validators\SortValidator->validate('sortby')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(31): Wiki\controllers\validationHandler->useValidators(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(90): Wiki\controllers\ArticleHandler->checkSearch(Array, Object(Wiki\controllers\validationHandler))
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #5 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -648,34 +648,34 @@ Stack trace:
 31-08-2026 11:36:23 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
 31-08-2026 11:36:23 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:40:03 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:40:03 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:40:03 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:40:03 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:40:03 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:40:03 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:40:03 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:40:03 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:40:17 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:40:17 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:40:17 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:40:17 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:40:17 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:40:17 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:40:17 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:40:17 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:42:24 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:42:24 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:42:24 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:42:24 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:42:24 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:42:24 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:42:24 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:42:24 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:43:22 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:43:22 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:43:22 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:43:22 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:43:22 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:43:22 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:43:22 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:43:22 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:48:45 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:48:45 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:48:45 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:48:45 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:48:45 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:48:45 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:48:45 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:48:45 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:48:45 | ::1 | Unknown error type: [2] Undefined array key "userError" 
 31-08-2026 11:48:45 | ::1 | Fatal error on line 48 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
@@ -683,7 +683,7 @@ Stack trace:
 31-08-2026 11:48:45 | ::1 | Unknown error type: [1] Uncaught TypeError: array_merge(): Argument #1 must be of type array, null given in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php:48
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(48): array_merge(NULL, Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(42): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(42): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -693,28 +693,28 @@ Stack trace:
 31-08-2026 11:48:45 | ::1 | Fatal error on line 48 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
 31-08-2026 11:48:45 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:48:59 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:48:59 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:48:59 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:48:59 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:48:59 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:48:59 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:48:59 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:48:59 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:49:21 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:49:21 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:49:21 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:49:21 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 11:50:46 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 11:50:46 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:50:46 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 11:50:46 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:41:20 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 14:41:20 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 14:41:20 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 14:41:20 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:41:20 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 14:41:20 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 14:41:20 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 14:41:20 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:41:20 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 14:41:20 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 14:41:20 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 14:41:20 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:41:20 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 14:41:20 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 14:41:20 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 14:41:20 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:41:20 | ::1 | Unknown error type: [2] Undefined array key "name" 
 31-08-2026 14:41:20 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
@@ -743,7 +743,7 @@ Stack trace:
 31-08-2026 14:45:13 | ::1 | Fatal error on line 102 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
 31-08-2026 14:45:13 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:48:52 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 14:48:52 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 14:48:52 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 14:48:52 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:48:52 | ::1 | Unknown error type: [2] Trying to access array offset on value of type bool 
 31-08-2026 14:48:52 | ::1 | Fatal error on line 102 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
@@ -772,7 +772,7 @@ Stack trace:
 31-08-2026 14:48:52 | ::1 | Fatal error on line 73 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
 31-08-2026 14:48:52 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:49:48 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 14:49:48 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 14:49:48 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 14:49:48 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 14:49:48 | ::1 | Unknown error type: [2] Trying to access array offset on value of type bool 
 31-08-2026 14:49:48 | ::1 | Fatal error on line 102 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
@@ -786,7 +786,7 @@ Stack trace:
 31-08-2026 14:49:48 | ::1 | Unknown error type: [1] Uncaught TypeError: array_merge(): Argument #1 must be of type array, null given in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php:124
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(124): array_merge(NULL, Array)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(23): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(23): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -796,7 +796,7 @@ Stack trace:
 31-08-2026 14:49:48 | ::1 | Fatal error on line 124 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
 31-08-2026 14:49:48 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 15:15:34 | ::1 | Unknown error type: [2] Undefined array key "name" 
-31-08-2026 15:15:34 | ::1 | Fatal error on line 40 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 15:15:34 | ::1 | Fatal error on line 40 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validationHandler.php 
 31-08-2026 15:15:34 | ::1 | PHP 8.2.12 (WINNT) 
 31-08-2026 15:15:34 | ::1 | Unknown error type: [2] Undefined array key "email" 
 31-08-2026 15:15:34 | ::1 | Fatal error on line 107 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
@@ -804,7 +804,7 @@ Stack trace:
 31-08-2026 15:15:34 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserIDByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 107 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:39
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(107): Wiki\models\UserInfoModel->fetchUserIDByEmail(NULL)
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(23): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(23): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -813,3 +813,15 @@ Stack trace:
   thrown 
 31-08-2026 15:15:34 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
 31-08-2026 15:15:34 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 16:03:45 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 16:03:45 | ::1 | Fatal error on line 40 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 16:03:45 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 16:03:45 | ::1 | Unknown error type: [2] Undefined array key 0 
+31-08-2026 16:03:45 | ::1 | Fatal error on line 23 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+31-08-2026 16:03:45 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 16:03:45 | ::1 | Unknown error type: [2] Undefined array key 1 
+31-08-2026 16:03:45 | ::1 | Fatal error on line 23 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+31-08-2026 16:03:45 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 16:03:45 | ::1 | Unknown error type: [2] Undefined array key 2 
+31-08-2026 16:03:45 | ::1 | Fatal error on line 23 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+31-08-2026 16:03:45 | ::1 | PHP 8.2.12 (WINNT) 
