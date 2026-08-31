@@ -56,8 +56,13 @@ class Crud
     public function selectOne(string $sql, array $params): array|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
+        // If query failed return false;
+        if (!$stmt){
+            return false;
+        }
         $result = $stmt->fetch(mode: \PDO::FETCH_ASSOC);
-        return $result;
+        // If fetching a result failed, return empty array;
+        return ($result ? $result : []);
     }
 
     /**

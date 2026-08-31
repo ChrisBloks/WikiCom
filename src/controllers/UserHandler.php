@@ -33,8 +33,9 @@ class UserHandler
 
         // All fields cotain valid inputs
         if ($result['ok']) {
-            $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail(email: $result['field_inputs']['email']);
-            
+            $userinfo = ModelSelector::getUserInfoModel()
+                ->fetchUserInfoByEmail(email: $result['field_inputs']['email']);
+               
             // Query failed!
             if ($userinfo === false){
                 $result['ok'] = false;
@@ -43,13 +44,13 @@ class UserHandler
 
             // If no corresponding email was found in the database OR 
             // if given password does not match stored password (hashed)
-            else if (empty($userinfo) || !password_verify($result['field_inputs']['password'], $userinfo['password'])) {
+            else if (empty($userinfo) || !password_verify($result['field_inputs']['password'], $userinfo['password'])) {   
                 $result['ok'] = false;
                 $result['userErr'][] = "Login email or password is wrong!";
             }
         } 
         // Some field contained an invalid input
-        else {
+        else {  
             $result['ok'] = false;
             $result['userError'] = array_merge($response['userError'], $validator->getErrors()); // Get why validation failed
         }

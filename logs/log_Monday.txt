@@ -843,3 +843,171 @@ Stack trace:
   thrown 
 31-08-2026 16:16:26 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
 31-08-2026 16:16:26 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:10:42 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 17:10:42 | ::1 | Fatal error on line 42 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 17:10:42 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:10:42 | ::1 | Unknown error type: [2] Undefined array key "email" 
+31-08-2026 17:10:42 | ::1 | Fatal error on line 36 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 17:10:42 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:10:42 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserInfoByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 36 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:20
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(36): Wiki\models\UserInfoModel->fetchUserInfoByEmail(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(56): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:10:42 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+31-08-2026 17:10:42 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:10:43 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 17:10:43 | ::1 | Fatal error on line 42 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 17:10:43 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:10:43 | ::1 | Unknown error type: [2] Undefined array key "email" 
+31-08-2026 17:10:43 | ::1 | Fatal error on line 36 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 17:10:43 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:10:43 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserInfoByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 36 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:20
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(36): Wiki\models\UserInfoModel->fetchUserInfoByEmail(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(56): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:10:43 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+31-08-2026 17:10:43 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:11:55 | ::1 | Unknown error type: [2] Trying to access array offset on value of type bool 
+31-08-2026 17:11:55 | ::1 | Fatal error on line 182 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+31-08-2026 17:11:55 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:11:55 | ::1 | Unknown error type: [2] Trying to access array offset on value of type bool 
+31-08-2026 17:11:55 | ::1 | Fatal error on line 183 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+31-08-2026 17:11:55 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:11:55 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\views\containers\Title::__construct(): Argument #1 ($text) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 181 and defined in C:\xampp\htdocs\Educom\Wiki\src\views\containers\Title.php:10
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(181): Wiki\views\containers\Title->__construct(NULL, NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:11:55 | ::1 | Fatal error on line 10 in file C:\xampp\htdocs\Educom\Wiki\src\views\containers\Title.php 
+31-08-2026 17:11:55 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:05 | ::1 | Unknown error type: [2] Trying to access array offset on value of type bool 
+31-08-2026 17:12:05 | ::1 | Fatal error on line 157 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+31-08-2026 17:12:05 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:05 | ::1 | Unknown error type: [2] Trying to access array offset on value of type bool 
+31-08-2026 17:12:05 | ::1 | Fatal error on line 163 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+31-08-2026 17:12:05 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:05 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\views\containers\Title::__construct(): Argument #1 ($text) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 162 and defined in C:\xampp\htdocs\Educom\Wiki\src\views\containers\Title.php:10
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(162): Wiki\views\containers\Title->__construct(NULL, 'fs-1 text-cente...')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:12:05 | ::1 | Fatal error on line 10 in file C:\xampp\htdocs\Educom\Wiki\src\views\containers\Title.php 
+31-08-2026 17:12:05 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:21 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 17:12:21 | ::1 | Fatal error on line 42 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 17:12:21 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:21 | ::1 | Unknown error type: [2] Undefined array key "email" 
+31-08-2026 17:12:21 | ::1 | Fatal error on line 36 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 17:12:21 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:21 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserInfoByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 36 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:20
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(36): Wiki\models\UserInfoModel->fetchUserInfoByEmail(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(56): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:12:21 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+31-08-2026 17:12:21 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:58 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 17:12:58 | ::1 | Fatal error on line 42 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 17:12:58 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:58 | ::1 | Unknown error type: [2] Undefined array key "email" 
+31-08-2026 17:12:58 | ::1 | Fatal error on line 36 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 17:12:58 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:12:58 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserInfoByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 36 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:20
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(36): Wiki\models\UserInfoModel->fetchUserInfoByEmail(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(56): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:12:58 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+31-08-2026 17:12:58 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:14:08 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 17:14:08 | ::1 | Fatal error on line 43 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 17:14:08 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:14:08 | ::1 | Unknown error type: [2] Undefined array key "email" 
+31-08-2026 17:14:08 | ::1 | Fatal error on line 36 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 17:14:08 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:14:08 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserInfoByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 36 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:20
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(36): Wiki\models\UserInfoModel->fetchUserInfoByEmail(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(56): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:14:08 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+31-08-2026 17:14:08 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:14:28 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 17:14:28 | ::1 | Fatal error on line 43 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 17:14:28 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:14:28 | ::1 | Unknown error type: [2] Undefined array key "email" 
+31-08-2026 17:14:28 | ::1 | Fatal error on line 36 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 17:14:28 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:14:28 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserInfoByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 36 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:20
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(36): Wiki\models\UserInfoModel->fetchUserInfoByEmail(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(56): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:14:28 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+31-08-2026 17:14:28 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:18:29 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 17:18:29 | ::1 | Fatal error on line 43 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 17:18:29 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:18:29 | ::1 | Unknown error type: [2] Undefined array key "email" 
+31-08-2026 17:18:29 | ::1 | Fatal error on line 36 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 17:18:29 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:18:29 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::fetchUserInfoByEmail(): Argument #1 ($email) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php on line 36 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:20
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(36): Wiki\models\UserInfoModel->fetchUserInfoByEmail(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(56): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 17:18:29 | ::1 | Fatal error on line 20 in file C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php 
+31-08-2026 17:18:29 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:18:55 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 17:18:55 | ::1 | Fatal error on line 43 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+31-08-2026 17:18:55 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 17:28:17 | ::1 | Unknown error type: [2] Undefined variable $results 
+31-08-2026 17:28:17 | ::1 | Fatal error on line 57 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 17:28:17 | ::1 | PHP 8.2.12 (WINNT) 
