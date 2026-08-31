@@ -163,7 +163,7 @@ class PostRequestHandler extends BaseRequestHandler
                     );
                 }
                 break;
-        }s
+        }
 
         return $this->response;
     }
