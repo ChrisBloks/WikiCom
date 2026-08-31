@@ -9,7 +9,7 @@ Wiki\controllers\validators\Validator;
 
 
 /**
- * Handler (controller) class for validating contact, login, and registration form submissions.
+ * Handler (controller) class for validating/executing all article-related requests
  * @uses tSingleton
  */
 class ArticleHandler
@@ -26,9 +26,12 @@ class ArticleHandler
      */
     public function checkSearch(array &$response, Validator $validator): array|false
     {
+        // Get all fields of the 'search' form
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
-        // Check first line validation
-        $result = $validator->useValidators($field_info);
+        
+        // Validate all fields
+        $result = $validator->validateFields($field_info);
+
         if ($result) {
             return $result;
         } else {

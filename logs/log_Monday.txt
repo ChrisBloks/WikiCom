@@ -620,3 +620,87 @@ Stack trace:
 31-08-2026 11:16:52 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
 31-08-2026 11:16:52 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
 31-08-2026 11:16:52 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:16 | ::1 | Unknown error type: [2] Undefined array key "Author" 
+31-08-2026 11:36:16 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:16 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:20 | ::1 | Unknown error type: [2] Undefined array key "Tag" 
+31-08-2026 11:36:20 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:20 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:20 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+31-08-2026 11:36:20 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:20 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:20 | ::1 | Unknown error type: [2] Undefined array key "Author" 
+31-08-2026 11:36:20 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:20 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:20 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+31-08-2026 11:36:20 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:20 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:23 | ::1 | Unknown error type: [2] Undefined array key "Tag" 
+31-08-2026 11:36:23 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:23 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:23 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+31-08-2026 11:36:23 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:23 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:23 | ::1 | Unknown error type: [2] Undefined array key "Author" 
+31-08-2026 11:36:23 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:23 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:36:23 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+31-08-2026 11:36:23 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:36:23 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:40:03 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:40:03 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:40:03 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:40:03 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:40:03 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:40:03 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:40:17 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:40:17 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:40:17 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:40:17 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:40:17 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:40:17 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:42:24 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:42:24 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:42:24 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:42:24 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:42:24 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:42:24 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:43:22 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:43:22 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:43:22 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:43:22 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:43:22 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:43:22 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:48:45 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:48:45 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:48:45 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:48:45 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:48:45 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:48:45 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:48:45 | ::1 | Unknown error type: [2] Undefined array key "userError" 
+31-08-2026 11:48:45 | ::1 | Fatal error on line 48 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 11:48:45 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:48:45 | ::1 | Unknown error type: [1] Uncaught TypeError: array_merge(): Argument #1 must be of type array, null given in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php:48
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(48): array_merge(NULL, Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(42): Wiki\controllers\UserHandler->checkLogin(Array, Object(Wiki\controllers\validators\Validator))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+31-08-2026 11:48:45 | ::1 | Fatal error on line 48 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+31-08-2026 11:48:45 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:48:59 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:48:59 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:48:59 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:48:59 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:48:59 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:48:59 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:49:21 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:49:21 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:49:21 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:50:46 | ::1 | Unknown error type: [2] Undefined array key "name" 
+31-08-2026 11:50:46 | ::1 | Fatal error on line 38 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\Validator.php 
+31-08-2026 11:50:46 | ::1 | PHP 8.2.12 (WINNT) 

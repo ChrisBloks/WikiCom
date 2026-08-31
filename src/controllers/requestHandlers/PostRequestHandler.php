@@ -14,6 +14,8 @@ class PostRequestHandler extends BaseRequestHandler
     public function handleRequest(array $request): array
     {
         $this->response = $request;
+        $this->response['userError'] = [];
+
         switch ($request['page']) {
             case 'register':
                 $validator = new Validator();
@@ -40,7 +42,7 @@ class PostRequestHandler extends BaseRequestHandler
                 // Validate user inputs and on succes: get logged-in user's info
                 $validator = new Validator();
                 $userinfo = UserHandler::getInstance()->checkLogin($this->response, $validator);
-                // If log in was succesful
+                // If log in was succesful, if the login was unsuccesful, errors are stored in $response
                 if ($userinfo !== false) {
                     // Update session variables
                     $_SESSION['userName'] = $userinfo['name'];
@@ -50,10 +52,6 @@ class PostRequestHandler extends BaseRequestHandler
                     $this->response['page'] = 'home';
                     $this->response['isLoggedIn'] = true;
                 }
-                else{
-                    $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
-                }
-
                 break;
             case 'about':
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
@@ -133,6 +131,7 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
         }
 
+        HtmlUtils::dump("response", $this->response);
         return $this->response;
     }
 }

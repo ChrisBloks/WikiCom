@@ -7,7 +7,7 @@ use Wiki\tools\traits\tSingleton,
 Wiki\models\ModelSelector,
 Wiki\controllers\validators\BaseValidator,
 Wiki\controllers\validators\Validator;
-
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Handler (controller) class for validating contact, login, and registration form submissions.
@@ -29,7 +29,8 @@ class UserHandler
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Check first line validation
-        $result = $validator->useValidators($field_info);
+        $result = $validator->validateFields($field_info);
+
         if ($result) {
             $userinfo = ModelSelector::getUserInfoModel()->fetchUserInfoByEmail($result['email']);
             // If email exists AND the corresponding password matches 
@@ -38,12 +39,13 @@ class UserHandler
             }
             // Email/Password could not be matched
             else {
-                $response['userError'] = "Login email or password is wrong!";
+
+                $response['userError'][] = "Login email or password is wrong!";
                 return false;
             }
             // First line validation failed
         } else {
-            $response['userError'] = $validator->getErrors(); // Get why validation failed
+            $response['userError'] = array_merge($response['userError'], $validator->getErrors()); // Get why validation failed
             return false;
 
         }
@@ -61,7 +63,7 @@ class UserHandler
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Check first line validation
-        $result = $validator->useValidators($field_info);
+        $result = $validator->validateFields($field_info);
         if ($result) {
             // Check if the email does NOT exist
             if (!ModelSelector::getUserInfoModel()->checkEmailExists($result['email'])) {
@@ -69,13 +71,13 @@ class UserHandler
             }
             // Email was found in the database 
             else {
-                $response['userError'] = "Email already exists!";
+                $response['userError'][] = "Email already exists!";
                 return false;
             }
         }
         // First line validation failed 
         else {
-            $response['userError'] = $validator->getErrors();
+            $response['userError'] = array_merge($response['userError'], $validator->getErrors());
             return false;
         }
     }
@@ -91,14 +93,14 @@ class UserHandler
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Perform basic validation on contact fields
-        $result = $validator->useValidators($field_info);
+        $result = $validator->validateFields($field_info);
         if ($result) {
             return $result;
 
         }
         // If any contact field was not entered correctly
         else {
-            $response['userError'] = $validator->getErrors();
+            $response['userError'] = array_merge($response['userError'], $validator->getErrors());
             return false;
         }
     }
@@ -109,13 +111,13 @@ class UserHandler
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         
         // Perform basic validation on contact fields
-        $result = $validator->useValidators($field_info);
+        $result = $validator->validateFields($field_info);
         if ($result) {
             return $result;
         }
         // If any contact field was not entered correctly
         else {
-            $response['userError'] = $validator->getErrors();
+            $response['userError'] = array_merge($response['userError'], $validator->getErrors());
             return false;
         }
     }
