@@ -6,9 +6,15 @@ trait tErrorMessageCollector
 {
     private array $errors = [];
 
-    protected function logError(string $message): void
+    protected function logError(string $message, ?string $key = NULL): void
     {
-        $this->errors[] = $message;
+        if($key){
+            $this->errors[$key] = $message;
+        }
+        else {
+            $this->errors[] = $message;
+        }
+        
     }
 
     public function hasErrors(): bool

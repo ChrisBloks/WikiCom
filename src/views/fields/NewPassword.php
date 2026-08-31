@@ -10,7 +10,7 @@ class NewPassword extends BaseField implements iElement
     protected string $type;
     protected string $text;
     protected string $name;
-    public function __construct(string $name = "", string $class, string $label = "")
+    public function __construct(string $name = "", string $class = "", string $label = "")
     {
         parent::__construct($name, $label, $class);
     }

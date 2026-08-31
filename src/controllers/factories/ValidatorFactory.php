@@ -5,7 +5,9 @@ use Wiki\tools\interfaces\iValidator,
     Wiki\controllers\validators\BaseValidator,
     Wiki\controllers\validators\NewPasswordValidator,
     Wiki\controllers\validators\EmailValidator,
-    Wiki\controllers\validators\ImgValidator;
+    Wiki\controllers\validators\ImgValidator,
+    Wiki\controllers\validators\CheckBoxValidator,
+    Wiki\controllers\validators\SortValidator;
     
 
 enum ValidatorFactory: string
@@ -16,6 +18,8 @@ enum ValidatorFactory: string
     case VNEWPASS = 'new_password';
     case VTEXTAREA = 'textarea';
     case VFILE = 'file';
+    case VSORT = 'select';
+    case VCHECKBOX = 'checkboxgroup';
 
     public function createValidator(): iValidator
     {
@@ -25,7 +29,9 @@ enum ValidatorFactory: string
             self::VPASSWORD => new BaseValidator(),
             self::VTEXTAREA => new BaseValidator(),
             self::VNEWPASS => new NewPasswordValidator(),
-            self::VFILE => new ImgValidator()
+            self::VFILE => new ImgValidator(),
+            self::VSORT => new SortValidator(),
+            self::VCHECKBOX => new CheckBoxValidator()
         };
     }
 }

@@ -145,7 +145,7 @@ class ArticleModel extends BaseModel
             return [$join_clause, $where_clause];
         })($author_ids, $tag_ids, $params);
 
-        $order_by_clause = ' ORDER BY ' . $sortBy . ';';
+        $order_by_clause = ' ORDER BY ' . $sortBy . ' DESC;';
 
         // Connect the clauses
         $sql =  $base_select_clause .

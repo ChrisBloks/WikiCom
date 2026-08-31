@@ -243,10 +243,16 @@ class PageFactory
                 $filter_container->addElement($form);
                 // =================================================================================================
                 // Table display
+                $author_ids = $this->response["Author"] ?? [];
+                $tag_ids = $this->response["Tag"] ?? [];
+                $sortby = $this->response['sortby'] ?? "";
+
+                // create checkbox inputs for filtering
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
-                    author_ids: [],
-                    tag_ids: []
+                    author_ids: $author_ids,
+                    tag_ids: $tag_ids,
+                    sortBy: $sortby
                 );
 
                 // print table for search results

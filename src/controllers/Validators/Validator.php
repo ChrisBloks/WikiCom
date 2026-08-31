@@ -8,7 +8,7 @@ class Validator
 {
     use tErrorMessageCollector;
     protected array $validatorlist = [];
-    protected array $field_Inputs = [];
+    protected array $field_inputs = [];
 
     /**
      * Collects the needed validator objects needed
@@ -18,27 +18,36 @@ class Validator
      * @param array $field_info array containing info about fields
      * @return array|false
      */
-    public function useValidators(array $field_info): array|false
+    public function validateFields(array $field_info): array|false
     {
-        // Gets the correct validators
+        // Populate the validatorList with the required validator instances
         $this->getValidators($field_info);
+
         // Loop through the fields and uses the correct validator
         foreach ($field_info as $field) {
-            if ($this->validatorlist[$field['type']]->validate($field['name'])) {
-                $this->field_Inputs = array_merge($this->field_Inputs, $this->validatorlist[$field['type']]->getFieldInputs());
-            } else {
-                $this->logError($this->validatorlist[$field['type']]->getErrors()[0]);
+            $validation_result = $this->validatorlist[$field['type']]->validate($field['name']);
+            // If validation is succesful
+            if ($validation_result) {
+                // Collect the user's inputs
+                $this->field_inputs = array_merge($this->field_inputs, $this->validatorlist[$field['type']]->getFieldInputs());
+            } 
+            // If validation failed
+            else {
+                // Get all errors
+                foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message){
+                    $this->logError("{$field_info['name']}: {$error_message}");
+                }
             }
         }
         if ($this->hasErrors()) {
             return false;
         } else {
-            return $this->field_Inputs;
+            return $this->field_inputs;
         }
     }
     /**
-     * Goes through all the field types and based on those calls the page factory to create the correct fields
-     * @param array $field_info array containing info about fields
+     * Populate the validatorList with validators based on field_info types.
+     * @param array $field_info should contain ['type'] key
      * @return void
      */
     protected function getValidators(array $field_info): void

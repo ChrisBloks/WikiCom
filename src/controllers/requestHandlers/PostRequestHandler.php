@@ -4,9 +4,8 @@ namespace Wiki\controllers\requestHandlers;
 
 use Wiki\tools\utils\Utils,
 Wiki\tools\utils\HtmlUtils,
-Wiki\controllers\validators\BaseValidator,
-Wiki\controllers\validators\RegisterValidator,
 Wiki\controllers\UserHandler,
+Wiki\controllers\ArticleHandler,
 Wiki\controllers\validators\Validator,
 Wiki\models\ModelSelector;
 
@@ -15,6 +14,8 @@ class PostRequestHandler extends BaseRequestHandler
     public function handleRequest(array $request): array
     {
         $this->response = $request;
+        $this->response['userError'] = [];
+
         switch ($request['page']) {
             case 'register':
                 $validator = new Validator();
@@ -41,7 +42,7 @@ class PostRequestHandler extends BaseRequestHandler
                 // Validate user inputs and on succes: get logged-in user's info
                 $validator = new Validator();
                 $userinfo = UserHandler::getInstance()->checkLogin($this->response, $validator);
-                // If log in was succesful
+                // If log in was succesful, if the login was unsuccesful, errors are stored in $response
                 if ($userinfo !== false) {
                     // Update session variables
                     $_SESSION['userName'] = $userinfo['name'];
@@ -51,7 +52,6 @@ class PostRequestHandler extends BaseRequestHandler
                     $this->response['page'] = 'dashboard';
                     $this->response['isLoggedIn'] = true;
                 }
-
                 break;
             case 'about':
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
@@ -87,10 +87,18 @@ class PostRequestHandler extends BaseRequestHandler
                 }
                 break;
             case 'search':
-                $field_info = ModelSelector::getFormModel()->fetchFieldInfo($this->response['page']);
-                foreach ($field_info as $field) {
-                    $this->response[$field['name']] = $_POST[$field['name']];
+                $validator = new Validator();
+                $search_info = ArticleHandler::getInstance()->checkSearch($this->response,$validator);
+
+                if ($search_info !== false) {
+                    // Update response
+                    $this->response = array_merge($this->response,$search_info);
                 }
+                else{
+                    $this->response['userError'] = ModelSelector::getUserInfoModel()->getErrors();
+                }
+
+
 
             // collect checkboxgroup van tags en authors
             // collect sortby rating/datum
@@ -123,6 +131,7 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
         }
 
+        HtmlUtils::dump("response", $this->response);
         return $this->response;
     }
 }
