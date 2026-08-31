@@ -32,6 +32,22 @@ class UserInfoModel extends BaseModel
     }
 
     /**
+     * Fetch only user id from the database based on given email.
+     * @param string $email
+     * @return array|false
+     */
+    public function fetchUserIDByEmail(string $email): array|false
+    {
+        $sql = "SELECT id FROM user 
+                        WHERE email=:email";
+        $params = ["email" => $email];
+        $result = $this->crud->selectOne($sql, $params);
+        return $result;
+    }
+
+    
+
+    /**
      * Check if an email is already present in the database.
      * True if an email was matched, false otherwise.
      * @param string $email

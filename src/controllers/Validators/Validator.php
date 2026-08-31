@@ -15,10 +15,12 @@ class Validator
      * Runs through the fields and based on type runs the correct validators
      * If fails save the error message otherwise save the field input and return the array if no errors
      * otherwise return false
-     * @param array $field_info array containing info about fields
-     * @return array|false
+     * @param array $field_info [int => ['type' => string, 'name' => string]]
+     * @return array ['ok' => bool,
+     *               'userErr' => [int => string],
+     *               'field_inputs' => [field_name(string) => string]]
      */
-    public function validateFields(array $field_info): array|false
+    public function validateFields(array $field_info): array
     {
         // Populate the validatorList with the required validator instances
         $this->getValidators($field_info);
@@ -37,13 +39,15 @@ class Validator
                 foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message){
                     $this->logError("{$field_info['name']}: {$error_message}");
                 }
+                // All errors have been saved to the Validator
+                $this->validatorlist[$field['type']]->emptyErrors();
             }
         }
-        if ($this->hasErrors()) {
-            return false;
-        } else {
-            return $this->field_inputs;
-        }
+        return [
+            'ok' => $this->hasErrors(),
+            'userErr' => $this->getErrors(),
+            'field_inputs' => $this->field_inputs
+        ];
     }
     /**
      * Populate the validatorList with validators based on field_info types.

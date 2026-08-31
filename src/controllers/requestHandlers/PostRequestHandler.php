@@ -20,10 +20,12 @@ class PostRequestHandler extends BaseRequestHandler
             case 'register':
                 $validator = new Validator();
                 // Validate user inputs on the registration form
-                $userInfo = UserHandler::getInstance()->checkRegistration($this->response, $validator);
+                [$validation_ok, $validation_err, $userInfo] = UserHandler::getInstance()->checkRegistration($this->response, $validator);
+
+                HtmlUtils::dump('userInfo', $userInfo);
 
                 // If validation was succesful, add new user to the database
-                if ($userInfo !== false) {
+                if ($validation_ok) {
                     $registrationResult = ModelSelector::getUserInfoModel()
                         ->saveUser(
                             username: $userInfo['name'],

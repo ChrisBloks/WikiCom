@@ -59,7 +59,7 @@ class UserHandler
      * @param Validator $validator BaseValidator object for first line validation.
      * @return array|false
      */
-    public function checkRegistration(array &$response, Validator $validator): array|false
+    public function checkRegistration1(array &$response, Validator $validator): array|false
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
         // Check first line validation
@@ -67,6 +67,8 @@ class UserHandler
         if ($result) {
             // Check if the email does NOT exist
             if (!ModelSelector::getUserInfoModel()->checkEmailExists($result['email'])) {
+                
+                // if model result -> false -> model
                 return $result;
             }
             // Email was found in the database 
@@ -80,6 +82,50 @@ class UserHandler
             $response['userError'] = array_merge($response['userError'], $validator->getErrors());
             return false;
         }
+    }
+
+    /**
+     * Check if registration fiels were filled in correctly.
+     * On success adds a new user to the database. 
+     * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
+     * @param array $response array containing the source page (string)
+     * @param Validator $validator BaseValidator object for first line validation.
+     * @return array|false
+     */
+    public function checkRegistration(array $response, Validator $validator): array|false
+    {
+        // Validate page fields
+        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
+        // $result will contain keys ['ok', 'userErr', 'field_inputs']
+        $result = $validator->validateFields($field_info);
+
+        // All fields correctly filled in
+        if ($result['ok']) {
+
+            // Check if the email is present in the database
+            // Returns an array or false
+            $existing_user_id = ModelSelector::getUserInfoModel()->fetchUserIDbyEmail($result['field_inputs']['email']);
+            
+            // Query failed!
+            if ($existing_user_id === false){
+                $result['ok'] = false;
+                $result['userErr'][] =  ModelSelector::getUserInfoModel()->getErrors();
+            }
+
+            // ($existing_user_id is an array)
+            else if (!empty($existing_user_id)) {
+                $result['ok'] = false;
+                $result['userErr'][] =  'email already in use!';
+            }
+        }
+        // ($result == false) Fields were incorrectly filled in.
+        else {
+            $result['ok'] = false;
+            // Add validator errors to the userError array
+            $result['userErr'] = array_merge($result['userError'], $validator->getErrors());
+        }
+
+        return $result;
     }
 
 
