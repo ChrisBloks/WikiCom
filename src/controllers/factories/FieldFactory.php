@@ -18,7 +18,7 @@ class FieldFactory
 
     /**
      * Create a BaseField object which can be converted into HTML.
-     * @param array $field_def Must contain keys ['type', 'name', 'class', 'label']
+     * @param array $field_def Must contain keys ['type', 'name', 'class', 'label']. May additionally contain keys ['options', 'value']
      * @param ?string $field_text (optional) text to display in the field.
      * @return BaseField
      */

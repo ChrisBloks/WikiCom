@@ -103,6 +103,7 @@ class UserHandler
         }
     }
 
+    
     public function checkAboutInfo(array &$response, Validator $validator): array|false
     {
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
