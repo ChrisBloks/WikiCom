@@ -581,3 +581,42 @@ Stack trace:
 31-08-2026 9:51:46 | ::1 | Unknown error type: [2] Undefined array key "Author" 
 31-08-2026 9:51:46 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
 31-08-2026 9:51:46 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:12:58 | ::1 | >>>>>> Error [1049] on line 37 in file C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php 
+31-08-2026 11:12:58 | ::1 | >>>>>> SQLSTATE[HY000] [1049] Unknown database 'test' 
+31-08-2026 11:12:58 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(37): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 C:\xampp\htdocs\Educom\Wiki\src\models\Crud.php(23): Wiki\models\Crud::connectDB()
+#2 C:\xampp\htdocs\Educom\Wiki\src\tools\traits\tSingleton.php(23): Wiki\models\Crud->__construct()
+#3 C:\xampp\htdocs\Educom\Wiki\src\models\BaseModel.php(24): Wiki\models\Crud::getInstance()
+#4 C:\xampp\htdocs\Educom\Wiki\src\models\ModelSelector.php(50): Wiki\models\BaseModel->__construct()
+#5 C:\xampp\htdocs\Educom\Wiki\src\models\ModelSelector.php(38): Wiki\models\ModelSelector::initializeModel('Wiki\\models\\Web...')
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(105): Wiki\models\ModelSelector::__callStatic('getWebsiteInfoM...', Array)
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#8 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(87): Wiki\controllers\factories\PageFactory->show()
+#9 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->showResponse()
+#10 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#11 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#12 {main} 
+31-08-2026 11:14:34 | ::1 | Unknown error type: [2] Undefined array key "Tag" 
+31-08-2026 11:14:34 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:14:34 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:14:34 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+31-08-2026 11:14:34 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:14:34 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:14:34 | ::1 | Unknown error type: [2] Undefined array key "Author" 
+31-08-2026 11:14:34 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:14:34 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:14:34 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+31-08-2026 11:14:34 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:14:34 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:16:52 | ::1 | Unknown error type: [2] Undefined array key "Tag" 
+31-08-2026 11:16:52 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:16:52 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:16:52 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+31-08-2026 11:16:52 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:16:52 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:16:52 | ::1 | Unknown error type: [2] Undefined array key "Author" 
+31-08-2026 11:16:52 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:16:52 | ::1 | PHP 8.2.12 (WINNT) 
+31-08-2026 11:16:52 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+31-08-2026 11:16:52 | ::1 | Fatal error on line 21 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+31-08-2026 11:16:52 | ::1 | PHP 8.2.12 (WINNT) 

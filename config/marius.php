@@ -4,7 +4,7 @@ class Config
     const SERVERNAME = 'localhost';
     const USERNAME = 'root';
     const PASSWORD = '';
-    const DB = 'test';
+    const DB = 'Wiki';
     const AUTHORIMGPATH = "./img/authors/";
 
     const LOGPATH = "./logs";
