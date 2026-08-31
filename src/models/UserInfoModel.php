@@ -23,11 +23,6 @@ class UserInfoModel extends BaseModel
                         WHERE email=:email";
         $params = ["email" => $email];
         $result = $this->crud->selectOne($sql, $params);
-
-        if (empty($result)) {
-            $this->logError("no account with this email");
-            $result = false;
-        }
         return $result;
     }
 

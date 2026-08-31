@@ -1,9 +1,11 @@
 <?php
+
 namespace Wiki\controllers;
 
 use Wiki\controllers\factories\ValidatorFactory,
     Wiki\tools\traits\tErrorMessageCollector,
     Wiki\tools\utils\HtmlUtils;
+
 class ValidationHandler
 {
     use tErrorMessageCollector;
@@ -32,11 +34,11 @@ class ValidationHandler
             if ($validation_result) {
                 // Collect the user's inputs
                 $this->field_inputs = array_merge($this->field_inputs, $this->validatorlist[$field['type']]->getFieldInputs());
-            } 
+            }
             // If validation failed
             else {
                 // Get all errors
-                foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message){
+                foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message) {
                     $this->logError("{$field_info['name']}: {$error_message}");
                 }
                 // All errors have been saved to the ValidationHandler
@@ -62,5 +64,4 @@ class ValidationHandler
             }
         }
     }
-
 }
