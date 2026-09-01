@@ -79,6 +79,8 @@ class PageFactory
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+                    <script src="./src/js/wiki.js"></script>
                     <script>hljs.highlightAll();</script>'
         ));
     }
@@ -276,15 +278,20 @@ class PageFactory
 
 
             case 'editArticle':
-                // ToDo: change order of form elements to:
-                // Title -> tags -> add new tag -> body text -> codeblock ->imgupload -> submit
-
-
                 // Outer Div: image + text-div 
-                $outer_container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', '</div>');
+                $outer_container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', 
+                                                        '</div>');
 
                 // Inner text div: Title/Author/text/code
                 $inner_container = new ContainerElement('<div class="d-flex flex-grow-1">', '</div>');
+
+                // add tag functionality
+                $add_tag_widget = new AtomicElement('<div id="add-tag-widget" class="d-flex gap-2 mt-2 mb-2">
+                                                    <input type="text" id="new-tag-name" 
+                                                        class="form-control form-control-sm" placeholder="New tag">
+                                                    <button type="button" id="add-tag-btn" 
+                                                    class="btn btn-sm btn-secondary">Add tag</button>
+                                                    </div>');
 
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
@@ -302,6 +309,7 @@ class PageFactory
 
                 // add to page
                 $inner_container->addElement($form);
+                $outer_container->addElement($add_tag_widget);
                 $outer_container->addElement($inner_container);
                 $main->addElement($outer_container);
                 break;
