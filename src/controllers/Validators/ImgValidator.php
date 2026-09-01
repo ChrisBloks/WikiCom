@@ -84,6 +84,7 @@ class ImgValidator implements iValidator
             return false;
         }
 
+        $this->field_inputs['filevar'] = $filevar;
         return true;
     }
 }

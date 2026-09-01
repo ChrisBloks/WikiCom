@@ -92,7 +92,7 @@ class PostRequestHandler extends BaseRequestHandler
 
                     // Construct image file path
                     $target_dir = \Config::AUTHORIMGPATH;
-                    $filevar = $_FILES[$about_info['name']];
+                    $filevar = $validation_result['field_inputs']['filevar'];
                     $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
                     $filename = 'author_' . $this->response['aboutID'] . '.' . $filetype . '';
                     $target_file = $target_dir . $filename;

@@ -588,3 +588,9 @@ Stack trace:
 01-09-2026 13:41:51 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
 01-09-2026 13:41:51 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
 01-09-2026 13:41:51 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:47:52 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 13:47:52 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 13:47:52 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:48:11 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 13:48:11 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 13:48:11 | ::1 | PHP 8.2.12 (WINNT) 
