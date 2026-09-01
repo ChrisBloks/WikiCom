@@ -3,6 +3,8 @@
 namespace Wiki\controllers;
 
 // use Wiki\tools\interfaces\iValidator;
+
+use Wiki\controllers\ValidationHandler as ControllersValidationHandler;
 use Wiki\tools\traits\tSingleton,
 Wiki\models\ModelSelector,
 Wiki\controllers\validators\BaseValidator,
@@ -20,120 +22,58 @@ class UserHandler
     /**
      * Check if login fields were correctly filled in. 
      * Performs basic validation, then attempts to match an email and password to the inputs.
-     * @param array $response array containing the source page (string)
-     * @param ValidationHandler $validator BaseValidator object for first line validation.
-     * @return array|false
+     * @param array $validation_result array containing the name of the source page under key 'page'.
+     * @return array contains keys ['ok', 'user_error', 'field_inputs']
      */
-    public function checkLogin(array $response, ValidationHandler $validator): array
+    public function checkLogin(array $validation_result): array
     {
-        $field_info = ModelSelector::getFormModel()->fetchFieldInfo(page_name: $response['page']);
-        // $result will contain keys ['ok', 'userErr', 'field_inputs']
-        $result = $validator->validateFields(field_info: $field_info);
+        // Get user info associated with the given email
+        $user_info = ModelSelector::getUserInfoModel()
+            ->fetchUserInfoByEmail(email: $validation_result['field_inputs']['email']);
+        // Store user info in the validation_result
+            $validation_result['user_info'] = $user_info;
 
-        // All fields cotain valid inputs
-        if ($result['ok']) {
-            $userinfo = ModelSelector::getUserInfoModel()
-                ->fetchUserInfoByEmail(email: $result['field_inputs']['email']);
-            // Store user info in the result
-                $result['userInfo'] = $userinfo;
-
-            // Query failed!
-            if ($userinfo === false){
-                $result['ok'] = false;
-                $result['userErr'][] = "Something went wrong with the server! contact Marius";
-            }
-
-            // If no corresponding email was found in the database OR 
-            // if given password does not match stored password (hashed)
-            else if (empty($userinfo) || !password_verify($result['field_inputs']['password'], $userinfo['password'])) {   
-                $result['ok'] = false;
-                $result['userErr'][] = "Login email or password is wrong!";
-            }
-        } 
-        // Some field contained an invalid input
-        else {  
-            $result['ok'] = false;
-            $result['userError'] = array_merge($response['userError'], $validator->getErrors()); // Get why validation failed
+        // Query failed!
+        if ($user_info === false){
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] = "Something went wrong with the server! contact Marius";
         }
-        return $result;
+
+        // If no corresponding email was found in the database OR 
+        // if given password does not match stored password (hashed)
+        else if (empty($user_info) || !password_verify($validation_result['field_inputs']['password'], $user_info['password'])) {   
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] = "Login email or password is wrong!";
+        }
+        
+        return $validation_result;
     }
 
     /**
-     * Check if registration fiels were filled in correctly.
-     * On success adds a new user to the database. 
+     * Check if registration fields were filled in correctly.
      * Fails if any of the fields contained invalid inputs or if the given email already exists in the database.
-     * @param array $response array containing the source page (string)
-     * @param ValidationHandler $validator BaseValidator object for first line validation.
-     * @return array
+     * @param array $validation_result array containing the name of the source page under key 'page'.
+     * @return array contains keys ['ok', 'user_error', 'field_inputs']
      */
-    public function checkRegistration(array $response, ValidationHandler $validator): array
+    public function checkRegistration(array $validation_result): array
     {
-        // Validate page fields
-        $field_info = ModelSelector::getFormModel()->fetchFieldInfo(page_name: $response['page']);
-        // $result will contain keys ['ok', 'userErr', 'field_inputs']
-        $result = $validator->validateFields(field_info: $field_info);
-
-        // All fields correctly filled in
-        if ($result['ok']) {
-
-            // Check if the email is present in the database
-            // Returns an array or false
-            $existing_user_id = ModelSelector::getUserInfoModel()->fetchUserIDbyEmail(email: $result['field_inputs']['email']);
-            
-            // Query failed!
-            if ($existing_user_id === false){
-                $result['ok'] = false;
-                $result['userErr'][] =  ModelSelector::getUserInfoModel()->getErrors();
-            }
-
-            // ($existing_user_id is an array)
-            else if (!empty($existing_user_id)) {
-                $result['ok'] = false;
-                $result['userErr'][] =  'email already in use!';
-            }
-        }
-        // ($result == false) Fields were incorrectly filled in.
-        else {
-            $result['ok'] = false;
-            // Add validator errors to the userError array
-            $result['userErr'] = array_merge($result['userErr'], $validator->getErrors());
+        // Check if the email is present in the database
+        // Returns an array or false
+        $existing_user_id = ModelSelector::getUserInfoModel()->fetchUserIDbyEmail(email: $validation_result['field_inputs']['email']);
+        
+        // Query failed!
+        if ($existing_user_id === false){
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] =  ModelSelector::getUserInfoModel()->getErrors();
         }
 
-        return $result;
-    }
-
-
-    /**
-     * Checks if the contact form was correctly filled in and saves the contact to the database.
-     * @param array $response array containing the source page (string)
-     * @param ValidationHandler $validator ValidationHandler object for first line validation.
-     * @return array
-     */
-    public function checkContact(array $response, ValidationHandler $validator): array
-    {
-        $field_info = ModelSelector::getFormModel()->fetchFieldInfo(page_name: $response['page']);
-        // Perform basic validation on contact fields
-        // $result will contain keys ['ok', 'userErr', 'field_inputs']
-        $result = $validator->validateFields(field_info: $field_info);
-
-        return $result;
-    }
-
+        // ($existing_user_id is an array)
+        else if (!empty($existing_user_id)) {
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] =  'email already in use!';
+        }
     
-    /**
-     * checkAboutInfo TODO: add documentation
-     * @param array $response
-     * @param ValidationHandler $validator
-     * @return array
-     */
-    public function checkAboutInfo(array $response, ValidationHandler $validator): array
-    {
-        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
-        
-        // Perform basic validation on contact fields
-        // $result will contain keys ['ok', 'userErr', 'field_inputs']
-        $result = $validator->validateFields(field_info: $field_info);
-        
-        return $result;
+        return $validation_result;
     }
+
 }

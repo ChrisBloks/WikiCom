@@ -21,7 +21,7 @@ class ValidationHandler
      * otherwise return false
      * @param array $field_info [int => ['type' => string, 'name' => string]]
      * @return array ['ok' => bool,
-     *               'userErr' => [int => string],
+     *               'user_error' => [int => string],
      *               'field_inputs' => [field_name(string) => string]]
      */
     public function validateFields(array $field_info): array
@@ -44,19 +44,20 @@ class ValidationHandler
             if ($validation_result === false) {
                 // Save all errors
                 foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message) {
-                        $this->logError(
-                            message: "{$error_message}"
-                        );
+                    $this->logError(
+                        message: "{$error_message}"
+                    );
                 }
                 // All errors have been saved to the ValidationHandler
                 // Empty the validator's field (incase this validator will be used again)
                 $this->validatorlist[$field['type']]->emptyErrors();
             }
+
         }
 
         return [
             'ok' => !$this->hasErrors(),
-            'userErr' => $this->getErrors(),
+            'user_error' => $this->getErrors(),
             'field_inputs' => $this->field_inputs
         ];
 
