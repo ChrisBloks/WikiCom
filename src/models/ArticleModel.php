@@ -265,7 +265,7 @@ class ArticleModel extends BaseModel
                     WHERE name=:tag_name";
         $params = ["tag_name" => $tag_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
-        return !empty($result);
+        return $result;
     }
 
     /**
@@ -289,7 +289,7 @@ class ArticleModel extends BaseModel
      */
     public function addNewTag(string $tag_name): int|false
     {
-        $sql = "INSERT INTO tag (name) 
+        $sql = "INSERT INTO wiki_tag (name) 
                     VALUES (:tag_name)";
         $params = ["tag_name" => $tag_name];
         return $this->crud->doInsert(sql: $sql, params: $params);
@@ -304,9 +304,22 @@ class ArticleModel extends BaseModel
      */
     public function addTagToArticle(int $article_id, int $tag_id): int|false
     {
-        $sql = "INSERT INTO article_to_tag (article_id, tag_id) 
+        $sql = "INSERT INTO wiki_article_to_tag (article_id, wiki_tag_id) 
                     VALUES (:article_id,:tag_id)";
         $params = ["article_id" => $article_id, "tag_id" => $tag_id];
         return $this->crud->doInsert(sql: $sql, params: $params);
+    }
+
+    /**
+     * Removes all tag associations for a given article
+     *
+     * @param int $article_id
+     * @return bool True on success, false on failure
+     */
+    public function removeTagsFromArticle(int $article_id): bool
+    {
+        $sql = "DELETE FROM wiki_article_to_tag WHERE `wiki_article_to_tag`.`article_id` = :article_id";
+        $params = ["article_id" => $article_id];
+        return $this->crud->doDelete(sql: $sql, params: $params);
     }
 }

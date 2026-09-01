@@ -301,7 +301,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
-                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => "saveArticle"], //give article tag
+                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => "saveArticle"], //todo: verander terug naar edit article
                     class: $form_info["display_class"],
                     field_text: $bodyinfo,
                     submit_class: "btn btn-primary"

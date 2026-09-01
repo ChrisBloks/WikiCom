@@ -48,6 +48,7 @@ class PostRequestHandler extends BaseRequestHandler
                         $this->response['userError'] = array_merge($this->response['userError'], ModelSelector::getUserInfoModel()->getErrors());
                     }
                 }
+                HtmlUtils::dump("articleInfo", $this->response);
                 break;
 
             case 'login':
@@ -145,13 +146,13 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
             case 'saveArticle':
                 $this->response['page'] = 'editArticle';
-                $this->response['editArticleID'] = $_POST['articleID']; ///testing purposes
+                $this->response['editArticleID'] = $_POST['articleID']; ///todo testing purposes
                 $articleInfo = ArticleHandler::getInstance()
                     ->handleArticleSubmission(
                             response: $this->response, 
-                            validator: new ValidationHandler()
+                            validator: new ValidationHandler(),
+                            article_id:$this->response['editArticleID']
                         );
-                HtmlUtils::dump("articleInfo", $articleInfo);
                 break;
             case 'contact':
                 // Contains ['ok', 'userErr', 'field_inputs']

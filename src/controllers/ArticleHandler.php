@@ -50,13 +50,32 @@ class ArticleHandler
      * @param ValidationHandler $validator TextValidator object for first line validation.
      * @return array|false
      */
-    public function handleArticleSubmission(array &$response, ValidationHandler $validator): array|false
+    public function handleArticleSubmission(array &$response, ValidationHandler $validator,$article_id): array|false
     {
         // Get all fields of the 'editArticle' form
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
 
         $result = $validator->validateFields($field_info);
 
+        ModelSelector::getArticleModel()->removeTagsFromArticle(article_id: $article_id);
+
+        foreach ($result['field_inputs']['existing_tag'] as $key => $value) {
+            if ((int) $value === 0)
+                {
+                    //check if tag exists in the database
+                    $check = ModelSelector::getArticleModel()->checkTagExists(tag_name:$key);
+                    // If it does not exist, add to database
+                    if (empty($check)){
+                       // give id back to the array
+                        $tag_id = ModelSelector::getArticleModel()->addNewTag(tag_name:$key);
+                        $result['field_inputs']['existing_tag'][$key] = $tag_id;
+                        ModelSelector::getArticleModel()->addTagToArticle(article_id: $article_id, tag_id: $tag_id);
+                    }
+                }
+            else{
+                ModelSelector::getArticleModel()->addTagToArticle(article_id: $article_id, tag_id: $value);
+            }
+        }
 
 
 
