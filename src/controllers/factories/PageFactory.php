@@ -233,8 +233,8 @@ class PageFactory
                 );
                 $container->addElement($form);
 
-                $author_ids = $this->response["Author"] ?? [];
-                $tag_ids = $this->response["Tag"] ?? [];
+                $author_ids = isset($this->response["Author"]) ? array_keys($this->response["Author"]) : [];
+                $tag_ids = isset($this->response["Tag"]) ? array_keys($this->response["Tag"]) : [];
                 $sortby = $this->response['sortby'] ?? "";
 
                 // create checkbox inputs for filtering

@@ -56,8 +56,6 @@ class ArticleHandler
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
 
         $result = $validator->validateFields($field_info);
-        HtmlUtils::dump("result", $result);
-
 
 
 
