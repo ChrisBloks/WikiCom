@@ -32,11 +32,14 @@ class ValidationHandler
         // Loop through the fields and uses the correct validator
         foreach ($field_info as $field) {
             // Validate the field according to its type
-            $validation_result = $this->validatorlist[$field['type']]->validate(name: $field['name']);
-           
+            $validation_result = $this->validatorlist[$field['type']]
+                ->validate(
+                    name: $field['name'],
+                    optional: $field['optional']
+                );
+
             // Always add the user input to field_inputs
             $this->field_inputs = array_merge($this->field_inputs, $this->validatorlist[$field['type']]->getFieldInputs());
-           
             // If validation failed
             if ($validation_result === false) {
                 // Save all errors

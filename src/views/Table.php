@@ -40,7 +40,7 @@ class Table
 
     protected function buildHeadRow(): string
     {
-        $str = '<tr>';
+        $str = '<thead class="table-dark"><tr>';
 
         foreach ($this->columns as $column) {
             $str .= '<th' . HtmlUtils::addClassAttr($column['css_class'] ?? null) . '>'
@@ -54,7 +54,7 @@ class Table
 
     protected function buildRows(): string
     {
-        $str = '';
+        $str = '<tbody class="table-group-divider"';
 
         foreach ($this->rows as $row_data) {
             $str .= '<tr>';

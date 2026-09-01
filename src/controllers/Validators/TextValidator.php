@@ -24,7 +24,7 @@ class TextValidator implements iValidator
      * @param string $name
      * @return bool true if all validation steps were succesful, false otherwise.
      */
-    public function validate(string $name): bool
+    public function validate(string $name, bool $optional = false): bool
     {
         // Get post variable based on name given
         $this->field_inputs[$name] = Utils::getRequestVar(
@@ -33,12 +33,14 @@ class TextValidator implements iValidator
         );
         // If field was left empty, log an error
         if (empty($this->field_inputs[$name])) {
-            $this->logError(message: 'Field ' . $name . ' was not filled in!');
+            if ($optional == false) {
+                $this->logError(message: 'Field ' . $name . ' was not filled in!');
+            }
         }
         
 
         // If there are errors, return false, otherwise call the page-specific validator to check the values
-        if ($this->hasErrors()) {
+        if ($this->hasErrors() ) {
             return false;
         } else {
             return $this->validateFields(field_inputs: $this->field_inputs);

@@ -380,6 +380,7 @@ Stack trace:
   thrown 
 01-09-2026 9:59:44 | ::1 | Fatal error on line 99 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
 01-09-2026 9:59:44 | ::1 | PHP 8.2.12 (WINNT) 
+<<<<<<< HEAD
 01-09-2026 11:47:36 | ::1 | Unknown error type: [2] Undefined array key "user_error" 
 01-09-2026 11:47:36 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
 01-09-2026 11:47:36 | ::1 | PHP 8.2.12 (WINNT) 
@@ -449,3 +450,106 @@ Stack trace:
   thrown 
 01-09-2026 12:08:25 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php 
 01-09-2026 12:08:25 | ::1 | PHP 8.2.12 (WINNT) 
+=======
+01-09-2026 10:37:02 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:37:02 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:37:02 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:37:17 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:37:17 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:37:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:37:25 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:37:25 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:37:25 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:41:47 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:41:47 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:41:47 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:41:52 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:41:52 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:41:52 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:42:18 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:42:18 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:42:18 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:42:21 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:42:21 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:42:21 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:43:32 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:43:32 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:43:32 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:43:32 | ::1 | Unknown error type: [1] Uncaught ValueError: Path cannot be empty in C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php:50
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(50): getimagesize('')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php(32): Wiki\controllers\validators\ImgValidator->validateFields(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php(36): Wiki\controllers\validators\ImgValidator->validate('articleimg', true)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(58): Wiki\controllers\ValidationHandler->validateFields(Array)
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(150): Wiki\controllers\ArticleHandler->handleArticleSubmission(Array, Object(Wiki\controllers\ValidationHandler))
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#8 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#9 {main}
+  thrown 
+01-09-2026 10:43:32 | ::1 | Fatal error on line 50 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\ImgValidator.php 
+01-09-2026 10:43:32 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:43:40 | ::1 | >>>>>> Error [0] on line 399 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 10:43:40 | ::1 | >>>>>> No page defined for: '. '.' 
+01-09-2026 10:43:40 | ::1 | #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main} 
+01-09-2026 10:51:13 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:51:13 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:51:13 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:51:32 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:51:32 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:51:32 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:51:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:51:41 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:51:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:52:28 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:52:28 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:52:28 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:52:36 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:52:36 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:52:36 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:52:40 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:52:40 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:52:40 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:53:26 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:53:26 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:53:26 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:53:30 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:53:30 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:53:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:53:36 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:53:36 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:53:36 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:54:37 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:54:37 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:54:37 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:55:16 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:55:16 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:55:16 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:55:17 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:55:17 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:55:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:55:22 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:55:22 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:55:22 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:56:40 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:56:40 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:56:40 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:57:28 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:57:28 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:57:28 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:57:37 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:57:37 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:57:37 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:58:40 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:58:40 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:58:40 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 10:59:57 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 10:59:57 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 10:59:57 | ::1 | PHP 8.2.12 (WINNT) 
+>>>>>>> b670c7cd868b6253766675af7f7b86c779c1246a
