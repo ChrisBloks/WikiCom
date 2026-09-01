@@ -365,3 +365,18 @@ Stack trace:
 01-09-2026 9:39:09 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
 01-09-2026 9:39:09 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
 01-09-2026 9:39:09 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:59:44 | ::1 | Unknown error type: [2] Undefined array key "userError" 
+01-09-2026 9:59:44 | ::1 | Fatal error on line 99 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+01-09-2026 9:59:44 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:59:44 | ::1 | Unknown error type: [1] Uncaught TypeError: array_merge(): Argument #1 must be of type array, null given in C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php:99
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(99): array_merge(NULL, Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(25): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 9:59:44 | ::1 | Fatal error on line 99 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php 
+01-09-2026 9:59:44 | ::1 | PHP 8.2.12 (WINNT) 

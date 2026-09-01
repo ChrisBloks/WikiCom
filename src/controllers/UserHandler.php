@@ -36,7 +36,7 @@ class UserHandler
                 ->fetchUserInfoByEmail(email: $result['field_inputs']['email']);
             // Store user info in the result
                 $result['userInfo'] = $userinfo;
-                
+
             // Query failed!
             if ($userinfo === false){
                 $result['ok'] = false;
@@ -96,7 +96,7 @@ class UserHandler
         else {
             $result['ok'] = false;
             // Add validator errors to the userError array
-            $result['userErr'] = array_merge($result['userError'], $validator->getErrors());
+            $result['userErr'] = array_merge($result['userErr'], $validator->getErrors());
         }
 
         return $result;
