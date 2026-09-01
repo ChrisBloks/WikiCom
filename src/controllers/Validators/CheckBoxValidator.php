@@ -5,6 +5,7 @@ namespace Wiki\controllers\validators;
 use Wiki\tools\interfaces\iValidator,
     Wiki\tools\utils\Utils,
     Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\tools\utils\HtmlUtils;
 
 
 class CheckBoxValidator implements iValidator
@@ -21,12 +22,13 @@ class CheckBoxValidator implements iValidator
 
     public function getFieldInputs(): array
     {
+        HtmlUtils::dump("test",$_POST);
         return $this->field_inputs;
     }
 
     public function validateFields(array $field_inputs): bool
     {
-        // reset needed becaue field_inputs is an array in an array
+        // reset needed because field_inputs is an array in an array
         $inputs = reset($field_inputs);
         foreach ($inputs as $value)
             if (!is_numeric($value))

@@ -6,6 +6,7 @@ namespace Wiki\controllers;
 use Wiki\tools\traits\tSingleton,
 Wiki\models\ModelSelector,
 Wiki\controllers\validationHandler;
+use Wiki\tools\utils\HtmlUtils;
 
 
 /**
@@ -56,9 +57,27 @@ class ArticleHandler
 
         $result = $validator->validateFields($field_info);
 
-        $error = $validator->getErrors();
+        $requiredFields = ['title', 'summary', 'existing_tag'];
+        $result['userErr']=[];
 
-        return $error;
+        // Checks if all the required fields are filled in, if not add the error message to the userErr array
+        foreach ($requiredFields as $field) {
+            if (!empty($result['field_inputs'][$field])) {
+                $result['ok'] = true;
+
+            } else {
+                $result['userErr'] = array_merge(
+                    $result['userErr'],
+                    $validator->getErrors()[$field] ?? []
+                );
+            }
+        }
+
+
+
+
+
+        return $result;
 
     }
 }

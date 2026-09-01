@@ -1,0 +1,367 @@
+01-09-2026 8:38:25 | ::1 | Unknown error type: [1] Uncaught Error: Class "Wiki\controllers\requestHandlers\Validator" not found in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php:148
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+01-09-2026 8:38:25 | ::1 | Fatal error on line 148 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 8:38:25 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:39:28 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 8:39:28 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 8:39:28 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:39:28 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 8:39:28 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:39:28 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:39:28 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 8:39:28 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:39:28 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:41:44 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 8:41:44 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 8:41:44 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:41:44 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 8:41:44 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:41:44 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:41:44 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 8:41:44 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:41:44 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:42:52 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 8:42:52 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 8:42:52 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:42:52 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 8:42:52 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:42:52 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:42:52 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 8:42:52 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:42:52 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:43:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 8:43:41 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 8:43:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:43:41 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 8:43:41 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:43:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:43:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 8:43:41 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:43:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:43:56 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 8:43:56 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 8:43:56 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:43:56 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 8:43:56 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:43:56 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:43:56 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 8:43:56 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:43:56 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:49:47 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 8:49:47 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 8:49:47 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:49:47 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 8:49:47 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:49:47 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 8:49:47 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 8:49:47 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 8:49:47 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:30 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:05:30 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:05:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:30 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:05:30 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:30 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:05:30 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:33 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:05:33 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:05:33 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:33 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:05:33 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:33 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:33 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:05:33 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:33 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:36 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:05:36 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:05:36 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:36 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:05:36 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:36 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:36 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:05:36 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:36 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:40 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:05:40 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:05:40 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:40 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:05:40 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:40 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:40 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:05:40 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:40 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:42 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:05:42 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:05:42 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:42 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:05:42 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:42 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:05:42 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:05:42 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:05:42 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:06:25 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:06:25 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:06:25 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:06:25 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:06:25 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:06:25 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:06:25 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:06:25 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:06:25 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:06:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:06:41 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:06:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:06:41 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:06:41 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:06:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:06:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:06:41 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:06:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:08:46 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:08:46 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:08:46 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:08:46 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:08:46 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:08:46 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:08:46 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:08:46 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:08:46 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:09:00 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:09:00 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:09:00 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:09:00 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:09:00 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:09:00 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:09:00 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:09:00 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:09:00 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:17 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:19:17 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:19:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:17 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:19:17 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:19:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:17 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:19:17 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:19:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:17 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:19:17 | ::1 | Fatal error on line 66 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 9:19:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:17 | ::1 | Unknown error type: [1] Uncaught TypeError: array_merge(): Argument #2 must be of type array, null given in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php:66
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(66): array_merge(Array, NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(149): Wiki\controllers\ArticleHandler->handleArticleSubmission(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 9:19:17 | ::1 | Fatal error on line 66 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 9:19:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:30 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:19:30 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:19:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:30 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:19:30 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:19:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:30 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:19:30 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:19:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:30 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:19:30 | ::1 | Fatal error on line 66 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 9:19:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:19:30 | ::1 | Unknown error type: [1] Uncaught TypeError: array_merge(): Argument #2 must be of type array, null given in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php:66
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(66): array_merge(Array, NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(149): Wiki\controllers\ArticleHandler->handleArticleSubmission(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 9:19:30 | ::1 | Fatal error on line 66 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 9:19:30 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:17 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:23:17 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:23:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:17 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:23:17 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:23:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:17 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:23:17 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:23:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:17 | ::1 | Unknown error type: [2] Undefined array key "userError" 
+01-09-2026 9:23:17 | ::1 | Fatal error on line 68 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 9:23:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:17 | ::1 | Unknown error type: [1] Uncaught TypeError: array_merge(): Argument #1 must be of type array, null given in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php:67
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(67): array_merge(NULL, Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(149): Wiki\controllers\ArticleHandler->handleArticleSubmission(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 9:23:17 | ::1 | Fatal error on line 67 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 9:23:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:23:41 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:23:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:41 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:23:41 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:23:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:23:41 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:23:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:41 | ::1 | Unknown error type: [2] Undefined array key "userError" 
+01-09-2026 9:23:41 | ::1 | Fatal error on line 70 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 9:23:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:41 | ::1 | Unknown error type: [1] Uncaught TypeError: array_merge(): Argument #1 must be of type array, null given in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php:69
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(69): array_merge(NULL, Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(149): Wiki\controllers\ArticleHandler->handleArticleSubmission(Array, Object(Wiki\controllers\ValidationHandler))
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 9:23:41 | ::1 | Fatal error on line 69 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 9:23:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:57 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:23:57 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:23:57 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:57 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:23:57 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:23:57 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:23:57 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:23:57 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:23:57 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:26:04 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:26:04 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:26:04 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:26:04 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:26:04 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:26:04 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:26:04 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:26:04 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:26:04 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:27:11 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:27:11 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:27:11 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:27:11 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:27:11 | ::1 | Fatal error on line 17 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:27:11 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:27:11 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:27:11 | ::1 | Fatal error on line 31 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:27:11 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:29:53 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:29:53 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:29:53 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:29:53 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:29:53 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:29:53 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:29:53 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:29:53 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:29:53 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:30:11 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:30:11 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:30:11 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:30:11 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:30:11 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:30:11 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:30:11 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:30:11 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:30:11 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:31:05 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:31:05 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:31:05 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:31:05 | ::1 | Unknown error type: [2] Undefined array key "Existing Tag" 
+01-09-2026 9:31:05 | ::1 | Fatal error on line 19 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:31:05 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:31:05 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:31:05 | ::1 | Fatal error on line 34 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:31:05 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:33:49 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:33:49 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:33:49 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:33:49 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 9:33:49 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:33:49 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:33:49 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:33:49 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:33:49 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:34:13 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:34:13 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:34:13 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:34:13 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 9:34:13 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:34:13 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:34:13 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:34:13 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:34:13 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:35:16 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:35:16 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:35:16 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:35:16 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 9:35:16 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:35:16 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:35:16 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:35:16 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:35:16 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:36:03 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:36:03 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:36:03 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:36:03 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 9:36:03 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:36:03 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:36:03 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:36:03 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:36:03 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:36:58 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:36:58 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:36:58 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:36:58 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 9:36:58 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:36:58 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:36:58 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:36:58 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:36:58 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:38:31 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:38:31 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:38:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:38:31 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 9:38:31 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:38:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:38:31 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:38:31 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:38:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:38:56 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:38:56 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:38:56 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:38:56 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 9:38:56 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:38:56 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:38:56 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 9:38:56 | ::1 | Fatal error on line 33 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 9:38:56 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:38:58 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:38:58 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:38:58 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:39:06 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:39:06 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:39:06 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:39:09 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 9:39:09 | ::1 | Fatal error on line 189 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 9:39:09 | ::1 | PHP 8.2.12 (WINNT) 

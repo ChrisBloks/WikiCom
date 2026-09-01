@@ -40,8 +40,11 @@ class ValidationHandler
             // If validation failed
             if ($validation_result === false) {
                 // Save all errors
-                foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message) {
-                    $this->logError("{$field['name']}: {$error_message}");
+                foreach ($this->validatorlist[$field['type']]->getErrors() as $key =>$error_message) {
+                    $this->logError(
+                        message: "{$error_message}",
+                        key: $key
+                    );
                 }
                 // All errors have been saved to the ValidationHandler
                 // Empty the validator's field (incase this validator will be used again)
