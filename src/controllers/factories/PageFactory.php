@@ -294,7 +294,6 @@ class PageFactory
                                                     </div>');
 
                 $formFactory = new FormFactory();
-
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);

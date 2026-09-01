@@ -1087,3 +1087,259 @@ Stack trace:
 01-09-2026 14:29:55 | ::1 | PHP 8.2.12 (WINNT) 
 >>>>>>> aacdf0d3f5eb2fec14262314970c903c753e0fac
 >>>>>>> 31053b9ef5a15f261dc5e25ef549e9e66f90a595
+01-09-2026 16:17:20 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:17:20 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:17:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:17:20 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 16:17:20 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 16:17:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:17:20 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 16:17:20 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 16:17:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:17:20 | ::1 | Unknown error type: [2] Undefined array key "editArticleID" 
+01-09-2026 16:17:20 | ::1 | Fatal error on line 298 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 16:17:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:17:20 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #2 ($id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 298 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(298): Wiki\models\FormModel->fetchFieldInfo('editArticle', NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 16:17:20 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:17:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:18:06 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:18:06 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:18:06 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:18:06 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 16:18:06 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 16:18:06 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:18:06 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 16:18:06 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 16:18:06 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:18:06 | ::1 | Unknown error type: [2] Undefined array key "editArticleID" 
+01-09-2026 16:18:06 | ::1 | Fatal error on line 298 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 16:18:06 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:18:06 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #2 ($id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 298 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(298): Wiki\models\FormModel->fetchFieldInfo('editArticle', NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 16:18:06 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:18:06 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:18:12 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:18:12 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:18:12 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:18:12 | ::1 | Unknown error type: [2] Undefined array key "editArticleID" 
+01-09-2026 16:18:12 | ::1 | Fatal error on line 298 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 16:18:12 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:18:12 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #2 ($id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 298 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(298): Wiki\models\FormModel->fetchFieldInfo('editArticle', NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 16:18:12 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:18:12 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:18 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:19:18 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:19:18 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:18 | ::1 | Unknown error type: [2] Undefined array key "editArticleID" 
+01-09-2026 16:19:18 | ::1 | Fatal error on line 298 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 16:19:18 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:18 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #2 ($id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 298 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(298): Wiki\models\FormModel->fetchFieldInfo('editArticle', NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 16:19:18 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:19:18 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:45 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:19:45 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:19:45 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:45 | ::1 | Unknown error type: [2] Undefined array key "editArticleID" 
+01-09-2026 16:19:45 | ::1 | Fatal error on line 297 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 16:19:45 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:45 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #2 ($id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 297 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(297): Wiki\models\FormModel->fetchFieldInfo('editArticle', NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 16:19:45 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:19:45 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:52 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:19:52 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:19:52 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:52 | ::1 | Unknown error type: [2] Undefined array key "editArticleID" 
+01-09-2026 16:19:52 | ::1 | Fatal error on line 297 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 16:19:52 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:19:52 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #2 ($id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 297 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(297): Wiki\models\FormModel->fetchFieldInfo('editArticle', NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 16:19:52 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:19:52 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:20:09 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:20:09 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:20:09 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:20:09 | ::1 | Unknown error type: [2] Undefined array key "editArticleID" 
+01-09-2026 16:20:09 | ::1 | Fatal error on line 297 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 16:20:09 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:20:09 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\FormModel::fetchFieldInfo(): Argument #2 ($id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 297 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(297): Wiki\models\FormModel->fetchFieldInfo('editArticle', NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 16:20:09 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:20:09 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:20:35 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:20:35 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:20:35 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:20:35 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\ArticleModel::checkTitleExists(): Return value must be of type bool, array returned in C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php:282
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(60): Wiki\models\ArticleModel->checkTitleExists('test')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(146): Wiki\controllers\ArticleHandler->handleArticleSubmission(Array, '0')
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 16:20:35 | ::1 | Fatal error on line 282 in file C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php 
+01-09-2026 16:20:35 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:21:26 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:21:26 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:21:26 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:21:26 | ::1 | Unknown error type: [1] Uncaught Error: Unknown named parameter $title in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php:153
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+01-09-2026 16:21:26 | ::1 | Fatal error on line 153 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 16:21:26 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:22:35 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:22:35 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:22:35 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:22:35 | ::1 | Unknown error type: [1] Uncaught Error: Unknown named parameter $title in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php:153
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+01-09-2026 16:22:35 | ::1 | Fatal error on line 153 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 16:22:35 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:22:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:22:41 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:22:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:22:41 | ::1 | Unknown error type: [1] Uncaught Error: Unknown named parameter $title in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php:152
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+01-09-2026 16:22:41 | ::1 | Fatal error on line 152 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 16:22:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:23:24 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:23:24 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:23:24 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:23:24 | ::1 | Unknown error type: [2] Undefined array key "imgFileName" 
+01-09-2026 16:23:24 | ::1 | Fatal error on line 155 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 16:23:24 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:23:24 | ::1 | Unknown error type: [2] Undefined array key "userID" 
+01-09-2026 16:23:24 | ::1 | Fatal error on line 156 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 16:23:24 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:23:24 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\ArticleModel::saveNewArticleInfo(): Argument #4 ($imgFileName) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 151 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php:204
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(151): Wiki\models\ArticleModel->saveNewArticleInfo('test', 'asd', '', NULL, NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 16:23:24 | ::1 | Fatal error on line 204 in file C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php 
+01-09-2026 16:23:24 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:24:01 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:24:01 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:24:01 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:24:01 | ::1 | Unknown error type: [2] Undefined array key "userID" 
+01-09-2026 16:24:01 | ::1 | Fatal error on line 156 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 16:24:01 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:24:01 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\ArticleModel::saveNewArticleInfo(): Argument #5 ($user_id) must be of type int, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 151 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php:204
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(151): Wiki\models\ArticleModel->saveNewArticleInfo('test', 'asd', '', '', NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 16:24:01 | ::1 | Fatal error on line 204 in file C:\xampp\htdocs\Educom\Wiki\src\models\ArticleModel.php 
+01-09-2026 16:24:01 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:24:38 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:24:38 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:24:38 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:25:03 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:25:03 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:25:03 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:25:03 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 16:25:03 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 16:25:03 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:25:03 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 16:25:03 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 16:25:03 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:25:03 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 16:25:03 | ::1 | Fatal error on line 42 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 16:25:03 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:25:32 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 16:25:32 | ::1 | Fatal error on line 194 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 16:25:32 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:25:32 | ::1 | Unknown error type: [2] Undefined array key "existing_tag" 
+01-09-2026 16:25:32 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 16:25:32 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:25:32 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 16:25:32 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 16:25:32 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 16:25:32 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 16:25:32 | ::1 | Fatal error on line 42 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+01-09-2026 16:25:32 | ::1 | PHP 8.2.12 (WINNT) 

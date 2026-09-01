@@ -259,7 +259,7 @@ class ArticleModel extends BaseModel
      * @param string $tag_name
      * @return bool True if $tag_name matches an entry in the database, false otherwise.
      */
-    public function checkTagExists(string $tag_name): bool
+    public function checkTagExists(string $tag_name): array|false
     {
         $sql = "SELECT name FROM tag 
                     WHERE name=:tag_name";
@@ -273,13 +273,13 @@ class ArticleModel extends BaseModel
      * @param string $title_name
      * @return bool True if $title_name matches an entry in the database, false otherwise.
      */
-    public function checkTitleExists(string $title_name): bool
+    public function checkTitleExists(string $title_name): array|false
     {
         $sql = "SELECT title FROM wiki_article 
                     WHERE title=:title_name";
         $params = ["title_name" => $title_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
-        return !empty($result);
+        return $result;
     }
 
     /**
