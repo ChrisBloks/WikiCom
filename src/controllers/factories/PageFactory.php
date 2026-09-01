@@ -214,9 +214,9 @@ class PageFactory
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
                     field_text: [],
-                    class: $form_info["display_class"]
+                    class: $form_info["display_class"],
+                    submit_class: "btn btn-primary btn-sm"
                 );
-
                 $inner_container->addElement($form);
                 $outer_container->addElement($inner_container);
                 $main->addElement($outer_container);
@@ -279,8 +279,10 @@ class PageFactory
 
             case 'editArticle':
                 // Outer Div: image + text-div 
-                $outer_container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', 
-                                                        '</div>');
+                $outer_container = new ContainerElement(
+                    '<div class="d-flex flex-column align-items-center w-75 mx-auto">',
+                    '</div>'
+                );
 
                 // Inner text div: Title/Author/text/code
                 $inner_container = new ContainerElement('<div class="d-flex flex-grow-1">', '</div>');

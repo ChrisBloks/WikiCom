@@ -71,6 +71,7 @@ class Table
         return $str;
     }
 
+    // Todo allow rating count to rating
     protected function buildCell(array $column, mixed $value, array $row_data): string
     {
         $classAttr = HtmlUtils::addClassAttr($column['class_type'] ?? null);

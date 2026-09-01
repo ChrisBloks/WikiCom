@@ -1,5 +1,8 @@
 <?php
-
+/*  Allows drawing of ratings
+*   Marius 2026
+*   ToDo: allow showing of rating count
+*/
 namespace Wiki\views;
 
 use Wiki\tools\interfaces;
