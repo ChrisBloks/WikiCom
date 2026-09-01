@@ -50,11 +50,7 @@ class UserHandler
                 $result['userErr'][] = "Login email or password is wrong!";
             }
         } 
-        // Some field contained an invalid input
-        else {  
-            $result['ok'] = false;
-            $result['userError'] = array_merge($response['userError'], $validator->getErrors()); // Get why validation failed
-        }
+
         return $result;
     }
 
@@ -91,12 +87,6 @@ class UserHandler
                 $result['ok'] = false;
                 $result['userErr'][] =  'email already in use!';
             }
-        }
-        // ($result == false) Fields were incorrectly filled in.
-        else {
-            $result['ok'] = false;
-            // Add validator errors to the userError array
-            $result['userErr'] = array_merge($result['userErr'], $validator->getErrors());
         }
 
         return $result;

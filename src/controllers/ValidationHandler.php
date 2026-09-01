@@ -50,6 +50,7 @@ class ValidationHandler
                 // Empty the validator's field (incase this validator will be used again)
                 $this->validatorlist[$field['type']]->emptyErrors();
             }
+
         }
 
         return [
