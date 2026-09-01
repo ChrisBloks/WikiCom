@@ -13,7 +13,7 @@ class CheckBoxValidator implements iValidator
     use tErrorMessageCollector;
     protected array $field_inputs = [];
 
-    public function validate(string $name): bool
+    public function validate(string $name, bool $optional = false): bool
     {
         $this->field_inputs[$name] = $_POST[$name];
     
@@ -22,7 +22,6 @@ class CheckBoxValidator implements iValidator
 
     public function getFieldInputs(): array
     {
-        HtmlUtils::dump("test",$_POST);
         return $this->field_inputs;
     }
 

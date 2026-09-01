@@ -151,7 +151,7 @@ class PostRequestHandler extends BaseRequestHandler
                             response: $this->response, 
                             validator: new ValidationHandler()
                         );
-                HtmlUtils::dump("articleInfo",$articleInfo);
+                HtmlUtils::dump("articleInfo", $articleInfo);
                 break;
             case 'contact':
                 // Contains ['ok', 'userErr', 'field_inputs']

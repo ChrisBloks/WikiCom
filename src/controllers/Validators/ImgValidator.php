@@ -10,21 +10,23 @@ class ImgValidator implements iValidator
 {
     use tErrorMessageCollector;
     protected array $field_inputs = [];
-        public function validate(string $name): bool
+        public function validate(string $name, bool $optional = false): bool
     {
         // Get name of file
         $this->field_inputs[$name] = $_FILES[$name]['name'];
         // If field was left empty, log an error
         if (empty($this->field_inputs[$name])) {
+            if ($optional == false) {
             $this->logError(
                 message: 'Field ' . $name . ' was not filled in!',
                 key: $name
             );
+            }
         }
         
 
         // If there are errors, return false, otherwise call the page-specific validator to check the values
-        if ($this->hasErrors()) {
+        if ($this->hasErrors() or empty($this->field_inputs[$name])) {
             return false;
         } else {
             return $this->validateFields(field_inputs: $this->field_inputs);

@@ -13,7 +13,7 @@ class SortValidator implements iValidator
     protected array $field_inputs = [];
     private array $sort_values = ["lastEdit" ,"rating"];
     
-    public function validate(string $name): bool
+    public function validate(string $name, bool $optional = false): bool
     {
         $this->field_inputs[$name] = Utils::getRequestVar(
             key: $name,

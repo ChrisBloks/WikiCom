@@ -56,22 +56,7 @@ class ArticleHandler
         $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
 
         $result = $validator->validateFields($field_info);
-
-        $requiredFields = ['title', 'summary', 'existing_tag'];
-        $result['userErr']=[];
-
-        // Checks if all the required fields are filled in, if not add the error message to the userErr array
-        foreach ($requiredFields as $field) {
-            if (!empty($result['field_inputs'][$field])) {
-                $result['ok'] = true;
-
-            } else {
-                $result['userErr'] = array_merge(
-                    $result['userErr'],
-                    $validator->getErrors()[$field] ?? []
-                );
-            }
-        }
+        HtmlUtils::dump("result", $result);
 
 
 
