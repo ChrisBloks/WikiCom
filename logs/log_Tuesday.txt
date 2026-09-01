@@ -668,7 +668,9 @@ Stack trace:
 01-09-2026 13:48:11 | ::1 | PHP 8.2.12 (WINNT) 
 =======
 >>>>>>> b670c7cd868b6253766675af7f7b86c779c1246a
+<<<<<<< HEAD
 >>>>>>> origin/streamlineUserHandler
+<<<<<<< HEAD
 01-09-2026 13:56:24 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
@@ -748,6 +750,13 @@ Stack trace:
 01-09-2026 14:05:20 | ::1 | Fatal error on line 141 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
 01-09-2026 14:05:20 | ::1 | PHP 8.2.12 (WINNT) 
 01-09-2026 14:05:20 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\WebsiteInfoModel::fetchAuthorAboutInfo(): Argument #1 ($user_id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 141 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php:39
+=======
+=======
+01-09-2026 13:30:07 | ::1 | Unknown error type: [2] Undefined array key "aboutID" 
+01-09-2026 13:30:07 | ::1 | Fatal error on line 141 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 13:30:07 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:30:07 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\WebsiteInfoModel::fetchAuthorAboutInfo(): Argument #1 ($user_id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 141 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php:39
+>>>>>>> 31053b9ef5a15f261dc5e25ef549e9e66f90a595
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(141): Wiki\models\WebsiteInfoModel->fetchAuthorAboutInfo(NULL)
 #1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
@@ -757,12 +766,21 @@ Stack trace:
 #5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #6 {main}
   thrown 
+<<<<<<< HEAD
 01-09-2026 14:05:20 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php 
 01-09-2026 14:05:20 | ::1 | PHP 8.2.12 (WINNT) 
 01-09-2026 14:05:54 | ::1 | Unknown error type: [2] Undefined array key "aboutID" 
 01-09-2026 14:05:54 | ::1 | Fatal error on line 141 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
 01-09-2026 14:05:54 | ::1 | PHP 8.2.12 (WINNT) 
 01-09-2026 14:05:54 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\WebsiteInfoModel::fetchAuthorAboutInfo(): Argument #1 ($user_id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 141 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php:39
+=======
+01-09-2026 13:30:07 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php 
+01-09-2026 13:30:07 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:31:21 | ::1 | Unknown error type: [2] Undefined array key "aboutID" 
+01-09-2026 13:31:21 | ::1 | Fatal error on line 141 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 13:31:21 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:31:21 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\WebsiteInfoModel::fetchAuthorAboutInfo(): Argument #1 ($user_id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 141 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php:39
+>>>>>>> 31053b9ef5a15f261dc5e25ef549e9e66f90a595
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(141): Wiki\models\WebsiteInfoModel->fetchAuthorAboutInfo(NULL)
 #1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
@@ -772,6 +790,7 @@ Stack trace:
 #5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
 #6 {main}
   thrown 
+<<<<<<< HEAD
 01-09-2026 14:05:54 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php 
 01-09-2026 14:05:54 | ::1 | PHP 8.2.12 (WINNT) 
 01-09-2026 14:10:40 | ::1 | Unknown error type: [2] Undefined array key "aboutID" 
@@ -1015,3 +1034,56 @@ Stack trace:
   thrown 
 01-09-2026 14:47:28 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\CheckBoxGroup.php 
 01-09-2026 14:47:28 | ::1 | PHP 8.2.12 (WINNT) 
+=======
+01-09-2026 13:31:21 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php 
+01-09-2026 13:31:21 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:33:31 | ::1 | Unknown error type: [2] Undefined array key "name" 
+01-09-2026 13:33:31 | ::1 | Fatal error on line 100 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 13:33:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:33:31 | ::1 | Unknown error type: [2] Undefined array key "" 
+01-09-2026 13:33:31 | ::1 | Fatal error on line 100 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 13:33:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:33:31 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+01-09-2026 13:33:31 | ::1 | Fatal error on line 101 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 13:33:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:33:31 | ::1 | Unknown error type: [8192] pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated 
+01-09-2026 13:33:31 | ::1 | Fatal error on line 101 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 13:33:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:33:31 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+01-09-2026 13:33:31 | ::1 | Fatal error on line 106 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 13:33:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:33:31 | ::1 | Unknown error type: [8192] move_uploaded_file(): Passing null to parameter #1 ($from) of type string is deprecated 
+01-09-2026 13:33:31 | ::1 | Fatal error on line 106 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 13:33:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:23:20 | ::1 | Unknown error type: [2] Undefined array key "Tag" 
+01-09-2026 14:23:20 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 14:23:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:23:20 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 14:23:20 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 14:23:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:23:20 | ::1 | Unknown error type: [2] Undefined array key "Author" 
+01-09-2026 14:23:20 | ::1 | Fatal error on line 18 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 14:23:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:23:20 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, null given 
+01-09-2026 14:23:20 | ::1 | Fatal error on line 32 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\validators\CheckBoxValidator.php 
+01-09-2026 14:23:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:29:55 | ::1 | Unknown error type: [2] Undefined array key "name" 
+01-09-2026 14:29:55 | ::1 | Fatal error on line 100 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 14:29:55 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:29:55 | ::1 | Unknown error type: [2] Undefined array key "" 
+01-09-2026 14:29:55 | ::1 | Fatal error on line 100 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 14:29:55 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:29:55 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+01-09-2026 14:29:55 | ::1 | Fatal error on line 101 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 14:29:55 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:29:55 | ::1 | Unknown error type: [8192] pathinfo(): Passing null to parameter #1 ($path) of type string is deprecated 
+01-09-2026 14:29:55 | ::1 | Fatal error on line 101 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 14:29:55 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:29:55 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+01-09-2026 14:29:55 | ::1 | Fatal error on line 106 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 14:29:55 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:29:55 | ::1 | Unknown error type: [8192] move_uploaded_file(): Passing null to parameter #1 ($from) of type string is deprecated 
+01-09-2026 14:29:55 | ::1 | Fatal error on line 106 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 14:29:55 | ::1 | PHP 8.2.12 (WINNT) 
+>>>>>>> aacdf0d3f5eb2fec14262314970c903c753e0fac
+>>>>>>> 31053b9ef5a15f261dc5e25ef549e9e66f90a595

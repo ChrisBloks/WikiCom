@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2026 at 11:16 AM
+-- Generation Time: Sep 01, 2026 at 01:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -93,34 +93,33 @@ CREATE TABLE `field_info` (
   `lookup_info_id` int(11) DEFAULT NULL,
   `form_info_id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
-  `display_order` int(11) NOT NULL
+  `display_order` int(11) NOT NULL,
+  `optional` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `field_info`
 --
 
-INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form_info_id`, `label`, `display_order`) VALUES
-(1, 'name', 'text', 'contact-name form-control', NULL, 1, 'Your name:', 0),
-(2, 'email', 'email', 'contact-email form-control', NULL, 1, 'Your email:', 1),
-(3, 'password', 'password', 'login-password form-control', NULL, 2, 'Password:', 2),
-(4, 'description', 'textarea', 'about-text form-control', NULL, 5, 'About me:', 0),
-(6, 'verifypassword', 'new_password', 'register-verifypassword form-control', NULL, 7, 'Verify password:', 5),
-(7, 'Author', 'checkboxgroup', 'filter-author form-check-input border', 2, 3, 'Filter by Author', 1),
-(8, 'Tag', 'checkboxgroup', 'filter-tag form-check-input border', 1, 3, 'Filter by Tag', 0),
-(9, 'aboutimg', 'file', 'about-img-file form-control', NULL, 5, 'Upload file:', 1),
-(12, 'message', 'textarea', 'message-text form-control', NULL, 1, 'Your message:', 2),
-(13, 'email', 'email', 'login-email form-control', NULL, 2, 'Email:', 0),
-(14, 'name', 'text', 'register-name form-control', NULL, 7, 'Your name:', 1),
-(15, 'email', 'email', 'register-email form-control', NULL, 7, 'Your email:', 2),
-(17, 'summary', 'textarea', 'article-text form-control', NULL, 4, 'Body text:', 15),
-(18, 'codeBlock', 'textarea', 'article-codeblock form-control', NULL, 4, 'Codeblock:', 16),
-(19, 'articleimg', 'file', 'article-img-file form-control', NULL, 4, 'Upload file:', 17),
-(20, 'sortby', 'select', 'sort-by form-select', 3, 3, 'Sort by', 3),
-(21, 'new tag', 'text', 'add-new-tag form-control', NULL, 4, 'New tag name:', 0),
-(22, 'new tag button', 'button', 'add-new-tag-button btn btn-outline-secondary', NULL, 4, 'Add new tag', 1),
-(25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article title:', 14),
-(26, 'Existing Tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Change tags', 4);
+INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form_info_id`, `label`, `display_order`, `optional`) VALUES
+(1, 'name', 'text', 'contact-name form-control', NULL, 1, 'Your name:', 0, 0),
+(2, 'email', 'email', 'contact-email form-control', NULL, 1, 'Your email:', 1, 0),
+(3, 'password', 'password', 'login-password form-control', NULL, 2, 'Password:', 2, 0),
+(4, 'description', 'textarea', 'about-text form-control', NULL, 5, 'About me:', 0, 0),
+(6, 'verifypassword', 'new_password', 'register-verifypassword form-control', NULL, 7, 'Verify password:', 5, 0),
+(7, 'Author', 'checkboxgroup', 'filter-author form-check-input border', 2, 3, 'Filter by Author', 1, 0),
+(8, 'Tag', 'checkboxgroup', 'filter-tag form-check-input border', 1, 3, 'Filter by Tag', 0, 0),
+(9, 'aboutimg', 'file', 'about-img-file form-control', NULL, 5, 'Upload file:', 1, 0),
+(12, 'message', 'textarea', 'message-text form-control', NULL, 1, 'Your message:', 2, 0),
+(13, 'email', 'email', 'login-email form-control', NULL, 2, 'Email:', 0, 0),
+(14, 'name', 'text', 'register-name form-control', NULL, 7, 'Your name:', 1, 0),
+(15, 'email', 'email', 'register-email form-control', NULL, 7, 'Your email:', 2, 0),
+(17, 'summary', 'textarea', 'article-text form-control', NULL, 4, 'Body text:', 15, 0),
+(18, 'codeBlock', 'textarea', 'article-codeblock form-control', NULL, 4, 'Codeblock:', 16, 1),
+(19, 'articleimg', 'file', 'article-img-file form-control', NULL, 4, 'Upload file:', 17, 1),
+(20, 'sortby', 'select', 'sort-by form-select', 3, 3, 'Sort by', 3, 0),
+(25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article title:', 13, 0),
+(26, 'existing_tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Change tags', 14, 0);
 
 -- --------------------------------------------------------
 
@@ -418,6 +417,8 @@ CREATE TABLE `wiki_tag` (
 --
 
 INSERT INTO `wiki_tag` (`id`, `name`) VALUES
+(46, 'adsdd'),
+(44, 'dasz'),
 (1, 'tag1'),
 (2, 'tag2'),
 (3, 'tag3'),
@@ -616,7 +617,7 @@ ALTER TABLE `wiki_sortby_info`
 -- AUTO_INCREMENT for table `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Constraints for dumped tables

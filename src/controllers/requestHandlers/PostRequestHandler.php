@@ -28,9 +28,6 @@ class PostRequestHandler extends BaseRequestHandler
         $validation_result = (new ValidationHandler)
             ->validateFields(field_info: $field_info);
 
-        // TODO: remove
-        HtmlUtils::dump('validation_result', $validation_result );
-
         // If form was submitted correctly WRONG: add validation errors to response
         $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour
@@ -170,7 +167,6 @@ class PostRequestHandler extends BaseRequestHandler
         
 
         // TODO: remove
-        HtmlUtils::dump('$this->response', $this->response);
         return $this->response;
     }
 }
