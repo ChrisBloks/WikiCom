@@ -7,11 +7,14 @@
 .dashboard-pic {
   width: 120px;
   height: 120px;
+  object-fit: cover;
 }
 .main-content {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
+  min-width: 0;
+  width: 100%;
 }
 
 .checkbox_group{
@@ -21,10 +24,11 @@
   border: 1px solid;
   border-radius: 5px;
   margin-bottom: 5px;
+  width: 100%
 }
 
-.checkbox{
-  column-count: 3;
+.checkbox_group{
+  column-count: 4;
 
 }
 
@@ -33,3 +37,18 @@
   border-radius: 5px;
   margin-bottom: 5px;
 }
+
+.about-text{
+  width: 800px;
+  height: 400px;
+}
+.article-text{
+  width: 800px;
+  height: 400px;
+}
+
+.article-codeblock{
+  width: 800px;
+  height: 400px;
+}
+

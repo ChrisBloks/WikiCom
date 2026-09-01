@@ -10,6 +10,7 @@ use Wiki\views\BasePage,
     Wiki\controllers\factories\PageFactory,
     Wiki\controllers\requestHandlers\GetRequestHandler,
     Wiki\controllers\requestHandlers\PostRequestHandler;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * PageController class for handling non-AJAX requests.

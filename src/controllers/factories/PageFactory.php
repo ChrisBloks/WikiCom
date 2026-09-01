@@ -14,23 +14,23 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\tools\exceptions\PageNotFoundException,
-    Wiki\models\ModelSelector,
-    Wiki\controllers\factories\MenuFactory,
-    Wiki\views\BasePage,
-    Wiki\views\Table,
-    Wiki\views\containers\AtomicElement,
-    Wiki\views\containers\Header,
-    Wiki\views\containers\BodyText,
-    Wiki\views\containers\Title,
-    Wiki\views\containers\Image,
-    Wiki\views\containers\AuthorText,
-    Wiki\views\containers\CodeBlock,
-    Wiki\views\containers\Footer,
-    Wiki\views\containers\ContainerElement,
-    Wiki\views\containers\MainElement,
-    Wiki\views\containers\AccordionItem;
+Wiki\tools\traits\tErrorMessageCollector,
+Wiki\tools\exceptions\PageNotFoundException,
+Wiki\models\ModelSelector,
+Wiki\controllers\factories\MenuFactory,
+Wiki\views\BasePage,
+Wiki\views\Table,
+Wiki\views\containers\AtomicElement,
+Wiki\views\containers\Header,
+Wiki\views\containers\BodyText,
+Wiki\views\containers\Title,
+Wiki\views\containers\Image,
+Wiki\views\containers\AuthorText,
+Wiki\views\containers\CodeBlock,
+Wiki\views\containers\Footer,
+Wiki\views\containers\ContainerElement,
+Wiki\views\containers\MainElement,
+Wiki\views\containers\AccordionItem;
 
 
 
@@ -79,6 +79,8 @@ class PageFactory
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+                    <script src="./src/js/wiki.js"></script>
                     <script>hljs.highlightAll();</script>'
         ));
     }
@@ -126,7 +128,7 @@ class PageFactory
 
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
                 // get div styling from DB
-                $container = new ContainerElement('<div>', '</div>');
+                $container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', '</div>');
                 $container->addElement(new BodyText(
                     text: $pageinfo["bodytext"],
                     class: $pageinfo["bodytext_class"]
@@ -199,7 +201,11 @@ class PageFactory
             case 'contact':
             case 'login':
             case 'register':
-                $container = new ContainerElement('<div>', '</div>');
+                // Outer Div: image + text-div 
+                $outer_container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', '</div>');
+
+                // Inner text div: Title/Author/text/code
+                $inner_container = new ContainerElement('<div class="d-flex flex-grow-1">', '</div>');
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
@@ -211,30 +217,36 @@ class PageFactory
                     class: $form_info["display_class"]
                 );
 
-                $container->addElement($form);
-                $main->addElement($container);
+                $inner_container->addElement($form);
+                $outer_container->addElement($inner_container);
+                $main->addElement($outer_container);
                 break;
             case 'search':
-                $container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', '</div>');
-                $top_container = new ContainerElement('<div class="d-flex align-items-end border-bottom mb-3 ms-5 me-5">', '</div>');
-                $sub_container = new ContainerElement('<div class="ms-5 me-5">', '</div>');
+                $container = new ContainerElement('<div class="container-fluid">', '</div>');
+                $row = new ContainerElement('<div class="row">', '</div>');
 
-                // start form for collecting filter data
+                $filter_container = new ContainerElement('<div class="col-12 col-md-3 border-end pe-4">', '</div>');
+                $results_container = new ContainerElement('<div class="col-12 col-md-9 ps-4">', '</div>');
+                // ==================================================================================================
+                // Search functionality
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-                
+
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
                     field_text: [],
                     class: $form_info["display_class"],
+                    submit_class: "btn btn-primary btn-sm"
                 );
-                $container->addElement($form);
 
-                $author_ids = isset($this->response["Author"]) ? array_keys($this->response["Author"]) : [];
-                $tag_ids = isset($this->response["Tag"]) ? array_keys($this->response["Tag"]) : [];
+                $filter_container->addElement($form);
+                // =================================================================================================
+                // Table display
+                $author_ids = $this->response["Author"] ?? [];
+                $tag_ids = $this->response["Tag"] ?? [];
                 $sortby = $this->response['sortby'] ?? "";
 
                 // create checkbox inputs for filtering
@@ -247,16 +259,40 @@ class PageFactory
 
                 // print table for search results
                 $tableFactory = new Table($columnsdata, $rowsdata);
-                $container->addElement(new AtomicElement($tableFactory->createTable("table
-                                                                                                table-hover 
-                                                                                                table-striped
-                                                                                                table-bordered")));
+                $results_container->addElement(new ContainerElement('<div class="table-responsive">', '</div>'));
+                $results_container->addElement(new AtomicElement($tableFactory->createTable("table
+                                                                                    table-search
+                                                                                    table-hover 
+                                                                                    table-striped
+                                                                                    table-bordered")));
 
-                // add containers to page
+
+                //================================================================================================
+                // Add containers to page
+                $row->addElement($filter_container);
+                $row->addElement($results_container);
+                $container->addElement($row);
+
                 $main->addElement($container);
                 break;
+
+
             case 'editArticle':
-                $container = new ContainerElement('<div>', '</div>');
+                // Outer Div: image + text-div 
+                $outer_container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', 
+                                                        '</div>');
+
+                // Inner text div: Title/Author/text/code
+                $inner_container = new ContainerElement('<div class="d-flex flex-grow-1">', '</div>');
+
+                // add tag functionality
+                $add_tag_widget = new AtomicElement('<div id="add-tag-widget" class="d-flex gap-2 mt-2 mb-2">
+                                                    <input type="text" id="new-tag-name" 
+                                                        class="form-control form-control-sm" placeholder="New tag">
+                                                    <button type="button" id="add-tag-btn" 
+                                                    class="btn btn-sm btn-secondary">Add tag</button>
+                                                    </div>');
+
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
@@ -267,12 +303,15 @@ class PageFactory
                     field_info: $form_fields,
                     hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => "saveArticle"], //give article tag
                     class: $form_info["display_class"],
-                    field_text: $bodyinfo
+                    field_text: $bodyinfo,
+                    submit_class: "btn btn-primary"
                 );
 
                 // add to page
-                $container->addElement($form);
-                $main->addElement($container);
+                $inner_container->addElement($form);
+                $outer_container->addElement($add_tag_widget);
+                $outer_container->addElement($inner_container);
+                $main->addElement($outer_container);
                 break;
 
             case 'article':
@@ -339,48 +378,37 @@ class PageFactory
                 break;
 
             case 'dashboard':
+                //====================================================================================================
+                // add containers
+                $container = new ContainerElement('<div class="container-fluid">', '</div>');
+                $row = new ContainerElement('<div class="row">', '</div>');
+                $left_container = new ContainerElement('<div class="col-12 col-md-3 border-end pe-4">', '</div>');
+                $results_container = new ContainerElement('<div class="col-12 col-md-9 ps-4">', '</div>');
+                $user_container = new ContainerElement('<div class="d-flex align-items-end gap-3">', '</div>');
+
                 // @danny kun je bij dashboard ook de userID meegeven zodat ik niet in session memory hoef te pakken?
                 $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($_SESSION['userID']);
 
+                //====================================================================================================
+                // table information
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["id", "title", "lastEdit"]);
-
                 // add userID to fetcharticlebyUserId
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
-
-                $main_container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', '</div>');
-                $top_container = new ContainerElement('<div class="d-flex align-items-end border-bottom mb-3 ms-5 me-5">', '</div>');
-                $sub_container = new ContainerElement('<div class="ms-5 me-5">', '</div>');
-
-
-                $top_container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: 'dashboard-pic mb-1 justify-content-start rounded ms-5'
-                    ));
-
-                $top_container->addElement(new Title(
-                    text: $aboutinfo['name'],
-                    class: "display-1 text-center ms-5" /* i want the title now */
-                ));
-
-                $tableFactory = new Table($columnsdata, $rowsdata);
-                $sub_container->addElement(new Title(
-                                                text: "Articles",
-                                                class: "fs-3"
-                ));
-                $sub_container->addElement(new AtomicElement($tableFactory->createTable("table
-                                                                                                table-hover 
-                                                                                                table-striped
-                                                                                                table-bordered")));
 
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
 
-                $sub_container->addElement(new Title(
-                                                text: "Create new article",
-                                                class: "h4 border-top"
+                $user_container->addElement(new Image(
+                    name: './img/authors/' . $aboutinfo['imgFileName'],
+                    class: 'dashboard-pic rounded mb-1'
                 ));
 
+                $user_container->addElement(new Title(
+                    text: $aboutinfo['name'],
+                    class: "fs-1 lh-1"
+                ));
+                $left_container->addElement($user_container);
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: [],
@@ -389,11 +417,27 @@ class PageFactory
                     field_text: [],
                     submit_class: "btn btn-primary btn-sm"
                 );
-                $sub_container->addElement($form);
+                $left_container->addElement(new Title(
+                    text: "Create new article",
+                    class: "h4 border-top"
+                ));
+                $left_container->addElement($form);
 
-                // Add to page
-                $main->addElement($top_container);
-                $main->addElement($sub_container);
+                $tableFactory = new Table($columnsdata, $rowsdata);
+                $results_container->addElement(new Title(
+                    text: "Articles",
+                    class: "fs-2"
+                ));
+                $results_container->addElement(new AtomicElement($tableFactory->createTable("table
+                                                                                                table-hover 
+                                                                                                table-striped
+                                                                                                table-bordered")));
+
+                $row->addElement($left_container);
+                $row->addElement($results_container);
+                $container->addElement($row);
+
+                $main->addElement($container);
                 break;
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");

@@ -70,7 +70,7 @@ class PostRequestHandler extends BaseRequestHandler
                     $_SESSION['userID'] = $user_info['id'];
 
                     // Update response
-                    $this->response['page'] = 'home';
+                    $this->response['page'] = 'dashboard';
                     $this->response['isLoggedIn'] = true;
                 }
                 break;

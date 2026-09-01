@@ -21,7 +21,7 @@ class CheckBoxGroup extends BaseField
     public function show(): string
     {
     
-        $ret = '<div class="fw-bold mb-1">' . HtmlUtils::printLabel($this->id, $this->label) . '</div>';
+        $ret = '<div class="fw-bold mb-1">' . HtmlUtils::printLabel($this->id, $this->label);
         $ret .= '<div class="checkbox_group">';
         foreach ($this->options as $value => $display) {
             $checked = isset($this->value[$value]) ? $this->value[$value]:'';
@@ -29,6 +29,7 @@ class CheckBoxGroup extends BaseField
             $ret .= HtmlUtils::printLabel($this->id, $display) . "";
         }
 
+        $ret .= '</div>';
         return $ret .= "</div>";
     }
 }
