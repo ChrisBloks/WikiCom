@@ -18,28 +18,14 @@ class ArticleHandler
     use tSingleton;
 
     /**
-     * Check if search inputs are valid. 
-     * Performs basic validation and returns inputs if they are correct.
-     * Stores errors in the (passed by reference) $response parameter.
-     * @param array $response array containing the source page (string)
-     * @param ValidationHandler $validator BaseValidator object for first line validation.
+     * TODO: is this function still required?
+     * @param array $validation_result array containing the source page (string).
      * @return array|false
      */
-    public function checkSearch(array &$response, ValidationHandler $validator): array|false
+    public function checkSearch(array $validation_result): array|false
     {
-        // Get all fields of the 'search' form
-        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
-        
-        // Validate all fields
-        $result = $validator->validateFields($field_info);
-
-        if ($result) {
-            return $result;
-        } else {
-            $response['userError'] = array_merge($response['userError'], $validator->getErrors()); // Get why validation failed
-            return false;
-
-        }
+        // Currently no page-specific validation required
+        return $validation_result;
     }
 
     /**
@@ -72,10 +58,6 @@ class ArticleHandler
                 );
             }
         }
-
-
-
-
 
         return $result;
 
