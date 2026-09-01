@@ -1,0 +1,36 @@
+01-09-2026 9:43:00 | ::1 | Unknown error type: [2] Undefined array key "name" 
+01-09-2026 9:43:00 | ::1 | Fatal error on line 68 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:43:00 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:43:00 | ::1 | Unknown error type: [2] Undefined array key "id" 
+01-09-2026 9:43:00 | ::1 | Fatal error on line 69 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:43:00 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:50:07 | ::1 | Unknown error type: [2] Undefined array key "name" 
+01-09-2026 9:50:07 | ::1 | Fatal error on line 68 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:50:07 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:50:07 | ::1 | Unknown error type: [2] Undefined array key "id" 
+01-09-2026 9:50:07 | ::1 | Fatal error on line 69 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:50:07 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:51:33 | ::1 | Unknown error type: [2] Undefined array key "name" 
+01-09-2026 9:51:33 | ::1 | Fatal error on line 69 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:51:33 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:51:33 | ::1 | Unknown error type: [2] Undefined array key "id" 
+01-09-2026 9:51:33 | ::1 | Fatal error on line 70 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:51:33 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:55:13 | ::1 | Unknown error type: [2] Undefined array key "user_info" 
+01-09-2026 9:55:13 | ::1 | Fatal error on line 66 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:55:13 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:55:13 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+01-09-2026 9:55:13 | ::1 | Fatal error on line 69 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:55:13 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:55:13 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+01-09-2026 9:55:13 | ::1 | Fatal error on line 70 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:55:13 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:55:34 | ::1 | Unknown error type: [2] Undefined array key "user_info" 
+01-09-2026 9:55:34 | ::1 | Fatal error on line 66 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:55:34 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:55:34 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+01-09-2026 9:55:34 | ::1 | Fatal error on line 69 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:55:34 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 9:55:34 | ::1 | Unknown error type: [2] Trying to access array offset on value of type null 
+01-09-2026 9:55:34 | ::1 | Fatal error on line 70 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php 
+01-09-2026 9:55:34 | ::1 | PHP 8.2.12 (WINNT) 

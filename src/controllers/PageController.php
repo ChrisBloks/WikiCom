@@ -6,6 +6,7 @@ use Wiki\views\BasePage,
     Wiki\tools\interfaces\iController,
     Wiki\tools\traits\tErrorMessageCollector,
     Wiki\tools\utils\Utils,
+    Wiki\tools\utils\HtmlUtils,
     Wiki\controllers\factories\PageFactory,
     Wiki\controllers\requestHandlers\GetRequestHandler,
     Wiki\controllers\requestHandlers\PostRequestHandler;

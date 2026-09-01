@@ -20,7 +20,6 @@ class UserHandler
     /**
      * Check if login fields were correctly filled in. 
      * Performs basic validation, then attempts to match an email and password to the inputs.
-     * Stores errors in the (passed by reference) $response parameter.
      * @param array $response array containing the source page (string)
      * @param ValidationHandler $validator BaseValidator object for first line validation.
      * @return array|false
@@ -35,7 +34,9 @@ class UserHandler
         if ($result['ok']) {
             $userinfo = ModelSelector::getUserInfoModel()
                 ->fetchUserInfoByEmail(email: $result['field_inputs']['email']);
-               
+            // Store user info in the result
+                $result['userInfo'] = $userinfo;
+                
             // Query failed!
             if ($userinfo === false){
                 $result['ok'] = false;

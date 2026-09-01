@@ -62,8 +62,9 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['userError'] = array_merge($this->response['userError'], $validation_result['userErr']);
 
                 // If log in was succesful, if the login was unsuccesful, errors are stored in $response
-                if ($validation_result['ok'] !== false) {
-                    $user_info = $validation_result['field_inputs'];
+                if ($validation_result['ok']) {
+                    $user_info = $validation_result['userInfo'];
+                    
                     // Update session variables
                     $_SESSION['userName'] = $user_info['name'];
                     $_SESSION['userID'] = $user_info['id'];
@@ -164,7 +165,7 @@ class PostRequestHandler extends BaseRequestHandler
                 }
                 break;
         }
-
+        
         return $this->response;
     }
 }
