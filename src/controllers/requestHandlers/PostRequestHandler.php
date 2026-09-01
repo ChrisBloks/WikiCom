@@ -28,9 +28,6 @@ class PostRequestHandler extends BaseRequestHandler
         $validation_result = (new ValidationHandler)
             ->validateFields(field_info: $field_info);
 
-        // TODO: remove
-        HtmlUtils::dump('validation_result', $validation_result );
-
         // If form was submitted correctly WRONG: add validation errors to response
         if (!$validation_result['ok']) {
             $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
@@ -144,7 +141,6 @@ class PostRequestHandler extends BaseRequestHandler
                             response: $this->response,
                             validator: new ValidationHandler()
                         );
-                    HtmlUtils::dump("articleInfo", $articleInfo);
                     break;
                 case 'contact':
                     // On succesful contact form validaiton, save input to the database
@@ -159,7 +155,6 @@ class PostRequestHandler extends BaseRequestHandler
         }
 
         // TODO: remove
-        HtmlUtils::dump('$this->response', $this->response);
         return $this->response;
     }
 }
