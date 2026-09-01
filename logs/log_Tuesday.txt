@@ -669,3 +669,349 @@ Stack trace:
 =======
 >>>>>>> b670c7cd868b6253766675af7f7b86c779c1246a
 >>>>>>> origin/streamlineUserHandler
+01-09-2026 13:56:24 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 13:56:24 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 13:56:24 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 13:58:42 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 13:58:42 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 13:58:42 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:00:14 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(30): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:00:14 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:00:14 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:00:34 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(30): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:00:34 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:00:34 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:00:45 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(30): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:00:45 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:00:45 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:03:01 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 30 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(30): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:03:01 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:03:01 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:03:04 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 14:03:04 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 14:03:04 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:03:32 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 14:03:32 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 14:03:32 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:03:41 | ::1 | Unknown error type: [2] foreach() argument must be of type array|object, bool given 
+01-09-2026 14:03:41 | ::1 | Fatal error on line 191 in file C:\xampp\htdocs\Educom\Wiki\src\models\FormModel.php 
+01-09-2026 14:03:41 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:05:20 | ::1 | Unknown error type: [2] Undefined array key "aboutID" 
+01-09-2026 14:05:20 | ::1 | Fatal error on line 141 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 14:05:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:05:20 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\WebsiteInfoModel::fetchAuthorAboutInfo(): Argument #1 ($user_id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 141 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php:39
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(141): Wiki\models\WebsiteInfoModel->fetchAuthorAboutInfo(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 14:05:20 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php 
+01-09-2026 14:05:20 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:05:54 | ::1 | Unknown error type: [2] Undefined array key "aboutID" 
+01-09-2026 14:05:54 | ::1 | Fatal error on line 141 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 14:05:54 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:05:54 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\WebsiteInfoModel::fetchAuthorAboutInfo(): Argument #1 ($user_id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 141 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php:39
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(141): Wiki\models\WebsiteInfoModel->fetchAuthorAboutInfo(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 14:05:54 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php 
+01-09-2026 14:05:54 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:10:40 | ::1 | Unknown error type: [2] Undefined array key "aboutID" 
+01-09-2026 14:10:40 | ::1 | Fatal error on line 141 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+01-09-2026 14:10:40 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:10:40 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\WebsiteInfoModel::fetchAuthorAboutInfo(): Argument #1 ($user_id) must be of type string, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 141 and defined in C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php:39
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(141): Wiki\models\WebsiteInfoModel->fetchAuthorAboutInfo(NULL)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+01-09-2026 14:10:40 | ::1 | Fatal error on line 39 in file C:\xampp\htdocs\Educom\Wiki\src\models\WebsiteInfoModel.php 
+01-09-2026 14:10:40 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:20:17 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:20:17 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:20:17 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:24:13 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:24:13 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:24:13 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:31:26 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:31:26 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:31:26 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:31:31 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:31:31 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:31:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:33:50 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:33:50 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:33:50 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:34:31 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:34:31 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:34:31 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:35:49 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:35:49 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:35:49 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:35:51 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:35:51 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:35:51 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:36:57 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:36:57 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:36:57 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:37:10 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:37:10 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:37:10 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:38:03 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:38:03 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:38:03 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:39:01 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:39:01 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:39:01 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:39:06 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:39:06 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:39:06 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:39:12 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:39:12 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:39:12 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:40:11 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:40:11 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:40:11 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:42:29 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:42:29 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:42:29 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:44:18 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:44:18 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:44:18 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:44:32 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:44:32 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:44:32 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:45:56 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ValidationHandler::validateFields(): Argument #1 ($field_info) must be of type array, bool given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php on line 29 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php:27
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(29): Wiki\controllers\ValidationHandler->validateFields(false)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(78): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(45): Wiki\controllers\PageController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+01-09-2026 14:45:56 | ::1 | Fatal error on line 27 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ValidationHandler.php 
+01-09-2026 14:45:56 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:47:28 | ::1 | Unknown error type: [2] Undefined array key "options" 
+01-09-2026 14:47:28 | ::1 | Fatal error on line 47 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php 
+01-09-2026 14:47:28 | ::1 | PHP 8.2.12 (WINNT) 
+01-09-2026 14:47:28 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\views\fields\CheckBoxGroup::__construct(): Argument #4 ($options) must be of type array, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php on line 43 and defined in C:\xampp\htdocs\Educom\Wiki\src\views\fields\CheckBoxGroup.php:13
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FieldFactory.php(43): Wiki\views\fields\CheckBoxGroup->__construct('existing_tag', 'Change tags', 'Existing-tag fo...', NULL, Array)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\FormFactory.php(47): Wiki\controllers\factories\FieldFactory->createField(Array, '')
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(302): Wiki\controllers\factories\FormFactory->createForm(Array, Array, Array, Array, 'form-group', 'btn btn-primary')
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(57): Wiki\controllers\factories\PageFactory->addBody()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#5 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#6 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
+#7 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#8 {main}
+  thrown 
+01-09-2026 14:47:28 | ::1 | Fatal error on line 13 in file C:\xampp\htdocs\Educom\Wiki\src\views\fields\CheckBoxGroup.php 
+01-09-2026 14:47:28 | ::1 | PHP 8.2.12 (WINNT) 

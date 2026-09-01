@@ -32,14 +32,13 @@ class PostRequestHandler extends BaseRequestHandler
         HtmlUtils::dump('validation_result', $validation_result );
 
         // If form was submitted correctly WRONG: add validation errors to response
-        if (!$validation_result['ok']) {
-            $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
-        } 
+        $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour
-        else {
             // Get page-speicifc behaviour
             switch ($request['page']) {
                 case 'register':
+                    if (!$validation_result['ok']) {
+
                     // Check if registration is allowed
                     $validation_result = UserHandler::getInstance()
                         ->checkRegistration(validation_result: $validation_result);
@@ -65,9 +64,11 @@ class PostRequestHandler extends BaseRequestHandler
                             $this->response['user_error'] = array_merge($this->response['user_error'], ModelSelector::getUserInfoModel()->getErrors());
                         }
                     }
+                    }
                     break;
 
                 case 'login':
+                    if (!$validation_result['ok']) {
                     // Validate user inputs and on succes: get logged-in user's info
                     $validation_result = UserHandler::getInstance()
                         ->checkLogin(validation_result: $validation_result);
@@ -87,14 +88,18 @@ class PostRequestHandler extends BaseRequestHandler
                         $this->response['page'] = 'home';
                         $this->response['isLoggedIn'] = true;
                     }
+                    }
                     break;
 
                 case 'about':
                     $this->response['aboutID'] = Utils::getRequestVar('author', false);
                     $this->response['userID'] = Utils::getSesVar('userID');
 
+                    if (!$validation_result['ok']) {
+
                     $about_info = $validation_result['field_inputs'];
 
+                    if (isset($validation_result['field_inputs']['filevar'])){
                     // Construct image file path
                     $target_dir = \Config::AUTHORIMGPATH;
                     $filevar = $validation_result['field_inputs']['filevar'];
@@ -117,6 +122,8 @@ class PostRequestHandler extends BaseRequestHandler
                     else {
                         $this->response['user_error'][] = "Sorry, there was an error uploading your file.";
                     }
+                    }
+                    }
                     break;
 
                 case 'search':
@@ -134,17 +141,21 @@ class PostRequestHandler extends BaseRequestHandler
                     $this->response['editArticleID'] = 0;
                     break;
                 case 'editArticle':
-                    $this->response['editArticleID'] = 0;
-                    break;
-                case 'saveArticle':
+                    if (!$validation_result['ok']) {
+                    if (Utils::getRequestVar('action',true) == 'saveArticle')
+                        {
                     $this->response['page'] = 'editArticle';
                     $this->response['editArticleID'] = $_POST['articleID']; ///testing purposes
                     $articleInfo = ArticleHandler::getInstance()
                         ->handleArticleSubmission(
-                            response: $this->response,
-                            validator: new ValidationHandler()
+                            result: $validation_result,
+                            article_id: $this->response['editArticleID']
                         );
-                    HtmlUtils::dump("articleInfo", $articleInfo);
+                    }
+                    else{
+                    $this->response['editArticleID'] = 0;
+                    }
+                    }
                     break;
                 case 'contact':
                     // On succesful contact form validaiton, save input to the database
@@ -156,7 +167,7 @@ class PostRequestHandler extends BaseRequestHandler
                     );
                     break;
             }
-        }
+        
 
         // TODO: remove
         HtmlUtils::dump('$this->response', $this->response);

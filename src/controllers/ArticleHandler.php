@@ -32,17 +32,11 @@ class ArticleHandler
      * Uses the validator to check if article submission fields are valid.
      * If results are good run further tests needed to have a valid article submission.
      * Stores errors in the (passed by reference) $response parameter.
-     * @param array $response array containing the source page (string)
-     * @param ValidationHandler $validator TextValidator object for first line validation.
+     * @param array $result array containing the source page (string)
      * @return array|false
      */
-    public function handleArticleSubmission(array &$response, ValidationHandler $validator,$article_id): array|false
+    public function handleArticleSubmission(array $result,$article_id): array|false
     {
-        // Get all fields of the 'editArticle' form
-        $field_info = ModelSelector::getFormModel()->fetchFieldInfo($response['page']);
-
-        $result = $validator->validateFields($field_info);
-
         ModelSelector::getArticleModel()->removeTagsFromArticle(article_id: $article_id);
 
         foreach ($result['field_inputs']['existing_tag'] as $key => $value) {
