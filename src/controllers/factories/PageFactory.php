@@ -413,7 +413,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: [],
-                    hidden_field_info: ['page' => $this->page],
+                    hidden_field_info: ['page' => 'editArticle', 'id' => '0'],
                     class: $form_info["display_class"],
                     field_text: [],
                     submit_class: "btn btn-primary btn-sm"
