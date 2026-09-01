@@ -141,10 +141,17 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['editArticleID'] = 0;
                 break;
             case 'editArticle':
-                // add validator
                 $this->response['editArticleID'] = 0;
-                // check user_id against db
-                // if ok -> send article info to db
+                break;
+            case 'saveArticle':
+                $this->response['page'] = 'editArticle';
+                $this->response['editArticleID'] = $_POST['articleID']; ///testing purposes
+                $articleInfo = ArticleHandler::getInstance()
+                    ->handleArticleSubmission(
+                            response: $this->response, 
+                            validator: new ValidationHandler()
+                        );
+                HtmlUtils::dump("articleInfo",$articleInfo);
                 break;
             case 'contact':
                 // Contains ['ok', 'userErr', 'field_inputs']

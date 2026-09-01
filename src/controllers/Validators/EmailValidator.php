@@ -3,7 +3,7 @@
 namespace Wiki\controllers\validators;
 
 
-class EmailValidator extends BaseValidator
+class EmailValidator extends TextValidator
 {
     public function validateFields(array $field_inputs): bool
     {

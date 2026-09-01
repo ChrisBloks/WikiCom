@@ -6,13 +6,14 @@ use Wiki\tools\interfaces\iValidator,
     Wiki\tools\traits\tErrorMessageCollector,
     Wiki\models\ModelSelector,
     Wiki\tools\utils\Utils;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
- * Base validation class that defines basic 1st line of defence validation. If succesful, calls more specific validation behaviour as defined in child classes.
+ * Text validation class that defines basic 1st line of defence validation. If succesful, calls more specific validation behaviour as defined in child classes.
  * @uses tErrorMessageCollector
  * @var array $field_inputs array containing user inputs
  */
-class BaseValidator implements iValidator
+class TextValidator implements iValidator
 {
     use tErrorMessageCollector;
 

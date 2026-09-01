@@ -4,11 +4,13 @@ namespace Wiki\controllers;
 
 use Wiki\controllers\factories\ValidatorFactory,
     Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\tools\utils\HtmlUtils;
+    Wiki\tools\utils\HtmlUtils,
+    Wiki\tools\traits\tSingleton;
 
 class ValidationHandler
 {
     use tErrorMessageCollector;
+    use tSingleton;
     protected array $validatorlist = [];
     protected array $field_inputs = [];
 
@@ -38,8 +40,11 @@ class ValidationHandler
             // If validation failed
             if ($validation_result === false) {
                 // Save all errors
-                foreach ($this->validatorlist[$field['type']]->getErrors() as $error_message) {
-                    $this->logError("{$field['name']}: {$error_message}");
+                foreach ($this->validatorlist[$field['type']]->getErrors() as $key =>$error_message) {
+                    $this->logError(
+                        message: "{$error_message}",
+                        key: $key
+                    );
                 }
                 // All errors have been saved to the ValidationHandler
                 // Empty the validator's field (incase this validator will be used again)
@@ -64,7 +69,7 @@ class ValidationHandler
     {
         foreach ($field_info as $field) {
             if (!array_key_exists($field['type'], $this->validatorlist)) {
-                $this->validatorlist[$field['type']] = ValidatorFactory::from($field['type'])->createValidator();
+                $this->validatorlist[$field['type']] = ValidatorFactory::From($field['type'])->createValidator();
             }
         }
     }
