@@ -3,11 +3,11 @@
 namespace Wiki\controllers\requestHandlers;
 
 use Wiki\tools\utils\Utils,
-    Wiki\tools\utils\HtmlUtils,
-    Wiki\controllers\UserHandler,
-    Wiki\controllers\ArticleHandler,
-    Wiki\controllers\ValidationHandler,
-    Wiki\models\ModelSelector;
+Wiki\tools\utils\HtmlUtils,
+Wiki\controllers\UserHandler,
+Wiki\controllers\ArticleHandler,
+Wiki\controllers\ValidationHandler,
+Wiki\models\ModelSelector;
 
 class PostRequestHandler extends BaseRequestHandler
 {
@@ -29,14 +29,13 @@ class PostRequestHandler extends BaseRequestHandler
             ->validateFields(field_info: $field_info);
 
         // If form was submitted correctly WRONG: add validation errors to response
-        if (!$validation_result['ok']) {
-            $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
-        } 
+        $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour
-        else {
-            // Get page-speicifc behaviour
-            switch ($request['page']) {
-                case 'register':
+        // Get page-speicifc behaviour
+        switch ($request['page']) {
+            case 'register':
+                if ($validation_result['ok']) {
+
                     // Check if registration is allowed
                     $validation_result = UserHandler::getInstance()
                         ->checkRegistration(validation_result: $validation_result);
@@ -62,9 +61,11 @@ class PostRequestHandler extends BaseRequestHandler
                             $this->response['user_error'] = array_merge($this->response['user_error'], ModelSelector::getUserInfoModel()->getErrors());
                         }
                     }
-                    break;
+                }
+                break;
 
-                case 'login':
+            case 'login':
+                if ($validation_result['ok']) {
                     // Validate user inputs and on succes: get logged-in user's info
                     $validation_result = UserHandler::getInstance()
                         ->checkLogin(validation_result: $validation_result);
@@ -84,74 +85,145 @@ class PostRequestHandler extends BaseRequestHandler
                         $this->response['page'] = 'home';
                         $this->response['isLoggedIn'] = true;
                     }
-                    break;
+                }
+                break;
 
-                case 'about':
-                    $this->response['aboutID'] = Utils::getRequestVar('author', false);
-                    $this->response['userID'] = Utils::getSesVar('userID');
+            case 'about':
+                $this->response['aboutID'] = Utils::getRequestVar('author', false);
+                $this->response['userID'] = Utils::getSesVar('userID');
+
+                if ($validation_result['ok']) {
 
                     $about_info = $validation_result['field_inputs'];
 
-                    // Construct image file path
-                    $target_dir = \Config::AUTHORIMGPATH;
-                    $filevar = $_FILES[$about_info['name']];
-                    $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
-                    $filename = 'author_' . $this->response['aboutID'] . '.' . $filetype . '';
-                    $target_file = $target_dir . $filename;
+                    if (isset($validation_result['field_inputs']['filevar'])) {
+                        // Construct image file path
+                        $target_dir = \Config::AUTHORIMGPATH;
+                        $filevar = $validation_result['field_inputs']['filevar'];
+                        $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
+                        $filename = 'author_' . $this->response['aboutID'] . '.' . $filetype . '';
+                        $target_file = $target_dir . $filename;
 
-                    // uploading image
-                    if (move_uploaded_file($filevar["tmp_name"], $target_file)) {
-                        $result = ModelSelector::getUserInfoModel()
-                            ->saveUserAboutInfo(
-                                imgFileName: $filename,
-                                description: $about_info['description'],
-                                author_id: $this->response['aboutID']
-                            );
-                        if ($result == false) {
-                            $this->response['user_error'] = array_merge($this->response['user_error'], ModelSelector::getUserInfoModel()->getErrors());
+                        // uploading image
+                        if (move_uploaded_file($filevar["tmp_name"], $target_file)) {
+                            $result = ModelSelector::getUserInfoModel()
+                                ->saveUserAboutInfo(
+                                    imgFileName: $filename,
+                                    description: $about_info['description'],
+                                    author_id: $this->response['aboutID']
+                                );
+                            if ($result == false) {
+                                $this->response['user_error'] = array_merge($this->response['user_error'], ModelSelector::getUserInfoModel()->getErrors());
+                            }
+                        } else {
+                            $this->response['user_error'][] = "Sorry, there was an error uploading your file.";
                         }
-                    } 
-                    else {
-                        $this->response['user_error'][] = "Sorry, there was an error uploading your file.";
                     }
-                    break;
+                }
+                break;
 
-                case 'search':
-                    // broken
-                    // $search_info = ArticleHandler::getInstance()
-                    //    ->checkSearch(response: $this->response);
-                    // collect checkboxgroup van tags en authors
-                    // collect sortby rating/datum
-                    // give collected checkboxes and sort to pagefactory
-                case 'rateArticle':
-                    // This is actually an ajax function
-                    break;
-                case 'dashboard':
-                    $this->response['page'] = 'editArticle';
-                    $this->response['editArticleID'] = 0;
-                    break;
-                case 'editArticle':
-                    $this->response['editArticleID'] = 0;
-                    break;
-                case 'saveArticle':
-                    $this->response['page'] = 'editArticle';
-                    $this->response['editArticleID'] = $_POST['articleID']; ///testing purposes
-                    $articleInfo = ArticleHandler::getInstance()
-                        ->handleArticleSubmission(
-                            response: $this->response,
-                            validator: new ValidationHandler()
-                        );
-                    break;
-                case 'contact':
-                    // On succesful contact form validaiton, save input to the database
-                    $field_inputs = $validation_result['field_inputs'];
-                    ModelSelector::getWebsiteInfoModel()->saveContact(
-                        name: $field_inputs['name'],
-                        email: $field_inputs['email'],
-                        message: $field_inputs['message']
-                    );
-                    break;
-            }
+            case 'search':
+            // broken
+            // $search_info = ArticleHandler::getInstance()
+            //    ->checkSearch(response: $this->response);
+            // collect checkboxgroup van tags en authors
+            // collect sortby rating/datum
+            // give collected checkboxes and sort to pagefactory
+            case 'rateArticle':
+                // This is actually an ajax function
+                break;
+            case 'dashboard':
+                break;
+            case 'editArticle':
+                $this->response['page'] = 'editArticle';
+                $this->response['editArticleID'] = Utils::getRequestVar('articleID', true);
+                $this->response['userID'] = Utils::getSesVar('userID');
+
+                if ($validation_result['ok']) {
+                    // This is the post request for editing or saving a (new) article
+                    if (Utils::getRequestVar('action', true) == 'saveArticle') {
+
+                        $validation_result = ArticleHandler::getInstance()
+                            ->handleArticleSubmission(
+                                validation_result: $validation_result,
+                                article_id: $this->response['editArticleID']
+                            );
+
+                        if (isset($validation_result['field_inputs']['filevar'])) {
+                            // Construct image file path
+                            $target_dir = \Config::ARTICLEIMGPATH;
+                            $filevar = $validation_result['field_inputs']['filevar'];
+                            $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
+                            $filename = 'article_' . $this->response['editArticleID'] . '.' . $filetype . '';
+                            $target_file = $target_dir . $filename;
+
+                            // uploading image
+                            if (!move_uploaded_file($filevar["tmp_name"], $target_file)) {
+                                $validation_result['ok'] = false;
+                                $this->response['user_error'][] = "Sorry, there was an error uploading your file.";
+                            } else {
+                                $validation_result['field_inputs']['articleimg'] = $filename;
+                            }
+                        }
+
+
+                        if ($validation_result['ok']) {
+                            // Adds new article to the data base and returns the new article id, which is stored in the response array
+                            if ($this->response['editArticleID'] == 0) {
+                                $new_article_id = ModelSelector::getArticleModel()->saveNewArticleInfo(
+                                    article_title: $validation_result['field_inputs']['title'],
+                                    article_summary: $validation_result['field_inputs']['summary'],
+                                    article_codeBlock: $validation_result['field_inputs']['codeBlock'] ?? '',
+                                    imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
+                                    user_id: $this->response['userID']
+                                );
+                                if ($new_article_id === false) {
+                                    $this->response['user_error'][] = 'Something went wrong while saving the article. Please try again later.';
+                                } else {
+                                    $this->response['articleID'] = $new_article_id;
+                                    $this->response['page'] = 'article';
+                                }
+                            } else {
+                                //if no article image given check if article already has an image, if so keep it.
+                                if (empty($validation_result['field_inputs']['articleimg'])) {
+                                    $article_info = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
+                                    $validation_result['field_inputs']['articleimg'] = $article_info['imgFileName'];
+                                }
+
+
+
+                                // Updates existing article in the database
+                                $update_result = ModelSelector::getArticleModel()->saveExistingArticleInfo(
+                                    article_id: $this->response['editArticleID'],
+                                    article_title: $validation_result['field_inputs']['title'],
+                                    article_summary: $validation_result['field_inputs']['summary'],
+                                    article_codeBlock: $validation_result['field_inputs']['codeBlock'] ?? '',
+                                    imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
+                                    user_id: $this->response['userID']
+                                );
+                                if ($update_result === false) {
+                                    $this->response['user_error'][] = 'Something went wrong while updating the article. Please try again later.';
+                                }
+                            }
+                        } else {
+                            $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
+                        }
+
+                    } else {
+                        // This is a post request for creating a new article
+                        $this->response['editArticleID'] = 0;
+                    }
+                }
+                break;
+            case 'contact':
+                // On succesful contact form validation, save input to the database
+                $field_inputs = $validation_result['field_inputs'];
+                ModelSelector::getWebsiteInfoModel()->saveContact(
+                    name: $field_inputs['name'],
+                    email: $field_inputs['email'],
+                    message: $field_inputs['message']
+                );
+                break;
         }
 
         return $this->response;

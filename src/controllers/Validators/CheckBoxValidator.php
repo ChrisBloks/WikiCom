@@ -16,6 +16,14 @@ class CheckBoxValidator implements iValidator
     public function validate(string $name, bool $optional = false): bool
     {
         $this->field_inputs[$name] = $_POST[$name];
+
+        if ($optional == false){
+            if (empty($this->field_inputs[$name]))
+            {
+                $this -> logError("Please select at least one {$name}");
+                return false;
+            }
+        }
     
         return $this->validateFields(field_inputs: $this->field_inputs);
     }

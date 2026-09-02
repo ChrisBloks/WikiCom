@@ -19,7 +19,7 @@ $(document).ready(function () {
     var safeId = tagName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
     var checkboxHtml =
-      '<input type="checkbox" name="Existing_tag['+ safeId +']" id="new-tag-' +
+      '<input type="checkbox" name="existing_tag['+ safeId +']" id="new-tag-' +
       safeId + '" class="Existing-tag form-check-input" value="0" checked>' 
       +
       '<label for="new-tag-' + safeId +'">' +

@@ -36,10 +36,13 @@ class FormModel extends BaseModel
         $params = ["page" => $page_name];
         $result = $this->crud->selectMany($sql, $params);
 
+
         if (empty($result)) {
             $this->logError("Page has no Form");
             return false;
         }
+
+
         foreach ($result as &$field_info) {
             if (isset($field_info["id"])) {
                 $field_sub_info = $this->fetchLookupInfo(field_info: $field_info, parent_id: $id);
