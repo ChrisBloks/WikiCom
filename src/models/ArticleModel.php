@@ -322,4 +322,16 @@ class ArticleModel extends BaseModel
         $params = ["article_id" => $article_id];
         return $this->crud->doDelete(sql: $sql, params: $params);
     }
+
+    /**
+     * Deletes article from database
+     * @param int $article_id
+     * @return void
+     */
+    public function deleteArticle(int $article_id): int|false
+    {
+        $sql = "DELETE FROM wiki_article WHERE id=:article_id";
+        $params = ['article_id' => $article_id];
+        return $this->crud->doDelete(sql: $sql, params: $params);
+    }
 }

@@ -2,12 +2,12 @@
 .profile-pic {
   width: 300px;
   height: 300px;
-  object-fit: cover;
+  object-fit: scale-down;
 }
 .dashboard-pic {
   width: 120px;
   height: 120px;
-  object-fit: cover;
+  object-fit: scale-down;
 }
 .main-content {
   flex-grow: 1;
