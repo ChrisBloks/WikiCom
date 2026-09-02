@@ -154,7 +154,6 @@ class PostRequestHandler extends BaseRequestHandler
             }
         }
 
-        // TODO: remove
         return $this->response;
     }
 }

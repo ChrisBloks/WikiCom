@@ -46,7 +46,6 @@ class Crud
         return is_object(value: $this->db);
     }
 
-
     /**
      * Select a single entry from the database.
      * @param string $sql
@@ -75,16 +74,14 @@ class Crud
     public function selectMany(string $sql, ?array $params, int $fetch_mode = \PDO::FETCH_ASSOC): array|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
-        // HtmlUtils::dump("stmt", $stmt);
         try {
             $result = $stmt->fetchAll(mode: $fetch_mode);
-        }
-        catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             $this->logError($e->getMessage());
-            $result = false;
+            return false;
         }
-        
-        return $result;
+
+        return ($result ? $result : []);
     }
 
     /**
@@ -118,7 +115,8 @@ class Crud
      * @param array $params
      * @return int|false Number of affected rows or false on failure.
      */
-    public function doUpdate(string $sql, array $params): int|false{
+    public function doUpdate(string $sql, array $params): int|false
+    {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
         return $stmt->rowCount();
     }

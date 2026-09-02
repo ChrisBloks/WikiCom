@@ -48,7 +48,7 @@ class Table
                 . '</th>';
         }
 
-        $str .= '</tr>';
+        $str .= '</tr></thead>';
         return $str;
     }
 
@@ -67,10 +67,11 @@ class Table
 
             $str .= '</tr>';
         }
-
+        $str.= '</tbody>';
         return $str;
     }
 
+    // Todo allow rating count to rating
     protected function buildCell(array $column, mixed $value, array $row_data): string
     {
         $classAttr = HtmlUtils::addClassAttr($column['class_type'] ?? null);

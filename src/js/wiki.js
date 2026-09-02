@@ -6,14 +6,14 @@ $(document).ready(function () {
     if (!tagName) return;
 
     var alreadyAdded = false;
-    $(".checkbox_group label").each(function () {
-      if ($(this).text().trim().toLowerCase() === tagName.toLowerCase()) {
-        alreadyAdded = true;
-      }
+    $('.checkbox_group label').each(function () {
+        if ($(this).text().trim().toLowerCase() === tagName.toLowerCase()) {
+            alreadyAdded = true;
+        }
     });
     if (alreadyAdded) {
-      alert("That tag is already in the list.");
-      return;
+        alert('That tag is already in the list.');
+        return;
     }
 
     var safeId = tagName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
