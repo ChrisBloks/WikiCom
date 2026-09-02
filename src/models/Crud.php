@@ -76,13 +76,12 @@ class Crud
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
         try {
             $result = $stmt->fetchAll(mode: $fetch_mode);
-        }
-        catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             $this->logError($e->getMessage());
             return false;
         }
-        
-        return ($result ? $result:[]);
+
+        return ($result ? $result : []);
     }
 
     /**
@@ -116,7 +115,8 @@ class Crud
      * @param array $params
      * @return int|false Number of affected rows or false on failure.
      */
-    public function doUpdate(string $sql, array $params): int|false{
+    public function doUpdate(string $sql, array $params): int|false
+    {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
         return $stmt->rowCount();
     }
