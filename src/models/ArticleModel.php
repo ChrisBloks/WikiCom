@@ -40,7 +40,8 @@ class ArticleModel extends BaseModel
                         article.summary,
                         article.codeBlock,
                         article.imgFileName,
-                        article.lastEdit 
+                        article.lastEdit,
+                        article.user_id
                     FROM wiki_article as article
                     JOIN user ON article.user_id=user.id 
                     WHERE article.id=:article_id";
