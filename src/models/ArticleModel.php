@@ -35,20 +35,23 @@ class ArticleModel extends BaseModel
      */
     public function fetchArticleById(int $article_id): array|false
     {
-        $sql = "SELECT  article.title,
+        $sql = "SELECT
+                    article.title,
                         user.name,
                         article.summary,
                         article.codeBlock,
                         article.imgFileName,
-                        article.lastEdit 
-                    FROM wiki_article as article
-                    JOIN user ON article.user_id=user.id 
-                    WHERE article.id=:article_id";
+                    article.lastEdit,
+                    article.user_id,
+                    COALESCE(v_article_avg_rating.AVGrating, 0) AS rating
+                FROM
+                    wiki_article AS article
+                JOIN USER ON article.user_id = user.id
+                JOIN v_article_avg_rating ON article.id = v_article_avg_rating.id
+                WHERE
+                    article.id =:article_id;";
         $params = ['article_id' => $article_id];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
-        if ($result === false) {
-            $result = [];
-        }
         return $result;
     }
 
@@ -66,9 +69,6 @@ class ArticleModel extends BaseModel
                     WHERE user_id=:user_id";
         $params = ['user_id' => $user_id];
         $result = $this->crud->selectMany(sql: $sql, params: $params);
-        if (empty($result)) {
-            $result = false;
-        }
         return $result;
     }
 
@@ -148,7 +148,7 @@ class ArticleModel extends BaseModel
         $order_by_clause = ' ORDER BY ' . $sortBy . ' DESC;';
 
         // Connect the clauses
-        $sql =  $base_select_clause .
+        $sql = $base_select_clause .
             $extra_select_clause .
             $from_clause .
             $join_clause .
@@ -237,11 +237,11 @@ class ArticleModel extends BaseModel
                             summary = :summary,
                             codeBlock = :codeBlock,
                             imgFileName = :imgFileName,
-                            user_id = :user_id,
                             lastEdit = :lastEdit
-                    WHERE   id = :id";
+                    WHERE   id = :article_id
+                    AND     user_id = :user_id";
         $params = [
-            ":id" => $article_id,
+            ":article_id" => $article_id,
             ':title' => $article_title,
             ':summary' => $article_summary,
             ':codeBlock' => $article_codeBlock,
@@ -259,13 +259,13 @@ class ArticleModel extends BaseModel
      * @param string $tag_name
      * @return bool True if $tag_name matches an entry in the database, false otherwise.
      */
-    public function checkTagExists(string $tag_name): bool
+    public function checkTagExists(string $tag_name): array|false
     {
         $sql = "SELECT name FROM tag 
                     WHERE name=:tag_name";
         $params = ["tag_name" => $tag_name];
-        $result = $this->crud->selectOne(sql: $sql, params: $params);
-        return !empty($result);
+        $result = $this->crud->selectOne(sql: $sql, params: $params); // Array or false
+        return $result;
     }
 
     /**
@@ -273,7 +273,7 @@ class ArticleModel extends BaseModel
      * @param string $title_name
      * @return bool True if $title_name matches an entry in the database, false otherwise.
      */
-    public function checkTitleExists(string $title_name): bool
+    public function checkTitleExists(string $title_name): array|false
     {
         $sql = "SELECT title FROM wiki_article 
                     WHERE title=:title_name";
@@ -289,7 +289,7 @@ class ArticleModel extends BaseModel
      */
     public function addNewTag(string $tag_name): int|false
     {
-        $sql = "INSERT INTO tag (name) 
+        $sql = "INSERT INTO wiki_tag (name) 
                     VALUES (:tag_name)";
         $params = ["tag_name" => $tag_name];
         return $this->crud->doInsert(sql: $sql, params: $params);
@@ -304,9 +304,22 @@ class ArticleModel extends BaseModel
      */
     public function addTagToArticle(int $article_id, int $tag_id): int|false
     {
-        $sql = "INSERT INTO article_to_tag (article_id, tag_id) 
+        $sql = "INSERT INTO wiki_article_to_tag (article_id, wiki_tag_id) 
                     VALUES (:article_id,:tag_id)";
         $params = ["article_id" => $article_id, "tag_id" => $tag_id];
         return $this->crud->doInsert(sql: $sql, params: $params);
+    }
+
+    /**
+     * Removes all tag associations for a given article
+     *
+     * @param int $article_id
+     * @return bool True on success, false on failure
+     */
+    public function removeTagsFromArticle(int $article_id): bool
+    {
+        $sql = "DELETE FROM wiki_article_to_tag WHERE `wiki_article_to_tag`.`article_id` = :article_id";
+        $params = ["article_id" => $article_id];
+        return $this->crud->doDelete(sql: $sql, params: $params);
     }
 }

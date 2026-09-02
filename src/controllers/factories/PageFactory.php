@@ -30,7 +30,7 @@ Wiki\views\containers\CodeBlock,
 Wiki\views\containers\Footer,
 Wiki\views\containers\ContainerElement,
 Wiki\views\containers\MainElement,
-Wiki\views\containers\AccordionItem;
+Wiki\views\Rating;
 
 
 
@@ -214,9 +214,9 @@ class PageFactory
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
                     field_text: [],
-                    class: $form_info["display_class"]
+                    class: $form_info["display_class"],
+                    submit_class: "btn btn-primary btn-sm"
                 );
-
                 $inner_container->addElement($form);
                 $outer_container->addElement($inner_container);
                 $main->addElement($outer_container);
@@ -279,8 +279,10 @@ class PageFactory
 
             case 'editArticle':
                 // Outer Div: image + text-div 
-                $outer_container = new ContainerElement('<div class="d-flex flex-column align-items-center w-75 mx-auto">', 
-                                                        '</div>');
+                $outer_container = new ContainerElement(
+                    '<div class="d-flex flex-column align-items-center w-75 mx-auto">',
+                    '</div>'
+                );
 
                 // Inner text div: Title/Author/text/code
                 $inner_container = new ContainerElement('<div class="d-flex flex-grow-1">', '</div>');
@@ -301,7 +303,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
-                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page], //give article tag
+                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page,'action' =>'saveArticle'], //todo: verander terug naar edit article
                     class: $form_info["display_class"],
                     field_text: $bodyinfo,
                     submit_class: "btn btn-primary"
@@ -318,8 +320,8 @@ class PageFactory
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 $tags = ModelSelector::getArticleModel()->fetchArticleTags($this->response['articleID']);
-                // ToDo: add accordion functionality to body text and code element
 
+                // ToDo: add accordion functionality to body text and code element
                 // Outer Div: image + text-div 
                 $outer_container = new ContainerElement('<div class="align-items-center w-75 mx-auto">', '</div>');
 
@@ -335,6 +337,9 @@ class PageFactory
                     text: "Author: " . ucfirst($bodyinfo['name']) . "",
                     class: $classes['author_class']
                 ));
+                $outer_container->addElement(new Rating(
+                    rating: $bodyinfo['rating']
+                ));
                 $display_tags = '';
                 foreach ($tags as $key => $value) {
                     $display_tags .= '<a>' . $value . ' </a>';
@@ -343,6 +348,7 @@ class PageFactory
                     text: $display_tags,
                     class: 'border-bottom border-top mb-3'
                 ));
+
                 $outer_container->addElement(new Title(
                     text: 'Description',
                     class: "h4 mb-4"
@@ -393,7 +399,7 @@ class PageFactory
                 // table information
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["id", "title", "lastEdit"]);
                 // add userID to fetcharticlebyUserId
-                $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId(1);
+                $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId($_SESSION['userID']);
 
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
@@ -412,7 +418,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: [],
-                    hidden_field_info: ['page' => $this->page],
+                    hidden_field_info: ['page' => 'editArticle', 'id' => '0'],
                     class: $form_info["display_class"],
                     field_text: [],
                     submit_class: "btn btn-primary btn-sm"
@@ -447,10 +453,13 @@ class PageFactory
         // add the <main> to the body content
         $this->htmlpage->addToBodyContent($main);
 
-        // add the footer to the body content
+
+        //add the footer to the body content
         $this->htmlpage->addToBodyContent(new Footer(
             text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
-            class: 'border-top text-end bg-primary-subtle mt-auto pe-5'
+            class: 'border-top text-end flex-end bg-primary-subtle mt-auto pe-5'
         ));
+
     }
+
 }

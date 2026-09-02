@@ -23,13 +23,24 @@ class UserInfoModel extends BaseModel
                         WHERE email=:email";
         $params = ["email" => $email];
         $result = $this->crud->selectOne($sql, $params);
-
-        if (empty($result)) {
-            $this->logError("no account with this email");
-            $result = false;
-        }
         return $result;
     }
+
+    /**
+     * Fetch only user id from the database based on given email.
+     * @param string $email
+     * @return array|false
+     */
+    public function fetchUserIDByEmail(string $email): array|false
+    {
+        $sql = "SELECT id FROM user 
+                        WHERE email=:email";
+        $params = ["email" => $email];
+        $result = $this->crud->selectOne($sql, $params);
+        return $result;
+    }
+
+    
 
     /**
      * Check if an email is already present in the database.

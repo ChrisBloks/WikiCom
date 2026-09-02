@@ -46,7 +46,6 @@ class Crud
         return is_object(value: $this->db);
     }
 
-
     /**
      * Select a single entry from the database.
      * @param string $sql
@@ -56,8 +55,16 @@ class Crud
     public function selectOne(string $sql, array $params): array|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
-        $result = $stmt->fetch(mode: \PDO::FETCH_ASSOC);
-        return $result;
+        // If query failed return false;
+        try {
+            $result = $stmt->fetch(mode: \PDO::FETCH_ASSOC);
+        } catch (\Throwable $e) {
+            $this->logError($e->getMessage());
+            return false;
+        }
+
+        // If fetching a result failed, return empty array;
+        return ($result) ? $result : [];
     }
 
     /**
@@ -70,16 +77,14 @@ class Crud
     public function selectMany(string $sql, ?array $params, int $fetch_mode = \PDO::FETCH_ASSOC): array|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
-        // HtmlUtils::dump("stmt", $stmt);
         try {
             $result = $stmt->fetchAll(mode: $fetch_mode);
-        }
-        catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             $this->logError($e->getMessage());
-            $result = false;
+            return false;
         }
-        
-        return $result;
+
+        return ($result ? $result : []);
     }
 
     /**
@@ -104,7 +109,14 @@ class Crud
     public function doDelete(string $sql, array $params): int|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
-        return $stmt->rowCount();
+
+        try {
+            $result = $stmt->rowCount();
+        } catch (\Throwable $e) {
+            $this->logError($e->getMessage());
+            $result = false;
+        }
+        return $result;
     }
 
     /**
@@ -113,9 +125,16 @@ class Crud
      * @param array $params
      * @return int|false Number of affected rows or false on failure.
      */
-    public function doUpdate(string $sql, array $params): int|false{
+    public function doUpdate(string $sql, array $params): int|false
+    {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
-        return $stmt->rowCount();
+        try {
+            $result = $stmt->rowCount();
+        } catch (\Throwable $e) {
+            $this->logError($e->getMessage());
+            $result = false;
+        }
+        return $result;
     }
 
     /**

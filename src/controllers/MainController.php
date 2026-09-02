@@ -3,6 +3,7 @@
 namespace Wiki\controllers;
 
 use Wiki\tools\interfaces;
+use Wiki\controllers\AjaxController;
 
 /**
  * Controller class for initial request handling and forwarding request to the correct subcontroller.
@@ -39,7 +40,7 @@ class MainController
     {
         // Ajax request. Action is equal to a specific update
         if ($this->async) {
-            // return new AjaxController();
+            return new AjaxController();
         }
 
         // Default

@@ -24,7 +24,8 @@ class FormModel extends BaseModel
         $sql = "SELECT  fi.type, 
                         fi.name, 
                         fi.class, 
-                        fi.label, 
+                        fi.label,
+                        fi.optional, 
                         li.*
                 FROM field_info fi
                 JOIN form_info fo ON fi.form_info_id = fo.id
@@ -35,10 +36,13 @@ class FormModel extends BaseModel
         $params = ["page" => $page_name];
         $result = $this->crud->selectMany($sql, $params);
 
+
         if (empty($result)) {
             $this->logError("Page has no Form");
             return false;
         }
+
+
         foreach ($result as &$field_info) {
             if (isset($field_info["id"])) {
                 $field_sub_info = $this->fetchLookupInfo(field_info: $field_info, parent_id: $id);
@@ -177,6 +181,7 @@ class FormModel extends BaseModel
 
         // Always add an ORDER BY clause
         $sql .= " ORDER BY {$field_info['order_by']}";
+
 
         // Execute the query
         $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE|\PDO::FETCH_ASSOC);

@@ -37,8 +37,8 @@ abstract class BaseField implements iElement
 
     abstract public function show(): string;
 
-    protected function baseAttribs(bool $is_array = false, string $id = ""): string
+    protected function baseAttribs(bool $is_array = false, string $id = "",string $value = NULL): string
     {
-        return ' name="' . $this->name . ($is_array ? "[]" : "") . '" id="' . $this->id . ($is_array ? $id : "") . '" class="' . $this->class . '" ';
+        return ' name="' . $this->name . ($is_array ? (isset($value) ?   "[{$value}]": "[]") : "") . '" id="' . $this->id . ($is_array ? $id : "") . '" class="' . $this->class . '" ';
     }
 }

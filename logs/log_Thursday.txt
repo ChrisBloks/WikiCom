@@ -245,7 +245,7 @@ Stack trace:
 27-08-2026 11:46:18 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::checkEmailExists(): Return value must be of type bool, array returned in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:43
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(67): Wiki\models\UserInfoModel->checkEmailExists('danny@emdail.co...')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(22): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(22): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()
@@ -277,7 +277,7 @@ Stack trace:
 27-08-2026 11:48:09 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\UserInfoModel::checkEmailExists(): Return value must be of type bool, array returned in C:\xampp\htdocs\Educom\Wiki\src\models\UserInfoModel.php:43
 Stack trace:
 #0 C:\xampp\htdocs\Educom\Wiki\src\controllers\UserHandler.php(67): Wiki\models\UserInfoModel->checkEmailExists('danny@email1.co...')
-#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(22): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validators\Validator))
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\requestHandlers\PostRequestHandler.php(22): Wiki\controllers\UserHandler->checkRegistration(Array, Object(Wiki\controllers\validationHandler))
 #2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(77): Wiki\controllers\requestHandlers\PostRequestHandler->handleRequest(Array)
 #3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(44): Wiki\controllers\PageController->validateRequest()
 #4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(31): Wiki\controllers\PageController->handleRequest()

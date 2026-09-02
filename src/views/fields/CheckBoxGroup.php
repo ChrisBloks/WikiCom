@@ -25,7 +25,7 @@ class CheckBoxGroup extends BaseField
         $ret .= '<div class="checkbox_group">';
         foreach ($this->options as $value => $display) {
             $checked = isset($this->value[$value]) ? $this->value[$value]:'';
-            $ret .= '<input type="checkbox"' . $this->baseAttribs(true, $value) . 'value="' . $value . '"' . ($checked ? 'checked' : '') . '>';
+            $ret .= '<input type="checkbox"' . $this->baseAttribs(true, $value,$display) . 'value="' . $value . '"' . ($checked ? 'checked' : '') . '>';
             $ret .= HtmlUtils::printLabel($this->id, $display) . "";
         }
 

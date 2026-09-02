@@ -17,27 +17,23 @@ $(document).ready(function () {
     if (!tagName) return;
 
     var alreadyAdded = false;
-    $(".checkbox_group label").each(function () {
-      if ($(this).text().trim().toLowerCase() === tagName.toLowerCase()) {
-        alreadyAdded = true;
-      }
+    $('.checkbox_group label').each(function () {
+        if ($(this).text().trim().toLowerCase() === tagName.toLowerCase()) {
+            alreadyAdded = true;
+        }
     });
     if (alreadyAdded) {
-      alert("That tag is already in the list.");
-      return;
+        alert('That tag is already in the list.');
+        return;
     }
 
     var safeId = tagName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
     var checkboxHtml =
-      '<input type="checkbox" name="Existing_tag[' +
-      safeId +
-      ']" id="new-tag-' +
-      safeId +
-      '" class="Existing-tag form-check-input" value="0" checked>' +
-      '<label for="new-tag-' +
-      safeId +
-      '">' +
+      '<input type="checkbox" name="existing_tag['+ safeId +']" id="new-tag-' +
+      safeId + '" class="Existing-tag form-check-input" value="0" checked>' 
+      +
+      '<label for="new-tag-' + safeId +'">' +
       escapeHtml(tagName) +
       "</label><br>";
 
