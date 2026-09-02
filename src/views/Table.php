@@ -97,6 +97,8 @@ class Table
 
             case 'string':
                 return "<td$classAttr>" . htmlspecialchars((string) $value) . '</td>';
+            case 'Title':
+                return '<td'.$classAttr.'><a href="main.php?page=article&id='.$row_data['id'].'">' . htmlspecialchars((string) $value) . '</a></td>';
 
             default:
                 throw new \InvalidArgumentException("Unknown display_type: '{$column['display_type']}'");
