@@ -38,7 +38,7 @@ class FirstCell
             action: '',
             method: 'POST',
             submit_caption: '&#10060;',
-            submit_class: 'btn btn-danger btn-sm'
+            submit_class: 'btn btn-danger btn-sm delete-button'
         );
         $form->addHiddenField('page', $this->delete_page);
         $form->addHiddenField('id', (string) $this->page_id);

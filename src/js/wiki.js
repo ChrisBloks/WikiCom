@@ -1,4 +1,15 @@
 $(document).ready(function () {
+  $(".delete-button").on("click", function () {
+    alert("Are you sure you want to delete this article?");
+  });
+
+  $("#new-tag-name").on("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      $("#add-tag-btn").trigger("click"); // optional: treat Enter as "Add tag"
+    }
+  });
+
   $("#add-tag-widget").insertBefore(".checkbox_group");
 
   $("#add-tag-btn").on("click", function () {
@@ -19,10 +30,14 @@ $(document).ready(function () {
     var safeId = tagName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
     var checkboxHtml =
-      '<input type="checkbox" name="Existing_tag['+ safeId +']" id="new-tag-' +
-      safeId + '" class="Existing-tag form-check-input" value="0" checked>' 
-      +
-      '<label for="new-tag-' + safeId +'">' +
+      '<input type="checkbox" name="Existing_tag[' +
+      safeId +
+      ']" id="new-tag-' +
+      safeId +
+      '" class="Existing-tag form-check-input" value="0" checked>' +
+      '<label for="new-tag-' +
+      safeId +
+      '">' +
       escapeHtml(tagName) +
       "</label><br>";
 
