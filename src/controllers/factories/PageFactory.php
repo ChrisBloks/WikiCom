@@ -317,6 +317,11 @@ class PageFactory
                 break;
 
             case 'article':
+                 // TODO: clean this up
+                $this->htmlpage->addToHeadContent(new AtomicElement(
+                    '<script src="./src/js/articlePage.js"></script>'
+                ));
+
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 $tags = ModelSelector::getArticleModel()->fetchArticleTags($this->response['articleID']);
