@@ -46,7 +46,6 @@ class Crud
         return is_object(value: $this->db);
     }
 
-
     /**
      * Select a single entry from the database.
      * @param string $sql
@@ -56,8 +55,13 @@ class Crud
     public function selectOne(string $sql, array $params): array|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
+        // If query failed return false;
+        if (!$stmt){
+            return false;
+        }
         $result = $stmt->fetch(mode: \PDO::FETCH_ASSOC);
-        return $result;
+        // If fetching a result failed, return empty array;
+        return ($result ? $result : []);
     }
 
     /**
@@ -75,10 +79,10 @@ class Crud
         }
         catch (\Throwable $e) {
             $this->logError($e->getMessage());
-            $result = false;
+            return false;
         }
         
-        return $result;
+        return ($result ? $result:[]);
     }
 
     /**

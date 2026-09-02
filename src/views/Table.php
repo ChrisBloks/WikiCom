@@ -48,7 +48,7 @@ class Table
                 . '</th>';
         }
 
-        $str .= '</tr>';
+        $str .= '</tr></thead>';
         return $str;
     }
 
@@ -67,7 +67,7 @@ class Table
 
             $str .= '</tr>';
         }
-
+        $str.= '</tbody>';
         return $str;
     }
 
