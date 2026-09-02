@@ -56,12 +56,15 @@ class Crud
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
         // If query failed return false;
-        if (!$stmt){
+        try {
+            $result = $stmt->fetch(mode: \PDO::FETCH_ASSOC);
+        } catch (\Throwable $e) {
+            $this->logError($e->getMessage());
             return false;
         }
-        $result = $stmt->fetch(mode: \PDO::FETCH_ASSOC);
+
         // If fetching a result failed, return empty array;
-        return ($result ? $result : []);
+        return ($result) ? $result : [];
     }
 
     /**
@@ -106,7 +109,14 @@ class Crud
     public function doDelete(string $sql, array $params): int|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
-        return $stmt->rowCount();
+
+        try {
+            $result = $stmt->rowCount();
+        } catch (\Throwable $e) {
+            $this->logError($e->getMessage());
+            $result = false;
+        }
+        return $result;
     }
 
     /**
@@ -118,7 +128,13 @@ class Crud
     public function doUpdate(string $sql, array $params): int|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
-        return $stmt->rowCount();
+        try {
+            $result = $stmt->rowCount();
+        } catch (\Throwable $e) {
+            $this->logError($e->getMessage());
+            $result = false;
+        }
+        return $result;
     }
 
     /**

@@ -303,7 +303,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
-                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page], //give article tag
+                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page,'action' =>'saveArticle'], //todo: verander terug naar edit article
                     class: $form_info["display_class"],
                     field_text: $bodyinfo,
                     submit_class: "btn btn-primary"
@@ -417,7 +417,7 @@ class PageFactory
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: [],
-                    hidden_field_info: ['page' => $this->page],
+                    hidden_field_info: ['page' => 'editArticle', 'id' => '0'],
                     class: $form_info["display_class"],
                     field_text: [],
                     submit_class: "btn btn-primary btn-sm"

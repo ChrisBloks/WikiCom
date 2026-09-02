@@ -2,7 +2,7 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\interfaces\iValidator,
-    Wiki\controllers\validators\BaseValidator,
+    Wiki\controllers\validators\TextValidator,
     Wiki\controllers\validators\NewPasswordValidator,
     Wiki\controllers\validators\EmailValidator,
     Wiki\controllers\validators\ImgValidator,
@@ -24,10 +24,10 @@ enum ValidatorFactory: string
     public function createValidator(): iValidator
     {
         return match ($this) {
-            self::VTEXT => new BaseValidator(),
+            self::VTEXT => new TextValidator(),
             self::VEMAIL => new EmailValidator(),
-            self::VPASSWORD => new BaseValidator(),
-            self::VTEXTAREA => new BaseValidator(),
+            self::VPASSWORD => new TextValidator(),
+            self::VTEXTAREA => new TextValidator(),
             self::VNEWPASS => new NewPasswordValidator(),
             self::VFILE => new ImgValidator(),
             self::VSORT => new SortValidator(),
