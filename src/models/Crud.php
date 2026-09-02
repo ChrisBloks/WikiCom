@@ -78,7 +78,6 @@ class Crud
     public function selectMany(string $sql, ?array $params, int $fetch_mode = \PDO::FETCH_ASSOC): array|false
     {
         $stmt = $this->prepareAndExecute(sql: $sql, params: $params);
-        // HtmlUtils::dump("stmt", $stmt);
         try {
             $result = $stmt->fetchAll(mode: $fetch_mode);
         } catch (\Throwable $e) {
@@ -86,7 +85,7 @@ class Crud
             return false;
         }
 
-        return $result;
+        return ($result ? $result : []);
     }
 
     /**
