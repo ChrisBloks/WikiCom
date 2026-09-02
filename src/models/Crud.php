@@ -83,7 +83,7 @@ class Crud
             $result = $stmt->fetchAll(mode: $fetch_mode);
         } catch (\Throwable $e) {
             $this->logError($e->getMessage());
-            $result = false;
+            return false;
         }
 
         return $result;
