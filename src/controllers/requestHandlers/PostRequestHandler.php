@@ -131,7 +131,6 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
         }
 
-        HtmlUtils::dump("response", $this->response);
         return $this->response;
     }
 }
