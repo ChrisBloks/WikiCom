@@ -8,6 +8,7 @@ Wiki\controllers\UserHandler,
 Wiki\controllers\ArticleHandler,
 Wiki\controllers\ValidationHandler,
 Wiki\models\ModelSelector;
+use Monolog\Test\TestCase;
 
 class PostRequestHandler extends BaseRequestHandler
 {
@@ -123,12 +124,22 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
 
             case 'search':
-            // broken
-            // $search_info = ArticleHandler::getInstance()
-            //    ->checkSearch(response: $this->response);
-            // collect checkboxgroup van tags en authors
-            // collect sortby rating/datum
-            // give collected checkboxes and sort to pagefactory
+                $this->response['Tag'] = $validation_result['field_inputs']['Tag'] ?? [];
+                $this->response['Author'] = $validation_result['field_inputs']['Author'] ?? [];
+                $this->response['sortby'] = $validation_result['field_inputs']['sortby'];
+
+                $checkboxgroups = ['Tag', 'Author'];
+                $field_values = [];
+
+                foreach ($checkboxgroups as $group) {
+                    $field_values[$group] = [];
+                    foreach ($this->response[$group] ?? [] as $value) {
+                        $field_values[$group][$value] = '1';
+                    }
+                }
+                $this->response['field_values'] = $field_values;
+
+                break;
             case 'rateArticle':
                 // This is actually an ajax function
                 break;
@@ -225,8 +236,8 @@ class PostRequestHandler extends BaseRequestHandler
                 );
                 break;
         }
-        HtmlUtils::dump("validation_result", $validation_result);
-        HtmlUtils::dump("response", $this->response);
+
+        
         return $this->response;
     }
 }
