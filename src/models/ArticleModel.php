@@ -1,9 +1,9 @@
 <?php
 /* ArticleModel
- *  Danny
- *  08/2026
- *  ArticleModel class gives al the methods needed to pull or insert article information from database
- */
+*  Danny
+*  08/2026
+*  ArticleModel class gives al the methods needed to pull or insert article information from database
+*/
 
 namespace Wiki\models;
 
@@ -37,10 +37,10 @@ class ArticleModel extends BaseModel
     {
         $sql = "SELECT
                     article.title,
-                    user.name,
-                    article.summary,
-                    article.codeBlock,
-                    article.imgFileName,
+                        user.name,
+                        article.summary,
+                        article.codeBlock,
+                        article.imgFileName,
                     article.lastEdit,
                     article.user_id,
                     v_article_avg_rating.AVGrating
@@ -114,7 +114,7 @@ class ArticleModel extends BaseModel
                 " ,user.name as author" : // get the authors
                 ""); // get average rating
 
-        $from_clause = " FROM wiki_article as article";
+                $from_clause = " FROM wiki_article as article";
 
         // Building the JOIN and WHERE clauses
         // For storing mapping of placeholder to variables for PREPARED statement
@@ -126,7 +126,7 @@ class ArticleModel extends BaseModel
 
             // check if any tags are given and build IN clause
             if (!empty($tag_ids)) {
-                $join_clause .= ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
+                $join_clause .=  ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
                     ' JOIN wiki_tag ON wiki_tag.id = att.wiki_tag_id';
                 [$in_clause, $placeholder_mapping] = $this->buildInClause(reference: 'att.wiki_tag_id', values: $tag_ids, prefix: 'tag');
                 $where_statements[] = $in_clause;
@@ -230,15 +230,9 @@ class ArticleModel extends BaseModel
      * @param int $user_id id of the author
      * @return bool
      */
-    public function saveExistingArticleInfo(
-        int $article_id,
-        string $article_title,
-        string $article_summary,
-        string $article_codeBlock,
-        string $imgFileName,
-        int $user_id
-    ): int|false {
-        $sql = "UPDATE  wiki_article
+    public function saveExistingArticleInfo(int $article_id, string $article_title, string $article_summary, string $article_codeBlock, string $imgFileName, int $user_id): int|false
+    {
+        $sql = "UPDATE  article
                     SET     title = :title,
                             summary = :summary,
                             codeBlock = :codeBlock,
@@ -256,7 +250,6 @@ class ArticleModel extends BaseModel
             ':lastEdit' => date('Y-m-d'),
         ];
 
-
         return $this->crud->doUpdate(sql: $sql, params: $params);
     }
 
@@ -271,7 +264,7 @@ class ArticleModel extends BaseModel
         $sql = "SELECT name FROM tag 
                     WHERE name=:tag_name";
         $params = ["tag_name" => $tag_name];
-        $result = $this->crud->selectOne(sql: $sql, params: $params);
+        $result = $this->crud->selectOne(sql: $sql, params: $params); // Array or false
         return $result;
     }
 
@@ -282,11 +275,11 @@ class ArticleModel extends BaseModel
      */
     public function checkTitleExists(string $title_name): array|false
     {
-        $sql = "SELECT id FROM wiki_article 
+        $sql = "SELECT title FROM wiki_article 
                     WHERE title=:title_name";
         $params = ["title_name" => $title_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
-        return $result;
+        return !empty($result);
     }
 
     /**
