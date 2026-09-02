@@ -4,8 +4,10 @@ namespace Wiki\controllers;
 
 use Wiki\tools\interfaces\iController;
 use Wiki\tools\utils\utils;
+use Wiki\controllers\ArticleHandler;
 
-class AjaxController implements iController{
+class AjaxController implements iController
+{
 
     private array $request;
     private array $response;
@@ -37,16 +39,34 @@ class AjaxController implements iController{
     private function getRequest(): void
     {
         $this->request = [
-            'func' => utils::getRequestVar('func', true, 'unknown'),
+            'action' => utils::getRequestVar('action', true, 'unknown'),
+            'id' => utils::getRequestVar('id', true, null),
 
         ];
     }
 
-    // decide what to do based on the action, fill $this->response
+    // decide what to do based on the action, fill $this->request
     private function validateRequest(): void
     {
-        switch ($this->request['func']) {
+
+        switch ($this->request['action']) {
             case 'saveRating':
+                // ToDo 
+                break;
+            case 'deleteArticle':
+                $articleHandler = new ArticleHandler();
+                $delete_result = $articleHandler->handleDeleteArticle(
+                    article_id: (int) $this->request['id'],
+                    userId: (int) $_SESSION['userID']
+                );
+                if ($delete_result === false) {
+                    throw new \Exception('Failed to delete article');
+                }
+                $this->response =
+                    [
+                        'success' => true,
+                        'deleted rows' => $delete_result,
+                    ];
                 break;
             default:
                 $this->response = [

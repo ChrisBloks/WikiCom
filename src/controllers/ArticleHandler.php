@@ -7,6 +7,7 @@ use Wiki\tools\traits\tSingleton,
 Wiki\models\ModelSelector,
 Wiki\controllers\validationHandler;
 use Wiki\tools\utils\HtmlUtils;
+use Exception;
 
 
 /**
@@ -88,4 +89,41 @@ class ArticleHandler
         return $validation_result;
 
     }
+
+    /** WIP
+     * handles deletion of user articles from database
+     * @param int $article_id id of article to be deleted
+     * @param int $userId id of user
+     * @return void
+     */
+    public function handleDeleteArticle(int $article_id, int $userId): int|false
+    {
+
+        //check whether the article is owned by the userId (double check)
+        $article = ModelSelector::getArticleModel()->fetchArticleById($article_id);
+        if (!$article) {
+            throw new \Exception("Article not found");
+        }
+        if ($userId != $article['user_id']) {
+            throw new \Exception("Article does not match to user!");
+        }
+
+        $result = ModelSelector::getArticleModel()->deleteArticle($article_id);
+        // PDO should return either false (failed) or an row count for rows deleted
+
+        if ($result === false) {
+            // DB query failure
+            return false;
+        }
+
+        if ($result === 0) {
+            // query runs but cant find article id
+            return false;
+        }
+        // query succesful, return rowcount
+        return $result;
+    }
+
+
+
 }
