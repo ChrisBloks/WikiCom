@@ -298,7 +298,12 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
+                if ($this->response['editArticleID'] == 0) {
+                    $bodyinfo = isset($this->response['field_inputs']) ? $this->response['field_inputs'] : [];
+                }
+                else {
+                    $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
+                }
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,

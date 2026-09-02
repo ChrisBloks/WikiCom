@@ -279,7 +279,7 @@ class ArticleModel extends BaseModel
                     WHERE title=:title_name";
         $params = ["title_name" => $title_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
-        return !empty($result);
+        return $result;
     }
 
     /**
