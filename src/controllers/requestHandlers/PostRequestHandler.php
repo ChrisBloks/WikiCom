@@ -226,10 +226,6 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
         }
 
-
-        // TODO: remove
-        HtmlUtils::dump('validation_result', $validation_result);
-        HtmlUtils::dump('response', $_SESSION);
         return $this->response;
     }
 }

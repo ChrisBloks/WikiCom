@@ -46,7 +46,6 @@ class Crud
         return is_object(value: $this->db);
     }
 
-
     /**
      * Select a single entry from the database.
      * @param string $sql
