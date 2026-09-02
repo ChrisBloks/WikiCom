@@ -320,6 +320,7 @@ class PageFactory
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 $tags = ModelSelector::getArticleModel()->fetchArticleTags($this->response['articleID']);
+
                 // ToDo: add accordion functionality to body text and code element
                 // Outer Div: image + text-div 
                 $outer_container = new ContainerElement('<div class="align-items-center w-75 mx-auto">', '</div>');
@@ -337,7 +338,7 @@ class PageFactory
                     class: $classes['author_class']
                 ));
                 $outer_container->addElement(new Rating(
-                    rating: $bodyinfo['AVGrating']
+                    rating: $bodyinfo['rating']
                 ));
                 $display_tags = '';
                 foreach ($tags as $key => $value) {

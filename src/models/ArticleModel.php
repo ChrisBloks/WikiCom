@@ -43,7 +43,7 @@ class ArticleModel extends BaseModel
                     article.imgFileName,
                     article.lastEdit,
                     article.user_id,
-                    v_article_avg_rating.AVGrating
+                    COALESCE(v_article_avg_rating.AVGrating, 0) AS rating
                 FROM
                     wiki_article AS article
                 JOIN USER ON article.user_id = user.id
