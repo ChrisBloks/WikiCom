@@ -230,18 +230,19 @@ class ArticleModel extends BaseModel
      * @param int $user_id id of the author
      * @return bool
      */
-    public function saveExistingArticleInfo(int $article_id, string $article_title, string $article_summary, string $article_codeBlock, string $imgFileName, int $user_id): int|false
+    public function saveExistingArticleInfo(int $article_id, string $article_title, string $article_summary, 
+                                            string $article_codeBlock, string $imgFileName, int $user_id): int|false
     {
-        $sql = "UPDATE  article
+        $sql = "UPDATE  wiki_article
                     SET     title = :title,
                             summary = :summary,
                             codeBlock = :codeBlock,
                             imgFileName = :imgFileName,
-                            user_id = :user_id,
                             lastEdit = :lastEdit
-                    WHERE   id = :id";
+                    WHERE   id = :article_id
+                    AND     user_id = :user_id";
         $params = [
-            ":id" => $article_id,
+            ":article_id" => $article_id,
             ':title' => $article_title,
             ':summary' => $article_summary,
             ':codeBlock' => $article_codeBlock,
@@ -249,6 +250,7 @@ class ArticleModel extends BaseModel
             ':user_id' => $user_id,
             ':lastEdit' => date('Y-m-d'),
         ];
+
 
         return $this->crud->doUpdate(sql: $sql, params: $params);
     }
@@ -275,7 +277,7 @@ class ArticleModel extends BaseModel
      */
     public function checkTitleExists(string $title_name): array|false
     {
-        $sql = "SELECT title FROM wiki_article 
+        $sql = "SELECT id FROM wiki_article 
                     WHERE title=:title_name";
         $params = ["title_name" => $title_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params);

@@ -20,6 +20,7 @@ class InputField extends BaseField implements iElement
 
     public function show(): string
     {
+
         return HtmlUtils::printLabel($this->id, $this->label)
             . '<input type="' . $this->type . '" 
                         name="' . $this->name . '" 

@@ -9,6 +9,7 @@ use Wiki\views\fields\BaseField,
     Wiki\views\fields\ButtonField,
     Wiki\views\fields\InputField,
     Wiki\views\fields\NewPassword;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Factory class for dynamically building page fields.

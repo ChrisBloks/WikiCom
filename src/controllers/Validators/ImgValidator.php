@@ -56,14 +56,14 @@ class ImgValidator implements iValidator
             return false;
         }
 
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            $this->logError(
-                message: "Sorry, file already exists.",
-                key: $key_name
-            );
-            return false;
-        }
+        // // Check if file already exists
+        // if (file_exists($target_file)) {
+        //     $this->logError(
+        //         message: "Sorry, file already exists.",
+        //         key: $key_name
+        //     );
+        //     return false;
+        // }
 
         // Check file size
         if ($filevar["size"] > 500000) {
