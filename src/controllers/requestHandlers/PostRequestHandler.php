@@ -138,7 +138,6 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['page'] = 'editArticle';
                 $this->response['editArticleID'] = Utils::getRequestVar('articleID', true);
                 $this->response['userID'] = Utils::getSesVar('userID');
-
                 if ($validation_result['ok']) {
                     // This is the post request for editing or saving a (new) article
                     if (Utils::getRequestVar('action', true) == 'saveArticle') {
@@ -225,7 +224,7 @@ class PostRequestHandler extends BaseRequestHandler
                 );
                 break;
         }
-
+        HtmlUtils::dump("response", $this->response);
         return $this->response;
     }
 }
