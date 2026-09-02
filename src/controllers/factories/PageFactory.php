@@ -237,24 +237,22 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: [],
+                    field_text: ['sortby' => $this->response['sortby']],
                     class: $form_info["display_class"],
-                    submit_class: "btn btn-primary btn-sm"
+                    submit_class: "btn btn-primary btn-sm",
+                    field_array_values: $this->response['field_values']
                 );
 
                 $filter_container->addElement($form);
                 // =================================================================================================
                 // Table display
-                $author_ids = $this->response["Author"] ?? [];
-                $tag_ids = $this->response["Tag"] ?? [];
-                $sortby = $this->response['sortby'] ?? "";
-
+         
                 // create checkbox inputs for filtering
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
-                    author_ids: $author_ids,
-                    tag_ids: $tag_ids,
-                    sortBy: $sortby
+                    author_ids: $this->response["Author"] ,
+                    tag_ids: $this->response["Tag"] ,
+                    sortBy: $this->response['sortby']
                 );
 
                 // print table for search results
@@ -304,6 +302,7 @@ class PageFactory
                 else {
                     $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
                 }
+
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,
