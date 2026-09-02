@@ -1,9 +1,9 @@
 <?php
 /* ArticleModel
-*  Danny
-*  08/2026
-*  ArticleModel class gives al the methods needed to pull or insert article information from database
-*/
+ *  Danny
+ *  08/2026
+ *  ArticleModel class gives al the methods needed to pull or insert article information from database
+ */
 
 namespace Wiki\models;
 
@@ -66,9 +66,6 @@ class ArticleModel extends BaseModel
                     WHERE user_id=:user_id";
         $params = ['user_id' => $user_id];
         $result = $this->crud->selectMany(sql: $sql, params: $params);
-        if (empty($result)) {
-            $result = false;
-        }
         return $result;
     }
 
@@ -114,7 +111,7 @@ class ArticleModel extends BaseModel
                 " ,user.name as author" : // get the authors
                 ""); // get average rating
 
-                $from_clause = " FROM wiki_article as article";
+        $from_clause = " FROM wiki_article as article";
 
         // Building the JOIN and WHERE clauses
         // For storing mapping of placeholder to variables for PREPARED statement
@@ -126,7 +123,7 @@ class ArticleModel extends BaseModel
 
             // check if any tags are given and build IN clause
             if (!empty($tag_ids)) {
-                $join_clause .=  ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
+                $join_clause .= ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
                     ' JOIN wiki_tag ON wiki_tag.id = att.wiki_tag_id';
                 [$in_clause, $placeholder_mapping] = $this->buildInClause(reference: 'att.wiki_tag_id', values: $tag_ids, prefix: 'tag');
                 $where_statements[] = $in_clause;
@@ -148,7 +145,7 @@ class ArticleModel extends BaseModel
         $order_by_clause = ' ORDER BY ' . $sortBy . ' DESC;';
 
         // Connect the clauses
-        $sql =  $base_select_clause .
+        $sql = $base_select_clause .
             $extra_select_clause .
             $from_clause .
             $join_clause .
