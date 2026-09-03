@@ -36,10 +36,11 @@ class ArticleHandler
      * @param array $validation_result array containing the source page (string)
      * @return array|false
      */
-    public function handleArticleSubmission(array $validation_result, $article_id): array|false
+    public function handleArticleSubmission(array $validation_result, string $article_id, string $user_id): array|false
     {
         ModelSelector::getArticleModel()->removeTagsFromArticle(article_id: $article_id);
 
+        // check for tags if they already exist
         foreach ($validation_result['field_inputs']['existing_tag'] as $key => $value) {
             if ((int) $value === 0) {
                 //check if tag exists in the database
@@ -56,7 +57,7 @@ class ArticleHandler
             }
         }
 
-        // new article submission, check if title already exists
+        // new article submission, check if title already exists and if it does not exits start save info
         if ($article_id == 0) {
             $titlecheck = ModelSelector::getArticleModel()->checkTitleExists(title_name: $validation_result['field_inputs']['title']);
 
@@ -69,25 +70,87 @@ class ArticleHandler
                 $validation_result['ok'] = false;
                 $validation_result['user_error'][] = "Title already exists, please choose a different title!";
             }
-        }
-        // existing article submission, check if title already exists and if it exists check if it has 
-        // the same id as the current article being edited. If not, title already exists and is invalid.
-        else {
-            $titlecheck = ModelSelector::getArticleModel()->checkTitleExists(title_name: $validation_result['field_inputs']['title']);
 
-            if ($titlecheck === false) {
-                $validation_result['ok'] = false;
-                $validation_result['user_error'][] = "Something went wrong with the server! contact Marius";
+            if ($validation_result['ok']) {
+                // Adds new article to the data base and returns the new article id, which is stored in the response array
+                if ($article_id == 0) {
+                    $new_article_id = ModelSelector::getArticleModel()->saveNewArticleInfo(
+                        article_title: $validation_result['field_inputs']['title'],
+                        article_summary: $validation_result['field_inputs']['summary'],
+                        article_codeBlock: $validation_result['field_inputs']['codeBlock'] ?? '',
+                        imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
+                        user_id: $user_id
+                    );
+                    if ($new_article_id === false) {
+                        $validation_result['user_error'][] = 'Something went wrong while saving the article. Please try again later.';
+                    } else {
+                        $validation_result['field_inputs']['new_article_id'] = $new_article_id;
+                        $this->response['page'] = 'article';
+                    }
+                }
+            }
+            // existing article submission, check if title already exists and if it exists check if it has 
+            // the same id as the current article being edited. If not, title already exists and is invalid.
+            else {
+                $titlecheck = ModelSelector::getArticleModel()->checkTitleExists(title_name: $validation_result['field_inputs']['title']);
+
+                if ($titlecheck === false) {
+                    $validation_result['ok'] = false;
+                    $validation_result['user_error'][] = "Something went wrong with the server! contact Marius";
+                }
+
+                if (!empty($titlecheck) && $titlecheck['id'] != $article_id) {
+                    $validation_result['ok'] = false;
+                    $validation_result['user_error'][] = "Title already exists, please choose a different title!";
+                }
             }
 
-            if (!empty($titlecheck) && $titlecheck['id'] != $article_id) {
-                $validation_result['ok'] = false;
-                $validation_result['user_error'][] = "Title already exists, please choose a different title!";
+            // checks if image file exists and if it exists create path and upload image
+            if (isset($validation_result['field_inputs']['filevar'])) {
+                // Construct image file path
+                $target_dir = \Config::ARTICLEIMGPATH;
+                $filevar = $validation_result['field_inputs']['filevar'];
+                $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
+                $filename = 'article_' . $article_id . '.' . $filetype . '';
+                $target_file = $target_dir . $filename;
+
+                // uploading image
+                if (!move_uploaded_file($filevar["tmp_name"], $target_file)) {
+                    $validation_result['ok'] = false;
+                    $validation_result['user_error'][] = "Sorry, there was an error uploading your file.";
+                } else {
+                    $validation_result['field_inputs']['articleimg'] = $filename;
+                }
             }
+
+
+            if ($validation_result['ok']) {
+                //if no article image given check if article already has an image, if so keep it.
+                if (empty($validation_result['field_inputs']['articleimg'])) {
+                    $article_info = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
+                    $validation_result['field_inputs']['articleimg'] = $article_info['imgFileName'];
+                }
+
+                // Updates existing article in the database
+                $update_result = ModelSelector::getArticleModel()->saveExistingArticleInfo(
+                    article_id: $article_id,
+                    article_title: $validation_result['field_inputs']['title'],
+                    article_summary: $validation_result['field_inputs']['summary'],
+                    article_codeBlock: $validation_result['field_inputs']['codeBlock'] ?? '',
+                    imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
+                    user_id: $user_id
+                );
+                if ($update_result === false) {
+                    $validation_result['user_error'][] = 'Something went wrong while updating the article. Please try again later.';
+
+                }
+            } else {
+                $validation_result['user_error'] = array_merge($validation_result['user_error'], $validation_result['user_error']);
+            }
+
+            return $validation_result;
+
         }
-
-        return $validation_result;
-
     }
 
     /** WIP

@@ -2,7 +2,7 @@
 .profile-pic {
   width: 300px;
   height: 300px;
-  object-fit: scale-down;
+  object-fit: cover;
 }
 .dashboard-pic {
   width: 120px;
