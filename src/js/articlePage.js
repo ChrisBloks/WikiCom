@@ -6,11 +6,12 @@ function saveRating(rating, article_id, rating_div) {
         type: 'POST',
         url: "main.php",
         data: {
-            func: 'saveRating',
+            action: 'saveRating',
             rating: rating,
             article_id: article_id,
         },
         success: function (response) {
+            console.log('response: ', response);
             // Set the new rating
             rating_div.find("p.article_rating_display")
                 .html("Current rating: ("+response['avg_rating']+")");

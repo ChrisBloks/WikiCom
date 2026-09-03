@@ -442,3 +442,33 @@ Stack trace:
   thrown 
 03-09-2026 14:35:14 | ::1 | Fatal error on line 15 in file C:\xampp\htdocs\Educom\Wiki\src\views\containers\Rating.php 
 03-09-2026 14:35:14 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 15:31:01 | ::1 | Unknown error type: [2] Undefined array key "avg_rating" 
+03-09-2026 15:31:01 | ::1 | Fatal error on line 348 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+03-09-2026 15:31:01 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 15:31:01 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\views\containers\Rating::__construct(): Argument #1 ($rating) must be of type float, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 347 and defined in C:\xampp\htdocs\Educom\Wiki\src\views\containers\Rating.php:16
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(347): Wiki\views\containers\Rating->__construct(NULL, '1')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(59): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(32): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+03-09-2026 15:31:01 | ::1 | Fatal error on line 16 in file C:\xampp\htdocs\Educom\Wiki\src\views\containers\Rating.php 
+03-09-2026 15:31:01 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 15:32:03 | ::1 | Unknown error type: [2] Undefined array key "avg_rating" 
+03-09-2026 15:32:03 | ::1 | Fatal error on line 349 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php 
+03-09-2026 15:32:03 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 15:32:03 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\views\containers\Rating::__construct(): Argument #1 ($rating) must be of type float, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php on line 348 and defined in C:\xampp\htdocs\Educom\Wiki\src\views\containers\Rating.php:16
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(348): Wiki\views\containers\Rating->__construct(NULL, '1')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\factories\PageFactory.php(59): Wiki\controllers\factories\PageFactory->addBody()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(88): Wiki\controllers\factories\PageFactory->show()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\PageController.php(46): Wiki\controllers\PageController->showResponse()
+#4 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(32): Wiki\controllers\PageController->handleRequest()
+#5 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#6 {main}
+  thrown 
+03-09-2026 15:32:03 | ::1 | Fatal error on line 16 in file C:\xampp\htdocs\Educom\Wiki\src\views\containers\Rating.php 
+03-09-2026 15:32:03 | ::1 | PHP 8.2.12 (WINNT) 

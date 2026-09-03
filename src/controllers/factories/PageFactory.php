@@ -345,7 +345,7 @@ class PageFactory
                     class: $classes['author_class']
                 ));
                 $outer_container->addElement(new Rating(
-                    rating: $bodyinfo['avg_rating'],
+                    rating: $bodyinfo['rating'],
                     article_id: $this->response['articleID']
                 ));
                 $display_tags = '';
