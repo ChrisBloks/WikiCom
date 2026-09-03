@@ -232,7 +232,7 @@ class ArticleModel extends BaseModel
      */
     public function saveExistingArticleInfo(int $article_id, string $article_title, string $article_summary, string $article_codeBlock, string $imgFileName, int $user_id): int|false
     {
-        $sql = "UPDATE  article
+        $sql = "UPDATE  wiki_article
                     SET     title = :title,
                             summary = :summary,
                             codeBlock = :codeBlock,
@@ -250,6 +250,7 @@ class ArticleModel extends BaseModel
             ':lastEdit' => date('Y-m-d'),
         ];
 
+
         return $this->crud->doUpdate(sql: $sql, params: $params);
     }
 
@@ -261,7 +262,7 @@ class ArticleModel extends BaseModel
      */
     public function checkTagExists(string $tag_name): array|false
     {
-        $sql = "SELECT name FROM tag 
+        $sql = "SELECT id FROM tag 
                     WHERE name=:tag_name";
         $params = ["tag_name" => $tag_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params); // Array or false
@@ -275,7 +276,7 @@ class ArticleModel extends BaseModel
      */
     public function checkTitleExists(string $title_name): array|false
     {
-        $sql = "SELECT title FROM wiki_article 
+        $sql = "SELECT id FROM wiki_article 
                     WHERE title=:title_name";
         $params = ["title_name" => $title_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
