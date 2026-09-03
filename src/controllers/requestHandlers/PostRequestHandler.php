@@ -81,7 +81,7 @@ class PostRequestHandler extends BaseRequestHandler
                     $validation_result = UserHandler::getInstance()->handleUserAboutInfo($validation_result);
                     // if there are any errors save them in response
                     $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-                    if ($validation_result['ok']){
+                    if ($validation_result['ok']) {
                         $_SESSION['messages'][] = 'User information is saved!';
                     }
                 }
@@ -90,17 +90,7 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['Tag'] = $validation_result['field_inputs']['Tag'] ?? [];
                 $this->response['Author'] = $validation_result['field_inputs']['Author'] ?? [];
                 $this->response['sortby'] = $validation_result['field_inputs']['sortby'];
-
-                $checkboxgroups = ['Tag', 'Author'];
-                $field_values = [];
-
-                foreach ($checkboxgroups as $group) {
-                    $field_values[$group] = [];
-                    foreach ($this->response[$group] ?? [] as $value) {
-                        $field_values[$group][$value] = '1';
-                    }
-                }
-                $this->response['field_values'] = $field_values;
+                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'],['Tag', 'Author']);
 
                 break;
             case 'rateArticle':
@@ -111,8 +101,11 @@ class PostRequestHandler extends BaseRequestHandler
             case 'editArticle':
                 $this->response['editArticleID'] = Utils::getRequestVar('articleID', true);
                 $this->response['userID'] = Utils::getSesVar('userID');
-                $this->response['field_inputs'] = $validation_result['field_inputs'];
-                
+                $this->response['bodyinfo']['title'] = $validation_result['field_inputs']['title'];
+                $this->response['bodyinfo']['summary'] = $validation_result['field_inputs']['summary'];
+                $this->response['bodyinfo']['codeBlock'] = $validation_result['field_inputs']['codeBlock'];
+                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'],['existing_tag']);
+
                 if ($validation_result['ok']) {
                     // This is the post request for editing or saving a (new) article
                     if (Utils::getRequestVar('action', true) == 'saveArticle') {
@@ -128,7 +121,7 @@ class PostRequestHandler extends BaseRequestHandler
                             $this->response['editArticleID'] = $validation_result['field_inputs']['new_article_id'];
                         }
 
-                        if ($validation_result['ok']){
+                        if ($validation_result['ok']) {
                             $this->response['page'] = 'article';
                             $this->response['articleID'] = $this->response['editArticleID'];
                             $_SESSION['messages'][] = 'Article has been submitted!';
@@ -153,5 +146,28 @@ class PostRequestHandler extends BaseRequestHandler
         }
 
         return $this->response;
+    }
+
+
+    /**
+     * changes the array with given keys to values for the checkboxgroup to mark
+     * so example : [tag5 => 5] becomes [5 => 1] 
+     * @param array $result_array array containing the arrays that need to be changes.
+     * @param array $keys is an array with key names used to find the array that have to be changed.
+     * @return array the marked array 
+     */
+    protected function arrayToMarkedArray(array $result_array, array $keys)
+    {
+        $marked_array = [];
+
+        foreach ($keys as $key) {
+            $marked_array[$key] = [];
+            foreach ($result_array[$key] ?? [] as $value) {
+                $marked_array[$key][$value] = '1';
+            }
+        }
+
+        return $marked_array;
+
     }
 }

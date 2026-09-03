@@ -10,7 +10,7 @@ class GetRequestHandler extends BaseRequestHandler
 {
     public function handleRequest(array $request): array
     {
-
+        $_SESSION['errors'] = [];
         $this->response = $request;
 
         switch ($request['page']) {
@@ -39,7 +39,7 @@ class GetRequestHandler extends BaseRequestHandler
                     if ($this->response['userID'] != $article_info['user_id']) {
                         $this->response['page'] = 'article';
                         $this->response['articleID']  = $this->response['editArticleID'];
-                        $this->response['user_error'][] = "You are not authorized to edit this article.";
+                        $_SESSION['errors'][] = "You are not authorized to edit this article.";
                     }
                 }
 

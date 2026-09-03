@@ -295,7 +295,7 @@ class PageFactory
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
                 if ($this->response['editArticleID'] == 0) {
-                    $bodyinfo = isset($this->response['field_inputs']) ? $this->response['field_inputs'] : [];
+                    $bodyinfo = isset($this->response['bodyinfo'])? $this->response['bodyinfo']:[];
                 }
                 else {
                     $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
@@ -307,7 +307,8 @@ class PageFactory
                     hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page,'action' =>'saveArticle'], 
                     class: $form_info["display_class"],
                     field_text: $bodyinfo,
-                    submit_class: "btn btn-primary"
+                    submit_class: "btn btn-primary",
+                    field_array_values: isset($this->response['field_values']) ? $this->response['field_values']:[]
                 );
 
                 // add to page
