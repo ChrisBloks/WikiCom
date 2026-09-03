@@ -51,11 +51,19 @@ class FormFactory
                 }
             // (optional) set field name
             $text = (isset($field_text[$field_def['name']]) ? $field_text[$field_def['name']] : "");
+
+            //if $text is an array give it to field_def['value'] //todo change this part where there is an array when array given
+            if (is_array($text)){
+                $field_def['value'] = $text;
+                $text = '';
+            }
+
             // Create Field object
             $form->addElement($field_factory->createField(
                 field_def: $field_def,
                 field_text: $text
             ));
+
         }
         return $form;
     }

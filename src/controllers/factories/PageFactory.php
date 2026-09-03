@@ -303,11 +303,10 @@ class PageFactory
                     $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
                 }
 
-
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
-                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page,'action' =>'saveArticle'], //todo: verander terug naar edit article
+                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page,'action' =>'saveArticle'], 
                     class: $form_info["display_class"],
                     field_text: $bodyinfo,
                     submit_class: "btn btn-primary"

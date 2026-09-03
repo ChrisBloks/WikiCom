@@ -17,7 +17,7 @@ class PostRequestHandler extends BaseRequestHandler
     public function handleRequest(array $request): array
     {
         $this->response = $request;
-        $this->response['user_error'] = [];
+        $_SESSION['errorMessage'] = [];
 
         // Validate the posted Form
         // Get field type and name
@@ -30,7 +30,7 @@ class PostRequestHandler extends BaseRequestHandler
             ->validateFields(field_info: $field_info);
 
         // If form was submitted correctly WRONG: add validation errors to response
-        $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
+        $_SESSION['errorMessage'] = array_merge($_SESSION['errorMessage'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour
         // Get page-speicifc behaviour
         switch ($request['page']) {
@@ -42,7 +42,7 @@ class PostRequestHandler extends BaseRequestHandler
                         ->handleRegistration(validation_result: $validation_result);
 
                     // Add all (if any) error messages to the response array
-                    $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
+                    $_SESSION['errorMessage'] = array_merge($_SESSION['errorMessage'], $validation_result['user_error']);
 
                     // Registration was successful
                     if ($validation_result['registration_result'] !== false) {
@@ -58,7 +58,7 @@ class PostRequestHandler extends BaseRequestHandler
                         ->handleUserLogin(validation_result: $validation_result);
 
                     // Add all (if any) error messages to the response array
-                    $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
+                    $_SESSION['errorMessage'] = array_merge($_SESSION['errorMessage'], $validation_result['user_error']);
 
                     // If log in was succesful, if the login was unsuccesful, errors are stored in $response
                     if ($validation_result['ok']) {
@@ -77,7 +77,7 @@ class PostRequestHandler extends BaseRequestHandler
                     // checks if image is correct and saves about info
                     $validation_result = UserHandler::getInstance()->handleUserAboutInfo($validation_result);
                     // if there are any errors save them in response
-                    $this->response['user_error'] = array_merge($this->response['user_error'], $validation_result['user_error']);
+                    $_SESSION['errorMessage'] = array_merge($_SESSION['errorMessage'], $validation_result['user_error']);
                 }
                 break;
             case 'search':
@@ -103,10 +103,10 @@ class PostRequestHandler extends BaseRequestHandler
             case 'dashboard':
                 break;
             case 'editArticle':
-                $this->response['page'] = 'editArticle';
                 $this->response['editArticleID'] = Utils::getRequestVar('articleID', true);
                 $this->response['userID'] = Utils::getSesVar('userID');
                 $this->response['field_inputs'] = $validation_result['field_inputs'];
+                
                 if ($validation_result['ok']) {
                     // This is the post request for editing or saving a (new) article
                     if (Utils::getRequestVar('action', true) == 'saveArticle') {
@@ -115,11 +115,21 @@ class PostRequestHandler extends BaseRequestHandler
                             ->handleArticleSubmission(
                                 validation_result: $validation_result,
                                 article_id: $this->response['editArticleID'],
-                                $this->response['userID']
+                                user_id: $this->response['userID']
                             );
 
-                    } else {
-                        // This is a post request for creating a new article
+                        if (isset($validation_result['field_inputs']['new_article_id'])) {
+                            $this->response['editArticleID'] = $validation_result['field_inputs']['new_article_id'];
+                        }
+
+                        if ($validation_result['ok']){
+                            $this->response['page'] = 'article';
+                            $this->response['articleID'] = $this->response['editArticleID'];
+                        }
+
+                    }
+                    // This is a post request for creating a new article
+                    else {
                         $this->response['editArticleID'] = 0;
                     }
                 }
