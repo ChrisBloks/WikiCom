@@ -346,7 +346,8 @@ class PageFactory
                 ));
                 $outer_container->addElement(new Rating(
                     rating: $bodyinfo['rating'],
-                    article_id: $this->response['articleID']
+                    article_id: $this->response['articleID'],
+                    isloggedIn: $this->response['isLoggedIn']
                 ));
                 $display_tags = '';
                 foreach ($tags as $key => $value) {
