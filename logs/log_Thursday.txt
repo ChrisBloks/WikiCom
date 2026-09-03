@@ -472,3 +472,55 @@ Stack trace:
   thrown 
 03-09-2026 15:32:03 | ::1 | Fatal error on line 16 in file C:\xampp\htdocs\Educom\Wiki\src\views\containers\Rating.php 
 03-09-2026 15:32:03 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:19:26 | ::1 | Unknown error type: [2] Undefined array key "$user_id" 
+03-09-2026 16:19:26 | ::1 | Fatal error on line 62 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php 
+03-09-2026 16:19:26 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:19:26 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ArticleHandler::handleSaveRating(): Argument #1 ($user_id) must be of type int, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php on line 61 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(61): Wiki\controllers\ArticleHandler->handleSaveRating(NULL, NULL, '1')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(27): Wiki\controllers\AjaxController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(32): Wiki\controllers\AjaxController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+03-09-2026 16:19:26 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+03-09-2026 16:19:26 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:19:28 | ::1 | Unknown error type: [2] Undefined array key "$user_id" 
+03-09-2026 16:19:28 | ::1 | Fatal error on line 62 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php 
+03-09-2026 16:19:28 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:19:28 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ArticleHandler::handleSaveRating(): Argument #1 ($user_id) must be of type int, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php on line 61 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(61): Wiki\controllers\ArticleHandler->handleSaveRating(NULL, NULL, '3')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(27): Wiki\controllers\AjaxController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(32): Wiki\controllers\AjaxController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+03-09-2026 16:19:28 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+03-09-2026 16:19:28 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:22:07 | ::1 | Unknown error type: [2] Undefined array key "$user_id" 
+03-09-2026 16:22:07 | ::1 | Fatal error on line 64 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php 
+03-09-2026 16:22:07 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:22:07 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ArticleHandler::handleSaveRating(): Argument #1 ($user_id) must be of type int, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php on line 63 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(63): Wiki\controllers\ArticleHandler->handleSaveRating(NULL, NULL, '2')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(27): Wiki\controllers\AjaxController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(32): Wiki\controllers\AjaxController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+03-09-2026 16:22:07 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+03-09-2026 16:22:07 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:22:22 | ::1 | Unknown error type: [2] Undefined array key "$user_id" 
+03-09-2026 16:22:22 | ::1 | Fatal error on line 64 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php 
+03-09-2026 16:22:22 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:22:22 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\controllers\ArticleHandler::handleSaveRating(): Argument #1 ($user_id) must be of type int, null given, called in C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php on line 63 and defined in C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php:22
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(63): Wiki\controllers\ArticleHandler->handleSaveRating(NULL, NULL, '1')
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(27): Wiki\controllers\AjaxController->validateRequest()
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(32): Wiki\controllers\AjaxController->handleRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#4 {main}
+  thrown 
+03-09-2026 16:22:22 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
+03-09-2026 16:22:22 | ::1 | PHP 8.2.12 (WINNT) 

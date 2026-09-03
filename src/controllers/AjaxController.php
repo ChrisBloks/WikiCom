@@ -42,7 +42,7 @@ class AjaxController implements iController
         $this->request = [
             'action' => utils::getRequestVar('action', true, 'unknown'),
             'id' => utils::getRequestVar('id', true, null),
-            'user_id' => utils::getSesVar('user_id', null),
+            'user_id' => utils::getSesVar('userID', null),
             'isLoggedIn' => isset($_SESSION['userID'])
         ];
     }
@@ -56,11 +56,14 @@ class AjaxController implements iController
                     throw new BadMethodCallException('Tried to save a rating without being logged in!');
                 }
                 else {
+                    HtmlUtils::dump("session", $_SESSION);
+                    HtmlUtils::dump("request", $this->request);
                     $rating = utils::getRequestVar('rating', true, null);
+                    $article_id = utils::getRequestVar('article_id', true, null);
                     $articleHandler = new ArticleHandler();
                     $new_avg_rating = $articleHandler->handleSaveRating(
-                        user_id: $this->request['$user_id'],
-                        article_id: $this->request['id'],
+                        user_id: $this->request['user_id'],
+                        article_id: $article_id,
                         rating: $rating);
                     $this->response = [
                         'avg_rating' => $new_avg_rating

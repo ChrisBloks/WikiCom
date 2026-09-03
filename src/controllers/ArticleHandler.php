@@ -20,7 +20,7 @@ class ArticleHandler
 
     // Sends a new rating to the database and retrieves the new avg rating
     public function handleSaveRating(int $user_id, int $article_id, int $rating){
-        $rating_model = ModelSelector::getArticleModel();
+        $rating_model = ModelSelector::getRatingModel();
         $rating_model->saveRating(
             user_id: $user_id,
             article_id: $article_id,
