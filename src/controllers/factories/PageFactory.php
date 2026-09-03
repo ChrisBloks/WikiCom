@@ -30,6 +30,7 @@ Wiki\views\containers\CodeBlock,
 Wiki\views\containers\Footer,
 Wiki\views\containers\ContainerElement,
 Wiki\views\containers\MainElement,
+Wiki\views\containers\NoticeMessage,
 Wiki\views\Rating;
 
 
@@ -47,6 +48,7 @@ class PageFactory
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
         $this->htmlpage = new BasePage;
+        
     }
 
     public function show()
@@ -88,12 +90,7 @@ class PageFactory
 
     public function addBody()
     {
-        // ToDo: make error element, pass array with errors
-        if ($this->hasErrors() == true) {
-            HtmlUtils::dump("Errors", $this->getErrors());
-        }
 
-        // tNoticeMessage ... eventually
 
         // title
         $this->htmlpage->addToBodyContent(new Header(
@@ -122,6 +119,7 @@ class PageFactory
         }
 
         $main = new MainElement();
+        $main->addElement(new NoticeMessage());
         // page building
         switch ($this->page) {
             case 'home':
