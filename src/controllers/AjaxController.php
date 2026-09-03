@@ -48,6 +48,7 @@ class AjaxController implements iController{
         switch ($this->request['func']) {
             case 'saveRating':
                 $this->response = [
+                    // TODO:: Actually retrieve the rating
                     'avg_rating' => rand(0,10)
                 ];
                 break;
