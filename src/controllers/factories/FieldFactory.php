@@ -54,7 +54,7 @@ class FieldFactory
                     class: $field_def["class"],
                     label: $field_def["label"],
                     options: isset($field_def['options']) ? $field_def['options']:[],
-                    text: $field_text
+                    selected_option: $field_text
                 );
             case 'button':
                 return new ButtonField(

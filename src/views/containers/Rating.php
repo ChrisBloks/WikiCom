@@ -17,6 +17,12 @@ class Rating extends ContainerElement
     {
         parent::__construct('<div class="rating_div">', '</div>');
 
+        $max = 5;
+        $roundedrating = max(0.0, min($max, round($rating, 0)));
+        $percent = ($roundedrating / $max) * $max;
+        $full    = str_repeat('&#9733;', $percent);
+        $empty   = str_repeat('&#9734;', $max - $percent);
+
         // Add interactive element
         if (!$display_only){
             // Add dropdown
@@ -48,7 +54,9 @@ class Rating extends ContainerElement
         // Add display element
         $this->addElement(
             new AtomicElement(
-                html: '<p class="article_rating_display"> Current rating: ('. round($rating, 1) . ') </p>'
+                html: '<p class="article_rating_display"><span class="stars-full" style="width: ' . $percent . '%;">' . $full 
+                . '</span><span class="stars-empty">' . $empty . '</span>
+                 ('. round($rating, 1) . ') </p>'
             )
         );
 
@@ -61,3 +69,4 @@ class Rating extends ContainerElement
         );
     }
 }
+
