@@ -1,7 +1,7 @@
 <?php
 namespace Wiki\controllers;
 
-
+use BadMethodCallException;
 use Wiki\tools\interfaces\iController;
 use Wiki\tools\utils\utils;
 use Wiki\controllers\ArticleHandler;
@@ -42,7 +42,8 @@ class AjaxController implements iController
         $this->request = [
             'action' => utils::getRequestVar('action', true, 'unknown'),
             'id' => utils::getRequestVar('id', true, null),
-
+            'user_id' => utils::getSesVar('user_id', null),
+            'isLoggedIn' => isset($_SESSION['userID'])
         ];
     }
 
@@ -50,17 +51,21 @@ class AjaxController implements iController
     private function validateRequest(): void
     {
         switch ($this->request['action']) {
-            case 'saveRating':                
-                $user_id = utils::getSesVar('user_id', null);
-                $article_id = utils::getRequestVar('article_id', true, null);
-                $rating = utils::getRequestVar('rating', true, null);
-
-                $articleHandler = new ArticleHandler();
-                $new_avg_rating = $articleHandler->handleSaveRating($user_id, $article_id, $rating);
-                $this->response = [
-                    'avg_rating' => $new_avg_rating
-                ];
-                // ToDo 
+            case 'saveRating':
+                if(!$this->request['isLoggedIn']){
+                    throw new BadMethodCallException('Tried to save a rating without being logged in!');
+                }
+                else {
+                    $rating = utils::getRequestVar('rating', true, null);
+                    $articleHandler = new ArticleHandler();
+                    $new_avg_rating = $articleHandler->handleSaveRating(
+                        user_id: $this->request['$user_id'],
+                        article_id: $this->request['id'],
+                        rating: $rating);
+                    $this->response = [
+                        'avg_rating' => $new_avg_rating
+                    ];
+                }
                 break;
             case 'deleteArticle':
                 $articleHandler = new ArticleHandler();
