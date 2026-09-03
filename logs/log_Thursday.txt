@@ -524,3 +524,17 @@ Stack trace:
   thrown 
 03-09-2026 16:22:22 | ::1 | Fatal error on line 22 in file C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php 
 03-09-2026 16:22:22 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:26:40 | ::1 | Unknown error type: [2] Undefined array key 0 
+03-09-2026 16:26:40 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\models\RatingModel.php 
+03-09-2026 16:26:40 | ::1 | PHP 8.2.12 (WINNT) 
+03-09-2026 16:26:40 | ::1 | Unknown error type: [1] Uncaught TypeError: Wiki\models\RatingModel::fetchAvgRating(): Return value must be of type float|false, null returned in C:\xampp\htdocs\Educom\Wiki\src\models\RatingModel.php:30
+Stack trace:
+#0 C:\xampp\htdocs\Educom\Wiki\src\controllers\ArticleHandler.php(29): Wiki\models\RatingModel->fetchAvgRating(2)
+#1 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(64): Wiki\controllers\ArticleHandler->handleSaveRating(7, 2, 1)
+#2 C:\xampp\htdocs\Educom\Wiki\src\controllers\AjaxController.php(27): Wiki\controllers\AjaxController->validateRequest()
+#3 C:\xampp\htdocs\Educom\Wiki\src\controllers\MainController.php(32): Wiki\controllers\AjaxController->handleRequest()
+#4 C:\xampp\htdocs\Educom\Wiki\main.php(36): Wiki\controllers\MainController->main()
+#5 {main}
+  thrown 
+03-09-2026 16:26:40 | ::1 | Fatal error on line 30 in file C:\xampp\htdocs\Educom\Wiki\src\models\RatingModel.php 
+03-09-2026 16:26:40 | ::1 | PHP 8.2.12 (WINNT) 

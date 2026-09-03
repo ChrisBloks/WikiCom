@@ -20,7 +20,7 @@ function saveRating(rating, article_id, rating_div) {
         error: function (error)
         {
             console.log('AJAX call failed!');
-            console.log(error.message);
+            console.log(error.responseText);
         }
     });
 }

@@ -56,8 +56,6 @@ class AjaxController implements iController
                     throw new BadMethodCallException('Tried to save a rating without being logged in!');
                 }
                 else {
-                    HtmlUtils::dump("session", $_SESSION);
-                    HtmlUtils::dump("request", $this->request);
                     $rating = utils::getRequestVar('rating', true, null);
                     $article_id = utils::getRequestVar('article_id', true, null);
                     $articleHandler = new ArticleHandler();

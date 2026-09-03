@@ -7,6 +7,8 @@
 
 namespace Wiki\models;
 
+use Wiki\tools\utils\HtmlUtils;
+
 class RatingModel extends BaseModel
 {
 
@@ -25,7 +27,7 @@ class RatingModel extends BaseModel
             $this->logError("No average rating for article id");
             $result = false;
         }
-        return $result;
+        return $result['AVGrating'];
     }
 
     /**
