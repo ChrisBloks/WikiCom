@@ -17,8 +17,10 @@ function saveRating(rating, article_id, rating_div) {
                 .html("Current rating: ("+response['avg_rating']+")");
             console.log('saveRating Succesful');
         },
-        error: function (){
-            console.log('AJAX call failed!')
+        error: function (error)
+        {
+            console.log('AJAX call failed!');
+            console.log(error.message);
         }
     });
 }

@@ -18,6 +18,18 @@ class ArticleHandler
 {
     use tSingleton;
 
+    // Sends a new rating to the database and retrieves the new avg rating
+    public function handleSaveRating(int $user_id, int $article_id, int $rating){
+        $rating_model = ModelSelector::getArticleModel();
+        $rating_model->saveRating(
+            user_id: $user_id,
+            article_id: $article_id,
+            rating: $rating
+        );
+        return $rating_model->fetchAvgRating(article_id: $article_id);
+    }
+
+
     /**
      * TODO: is this function still required?
      * @param array $validation_result array containing the source page (string).
@@ -146,7 +158,7 @@ class ArticleHandler
      * handles deletion of user articles from database
      * @param int $article_id id of article to be deleted
      * @param int $userId id of user
-     * @return void
+     * @return int|false
      */
     public function handleDeleteArticle(int $article_id, int $userId): int|false
     {

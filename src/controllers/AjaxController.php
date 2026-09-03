@@ -5,6 +5,7 @@ namespace Wiki\controllers;
 use Wiki\tools\interfaces\iController;
 use Wiki\tools\utils\utils;
 use Wiki\controllers\ArticleHandler;
+use Wiki\tools\utils\HtmlUtils;
 
 class AjaxController implements iController
 {
@@ -48,12 +49,16 @@ class AjaxController implements iController
     // decide what to do based on the action, fill $this->request
     private function validateRequest(): void
     {
-
         switch ($this->request['action']) {
-            case 'saveRating':
+            case 'saveRating':                
+                $user_id = utils::getSesVar('user_id', null);
+                $article_id = utils::getRequestVar('article_id', true, null);
+                $rating = utils::getRequestVar('rating', true, null);
+
+                $articleHandler = new ArticleHandler();
+                $new_avg_rating = $articleHandler->handleSaveRating($user_id, $article_id, $rating);
                 $this->response = [
-                    // TODO:: Actually retrieve the rating
-                    'avg_rating' => rand(0,10)
+                    'avg_rating' => $new_avg_rating
                 ];
                 // ToDo 
                 break;
