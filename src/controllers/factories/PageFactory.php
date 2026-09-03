@@ -30,8 +30,8 @@ Wiki\views\containers\CodeBlock,
 Wiki\views\containers\Footer,
 Wiki\views\containers\ContainerElement,
 Wiki\views\containers\MainElement,
-Wiki\views\containers\NoticeMessage,
-Wiki\views\Rating;
+Wiki\views\containers\Rating,
+Wiki\views\containers\NoticeMessage;
 
 
 
@@ -318,6 +318,11 @@ class PageFactory
                 break;
 
             case 'article':
+                 // TODO: clean this up
+                $this->htmlpage->addToHeadContent(new AtomicElement(
+                    '<script src="./src/js/articlePage.js"></script>'
+                ));
+
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 $tags = ModelSelector::getArticleModel()->fetchArticleTags($this->response['articleID']);
@@ -339,7 +344,8 @@ class PageFactory
                     class: $classes['author_class']
                 ));
                 $outer_container->addElement(new Rating(
-                    rating: $bodyinfo['rating']
+                    rating: $bodyinfo['avg_rating'],
+                    article_id: $this->response['articleID']
                 ));
                 $display_tags = '';
                 foreach ($tags as $key => $value) {

@@ -8,13 +8,13 @@ class Select extends BaseField
 {
 
     protected array $options = [];
-    protected string $text = '';
+    protected string $selected_option;
 
-    public function __construct(string $name, string $label, string $class, array $options, string $text)
+    public function __construct(string $name, string $label, string $class, array $options, string $selected_option = "", string $options_class = "")
     {
         parent::__construct($name, $label, $class);
         $this->options = $options;
-        $this->text = $text;
+        $this->selected_option = $selected_option;
     }
 
 
@@ -24,12 +24,12 @@ class Select extends BaseField
             . '<select' . $this->baseAttribs() . ">";
 
         foreach ($this->options as $value => $display) {
-            $selected = '';
-            if ($this->text == $value) {
-                $selected = 'selected';
-            }
-
-            $ret .= '<option value="' . $value . '" ' . ($selected ? ' selected' : '') . '>' . $display . '</option>';
+            $ret .= '<option '.
+                    (!empty($option_class) ? 'class="'.$option_class.'"' : ""). 
+                    'value="' . $value . '">'.
+                    ($value == $this->selected_option ? ' selected' : '') .
+                    $display.
+                '</option>';
         }
 
 
