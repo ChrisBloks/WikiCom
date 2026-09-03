@@ -17,7 +17,8 @@ class PostRequestHandler extends BaseRequestHandler
     public function handleRequest(array $request): array
     {
         $this->response = $request;
-        $_SESSION['errorMessage'] = [];
+        $_SESSION['errors'] = [];
+        $_SESSION['messages'] = [];
 
         // Validate the posted Form
         // Get field type and name
@@ -30,7 +31,7 @@ class PostRequestHandler extends BaseRequestHandler
             ->validateFields(field_info: $field_info);
 
         // If form was submitted correctly WRONG: add validation errors to response
-        $_SESSION['errorMessage'] = array_merge($_SESSION['errorMessage'], $validation_result['user_error']);
+        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour
         // Get page-speicifc behaviour
         switch ($request['page']) {
@@ -42,11 +43,12 @@ class PostRequestHandler extends BaseRequestHandler
                         ->handleRegistration(validation_result: $validation_result);
 
                     // Add all (if any) error messages to the response array
-                    $_SESSION['errorMessage'] = array_merge($_SESSION['errorMessage'], $validation_result['user_error']);
+                    $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
 
                     // Registration was successful
-                    if ($validation_result['registration_result'] !== false) {
+                    if ($validation_result['ok'] !== false) {
                         $this->response['page'] = 'login';
+                        $_SESSION['messages'][] = 'Registration was successful!';
                     }
                 }
                 break;
@@ -58,13 +60,14 @@ class PostRequestHandler extends BaseRequestHandler
                         ->handleUserLogin(validation_result: $validation_result);
 
                     // Add all (if any) error messages to the response array
-                    $_SESSION['errorMessage'] = array_merge($_SESSION['errorMessage'], $validation_result['user_error']);
+                    $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
 
                     // If log in was succesful, if the login was unsuccesful, errors are stored in $response
                     if ($validation_result['ok']) {
                         // Update response
                         $this->response['page'] = 'home';
                         $this->response['isLoggedIn'] = true;
+                        $_SESSION['messages'][] = 'Login was successful!';
                     }
                 }
                 break;
@@ -77,7 +80,10 @@ class PostRequestHandler extends BaseRequestHandler
                     // checks if image is correct and saves about info
                     $validation_result = UserHandler::getInstance()->handleUserAboutInfo($validation_result);
                     // if there are any errors save them in response
-                    $_SESSION['errorMessage'] = array_merge($_SESSION['errorMessage'], $validation_result['user_error']);
+                    $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+                    if ($validation_result['ok']){
+                        $_SESSION['messages'][] = 'User information is saved!';
+                    }
                 }
                 break;
             case 'search':
@@ -125,6 +131,7 @@ class PostRequestHandler extends BaseRequestHandler
                         if ($validation_result['ok']){
                             $this->response['page'] = 'article';
                             $this->response['articleID'] = $this->response['editArticleID'];
+                            $_SESSION['messages'][] = 'Article has been submitted!';
                         }
 
                     }

@@ -92,7 +92,7 @@ class UserHandler
                 );
             // Registration was successful
             if ($registrationResult !== false) {
-                $validation_result['registration_result'] = $registrationResult;
+                $validation_result['ok'] = $registrationResult;
             }
             // Store model errors 
             else {
