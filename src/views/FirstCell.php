@@ -35,10 +35,11 @@ class FirstCell
     private function _buildDeleteForm(): string
     {
         $form = new containers\Form(
-            action: '',
+            action: 'main.php',
             method: 'POST',
             submit_caption: '&#10060;',
-            submit_class: 'btn btn-danger btn-sm'
+            class: "ajax-delete-form",
+            submit_class: 'btn btn-danger btn-sm delete-button'
         );
         $form->addHiddenField('page', $this->delete_page);
         $form->addHiddenField('id', (string) $this->page_id);

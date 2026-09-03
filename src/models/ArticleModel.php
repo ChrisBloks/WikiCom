@@ -43,7 +43,7 @@ class ArticleModel extends BaseModel
                         article.imgFileName,
                     article.lastEdit,
                     article.user_id,
-                    v_article_avg_rating.AVGrating
+                    COALESCE(v_article_avg_rating.AVGrating, 0) AS rating
                 FROM
                     wiki_article AS article
                 JOIN USER ON article.user_id = user.id
@@ -232,7 +232,7 @@ class ArticleModel extends BaseModel
      */
     public function saveExistingArticleInfo(int $article_id, string $article_title, string $article_summary, string $article_codeBlock, string $imgFileName, int $user_id): int|false
     {
-        $sql = "UPDATE  article
+        $sql = "UPDATE  wiki_article
                     SET     title = :title,
                             summary = :summary,
                             codeBlock = :codeBlock,
@@ -250,6 +250,7 @@ class ArticleModel extends BaseModel
             ':lastEdit' => date('Y-m-d'),
         ];
 
+
         return $this->crud->doUpdate(sql: $sql, params: $params);
     }
 
@@ -261,7 +262,7 @@ class ArticleModel extends BaseModel
      */
     public function checkTagExists(string $tag_name): array|false
     {
-        $sql = "SELECT name FROM tag 
+        $sql = "SELECT id FROM tag 
                     WHERE name=:tag_name";
         $params = ["tag_name" => $tag_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params); // Array or false
@@ -275,11 +276,11 @@ class ArticleModel extends BaseModel
      */
     public function checkTitleExists(string $title_name): array|false
     {
-        $sql = "SELECT title FROM wiki_article 
+        $sql = "SELECT id FROM wiki_article 
                     WHERE title=:title_name";
         $params = ["title_name" => $title_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
-        return !empty($result);
+        return $result;
     }
 
     /**
@@ -320,6 +321,18 @@ class ArticleModel extends BaseModel
     {
         $sql = "DELETE FROM wiki_article_to_tag WHERE `wiki_article_to_tag`.`article_id` = :article_id";
         $params = ["article_id" => $article_id];
+        return $this->crud->doDelete(sql: $sql, params: $params);
+    }
+
+    /**
+     * Deletes article from database
+     * @param int $article_id
+     * @return void
+     */
+    public function deleteArticle(int $article_id): int|false
+    {
+        $sql = "DELETE FROM wiki_article WHERE id=:article_id";
+        $params = ['article_id' => $article_id];
         return $this->crud->doDelete(sql: $sql, params: $params);
     }
 }

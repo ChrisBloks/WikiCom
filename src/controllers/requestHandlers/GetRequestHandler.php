@@ -22,6 +22,12 @@ class GetRequestHandler extends BaseRequestHandler
             case 'article':
                 $this->response['articleID'] = Utils::getRequestVar('id', false);
                 break;
+            case 'search':
+                $this->response['Tag'] = [];
+                $this->response['Author'] = [];
+                $this->response['sortby'] = '';
+                $this->response['field_values'] = [];
+                break;
             case 'editArticle':
                 $this->response['userID'] = Utils::getSesVar('userID');
                 $this->response['editArticleID'] = Utils::getRequestVar('id', false);

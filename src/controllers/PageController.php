@@ -3,13 +3,13 @@
 namespace Wiki\controllers;
 
 use Wiki\views\BasePage,
-    Wiki\tools\interfaces\iController,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\tools\utils\Utils,
-    Wiki\tools\utils\HtmlUtils,
-    Wiki\controllers\factories\PageFactory,
-    Wiki\controllers\requestHandlers\GetRequestHandler,
-    Wiki\controllers\requestHandlers\PostRequestHandler;
+Wiki\tools\interfaces\iController,
+Wiki\tools\traits\tErrorMessageCollector,
+Wiki\tools\utils\Utils,
+Wiki\tools\utils\HtmlUtils,
+Wiki\controllers\factories\PageFactory,
+Wiki\controllers\requestHandlers\GetRequestHandler,
+Wiki\controllers\requestHandlers\PostRequestHandler;
 
 /**
  * PageController class for handling non-AJAX requests.
@@ -72,12 +72,12 @@ class PageController implements iController
     protected function validateRequest(): void
     {
         // Get correct handler
-        $requestHandler =  ($this->request['posted'] ? new PostRequestHandler() : new GetRequestHandler());
+        $requestHandler = ($this->request['posted'] ? new PostRequestHandler() : new GetRequestHandler());
 
         // Validate requets and retrieve page object
         $this->response = $requestHandler->handleRequest($this->request);
     }
-    
+
     /**
      * If page generation was succesful, call its show function.
      * @return void

@@ -30,7 +30,8 @@ Wiki\views\containers\CodeBlock,
 Wiki\views\containers\Footer,
 Wiki\views\containers\ContainerElement,
 Wiki\views\containers\MainElement,
-Wiki\views\containers\Rating;
+Wiki\views\containers\Rating,
+Wiki\views\containers\NoticeMessage;
 
 
 
@@ -47,6 +48,7 @@ class PageFactory
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
         $this->htmlpage = new BasePage;
+        
     }
 
     public function show()
@@ -88,12 +90,7 @@ class PageFactory
 
     public function addBody()
     {
-        // ToDo: make error element, pass array with errors
-        if ($this->hasErrors() == true) {
-            HtmlUtils::dump("Errors", $this->getErrors());
-        }
 
-        // tNoticeMessage ... eventually
 
         // title
         $this->htmlpage->addToBodyContent(new Header(
@@ -122,6 +119,7 @@ class PageFactory
         }
 
         $main = new MainElement();
+        $main->addElement(new NoticeMessage());
         // page building
         switch ($this->page) {
             case 'home':
@@ -237,24 +235,22 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: [],
+                    field_text: ['sortby' => $this->response['sortby']],
                     class: $form_info["display_class"],
-                    submit_class: "btn btn-primary btn-sm"
+                    submit_class: "btn btn-primary btn-sm",
+                    field_array_values: $this->response['field_values']
                 );
 
                 $filter_container->addElement($form);
                 // =================================================================================================
                 // Table display
-                $author_ids = $this->response["Author"] ?? [];
-                $tag_ids = $this->response["Tag"] ?? [];
-                $sortby = $this->response['sortby'] ?? "";
-
+         
                 // create checkbox inputs for filtering
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
-                    author_ids: $author_ids,
-                    tag_ids: $tag_ids,
-                    sortBy: $sortby
+                    author_ids: $this->response["Author"] ,
+                    tag_ids: $this->response["Tag"] ,
+                    sortBy: $this->response['sortby']
                 );
 
                 // print table for search results
@@ -298,12 +294,17 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-                $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
+                if ($this->response['editArticleID'] == 0) {
+                    $bodyinfo = isset($this->response['field_inputs']) ? $this->response['field_inputs'] : [];
+                }
+                else {
+                    $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
+                }
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
-                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page,'action' =>'saveArticle'], //todo: verander terug naar edit article
+                    hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page,'action' =>'saveArticle'], 
                     class: $form_info["display_class"],
                     field_text: $bodyinfo,
                     submit_class: "btn btn-primary"
@@ -325,6 +326,7 @@ class PageFactory
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 $tags = ModelSelector::getArticleModel()->fetchArticleTags($this->response['articleID']);
+
                 // ToDo: add accordion functionality to body text and code element
                 // Outer Div: image + text-div 
                 $outer_container = new ContainerElement('<div class="align-items-center w-75 mx-auto">', '</div>');
@@ -342,7 +344,7 @@ class PageFactory
                     class: $classes['author_class']
                 ));
                 $outer_container->addElement(new Rating(
-                    rating: $bodyinfo['AVGrating'],
+                    rating: $bodyinfo['avg_rating'],
                     article_id: $this->response['articleID']
                 ));
                 $display_tags = '';
