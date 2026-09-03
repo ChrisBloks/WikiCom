@@ -30,7 +30,7 @@ Wiki\views\containers\CodeBlock,
 Wiki\views\containers\Footer,
 Wiki\views\containers\ContainerElement,
 Wiki\views\containers\MainElement,
-Wiki\views\Rating;
+Wiki\views\containers\Rating;
 
 
 
@@ -342,7 +342,8 @@ class PageFactory
                     class: $classes['author_class']
                 ));
                 $outer_container->addElement(new Rating(
-                    rating: $bodyinfo['AVGrating']
+                    rating: $bodyinfo['AVGrating'],
+                    article_id: $this->response['articleID']
                 ));
                 $display_tags = '';
                 foreach ($tags as $key => $value) {

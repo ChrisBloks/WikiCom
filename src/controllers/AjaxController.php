@@ -47,6 +47,9 @@ class AjaxController implements iController{
     {
         switch ($this->request['func']) {
             case 'saveRating':
+                $this->response = [
+                    'avg_rating' => rand(0,10)
+                ];
                 break;
             default:
                 $this->response = [
