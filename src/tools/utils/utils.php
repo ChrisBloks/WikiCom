@@ -27,6 +27,23 @@ class Utils
         return htmlspecialchars(strip_tags(trim($raw)), ENT_QUOTES, 'UTF-8');
     }
 
+    public static function getRequestNumber(string $key, bool $frompost, $default = ''): string
+    {
+        $source = $frompost ? $_POST : $_GET;
+
+        if (!array_key_exists($key, $source) || !is_scalar($source[$key])) {
+            return $default;
+        }
+
+        $raw = trim((string) $source[$key]);
+
+        if ($raw === '' || !is_numeric($raw)) {
+            return $default;
+        }
+
+        return (string) $raw;
+    }
+
     public static function getValueFromArray(string $key, array $arr, mixed $default = ''): mixed
     {
         return (isset($arr[$key])

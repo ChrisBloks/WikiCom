@@ -4,7 +4,7 @@ namespace Wiki\views\fields;
 
 use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
 
-class CheckBoxGroup extends BaseField
+class CheckBox extends BaseField
 {
 
     protected array $options = [];
