@@ -36,7 +36,7 @@ class ArticleHandler
      * @param array $validation_result array containing the source page (string)
      * @return array|false
      */
-    public function handleArticleSubmission(array $validation_result, $article_id): array|false
+    public function handleArticleSubmission(array $validation_result, int $article_id): array|false
     {
         ModelSelector::getArticleModel()->removeTagsFromArticle(article_id: $article_id);
 
@@ -94,18 +94,18 @@ class ArticleHandler
      * handles deletion of user articles from database
      * @param int $article_id id of article to be deleted
      * @param int $userId id of user
-     * @return void
-     */
+     * @return int | false
+    */
     public function handleDeleteArticle(int $article_id, int $userId): int|false
     {
 
         //check whether the article is owned by the userId (double check)
         $article = ModelSelector::getArticleModel()->fetchArticleById($article_id);
         if (!$article) {
-            throw new \Exception("Article not found");
+            throw new Exception("Article not found");
         }
         if ($userId != $article['user_id']) {
-            throw new \Exception("Article does not match to user!");
+            throw new Exception("Article does not match to user!");
         }
 
         $result = ModelSelector::getArticleModel()->deleteArticle($article_id);
