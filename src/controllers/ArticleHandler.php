@@ -158,13 +158,8 @@ class ArticleHandler
      * handles deletion of user articles from database
      * @param int $article_id id of article to be deleted
      * @param int $userId id of user
-<<<<<<< HEAD
-     * @return int | false
-    */
-=======
      * @return int|false
      */
->>>>>>> 2bdb3e127511353fd97f65d899c8ab05a23676fb
     public function handleDeleteArticle(int $article_id, int $userId): int|false
     {
 
