@@ -3,6 +3,7 @@
 namespace Wiki\views\containers;
 
 use Wiki\tools\interfaces\iElement;
+use Wiki\tools\utils\HtmlUtils;
 
 class WrappedText implements iElement
 {

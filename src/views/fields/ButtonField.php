@@ -4,6 +4,10 @@ namespace Wiki\views\fields;
 
 use Wiki\views\fields\BaseField, Wiki\tools\interfaces\iElement;
 
+/**
+ * Class for adding a button field to a form
+ * @var string type MUST BE BUTTON
+ */
 class ButtonField extends BaseField implements iElement
 {
 
