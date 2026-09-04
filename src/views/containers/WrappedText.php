@@ -5,6 +5,11 @@ namespace Wiki\views\containers;
 use Wiki\tools\interfaces\iElement;
 use Wiki\tools\utils\HtmlUtils;
 
+/**
+ * Class to create a text element in a wrapper
+ * @var $text text to show on page
+ * @var $wrapper the html wrapper for that element
+ */
 class WrappedText implements iElement
 {
     // properties
@@ -12,7 +17,7 @@ class WrappedText implements iElement
     protected string $wrapper;
 
 
-    public function __construct($text, $wrapper)
+    public function __construct(string $text, string $wrapper)
     {
         $this->text = $text;
         $this->wrapper = $wrapper;

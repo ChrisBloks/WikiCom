@@ -7,13 +7,13 @@ use Wiki\tools\interfaces\iElement,
 
 
 /**
- * ContainerElement
+ * ContainerElement contains html elements and shows the child elements in a wrapper
+ * @var $html_before opening html 
+ * @var $html_after closing html 
  * @uses tElementContainer
  */
 class ContainerElement implements iElement
 {
-
-
     use tElementContainer;
 
     // properties
@@ -26,6 +26,10 @@ class ContainerElement implements iElement
         $this->html_after = $html_after;
     }
 
+    /**
+     * Loops through child elements
+     * @return string
+     */
     public function show(): string
     {
         $str = "";
