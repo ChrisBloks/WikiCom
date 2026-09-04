@@ -2,7 +2,7 @@
 
 namespace Wiki\views;
 
-use Wiki\tools\utils\HtmlUtils, Wiki\config;
+use Wiki\tools\utils\HtmlUtils, Wiki\config, Wiki\views\containers\Rating;
 
 /**
  * Table
@@ -83,7 +83,9 @@ class Table
 
             case 'rating':
                 return "<td$classAttr>" . (new Rating(
-                    rating: (float) $value
+                    rating: (float) $value,
+                    article_id: $row_data['id'],
+                    display_only: true
                 ))->show() . '</td>';
 
                 // replace editarticle with const from config file

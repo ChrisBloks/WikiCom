@@ -2,13 +2,19 @@
 
 namespace Wiki\views\containers;
 
-use Wiki\tools\interfaces, Wiki\tools\traits;
+use Wiki\tools\interfaces\iElement,
+     Wiki\tools\traits\tElementContainer;
 
-class ContainerElement implements interfaces\iElement
+
+/**
+ * ContainerElement
+ * @uses tElementContainer
+ */
+class ContainerElement implements iElement
 {
 
 
-    use traits\tElementContainer;
+    use tElementContainer;
 
     // properties
     protected string $html_before;

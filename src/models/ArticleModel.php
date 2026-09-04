@@ -20,12 +20,6 @@ class ArticleModel extends BaseModel
      * Defines a static mapping of strings to ORDER BY values for SQL queries.
      * @var array
      */
-    private static $sort_values = [
-        "rating" => "AVGrating",
-        "AVGrating" => "AVGrating",
-        "datum" => "article.lastEdit",
-        "date" => "article.lastEdit"
-    ];
 
 
     /**
@@ -97,11 +91,11 @@ class ArticleModel extends BaseModel
      * @param string $sortBy defines contents of the SORT BY clause.
      * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
      */
-    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ""): array|false
+    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy): array|false
     {
         // Check if sortBy is a valid sorting method
-        $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'lastEdit';
 
+        $sortBy = (empty($sortBy)) ? 'lastEdit':$sortBy;
 
         $base_select_clause = "SELECT DISTINCT 
                                 article.id,
@@ -232,7 +226,7 @@ class ArticleModel extends BaseModel
      */
     public function saveExistingArticleInfo(int $article_id, string $article_title, string $article_summary, string $article_codeBlock, string $imgFileName, int $user_id): int|false
     {
-        $sql = "UPDATE  article
+        $sql = "UPDATE  wiki_article
                     SET     title = :title,
                             summary = :summary,
                             codeBlock = :codeBlock,
@@ -250,6 +244,7 @@ class ArticleModel extends BaseModel
             ':lastEdit' => date('Y-m-d'),
         ];
 
+
         return $this->crud->doUpdate(sql: $sql, params: $params);
     }
 
@@ -261,7 +256,7 @@ class ArticleModel extends BaseModel
      */
     public function checkTagExists(string $tag_name): array|false
     {
-        $sql = "SELECT name FROM tag 
+        $sql = "SELECT id FROM wiki_tag 
                     WHERE name=:tag_name";
         $params = ["tag_name" => $tag_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params); // Array or false
@@ -275,7 +270,7 @@ class ArticleModel extends BaseModel
      */
     public function checkTitleExists(string $title_name): array|false
     {
-        $sql = "SELECT title FROM wiki_article 
+        $sql = "SELECT id FROM wiki_article 
                     WHERE title=:title_name";
         $params = ["title_name" => $title_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
