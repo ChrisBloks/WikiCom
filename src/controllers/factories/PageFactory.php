@@ -252,6 +252,9 @@ class PageFactory
                     tag_ids: $this->response["Tag"] ,
                     sortBy: $this->response['sortby']
                 );
+                HtmlUtils::dump('columns', $columnsdata);
+
+                HtmlUtils::dump('rows', $rowsdata);
 
                 // print table for search results
                 $tableFactory = new Table($columnsdata, $rowsdata);

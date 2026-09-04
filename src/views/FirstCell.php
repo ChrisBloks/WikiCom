@@ -2,8 +2,16 @@
 
 namespace Wiki\views;
 
-use Wiki\tools\utils;
-
+use Wiki\tools\utils,
+    Wiki\views\containers\Form;
+/**
+ * Creates several options in a table cell that correspond to a set of actions
+ * actions are database->delete article or editpage
+ * This should usually be the first cell in each table row
+ * @var int $page_id | page identifier 
+ * @var string $target_page | target page for redirect
+ * @var string $delete_page | target for page that needs to be deleted
+ */
 class FirstCell
 {
     private int $page_id;
@@ -17,7 +25,10 @@ class FirstCell
         $this->delete_page = $delete_page;
     }
 
-    // adds options to the first cell of each row: now only href to a page, and a form for delete
+    /**
+     * adds options to the first cell of each row: now only href to a page, and a form for delete
+     * @return string HTML string containing the div with href and delete form
+     */
     public function returnFirstCellOptions(): string
     {
         $editUrl = utils\Url::buildUrl(['page' => $this->target_page, 'id' => $this->page_id]);
@@ -31,10 +42,13 @@ class FirstCell
         return $str;
     }
 
-    // replace with get-request later on/ajax
+    /**
+     * Sends form request to delete an article
+     * @return string HTML-string containing the form
+     */
     private function _buildDeleteForm(): string
     {
-        $form = new containers\Form(
+        $form = new Form(
             action: 'main.php',
             method: 'POST',
             submit_caption: '&#10060;',
@@ -46,6 +60,13 @@ class FirstCell
         return $form->show();
     }
 
+    /**
+     * Adds the actionlink span to a firstcell action
+     * @param string $page_id Page redirect
+     * @param string $title Textdisplay
+     * @param string $hint handle for ajax handling/targeting if needed
+     * @return string
+     */
     private function _actionLink(string $page_id, string $title, string $hint): string
     {
         return '<span'
