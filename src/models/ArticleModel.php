@@ -20,12 +20,6 @@ class ArticleModel extends BaseModel
      * Defines a static mapping of strings to ORDER BY values for SQL queries.
      * @var array
      */
-    private static $sort_values = [
-        "rating" => "AVGrating",
-        "AVGrating" => "AVGrating",
-        "datum" => "article.lastEdit",
-        "date" => "article.lastEdit"
-    ];
 
 
     /**
@@ -97,11 +91,11 @@ class ArticleModel extends BaseModel
      * @param string $sortBy defines contents of the SORT BY clause.
      * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
      */
-    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ""): array|false
+    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy): array|false
     {
         // Check if sortBy is a valid sorting method
-        $sortBy = array_key_exists($sortBy, self::$sort_values) ? self::$sort_values[$sortBy] : 'lastEdit';
 
+        $sortBy = (empty($sortBy)) ? 'lastEdit':$sortBy;
 
         $base_select_clause = "SELECT DISTINCT 
                                 article.id,
@@ -262,7 +256,7 @@ class ArticleModel extends BaseModel
      */
     public function checkTagExists(string $tag_name): array|false
     {
-        $sql = "SELECT id FROM tag 
+        $sql = "SELECT id FROM wiki_tag 
                     WHERE name=:tag_name";
         $params = ["tag_name" => $tag_name];
         $result = $this->crud->selectOne(sql: $sql, params: $params); // Array or false

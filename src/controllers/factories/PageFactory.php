@@ -244,7 +244,7 @@ class PageFactory
                 $filter_container->addElement($form);
                 // =================================================================================================
                 // Table display
-         
+
                 // create checkbox inputs for filtering
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
@@ -351,7 +351,8 @@ class PageFactory
                 ));
                 $display_tags = '';
                 foreach ($tags as $key => $value) {
-                    $display_tags .= '<a>' . $value . ' </a>';
+                    $tag_id = ModelSelector::getArticleModel()->checkTagExists($value);
+                    $display_tags .= '<a href="main.php?page=search&tag='.$tag_id['id'].'">' . $value . ' </a>';
                 }
                 $outer_container->addElement(new BodyText(
                     text: $display_tags,
