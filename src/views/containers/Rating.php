@@ -10,6 +10,13 @@ use Wiki\views\containers\ContainerElement,
 use Wiki\views\fields\ButtonField;
 use Wiki\views\fields\HiddenField;
 
+/**
+ * Add an element containing user rating
+ * @var float $rating       the rating in numbers
+ * @var int $article_id     the id of the page its linked to
+ * @var bool $display_only  Wether you can rate it or not
+ * @var bool $isLoggedIn    Whether the user is logged in
+ */
 class Rating extends ContainerElement
 {
 
