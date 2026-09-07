@@ -246,7 +246,7 @@ class PageFactory
                 // Table display
 
                 // create checkbox inputs for filtering
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "lastEdit", "rating"]);
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title","tags","lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
                     author_ids: $this->response["Author"] ,
                     tag_ids: $this->response["Tag"] ,
