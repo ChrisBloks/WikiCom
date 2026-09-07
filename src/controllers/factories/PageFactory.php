@@ -52,7 +52,6 @@ class PageFactory
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
         $this->htmlpage = new BasePage;
-        
     }
 
     public function show()
@@ -322,7 +321,11 @@ class PageFactory
                 break;
 
             case 'article':
-                 // TODO: clean this up
+                $converter = new GithubFlavoredMarkdownConverter([
+                    'html_input' => 'escape',
+                    'allow_unsafe_links' => false,
+                ]);
+                // TODO: clean this up
                 $this->htmlpage->addToHeadContent(new AtomicElement(
                     '<script src="./src/js/articlePage.js"></script>'
                 ));
@@ -357,13 +360,16 @@ class PageFactory
                 $tag_container = new ContainerElement('<div class="d-flex flex-wrap gap-2 mb-3 border-top border-bottom py-2"', '</div>');
                 foreach ($tags as $key => $value) {
                     $tag_id = ModelSelector::getArticleModel()->checkTagExists($value);
-                    $display_tags .= '<a href="main.php?page=search&tag='.$tag_id['id'].'">' . $value . ' </a>';
-                }
-                $outer_container->addElement(new BodyText(
-                    text: $display_tags,
-                    class: 'border-bottom border-top mb-3'
-                ));
 
+                    $tag_container->addElement(new ButtonField(
+                        type: 'button',
+                        name: 'tag_' . $tag_id['id'],
+                        class: 'button button-sm',
+                        label: $value,
+                        href: 'main.php?page=search&tag=' . urlencode($tag_id['id'])
+                    ));
+                }
+                $outer_container->addElement($tag_container);
                 $outer_container->addElement(new Title(
                     text: 'Description',
                     class: "h4 mb-4"
