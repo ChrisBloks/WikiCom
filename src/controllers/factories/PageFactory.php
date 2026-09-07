@@ -327,7 +327,7 @@ class PageFactory
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 $tags = ModelSelector::getArticleModel()->fetchArticleTags($this->response['articleID']);
-                $ratable = ($bodyinfo['user_id'] == $_SESSION['userID']) ? false:$this->response['isLoggedIn'];
+                $ratable = ($bodyinfo['user_id'] == $_SESSION['userID']) ? false : $this->response['isLoggedIn'];
 
                 // ToDo: add accordion functionality to body text and code element
                 // Outer Div: image + text-div 
