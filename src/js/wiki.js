@@ -1,12 +1,27 @@
 $(document).ready(function () {
-  // $(".delete-button").on("click", function () {
-  //   alert("Are you sure you want to delete this article?");
-  // });
+  // load bsmarkdown before anything else on page or it doesnt load
+  $(".article-text").bsMarkdownEditor({
+    minHeight: 240,
+    preview: true,
+    mode: "editor",
+    resize: "vertical",
+    size: "sm",
+    btnClass: "border-0",
+    wrapperClass: null,
+    actions: "all",
+    lang: "en",
+  });
 
+
+  $(".d-flex.flex-grow-1 table").addClass("table table-striped table-bordered");
+  $(".d-flex.flex-grow-1  th, ..d-flex.flex-grow-1  td").addClass(
+    "align-middle",
+  );
   $("#new-tag-name").on("keydown", function (event) {
+    // Enter as "Add tag"
     if (event.key === "Enter") {
       event.preventDefault();
-      $("#add-tag-btn").trigger("click"); // optional: treat Enter as "Add tag"
+      $("#add-tag-btn").trigger("click");
     }
   });
 

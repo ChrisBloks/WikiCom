@@ -8,6 +8,6 @@ class BodyText extends WrappedText
 {
     public function __construct(string $text, string $class = '')
     {
-        parent::__construct($text, 'p' . HtmlUtils::addClassAttr($class));
+        parent::__construct($text, 'div' . HtmlUtils::addClassAttr($class));
     }
 }

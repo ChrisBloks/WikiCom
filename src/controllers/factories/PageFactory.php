@@ -32,6 +32,9 @@ Wiki\views\containers\ContainerElement,
 Wiki\views\containers\MainElement,
 Wiki\views\containers\Rating,
 Wiki\views\containers\NoticeMessage,
+League\CommonMark\GithubFlavoredMarkdownConverter,
+HTMLPurifier,
+HTMLPurifier_Config,
 Wiki\views\fields\ButtonField;
 
 
@@ -49,7 +52,7 @@ class PageFactory
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
         $this->htmlpage = new BasePage;
-
+        
     }
 
     public function show()
@@ -70,21 +73,21 @@ class PageFactory
 
     private function addScripts()
     {
+        // should move to a config or something instead of pasting links raw in the pagefactory
         $this->htmlpage->addToHeadContent(new AtomicElement('
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
-                    rel="stylesheet">
-                    <link href="./src//css/stylesheet.css" rel="stylesheet">
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
-                    '));
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+                <link rel="stylesheet" href="./src/css/stylesheet.css">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
+    '));
 
-        $this->htmlpage->addToHeadContent(new AtomicElement(
-            '
-                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
-                    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
-                    <script src="./src/js/wiki.js"></script>
-                    <script>hljs.highlightAll();</script>'
+        $this->htmlpage->addToHeadContent(new AtomicElement('
+                <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="./vendor/webcito/bs-markdown-editor/dist/bs-markdown-editor.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                <script src="./src/js/wiki.js"></script>
+                <script>hljs.highlightAll();</script>'
         ));
     }
 
@@ -319,7 +322,7 @@ class PageFactory
                 break;
 
             case 'article':
-                // TODO: clean this up
+                 // TODO: clean this up
                 $this->htmlpage->addToHeadContent(new AtomicElement(
                     '<script src="./src/js/articlePage.js"></script>'
                 ));
@@ -354,24 +357,30 @@ class PageFactory
                 $tag_container = new ContainerElement('<div class="d-flex flex-wrap gap-2 mb-3 border-top border-bottom py-2"', '</div>');
                 foreach ($tags as $key => $value) {
                     $tag_id = ModelSelector::getArticleModel()->checkTagExists($value);
-
-                    $tag_container->addElement(new ButtonField(
-                        type: 'button',
-                        name: 'tag_' . $tag_id['id'],
-                        class: 'button button-sm',
-                        label: $value,
-                        href: 'main.php?page=search&tag=' . urlencode($tag_id['id'])
-                    ));
+                    $display_tags .= '<a href="main.php?page=search&tag='.$tag_id['id'].'">' . $value . ' </a>';
                 }
-                $outer_container->addElement($tag_container);
+                $outer_container->addElement(new BodyText(
+                    text: $display_tags,
+                    class: 'border-bottom border-top mb-3'
+                ));
+
                 $outer_container->addElement(new Title(
                     text: 'Description',
                     class: "h4 mb-4"
                 ));
 
                 // Div with body text and image
+                // purifier ini
+                $config = HTMLPurifier_Config::createDefault();
+                $config->set('HTML.Allowed', 'p,div[class],span[class],h1,h2,h3,h4,h5,h6,ul,ol,li,strong,em,a[href],img[src|alt|width|height],blockquote,code,pre,table,thead,tbody,tr,th,td,hr,br');
+
+                $purifier = new HTMLPurifier($config);
+
+                $bodytext = $converter->convert($bodyinfo['summary'])->getContent();
+                $bodytext = $purifier->purify($bodytext);
+
                 $text_container->addElement(new BodyText(
-                    text: ucfirst($bodyinfo['summary']),
+                    text: $bodytext,
                     class: $classes['body_class']
                 ));
                 $text_container->addElement(new Image(
