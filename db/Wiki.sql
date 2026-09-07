@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2026 at 11:02 AM
+-- Generation Time: Sep 07, 2026 at 11:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -55,7 +55,10 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 (11, '', '', '2026-09-07', ''),
 (12, 'd', '', '2026-09-07', ''),
 (13, '', '', '2026-09-07', ''),
-(14, 'Test', 'danny@email.com', '2026-09-07', 'dsd');
+(14, 'Test', 'danny@email.com', '2026-09-07', 'dsd'),
+(15, 'd', 'danny@email.com', '2026-09-07', 'd'),
+(16, '', '', '2026-09-07', ''),
+(17, 'd', 'danny@email.com', '2026-09-07', 'sddssd');
 
 -- --------------------------------------------------------
 
@@ -555,7 +558,7 @@ ALTER TABLE `wiki_tag`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `display_classes`
