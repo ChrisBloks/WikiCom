@@ -149,7 +149,13 @@ class ArticleModel extends BaseModel
             $where_clause .
             $order_by_clause;
 
-        return $this->crud->selectMany(sql: $sql, params: $params);
+        $result = $this->crud->selectMany(sql: $sql, params: $params);
+
+        foreach ($result as $key => $article){
+            $result[$key]['tags'] = implode(",",$this->fetchArticleTags($article['id']));
+        }
+
+        return $result;
     }
 
     /**

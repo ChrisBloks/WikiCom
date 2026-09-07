@@ -121,9 +121,11 @@ class WebsiteInfoModel extends BaseModel
                        `column_title`, 
                        `display_type`,
                        `class_types`,
-                       `column_headers`
+                       `column_headers`,
+                       `href`
                        FROM table_columns
-                       WHERE column_name in ($placeholders)";
+                       WHERE column_name in ($placeholders)
+                       ORDER BY display_order";
         $result = $this->crud->selectMany($sql, $columns, \PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
 
         return $result;
