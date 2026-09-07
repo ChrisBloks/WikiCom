@@ -11,6 +11,12 @@
   object-fit: scale-down;
 }
 
+.article-pic{
+  width: 400px;
+  height: 400px;
+  object-fit: scale-down;
+}
+
 .main-content {
   flex-grow: 1;
   flex-shrink: 0;
