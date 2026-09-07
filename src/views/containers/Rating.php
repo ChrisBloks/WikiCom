@@ -13,7 +13,7 @@ use Wiki\views\fields\HiddenField;
 class Rating extends ContainerElement
 {
 
-    public function __construct(float $rating, int $article_id, bool $display_only = false,bool $isloggedIn = false)
+    public function __construct(float $rating, int $article_id, bool $display_only = false,bool $ratable = false)
     {
         parent::__construct('<div class="rating_div">', '</div>');
 
@@ -24,7 +24,7 @@ class Rating extends ContainerElement
         $empty   = str_repeat('&#9734;', $max - $percent);
 
         // Add interactive element
-        if (!$display_only && $isloggedIn){
+        if (!$display_only && $ratable){
             // Add dropdown
             $this->addElement(
                 new Select(

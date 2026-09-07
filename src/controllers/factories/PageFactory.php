@@ -327,6 +327,7 @@ class PageFactory
                 $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['articleID']);
                 $classes = ModelSelector::getWebsiteInfoModel()->fetchClasses($this->page);
                 $tags = ModelSelector::getArticleModel()->fetchArticleTags($this->response['articleID']);
+                $ratable = ($bodyinfo['user_id'] == $_SESSION['userID']) ? false:$this->response['isLoggedIn'];
 
                 // ToDo: add accordion functionality to body text and code element
                 // Outer Div: image + text-div 
@@ -347,7 +348,7 @@ class PageFactory
                 $outer_container->addElement(new Rating(
                     rating: $bodyinfo['rating'],
                     article_id: $this->response['articleID'],
-                    isloggedIn: $this->response['isLoggedIn']
+                    ratable: $ratable
                 ));
                 $display_tags = '';
                 foreach ($tags as $key => $value) {
