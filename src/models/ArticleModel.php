@@ -91,7 +91,7 @@ class ArticleModel extends BaseModel
      * @param string $sortBy defines contents of the SORT BY clause.
      * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
      */
-    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy): array|false
+    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy =''): array|false
     {
         // Check if sortBy is a valid sorting method
 

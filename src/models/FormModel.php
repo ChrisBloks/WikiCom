@@ -65,7 +65,9 @@ class FormModel extends BaseModel
                                 fo.method, 
                                 fo.submit_caption,
                                 fo.enctype,
-                                fo.display_class
+                                fo.display_class,
+                                fo.submit_class,
+                                fo.id
                 FROM form_info fo
                 JOIN website_info wi ON fo.website_info_id = wi.id
                 WHERE wi.name = :page";
@@ -73,7 +75,7 @@ class FormModel extends BaseModel
         $result = $this->crud->selectMany(sql: $sql, params: $params);
 
         // If the query was succesful, extract the first row
-        if ($result !== false) {
+        if ($result !== false && count($result)==1) {
             $result = $result[0];
         }
 

@@ -2,4 +2,4 @@
 /vendor/monolog
 /vendor/autoload
 /img
-/logs
+/logs/
