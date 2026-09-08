@@ -4,6 +4,7 @@ namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils;
 use Wiki\views\containers\Form;
+use Wiki\views\fields\HiddenField;
 
 /**
  * Factroy class for dynamically creating fields for the Wiki
@@ -37,7 +38,7 @@ class FormFactory
 
         // Add hidden fields to the form.
         foreach ($hidden_field_info as $field_name => $field_value) {
-            $form->addHiddenField($field_name, $field_value);
+            $form->addElement(new HiddenField(name: $field_name, value: $field_value));
         }
 
         // Initialize FieldFactory to prepare for loop.
