@@ -131,10 +131,25 @@ class UserHandler
                         author_id: $aboutID
                     );
                 if ($result == false) {
+                    $validation_result['ok']= false;
                     $validation_result['user_error'] = array_merge($validation_result['user_error'], ModelSelector::getUserInfoModel()->getErrors());
                 }
             } else {
+                $validation_result['ok']= false;
                 $validation_result['user_error'][] = "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            $about_old_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($aboutID);
+            $filename = isset($about_old_info['imgFileName']) ? $about_old_info['imgFileName'] : '';
+            $result = ModelSelector::getUserInfoModel()
+                ->saveUserAboutInfo(
+                    imgFileName: $filename,
+                    description: $about_info['description'],
+                    author_id: $aboutID
+                );
+            if ($result == false) {
+                $validation_result['ok']= false;
+                $validation_result['user_error'] = array_merge($validation_result['user_error'], ModelSelector::getUserInfoModel()->getErrors());
             }
         }
         return $validation_result;
