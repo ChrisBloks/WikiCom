@@ -182,6 +182,10 @@ class WebsiteInfoModel extends BaseModel
     }
 
     public function fetchElementInfoByPage(string $page_name): array {
+        $sql = "";
+        $elements = $this->crud->selectMany($sql, NULL);
 
+        // Order elements?
+        return $elements;
     }
 }
