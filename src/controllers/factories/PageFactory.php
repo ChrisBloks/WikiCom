@@ -269,16 +269,13 @@ class PageFactory
 
             case 'editArticle':
                 // main Div: image + text-div 
-                $main_container = new ContainerElement(
-                    $styling_container['main_div'],
-                    '</div>'
-                );
+                $main_container = new ContainerElement($styling_container['main_div'], '</div>');
 
                 // sub text div: Title/Author/text/code
                 $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
 
                 // add tag functionality //TODO
-                $add_tag_widget = new ContainerElement($styling_container['add_tag_div'],'</div>');
+                $add_tag_widget = new ContainerElement($styling_container['add_tag_div'], '</div>');
 
                 $add_tag_widget->addElement(new AtomicElement($styling_elements['tag_input_class']));
 
@@ -300,7 +297,7 @@ class PageFactory
                     class: $form_info["display_class"],
                     field_text: $bodyinfo,
                     submit_class: $form_info['submit_class'],
-                    field_array_values: isset($this->response['field_values']) ? $this->response['field_values']:[]
+                    field_array_values: isset($this->response['field_values']) ? $this->response['field_values'] : []
                 );
 
                 // add to page
@@ -347,7 +344,7 @@ class PageFactory
 
                     $tag_container->addElement(new ButtonField(
                         type: 'button',
-                        name:  $tag_id['id'],
+                        name: $tag_id['id'],
                         class: $styling_elements["button_class"],
                         label: $value,
                         href: 'main.php?page=search&tag=' . urlencode($tag_id['id'])
@@ -393,7 +390,7 @@ class PageFactory
 
                 // add to page
                 $main->addElement($main_container);
-                $main->addElement(new ContainerElement($styling_container['horizontal_rule'],''));
+                $main->addElement(new ContainerElement($styling_container['horizontal_rule'], ''));
                 $main->addElement($bottom_container);
                 break;
 
