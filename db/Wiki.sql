@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2026 at 09:51 AM
+-- Generation Time: Sep 08, 2026 at 10:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,7 +58,11 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 (14, 'Test', 'danny@email.com', '2026-09-07', 'dsd'),
 (15, 'd', 'danny@email.com', '2026-09-07', 'd'),
 (16, '', '', '2026-09-07', ''),
-(17, 'd', 'danny@email.com', '2026-09-07', 'sddssd');
+(17, 'd', 'danny@email.com', '2026-09-07', 'sddssd'),
+(18, 'Test', 'danny@email.com', '2026-09-08', 'dfsdf'),
+(19, 'Test', 'danny@email.com', '2026-09-08', 'dfsdf'),
+(20, 'Test', 'dannytest@email.com', '2026-09-08', 'ddd'),
+(21, 'd', 'danny@email.com', '2026-09-08', 'test');
 
 -- --------------------------------------------------------
 
@@ -328,10 +332,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
 (1, 'Danny', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website'),
-(2, 'user2', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'dadfa@adfaf.com', 'user2.jpg', 'the description of user2'),
-(3, 'Danny3', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email1.com', '', 'hallo'),
-(5, 'Danny5', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email12.com', '', ''),
-(7, 'christian', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
+(7, 'Christian', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
 (8, 'Marius', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'marius@gmail.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.');
 
 -- --------------------------------------------------------
@@ -441,10 +442,7 @@ CREATE TABLE `wiki_article` (
 --
 
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
-(1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11'),
-(2, 'article2', 2, 'the body text of article 2', 'def process_image(nr: int) -> None:\n  dimension_images = \'1280x1024\'.split(\'x\')  file_name = f\'image_{str(nr).zfill(3)}.jpg\'\n  img = Image.open(f\'{file_name}\')\n  img = img.filter(ImageFilter.GaussianBlur(15))\n  img.thumbnail((int(dimension_images[0]), int(dimension_images[1])))\n  img.save(f\'processed_{file_name}\')\n  print(f\'- Processed {file_name}\')', 'article1.jpeg\n', '2026-08-12'),
-(26, 'dses', 1, 'sd', '', '', '2026-09-07'),
-(27, 'nieuwe article', 1, 'sddsf', '', '', '2026-09-07');
+(1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11');
 
 -- --------------------------------------------------------
 
@@ -462,13 +460,7 @@ CREATE TABLE `wiki_article_to_tag` (
 --
 
 INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
-(1, 1),
-(1, 3),
-(1, 46),
-(2, 3),
-(2, 4),
-(26, 46),
-(27, 3);
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -487,11 +479,7 @@ CREATE TABLE `wiki_rating` (
 --
 
 INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
-(1, 1, 4),
-(1, 2, 2),
-(2, 1, 1),
-(2, 2, 5),
-(3, 2, 3);
+(1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -529,17 +517,7 @@ CREATE TABLE `wiki_tag` (
 --
 
 INSERT INTO `wiki_tag` (`id`, `name`) VALUES
-(46, 'adsdddd'),
-(44, 'dasz'),
-(49, 'hallo'),
-(51, 'iets-serieus'),
-(52, 'nieuwe-tag'),
-(1, 'tag1'),
-(2, 'tag2'),
-(3, 'tag3'),
-(4, 'tag4'),
-(5, 'tag82'),
-(43, 'testTag');
+(1, 'tag1');
 
 -- --------------------------------------------------------
 
@@ -674,7 +652,7 @@ ALTER TABLE `wiki_tag`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `field_info`
@@ -728,7 +706,7 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `website_info`
