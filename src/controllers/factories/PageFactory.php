@@ -278,12 +278,11 @@ class PageFactory
                 $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
 
                 // add tag functionality //TODO
-                $add_tag_widget = new AtomicElement('<div id="add-tag-widget" class="d-flex gap-2 mt-2 mb-2">
-                                                    <input type="text" id="new-tag-name" 
-                                                        class="form-control form-control-sm" placeholder="New tag">
-                                                    <button type="button" id="add-tag-btn" 
-                                                    class="btn btn-sm btn-secondary">Add tag</button>
-                                                    </div>');
+                $add_tag_widget = new ContainerElement($styling_container['add_tag_div'],'</div>');
+
+                $add_tag_widget->addElement(new AtomicElement($styling_elements['tag_input_class']));
+
+                $add_tag_widget->addElement(new AtomicElement($styling_elements['tag_button_class']));
 
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
@@ -342,14 +341,14 @@ class PageFactory
                     ratable: $ratable
                 ));
 
-                $tag_container = new ContainerElement('<div class="d-flex flex-wrap gap-2 mb-3 border-top border-bottom py-2"', '</div>');
+                $tag_container = new ContainerElement($styling_container['tag_div'], '</div>');
                 foreach ($tags as $key => $value) {
                     $tag_id = ModelSelector::getArticleModel()->checkTagExists($value);
 
                     $tag_container->addElement(new ButtonField(
                         type: 'button',
-                        name: 'tag_' . $tag_id['id'],
-                        class: 'button button-sm',
+                        name:  $tag_id['id'],
+                        class: $styling_elements["button_class"],
                         label: $value,
                         href: 'main.php?page=search&tag=' . urlencode($tag_id['id'])
                     ));
@@ -357,7 +356,7 @@ class PageFactory
                 $main_container->addElement($tag_container);
                 $main_container->addElement(new Title(
                     text: 'Description',
-                    class: "h4 mb-4"
+                    class: $styling_elements['description_class']
                 ));
 
                 // Div with body text and image
@@ -370,7 +369,7 @@ class PageFactory
                 $bodytext = $converter->convert($bodyinfo['summary'])->getContent();
                 $bodytext = $purifier->purify($bodytext);
 
-                $text_container->addElement(new BodyText(
+                $sub_container->addElement(new BodyText(
                     text: $bodytext,
                     class: $styling_elements['body_class']
                 ));

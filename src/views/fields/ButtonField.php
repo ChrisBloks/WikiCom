@@ -31,7 +31,7 @@ class ButtonField extends BaseField implements iElement
                         class="' . $this->class . '" >';
 
         if ($this->href !== null) {
-            return '<a href="' . $this->href . '" style="text-decoration:none;">' . $input . '</a><br>';
+            return '<a href="' . $this->href . '">' . $input . '</a><br>';
         }
 
         return $input . '<br>';
