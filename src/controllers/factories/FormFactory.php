@@ -2,8 +2,8 @@
 
 namespace Wiki\controllers\factories;
 
-use Wiki\tools\utils\HtmlUtils;
-use Wiki\views\containers\Form;
+use Wiki\tools\utils\HtmlUtils,
+    Wiki\views\containers\Form;
 
 /**
  * Factroy class for dynamically creating fields for the Wiki
