@@ -1,19 +1,23 @@
 <?php
-/**
- * Creates a bar for display error messages
- */
 namespace Wiki\views\containers;
 
 use Wiki\tools\utils\HtmlUtils,
     Wiki\tools\interfaces\iElement;
 
+/**
+ * Creates an element used for displaying notice messages
+ */
 class NoticeMessage implements iElement
 {
+    // moveto DB
     private array $typeClassMap = [
         'error'   => 'alert alert-danger',
         'message' => 'alert alert-success',
     ];
 
+    /** stores all notice messages based on type
+     * in a string with class attribute
+    */ 
     public function show(): string
     {
         $notices = $this->collectNotices();
@@ -35,6 +39,9 @@ class NoticeMessage implements iElement
         return $str;
     }
 
+    /** collects all messages from session and assigns message type to them
+     * 
+     */
     private function collectNotices(): array
     {
         $notices = [];
