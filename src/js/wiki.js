@@ -14,9 +14,11 @@ $(document).ready(function () {
 
 
   $(".d-flex.flex-grow-1 table").addClass("table table-striped table-bordered");
-  $(".d-flex.flex-grow-1  th, ..d-flex.flex-grow-1  td").addClass(
+  $(".d-flex.flex-grow-1  th, .d-flex.flex-grow-1  td").addClass(
     "align-middle",
   );
+  $("#add-tag-widget").insertBefore(".checkbox_group");
+
   $("#new-tag-name").on("keydown", function (event) {
     // Enter as "Add tag"
     if (event.key === "Enter") {
@@ -25,7 +27,6 @@ $(document).ready(function () {
     }
   });
 
-  $("#add-tag-widget").insertBefore(".checkbox_group");
 
   $("#add-tag-btn").on("click", function () {
     var tagName = $("#new-tag-name").val().trim();

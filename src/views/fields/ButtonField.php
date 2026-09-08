@@ -14,11 +14,15 @@ class ButtonField extends BaseField implements iElement
         string $name,
         string $class,
         string $label = "",
+        string $id = "",
         ?string $href = null
     ) {
         parent::__construct($name, $label, $class);
         $this->type = $type;
         $this->href = $href;
+        if (!empty($id)){
+            $this->id = $id;
+        }
     }
 
     public function show(): string
