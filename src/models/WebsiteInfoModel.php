@@ -11,6 +11,8 @@ use Wiki\tools\utils\HtmlUtils;
 
 class WebsiteInfoModel extends BaseModel
 {
+
+
     /*
     * method gets body text based on the page name
     *
@@ -177,5 +179,13 @@ class WebsiteInfoModel extends BaseModel
         }
 
         return $styling;
+    }
+
+    public function fetchElementInfoByPage(string $page_name): array {
+        $sql = "";
+        $elements = $this->crud->selectMany($sql, NULL);
+
+        // Order elements?
+        return $elements;
     }
 }
