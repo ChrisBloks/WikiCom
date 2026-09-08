@@ -91,7 +91,7 @@ class ArticleModel extends BaseModel
      * @param string $sortBy defines contents of the SORT BY clause.
      * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
      */
-    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy): array|false
+    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy =''): array|false
     {
         // Check if sortBy is a valid sorting method
 
@@ -149,7 +149,13 @@ class ArticleModel extends BaseModel
             $where_clause .
             $order_by_clause;
 
-        return $this->crud->selectMany(sql: $sql, params: $params);
+        $result = $this->crud->selectMany(sql: $sql, params: $params);
+
+        foreach ($result as $key => $article){
+            $result[$key]['tags'] = implode(",",$this->fetchArticleTags($article['id']));
+        }
+
+        return $result;
     }
 
     /**

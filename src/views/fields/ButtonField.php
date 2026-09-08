@@ -10,21 +10,38 @@ use Wiki\views\fields\BaseField, Wiki\tools\interfaces\iElement;
  */
 class ButtonField extends BaseField implements iElement
 {
-
     protected string $type;
-    public function __construct(string $type, string $name, string $class, string $label = "")
-    {
+    protected ?string $href;
+
+    public function __construct(
+        string $type,
+        string $name,
+        string $class,
+        string $label = "",
+        string $id = "",
+        ?string $href = null
+    ) {
         parent::__construct($name, $label, $class);
         $this->type = $type;
+        $this->href = $href;
+        if (!empty($id)){
+            $this->id = $id;
+        }
     }
 
     public function show(): string
     {
-        return
+        $input =
             '<input type="' . $this->type . '" 
                         name="' . $this->name . '" 
                         id="' . $this->id . '" 
-                        value="' . $this->label . '" 
-                        class="' . $this->class . '" ><br>';
+                        value="' . htmlspecialchars($this->label) . '" 
+                        class="' . $this->class . '" >';
+
+        if ($this->href !== null) {
+            return '<a href="' . $this->href . '">' . $input . '</a><br>';
+        }
+
+        return $input . '<br>';
     }
 }

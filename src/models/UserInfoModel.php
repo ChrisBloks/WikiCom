@@ -104,9 +104,9 @@ class UserInfoModel extends BaseModel
             "imgFileName" => $imgFileName,
             "description" => $description
         ];
-        $result = $this->crud->doInsert($sql, $params);
+        $result = $this->crud->doUpdate($sql, $params);
         if (empty($result)) {
-            $this->logError("registration failed");
+            $this->logError("About info is not saved");
             $result = false;
         }
         return $result;

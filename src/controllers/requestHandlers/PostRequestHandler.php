@@ -90,7 +90,7 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['Tag'] = $validation_result['field_inputs']['Tag'] ?? [];
                 $this->response['Author'] = $validation_result['field_inputs']['Author'] ?? [];
                 $this->response['sortby'] = $validation_result['field_inputs']['sortby'];
-                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'],['Tag', 'Author']);
+                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'], ['Tag', 'Author']);
 
                 break;
             case 'rateArticle':
@@ -104,7 +104,7 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['bodyinfo']['title'] = $validation_result['field_inputs']['title'];
                 $this->response['bodyinfo']['summary'] = $validation_result['field_inputs']['summary'];
                 $this->response['bodyinfo']['codeBlock'] = $validation_result['field_inputs']['codeBlock'];
-                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'],['existing_tag']);
+                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'], ['existing_tag']);
 
                 if ($validation_result['ok']) {
                     // This is the post request for editing or saving a (new) article
@@ -136,12 +136,15 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
             case 'contact':
                 // On succesful contact form validation, save input to the database
-                $field_inputs = $validation_result['field_inputs'];
-                ModelSelector::getWebsiteInfoModel()->saveContact(
-                    name: $field_inputs['name'],
-                    email: $field_inputs['email'],
-                    message: $field_inputs['message']
-                );
+                if ($validation_result['ok']) {
+                    $field_inputs = $validation_result['field_inputs'];
+                    ModelSelector::getWebsiteInfoModel()->saveContact(
+                        name: $field_inputs['name'],
+                        email: $field_inputs['email'],
+                        message: $field_inputs['message']
+                    );
+                    $_SESSION['messages'][] = 'Message has been sent!';
+                }
                 break;
         }
 

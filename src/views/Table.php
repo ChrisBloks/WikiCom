@@ -142,7 +142,7 @@ class Table
                 return "<td$classAttr>" . htmlspecialchars((string) $value) . '</td>';
             // cell contains title
             case 'Title':
-                return '<td'.$classAttr.'><a href="main.php?page=article&id='.$row_data['id'].'">' . htmlspecialchars((string) $value) . '</a></td>';
+                return '<td'.$classAttr.'><a href="'.$column['href'].''.$row_data['id'].'">' . htmlspecialchars((string) $value) . '</a></td>';
 
             default:
                 throw new \InvalidArgumentException('Unknown display_type: '. $column['display_type']);
