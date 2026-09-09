@@ -39,7 +39,7 @@ class ElementInfo implements \arrayAccess {
     }
 
     public function offsetSet(mixed $offset, mixed $value): void {
-        if (in_array($offset, $this::$allowed_keys, true)){
+        if (in_array($offset, self::$allowed_keys, true)){
             $this->container[$offset] = $value;
         }
         else {
