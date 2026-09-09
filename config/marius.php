@@ -9,6 +9,6 @@ class Config
     const ARTICLEIMGPATH = "./img/article/";
 
     const LOGPATH = "./logs";
-    public const FIRST_CELL_TARGET = "editArticle";
+    const FIRST_CELL_TARGET = "editArticle";
 
 }

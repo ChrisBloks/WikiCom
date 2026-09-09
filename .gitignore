@@ -1,6 +1,4 @@
-/vendor/ManKind
-/vendor/monolog
-/vendor/autoload
+/vendor
 /img
 /logs
 /vendor

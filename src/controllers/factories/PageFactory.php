@@ -441,6 +441,21 @@ class PageFactory
                     class: $styling_elements["new_article_title"]
                 ));
                 $left_container->addElement($form);
+                //===================================
+                // goto edit user info
+
+                $left_container->addElement(new Title(
+                    text: "Edit User information",
+                    class: "fs-3 border-top mt-3"
+                ));
+                $left_container->addElement(new ButtonField(
+                                    type: "button",
+                                    name: 'Edit User Information',
+                                    class: 'btn btn-secondary mt-1',
+                                    label: 'Change user information',
+                                    id: $_SESSION['userID'],
+                                    href: 'main.php?page=editUser&id='. $_SESSION['userID'] 
+                ));
 
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $results_container->addElement(new Title(
@@ -455,6 +470,33 @@ class PageFactory
 
                 $main->addElement($container);
                 break;
+            case 'editUser':
+                // main Div: image + text-div 
+                $main_container = new ContainerElement($styling_container['main_div'], '</div>');
+
+                // sub text div: Title/Author/text/code
+                $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
+                $formFactory = new FormFactory();
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
+                htmlutils::dump('form info', $form_info);
+                htmlutils::dump('form fields', $form_fields);
+
+                $form = $formFactory->createForm(
+                    form_info: $form_info,
+                    field_info: $form_fields,
+                    hidden_field_info: ['page' => $this->page],
+                    field_text: [],
+                    class: $form_info["display_class"],
+                    submit_class: $form_info["submit_class"]
+                );
+                $sub_container->addElement($form);
+                $main_container->addElement($sub_container);
+                $main->addElement($main_container);
+                HtmlUtils::dump('POST', $_POST);
+                break;
+
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
         }
