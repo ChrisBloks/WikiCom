@@ -45,8 +45,8 @@ class SearchableCheckboxes extends BaseField
         // Add search field
         $search_field_info = [
             'name' => 'searchField',
-            'class' => 'form-control search-input',
-            'label' => 'Search',
+            'class' => 'form-control', // search-input',
+            'label' => '',
         ];
 
         $html .= (new SearchField($search_field_info))->show();

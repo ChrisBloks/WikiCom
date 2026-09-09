@@ -34,10 +34,10 @@ abstract class BaseField implements iElement
         $this->label = $label;
         $this->class = $class;
         $this->html = '';
-        if (($label === "")) {
-            throw new \BadFunctionCallException("Label not set!");
+        if (!($label === "")) {
+            $this->html .= HtmlUtils::printLabel($this->id, $label);
         }
-        $this->html .= HtmlUtils::printLabel($this->id, $label);
+        
     }
 
     /**
