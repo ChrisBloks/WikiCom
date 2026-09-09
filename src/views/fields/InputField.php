@@ -10,14 +10,14 @@ class InputField extends BaseField
     protected string $type;
     protected string $text;
     protected string $name;
-    public function __construct(string $type, string $name, string $class, string $label = "", string $text = "",string $id ="")
+    public function __construct(string $type, string $name, string $class, string $label = "", string $text = "", string $id = "")
     {
         parent::__construct($name, $label, $class);
         $this->type = $type;
         $this->text = $text;
         $this->name = $name;
-        if (!empty($id)){
-            $this->id=$id;
+        if (!empty($id)) {
+            $this->id = $id;
         }
     }
 
@@ -30,5 +30,7 @@ class InputField extends BaseField
                         id="' . $this->id . '" 
                         value="' . $this->text . '" 
                         class="' . $this->class . '" ><br>';
+
+                        
     }
 }

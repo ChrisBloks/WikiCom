@@ -276,9 +276,9 @@ class PageFactory
                     ]
                 ];
 
-                HtmlUtils::dump("form_info", $form_info);
-                HtmlUtils::dump("form_fields", $form_fields);
-                HtmlUtils::dump("response", $this->response);
+                // HtmlUtils::dump("form_info", $form_info);
+                // HtmlUtils::dump("form_fields", $form_fields);
+                // HtmlUtils::dump("response", $this->response);
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,
