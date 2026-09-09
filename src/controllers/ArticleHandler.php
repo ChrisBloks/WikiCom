@@ -26,7 +26,7 @@ class ArticleHandler
             article_id: $article_id,
             rating: $rating
         );
-        return $rating_model->fetchAvgRating(article_id: $article_id);
+        return $rating_model->fetchRatingInfoByArticleId(article_id: $article_id);
     }
 
 

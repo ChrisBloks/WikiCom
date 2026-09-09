@@ -22,7 +22,7 @@ class TextAreaField extends BaseField implements iElement
         // rows and cols should be variable eventually
         $this->html .= '<textarea name="' . $name 
                     . '" class="' . $class . '">' 
-                    . $this->text . '</textarea>';
+                    . $this->text . '</textarea><br>';
     }
 
     public function show(): string
