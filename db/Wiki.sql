@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2026 at 10:37 AM
+-- Generation Time: Sep 09, 2026 at 12:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,7 +62,8 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 (18, 'Test', 'danny@email.com', '2026-09-08', 'dfsdf'),
 (19, 'Test', 'danny@email.com', '2026-09-08', 'dfsdf'),
 (20, 'Test', 'dannytest@email.com', '2026-09-08', 'ddd'),
-(21, 'd', 'danny@email.com', '2026-09-08', 'test');
+(21, 'd', 'danny@email.com', '2026-09-08', 'test'),
+(22, 'Test', 'danny@email.com', '2026-09-08', 'd');
 
 -- --------------------------------------------------------
 
@@ -99,12 +100,12 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form
 (13, 'email', 'email', 'login-email form-control', NULL, 2, 'Email:', 0, 0),
 (14, 'name', 'text', 'register-name form-control', NULL, 7, 'Your name:', 1, 0),
 (15, 'email', 'email', 'register-email form-control', NULL, 7, 'Your email:', 2, 0),
-(17, 'summary', 'textarea', 'article-text form-control', NULL, 4, 'Body text:', 15, 0),
-(18, 'codeBlock', 'textarea', 'article-codeblock form-control', NULL, 4, 'Codeblock:', 16, 1),
-(19, 'articleimg', 'file', 'article-img-file form-control', NULL, 4, 'Upload file:', 17, 1),
+(17, 'summary', 'textarea', 'article-text form-control', NULL, 4, 'Body Text', 15, 0),
+(18, 'codeBlock', 'textarea', 'article-codeblock form-control', NULL, 4, 'Codeblock', 16, 1),
+(19, 'articleimg', 'file', 'article-img-file form-control', NULL, 4, 'Upload File', 17, 1),
 (20, 'sortby', 'select', 'sort-by form-select', 3, 3, 'Sort by', 3, 0),
-(25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article title:', 13, 0),
-(26, 'existing_tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Change tags', 14, 0);
+(25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article Title', 13, 0),
+(26, 'existing_tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Article Tags', 14, 0);
 
 -- --------------------------------------------------------
 
@@ -133,7 +134,7 @@ INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_in
 (3, '', 'POST', 'Filter', 6, 'form-group justify-content-start', '', 'btn btn-primary btn-sm'),
 (4, '', 'POST', 'SaveArticle\r\n', 7, 'form-group', 'multipart/form-data', 'btn btn-primary btn-sm'),
 (5, '', 'POST', 'Save About', 2, 'form-group', 'multipart/form-data', 'btn btn-primary btn-sm'),
-(6, '', 'GET', 'Create new article', 8, 'form-group', '', 'btn btn-primary btn-sm'),
+(6, '', 'GET', 'Create new article', 8, 'form-group', '', 'btn btn-primary btn-sm d-block mx-auto'),
 (7, '', 'POST', 'Register', 5, 'form-group', '', 'btn btn-primary btn-sm');
 
 -- --------------------------------------------------------
@@ -193,6 +194,40 @@ INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `page_elements`
+--
+
+CREATE TABLE `page_elements` (
+  `id` int(11) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  `element_type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `page_elements`
+--
+
+INSERT INTO `page_elements` (`id`, `class`, `element_type`) VALUES
+(1, '<div class=\"d-flex align-items-center w-75 mx-auto\">\r\n', 'container'),
+(2, '<div class=\"flex-grow-1\">', 'container');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page_structure`
+--
+
+CREATE TABLE `page_structure` (
+  `id` int(11) NOT NULL,
+  `website_info_id` int(11) NOT NULL,
+  `page_element_id` int(11) NOT NULL,
+  `order_by` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `styling_containers`
 --
 
@@ -221,7 +256,7 @@ INSERT INTO `styling_containers` (`id`, `name`, `styling`) VALUES
 (13, 'sub_div', '<div class=\"d-flex flex-grow-1\">'),
 (14, 'horizontal_rule', '<hr class=\"w-75 mx-auto my-4\">'),
 (15, 'bot_div', '<div class=\"align-items-center w-75 mx-auto mt-4\">'),
-(16, 'user_div', '<div class=\"d-flex align-items-end gap-3\">'),
+(16, 'user_div', '<div class=\"d-flex justify-content-center align-items-center align-items-end gap-3\">'),
 (17, 'tag_div', '<div class=\"d-flex flex-wrap gap-2 mb-3 border-top border-bottom py-2\">'),
 (18, 'add_tag_div', '<div id=\"add-tag-widget\" class=\"d-flex gap-2 mt-2 mb-2\">');
 
@@ -252,9 +287,9 @@ INSERT INTO `styling_elements` (`id`, `website_info_id`, `class_name`, `class`) 
 (7, 9, 'codeblock_class', 'container-lg fs-6 col-15'),
 (8, 9, 'img_class', 'rounded article-pic mx-auto d-flex ms-3'),
 (9, 2, 'img_class', 'rounded-circle profile-pic d-flex justify-content-end mb-3'),
-(11, 8, 'img_class', 'dashboard-pic rounded mb-1'),
-(12, 8, 'user_title', 'fs-1 lh-1'),
-(13, 8, 'new_article_title', 'h4 border-top'),
+(11, 8, 'img_class', 'p-2 dashboard-pic rounded mb-1'),
+(12, 8, 'user_title', 'p-2 fs-1 fw-bold align-middle'),
+(13, 8, 'new_article_title', 'd-flex justify-content-center h4 border-top'),
 (14, 8, 'articles_class', 'fs-2'),
 (15, 9, 'article_script', '<script src=\"./src/js/articlePage.js\"></script>'),
 (16, 9, 'button_class', 'button button-sm'),
@@ -306,10 +341,11 @@ CREATE TABLE `table_columns` (
 
 INSERT INTO `table_columns` (`id`, `column_name`, `column_title`, `display_type`, `class_types`, `column_headers`, `display_order`, `href`) VALUES
 (1, 'id', 'Actions', 'first_cell', 'first_cell', 'first_cellTableHead', 0, ''),
-(2, 'title', 'Title', 'Title', 'articletitle', 'articletitleTableHead', 1, 'main.php?page=article&id='),
-(3, 'lastEdit', 'Last edited', 'date', 'lastEdit', 'lastEditTableHead', 4, ''),
-(5, 'rating', 'Average Rating', 'rating', 'rating', 'ratingTableHead', 3, ''),
-(6, 'tags', 'Tags', 'string', 'tags_class', 'tagsTableHead', 2, '');
+(2, 'title', 'Title', 'Title', 'articletitle', 'articletitleTableHead', 10, 'main.php?page=article&id='),
+(3, 'lastEdit', 'Last edited', 'date', 'lastEdit', 'lastEditTableHead', 40, ''),
+(5, 'rating', 'Average Rating', 'rating', 'rating', 'ratingTableHead', 30, ''),
+(6, 'tags', 'Tags', 'string', 'tags_class', 'tagsTableHead', 20, ''),
+(7, 'Author', 'Author', 'string', 'Author_class', 'AuthorTableHead', 15, '');
 
 -- --------------------------------------------------------
 
@@ -331,9 +367,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website'),
+(1, 'Danny', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christian', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
-(8, 'Marius', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'marius@gmail.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.');
+(8, 'Marius', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'marius@gmail.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
+(11, 'danny', '$2y$10$eO4wsad1NVSXN/tC9gpMK.dKF4SJCtuISWNqvW07tpiik9aQ009YO', 'dannytest@email.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -344,6 +381,7 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `descripti
 CREATE TABLE `v_article_avg_rating` (
 `id` int(11)
 ,`AVGrating` decimal(8,4)
+,`Nratings` bigint(21)
 );
 
 -- --------------------------------------------------------
@@ -442,7 +480,9 @@ CREATE TABLE `wiki_article` (
 --
 
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
-(1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11');
+(1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11'),
+(28, 'PHP', 1, 'PHP is een scripttaal en is vergelijkbaar met Perl, Python en Ruby. Qua syntaxis lijkt PHP het meest op C, maar net als bij veel andere scripttalen moeten variabelen voorafgegaan worden door een dollarteken $. Dit is overgenomen uit de scripttaal Perl, waarvan PHP mede is afgeleid. In tegenstelling tot C is het in PHP wel mogelijk om naast procedureel programmeren ook objectgeoriënteerd te programmeren, net als in bijvoorbeeld Java, C++ en C#. In de eerste versies van PHP was het objectgeoriënteerd programmeren nog heel beperkt. Pas sinds versie 5 zijn de meest essentiële functies hiervoor allemaal beschikbaar.', '$url = &quot;http://nl.wikipedia.org/wiki/PHP&quot;;\r\n\r\necho &quot;U bevindt zich momenteel op $url. Welkom!&quot;;\r\n// Of\r\necho &quot;U bevindt zich momenteel op &quot;.$url.&quot;. Welkom!&quot;;', 'article_0.jpg', '2026-09-08'),
+(29, 'New article', 1, 'This is the body text.', '', 'article_0.jpg', '2026-09-08');
 
 -- --------------------------------------------------------
 
@@ -460,7 +500,10 @@ CREATE TABLE `wiki_article_to_tag` (
 --
 
 INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
-(1, 1);
+(1, 1),
+(28, 53),
+(28, 54),
+(29, 54);
 
 -- --------------------------------------------------------
 
@@ -479,7 +522,11 @@ CREATE TABLE `wiki_rating` (
 --
 
 INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
-(1, 1, 4);
+(1, 1, 4),
+(7, 1, 1),
+(7, 28, 3),
+(7, 29, 4),
+(8, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -517,6 +564,8 @@ CREATE TABLE `wiki_tag` (
 --
 
 INSERT INTO `wiki_tag` (`id`, `name`) VALUES
+(54, 'code'),
+(53, 'php'),
 (1, 'tag1');
 
 -- --------------------------------------------------------
@@ -526,7 +575,7 @@ INSERT INTO `wiki_tag` (`id`, `name`) VALUES
 --
 DROP TABLE IF EXISTS `v_article_avg_rating`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_article_avg_rating`  AS SELECT `a`.`id` AS `id`, avg(`r`.`rating`) AS `AVGrating` FROM (`wiki_article` `a` left join `wiki_rating` `r` on(`a`.`id` = `r`.`article_id`)) GROUP BY `a`.`id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_article_avg_rating`  AS SELECT `a`.`id` AS `id`, avg(`r`.`rating`) AS `AVGrating`, count(`r`.`rating`) AS `Nratings` FROM (`wiki_article` `a` left join `wiki_rating` `r` on(`a`.`id` = `r`.`article_id`)) GROUP BY `a`.`id` ;
 
 --
 -- Indexes for dumped tables
@@ -564,6 +613,20 @@ ALTER TABLE `lookup_info`
 --
 ALTER TABLE `menu_items`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `page_elements`
+--
+ALTER TABLE `page_elements`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `page_structure`
+--
+ALTER TABLE `page_structure`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_website_info_to_page_structure` (`website_info_id`),
+  ADD KEY `fk_page_elements_to_page_structure` (`page_element_id`);
 
 --
 -- Indexes for table `styling_containers`
@@ -652,7 +715,7 @@ ALTER TABLE `wiki_tag`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `field_info`
@@ -679,6 +742,12 @@ ALTER TABLE `menu_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `page_structure`
+--
+ALTER TABLE `page_structure`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `styling_containers`
 --
 ALTER TABLE `styling_containers`
@@ -700,13 +769,13 @@ ALTER TABLE `styling_system`
 -- AUTO_INCREMENT for table `table_columns`
 --
 ALTER TABLE `table_columns`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `website_info`
@@ -718,7 +787,7 @@ ALTER TABLE `website_info`
 -- AUTO_INCREMENT for table `wiki_article`
 --
 ALTER TABLE `wiki_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `wiki_sortby_info`
@@ -730,7 +799,7 @@ ALTER TABLE `wiki_sortby_info`
 -- AUTO_INCREMENT for table `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- Constraints for dumped tables
@@ -748,6 +817,13 @@ ALTER TABLE `field_info`
 --
 ALTER TABLE `form_info`
   ADD CONSTRAINT `website_info_to_form_info` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
+
+--
+-- Constraints for table `page_structure`
+--
+ALTER TABLE `page_structure`
+  ADD CONSTRAINT `fk_page_elements_to_page_structure` FOREIGN KEY (`page_element_id`) REFERENCES `page_elements` (`id`),
+  ADD CONSTRAINT `fk_website_info_to_page_structure` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
 
 --
 -- Constraints for table `styling_elements`
