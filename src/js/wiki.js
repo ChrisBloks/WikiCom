@@ -12,13 +12,14 @@ $(document).ready(function () {
     lang: "en",
   });
 
-
+// Bootstrapping page
   $(".d-flex.flex-grow-1 table").addClass("table table-striped table-bordered");
   $(".d-flex.flex-grow-1  th, .d-flex.flex-grow-1  td").addClass(
     "align-middle",
   );
   $("#add-tag-widget").insertBefore(".checkbox_group");
-
+ 
+  // Add new tag
   $("#new-tag-name").on("keydown", function (event) {
     // Enter as "Add tag"
     if (event.key === "Enter") {

@@ -9,12 +9,14 @@ class Select extends BaseField
 
     protected array $options = [];
     protected string $selected_option;
+    protected string $option_class;
 
     public function __construct(string $name, string $label, string $class, array $options, string $selected_option = "", string $option_class = "")
     {
         parent::__construct($name, $label, $class);
         $this->options = $options;
         $this->selected_option = $selected_option;
+        $this->option_class = $option_class;
     }
 
 

@@ -10,7 +10,7 @@ class CheckBoxGroup extends BaseField
 
     protected array $options = [];
 
-    public function __construct(string $name, string $label, string $class, array $options, array $value = [])
+    public function __construct(string $name, string $label, string $class, array $options, mixed $value = [])
     {
         parent::__construct($name, $label, $class);
         $this->options = $options;
@@ -23,10 +23,10 @@ class CheckBoxGroup extends BaseField
     
         $ret = '<div class="fw-bold mb-1">' . HtmlUtils::printLabel($this->id, $this->label);
         $ret .= '<div class="checkbox_group">';
-        foreach ($this->options as $value => $display) {
-            $checked = isset($this->value[$value]) ? $this->value[$value]:'';
-            $ret .= '<input type="checkbox"' . $this->baseAttribs(true, $value,$display) . 'value="' . $value . '"' . ($checked ? 'checked' : '') . '>';
-            $ret .= HtmlUtils::printLabel($this->id, $display) . "";
+        foreach ($this->options as $checkbox_id => $checkbox_name) {
+            $checked = isset($this->options[$checkbox_id]) ? $this->options[$checkbox_id]:'';
+            $ret .= '<input type="checkbox"' . $this->baseAttribs($checkbox_id, $checkbox_name, true) . 'value="' . $checkbox_name . '"' . ($checked? 'checked' : '') . '>';
+            $ret .= HtmlUtils::printLabel($this->id, $checkbox_name) . "";
         }
 
         $ret .= '</div>';

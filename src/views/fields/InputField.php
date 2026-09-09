@@ -2,9 +2,9 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\tools\interfaces\iElement, Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
+use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
 
-class InputField extends BaseField implements iElement
+class InputField extends BaseField
 {
 
     protected string $type;

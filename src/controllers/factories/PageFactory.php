@@ -152,9 +152,7 @@ class PageFactory
                             'user' => $this->response['aboutID'],
                             'page' => $this->page
                         ],
-                        field_text: ["description" => $aboutinfo["description"]],
-                        class: $form_info["display_class"],
-                        submit_class: $form_info['submit_class']
+                        field_default_text: ["description" => $aboutinfo["description"]]
                     );
 
                     $top_container->addElement(new Title(
@@ -209,9 +207,7 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: [],
-                    class: $form_info["display_class"],
-                    submit_class: $form_info["submit_class"]
+                    field_default_text: []
                 );
                 $sub_container->addElement($form);
                 $main_container->addElement($sub_container);
@@ -228,15 +224,68 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+    
+                // TESTING
+                $form_fields = [
+                    [
+                        'type' => 'SearchableCheckboxes',
+                        'name' => 'searchableCheckboxes',
+                        'class' => 'filter-tag form-check-input border',
+                        'label' => 'FILTER ME',
+                        'optional' => 1,
+                        'options' => [
+                            // 0 => ['tag4', 'tag5'],
+                            1 => [
+                                'name' => 'tag',
+                                'label' => 'PHP',
+                                'class' => 'filter-tag form-check-input border',
+                                'value' => '1',
+                            ],
+                            2 => [
+                                'name' => 'tag',
+                                'label' => 'php',
+                                'class' => 'filter-tag form-check-input border',
+                                'value' => '2',
+                            ],
+                            3 => [
+                                'name' => 'tag',
+                                'label' => 'code',
+                                'class' => 'filter-tag form-check-input border',
+                                'value' => '3',
+                            ],
+                            4 => [
+                                'name' => 'tag',
+                                'label' => 'tag1',
+                                'class' => 'filter-tag form-check-input border',
+                                'value' => '4',
+                            ],
+                            5 => [
+                                'name' => 'tag',
+                                'label' => 'tag2',
+                                'class' => 'filter-tag form-check-input border',
+                                'value' => '5',
+                            ],
+                        ]
+                    ]
+                ]; // class="filter-tag form-check-input border"
+
+                $this->response['field_values'] =
+                [
+                    'tag' => [
+                        2 => 1
+                    ]
+                ];
+
+                HtmlUtils::dump("form_info", $form_info);
+                HtmlUtils::dump("form_fields", $form_fields);
+                HtmlUtils::dump("response", $this->response);
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: ['sortby' => $this->response['sortby']],
-                    class: $form_info["display_class"],
-                    submit_class: $form_info["submit_class"],
-                    field_array_values: $this->response['field_values']
+                    field_default_text: ['sortby' => $this->response['sortby']],
+                    field_default_values: $this->response['field_values']
                 );
 
                 $filter_container->addElement($form);
@@ -250,9 +299,7 @@ class PageFactory
                     tag_ids: $this->response["Tag"],
                     sortBy: $this->response['sortby']
                 );
-                HtmlUtils::dump('columns', $columnsdata);
 
-                HtmlUtils::dump('rows', $rowsdata);
 
                 // print table for search results
                 $tableFactory = new Table($columnsdata, $rowsdata);
@@ -297,10 +344,8 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page, 'action' => 'saveArticle'],
-                    class: $form_info["display_class"],
-                    field_text: $bodyinfo,
-                    submit_class: $form_info['submit_class'],
-                    field_array_values: isset($this->response['field_values']) ? $this->response['field_values'] : []
+                    field_default_text: $bodyinfo,
+                    field_default_values: isset($this->response['field_values']) ? $this->response['field_values'] : []
                 );
 
                 // add to page
@@ -432,9 +477,7 @@ class PageFactory
                     form_info: $form_info,
                     field_info: [],
                     hidden_field_info: ['page' => 'editArticle', 'id' => '0'],
-                    class: $form_info["display_class"],
-                    field_text: [],
-                    submit_class: $form_info["submit_class"]
+                    field_default_text: []
                 );
                 $left_container->addElement(new Title(
                     text: "Create new article",
