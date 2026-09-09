@@ -93,7 +93,7 @@ class PageFactory
             case 'search':
                 $this->htmlpage->addToHeadContent(
                     new AtomicElement(
-                        '<script src="./src/js/articlePage.js"></script>'
+                        '<script src="./src/js/searchPage.js"></script>'
                     )
                 );
                 break;
@@ -243,9 +243,9 @@ class PageFactory
                     [
                         'type' => 'SearchableCheckboxes',
                         'name' => 'author_SearchableCheckboxes',
-                        'class' => 'filter_author form-check-input border',
+                        'class' => 'fw-bold mb-1 border border-3 filter_author',
                         'label' => 'Select author',
-                        'placeholer' => 'Search authors...',
+                        'placeholder' => 'Search authors...',
                         'optional' => 1,
                         'options' =>
                          [
@@ -253,25 +253,25 @@ class PageFactory
                             7 => [
                                 'name' => 'author',
                                 'label' => 'Danny',
-                                'class' => 'filter-author form-check-input border',
+                                'class' => 'searchable author_checkbox form-check-input',
                                 'value' => '7',
                             ],
                             34 => [
                                 'name' => 'author',
                                 'label' => 'Marius',
-                                'class' => 'filter-author form-check-input border',
+                                'class' => 'searchable author_checkbox form-check-input',
                                 'value' => '34',
                             ],
                             44 => [
                                 'name' => 'author',
                                 'label' => 'Christian',
-                                'class' => 'filter-author form-check-input border',
+                                'class' => 'searchable author_checkbox form-check-input',
                                 'value' => '44',
                             ],
                             1 => [
                                 'name' => 'author',
                                 'label' => 'Geert',
-                                'class' => 'filter-author form-check-input border',
+                                'class' => 'searchable author_checkbox form-check-input',
                                 'value' => '1',
                             ],
                         ]
@@ -280,9 +280,9 @@ class PageFactory
                     [
                         'type' => 'SearchableCheckboxes',
                         'name' => 'tag_SearchableCheckboxes',
-                        'class' => 'filter-tag form-check-input border',
+                        'class' => 'fw-bold mb-1 border border-3 filter_tags',
                         'label' => 'Select tags',
-                        'placeholer' => 'Search tags...',
+                        'placeholder' => 'Search tags...',
                         'optional' => 1,
                         'options' =>
                          [
@@ -290,31 +290,31 @@ class PageFactory
                             1 => [
                                 'name' => 'tag',
                                 'label' => 'PHP',
-                                'class' => 'filter-tag form-check-input border',
+                                'class' => 'searchable filter-tag form-check-input',
                                 'value' => '1',
                             ],
                             2 => [
                                 'name' => 'tag',
                                 'label' => 'php',
-                                'class' => 'filter-tag form-check-input border',
+                                'class' => 'searchable filter-tag form-check-input',
                                 'value' => '2',
                             ],
                             3 => [
                                 'name' => 'tag',
                                 'label' => 'code',
-                                'class' => 'filter-tag form-check-input border',
+                                'class' => 'searchable filter-tag form-check-input',
                                 'value' => '3',
                             ],
                             4 => [
                                 'name' => 'tag',
                                 'label' => 'tag1',
-                                'class' => 'filter-tag form-check-input border',
+                                'class' => 'searchable tag_checkbox form-check-input',
                                 'value' => '4',
                             ],
                             5 => [
                                 'name' => 'tag',
                                 'label' => 'tag2',
-                                'class' => 'filter-tag form-check-input border',
+                                'class' => 'searchable tag_checkbox form-check-input',
                                 'value' => '5',
                             ],
                         ]
