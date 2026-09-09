@@ -90,6 +90,42 @@ a.rating_option {
   display: block;
 }
 
+.star-ratings {
+  unicode-bidi: bidi-override;
+  color: #ccc;
+  font-size: 20px;
+  position: relative;
+  margin: 0;
+  top: -3px;
+  padding: 0;
+  .fill-ratings {
+    color: #e7711b;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    
+    span {
+      display: inline-block;
+    }
+  }
+  .empty-ratings {
+    padding: 0;
+    display: block;
+    z-index: 0;
+  }
+  .count-rating{
+    position: absolute;
+    font-size: 15px;
+    color:black;
+    top: 4.5px;
+    left: 90px;
+  }
+}
+
 /* .show {
   display: block;
 } */

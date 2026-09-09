@@ -17,9 +17,11 @@ class RatingModel extends BaseModel
      * @param int $article_id
      * @return float|false
      */
-    public function fetchAvgRating(int $article_id): float|false
+    public function fetchRatingInfoByArticleId(int $article_id): array|false
     {
-        $sql = "SELECT `AVGrating` as AVGrating FROM v_article_avg_rating 
+        $sql = "SELECT `AVGrating` as AVGrating,
+                        `Nratings` as Nratings
+                FROM v_article_avg_rating 
                 WHERE id=:article_id";
         $params = ["article_id" => $article_id];
         $result = $this->crud->selectOne($sql, $params);
@@ -27,7 +29,7 @@ class RatingModel extends BaseModel
             $this->logError("No average rating for article id");
             $result = false;
         }
-        return $result['AVGrating'];
+        return $result;
     }
 
     /**

@@ -127,7 +127,8 @@ class Table
                 return "<td$classAttr>" . (new Rating(
                                 rating: (float) $value,
                                 article_id: $row_data['id'],
-                                display_only: true
+                                display_only: true,
+                                count : $row_data['Nratings']
                             ))->show() . '</td>';
             // cell contains the first cell actions
             case 'first_cell':

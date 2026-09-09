@@ -116,6 +116,8 @@ class PageFactory
 
         $main = new MainElement();
         $main->addElement(new NoticeMessage());
+        $main->addElement(new AtomicElement("<br>"));
+
 
 
         // page building
@@ -244,15 +246,12 @@ class PageFactory
                 // Table display
 
                 // create checkbox inputs for filtering
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "tags", "lastEdit", "rating"]);
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title","Author", "tags", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
                     author_ids: $this->response["Author"],
                     tag_ids: $this->response["Tag"],
                     sortBy: $this->response['sortby']
                 );
-                HtmlUtils::dump('columns', $columnsdata);
-
-                HtmlUtils::dump('rows', $rowsdata);
 
                 // print table for search results
                 $tableFactory = new Table($columnsdata, $rowsdata);
@@ -338,7 +337,8 @@ class PageFactory
                 $main_container->addElement(new Rating(
                     rating: $bodyinfo['rating'],
                     article_id: $this->response['articleID'],
-                    ratable: $ratable
+                    ratable: $ratable,
+                    count: $bodyinfo['n_ratings']
                 ));
 
                 $tag_container = new ContainerElement($styling_container['tag_div'], '</div>');
@@ -465,6 +465,7 @@ class PageFactory
 
 
         //add the footer to the body content
+        $this->htmlpage->addToBodyContent(new AtomicElement("<br>"));
         $this->htmlpage->addToBodyContent(new Footer(
             text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
             class: $styling_system['footer']
