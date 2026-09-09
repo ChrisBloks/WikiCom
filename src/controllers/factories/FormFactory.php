@@ -2,6 +2,7 @@
 
 namespace Wiki\controllers\factories;
 
+use ArrayAccess;
 use Wiki\tools\utils\HtmlUtils;
 use Wiki\views\containers\Form;
 use Wiki\views\fields\HiddenField;
@@ -22,7 +23,7 @@ class FormFactory
      * @param string $submit_class name of the submit button
      * @return Form
      */
-    public function createForm(array $form_info, array $field_info, array $hidden_field_info, 
+    public function createForm(ArrayAccess $form_info, array $field_info, array $hidden_field_info, 
                                array $field_text = [], string $class = "", string $submit_class='',
                                array $field_array_values = []): Form
     {

@@ -2,23 +2,26 @@
 
 namespace Wiki\dataObjects;
 
-use Wiki\dataObjects\ElementInfo;
+use Wiki\dataObjects\ElementInfo,
+InvalidArgumentException;
+
 
 class FieldInfo extends ElementInfo
 {
-    static private array $allowed_keys =
+    static protected array $allowed_keys =
         [
-            'php_class',
-            'tag',
+            'type',
+            'class',
             'name',
-            'html_class',
+            'optional',
             'id',
             'value',
             'type',
-            'action',
-            'method',
-            'style',
+            'label',
+            'options',
+            'marked',
             'text',
             'label',
         ];
+
 }

@@ -7,7 +7,8 @@
 
 namespace Wiki\models;
 
-use Wiki\tools\utils\HtmlUtils;
+use Wiki\dataObjects\FormInfo,
+    Wiki\dataObjects\FieldInfo;
 
 class FormModel extends BaseModel
 {
@@ -50,7 +51,12 @@ class FormModel extends BaseModel
             }
         }
         unset($field_info);
-        return $result;
+
+        $form_fields = [];
+        foreach ($result as $form_field) {
+            $form_fields[] = new FieldInfo($form_field, true);
+        }
+        return $form_fields;
     }
 
     /**
@@ -59,7 +65,7 @@ class FormModel extends BaseModel
      * @param string $page_name
      * @return array ['action, 'method', 'submit_caption', 'encype', 'display_class']
      */
-    public function fetchFormInfo(string $page_name): array|false
+    public function fetchFormInfo(string $page_name): \arrayAccess|false
     {
         $sql = "SELECT DISTINCT fo.action, 
                                 fo.method, 
@@ -75,11 +81,13 @@ class FormModel extends BaseModel
         $result = $this->crud->selectMany(sql: $sql, params: $params);
 
         // If the query was succesful, extract the first row
-        if ($result !== false && count($result)==1) {
+        if ($result !== false && count($result) == 1) {
             $result = $result[0];
         }
 
-        return $result;
+        $form_info = new FormInfo($result,true);
+
+        return $form_info;
     }
 
     /**
@@ -168,7 +176,7 @@ class FormModel extends BaseModel
         if (!empty($field_info["bridge_table"])) {
             [$bridge_table_column, $source_table_column] = explode(",", $field_info["bridge_values"]);
 
-            $join_clause =  "JOIN {$field_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
+            $join_clause = "JOIN {$field_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
             // If a LEFT JOIN is required
             if (!empty($field_info['left_join_on'])) {
                 $join_clause = "LEFT " . $join_clause . " AND {$field_info["left_join_on"]} = {$parent_id}";
@@ -186,19 +194,19 @@ class FormModel extends BaseModel
 
 
         // Execute the query
-        $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE|\PDO::FETCH_ASSOC);
+        $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
 
         // format result
         $subcontainer_info = [];
         // Effectively transposes the $result array from [row => [col => value]] to [col => [row => value]]
         // Where 'col_name1' is replaced with 'options' and 'col_name2' is replaced with 'values'.
         // Loop over rows
-        foreach ($result as $id => $row){
+        foreach ($result as $id => $row) {
             // Loop over columns
-            foreach($row as $column_name => $value){
+            foreach ($row as $column_name => $value) {
                 // If 'options' is already set, put column value under 'value' instead
-                $column_name = isset($subcontainer_info['options'][$id]) ? 'value' :'options';
-                $subcontainer_info[$column_name][$id] = $value; 
+                $column_name = isset($subcontainer_info['options'][$id]) ? 'value' : 'options';
+                $subcontainer_info[$column_name][$id] = $value;
             }
         }
 

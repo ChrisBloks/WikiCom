@@ -205,8 +205,10 @@ class PageFactory
                 // sub text div: Title/Author/text/code
                 $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
                 $formFactory = new FormFactory();
+
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
