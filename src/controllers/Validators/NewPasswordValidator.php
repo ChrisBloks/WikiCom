@@ -23,6 +23,7 @@ class NewPasswordValidator extends TextValidator
         );
 
         $all_empty = true;
+
         // If field was left empty, log an error
         foreach ($this->field_inputs as $name => $field_input) {
             if (empty($field_input)) {
@@ -37,6 +38,7 @@ class NewPasswordValidator extends TextValidator
 
         // toDo add check for optional
         if ($all_empty && $optional === true){
+            echo 'all empty and optional';
             return true;
         }
 
