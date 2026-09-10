@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `wiki`
 --
-CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki`;
 
 -- --------------------------------------------------------
 
@@ -104,8 +102,12 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form
 (18, 'codeBlock', 'textarea', 'article-codeblock form-control', NULL, 4, 'Codeblock', 16, 1),
 (19, 'articleimg', 'file', 'article-img-file form-control', NULL, 4, 'Upload File', 17, 1),
 (20, 'sortby', 'select', 'sort-by form-select', 3, 3, 'Sort by', 3, 0),
-(25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article Title', 13, 0),
-(26, 'existing_tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Article Tags', 14, 0);
+(25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article title:', 13, 0),
+(26, 'existing_tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Change tags', 14, 0),
+(29, 'name', 'text', 'editUser-userName form-control', NULL, 9, 'Change username:', 10, 1),
+(30, 'email', 'email', 'editUser-email form-control', NULL, 9, 'Edit email:', 20, 1),
+(33, 'password', 'password', 'editPassword-pw1 form-control', NULL, 10, 'Old password:', 0, 0),
+(34, 'newpassword', 'new_password', 'editPassword-pw2 form-control', NULL, 10, 'New password:', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -134,8 +136,10 @@ INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_in
 (3, '', 'POST', 'Filter', 6, 'form-group justify-content-start', '', 'btn btn-primary btn-sm'),
 (4, '', 'POST', 'SaveArticle\r\n', 7, 'form-group', 'multipart/form-data', 'btn btn-primary btn-sm'),
 (5, '', 'POST', 'Save About', 2, 'form-group', 'multipart/form-data', 'btn btn-primary btn-sm'),
-(6, '', 'GET', 'Create new article', 8, 'form-group', '', 'btn btn-primary btn-sm d-block mx-auto'),
-(7, '', 'POST', 'Register', 5, 'form-group', '', 'btn btn-primary btn-sm');
+(6, '', 'GET', 'Create new article', 8, 'form-group', '', 'btn btn-primary btn-sm'),
+(7, '', 'POST', 'Register', 5, 'form-group', '', 'btn btn-primary btn-sm'),
+(9, '', 'POST', 'Change information', 10, 'form-control mt-5', '', 'btn btn-primary'),
+(10, '', 'POST', 'Save', 11, 'form-control mt-5', '', 'btn btn-primary');
 
 -- --------------------------------------------------------
 
@@ -295,7 +299,8 @@ INSERT INTO `styling_elements` (`id`, `website_info_id`, `class_name`, `class`) 
 (16, 9, 'button_class', 'button button-sm'),
 (17, 9, 'description_class', 'h4 mb-4'),
 (18, 7, 'tag_input_class', '<input type=\"text\" id=\"new-tag-name\"\r\n                                                    class=\"form-control form-control-sm\" placeholder=\"New tag\">'),
-(19, 7, 'tag_button_class', '<button type=\"button\" id=\"add-tag-btn\" \r\n                                                    class=\"btn btn-sm btn-secondary\">Add tag</button>');
+(19, 7, 'tag_button_class', '<button type=\"button\" id=\"add-tag-btn\" \r\n                                                    class=\"btn btn-sm btn-secondary\">Add tag</button>'),
+(20, 8, 'email_class', 'fs-6');
 
 -- --------------------------------------------------------
 
@@ -369,8 +374,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
 (1, 'Danny', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christian', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
-(8, 'Marius', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'marius@gmail.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
-(11, 'danny', '$2y$10$eO4wsad1NVSXN/tC9gpMK.dKF4SJCtuISWNqvW07tpiik9aQ009YO', 'dannytest@email.com', '', '');
+(8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
+(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
 
 -- --------------------------------------------------------
 
@@ -409,7 +414,9 @@ INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
 (6, 'search', ''),
 (7, 'editArticle', ''),
 (8, 'dashboard', ''),
-(9, 'article', '');
+(9, 'article', ''),
+(10, 'editUser', ''),
+(11, 'editPassword', '');
 
 -- --------------------------------------------------------
 
@@ -457,7 +464,11 @@ INSERT INTO `website_info_to_styling_containers` (`website_info_id`, `styling_id
 (9, 13),
 (9, 14),
 (9, 15),
-(9, 17);
+(9, 17),
+(10, 1),
+(10, 5),
+(11, 1),
+(11, 5);
 
 -- --------------------------------------------------------
 
@@ -721,13 +732,13 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `form_info`
 --
 ALTER TABLE `form_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `lookup_info`
@@ -757,7 +768,7 @@ ALTER TABLE `styling_containers`
 -- AUTO_INCREMENT for table `styling_elements`
 --
 ALTER TABLE `styling_elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `styling_system`
@@ -781,7 +792,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `website_info`
 --
 ALTER TABLE `website_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `wiki_article`

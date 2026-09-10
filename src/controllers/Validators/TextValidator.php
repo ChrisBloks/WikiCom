@@ -3,9 +3,9 @@
 namespace Wiki\controllers\validators;
 
 use Wiki\tools\interfaces\iValidator,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\models\ModelSelector,
-    Wiki\tools\utils\Utils;
+Wiki\tools\traits\tErrorMessageCollector,
+Wiki\models\ModelSelector,
+Wiki\tools\utils\Utils;
 use Wiki\tools\utils\HtmlUtils;
 
 /**
@@ -35,12 +35,13 @@ class TextValidator implements iValidator
         if (empty($this->field_inputs[$name])) {
             if ($optional == false) {
                 $this->logError(message: 'Field ' . $name . ' was not filled in!');
+            } else {
+                return true;
             }
         }
-        
 
         // If there are errors, return false, otherwise call the page-specific validator to check the values
-        if ($this->hasErrors() ) {
+        if ($this->hasErrors()) {
             return false;
         } else {
             return $this->validateFields(field_inputs: $this->field_inputs);

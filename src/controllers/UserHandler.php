@@ -6,11 +6,11 @@ namespace Wiki\controllers;
 
 use Wiki\controllers\ValidationHandler as ControllersValidationHandler;
 use Wiki\tools\traits\tSingleton,
-Wiki\models\ModelSelector,
-Wiki\controllers\validators\BaseValidator,
-Wiki\controllers\validationHandler,
-Wiki\tools\utils\HtmlUtils,
-Wiki\tools\utils\Utils;
+    Wiki\models\ModelSelector,
+    Wiki\controllers\validators\BaseValidator,
+    Wiki\controllers\validationHandler,
+    Wiki\tools\utils\HtmlUtils,
+    Wiki\tools\utils\Utils;
 
 /**
  * Handler (controller) class for validating contact, login, and registration form submissions.
@@ -87,7 +87,7 @@ class UserHandler
             $registrationResult = ModelSelector::getUserInfoModel()
                 ->saveUser(
                     username: $user_info['name'],
-                    password: $user_info['password_1'],
+                    password: password_hash($user_info['password_1'], PASSWORD_DEFAULT),
                     email: $user_info['email']
                 );
             // Registration was successful
@@ -131,11 +131,11 @@ class UserHandler
                         author_id: $aboutID
                     );
                 if ($result == false) {
-                    $validation_result['ok']= false;
+                    $validation_result['ok'] = false;
                     $validation_result['user_error'] = array_merge($validation_result['user_error'], ModelSelector::getUserInfoModel()->getErrors());
                 }
             } else {
-                $validation_result['ok']= false;
+                $validation_result['ok'] = false;
                 $validation_result['user_error'][] = "Sorry, there was an error uploading your file.";
             }
         } else {
@@ -148,12 +148,128 @@ class UserHandler
                     author_id: $aboutID
                 );
             if ($result == false) {
-                $validation_result['ok']= false;
+                $validation_result['ok'] = false;
                 $validation_result['user_error'] = array_merge($validation_result['user_error'], ModelSelector::getUserInfoModel()->getErrors());
             }
         }
         return $validation_result;
-
     }
 
+    /**
+     * Check if which fields were filled in correctly (name, email, or both).
+     * If everything is correct save new user info to database database.
+     * @param array $validation_result array containing the name of the source page under key 'page'.
+     * @return array contains keys ['ok', 'user_error', 'field_inputs']
+     */
+    public function handleUserInfoChange(array $validation_result): array
+    {
+        // hoe komen we hier ookal weer aan?
+        $user_id = $_SESSION['userID'];
+
+        //Get the current userdata 
+        $currentUser = ModelSelector::getUserInfoModel()->fetchUserInfoById($user_id);
+
+        if ($currentUser === false) {
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] = 'Could not load current user data.';
+            return $validation_result;
+        }
+
+        // heb niet gekeken of validaties getrimmed worden voor spaties in validatie of dat het nodig is
+        // kan evt weg
+        $newName  = trim($validation_result['field_inputs']['name']  ?? '');
+        $newEmail = trim($validation_result['field_inputs']['email'] ?? '');
+
+        $fieldsToUpdate = [];
+
+        // Check for new name
+        if (!empty($newName) && $newName !== $currentUser['name']) {
+            $fieldsToUpdate['name'] = $newName;
+        }
+
+        // Check whether email is different
+        if (!empty($newEmail) && $newEmail !== $currentUser['email']) {
+            $existingUserId = ModelSelector::getUserInfoModel()->fetchUserIDbyEmail(email: $newEmail);
+
+            if ($existingUserId === false) {
+                // query failed
+                $validation_result['ok'] = false;
+                $validation_result['user_error'][] = ModelSelector::getUserInfoModel()->getErrors();
+                return $validation_result;
+            }
+
+            if (!empty($existingUserId) && $existingUserId != $user_id) {
+                // Email belongs to someone else — reject
+                $validation_result['ok'] = false;
+                $validation_result['user_error'][] = 'That email is already in use.';
+                return $validation_result;
+            }
+
+            $fieldsToUpdate['email'] = $newEmail;
+        }
+
+        // start crud functions
+        if (!empty($fieldsToUpdate)) {
+            $validation_result['ok'] = ModelSelector::getUserInfoModel()
+                ->updateUserInfo(
+                    fields: $fieldsToUpdate,
+                    user_id: $user_id
+                );
+        } else {
+            $validation_result['ok'] = true; // nothing to do isn't an error but should pass a message maybe?
+        }
+
+        return $validation_result;
+    }
+
+    /**
+     * Handles the logic for changing a user's password
+     * Field info contains old password(password) and the new password(password_1 and password_2)
+     * @param array $validation_result contains result of validation and field info
+     * @return array
+     */
+    public function handleUserPasswordChange(array $validation_result)
+    {
+        // fetch information
+        $user_id = $_SESSION['userID'];
+        $user_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($user_id);
+
+        // failed query
+        if ($user_info === false) {
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] = ModelSelector::getUserInfoModel()->getErrors();
+            return $validation_result;
+        }
+
+        // query returns empty
+        if (empty($user_info)) {
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] = 'User not found.';
+            return $validation_result;
+        }
+
+        // Old password check against db
+        if (!password_verify($validation_result['field_inputs']['password'], $user_info['password'])) {
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] = 'Current password is incorrect.';
+            return $validation_result;
+        }
+
+        // New password must differ from old
+        if (password_verify($validation_result['field_inputs']['password_1'], $user_info['password'])) {
+            $validation_result['ok'] = false;
+            $validation_result['user_error'][] = 'New password must be different from the current password.';
+            return $validation_result;
+        }
+
+        // hash passwords and put info for query in array fields_to_update
+        $hashedPassword = password_hash($validation_result['field_inputs']['password_1'], PASSWORD_DEFAULT);
+
+        $fields_to_update = ['password' => $hashedPassword];
+
+        $validation_result['ok'] = ModelSelector::getUserInfoModel()
+            ->updateUserInfo(fields: $fields_to_update, user_id: $user_id);
+
+        return $validation_result;
+    }
 }

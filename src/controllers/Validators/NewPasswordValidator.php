@@ -21,6 +21,9 @@ class NewPasswordValidator extends TextValidator
             key: 'password_2',
             frompost: true
         );
+
+        $all_empty = true;
+
         // If field was left empty, log an error
         foreach ($this->field_inputs as $name => $field_input) {
             if (empty($field_input)) {
@@ -28,6 +31,15 @@ class NewPasswordValidator extends TextValidator
                     $this->logError(message: 'Field ' . $name . ' was not filled in!');
                 }
             }
+            else{
+                $all_empty = false;
+            }
+        }
+
+        // toDo add check for optional
+        if ($all_empty && $optional === true){
+            echo 'all empty and optional';
+            return true;
         }
 
 

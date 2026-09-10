@@ -3,11 +3,11 @@
 namespace Wiki\controllers\requestHandlers;
 
 use Wiki\tools\utils\Utils,
-Wiki\tools\utils\HtmlUtils,
-Wiki\controllers\UserHandler,
-Wiki\controllers\ArticleHandler,
-Wiki\controllers\ValidationHandler,
-Wiki\models\ModelSelector;
+    Wiki\tools\utils\HtmlUtils,
+    Wiki\controllers\UserHandler,
+    Wiki\controllers\ArticleHandler,
+    Wiki\controllers\ValidationHandler,
+    Wiki\models\ModelSelector;
 use Monolog\Test\TestCase;
 
 class PostRequestHandler extends BaseRequestHandler
@@ -126,7 +126,6 @@ class PostRequestHandler extends BaseRequestHandler
                             $this->response['articleID'] = $this->response['editArticleID'];
                             $_SESSION['messages'][] = 'Article has been submitted!';
                         }
-
                     }
                     // This is a post request for creating a new article
                     else {
@@ -146,11 +145,38 @@ class PostRequestHandler extends BaseRequestHandler
                     $_SESSION['messages'][] = 'Message has been sent!';
                 }
                 break;
+
+            case 'editUser':
+                htmlutils::dump('validation result before edit user', $validation_result);
+                if ($validation_result['ok']) {
+
+                    $validation_result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
+
+                    if ($validation_result['ok'] && $validation_result['field_inputs']['name'] || $validation_result['field_inputs']['email']) {
+                        $this->response['page'] = 'dashboard';
+                        $_SESSION['messages'][] = 'Your information has been updated.';
+                    } else {
+                        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+                    }
+                }
+                htmlutils::dump('validation result after edit user', $validation_result);
+                break;
+            case 'editPassword':
+                if ($validation_result['ok']) {
+                    $validation_result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);
+
+                    if ($validation_result['ok']) {
+                        $this->response['page'] = 'dashboard';
+                        $_SESSION['messages'][] = 'Password successfully changed';
+                    } else {
+                        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+                    }
+                }
+                break;
+            default:
+                throw new \Exception("Request couldnt be handled, please message an admin");
         }
 
         return $this->response;
     }
-
-
-
 }

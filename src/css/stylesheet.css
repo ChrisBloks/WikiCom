@@ -2,19 +2,20 @@
 .profile-pic {
   width: 300px;
   height: 300px;
-  object-fit: scale-down;
+  object-fit: cover;
 }
 
 .dashboard-pic {
-  width: 120px;
-  height: 120px;
-  object-fit: scale-down;
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+
 }
 
 .article-pic{
   width: 400px;
   height: 400px;
-  object-fit: scale-down;
+  object-fit: cover;
 }
 
 .main-content {

@@ -14,28 +14,28 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-Wiki\tools\traits\tErrorMessageCollector,
-Wiki\tools\exceptions\PageNotFoundException,
-Wiki\models\ModelSelector,
-Wiki\controllers\factories\MenuFactory,
-Wiki\views\BasePage,
-Wiki\views\Table,
-Wiki\views\containers\AtomicElement,
-Wiki\views\containers\Header,
-Wiki\views\containers\BodyText,
-Wiki\views\containers\Title,
-Wiki\views\containers\Image,
-Wiki\views\containers\AuthorText,
-Wiki\views\containers\CodeBlock,
-Wiki\views\containers\Footer,
-Wiki\views\containers\ContainerElement,
-Wiki\views\containers\MainElement,
-Wiki\views\containers\Rating,
-Wiki\views\containers\NoticeMessage,
-League\CommonMark\GithubFlavoredMarkdownConverter,
-HTMLPurifier,
-HTMLPurifier_Config,
-Wiki\views\fields\ButtonField;
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer,
+    Wiki\views\containers\ContainerElement,
+    Wiki\views\containers\MainElement,
+    Wiki\views\containers\Rating,
+    Wiki\views\containers\NoticeMessage,
+    League\CommonMark\GithubFlavoredMarkdownConverter,
+    HTMLPurifier,
+    HTMLPurifier_Config,
+    Wiki\views\fields\ButtonField;
 
 
 
@@ -80,7 +80,8 @@ class PageFactory
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
     '));
 
-        $this->htmlpage->addToHeadContent(new AtomicElement('
+        $this->htmlpage->addToHeadContent(new AtomicElement(
+            '
                 <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="./vendor/webcito/bs-markdown-editor/dist/bs-markdown-editor.js"></script>
@@ -408,7 +409,7 @@ class PageFactory
                 $results_container = new ContainerElement($styling_container["result_div"], '</div>');
                 $user_container = new ContainerElement($styling_container["user_div"], '</div>');
 
-                $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($_SESSION['userID']);
+                $aboutinfo = ModelSelector::getUserInfoModel()->fetchUserInfoById($_SESSION['userID']);
 
                 //====================================================================================================
                 // table information
@@ -439,10 +440,38 @@ class PageFactory
                     submit_class: $form_info["submit_class"]
                 );
                 $left_container->addElement(new Title(
+                    text: $aboutinfo['email'],
+                    class: $styling_elements["email_class"]
+                ));
+                $left_container->addElement(new Title(
                     text: "Create new article",
                     class: $styling_elements["new_article_title"]
                 ));
                 $left_container->addElement($form);
+                //===================================
+                // goto edit user info
+
+                $left_container->addElement(new Title(
+                    text: "Edit User information",
+                    class: "fs-3 border-top mt-3"
+                ));
+                $left_container->addElement(new ButtonField(
+                    type: "button",
+                    name: 'Edit User Information',
+                    class: 'btn btn-secondary mt-1',
+                    label: 'Change user information',
+                    id: $_SESSION['userID'],
+                    href: 'main.php?page=editUser&id=' . $_SESSION['userID']
+                ));
+
+                $left_container->addElement(new ButtonField(
+                    type: "button",
+                    name: 'Edit Password',
+                    class: 'btn btn-danger mt-1',
+                    label: 'Change Password',
+                    id: $_SESSION['userID'],
+                    href: 'main.php?page=editPassword&id=' . $_SESSION['userID']
+                ));
 
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $results_container->addElement(new Title(
@@ -456,6 +485,55 @@ class PageFactory
                 $container->addElement($row);
 
                 $main->addElement($container);
+                break;
+            case 'editUser':
+                // main Div: image + text-div 
+                $main_container = new ContainerElement($styling_container['main_div'], '</div>');
+
+                // sub text div: Title/Author/text/code
+                $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
+                $formFactory = new FormFactory();
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
+                //HtmlUtils::dump('form info', $form_info);
+                //HtmlUtils::dump('form fields', $form_fields);
+
+                $form = $formFactory->createForm(
+                    form_info: $form_info,
+                    field_info: $form_fields,
+                    hidden_field_info: ['page' => $this->page],
+                    field_text: [], // ik wil hier misschien al de user email in doen? thoughts?
+                    class: $form_info["display_class"],
+                    submit_class: $form_info["submit_class"]
+                );
+                $sub_container->addElement($form);
+                $main_container->addElement($sub_container);
+                $main->addElement($main_container);
+                break;
+
+            case 'editPassword':
+                // main Div: image + text-div 
+                $main_container = new ContainerElement($styling_container['main_div'], '</div>');
+
+                // sub text div: Title/Author/text/code
+                $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
+                $formFactory = new FormFactory();
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
+                $form = $formFactory->createForm(
+                    form_info: $form_info,
+                    field_info: $form_fields,
+                    hidden_field_info: ['page' => $this->page],
+                    field_text: [], 
+                    class: $form_info["display_class"],
+                    submit_class: $form_info["submit_class"]
+                );
+                
+                $sub_container->addElement($form);
+                $main_container->addElement($sub_container);
+                $main->addElement($main_container);
                 break;
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
@@ -472,7 +550,5 @@ class PageFactory
             text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
             class: $styling_system['footer']
         ));
-
     }
-
 }
