@@ -59,12 +59,13 @@ class AjaxController implements iController
                     $rating = utils::getRequestVar('rating', true, null);
                     $article_id = utils::getRequestVar('article_id', true, null);
                     $articleHandler = new ArticleHandler();
-                    $new_avg_rating = $articleHandler->handleSaveRating(
+                    $rating_info = $articleHandler->handleSaveRating(
                         user_id: $this->request['user_id'],
                         article_id: $article_id,
                         rating: $rating);
                     $this->response = [
-                        'avg_rating' => $new_avg_rating
+                        'avg_rating' => $rating_info["AVGrating"],
+                        'n_ratings' => $rating_info["Nratings"]
                     ];
                 }
                 break;

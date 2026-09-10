@@ -117,6 +117,8 @@ class PageFactory
 
         $main = new MainElement();
         $main->addElement(new NoticeMessage());
+        $main->addElement(new AtomicElement("<br>"));
+
 
 
         // page building
@@ -204,8 +206,10 @@ class PageFactory
                 // sub text div: Title/Author/text/code
                 $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
                 $formFactory = new FormFactory();
+
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
@@ -245,7 +249,7 @@ class PageFactory
                 // Table display
 
                 // create checkbox inputs for filtering
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "tags", "lastEdit", "rating"]);
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title","Author", "tags", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
                     author_ids: $this->response["Author"],
                     tag_ids: $this->response["Tag"],
@@ -336,7 +340,8 @@ class PageFactory
                 $main_container->addElement(new Rating(
                     rating: $bodyinfo['rating'],
                     article_id: $this->response['articleID'],
-                    ratable: $ratable
+                    ratable: $ratable,
+                    count: $bodyinfo['n_ratings']
                 ));
 
                 $tag_container = new ContainerElement($styling_container['tag_div'], '</div>');
@@ -540,6 +545,7 @@ class PageFactory
 
 
         //add the footer to the body content
+        $this->htmlpage->addToBodyContent(new AtomicElement("<br>"));
         $this->htmlpage->addToBodyContent(new Footer(
             text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
             class: $styling_system['footer']

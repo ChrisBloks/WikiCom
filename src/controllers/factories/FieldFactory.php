@@ -10,6 +10,7 @@ use Wiki\views\fields\BaseField,
     Wiki\views\fields\InputField,
     Wiki\views\fields\NewPassword;
 use Wiki\tools\utils\HtmlUtils;
+use ArrayAccess;
 
 /**
  * Factory class for dynamically building page fields.
@@ -23,11 +24,11 @@ class FieldFactory
      * @param ?string $field_text (optional) text to display in the field.
      * @return BaseField
      */
-    public function createField(array $field_def, ?string $field_text): BaseField
+    public function createField(ArrayAccess $field_def, ?string $field_text): BaseField
     {
         // Check if all required information is given.
         foreach (['type', 'name', 'class', 'label'] as $key) {
-            if (!array_key_exists($key, $field_def)) {
+            if (!isset($field_def[$key])) {
                 throw new \InvalidArgumentException("Field definition missing for key: '$key'");
             }
         }
