@@ -147,19 +147,17 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
 
             case 'editUser':
-                htmlutils::dump('validation result before edit user', $validation_result);
                 if ($validation_result['ok']) {
 
                     $validation_result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
 
-                    if ($validation_result['ok'] && $validation_result['field_inputs']['name'] || $validation_result['field_inputs']['email']) {
+                    if ($validation_result['ok'] && ($validation_result['field_inputs']['name'] || $validation_result['field_inputs']['email'])) {
                         $this->response['page'] = 'dashboard';
                         $_SESSION['messages'][] = 'Your information has been updated.';
                     } else {
                         $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
                     }
                 }
-                htmlutils::dump('validation result after edit user', $validation_result);
                 break;
             case 'editPassword':
                 if ($validation_result['ok']) {
