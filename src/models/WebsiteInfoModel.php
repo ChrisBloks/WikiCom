@@ -7,6 +7,8 @@
 
 namespace Wiki\models;
 
+use Wiki\tools\utils\HtmlUtils;
+
 class WebsiteInfoModel extends BaseModel
 {
     /*
@@ -26,7 +28,6 @@ class WebsiteInfoModel extends BaseModel
             return false;
         }
 
-        $result = array_merge($result, $this->fetchClasses($page_name));
 
         return $result;
     }
@@ -46,8 +47,6 @@ class WebsiteInfoModel extends BaseModel
             $this->logError("User has no info");
             return false;
         }
-
-        $result = array_merge($result, $this->fetchClasses($page_name));
 
         return $result;
     }
@@ -121,19 +120,21 @@ class WebsiteInfoModel extends BaseModel
                        `column_title`, 
                        `display_type`,
                        `class_types`,
-                       `column_headers`
+                       `column_headers`,
+                       `href`
                        FROM table_columns
-                       WHERE column_name in ($placeholders)";
+                       WHERE column_name in ($placeholders)
+                       ORDER BY display_order";
         $result = $this->crud->selectMany($sql, $columns, \PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
 
         return $result;
     }
 
-    public function fetchClasses(string $page_name): array
+    public function fetchElementStylingByPage(string $page_name): array
     {
         $sql = "SELECT class_name, class 
-                FROM display_classes as dc
-                JOIN  website_info as wi on wi.id = dc.website_info_id
+                FROM styling_elements as se
+                JOIN  website_info as wi on wi.id = se.website_info_id
                 WHERE wi.name = :page";
         $params = ["page" => $page_name];
         $classrows = $this->crud->selectMany($sql, $params);
@@ -145,5 +146,36 @@ class WebsiteInfoModel extends BaseModel
 
 
         return $classes;
+    }
+
+    public function fetchContainerStylingByPage(string $page_name):array
+    {
+        $sql = "SELECT styling.name, styling.styling
+                FROM styling_containers as styling
+                JOIN website_info_to_styling_containers as wits on wits.styling_id = styling.id
+                JOIN website_info as wi on wi.id = wits.website_info_id
+                WHERE wi.name = :page";
+        $params = ["page" => $page_name];
+        $stylingrows = $this->crud->selectMany($sql,$params);
+
+        $styling = [];
+        foreach ($stylingrows as $row){
+            $styling[$row['name']] = $row['styling'];
+        }
+
+        return $styling;
+    }
+
+    public function fetchSystemStyling():array
+    {
+        $sql = "SELECT styling_system.name, styling_system.styling
+                FROM styling_system";
+        $stylingrows = $this->crud->selectMany($sql,NULL);
+        $styling = [];
+        foreach ($stylingrows as $row){
+            $styling[$row['name']] = $row['styling'];
+        }
+
+        return $styling;
     }
 }

@@ -3,11 +3,11 @@
 namespace Wiki\controllers\requestHandlers;
 
 use Wiki\tools\utils\Utils,
-Wiki\tools\utils\HtmlUtils,
-Wiki\controllers\UserHandler,
-Wiki\controllers\ArticleHandler,
-Wiki\controllers\ValidationHandler,
-Wiki\models\ModelSelector;
+    Wiki\tools\utils\HtmlUtils,
+    Wiki\controllers\UserHandler,
+    Wiki\controllers\ArticleHandler,
+    Wiki\controllers\ValidationHandler,
+    Wiki\models\ModelSelector;
 use Monolog\Test\TestCase;
 
 class PostRequestHandler extends BaseRequestHandler
@@ -90,7 +90,7 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['Tag'] = $validation_result['field_inputs']['Tag'] ?? [];
                 $this->response['Author'] = $validation_result['field_inputs']['Author'] ?? [];
                 $this->response['sortby'] = $validation_result['field_inputs']['sortby'];
-                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'],['Tag', 'Author']);
+                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'], ['Tag', 'Author']);
 
                 break;
             case 'rateArticle':
@@ -104,7 +104,7 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['bodyinfo']['title'] = $validation_result['field_inputs']['title'];
                 $this->response['bodyinfo']['summary'] = $validation_result['field_inputs']['summary'];
                 $this->response['bodyinfo']['codeBlock'] = $validation_result['field_inputs']['codeBlock'];
-                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'],['existing_tag']);
+                $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'], ['existing_tag']);
 
                 if ($validation_result['ok']) {
                     // This is the post request for editing or saving a (new) article
@@ -126,7 +126,6 @@ class PostRequestHandler extends BaseRequestHandler
                             $this->response['articleID'] = $this->response['editArticleID'];
                             $_SESSION['messages'][] = 'Article has been submitted!';
                         }
-
                     }
                     // This is a post request for creating a new article
                     else {
@@ -136,18 +135,46 @@ class PostRequestHandler extends BaseRequestHandler
                 break;
             case 'contact':
                 // On succesful contact form validation, save input to the database
-                $field_inputs = $validation_result['field_inputs'];
-                ModelSelector::getWebsiteInfoModel()->saveContact(
-                    name: $field_inputs['name'],
-                    email: $field_inputs['email'],
-                    message: $field_inputs['message']
-                );
+                if ($validation_result['ok']) {
+                    $field_inputs = $validation_result['field_inputs'];
+                    ModelSelector::getWebsiteInfoModel()->saveContact(
+                        name: $field_inputs['name'],
+                        email: $field_inputs['email'],
+                        message: $field_inputs['message']
+                    );
+                    $_SESSION['messages'][] = 'Message has been sent!';
+                }
                 break;
+
+            case 'editUser':
+                if ($validation_result['ok']) {
+
+                    $validation_result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
+
+                    if ($validation_result['ok'] && ($validation_result['field_inputs']['name'] || $validation_result['field_inputs']['email'])) {
+                        $this->response['page'] = 'dashboard';
+                        $_SESSION['messages'][] = 'Your information has been updated.';
+                    } else {
+                        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+                    }
+                }
+                break;
+            case 'editPassword':
+                if ($validation_result['ok']) {
+                    $validation_result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);
+
+                    if ($validation_result['ok']) {
+                        $this->response['page'] = 'dashboard';
+                        $_SESSION['messages'][] = 'Password successfully changed';
+                    } else {
+                        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+                    }
+                }
+                break;
+            default:
+                throw new \Exception("Request couldnt be handled, please message an admin");
         }
 
         return $this->response;
     }
-
-
-
 }

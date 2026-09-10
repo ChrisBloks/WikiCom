@@ -1,16 +1,32 @@
 $(document).ready(function () {
-  // $(".delete-button").on("click", function () {
-  //   alert("Are you sure you want to delete this article?");
-  // });
+  // load bsmarkdown before anything else on page or it doesnt load
+  $(".article-text").bsMarkdownEditor({
+    minHeight: 240,
+    preview: true,
+    mode: "editor",
+    resize: "vertical",
+    size: "sm",
+    btnClass: "border-0",
+    wrapperClass: null,
+    actions: "all",
+    lang: "en",
+  });
+
+
+  $(".d-flex.flex-grow-1 table").addClass("table table-striped table-bordered");
+  $(".d-flex.flex-grow-1  th, .d-flex.flex-grow-1  td").addClass(
+    "align-middle",
+  );
+  $("#add-tag-widget").insertBefore(".checkbox_group");
 
   $("#new-tag-name").on("keydown", function (event) {
+    // Enter as "Add tag"
     if (event.key === "Enter") {
       event.preventDefault();
-      $("#add-tag-btn").trigger("click"); // optional: treat Enter as "Add tag"
+      $("#add-tag-btn").trigger("click");
     }
   });
 
-  $("#add-tag-widget").insertBefore(".checkbox_group");
 
   $("#add-tag-btn").on("click", function () {
     var tagName = $("#new-tag-name").val().trim();
@@ -79,7 +95,14 @@ $(document).ready(function () {
     });
   });
 });
+  //============================================================================
+  // Star rating width
+  // ===========================================================================
 
+$(document).ready(function() {
+  var star_rating_width = $('.fill-ratings span').width();
+  $('.star-ratings').width(star_rating_width);
+});
 // =======================================================
 // Functions
 // ========================================================

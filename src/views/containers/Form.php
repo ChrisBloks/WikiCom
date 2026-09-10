@@ -4,12 +4,18 @@ namespace Wiki\views\containers;
 
 use Wiki\tools\utils, Wiki\views\fields;
 
+/**
+ * Builds a form element with an action and a submit button
+ * Hidden fields can be added through Form->addhiddenfield
+ * @var $action         URL that processes the form submission
+ * @var $method         The HTTP method to submit the form with (POST/GET/etc)
+ * @var $submit_caption Text on submit button
+ * @var $class          css class styling tag
+ * @var $enctype        encoding type
+ * @var $submit_class   submit button css class styling
+ */
 class Form extends ContainerElement
 {
-
-    // Form class is a child of Container element, to display forms very well
-
-
     // properties
     protected array $hiddenfields;
 
@@ -20,8 +26,4 @@ class Form extends ContainerElement
         $this->html_after = '<button type="submit" value="submit"'. utils\HtmlUtils::addClassAttr($submit_class) .'>' . $submit_caption . ' </button></form>';
     }
 
-    public function addHiddenField(string $name, string $value): void
-    {
-        $this->addElement(new fields\HiddenField($name, $value));
-    }
 }

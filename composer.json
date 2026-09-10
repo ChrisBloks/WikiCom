@@ -4,7 +4,10 @@
     "type": "project",
     "require": {
         "php": ">= 8.2",
-        "monolog/monolog": "^3.0"
+        "monolog/monolog": "^3.0",
+        "webcito/bs-markdown-editor": "^1.1",
+        "league/commonmark": "^2.10",
+        "ezyang/htmlpurifier": "^4.19"
     },
     "autoload": {
         "psr-4": {
@@ -13,4 +16,3 @@
         }
     }
 }
-

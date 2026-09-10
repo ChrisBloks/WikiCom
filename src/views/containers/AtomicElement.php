@@ -4,6 +4,11 @@ namespace Wiki\views\containers;
 
 use Wiki\tools\interfaces, Wiki\tools\utils;
 
+/**
+ * Used to create html code
+ * @var $html contains the html code
+ * @var $class used to add class attributes
+ */
 class AtomicElement implements interfaces\iElement
 {
     // properties

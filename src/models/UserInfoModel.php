@@ -40,7 +40,7 @@ class UserInfoModel extends BaseModel
         return $result;
     }
 
-    
+
 
     /**
      * Check if an email is already present in the database.
@@ -67,17 +67,16 @@ class UserInfoModel extends BaseModel
      */
     public function saveUser(string $username, string $password, string $email): int|false
     {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO user (name,password,email) 
                         VALUES (:username,:password,:email)";
         $params = [
             "username" => $username,
-            "password" => $hashed_password,
+            "password" => $password,
             "email" => $email
         ];
         $result = $this->crud->doInsert($sql, $params);
-        if ($result==false) {
+        if ($result == false) {
             $this->logError("registration failed");
             $result = false;
         }
@@ -92,21 +91,21 @@ class UserInfoModel extends BaseModel
      * @param string $author_id
      * @return string|false
      */
-    public function saveUserAboutInfo(string $imgFileName, string $description,string $author_id): string|false
+    public function saveUserAboutInfo(string $imgFileName, string $description, string $author_id): string|false
     {
         $sql = "UPDATE user 
                 SET imgFileName = :imgFileName,
                     description = :description
                 WHERE id = :author_id";
-                
+
         $params = [
             "author_id" => $author_id,
             "imgFileName" => $imgFileName,
             "description" => $description
         ];
-        $result = $this->crud->doInsert($sql, $params);
+        $result = $this->crud->doUpdate($sql, $params);
         if (empty($result)) {
-            $this->logError("registration failed");
+            $this->logError("About info is not saved");
             $result = false;
         }
         return $result;
@@ -127,6 +126,33 @@ class UserInfoModel extends BaseModel
             $this->logError("No user with this id");
             $result = false;
         }
+        return $result;
+    }
+
+    public function updateUserInfo(array $fields, int $user_id): array|bool
+    {
+
+        if (empty($fields)) {
+            return false;
+        }
+
+        $setParts = [];
+        $params = [];
+        foreach ($fields as $column => $value) {
+            $setParts[] = "`$column` = :$column";
+            $params[$column] = $value;
+        }
+        $params['user_id'] = $user_id;
+
+        $sql = "UPDATE user SET " . implode(', ', $setParts) . " WHERE id = :user_id";
+
+        $result = $this->crud->doUpdate($sql, $params);
+        
+        if (empty($result)) {
+            $this->logError("Failed to update user info");
+            return false;
+        }
+
         return $result;
     }
 }

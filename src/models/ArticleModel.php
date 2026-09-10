@@ -37,7 +37,8 @@ class ArticleModel extends BaseModel
                         article.imgFileName,
                     article.lastEdit,
                     article.user_id,
-                    COALESCE(v_article_avg_rating.AVGrating, 0) AS rating
+                    COALESCE(v_article_avg_rating.AVGrating, 0) AS rating,
+                    v_article_avg_rating.Nratings AS n_ratings
                 FROM
                     wiki_article AS article
                 JOIN USER ON article.user_id = user.id
@@ -91,7 +92,7 @@ class ArticleModel extends BaseModel
      * @param string $sortBy defines contents of the SORT BY clause.
      * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
      */
-    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy): array|false
+    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy =''): array|false
     {
         // Check if sortBy is a valid sorting method
 
@@ -100,10 +101,12 @@ class ArticleModel extends BaseModel
         $base_select_clause = "SELECT DISTINCT 
                                 article.id,
                                 article.title, 
-                                article.summary, 
+                                article.summary,
+                                article.user_id, 
                                 article.lastEdit AS lastEdit";
 
-        $extra_select_clause = ", COALESCE(vr.AVGrating, 0) AS rating" .
+        $extra_select_clause = ", COALESCE(vr.AVGrating, 0) AS rating
+                                , Nratings AS Nratings" .
             (!empty($author_ids) ? // (optional append) If authors are specified
                 " ,user.name as author" : // get the authors
                 ""); // get average rating
@@ -149,7 +152,14 @@ class ArticleModel extends BaseModel
             $where_clause .
             $order_by_clause;
 
-        return $this->crud->selectMany(sql: $sql, params: $params);
+        $result = $this->crud->selectMany(sql: $sql, params: $params);
+
+        foreach ($result as $key => $article){
+            $result[$key]['tags'] = implode(",",$this->fetchArticleTags($article['id']));
+            $result[$key]['Author'] = ModelSelector::getUserInfoModel()->fetchUserInfoById($article['user_id'])['name'];
+        }
+
+        return $result;
     }
 
     /**

@@ -2,8 +2,10 @@
 
 namespace Wiki\controllers\factories;
 
+use ArrayAccess;
 use Wiki\tools\utils\HtmlUtils;
 use Wiki\views\containers\Form;
+use Wiki\views\fields\HiddenField;
 
 /**
  * Factroy class for dynamically creating fields for the Wiki
@@ -21,7 +23,7 @@ class FormFactory
      * @param string $submit_class name of the submit button
      * @return Form
      */
-    public function createForm(array $form_info, array $field_info, array $hidden_field_info, 
+    public function createForm(ArrayAccess $form_info, array $field_info, array $hidden_field_info, 
                                array $field_text = [], string $class = "", string $submit_class='',
                                array $field_array_values = []): Form
     {
@@ -37,7 +39,7 @@ class FormFactory
 
         // Add hidden fields to the form.
         foreach ($hidden_field_info as $field_name => $field_value) {
-            $form->addHiddenField($field_name, $field_value);
+            $form->addElement(new HiddenField(name: $field_name, value: $field_value));
         }
 
         // Initialize FieldFactory to prepare for loop.
