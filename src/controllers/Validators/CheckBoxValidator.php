@@ -15,7 +15,7 @@ class CheckBoxValidator implements iValidator
 
     public function validate(string $name, bool $optional = false): bool
     {
-        $this->field_inputs[$name] = $_POST[$name];
+        $this->field_inputs[$name] = isset($_POST[$name]) ? $_POST[$name]:array();
 
         if ($optional == false){
             if (empty($this->field_inputs[$name]))
@@ -37,12 +37,14 @@ class CheckBoxValidator implements iValidator
     {
         // reset needed because field_inputs is an array in an array
         $inputs = reset($field_inputs);
+        if (!is_null($inputs)){
         foreach ($inputs as $value)
             if (!is_numeric($value))
             {
                 $this ->logError("Check box is not numeric");
                 return false;
             }
+        }
         return true;
     }
 }
