@@ -91,7 +91,6 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['Author'] = $validation_result['field_inputs']['Author'] ?? [];
                 $this->response['sortby'] = $validation_result['field_inputs']['sortby'];
                 $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'], ['Tag', 'Author']);
-
                 break;
             case 'rateArticle':
                 // This is actually an ajax function

@@ -46,7 +46,22 @@ class FormModel extends BaseModel
         foreach ($result as &$field_info) {
             if (isset($field_info["id"])) {
                 $field_sub_info = $this->fetchLookupInfo(field_info: $field_info, parent_id: $id);
-                $field_info = array_merge($field_info, $field_sub_info);
+                // format result
+                $subcontainer_info = [];
+                // Effectively transposes the $result array from [row => [col => value]] to [col => [row => value]]
+                // Where 'col_name1' is replaced with 'options' and 'col_name2' is replaced with 'values'.
+                // Loop over rows
+                foreach ($field_sub_info as $id => $row) {
+                    // Loop over columns
+                    foreach ($row as $column_name => $value) {
+                        // If 'options' is already set, put column value under 'value' instead
+                        $column_name = isset($subcontainer_info['options'][$id]) ? 'value' : 'options';
+                        $subcontainer_info[$column_name][$id]['name'] = $value;
+                        $subcontainer_info[$column_name][$id]['label'] = $field_info['name'];
+                        $subcontainer_info[$column_name][$id]['id'] = $id;
+                    }
+                }
+                $field_info = array_merge($field_info, $subcontainer_info);
             }
         }
         unset($field_info);
@@ -75,7 +90,7 @@ class FormModel extends BaseModel
         $result = $this->crud->selectMany(sql: $sql, params: $params);
 
         // If the query was succesful, extract the first row
-        if ($result !== false && count($result)==1) {
+        if ($result !== false && count($result) == 1) {
             $result = $result[0];
         }
 
@@ -168,7 +183,7 @@ class FormModel extends BaseModel
         if (!empty($field_info["bridge_table"])) {
             [$bridge_table_column, $source_table_column] = explode(",", $field_info["bridge_values"]);
 
-            $join_clause =  "JOIN {$field_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
+            $join_clause = "JOIN {$field_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
             // If a LEFT JOIN is required
             if (!empty($field_info['left_join_on'])) {
                 $join_clause = "LEFT " . $join_clause . " AND {$field_info["left_join_on"]} = {$parent_id}";
@@ -186,23 +201,11 @@ class FormModel extends BaseModel
 
 
         // Execute the query
-        $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE|\PDO::FETCH_ASSOC);
+        $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
 
-        // format result
-        $subcontainer_info = [];
-        // Effectively transposes the $result array from [row => [col => value]] to [col => [row => value]]
-        // Where 'col_name1' is replaced with 'options' and 'col_name2' is replaced with 'values'.
-        // Loop over rows
-        foreach ($result as $id => $row){
-            // Loop over columns
-            foreach($row as $column_name => $value){
-                // If 'options' is already set, put column value under 'value' instead
-                $column_name = isset($subcontainer_info['options'][$id]) ? 'value' :'options';
-                $subcontainer_info[$column_name][$id] = $value; 
-            }
-        }
 
-        return $subcontainer_info;
+
+        return $result;
     }
 
 

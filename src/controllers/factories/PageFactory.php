@@ -236,6 +236,8 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
+                HtmlUtils::dump("real", $form_fields);
     
                 // TESTING
                 $form_fields = [
@@ -288,34 +290,34 @@ class PageFactory
                          [
                             // 0 => ['tag4', 'tag5'],
                             1 => [
-                                'name' => 'tag',
+                                'name' => 'tag[1]',
                                 'label' => 'PHP',
                                 'class' => 'filter-tag form-check-input border',
-                                'value' => '1',
+                                'value' => 'PHP',
                             ],
                             2 => [
-                                'name' => 'tag',
+                                'name' => 'tag[20]',
                                 'label' => 'php',
                                 'class' => 'filter-tag form-check-input border',
-                                'value' => '2',
+                                'value' => 'php',
                             ],
                             3 => [
-                                'name' => 'tag',
+                                'name' => 'tag[3]',
                                 'label' => 'code',
                                 'class' => 'filter-tag form-check-input border',
-                                'value' => '3',
+                                'value' => 'code',
                             ],
                             4 => [
-                                'name' => 'tag',
+                                'name' => 'tag[4]',
                                 'label' => 'tag1',
                                 'class' => 'filter-tag form-check-input border',
-                                'value' => '4',
+                                'value' => 'tag1',
                             ],
                             5 => [
-                                'name' => 'tag',
+                                'name' => 'tag[5]',
                                 'label' => 'tag2',
                                 'class' => 'filter-tag form-check-input border',
-                                'value' => '5',
+                                'value' => 'tag2',
                             ],
                         ]
                     ]
@@ -327,7 +329,7 @@ class PageFactory
                         2 => 1
                     ]
                 ];
-
+                HtmlUtils::dump("fake", $form_fields);
                 // HtmlUtils::dump("form_info", $form_info);
                 // HtmlUtils::dump("form_fields", $form_fields);
                 // HtmlUtils::dump("response", $this->response);
