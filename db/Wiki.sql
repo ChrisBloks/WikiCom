@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2026 at 12:52 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Gegenereerd op: 11 sep 2026 om 12:19
+-- Serverversie: 10.4.32-MariaDB
+-- PHP-versie: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,11 +20,13 @@ SET time_zone = "+00:00";
 --
 -- Database: `wiki`
 --
+CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact_messages`
+-- Tabelstructuur voor tabel `contact_messages`
 --
 
 CREATE TABLE `contact_messages` (
@@ -36,7 +38,7 @@ CREATE TABLE `contact_messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `contact_messages`
+-- Gegevens worden geëxporteerd voor tabel `contact_messages`
 --
 
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
@@ -66,7 +68,7 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `field_info`
+-- Tabelstructuur voor tabel `field_info`
 --
 
 CREATE TABLE `field_info` (
@@ -82,7 +84,7 @@ CREATE TABLE `field_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `field_info`
+-- Gegevens worden geëxporteerd voor tabel `field_info`
 --
 
 INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form_info_id`, `label`, `display_order`, `optional`) VALUES
@@ -112,7 +114,7 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form
 -- --------------------------------------------------------
 
 --
--- Table structure for table `form_info`
+-- Tabelstructuur voor tabel `form_info`
 --
 
 CREATE TABLE `form_info` (
@@ -127,7 +129,7 @@ CREATE TABLE `form_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `form_info`
+-- Gegevens worden geëxporteerd voor tabel `form_info`
 --
 
 INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_info_id`, `display_class`, `enctype`, `submit_class`) VALUES
@@ -144,7 +146,7 @@ INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_in
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lookup_info`
+-- Tabelstructuur voor tabel `lookup_info`
 --
 
 CREATE TABLE `lookup_info` (
@@ -159,7 +161,7 @@ CREATE TABLE `lookup_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `lookup_info`
+-- Gegevens worden geëxporteerd voor tabel `lookup_info`
 --
 
 INSERT INTO `lookup_info` (`id`, `source_table`, `column_names`, `order_by`, `where_value`, `bridge_table`, `bridge_values`, `left_join_on`) VALUES
@@ -171,7 +173,7 @@ INSERT INTO `lookup_info` (`id`, `source_table`, `column_names`, `order_by`, `wh
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu_items`
+-- Tabelstructuur voor tabel `menu_items`
 --
 
 CREATE TABLE `menu_items` (
@@ -182,7 +184,7 @@ CREATE TABLE `menu_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `menu_items`
+-- Gegevens worden geëxporteerd voor tabel `menu_items`
 --
 
 INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
@@ -198,7 +200,7 @@ INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page_elements`
+-- Tabelstructuur voor tabel `page_elements`
 --
 
 CREATE TABLE `page_elements` (
@@ -208,7 +210,7 @@ CREATE TABLE `page_elements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `page_elements`
+-- Gegevens worden geëxporteerd voor tabel `page_elements`
 --
 
 INSERT INTO `page_elements` (`id`, `class`, `element_type`) VALUES
@@ -218,7 +220,7 @@ INSERT INTO `page_elements` (`id`, `class`, `element_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page_structure`
+-- Tabelstructuur voor tabel `page_structure`
 --
 
 CREATE TABLE `page_structure` (
@@ -232,7 +234,7 @@ CREATE TABLE `page_structure` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `styling_containers`
+-- Tabelstructuur voor tabel `styling_containers`
 --
 
 CREATE TABLE `styling_containers` (
@@ -242,7 +244,7 @@ CREATE TABLE `styling_containers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `styling_containers`
+-- Gegevens worden geëxporteerd voor tabel `styling_containers`
 --
 
 INSERT INTO `styling_containers` (`id`, `name`, `styling`) VALUES
@@ -267,7 +269,7 @@ INSERT INTO `styling_containers` (`id`, `name`, `styling`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `styling_elements`
+-- Tabelstructuur voor tabel `styling_elements`
 --
 
 CREATE TABLE `styling_elements` (
@@ -278,7 +280,7 @@ CREATE TABLE `styling_elements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `styling_elements`
+-- Gegevens worden geëxporteerd voor tabel `styling_elements`
 --
 
 INSERT INTO `styling_elements` (`id`, `website_info_id`, `class_name`, `class`) VALUES
@@ -305,7 +307,7 @@ INSERT INTO `styling_elements` (`id`, `website_info_id`, `class_name`, `class`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `styling_system`
+-- Tabelstructuur voor tabel `styling_system`
 --
 
 CREATE TABLE `styling_system` (
@@ -315,7 +317,7 @@ CREATE TABLE `styling_system` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `styling_system`
+-- Gegevens worden geëxporteerd voor tabel `styling_system`
 --
 
 INSERT INTO `styling_system` (`id`, `name`, `styling`) VALUES
@@ -326,7 +328,7 @@ INSERT INTO `styling_system` (`id`, `name`, `styling`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_columns`
+-- Tabelstructuur voor tabel `table_columns`
 --
 
 CREATE TABLE `table_columns` (
@@ -341,7 +343,7 @@ CREATE TABLE `table_columns` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `table_columns`
+-- Gegevens worden geëxporteerd voor tabel `table_columns`
 --
 
 INSERT INTO `table_columns` (`id`, `column_name`, `column_title`, `display_type`, `class_types`, `column_headers`, `display_order`, `href`) VALUES
@@ -355,7 +357,7 @@ INSERT INTO `table_columns` (`id`, `column_name`, `column_title`, `display_type`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tabelstructuur voor tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -368,11 +370,11 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `user`
+-- Gegevens worden geëxporteerd voor tabel `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
+(1, 'Danny12', '$2y$10$0UIJllrDci5.4ibTGhUp3OlP0oOGcmqlF5DowGJ0Mce0Zc./RKPrm', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christian', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
 (11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
@@ -380,8 +382,8 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `descripti
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v_article_avg_rating`
--- (See below for the actual view)
+-- Stand-in structuur voor view `v_article_avg_rating`
+-- (Zie onder voor de actuele view)
 --
 CREATE TABLE `v_article_avg_rating` (
 `id` int(11)
@@ -392,7 +394,7 @@ CREATE TABLE `v_article_avg_rating` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `website_info`
+-- Tabelstructuur voor tabel `website_info`
 --
 
 CREATE TABLE `website_info` (
@@ -402,7 +404,7 @@ CREATE TABLE `website_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `website_info`
+-- Gegevens worden geëxporteerd voor tabel `website_info`
 --
 
 INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
@@ -421,7 +423,7 @@ INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `website_info_to_styling_containers`
+-- Tabelstructuur voor tabel `website_info_to_styling_containers`
 --
 
 CREATE TABLE `website_info_to_styling_containers` (
@@ -430,7 +432,7 @@ CREATE TABLE `website_info_to_styling_containers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `website_info_to_styling_containers`
+-- Gegevens worden geëxporteerd voor tabel `website_info_to_styling_containers`
 --
 
 INSERT INTO `website_info_to_styling_containers` (`website_info_id`, `styling_id`) VALUES
@@ -473,7 +475,7 @@ INSERT INTO `website_info_to_styling_containers` (`website_info_id`, `styling_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wiki_article`
+-- Tabelstructuur voor tabel `wiki_article`
 --
 
 CREATE TABLE `wiki_article` (
@@ -487,7 +489,7 @@ CREATE TABLE `wiki_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `wiki_article`
+-- Gegevens worden geëxporteerd voor tabel `wiki_article`
 --
 
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
@@ -498,7 +500,7 @@ INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `i
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wiki_article_to_tag`
+-- Tabelstructuur voor tabel `wiki_article_to_tag`
 --
 
 CREATE TABLE `wiki_article_to_tag` (
@@ -507,7 +509,7 @@ CREATE TABLE `wiki_article_to_tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `wiki_article_to_tag`
+-- Gegevens worden geëxporteerd voor tabel `wiki_article_to_tag`
 --
 
 INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
@@ -519,7 +521,7 @@ INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wiki_rating`
+-- Tabelstructuur voor tabel `wiki_rating`
 --
 
 CREATE TABLE `wiki_rating` (
@@ -529,7 +531,7 @@ CREATE TABLE `wiki_rating` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `wiki_rating`
+-- Gegevens worden geëxporteerd voor tabel `wiki_rating`
 --
 
 INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
@@ -542,7 +544,7 @@ INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wiki_sortby_info`
+-- Tabelstructuur voor tabel `wiki_sortby_info`
 --
 
 CREATE TABLE `wiki_sortby_info` (
@@ -552,7 +554,7 @@ CREATE TABLE `wiki_sortby_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `wiki_sortby_info`
+-- Gegevens worden geëxporteerd voor tabel `wiki_sortby_info`
 --
 
 INSERT INTO `wiki_sortby_info` (`id`, `sortby_name`, `sortby_value`) VALUES
@@ -562,7 +564,7 @@ INSERT INTO `wiki_sortby_info` (`id`, `sortby_name`, `sortby_value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wiki_tag`
+-- Tabelstructuur voor tabel `wiki_tag`
 --
 
 CREATE TABLE `wiki_tag` (
@@ -571,7 +573,7 @@ CREATE TABLE `wiki_tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `wiki_tag`
+-- Gegevens worden geëxporteerd voor tabel `wiki_tag`
 --
 
 INSERT INTO `wiki_tag` (`id`, `name`) VALUES
@@ -582,24 +584,24 @@ INSERT INTO `wiki_tag` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_article_avg_rating`
+-- Structuur voor de view `v_article_avg_rating`
 --
 DROP TABLE IF EXISTS `v_article_avg_rating`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_article_avg_rating`  AS SELECT `a`.`id` AS `id`, avg(`r`.`rating`) AS `AVGrating`, count(`r`.`rating`) AS `Nratings` FROM (`wiki_article` `a` left join `wiki_rating` `r` on(`a`.`id` = `r`.`article_id`)) GROUP BY `a`.`id` ;
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `contact_messages`
+-- Indexen voor tabel `contact_messages`
 --
 ALTER TABLE `contact_messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `field_info`
+-- Indexen voor tabel `field_info`
 --
 ALTER TABLE `field_info`
   ADD PRIMARY KEY (`id`),
@@ -607,32 +609,32 @@ ALTER TABLE `field_info`
   ADD KEY `lookup_info_id` (`lookup_info_id`);
 
 --
--- Indexes for table `form_info`
+-- Indexen voor tabel `form_info`
 --
 ALTER TABLE `form_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `website_info_to_form_info` (`website_info_id`);
 
 --
--- Indexes for table `lookup_info`
+-- Indexen voor tabel `lookup_info`
 --
 ALTER TABLE `lookup_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `menu_items`
+-- Indexen voor tabel `menu_items`
 --
 ALTER TABLE `menu_items`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `page_elements`
+-- Indexen voor tabel `page_elements`
 --
 ALTER TABLE `page_elements`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `page_structure`
+-- Indexen voor tabel `page_structure`
 --
 ALTER TABLE `page_structure`
   ADD PRIMARY KEY (`id`),
@@ -640,230 +642,230 @@ ALTER TABLE `page_structure`
   ADD KEY `fk_page_elements_to_page_structure` (`page_element_id`);
 
 --
--- Indexes for table `styling_containers`
+-- Indexen voor tabel `styling_containers`
 --
 ALTER TABLE `styling_containers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `styling_elements`
+-- Indexen voor tabel `styling_elements`
 --
 ALTER TABLE `styling_elements`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_website_info_dplay_classes` (`website_info_id`);
 
 --
--- Indexes for table `styling_system`
+-- Indexen voor tabel `styling_system`
 --
 ALTER TABLE `styling_system`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_columns`
+-- Indexen voor tabel `table_columns`
 --
 ALTER TABLE `table_columns`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `column_key_unique` (`column_name`);
 
 --
--- Indexes for table `user`
+-- Indexen voor tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `website_info`
+-- Indexen voor tabel `website_info`
 --
 ALTER TABLE `website_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `website_info_to_styling_containers`
+-- Indexen voor tabel `website_info_to_styling_containers`
 --
 ALTER TABLE `website_info_to_styling_containers`
   ADD PRIMARY KEY (`website_info_id`,`styling_id`),
   ADD KEY `styling_id` (`styling_id`);
 
 --
--- Indexes for table `wiki_article`
+-- Indexen voor tabel `wiki_article`
 --
 ALTER TABLE `wiki_article`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_article_to_user_id` (`user_id`);
 
 --
--- Indexes for table `wiki_article_to_tag`
+-- Indexen voor tabel `wiki_article_to_tag`
 --
 ALTER TABLE `wiki_article_to_tag`
   ADD PRIMARY KEY (`article_id`,`wiki_tag_id`),
   ADD KEY `fk_article_to_tag_tag_id` (`wiki_tag_id`);
 
 --
--- Indexes for table `wiki_rating`
+-- Indexen voor tabel `wiki_rating`
 --
 ALTER TABLE `wiki_rating`
   ADD PRIMARY KEY (`user_id`,`article_id`),
   ADD KEY `fk_rating_to_article_id` (`article_id`);
 
 --
--- Indexes for table `wiki_sortby_info`
+-- Indexen voor tabel `wiki_sortby_info`
 --
 ALTER TABLE `wiki_sortby_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `wiki_tag`
+-- Indexen voor tabel `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `contact_messages`
+-- AUTO_INCREMENT voor een tabel `contact_messages`
 --
 ALTER TABLE `contact_messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `field_info`
+-- AUTO_INCREMENT voor een tabel `field_info`
 --
 ALTER TABLE `field_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `form_info`
+-- AUTO_INCREMENT voor een tabel `form_info`
 --
 ALTER TABLE `form_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `lookup_info`
+-- AUTO_INCREMENT voor een tabel `lookup_info`
 --
 ALTER TABLE `lookup_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `menu_items`
+-- AUTO_INCREMENT voor een tabel `menu_items`
 --
 ALTER TABLE `menu_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `page_structure`
+-- AUTO_INCREMENT voor een tabel `page_structure`
 --
 ALTER TABLE `page_structure`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `styling_containers`
+-- AUTO_INCREMENT voor een tabel `styling_containers`
 --
 ALTER TABLE `styling_containers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `styling_elements`
+-- AUTO_INCREMENT voor een tabel `styling_elements`
 --
 ALTER TABLE `styling_elements`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `styling_system`
+-- AUTO_INCREMENT voor een tabel `styling_system`
 --
 ALTER TABLE `styling_system`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `table_columns`
+-- AUTO_INCREMENT voor een tabel `table_columns`
 --
 ALTER TABLE `table_columns`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `website_info`
+-- AUTO_INCREMENT voor een tabel `website_info`
 --
 ALTER TABLE `website_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `wiki_article`
+-- AUTO_INCREMENT voor een tabel `wiki_article`
 --
 ALTER TABLE `wiki_article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `wiki_sortby_info`
+-- AUTO_INCREMENT voor een tabel `wiki_sortby_info`
 --
 ALTER TABLE `wiki_sortby_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `wiki_tag`
+-- AUTO_INCREMENT voor een tabel `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `field_info`
+-- Beperkingen voor tabel `field_info`
 --
 ALTER TABLE `field_info`
   ADD CONSTRAINT `field_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`),
   ADD CONSTRAINT `field_info_ibfk_2` FOREIGN KEY (`lookup_info_id`) REFERENCES `lookup_info` (`id`);
 
 --
--- Constraints for table `form_info`
+-- Beperkingen voor tabel `form_info`
 --
 ALTER TABLE `form_info`
   ADD CONSTRAINT `website_info_to_form_info` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
 
 --
--- Constraints for table `page_structure`
+-- Beperkingen voor tabel `page_structure`
 --
 ALTER TABLE `page_structure`
   ADD CONSTRAINT `fk_page_elements_to_page_structure` FOREIGN KEY (`page_element_id`) REFERENCES `page_elements` (`id`),
   ADD CONSTRAINT `fk_website_info_to_page_structure` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
 
 --
--- Constraints for table `styling_elements`
+-- Beperkingen voor tabel `styling_elements`
 --
 ALTER TABLE `styling_elements`
   ADD CONSTRAINT `fk_website_info_dplay_classes` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
 
 --
--- Constraints for table `website_info_to_styling_containers`
+-- Beperkingen voor tabel `website_info_to_styling_containers`
 --
 ALTER TABLE `website_info_to_styling_containers`
   ADD CONSTRAINT `website_info_to_styling_containers_ibfk_1` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `website_info_to_styling_containers_ibfk_2` FOREIGN KEY (`styling_id`) REFERENCES `styling_containers` (`id`);
 
 --
--- Constraints for table `wiki_article`
+-- Beperkingen voor tabel `wiki_article`
 --
 ALTER TABLE `wiki_article`
   ADD CONSTRAINT `fk_article_to_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `wiki_article_to_tag`
+-- Beperkingen voor tabel `wiki_article_to_tag`
 --
 ALTER TABLE `wiki_article_to_tag`
   ADD CONSTRAINT `fk_article_to_tag_article_id` FOREIGN KEY (`article_id`) REFERENCES `wiki_article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_article_to_tag_tag_id` FOREIGN KEY (`wiki_tag_id`) REFERENCES `wiki_tag` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `wiki_rating`
+-- Beperkingen voor tabel `wiki_rating`
 --
 ALTER TABLE `wiki_rating`
   ADD CONSTRAINT `fk_rating_to_article_id` FOREIGN KEY (`article_id`) REFERENCES `wiki_article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
