@@ -55,7 +55,9 @@ class SearchableCheckboxes extends BaseField
         $html .= '<div class="checkbox_group">';
 
         foreach ($this->options as $checkbox_info) {
+            $html .= '<div class="checkbox_container">';
             $html .= (new Checkbox($checkbox_info))->show();
+            $html .= '</div>';
         }
         $html .= '</div>';
         return $html .= "</div>";

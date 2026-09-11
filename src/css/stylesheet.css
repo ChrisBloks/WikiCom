@@ -90,6 +90,11 @@ a.rating_option {
   display: block;
 }
 
+div.SearchableCheckboxes {
+  background-color: #e2e2e2;
+  border-color: #383838;
+}
+
 /* .show {
   display: block;
 } */

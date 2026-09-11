@@ -239,11 +239,11 @@ class PageFactory
     
                 // TESTING
                 $form_fields = [
-                    1 =>
+                    0 =>
                     [
                         'type' => 'SearchableCheckboxes',
                         'name' => 'author_SearchableCheckboxes',
-                        'class' => 'fw-bold mb-1 border border-3 filter_author',
+                        'class' => 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author',
                         'label' => 'Select author',
                         'placeholder' => 'Search authors...',
                         'optional' => 1,
@@ -251,36 +251,36 @@ class PageFactory
                          [
                             // 0 => ['tag4', 'tag5'],
                             7 => [
-                                'name' => 'author',
+                                'name' => 'Author[7]',
                                 'label' => 'Danny',
                                 'class' => 'searchable author_checkbox form-check-input',
                                 'value' => '7',
                             ],
                             34 => [
-                                'name' => 'author',
+                                'name' => 'Author[34]',
                                 'label' => 'Marius',
                                 'class' => 'searchable author_checkbox form-check-input',
                                 'value' => '34',
                             ],
                             44 => [
-                                'name' => 'author',
+                                'name' => 'Author[44]',
                                 'label' => 'Christian',
                                 'class' => 'searchable author_checkbox form-check-input',
                                 'value' => '44',
                             ],
                             1 => [
-                                'name' => 'author',
+                                'name' => 'Author[1]',
                                 'label' => 'Geert',
                                 'class' => 'searchable author_checkbox form-check-input',
                                 'value' => '1',
                             ],
                         ]
                     ],
-                    2 =>
+                    1 =>
                     [
                         'type' => 'SearchableCheckboxes',
                         'name' => 'tag_SearchableCheckboxes',
-                        'class' => 'fw-bold mb-1 border border-3 filter_tags',
+                        'class' => 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags',
                         'label' => 'Select tags',
                         'placeholder' => 'Search tags...',
                         'optional' => 1,
@@ -288,43 +288,63 @@ class PageFactory
                          [
                             // 0 => ['tag4', 'tag5'],
                             1 => [
-                                'name' => 'tag',
+                                'name' => 'Tag[1]',
                                 'label' => 'PHP',
                                 'class' => 'searchable filter-tag form-check-input',
                                 'value' => '1',
                             ],
                             2 => [
-                                'name' => 'tag',
+                                'name' => 'Tag[2]',
                                 'label' => 'php',
                                 'class' => 'searchable filter-tag form-check-input',
                                 'value' => '2',
                             ],
                             3 => [
-                                'name' => 'tag',
+                                'name' => 'Tag[3]',
                                 'label' => 'code',
                                 'class' => 'searchable filter-tag form-check-input',
                                 'value' => '3',
                             ],
                             4 => [
-                                'name' => 'tag',
+                                'name' => 'Tag[4]',
                                 'label' => 'tag1',
                                 'class' => 'searchable tag_checkbox form-check-input',
                                 'value' => '4',
                             ],
                             5 => [
-                                'name' => 'tag',
+                                'name' => 'Tag[5]',
                                 'label' => 'tag2',
                                 'class' => 'searchable tag_checkbox form-check-input',
                                 'value' => '5',
                             ],
                         ]
+                    ],
+                    2 => 
+                    [
+                        'type' => 'select',
+                        'name' => 'sortby',
+                        'class' => 'select sort-by form-select',
+                        'label' => 'Sort by',
+                        'optional' => 0,
+                        'id' => 3,
+                        'source_table' => 'wiki_sortby_info',
+                        'column_names' => 'sortby_value,sortby_name',
+                        'order_by' => 'wiki_sortby_info.sortby_name',
+                        'options' => 
+                        [
+                            'lastEdit' => 'Date',
+                            'rating' => 'Rating'
+                        ]
                     ]
+
                 ]; // class="filter-tag form-check-input border"
 
                 $this->response['field_values'] =
                 [
                     'tag' => [
-                        2 => 1
+                        2 => [
+                            
+                        ]
                     ]
                 ];
 
