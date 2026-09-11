@@ -12,6 +12,15 @@ $(document).ready(function () {
     lang: "en",
   });
 
+  // UX password length
+  $(function () {
+    initPasswordLengthChecker();
+  });
+
+
+  //============================================================================
+  // Edit article
+  //===========================================================================
 
   $(".d-flex.flex-grow-1 table").addClass("table table-striped table-bordered");
   $(".d-flex.flex-grow-1  th, .d-flex.flex-grow-1  td").addClass(
@@ -95,14 +104,15 @@ $(document).ready(function () {
     });
   });
 });
-  //============================================================================
-  // Star rating width
-  // ===========================================================================
+//============================================================================
+// Star rating width
+// ===========================================================================
 
-$(document).ready(function() {
+$(document).ready(function () {
   var star_rating_width = $('.fill-ratings span').width();
   $('.star-ratings').width(star_rating_width);
 });
+
 // =======================================================
 // Functions
 // ========================================================
@@ -110,3 +120,51 @@ $(document).ready(function() {
 function escapeHtml(str) {
   return $("<div>").text(str).html();
 }
+
+function initPasswordLengthChecker() {
+  const minLength = parseInt($('#newpassword-2-1').data('min-length'), 10) || 4;
+
+  function showError($input, message) {
+    $input.next('.feedback').remove();
+    if (message) {
+      $input.after(`<div class="feedback error text-danger">${message}</div>`);
+    }
+  }
+
+  function validatePasswordLength() {
+    const newPassword = $('#newpassword-2-1').val();
+    if (newPassword.length > 0 && newPassword.length < minLength) {
+      showError($('#newpassword-2-1'), `Password must be at least ${minLength} characters.`);
+      return false;
+    }
+    showError($('#newpassword-2-1'), '');
+    return true;
+  }
+
+  function validatePasswordsMatch() {
+    const newPassword = $('#newpassword-2-1').val();
+    const verifyPassword = $('#newpassword-2-2').val();
+
+    if (verifyPassword.length > 0 && newPassword !== verifyPassword) {
+      showError($('#verifypassword-2'), 'Passwords do not match.');
+      return false;
+    }
+    showError($('#newpassword-2-2'), '');
+    return true;
+  }
+
+  $('#newpassword-2-1, #newpassword-2-2').on('input', function () {
+    validatePasswordLength();
+    validatePasswordsMatch();
+  });
+
+  $('.edit-password').on('submit', function (e) {
+    const lengthOk = validatePasswordLength();
+    const matchOk = validatePasswordsMatch();
+
+    if (!lengthOk || !matchOk) {
+      e.preventDefault();
+    }
+  });
+}
+

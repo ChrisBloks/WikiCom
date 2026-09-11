@@ -10,5 +10,6 @@ class Config
 
     const LOGPATH = "./logs";
     const FIRST_CELL_TARGET = "editArticle";
+    const MIN_PW_LENGTH = 4;
 
 }
