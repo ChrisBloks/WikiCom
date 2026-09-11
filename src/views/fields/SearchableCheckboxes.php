@@ -38,14 +38,14 @@ class SearchableCheckboxes extends BaseField
     public function show(): string
     {
         // Add container for the search field and checkbox gorup
-        $html = '<div class="fw-bold mb-1 border border-3" ' .
+        $html = "<div class='{$this->class}' " .
                 (isset($this->id) ? "id='{$this->id}'" : "") .
                 '>' . HtmlUtils::printLabel($this->id, $this->label);
 
         // Add search field
         $search_field_info = [
             'name' => 'searchField',
-            'class' => 'form-control', // search-input',
+            'class' => 'searchField form-control', // search-input',
             'label' => '',
         ];
 
@@ -55,7 +55,9 @@ class SearchableCheckboxes extends BaseField
         $html .= '<div class="checkbox_group">';
 
         foreach ($this->options as $checkbox_info) {
+            $html .= '<div class="checkbox_container">';
             $html .= (new Checkbox($checkbox_info))->show();
+            $html .= '</div>';
         }
         $html .= '</div>';
         return $html .= "</div>";

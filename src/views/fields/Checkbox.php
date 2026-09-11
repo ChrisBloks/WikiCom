@@ -28,7 +28,7 @@ class Checkbox extends BaseField
             name: $field_info['name'], 
             label: $field_info['label'],
             class: $field_info['class'],
-            value: $field_info['value'], // For a checbkox, its value should be equal to its id.
+            value: $field_info['value'], // For a checkbox, its value should be equal to its id.
         );
         $this->checked = ($field_info['checked'] ?? false);
     }

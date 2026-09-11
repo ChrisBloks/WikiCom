@@ -28,7 +28,7 @@ class ValidationHandler
     {
         // Populate the validatorList with the required validator instances
         $this->getValidators($field_info);
-
+        
         // Loop through the fields and uses the correct validator
         foreach ($field_info as $field) {
             // Validate the field according to its type
