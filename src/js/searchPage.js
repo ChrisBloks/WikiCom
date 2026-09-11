@@ -2,40 +2,26 @@
 
 
 function updateCheckboxGroup(checkbox_group, search_input, max_distance = 2) {
-
     search_input = search_input.toLowerCase();
 
     // Get all checkboxes
-    let checkbox_divs = checkbox_group.find('div.checkbox_container');
+
 
     // If search_input is empty, show everything
     if (search_input.length == 0) {
         resetCheckboxesToDefault(checkbox_group);
         return;
     }
-
-    // Else hide or show each checkbox based on its string distance to the search_input
-    checkbox_divs.each(function (_) {
-        let div = $(this)
-        let label = div.find('label');
-        let string_distance = levenshtein_distance(label.text().toLowerCase(), search_input);
-
-        if (string_distance <= max_distance) {
-            $(this).css('display', 'block');
-        }
-        else {
-            $(this).css('display', 'none');
-        }
-    });
+    orderCheckboxes(checkbox_group, search_input, max_distance);
 }
 
 
 function resetCheckboxesToDefault(checkbox_group) {
-    checkbox_divs = checkbox_group.find('div.checkbox_container');
+    let checkbox_divs = checkbox_group.find('div.checkbox_container');
 
 
     // Make each checkbox visible and store its index for sorting
-    checkbox_array = []
+    let checkbox_array = []
     checkbox_divs.each(function (index) {
         let checkbox_div = $(this);
         checkbox_div.css('display', 'block'); // make visibble
@@ -49,6 +35,62 @@ function resetCheckboxesToDefault(checkbox_group) {
         return a[1].localeCompare(b[1]);
     });
 
+
+    // Build up html to put on page
+    html = "";
+    checkbox_array.forEach(checkbox_div => {
+        html += checkbox_div[0].get(0).outerHTML;
+    });
+
+    // update page
+    checkbox_group.html(html);
+}
+
+function orderCheckboxes(checkbox_group, search_input, max_distance) {
+    let checkbox_divs = checkbox_group.find('div.checkbox_container'); // jQuery set
+
+    // Collect checkboxes for ordering 
+    let checkbox_array = [];
+
+    // For each checkbox element, calculate its string distance to the search input
+    checkbox_divs.each(function (index) {
+        let div = $(this)
+        let label = div.find('label');
+        let string_distance = levenshtein_distance(
+            label.text().toLowerCase(),
+            search_input);
+
+        // Hide elements if their string distance exceeds the max distance
+        if (string_distance <= max_distance) {
+            $(this).css('display', 'block');
+        }
+        else {
+            $(this).css('display', 'none');
+        }
+
+        //              [int => [jQuery, int, string]]
+        checkbox_array[index] = [div, string_distance, label.text().toLowerCase()]
+    });
+
+    // Attempt to sort by distance, if distance is equal sort alphabetically
+    checkbox_array.sort(function (a, b) {
+        let dist_a = a[1];
+        let dist_b = b[1];
+        // sort by distance
+        if (dist_a > dist_b) {
+            return 1;
+        }
+        if (dist_a < dist_b) {
+            return -1;
+        }
+        // dist_a == dist_b
+        // sort alphabetically
+        else {
+            let label_a = a[2];
+            let label_b = b[2];
+            return label_a.localeCompare(label_b);
+        }
+    });
 
     // Build up html to put on page
     html = "";
@@ -99,7 +141,6 @@ function levenshtein_distance(str1, str2) {
             chr2 = str2[j - 1];
             (chr1 == chr2 ? cost = 0 : cost = 1)
 
-
             arr[j][i] = Math.min(
                 arr[j - 1][i - 1] + cost, // Substitution
                 arr[j][i - 1], // Insertion is free
@@ -112,7 +153,6 @@ function levenshtein_distance(str1, str2) {
 
 $(document).ready(function () {
     console.log('searchPage.js READY');
-
     //TODO: should be given sorted by default
     $(".checkbox_group").each(function (_) {
         resetCheckboxesToDefault($(this));
@@ -125,7 +165,7 @@ $(document).ready(function () {
             let search_field = $(this);
             let checkbox_group = search_field.parent()
                 .find(".checkbox_group");
-            updateCheckboxGroup(checkbox_group, search_field.val(), 1);
+            updateCheckboxGroup(checkbox_group, search_field.val(), 2);
 
         }
     })
