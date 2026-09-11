@@ -25,12 +25,12 @@ class Select extends BaseField
         $ret = HtmlUtils::printLabel($this->id, $this->label)
             . '<select' . $this->baseAttribs() . ">";
 
-        foreach ($this->options as $value => $display) {
+        foreach ($this->options as $select_info) {
             $ret .= '<option '.
                     (!empty($option_class) ? 'class="'.$option_class.'"' : ""). //
-                    'value="' . $value . '"'
-                    .($value == $this->selected_option ? ' selected' : '') . ">"
-                    .$display.
+                    'value="' . $select_info['value'] . '"'
+                    .($select_info['value'] == $this->selected_option ? ' selected' : '') . ">"
+                    .$select_info['label'].
                 '</option>';
         }
 

@@ -5,6 +5,7 @@ namespace Wiki\controllers\validators;
 use Wiki\tools\interfaces\iValidator,
     Wiki\tools\utils\Utils,
     Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\tools\utils\HtmlUtils;
 
 
 class SortValidator implements iValidator

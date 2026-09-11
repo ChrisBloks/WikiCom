@@ -90,6 +90,7 @@ class PageFactory
         ));
 
         switch ($this->page){
+            case 'editArticle':
             case 'search':
                 $this->htmlpage->addToHeadContent(
                     new AtomicElement(
@@ -236,120 +237,13 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-
-                HtmlUtils::dump("real", $form_fields);
     
-                // TESTING
-                $form_fields = [
-                    0 =>
-                    [
-                        'type' => 'SearchableCheckboxes',
-                        'name' => 'author_SearchableCheckboxes',
-                        'class' => 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author',
-                        'label' => 'Select author',
-                        'placeholder' => 'Search authors...',
-                        'optional' => 1,
-                        'options' =>
-                         [
-                            // 0 => ['tag4', 'tag5'],
-                            7 => [
-                                'name' => 'Author[7]',
-                                'label' => 'Danny',
-                                'class' => 'searchable author_checkbox form-check-input',
-                                'value' => '7',
-                            ],
-                            34 => [
-                                'name' => 'Author[34]',
-                                'label' => 'Marius',
-                                'class' => 'searchable author_checkbox form-check-input',
-                                'value' => '34',
-                            ],
-                            44 => [
-                                'name' => 'Author[44]',
-                                'label' => 'Christian',
-                                'class' => 'searchable author_checkbox form-check-input',
-                                'value' => '44',
-                            ],
-                            1 => [
-                                'name' => 'Author[1]',
-                                'label' => 'Geert',
-                                'class' => 'searchable author_checkbox form-check-input',
-                                'value' => '1',
-                            ],
-                        ]
-                    ],
-                    1 =>
-                    [
-                        'type' => 'SearchableCheckboxes',
-                        'name' => 'tag_SearchableCheckboxes',
-                        'class' => 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags',
-                        'label' => 'Select tags',
-                        'placeholder' => 'Search tags...',
-                        'optional' => 1,
-                        'options' =>
-                         [
-                            // 0 => ['tag4', 'tag5'],
-                            1 => [
-                                'name' => 'Tag[1]',
-                                'label' => 'PHP',
-                                'class' => 'searchable filter-tag form-check-input',
-                                'value' => '1',
-                            ],
-                            2 => [
-                                'name' => 'Tag[2]',
-                                'label' => 'php',
-                                'class' => 'searchable filter-tag form-check-input',
-                                'value' => '2',
-                            ],
-                            3 => [
-                                'name' => 'Tag[3]',
-                                'label' => 'code',
-                                'class' => 'searchable filter-tag form-check-input',
-                                'value' => '3',
-                            ],
-                            4 => [
-                                'name' => 'Tag[4]',
-                                'label' => 'tag1',
-                                'class' => 'searchable tag_checkbox form-check-input',
-                                'value' => '4',
-                            ],
-                            5 => [
-                                'name' => 'Tag[5]',
-                                'label' => 'tag2',
-                                'class' => 'searchable tag_checkbox form-check-input',
-                                'value' => '5',
-                            ],
-                        ]
-                    ],
-                    2 => 
-                    [
-                        'type' => 'select',
-                        'name' => 'sortby',
-                        'class' => 'select sort-by form-select',
-                        'label' => 'Sort by',
-                        'optional' => 0,
-                        'id' => 3,
-                        'source_table' => 'wiki_sortby_info',
-                        'column_names' => 'sortby_value,sortby_name',
-                        'order_by' => 'wiki_sortby_info.sortby_name',
-                        'options' => 
-                        [
-                            'lastEdit' => 'Date',
-                            'rating' => 'Rating'
-                        ]
-                    ]
+                
 
-                ]; // class="filter-tag form-check-input border"
+                // class="filter-tag form-check-input border"
 
-                $this->response['field_values'] =
-                [
-                    'tag' => [
-                        2 => [
-                            
-                        ]
-                    ]
-                ];
-                HtmlUtils::dump("fake", $form_fields);
+    
+
                 // HtmlUtils::dump("form_info", $form_info);
                 // HtmlUtils::dump("form_fields", $form_fields);
                 // HtmlUtils::dump("response", $this->response);

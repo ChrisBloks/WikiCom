@@ -21,6 +21,7 @@ enum ValidatorFactory: string
     case VSORT = 'select';
     case VCHECKBOX = 'checkboxgroup';
 
+    case VSCHECKBOX = 'SearchableCheckboxes';
     public function createValidator(): iValidator
     {
         return match ($this) {
@@ -31,7 +32,8 @@ enum ValidatorFactory: string
             self::VNEWPASS => new NewPasswordValidator(),
             self::VFILE => new ImgValidator(),
             self::VSORT => new SortValidator(),
-            self::VCHECKBOX => new CheckBoxValidator()
+            self::VCHECKBOX => new CheckBoxValidator(),
+            self::VSCHECKBOX => new CheckBoxValidator()
         };
     }
 }

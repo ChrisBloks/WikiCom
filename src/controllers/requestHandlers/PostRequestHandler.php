@@ -104,6 +104,8 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['bodyinfo']['summary'] = $validation_result['field_inputs']['summary'];
                 $this->response['bodyinfo']['codeBlock'] = $validation_result['field_inputs']['codeBlock'];
                 $this->response['field_values'] = $this->arrayToMarkedArray($validation_result['field_inputs'], ['existing_tag']);
+                HtmlUtils::dump("validation_result",$validation_result);
+
 
                 if ($validation_result['ok']) {
                     // This is the post request for editing or saving a (new) article
@@ -146,7 +148,6 @@ class PostRequestHandler extends BaseRequestHandler
                 }
                 break;
         }
-
         return $this->response;
     }
 

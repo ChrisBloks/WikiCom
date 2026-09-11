@@ -19,15 +19,14 @@ class ArticleHandler
     use tSingleton;
 
     // Sends a new rating to the database and retrieves the new avg rating
-    public function handleSaveRating(int $user_id, int $article_id, int $rating)
-    {
+    public function handleSaveRating(int $user_id, int $article_id, int $rating){
         $rating_model = ModelSelector::getRatingModel();
         $rating_model->saveRating(
             user_id: $user_id,
             article_id: $article_id,
             rating: $rating
         );
-        return $rating_model->fetchAvgRating(article_id: $article_id);
+        return $rating_model->fetchRatingInfoByArticleId(article_id: $article_id);
     }
 
 
@@ -55,23 +54,21 @@ class ArticleHandler
 
         // check for tags if they already exist
         $new_article_tags = [];
-        foreach ($validation_result['field_inputs']['existing_tag'] as $tag_id => $tag_names) {
-            if ((int) $tag_id === 0) {
-                foreach ($tag_names as $tag_name) {
-                    $tagcheck = ModelSelector::getArticleModel()->checkTagExists(tag_name: $tag_name);
-                    if (empty($tagcheck)) {
-                        $tag_id = ModelSelector::getArticleModel()->addNewTag(tag_name: $tag_name);
-                    } else {
-                        $tag_id = $tagcheck['id'];
-                    }
-                    $validation_result['field_inputs']['existing_tag'][$tag_id] = $tag_name;
+        foreach ($validation_result['field_inputs']['existing_tag'] as $key => $value) {
+            if ((int) $value === 0) {
+                $tagcheck = ModelSelector::getArticleModel()->checkTagExists(tag_name: $key);
+                if (empty($tagcheck)) {
+                    $value = ModelSelector::getArticleModel()->addNewTag(tag_name: $key);
+                } else {
+                    $value = $tagcheck['id'];
                 }
+                $validation_result['field_inputs']['existing_tag'][$key] = $value;
             }
 
             if ($isNewArticle) {
-                $new_article_tags[] = $tag_id;
+                $new_article_tags[] = $value;
             } else {
-                ModelSelector::getArticleModel()->addTagToArticle(article_id: $article_id, tag_id: $tag_id);
+                ModelSelector::getArticleModel()->addTagToArticle(article_id: $article_id, tag_id: $value);
             }
         }
 
@@ -136,7 +133,7 @@ class ArticleHandler
                 // if no new image given, keep the article's existing image
                 if (empty($validation_result['field_inputs']['articleimg'])) {
                     $article_info = ModelSelector::getArticleModel()->fetchArticleById($article_id);
-                    $validation_result['field_inputs']['articleimg'] = isset($article_info['imgFileName']) ? $article_info['imgFileName'] : '';
+                    $validation_result['field_inputs']['articleimg'] = isset($article_info['imgFileName']) ? $article_info['imgFileName']:'';
                 }
 
                 $update_result = ModelSelector::getArticleModel()->saveExistingArticleInfo(
