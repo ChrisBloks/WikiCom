@@ -25,7 +25,7 @@ class FieldFactory
      * @param ?string $field_text (optional) text to display in the field.
      * @return BaseField
      */
-    public function createField(ArrayAccess $field_def, ?string $field_text): BaseField
+    public function createField(Array $field_def, ?string $field_text): BaseField
     {
         // Check if all required information is given.
         foreach (['type', 'name', 'class', 'label'] as $key) {
