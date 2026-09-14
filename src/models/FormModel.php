@@ -20,7 +20,7 @@ class FormModel extends BaseModel
      * @param string $id
      * @return array|false
      */
-    public function fetchFieldInfo(string $page_name, string $id = ''): array|false
+    public function fetchFieldInfo(string $page_name, string $id = '0'): array|false
     {
         $sql = "SELECT  fi.type, 
                         fi.name, 
@@ -47,16 +47,27 @@ class FormModel extends BaseModel
         foreach ($result as &$field_info) {
             if (isset($field_info["id"])) {
                 $field_sub_info = $this->fetchLookupInfo(field_info: $field_info, parent_id: $id);
-                $field_info = array_merge($field_info, $field_sub_info);
+                // format result
+                $subcontainer_info = [];
+                // Change the structure of the lookup info to what is needed is the form of options => [name => ""
+                //                                                                                      class => ""
+                //                                                                                      value => "" ...]
+                foreach ($field_sub_info as $id => $row) {
+                    // Loop over columns
+                        $column_name = 'options';
+                        $subcontainer_info[$column_name][$id]['name'] = $field_info['name'].'['.$row['label'].']';
+                        $subcontainer_info[$column_name][$id]['class'] = $field_info['lookup_class'];
+                        $subcontainer_info[$column_name][$id]['label'] = $row['label'];
+                        $subcontainer_info[$column_name][$id]['value'] = $row['id'];
+                        $subcontainer_info[$column_name][$id]['checked'] = $row['checked'];
+                        
+                }
+                $field_info = array_merge($field_info, $subcontainer_info);
             }
         }
         unset($field_info);
-
-        $form_fields = [];
-        foreach ($result as $form_field) {
-            $form_fields[] = new FieldInfo($form_field, true);
-        }
-        return $form_fields;
+        
+        return $result;
     }
 
     /**
@@ -194,23 +205,11 @@ class FormModel extends BaseModel
 
 
         // Execute the query
-        $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_UNIQUE | \PDO::FETCH_ASSOC);
+        $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode:  \PDO::FETCH_ASSOC);
 
-        // format result
-        $subcontainer_info = [];
-        // Effectively transposes the $result array from [row => [col => value]] to [col => [row => value]]
-        // Where 'col_name1' is replaced with 'options' and 'col_name2' is replaced with 'values'.
-        // Loop over rows
-        foreach ($result as $id => $row) {
-            // Loop over columns
-            foreach ($row as $column_name => $value) {
-                // If 'options' is already set, put column value under 'value' instead
-                $column_name = isset($subcontainer_info['options'][$id]) ? 'value' : 'options';
-                $subcontainer_info[$column_name][$id] = $value;
-            }
-        }
 
-        return $subcontainer_info;
+
+        return $result;
     }
 
 

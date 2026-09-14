@@ -11,6 +11,7 @@ use Wiki\views\fields\BaseField,
     Wiki\views\fields\NewPassword;
 use Wiki\tools\utils\HtmlUtils;
 use ArrayAccess;
+use Wiki\views\fields\SearchableCheckboxes;
 
 /**
  * Factory class for dynamically building page fields.
@@ -24,7 +25,7 @@ class FieldFactory
      * @param ?string $field_text (optional) text to display in the field.
      * @return BaseField
      */
-    public function createField(ArrayAccess $field_def, ?string $field_text): BaseField
+    public function createField(Array $field_def, ?string $field_text): BaseField
     {
         // Check if all required information is given.
         foreach (['type', 'name', 'class', 'label'] as $key) {
@@ -41,6 +42,12 @@ class FieldFactory
                     label: $field_def["label"],
                     text: $field_text,
                 );
+
+            case 'SearchableCheckboxes':
+                return new SearchableCheckboxes(
+                    field_info: $field_def
+                );
+                
             case 'checkboxgroup':
                 return new CheckBoxGroup(
                     name: $field_def["name"],
