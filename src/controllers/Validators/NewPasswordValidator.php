@@ -2,7 +2,8 @@
 
 namespace Wiki\controllers\validators;
 
-use Wiki\tools\utils\Utils;
+use Wiki\tools\utils\Utils,
+    Wiki\Config;
 
 /**
  * Validator class for the registration form.
@@ -22,6 +23,9 @@ class NewPasswordValidator extends TextValidator
             frompost: true
         );
 
+        if (strlen($this->field_inputs['password_1']) < \Config::MIN_PW_LENGTH) {
+            $this->logError(message: 'Password must be at least 4 characters long.');
+        }
         $all_empty = true;
 
         // If field was left empty, log an error
@@ -30,14 +34,17 @@ class NewPasswordValidator extends TextValidator
                 if ($optional == false) {
                     $this->logError(message: 'Field ' . $name . ' was not filled in!');
                 }
-            }
-            else{
+            } else {
                 $all_empty = false;
             }
         }
 
+        // enforce string length of at least 4 characters
+
+
+
         // toDo add check for optional
-        if ($all_empty && $optional === true){
+        if ($all_empty && $optional === true) {
             echo 'all empty and optional';
             return true;
         }
