@@ -153,7 +153,6 @@ function initPasswordLengthChecker() {
 
   $('.edit-password').on('submit', function (e) {
     const lengthOk = validatePasswordLength();
-    const matchOk = validatePasswordsMatch();
 
     if (!lengthOk) {
       e.preventDefault();
