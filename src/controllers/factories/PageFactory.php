@@ -14,28 +14,29 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\tools\exceptions\PageNotFoundException,
-    Wiki\models\ModelSelector,
-    Wiki\controllers\factories\MenuFactory,
-    Wiki\views\BasePage,
-    Wiki\views\Table,
-    Wiki\views\containers\AtomicElement,
-    Wiki\views\containers\Header,
-    Wiki\views\containers\BodyText,
-    Wiki\views\containers\Title,
-    Wiki\views\containers\Image,
-    Wiki\views\containers\AuthorText,
-    Wiki\views\containers\CodeBlock,
-    Wiki\views\containers\Footer,
-    Wiki\views\containers\ContainerElement,
-    Wiki\views\containers\MainElement,
-    Wiki\views\containers\Rating,
-    Wiki\views\containers\NoticeMessage,
-    League\CommonMark\GithubFlavoredMarkdownConverter,
-    HTMLPurifier,
-    HTMLPurifier_Config,
-    Wiki\views\fields\ButtonField;
+Wiki\tools\traits\tErrorMessageCollector,
+Wiki\tools\exceptions\PageNotFoundException,
+Wiki\models\ModelSelector,
+Wiki\controllers\factories\MenuFactory,
+Wiki\views\BasePage,
+Wiki\views\Table,
+Wiki\views\containers\AtomicElement,
+Wiki\views\containers\Header,
+Wiki\views\containers\BodyText,
+Wiki\views\containers\Title,
+Wiki\views\containers\Card,
+Wiki\views\containers\Image,
+Wiki\views\containers\AuthorText,
+Wiki\views\containers\CodeBlock,
+Wiki\views\containers\Footer,
+Wiki\views\containers\ContainerElement,
+Wiki\views\containers\MainElement,
+Wiki\views\containers\Rating,
+Wiki\views\containers\NoticeMessage,
+League\CommonMark\GithubFlavoredMarkdownConverter,
+HTMLPurifier,
+HTMLPurifier_Config,
+Wiki\views\fields\ButtonField;
 
 
 
@@ -125,16 +126,47 @@ class PageFactory
         switch ($this->page) {
             case 'home':
 
+                $articles = ModelSelector::getArticleModel()->fetchFrontPageArticles();
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
-                // get div styling from DB
+
                 $container = new ContainerElement($styling_container['main_div'], '</div>');
-                $container->addElement(new BodyText(
-                    text: $pageinfo["bodytext"],
-                    class: $styling_elements["bodytext_class"]
+                $container->addElement(new AtomicElement('<h1 class="display-1"> Welcome to our website</h1>',''));
+
+                // outer row
+                $row_container = new ContainerElement('<div class="row g-4 mb-5">', '</div>');
+
+                // first article = featured, wrapped in col-md-8
+                $featured = array_shift($articles);
+                $featured_col = new ContainerElement('<div class="col-md-8">', '</div>');
+                $featured_col->addElement(new Card(
+                    image: $featured['imgFileName'],
+                    title: $featured['title'],
+                    summary: $featured['summary'],
+                    article_id: $featured['id']
                 ));
+                $row_container->addElement($featured_col);
+
+                // remaining articles = small cards, wrapped in col-md-4 > row > col-12 each
+                $small_col = new ContainerElement('<div class="col-md-4">', '</div>');
+                $small_row = new ContainerElement('<div class="row g-4">', '</div>');
+
+                foreach ($articles as $a) {
+                    $small_wrapper = new ContainerElement('<div class="col-12">', '</div>');
+                    $small_wrapper->addElement(new Card(
+                        image: $a['imgFileName'],
+                        title: $a['title'],
+                        summary: $a['summary'],
+                        article_id: $a['id']
+                    ));
+                    $small_row->addElement($small_wrapper);
+                }
+
+                $small_col->addElement($small_row);
+                $row_container->addElement($small_col);
+
+                $container->addElement($row_container);
                 $main->addElement($container);
                 break;
-
 
             case 'about':
                 $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
@@ -249,7 +281,7 @@ class PageFactory
                 // Table display
 
                 // create checkbox inputs for filtering
-                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title","Author", "tags", "lastEdit", "rating"]);
+                $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["title", "Author", "tags", "lastEdit", "rating"]);
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleBySearch(
                     author_ids: $this->response["Author"],
                     tag_ids: $this->response["Tag"],
@@ -526,11 +558,11 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: [], 
+                    field_text: [],
                     class: $form_info["display_class"],
                     submit_class: $form_info["submit_class"]
                 );
-                
+
                 $sub_container->addElement($form);
                 $main_container->addElement($sub_container);
                 $main->addElement($main_container);

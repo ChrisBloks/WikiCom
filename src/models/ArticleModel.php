@@ -339,4 +339,11 @@ class ArticleModel extends BaseModel
         $params = ['article_id' => $article_id];
         return $this->crud->doDelete(sql: $sql, params: $params);
     }
+
+    public function fetchFrontPageArticles(){
+        $sql = 'SELECT * FROM wiki_article ORDER BY RAND() LIMIT 3';
+        return $this->crud->selectMany($sql, []);
+    }
+
+
 }
