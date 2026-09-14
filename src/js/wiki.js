@@ -122,7 +122,7 @@ function escapeHtml(str) {
 }
 
 function initPasswordLengthChecker() {
-  const minLength = parseInt($('#newpassword-2-1').data('min-length'), 10) || 4;
+  const minLength = parseInt($('#newpassword-1').data('min-length'), 10) || 4;
 
   function showError($input, message) {
     $input.next('.feedback').remove();
@@ -132,28 +132,28 @@ function initPasswordLengthChecker() {
   }
 
   function validatePasswordLength() {
-    const newPassword = $('#newpassword-2-1').val();
+    const newPassword = $('#newpassword-1').val();
     if (newPassword.length > 0 && newPassword.length < minLength) {
-      showError($('#newpassword-2-1'), `Password must be at least ${minLength} characters.`);
+      showError($('#newpassword-1'), `Password must be at least ${minLength} characters.`);
       return false;
     }
-    showError($('#newpassword-2-1'), '');
+    showError($('#newpassword-1'), '');
     return true;
   }
 
   function validatePasswordsMatch() {
-    const newPassword = $('#newpassword-2-1').val();
-    const verifyPassword = $('#newpassword-2-2').val();
+    const newPassword = $('#newpassword-1').val();
+    const verifyPassword = $('#newpassword-2').val();
 
     if (verifyPassword.length > 0 && newPassword !== verifyPassword) {
       showError($('#verifypassword-2'), 'Passwords do not match.');
       return false;
     }
-    showError($('#newpassword-2-2'), '');
+    showError($('#newpassword-2'), '');
     return true;
   }
 
-  $('#newpassword-2-1, #newpassword-2-2').on('input', function () {
+  $('#newpassword-1, #newpassword-2').on('input', function () {
     validatePasswordLength();
     validatePasswordsMatch();
   });

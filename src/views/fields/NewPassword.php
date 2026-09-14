@@ -20,14 +20,14 @@ class NewPassword extends BaseField implements iElement
         return HtmlUtils::printLabel($this->id, "Password: ")
                 . '<input type=     "password" 
                             name=   "password_1" 
-                            id="' . $this->id . '-1" 
+                            id=     "newpassword-1" 
                             value=  "" 
                             class="' . $this->class . '"
                             data-min-length="' . \Config::MIN_PW_LENGTH . '" ><br>'.
                 HtmlUtils::printLabel($this->id, "Verify Password: ")
                 . '<input type=     "password" 
                             name=   "password_2" 
-                            id="' . $this->id . '-2" 
+                            id=     "newpassword-2" 
                             value=  "" 
                             class="' . $this->class . '" ><br>';
     }
