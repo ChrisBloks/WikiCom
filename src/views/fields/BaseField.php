@@ -25,19 +25,19 @@ abstract class BaseField implements iElement
     protected string $class;
     protected mixed $value;
 
-    public function __construct(string $name, string $label, string $class)
+    public function __construct(string $name, string $label, string $class, mixed $value = "")
     {
         self::$instance_count++;
-        $this->value = "";
+        $this->value = $value;
         $this->name = $name;
         $this->id = $name . "-" . self::$instance_count;
         $this->label = $label;
         $this->class = $class;
         $this->html = '';
-        if (($label === "")) {
-            throw new \BadFunctionCallException("Label not set!");
+        if (!($label === "")) {
+            $this->html .= HtmlUtils::printLabel($this->id, $label);
         }
-        $this->html .= HtmlUtils::printLabel($this->id, $label);
+        
     }
 
     /**
@@ -59,13 +59,12 @@ abstract class BaseField implements iElement
     /**
      * Returns this objects' attribute list to put in its HTML opening tag. 
      * If [x] is this function's output. Then the HTML may look like: <div [x]></div>
-     * @param bool $is_array Encodes if the $value parameter is an array.
-     * @param string $id value for the HTML id attribute
-     * @param string $value value for the HTML value attribute
      * @return string string attributes
      */
-    protected function baseAttribs(bool $is_array = false, string $id = "", ?string $value = NULL): string
+    protected function baseAttribs(): string
     {
-        return ' name="' . $this->name . ($is_array ? (isset($value) ? "[{$value}]": "[]") : "") . '" id="' . $this->id . ($is_array ? $id : "") . '" class="' . $this->class . '" ';
+        return ' name="' . $this->name .
+                '" id="' . $this->id .
+                '" class="' . $this->class . '" ';
     }
 }

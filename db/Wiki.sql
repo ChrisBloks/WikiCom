@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 11 sep 2026 om 12:19
+-- Gegenereerd op: 11 sep 2026 om 15:20
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -76,7 +76,6 @@ CREATE TABLE `field_info` (
   `name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `class` varchar(255) NOT NULL,
-  `lookup_info_id` int(11) DEFAULT NULL,
   `form_info_id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
   `display_order` int(11) NOT NULL,
@@ -87,29 +86,29 @@ CREATE TABLE `field_info` (
 -- Gegevens worden geëxporteerd voor tabel `field_info`
 --
 
-INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `lookup_info_id`, `form_info_id`, `label`, `display_order`, `optional`) VALUES
-(1, 'name', 'text', 'contact-name form-control', NULL, 1, 'Your name:', 0, 0),
-(2, 'email', 'email', 'contact-email form-control', NULL, 1, 'Your email:', 1, 0),
-(3, 'password', 'password', 'login-password form-control', NULL, 2, 'Password:', 2, 0),
-(4, 'description', 'textarea', 'about-text form-control', NULL, 5, 'About me:', 0, 1),
-(6, 'verifypassword', 'new_password', 'register-verifypassword form-control', NULL, 7, 'Verify password:', 5, 0),
-(7, 'Author', 'checkboxgroup', 'filter-author form-check-input border', 2, 3, 'Filter by Author', 1, 1),
-(8, 'Tag', 'checkboxgroup', 'filter-tag form-check-input border', 1, 3, 'Filter by Tag', 0, 1),
-(9, 'aboutimg', 'file', 'about-img-file form-control', NULL, 5, 'Upload file:', 1, 1),
-(12, 'message', 'textarea', 'message-text form-control', NULL, 1, 'Your message:', 2, 0),
-(13, 'email', 'email', 'login-email form-control', NULL, 2, 'Email:', 0, 0),
-(14, 'name', 'text', 'register-name form-control', NULL, 7, 'Your name:', 1, 0),
-(15, 'email', 'email', 'register-email form-control', NULL, 7, 'Your email:', 2, 0),
-(17, 'summary', 'textarea', 'article-text form-control', NULL, 4, 'Body Text', 15, 0),
-(18, 'codeBlock', 'textarea', 'article-codeblock form-control', NULL, 4, 'Codeblock', 16, 1),
-(19, 'articleimg', 'file', 'article-img-file form-control', NULL, 4, 'Upload File', 17, 1),
-(20, 'sortby', 'select', 'sort-by form-select', 3, 3, 'Sort by', 3, 0),
-(25, 'title', 'text', 'article-title form-control', NULL, 4, 'Article title:', 13, 0),
-(26, 'existing_tag', 'checkboxgroup', 'Existing-tag form-check-input', 4, 4, 'Change tags', 14, 0),
-(29, 'name', 'text', 'editUser-userName form-control', NULL, 9, 'Change username:', 10, 1),
-(30, 'email', 'email', 'editUser-email form-control', NULL, 9, 'Edit email:', 20, 1),
-(33, 'password', 'password', 'editPassword-pw1 form-control', NULL, 10, 'Old password:', 0, 0),
-(34, 'newpassword', 'new_password', 'editPassword-pw2 form-control', NULL, 10, 'New password:', 0, 0);
+INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `form_info_id`, `label`, `display_order`, `optional`) VALUES
+(1, 'name', 'text', 'contact-name form-control', 1, 'Your name:', 0, 0),
+(2, 'email', 'email', 'contact-email form-control', 1, 'Your email:', 1, 0),
+(3, 'password', 'password', 'login-password form-control', 2, 'Password:', 2, 0),
+(4, 'description', 'textarea', 'about-text form-control', 5, 'About me:', 0, 1),
+(6, 'verifypassword', 'new_password', 'register-verifypassword form-control', 7, 'Verify password:', 5, 0),
+(7, 'Author', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author', 3, 'Filter by Author', 1, 1),
+(8, 'Tag', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', 3, 'Filter by Tag', 0, 1),
+(9, 'aboutimg', 'file', 'about-img-file form-control', 5, 'Upload file:', 1, 1),
+(12, 'message', 'textarea', 'message-text form-control', 1, 'Your message:', 2, 0),
+(13, 'email', 'email', 'login-email form-control', 2, 'Email:', 0, 0),
+(14, 'name', 'text', 'register-name form-control', 7, 'Your name:', 1, 0),
+(15, 'email', 'email', 'register-email form-control', 7, 'Your email:', 2, 0),
+(17, 'summary', 'textarea', 'article-text form-control', 4, 'Body Text', 15, 0),
+(18, 'codeBlock', 'textarea', 'article-codeblock form-control', 4, 'Codeblock', 16, 1),
+(19, 'articleimg', 'file', 'article-img-file form-control', 4, 'Upload File', 17, 1),
+(20, 'sortby', 'select', 'sort-by form-select', 3, 'Sort by', 3, 0),
+(25, 'title', 'text', 'article-title form-control', 4, 'Article title:', 13, 0),
+(26, 'existing_tag', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', 4, 'Article tags:', 14, 0),
+(29, 'name', 'text', 'editUser-userName form-control', 9, 'Change username:', 10, 1),
+(30, 'email', 'email', 'editUser-email form-control', 9, 'Edit email:', 20, 1),
+(33, 'password', 'password', 'editPassword-pw1 form-control', 10, 'Old password:', 0, 0),
+(34, 'newpassword', 'new_password', 'editPassword-pw2 form-control', 10, 'New password:', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -157,18 +156,20 @@ CREATE TABLE `lookup_info` (
   `where_value` varchar(255) NOT NULL,
   `bridge_table` varchar(255) NOT NULL,
   `bridge_values` varchar(255) NOT NULL,
-  `left_join_on` varchar(255) NOT NULL
+  `left_join_on` varchar(255) NOT NULL,
+  `field_info_id` int(11) NOT NULL,
+  `lookup_class` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `lookup_info`
 --
 
-INSERT INTO `lookup_info` (`id`, `source_table`, `column_names`, `order_by`, `where_value`, `bridge_table`, `bridge_values`, `left_join_on`) VALUES
-(1, 'wiki_tag\n', 'id,name', 'wiki_tag.name', '', '', '', ''),
-(2, 'user', 'id,name', 'user.name', '', '', '', ''),
-(3, 'wiki_sortby_info', 'sortby_value,sortby_name', 'wiki_sortby_info.sortby_name', '', '', '', ''),
-(4, 'wiki_tag\n', 'id,name,!isnull(article_id) as marked', 'wiki_tag.name', '', 'wiki_article_to_tag', 'wiki_tag_id,wiki_tag.id', 'article_id');
+INSERT INTO `lookup_info` (`id`, `source_table`, `column_names`, `order_by`, `where_value`, `bridge_table`, `bridge_values`, `left_join_on`, `field_info_id`, `lookup_class`) VALUES
+(1, 'wiki_tag\n', 'id as id,name as label', 'wiki_tag.name', '', '', '', '', 8, 'searchable tag_checkbox form-check-input'),
+(2, 'user', 'id as id,name as label', 'user.name', '', '', '', '', 7, 'searchable author_checkbox form-check-input'),
+(3, 'wiki_sortby_info', 'sortby_value as id ,sortby_name as label', 'wiki_sortby_info.sortby_name', '', '', '', '', 20, 'sort_by'),
+(4, 'wiki_tag\n', 'id as id,name as label,!isnull(article_id) as checked', 'wiki_tag.name', '', 'wiki_article_to_tag', 'wiki_tag_id,wiki_tag.id', 'article_id', 26, 'searchable tag_checkbox form-check-input');
 
 -- --------------------------------------------------------
 
@@ -196,40 +197,6 @@ INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
 (6, 'Login', 'login', 5),
 (7, 'Dashboard', 'dashboard', 6),
 (8, 'Logout', 'logout', 7);
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `page_elements`
---
-
-CREATE TABLE `page_elements` (
-  `id` int(11) NOT NULL,
-  `class` varchar(255) NOT NULL,
-  `element_type` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `page_elements`
---
-
-INSERT INTO `page_elements` (`id`, `class`, `element_type`) VALUES
-(1, '<div class=\"d-flex align-items-center w-75 mx-auto\">\r\n', 'container'),
-(2, '<div class=\"flex-grow-1\">', 'container');
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `page_structure`
---
-
-CREATE TABLE `page_structure` (
-  `id` int(11) NOT NULL,
-  `website_info_id` int(11) NOT NULL,
-  `page_element_id` int(11) NOT NULL,
-  `order_by` int(11) NOT NULL,
-  `parent_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -495,7 +462,8 @@ CREATE TABLE `wiki_article` (
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
 (1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11'),
 (28, 'PHP', 1, 'PHP is een scripttaal en is vergelijkbaar met Perl, Python en Ruby. Qua syntaxis lijkt PHP het meest op C, maar net als bij veel andere scripttalen moeten variabelen voorafgegaan worden door een dollarteken $. Dit is overgenomen uit de scripttaal Perl, waarvan PHP mede is afgeleid. In tegenstelling tot C is het in PHP wel mogelijk om naast procedureel programmeren ook objectgeoriënteerd te programmeren, net als in bijvoorbeeld Java, C++ en C#. In de eerste versies van PHP was het objectgeoriënteerd programmeren nog heel beperkt. Pas sinds versie 5 zijn de meest essentiële functies hiervoor allemaal beschikbaar.', '$url = &quot;http://nl.wikipedia.org/wiki/PHP&quot;;\r\n\r\necho &quot;U bevindt zich momenteel op $url. Welkom!&quot;;\r\n// Of\r\necho &quot;U bevindt zich momenteel op &quot;.$url.&quot;. Welkom!&quot;;', 'article_0.jpg', '2026-09-08'),
-(29, 'New article', 1, 'This is the body text.', '', 'article_0.jpg', '2026-09-08');
+(29, 'New article', 1, 'This is the body text.', '', 'article_0.jpg', '2026-09-08'),
+(31, 'test', 1, 'testd', '', '', '2026-09-11');
 
 -- --------------------------------------------------------
 
@@ -516,7 +484,10 @@ INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
 (1, 1),
 (28, 53),
 (28, 54),
-(29, 54);
+(29, 54),
+(31, 53),
+(31, 54),
+(31, 55);
 
 -- --------------------------------------------------------
 
@@ -579,7 +550,8 @@ CREATE TABLE `wiki_tag` (
 INSERT INTO `wiki_tag` (`id`, `name`) VALUES
 (54, 'code'),
 (53, 'php'),
-(1, 'tag1');
+(1, 'tag1'),
+(55, 'test2');
 
 -- --------------------------------------------------------
 
@@ -605,8 +577,7 @@ ALTER TABLE `contact_messages`
 --
 ALTER TABLE `field_info`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `form_info_id` (`form_info_id`),
-  ADD KEY `lookup_info_id` (`lookup_info_id`);
+  ADD KEY `form_info_id` (`form_info_id`);
 
 --
 -- Indexen voor tabel `form_info`
@@ -619,27 +590,14 @@ ALTER TABLE `form_info`
 -- Indexen voor tabel `lookup_info`
 --
 ALTER TABLE `lookup_info`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_lookup_to_field` (`field_info_id`);
 
 --
 -- Indexen voor tabel `menu_items`
 --
 ALTER TABLE `menu_items`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexen voor tabel `page_elements`
---
-ALTER TABLE `page_elements`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexen voor tabel `page_structure`
---
-ALTER TABLE `page_structure`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_website_info_to_page_structure` (`website_info_id`),
-  ADD KEY `fk_page_elements_to_page_structure` (`page_element_id`);
 
 --
 -- Indexen voor tabel `styling_containers`
@@ -755,12 +713,6 @@ ALTER TABLE `menu_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT voor een tabel `page_structure`
---
-ALTER TABLE `page_structure`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT voor een tabel `styling_containers`
 --
 ALTER TABLE `styling_containers`
@@ -800,7 +752,7 @@ ALTER TABLE `website_info`
 -- AUTO_INCREMENT voor een tabel `wiki_article`
 --
 ALTER TABLE `wiki_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT voor een tabel `wiki_sortby_info`
@@ -812,7 +764,7 @@ ALTER TABLE `wiki_sortby_info`
 -- AUTO_INCREMENT voor een tabel `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
@@ -822,8 +774,7 @@ ALTER TABLE `wiki_tag`
 -- Beperkingen voor tabel `field_info`
 --
 ALTER TABLE `field_info`
-  ADD CONSTRAINT `field_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`),
-  ADD CONSTRAINT `field_info_ibfk_2` FOREIGN KEY (`lookup_info_id`) REFERENCES `lookup_info` (`id`);
+  ADD CONSTRAINT `field_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`);
 
 --
 -- Beperkingen voor tabel `form_info`
@@ -832,11 +783,10 @@ ALTER TABLE `form_info`
   ADD CONSTRAINT `website_info_to_form_info` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
 
 --
--- Beperkingen voor tabel `page_structure`
+-- Beperkingen voor tabel `lookup_info`
 --
-ALTER TABLE `page_structure`
-  ADD CONSTRAINT `fk_page_elements_to_page_structure` FOREIGN KEY (`page_element_id`) REFERENCES `page_elements` (`id`),
-  ADD CONSTRAINT `fk_website_info_to_page_structure` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
+ALTER TABLE `lookup_info`
+  ADD CONSTRAINT `fk_lookup_to_field` FOREIGN KEY (`field_info_id`) REFERENCES `field_info` (`id`);
 
 --
 -- Beperkingen voor tabel `styling_elements`
