@@ -89,6 +89,19 @@ class PageFactory
                 <script src="./src/js/wiki.js"></script>
                 <script>hljs.highlightAll();</script>'
         ));
+
+        switch ($this->page){
+            case 'editArticle':
+            case 'search':
+                $this->htmlpage->addToHeadContent(
+                    new AtomicElement(
+                        '<script src="./src/js/searchPage.js"></script>'
+                    )
+                );
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -155,9 +168,7 @@ class PageFactory
                             'user' => $this->response['aboutID'],
                             'page' => $this->page
                         ],
-                        field_text: ["description" => $aboutinfo["description"]],
-                        class: $form_info["display_class"],
-                        submit_class: $form_info['submit_class']
+                        field_default_text: ["description" => $aboutinfo["description"]]
                     );
 
                     $top_container->addElement(new Title(
@@ -214,9 +225,7 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: [],
-                    class: $form_info["display_class"],
-                    submit_class: $form_info["submit_class"]
+                    field_default_text: []
                 );
                 $sub_container->addElement($form);
                 $main_container->addElement($sub_container);
@@ -233,15 +242,23 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+    
+                
+
+                // class="filter-tag form-check-input border"
+
+    
+
+                // HtmlUtils::dump("form_info", $form_info);
+                // HtmlUtils::dump("form_fields", $form_fields);
+                // HtmlUtils::dump("response", $this->response);
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: ['sortby' => $this->response['sortby']],
-                    class: $form_info["display_class"],
-                    submit_class: $form_info["submit_class"],
-                    field_array_values: $this->response['field_values']
+                    field_default_text: ['sortby' => $this->response['sortby']],
+                    field_default_values: $this->response['field_values']
                 );
 
                 $filter_container->addElement($form);
@@ -299,10 +316,8 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page, 'action' => 'saveArticle'],
-                    class: $form_info["display_class"],
-                    field_text: $bodyinfo,
-                    submit_class: $form_info['submit_class'],
-                    field_array_values: isset($this->response['field_values']) ? $this->response['field_values'] : []
+                    field_default_text: $bodyinfo,
+                    field_default_values: isset($this->response['field_values']) ? $this->response['field_values'] : []
                 );
 
                 // add to page
@@ -435,9 +450,7 @@ class PageFactory
                     form_info: $form_info,
                     field_info: [],
                     hidden_field_info: ['page' => 'editArticle', 'id' => '0'],
-                    class: $form_info["display_class"],
-                    field_text: [],
-                    submit_class: $form_info["submit_class"]
+                    field_default_text: []
                 );
                 $left_container->addElement(new Title(
                     text: $aboutinfo['email'],
@@ -503,9 +516,6 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: [], // ik wil hier misschien al de user email in doen? thoughts?
-                    class: $form_info["display_class"],
-                    submit_class: $form_info["submit_class"]
                 );
                 $sub_container->addElement($form);
                 $main_container->addElement($sub_container);
@@ -526,9 +536,6 @@ class PageFactory
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
-                    field_text: [], 
-                    class: $form_info["display_class"],
-                    submit_class: $form_info["submit_class"]
                 );
                 
                 $sub_container->addElement($form);

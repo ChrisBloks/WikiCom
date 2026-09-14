@@ -30,7 +30,7 @@
   max-height: 250px;
   overflow-y: auto;
   padding-right: 0.5rem;
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 5px;
   margin-bottom: 5px;
   width: 100%
@@ -125,6 +125,10 @@ a.rating_option {
     top: 4.5px;
     left: 90px;
   }
+}
+div.SearchableCheckboxes {
+  background-color: #e2e2e2;
+  border-color: #383838;
 }
 
 /* .show {
