@@ -121,9 +121,14 @@ function escapeHtml(str) {
   return $("<div>").text(str).html();
 }
 
+//==============================================================
+// JS function to set a minimum length password 
+// + showing the error on page
 function initPasswordLengthChecker() {
+  // set minimum length of needed password to the min-length attribute (or 4)
   const minLength = parseInt($('#newpassword-1').data('min-length'), 10) || 4;
 
+  // creates a div for showing the error message
   function showError($input, message) {
     $input.next('.feedback').remove();
     if (message) {
@@ -131,6 +136,7 @@ function initPasswordLengthChecker() {
     }
   }
 
+  // validates the length of a password
   function validatePasswordLength() {
     const newPassword = $('#newpassword-1').val();
     if (newPassword.length > 0 && newPassword.length < minLength) {
@@ -141,28 +147,15 @@ function initPasswordLengthChecker() {
     return true;
   }
 
-  function validatePasswordsMatch() {
-    const newPassword = $('#newpassword-1').val();
-    const verifyPassword = $('#newpassword-2').val();
-
-    if (verifyPassword.length > 0 && newPassword !== verifyPassword) {
-      showError($('#verifypassword-2'), 'Passwords do not match.');
-      return false;
-    }
-    showError($('#newpassword-2'), '');
-    return true;
-  }
-
   $('#newpassword-1, #newpassword-2').on('input', function () {
     validatePasswordLength();
-    validatePasswordsMatch();
   });
 
   $('.edit-password').on('submit', function (e) {
     const lengthOk = validatePasswordLength();
     const matchOk = validatePasswordsMatch();
 
-    if (!lengthOk || !matchOk) {
+    if (!lengthOk) {
       e.preventDefault();
     }
   });
