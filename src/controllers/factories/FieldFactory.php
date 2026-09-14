@@ -11,6 +11,7 @@ use Wiki\views\fields\BaseField,
     Wiki\views\fields\NewPassword;
 use Wiki\tools\utils\HtmlUtils;
 use ArrayAccess;
+use Wiki\views\fields\SearchableCheckboxes;
 
 /**
  * Factory class for dynamically building page fields.
@@ -41,6 +42,12 @@ class FieldFactory
                     label: $field_def["label"],
                     text: $field_text,
                 );
+
+            case 'SearchableCheckboxes':
+                return new SearchableCheckboxes(
+                    field_info: $field_def
+                );
+                
             case 'checkboxgroup':
                 return new CheckBoxGroup(
                     name: $field_def["name"],
