@@ -242,16 +242,6 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-    
-                
-
-                // class="filter-tag form-check-input border"
-
-    
-
-                // HtmlUtils::dump("form_info", $form_info);
-                // HtmlUtils::dump("form_fields", $form_fields);
-                // HtmlUtils::dump("response", $this->response);
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,
