@@ -36,6 +36,8 @@ use Wiki\tools\utils\HtmlUtils,
     HTMLPurifier,
     HTMLPurifier_Config,
     Wiki\views\fields\ButtonField;
+use InvalidArgumentException;
+use Throwable;
 
 
 
@@ -286,13 +288,6 @@ class PageFactory
                 // sub text div: Title/Author/text/code
                 $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
 
-                // add tag functionality //TODO
-                $add_tag_widget = new ContainerElement($styling_container['add_tag_div'], '</div>');
-
-                $add_tag_widget->addElement(new AtomicElement($styling_elements['tag_input_class']));
-
-                $add_tag_widget->addElement(new AtomicElement($styling_elements['tag_button_class']));
-
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
@@ -300,6 +295,21 @@ class PageFactory
                     $bodyinfo = isset($this->response['bodyinfo']) ? $this->response['bodyinfo'] : [];
                 } else {
                     $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
+                }
+
+                // HtmlUtils::dump('form_fields', $form_fields);
+
+                
+                function array_find_index (array $haystack, callable $fn){
+                    foreach($haystack as $idx => $element){
+                        if ($fn($element)) return $idx;
+                    }
+                    throw new InvalidArgumentException("Array does not contain a truthy element");
+                }
+                try{
+                    $form_fields[array_find_index($form_fields, fn($x) => $x['type'] == 'SearchableCheckboxes')]['addable_options'] = true;
+                } catch (Throwable $e){
+                    HtmlUtils::dump('error:', $e->getMessage());
                 }
 
                 $form = $formFactory->createForm(
@@ -312,7 +322,6 @@ class PageFactory
 
                 // add to page
                 $sub_container->addElement($form);
-                $main_container->addElement($add_tag_widget);
                 $main_container->addElement($sub_container);
                 $main->addElement($main_container);
                 break;

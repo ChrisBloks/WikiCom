@@ -3,12 +3,14 @@
 namespace Wiki\views\fields;
 
 use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
+use Wiki\views\containers\AtomicElement;
 
 
 class SearchableCheckboxes extends BaseField
 {
     static protected array $required_attributes = ['name', 'label', 'class', 'options'];
     protected array $options = [];
+    protected bool $addable_options = false;
 
     public function __construct(array $field_info)
     {
@@ -32,6 +34,7 @@ class SearchableCheckboxes extends BaseField
 
         // Nested array. Each subarray is a field_info array for a checkbox.
         $this->options = $field_info['options'];
+        $this->addable_options = (isset($field_info['addable_options'])) ? $field_info['addable_options']:false;
     }
 
 
@@ -51,6 +54,15 @@ class SearchableCheckboxes extends BaseField
 
         $html .= (new SearchField($search_field_info))->show();
 
+        if ($this->addable_options){
+            $html .= (new AtomicElement('<div id="add-tag-widget" class="d-flex gap-2 mt-2 mb-2">
+            <input type="text" id="new-tag-name"
+            class="form-control form-control-sm" placeholder="New tag">
+            <button type="button" id="add-tag-btn" 
+            class="btn btn-sm btn-secondary">Add tag</button>
+            </div>'))->show();
+        }
+
         // Add checkboxgroup
         $html .= '<div class="checkbox_group">';
 
@@ -60,6 +72,7 @@ class SearchableCheckboxes extends BaseField
             $html .= '</div>';
         }
         $html .= '</div>';
+
         return $html .= "</div>";
     }
 }
