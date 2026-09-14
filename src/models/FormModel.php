@@ -31,7 +31,7 @@ class FormModel extends BaseModel
                 FROM field_info fi
                 JOIN form_info fo ON fi.form_info_id = fo.id
                 JOIN website_info wi ON wi.id = fo.website_info_id
-                LEFT JOIN lookup_info li on li.id = fi.lookup_info_id
+                LEFT JOIN lookup_info li on li.field_info_id = fi.id
                 WHERE wi.name = :page
                 ORDER BY fi.display_order;";
         $params = ["page" => $page_name];
