@@ -32,7 +32,6 @@ class GetRequestHandler extends BaseRequestHandler
                 ];
                 $this->response['Author'] = [];
                 $this->response['sortby'] = '';
-                $this->response['field_values'] = $this->arrayToMarkedArray($this->response, ['Tag']);
                 break;
             case 'editArticle':
                 $this->response['userID'] = Utils::getSesVar('userID');

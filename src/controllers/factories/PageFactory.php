@@ -93,7 +93,7 @@ class PageFactory
                 <script>hljs.highlightAll();</script>'
         ));
 
-        switch ($this->page){
+        switch ($this->page) {
             case 'editArticle':
             case 'search':
                 $this->htmlpage->addToHeadContent(
@@ -145,7 +145,7 @@ class PageFactory
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
 
                 $container = new ContainerElement($styling_container['main_div'], '</div>');
-                $container->addElement(new AtomicElement('<h1 class="display-1"> Welcome to our website</h1>',''));
+                $container->addElement(new AtomicElement('<h1 class="display-1"> Welcome to our website</h1>', ''));
 
                 // outer row
                 $row_container = new ContainerElement('<div class="row g-4 mb-5">', '</div>');
@@ -277,12 +277,14 @@ class PageFactory
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
 
+
+                $form_fields = $this->addCheckedUsingArray($form_fields, $this->response);
+
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
                     hidden_field_info: ['page' => $this->page],
                     field_default_text: ['sortby' => $this->response['sortby']],
-                    field_default_values: $this->response['field_values']
                 );
 
                 $filter_container->addElement($form);
@@ -329,18 +331,21 @@ class PageFactory
                     $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
                 }
 
-                // HtmlUtils::dump('form_fields', $form_fields);
+                HtmlUtils::dump("test",$this->response);
+                $form_fields = $this->addCheckedUsingArray($form_fields, $this->response);
 
-                
-                function array_find_index (array $haystack, callable $fn){
-                    foreach($haystack as $idx => $element){
-                        if ($fn($element)) return $idx;
+
+                function array_find_index(array $haystack, callable $fn)
+                {
+                    foreach ($haystack as $idx => $element) {
+                        if ($fn($element))
+                            return $idx;
                     }
                     throw new InvalidArgumentException("Array does not contain a truthy element");
                 }
-                try{
+                try {
                     $form_fields[array_find_index($form_fields, fn($x) => $x['type'] == 'SearchableCheckboxes')]['addable_options'] = true;
-                } catch (Throwable $e){
+                } catch (Throwable $e) {
                     HtmlUtils::dump('error:', $e->getMessage());
                 }
 
@@ -349,7 +354,6 @@ class PageFactory
                     field_info: $form_fields,
                     hidden_field_info: ["articleID" => $this->response['editArticleID'], 'page' => $this->page, 'action' => 'saveArticle'],
                     field_default_text: $bodyinfo,
-                    field_default_values: isset($this->response['field_values']) ? $this->response['field_values'] : []
                 );
 
                 // add to page
@@ -588,5 +592,22 @@ class PageFactory
             text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
             class: $styling_system['footer']
         ));
+    }
+
+    public function addCheckedUsingArray($form_fields, $response)
+    {
+        foreach ($form_fields as &$field) {
+            if (!empty($response[$field['name']]) && is_array($response[$field['name']])) {
+                foreach ($field['options'] as $key => $option) {
+                    if (in_array($option['value'], $response[$field['name']])) {
+                        $field['options'][$key]['checked'] = 1;
+                    }
+                }
+            }
+        }
+        unset($field);
+
+        return $form_fields;
+
     }
 }
