@@ -18,12 +18,10 @@ class FormFactory
      * @param array $field_info nested subarray where each subarray rerpresents a field's information. Each subarray should contain TODO: what should/may it contain? ['type', 'name']
      * @param array $hidden_field_info array of form ['field_name' => field_value]
      * @param array $field_default_text every field may (optionally) contain a text.
-     * @param array $field_default_values special case where information needs to be given to field as an array.
      * @return Form
      */
     public function createForm(ArrayAccess $form_info, array $field_info, array $hidden_field_info, 
-                               array $field_default_text = [],
-                               array $field_default_values = []): Form
+                               array $field_default_text = []): Form
     {
         // Initialize the Form
         $form = new Form(
@@ -44,11 +42,7 @@ class FormFactory
         $field_factory = new FieldFactory();
         // Loop over field info, in each iteration add a Field Object to Form.
         foreach ($field_info as $field_def) {
-            // give value to field def if array_values is given
-            if (isset($field_array_values[$field_def['name']]))
-                {
-                    $field_def['value'] = $field_default_values[$field_def['name']];
-                }
+
             // (optional) set field name
             $text = (isset($field_default_text[$field_def['name']]) ? $field_default_text[$field_def['name']] : "");
 
