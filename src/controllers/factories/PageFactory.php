@@ -141,6 +141,16 @@ class PageFactory
         switch ($this->page) {
             case 'home':
 
+                $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
+
+                HtmlUtils::dump("test",$elements_info);
+
+                foreach ($elements_info as $element){
+                    if ($element['parent_order']==0){
+                        
+                    }
+                }
+
                 $articles = ModelSelector::getArticleModel()->fetchFrontPageArticles();
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
 
