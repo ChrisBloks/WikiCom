@@ -19,7 +19,7 @@ class ValidationHandler
      * Runs through the fields and based on type runs the correct validators
      * If fails save the error message otherwise save the field input and return the array if no errors
      * otherwise return false
-     * @param array $field_info [int => ['type' => string, 'name' => string]]
+     * @param array $field_info [int => ['type' => string, 'name' => string, 'error_disp_name' => string]]
      * @return array ['ok' => bool,
      *               'user_error' => [int => string],
      *               'field_inputs' => [field_name(string) => string]]
@@ -35,7 +35,8 @@ class ValidationHandler
             $validation_result = $this->validatorlist[$field['type']]
                 ->validate(
                     name: $field['name'],
-                    optional: $field['optional']
+                    optional: $field['optional'],
+                    error_disp_name: $field['error_disp_name']
                 );
 
             // Always add the user input to field_inputs
