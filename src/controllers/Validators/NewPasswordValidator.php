@@ -23,29 +23,29 @@ class NewPasswordValidator extends TextValidator
             frompost: true
         );
 
+        // enforce string length of at least 4 characters
         if (strlen($this->field_inputs['password_1']) < \Config::MIN_PW_LENGTH) {
             $this->logError(message: 'Password must be at least 4 characters long.');
         }
         $all_empty = true;
 
-        // If field was left empty, log an error
-        foreach ($this->field_inputs as $name => $field_input) {
-            if (empty($field_input)) {
-                if ($optional == false) {
-                    $this->logError(message: 'Field ' . $name . ' was not filled in!');
-                }
-            } else {
-                $all_empty = false;
-            }
+        if (empty($this->field_inputs['password_1'])){
+            if (!$optional) $this->logError(message: "Password is not filled in.");
+        } else {
+            $all_empty = false;
         }
 
-        // enforce string length of at least 4 characters
+        if (empty($this->field_inputs['password_2'])){
+            if (!$optional) $this->logError(message: "Verify password is not filled in.");
+        } else {
+            $all_empty = false;
+        }
 
-
+        
 
         // toDo add check for optional
         if ($all_empty && $optional === true) {
-            echo 'all empty and optional';
+            // echo 'all empty and optional';
             return true;
         }
 
@@ -57,6 +57,7 @@ class NewPasswordValidator extends TextValidator
             return $this->validateFields(field_inputs: $this->field_inputs);
         }
     }
+
     /**
      * Register page-specific validation behaviour. Check if both passwords are the same.
      * @param array $field_inputs
