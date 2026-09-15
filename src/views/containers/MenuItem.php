@@ -17,6 +17,7 @@ class Menuitem extends ContainerElement
 {
     public function __construct(string $label, string $href, string $class = '', array $attrs = [], string $li_class = '')
     {
+        HtmlUtils::dump('attrs', $attrs);
         $safe_label = htmlspecialchars($label);
         $safe_href = htmlspecialchars($href);
 
@@ -31,5 +32,30 @@ class Menuitem extends ContainerElement
         HtmlUtils::dump("flag???",htmlentities($element_inner->show()));
 
         parent::__construct(new ElementInfo(["html_tag" => 'li '.$element_inner->show(),"html_class" => $li_class]));
+    }
+
+
+    public function __construct2(string $label, string $href, string $class = '', array $attrs = [], string $li_class = '')
+    {
+        $safe_label = htmlspecialchars($label);
+        $safe_href = htmlspecialchars($href);
+
+        parent::__construct(
+            new ElementInfo([
+                'html_tag' => 'li',
+                'class' => $li_class,
+            ])
+        );
+
+        $this->addElement(
+            new AtomicElement(
+                new ElementInfo([
+                    'html_tag' => 'a',
+                    'href' => $safe_href,
+                    'class' => $class,
+                    'label' => $safe_label
+                ])
+            )
+        );
     }
 }

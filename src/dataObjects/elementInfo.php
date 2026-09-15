@@ -4,22 +4,24 @@ namespace Wiki\dataObjects;
 
 use InvalidArgumentException;
 use Throwable;
+use Wiki\tools\interfaces\iElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
-class ElementInfo implements \arrayAccess
+class ElementInfo implements iElementInfo
 {
-
     static private array $allowed_keys =
-        [
-            'order_by',
-            'parent_order',
-            'name',
-            'html_tag',
-            'html_class',
-            'php_class',
-            'js_class',
-            'text',
-        ];
+    [
+        'html_tag',
+        'html_class',
+        'id',
+        'name',
+        'text',
+        'js_class',
+        'php_class',
+        'order_by',
+        'parent_order',
+        'closing_tag',
+    ];
 
     private array $container = [];
 
@@ -28,8 +30,7 @@ class ElementInfo implements \arrayAccess
         foreach ($attributes as $key => $value) {
             try {
                 $this[$key] = $value;
-            } 
-            catch (InvalidArgumentException $e) {
+            } catch (InvalidArgumentException $e) {
                 if (!$permissive) {
                     throw $e;
                 }
@@ -45,18 +46,19 @@ class ElementInfo implements \arrayAccess
 
     public function offsetGet(mixed $offset): mixed
     {
+        if ($offset == 'class') $offset = 'html_class';
         return $this->container[$offset] ?? null;
     }
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
+        if ($offset == 'class') $offset = 'html_class';
         if (in_array($offset, static::$allowed_keys, true)) {
             $this->container[$offset] = $value;
         } else {
             throw new InvalidArgumentException("{$offset} is not an allowed key of ElementInfo!");
         }
     }
-
 
     public function offsetUnset(mixed $offset): void
     {
@@ -66,5 +68,9 @@ class ElementInfo implements \arrayAccess
     public function isEmpty(): bool
     {
         return empty($this->container);
+    }
+
+    public function getHTMLAttributes(): array {
+        return ['class', 'id', 'name'];
     }
 }
