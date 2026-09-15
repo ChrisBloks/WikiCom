@@ -1,6 +1,7 @@
 <?php
 namespace Wiki\views\containers;
 
+use Wiki\dataObjects\ElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 /**
@@ -10,6 +11,7 @@ class Menu extends ContainerElement
 {
     public function __construct(string $class = "nav")
     {
-        parent::__construct('<ul' . HtmlUtils::addClassAttr($class) . '>', '</ul>');
+        $element_info = ["html_tag" => "ul", "html_class" => "nav"];
+        parent::__construct(new ElementInfo($element_info));
     }
 }

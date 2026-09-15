@@ -144,53 +144,57 @@ class PageFactory
                 $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
                 HtmlUtils::dump("test",$elements_info);
-
-                foreach ($elements_info as $element){
-                    if ($element['parent_order']==0){
-                        
+                $element_list = [];
+                foreach ($elements_info as $element_info){
+                    if ($element_info['parent_order']==0){
+                        $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
+                    }else{
+                        $element_info_list[$element_info['order_by']] = new $element_info['php_class']("<".$element_info['html_tag']." class=".$element_info['html_class']." >"."</".$element_info['html_tag'].">");
+                        $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
                     }
                 }
+                HtmlUtils::dump("elementlist",$element_list);
 
-                $articles = ModelSelector::getArticleModel()->fetchFrontPageArticles();
-                $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
+                // $articles = ModelSelector::getArticleModel()->fetchFrontPageArticles();
+                // $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
 
-                $container = new ContainerElement($styling_container['main_div'], '</div>');
-                $container->addElement(new AtomicElement('<h1 class="display-1"> Welcome to our website</h1>', ''));
+                // $container = new ContainerElement($styling_container['main_div'], '</div>');
+                // $container->addElement(new AtomicElement('<h1 class="display-1"> Welcome to our website</h1>', ''));
 
-                // outer row
-                $row_container = new ContainerElement('<div class="row g-4 mb-5">', '</div>');
+                // // outer row
+                // $row_container = new ContainerElement('<div class="row g-4 mb-5">', '</div>');
 
-                // first article = featured, wrapped in col-md-8
-                $featured = array_shift($articles);
-                $featured_col = new ContainerElement('<div class="col-md-8">', '</div>');
-                $featured_col->addElement(new Card(
-                    image: $featured['imgFileName'],
-                    title: $featured['title'],
-                    summary: $featured['summary'],
-                    article_id: $featured['id']
-                ));
-                $row_container->addElement($featured_col);
+                // // first article = featured, wrapped in col-md-8
+                // $featured = array_shift($articles);
+                // $featured_col = new ContainerElement('<div class="col-md-8">', '</div>');
+                // $featured_col->addElement(new Card(
+                //     image: $featured['imgFileName'],
+                //     title: $featured['title'],
+                //     summary: $featured['summary'],
+                //     article_id: $featured['id']
+                // ));
+                // $row_container->addElement($featured_col);
 
-                // remaining articles = small cards, wrapped in col-md-4 > row > col-12 each
-                $small_col = new ContainerElement('<div class="col-md-4">', '</div>');
-                $small_row = new ContainerElement('<div class="row g-4">', '</div>');
+                // // remaining articles = small cards, wrapped in col-md-4 > row > col-12 each
+                // $small_col = new ContainerElement('<div class="col-md-4">', '</div>');
+                // $small_row = new ContainerElement('<div class="row g-4">', '</div>');
 
-                foreach ($articles as $a) {
-                    $small_wrapper = new ContainerElement('<div class="col-12">', '</div>');
-                    $small_wrapper->addElement(new Card(
-                        image: $a['imgFileName'],
-                        title: $a['title'],
-                        summary: $a['summary'],
-                        article_id: $a['id']
-                    ));
-                    $small_row->addElement($small_wrapper);
-                }
+                // foreach ($articles as $a) {
+                //     $small_wrapper = new ContainerElement('<div class="col-12">', '</div>');
+                //     $small_wrapper->addElement(new Card(
+                //         image: $a['imgFileName'],
+                //         title: $a['title'],
+                //         summary: $a['summary'],
+                //         article_id: $a['id']
+                //     ));
+                //     $small_row->addElement($small_wrapper);
+                // }
 
-                $small_col->addElement($small_row);
-                $row_container->addElement($small_col);
+                // $small_col->addElement($small_row);
+                // $row_container->addElement($small_col);
 
-                $container->addElement($row_container);
-                $main->addElement($container);
+                // $container->addElement($row_container);
+                // $main->addElement($container);
                 break;
 
             case 'about':

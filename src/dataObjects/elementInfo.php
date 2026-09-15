@@ -11,23 +11,19 @@ class ElementInfo implements \arrayAccess
 
     static private array $allowed_keys =
         [
-            'php_class',
-            'tag',
+            'order_by',
+            'parent_order',
             'name',
+            'html_tag',
             'html_class',
-            'id',
-            'value',
-            'type',
-            'action',
-            'method',
-            'style',
+            'php_class',
+            'js_class',
             'text',
-            'label',
         ];
 
     private array $container = [];
 
-    public function __construct(array $attributes, bool $permissive = false)
+    public function __construct(array $attributes = [], bool $permissive = false)
     {
         foreach ($attributes as $key => $value) {
             try {
@@ -65,5 +61,10 @@ class ElementInfo implements \arrayAccess
     public function offsetUnset(mixed $offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->container);
     }
 }

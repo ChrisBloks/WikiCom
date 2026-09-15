@@ -6,6 +6,7 @@ namespace Wiki\controllers\factories;
 use Wiki\tools\traits\tErrorMessageCollector,
     Wiki\views\containers\Menu,
     Wiki\views\containers\Menuitem;
+use Wiki\tools\utils\HtmlUtils;
 
 class MenuFactory
 {
@@ -22,6 +23,7 @@ class MenuFactory
 
         foreach ($menu_items as $item) {
             try {
+                HtmlUtils::dump("test",htmlentities($this->buildMenuItem($item)->show()));
                 $menu->addElement($this->buildMenuItem($item));
             } catch (\InvalidArgumentException $e) {
                 $this->logError($e->getMessage());

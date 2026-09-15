@@ -2,6 +2,8 @@
 
 namespace Wiki\views;
 
+use Wiki\dataObjects\ElementInfo;
+use Wiki\models\ElementModel;
 use Wiki\views\containers\ContainerElement;
 use Wiki\tools\interfaces\iElement;
 /**
@@ -19,8 +21,8 @@ class BasePage extends HtmlDoc
 
     public function __construct()
     {
-        $this->head_container = new ContainerElement("", "");
-        $this->body_container = new ContainerElement("", "");
+        $this->head_container = new ContainerElement(new ElementInfo());
+        $this->body_container = new ContainerElement(new ElementInfo());
     }
 
     /**

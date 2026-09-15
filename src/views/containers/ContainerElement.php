@@ -3,7 +3,9 @@
 namespace Wiki\views\containers;
 
 use Wiki\tools\interfaces\iElement,
-     Wiki\tools\traits\tElementContainer;
+Wiki\tools\traits\tElementContainer;
+use ArrayAccess;
+use Wiki\tools\utils\HtmlUtils;
 
 
 /**
@@ -20,10 +22,15 @@ class ContainerElement implements iElement
     protected string $html_before;
     protected string $html_after;
 
-    public function __construct(string $html_before, string $html_after)
+    public function __construct(ArrayAccess $element_info)
     {
-        $this->html_before = $html_before;
-        $this->html_after = $html_after;
+        if ($element_info->isEmpty()) {
+            $this->html_before = "";
+            $this->html_after = "";
+            return;
+        }
+        $this->html_before = "<" . $element_info['html_tag'] . "" . HtmlUtils::addClassAttr($element_info['html_class']) . ">";
+        $this->html_after = "</" . $element_info['html_tag'] . ">";
     }
 
     /**

@@ -8,6 +8,7 @@
 namespace Wiki\models;
 
 use Wiki\dataObjects\FormInfo,
+Wiki\dataObjects\ElementInfo,
 Wiki\dataObjects\FieldInfo;
 use Wiki\tools\utils\HtmlUtils;
 
@@ -35,6 +36,10 @@ class ElementModel extends BaseModel
         if (empty($result)) {
             $this->logError("Page has no Form");
             return false;
+        }
+
+        foreach ($result as $key => $value){
+            $result[$key] = new ElementInfo($value);
         }
 
         return $result;

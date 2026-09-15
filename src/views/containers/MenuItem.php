@@ -2,6 +2,7 @@
 
 namespace Wiki\views\containers;
 
+use Wiki\dataObjects\ElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 /**
@@ -19,11 +20,16 @@ class Menuitem extends ContainerElement
         $safe_label = htmlspecialchars($label);
         $safe_href = htmlspecialchars($href);
 
-        parent::__construct(
-            '<li' . HtmlUtils::addClassAttr($li_class) . '>' .
-                '<a href="?page=' . $safe_href . '"' . HtmlUtils::addClassAttr($class) . HtmlUtils::addAttrs($attrs) . '>' .
-                $safe_label . '</a>',
-            "</li>"
-        );
+
+        $element_info_inner = ["html_tag" => 'a href="?page=' . $safe_href . '" '. HtmlUtils::addAttrs($attrs) .'',"html_class" => $class];
+
+        $element_inner = new ContainerElement(new ElementInfo($element_info_inner));
+
+        $element_inner->addElement(new AtomicElement($safe_label));
+
+
+        HtmlUtils::dump("flag???",htmlentities($element_inner->show()));
+
+        parent::__construct(new ElementInfo(["html_tag" => 'li '.$element_inner->show(),"html_class" => $li_class]));
     }
 }
