@@ -3,6 +3,8 @@
 namespace Wiki\views\containers;
 
 use Wiki\tools\interfaces, Wiki\tools\utils;
+use ArrayAccess,
+Wiki\tools\utils\HtmlUtils;
 
 /**
  * Used to create html code
@@ -12,17 +14,21 @@ use Wiki\tools\interfaces, Wiki\tools\utils;
 class AtomicElement implements interfaces\iElement
 {
     // properties
-    private string $html;
-    private string $class;
+    protected string $html_before;
+    protected string $html_after;
+    protected string $html;
 
-    public function __construct(string $html, string $class = '')
+    public function __construct(ArrayAccess $element_info)
     {
-        $this->html = $html;
-        $this->class = $class;
+        $this->html_before = (isset($element_info['html_tag']) ? "<" . $element_info['html_tag'] . "" . HtmlUtils::addClassAttr($element_info['html_class']) . ">" : "");
+        $this->html_after = (isset($element_info['html_tag']) ? "</" . $element_info['html_tag'] . ">" : "");
+
+        $this->html = $this->html_before .$element_info['text'].$this->html_after;
     }
+
 
     public function show(): string
     {
-        return $this->html . utils\HtmlUtils::addClassAttr($this->class);
+        return $this->html;
     }
 }

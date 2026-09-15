@@ -19,6 +19,7 @@ class ElementInfo implements \arrayAccess
             'php_class',
             'js_class',
             'text',
+            'article',
         ];
 
     private array $container = [];

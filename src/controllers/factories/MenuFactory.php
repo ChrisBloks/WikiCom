@@ -23,7 +23,6 @@ class MenuFactory
 
         foreach ($menu_items as $item) {
             try {
-                HtmlUtils::dump("test",htmlentities($this->buildMenuItem($item)->show()));
                 $menu->addElement($this->buildMenuItem($item));
             } catch (\InvalidArgumentException $e) {
                 $this->logError($e->getMessage());
