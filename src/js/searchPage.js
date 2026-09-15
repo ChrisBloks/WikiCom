@@ -43,14 +43,11 @@ function resetCheckboxesToDefault(checkbox_group) {
     return a[1].localeCompare(b[1]);
   });
 
-  // Build up html to put on page
-  html = "";
+  // Build up elements to put on page
+  checkbox_group.empty();
   checkbox_array.forEach((checkbox_div) => {
-    html += checkbox_div[0].get(0).outerHTML;
+    checkbox_group.append(checkbox_div[0]);
   });
-
-  // update page
-  checkbox_group.html(html);
 }
 
 /**
@@ -105,14 +102,12 @@ function orderCheckboxes(checkbox_group, search_input, max_distance) {
     }
   });
 
-  // Build up html to put on page
-  html = "";
+  // Build up elements to put on page
+  checkbox_group.empty();
   checkbox_array.forEach((checkbox_div) => {
-    html += checkbox_div[0].get(0).outerHTML;
+    checkbox_group.append(checkbox_div[0]);
   });
 
-  // update page
-  checkbox_group.html(html);
 }
 
 /**
