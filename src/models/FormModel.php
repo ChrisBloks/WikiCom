@@ -27,6 +27,7 @@ class FormModel extends BaseModel
                         fi.class, 
                         fi.label,
                         fi.optional, 
+                        fi.error_disp_name,
                         li.*
                 FROM field_info fi
                 JOIN form_info fo ON fi.form_info_id = fo.id
