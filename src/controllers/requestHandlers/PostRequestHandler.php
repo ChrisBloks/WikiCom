@@ -150,7 +150,7 @@ class PostRequestHandler extends BaseRequestHandler
 
                     $validation_result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
 
-                    if ($validation_result['ok'] && ($validation_result['field_inputs']['name'] || $validation_result['field_inputs']['email'])) {
+                    if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
                         $this->response['page'] = 'dashboard';
                         $_SESSION['messages'][] = 'Your information has been updated.';
                     } else {

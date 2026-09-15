@@ -104,59 +104,7 @@ class UserHandler
     }
 
     /**
-     * Check if about fields were filled in correctly.
-     * If everything is correct save new userabout info to database database.
-     * @param array $validation_result array containing the name of the source page under key 'page'.
-     * @return array contains keys ['ok', 'user_error', 'field_inputs']
-     */
-    public function handleUserAboutInfo(array $validation_result): array
-    {
-        $aboutID = Utils::getRequestVar('author', false);
-        $about_info = $validation_result['field_inputs'];
-
-        if (isset($validation_result['field_inputs']['filevar'])) {
-            // Construct image file path
-            $target_dir = \Config::AUTHORIMGPATH;
-            $filevar = $validation_result['field_inputs']['filevar'];
-            $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
-            $filename = 'author_' . $aboutID . '.' . $filetype . '';
-            $target_file = $target_dir . $filename;
-
-            // uploading image
-            if (move_uploaded_file($filevar["tmp_name"], $target_file)) {
-                $result = ModelSelector::getUserInfoModel()
-                    ->saveUserAboutInfo(
-                        imgFileName: $filename,
-                        description: $about_info['description'],
-                        author_id: $aboutID
-                    );
-                if ($result == false) {
-                    $validation_result['ok'] = false;
-                    $validation_result['user_error'] = array_merge($validation_result['user_error'], ModelSelector::getUserInfoModel()->getErrors());
-                }
-            } else {
-                $validation_result['ok'] = false;
-                $validation_result['user_error'][] = "Sorry, there was an error uploading your file.";
-            }
-        } else {
-            $about_old_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($aboutID);
-            $filename = isset($about_old_info['imgFileName']) ? $about_old_info['imgFileName'] : '';
-            $result = ModelSelector::getUserInfoModel()
-                ->saveUserAboutInfo(
-                    imgFileName: $filename,
-                    description: $about_info['description'],
-                    author_id: $aboutID
-                );
-            if ($result == false) {
-                $validation_result['ok'] = false;
-                $validation_result['user_error'] = array_merge($validation_result['user_error'], ModelSelector::getUserInfoModel()->getErrors());
-            }
-        }
-        return $validation_result;
-    }
-
-    /**
-     * Check if which fields were filled in correctly (name, email, or both).
+     * Check if which user info fields were filled in correctly 
      * If everything is correct save new user info to database database.
      * @param array $validation_result array containing the name of the source page under key 'page'.
      * @return array contains keys ['ok', 'user_error', 'field_inputs']
@@ -165,7 +113,6 @@ class UserHandler
     {
         // hoe komen we hier ookal weer aan?
         $user_id = $_SESSION['userID'];
-
         //Get the current userdata 
         $currentUser = ModelSelector::getUserInfoModel()->fetchUserInfoById($user_id);
 
@@ -175,14 +122,15 @@ class UserHandler
             return $validation_result;
         }
 
+        $fieldsToUpdate = [];
+
         // heb niet gekeken of validaties getrimmed worden voor spaties in validatie of dat het nodig is
         // kan evt weg
         $new_name  = trim($validation_result['field_inputs']['name']  ?? '');
         $new_email = trim($validation_result['field_inputs']['email'] ?? '');
+        $new_description = trim($validation_result['field_inputs']['description'] ?? '');
 
-        $fieldsToUpdate = [];
-
-
+        // check for image
         if (isset($validation_result['field_inputs']['filevar'])) {
             // Construct image file path
             $target_dir = \Config::AUTHORIMGPATH;
@@ -190,9 +138,17 @@ class UserHandler
             $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
             $filename = 'author_' . $user_id . '.' . $filetype . '';
             $target_file = $target_dir . $filename;
-
             // move image to img/authors
-            move_uploaded_file($filevar["tmp_name"], $target_file);
+            if (move_uploaded_file($filevar["tmp_name"], $target_file)) {
+                // add new image path to DB
+                $fieldsToUpdate['imgFileName'] = $filename;
+            } else {
+
+                $validation_result['ok'] = false;
+                $validation_result['user_error'][] = "Sorry, there was an error uploading your file.";
+            };
+        } else {
+            $filename = isset($about_old_info['imgFileName']) ? $currentUser['imgFileName'] : '';
         }
 
         // Check for new name
@@ -221,8 +177,11 @@ class UserHandler
             $fieldsToUpdate['email'] = $new_email;
         }
 
+        // check for description
+        if (!empty($new_description) && $new_description !== $currentUser['description']) {
+            $fieldsToUpdate['description'] = $new_description;
+        }
 
-        
         // start crud functions
         if (!empty($fieldsToUpdate)) {
             $validation_result['ok'] = ModelSelector::getUserInfoModel()
