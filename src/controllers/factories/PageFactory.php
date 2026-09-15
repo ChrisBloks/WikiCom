@@ -14,31 +14,31 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-Wiki\tools\traits\tErrorMessageCollector,
-Wiki\tools\exceptions\PageNotFoundException,
-Wiki\models\ModelSelector,
-Wiki\controllers\factories\MenuFactory,
-Wiki\views\BasePage,
-Wiki\views\Table,
-Wiki\views\containers\AtomicElement,
-Wiki\views\containers\Header,
-Wiki\views\containers\BodyText,
-Wiki\views\containers\Title,
-Wiki\views\containers\Card,
-Wiki\views\containers\Image,
-Wiki\views\containers\AuthorText,
-Wiki\views\containers\CodeBlock,
-Wiki\views\containers\Footer,
-Wiki\views\containers\ContainerElement,
-Wiki\views\containers\MainElement,
-Wiki\views\containers\Rating,
-Wiki\views\containers\NoticeMessage,
-League\CommonMark\GithubFlavoredMarkdownConverter,
-HTMLPurifier,
-HTMLPurifier_Config,
-Wiki\views\fields\ButtonField,
-InvalidArgumentException,
-Throwable;
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer,
+    Wiki\views\containers\ContainerElement,
+    Wiki\views\containers\MainElement,
+    Wiki\views\containers\Rating,
+    Wiki\views\containers\Card,
+    Wiki\views\containers\NoticeMessage,
+    League\CommonMark\GithubFlavoredMarkdownConverter,
+    HTMLPurifier,
+    HTMLPurifier_Config,
+    Wiki\views\fields\ButtonField,
+    InvalidArgumentException,
+    Throwable;
 
 
 
@@ -143,9 +143,8 @@ class PageFactory
 
                 $articles = ModelSelector::getArticleModel()->fetchFrontPageArticles();
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
-
                 $container = new ContainerElement($styling_container['main_div'], '</div>');
-                $container->addElement(new AtomicElement('<h1 class="display-1"> Welcome to our website</h1>', ''));
+                $container->addElement(new Title($pageinfo['bodytext'], 'display-1 border-bottom mb-1'));
 
                 // outer row
                 $row_container = new ContainerElement('<div class="row g-4 mb-5">', '</div>');
@@ -186,61 +185,26 @@ class PageFactory
             case 'about':
                 $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
 
-                if ($this->response['userID'] == $this->response['aboutID']) {
-                    // Edit view: 
-                    $top_container = new ContainerElement($styling_container['top_div'], '</div>');
-                    $main_container = new ContainerElement($styling_container['main_div'], '</div>');
-                    $sub_container = new ContainerElement('<div>', '</div>');
+                $main_container = new ContainerElement($styling_container['main_div_2'], '</div>');
+                $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
 
-                    $formFactory = new FormFactory();
-                    $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
-                    $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-                    $form = $formFactory->createForm(
-                        form_info: $form_info,
-                        field_info: $form_fields,
-                        hidden_field_info: [
-                            'user' => $this->response['aboutID'],
-                            'page' => $this->page
-                        ],
-                        field_default_text: ["description" => $aboutinfo["description"]]
-                    );
+                $sub_container->addElement(new Title(
+                    text: $aboutinfo['name'],
+                    class: $styling_elements['name_class']
+                ));
+                $sub_container->addElement(new BodyText(
+                    text: $aboutinfo['description'],
+                    class: $styling_elements['description_class']
+                ));
 
-                    $top_container->addElement(new Title(
-                        text: $aboutinfo['name'],
-                        class: $styling_elements['name_class']
-                    ));
+                $main_container->addElement($sub_container);
+                $main_container->addElement(new Image(
+                    name: './img/authors/' . $aboutinfo['imgFileName'],
+                    class: $styling_elements['img_class']
+                ));
 
-                    $sub_container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: $styling_elements['img_class']
-                    ));
+                $main->addElement($main_container);
 
-                    $main->addElement($top_container);
-                    $main_container->addElement($sub_container);
-                    $main_container->addElement($form);
-                    $main->addElement($main_container);
-                } else {
-                    // Read-only view
-                    $main_container = new ContainerElement($styling_container['main_div_2'], '</div>');
-                    $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
-
-                    $sub_container->addElement(new Title(
-                        text: $aboutinfo['name'],
-                        class: $styling_elements['name_class']
-                    ));
-                    $sub_container->addElement(new BodyText(
-                        text: $aboutinfo['description'],
-                        class: $styling_elements['description_class']
-                    ));
-
-                    $main_container->addElement($sub_container);
-                    $main_container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: $styling_elements['img_class']
-                    ));
-
-                    $main->addElement($main_container);
-                }
                 break;
             case 'contact':
             case 'login':
@@ -330,8 +294,6 @@ class PageFactory
                 } else {
                     $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
                 }
-
-                HtmlUtils::dump("test",$this->response);
                 $form_fields = $this->addCheckedUsingArray($form_fields, $this->response);
 
 
@@ -608,6 +570,5 @@ class PageFactory
         unset($field);
 
         return $form_fields;
-
     }
 }

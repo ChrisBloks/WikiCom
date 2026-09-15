@@ -29,7 +29,7 @@ class PostRequestHandler extends BaseRequestHandler
         // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
         $validation_result = (new ValidationHandler)
             ->validateFields(field_info: $field_info);
-
+            
         // If form was submitted correctly WRONG: add validation errors to response
         $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour

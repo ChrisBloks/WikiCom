@@ -177,19 +177,32 @@ class UserHandler
 
         // heb niet gekeken of validaties getrimmed worden voor spaties in validatie of dat het nodig is
         // kan evt weg
-        $newName  = trim($validation_result['field_inputs']['name']  ?? '');
-        $newEmail = trim($validation_result['field_inputs']['email'] ?? '');
+        $new_name  = trim($validation_result['field_inputs']['name']  ?? '');
+        $new_email = trim($validation_result['field_inputs']['email'] ?? '');
 
         $fieldsToUpdate = [];
 
+
+        if (isset($validation_result['field_inputs']['filevar'])) {
+            // Construct image file path
+            $target_dir = \Config::AUTHORIMGPATH;
+            $filevar = $validation_result['field_inputs']['filevar'];
+            $filetype = strtolower(pathinfo($filevar['name'], PATHINFO_EXTENSION));
+            $filename = 'author_' . $user_id . '.' . $filetype . '';
+            $target_file = $target_dir . $filename;
+
+            // move image to img/authors
+            move_uploaded_file($filevar["tmp_name"], $target_file);
+        }
+
         // Check for new name
-        if (!empty($newName) && $newName !== $currentUser['name']) {
-            $fieldsToUpdate['name'] = $newName;
+        if (!empty($new_name) && $new_name !== $currentUser['name']) {
+            $fieldsToUpdate['name'] = $new_name;
         }
 
         // Check whether email is different
-        if (!empty($newEmail) && $newEmail !== $currentUser['email']) {
-            $existingUserId = ModelSelector::getUserInfoModel()->fetchUserIDbyEmail(email: $newEmail);
+        if (!empty($new_email) && $new_email !== $currentUser['email']) {
+            $existingUserId = ModelSelector::getUserInfoModel()->fetchUserIDbyEmail(email: $new_email);
 
             if ($existingUserId === false) {
                 // query failed
@@ -205,9 +218,11 @@ class UserHandler
                 return $validation_result;
             }
 
-            $fieldsToUpdate['email'] = $newEmail;
+            $fieldsToUpdate['email'] = $new_email;
         }
 
+
+        
         // start crud functions
         if (!empty($fieldsToUpdate)) {
             $validation_result['ok'] = ModelSelector::getUserInfoModel()
