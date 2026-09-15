@@ -10,15 +10,17 @@ class ImgValidator implements iValidator
 {
     use tErrorMessageCollector;
     protected array $field_inputs = [];
-        public function validate(string $name, bool $optional = false): bool
+        public function validate(string $name, bool $optional = false, ?string $error_disp_name = ""): bool
     {
+        if (empty($error_disp_name)) $error_disp_name = $name;
+
         // Get name of file
         $this->field_inputs[$name] = $_FILES[$name]['name'];
         // If field was left empty, log an error
         if (empty($this->field_inputs[$name])) {
             if ($optional == false) {
             $this->logError(
-                message: 'Field ' . $name . ' was not filled in!',
+                message: "{$error_disp_name} was not filled in!",
                 key: $name
             );
             }
@@ -29,7 +31,7 @@ class ImgValidator implements iValidator
         if ($this->hasErrors() or empty($this->field_inputs[$name])) {
             return false;
         } else {
-            return $this->validateFields(field_inputs: $this->field_inputs);
+            return $this->validateFields(field_inputs: $this->field_inputs, error_disp_name: $error_disp_name);
         }
     }
 
@@ -38,7 +40,7 @@ class ImgValidator implements iValidator
         return $this->field_inputs;
     }
 
-    public function validateFields(array $field_inputs): bool
+    public function validateFields(array $field_inputs, string $error_disp_name): bool
     {
         $target_dir = \Config::AUTHORIMGPATH;
         // use the same key of field inputs to find the image file
