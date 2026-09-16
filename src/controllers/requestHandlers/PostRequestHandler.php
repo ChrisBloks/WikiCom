@@ -143,19 +143,7 @@ class PostRequestHandler extends BaseRequestHandler
                     );
                     $_SESSION['messages'][] = 'Message has been sent!';
                 }
-                break;
-            case 'editPassword':
-                if ($validation_result['ok']) {
-                    $validation_result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);
-
-                    if ($validation_result['ok']) {
-                        $this->response['page'] = 'dashboard';
-                        $_SESSION['messages'][] = 'Password successfully changed';
-                    } else {
-                        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-                    }
-                }
-                break;
+                break;    
             default:
                 throw new \Exception("Request couldnt be handled, please message an admin");
         }
