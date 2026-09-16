@@ -9,6 +9,7 @@ namespace Wiki\models;
 
 use Wiki\dataObjects\FormInfo,
 Wiki\dataObjects\ElementInfo,
+Wiki\dataObjects\Stack,
 Wiki\dataObjects\FieldInfo;
 use Wiki\tools\utils\HtmlUtils;
 
@@ -40,10 +41,21 @@ class ElementModel extends BaseModel
             return false;
         }
 
-        foreach ($result as $key => $value){
-            $lookup_info = $this->fetchLookupInfoByElementId($value['element_id']);
-            HtmlUtils::dump('test1',$value);
-            HtmlUtils::dump('test',$this->fetchLookupInfoResult($lookup_info,$value['element_id']));
+        foreach ($result as $key => $value) {
+            $lookup_results = [];
+            $stack = new Stack();
+            $stack->add($this->fetchLookupInfoByElementId($value['element_id']));
+            $parent = 0;
+
+            while (!$stack->isEmpty()) {
+                $lookup_info_temp = $stack->pop();
+                HtmlUtils::dump("test",$lookup_info_temp);
+                $lookup_result = $this->fetchLookupInfoResult($lookup_info_temp, $lookup_info_temp['element_id']);
+                $element_id = 100;
+                $lookup_info = $this->fetchLookupInfoByElementId($element_id);
+                $lookup_results[] = $lookup_result; 
+            }
+
             $result[$key] = new ElementInfo($value);
         }
 
@@ -51,7 +63,7 @@ class ElementModel extends BaseModel
         return $result;
     }
 
-        /**
+    /**
      * Fetches an article with the given user id
      * @param int $element_id
      * @return array|false a single article of form [id, title, lastEdit]
@@ -62,7 +74,7 @@ class ElementModel extends BaseModel
                     FROM element_lookup_info
                     WHERE element_id=:element_id";
         $params = ['element_id' => $element_id];
-        $result = $this->crud->selectOne(sql: $sql, params: $params);
+        $result = $this->crud->selectMany(sql: $sql, params: $params);
         return $result;
     }
 
@@ -257,10 +269,9 @@ class ElementModel extends BaseModel
 
         // // Always add an ORDER BY clause
         // $sql .= " ORDER BY {$lookup_info['order_by']}";
-        HtmlUtils::dump("sql",$sql);
 
         // Execute the query
-        $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_ASSOC);
+        $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);
 
 
 
