@@ -24,6 +24,8 @@ class ElementInfo implements \arrayAccess
             'bodytext',
             'image',
             'element_id',
+            'form_info',
+            'sub_fields',
         ];
 
     private array $container = [];

@@ -202,7 +202,16 @@ class PageFactory
             case 'contact':
 
                 foreach ($elements_info as $element_info) {
-                    HtmlUtils::dump("element",$element_info);
+                    // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
+                    if ($element_info['parent_order'] == 0) {
+                        $element = new $element_info['php_class']($element_info);
+                        $element_info_list[$element_info['order_by']] = $element;
+                        $main->addElement($element);
+                        // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
+                    } else {
+                        $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
+                        $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
+                    }
                 }
 
 
