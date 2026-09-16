@@ -18,7 +18,7 @@ class ElementModel extends BaseModel
     {
         $sql = "SELECT  p_e.order_by,
                         p_e.parent_order,
-                        page.name,
+                        e_i.name,
                         e_i.html_tag,
                         e_i.html_class,
                         e_i.php_class,

@@ -39,6 +39,7 @@ HTMLPurifier_Config,
 Wiki\views\fields\ButtonField,
 InvalidArgumentException,
 Throwable;
+use Wiki\dataObjects\ElementInfo;
 
 
 
@@ -70,35 +71,40 @@ class PageFactory
 
     private function addHead()
     {
-        $this->htmlpage->addtoHeadContent(new AtomicElement("<title> Testpage </title>"));
+        $this->htmlpage->addtoHeadContent(new AtomicElement(new ElementInfo(["html_tag" => "title", "text" => "Testpage"])));
     }
 
     private function addScripts()
     {
         // should move to a config or something instead of pasting links raw in the pagefactory
-        $this->htmlpage->addToHeadContent(new AtomicElement('
+        $this->htmlpage->addToHeadContent(new AtomicElement(new ElementInfo([
+            "text" => '
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
                 <link rel="stylesheet" href="./src/css/stylesheet.css">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
-    '));
+    '
+        ])));
 
-        $this->htmlpage->addToHeadContent(new AtomicElement(
-            '
+        $this->htmlpage->addToHeadContent(new AtomicElement(new ElementInfo([
+            "text" =>
+                '
                 <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="./vendor/webcito/bs-markdown-editor/dist/bs-markdown-editor.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
                 <script src="./src/js/wiki.js"></script>
                 <script>hljs.highlightAll();</script>'
-        ));
+        ])));
 
         switch ($this->page) {
             case 'editArticle':
             case 'search':
                 $this->htmlpage->addToHeadContent(
                     new AtomicElement(
-                        '<script src="./src/js/searchPage.js"></script>'
+                        new ElementInfo(
+                            ["text" => '<script src="./src/js/searchPage.js"></script>']
+                        )
                     )
                 );
                 break;
@@ -133,68 +139,43 @@ class PageFactory
 
         $main = new MainElement();
         $main->addElement(new NoticeMessage());
-        $main->addElement(new AtomicElement("<br>"));
+        $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
 
+        // Maybe seperate controller
+        $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
+
+        foreach ($elements_info as &$element_info) {
+            switch ($element_info['name']) {
+                case "random_article":
+                    $excludelist = $excludelist ?? [];
+                    $element_info['article'] = ModelSelector::getArticleModel()->fetchFrontPageArticles($excludelist);
+                    $excludelist[] = $element_info['article']['id'];
+                    break;
+                default:
+                    break;
+            }
+        }
+        unset($element_info);
 
         // page building
         switch ($this->page) {
             case 'home':
 
-                $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
-
-                HtmlUtils::dump("test",$elements_info);
-                $element_list = [];
-                foreach ($elements_info as $element_info){
-                    if ($element_info['parent_order']==0){
+                // loop through list of element info
+                foreach ($elements_info as $element_info) {
+                    // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
+                    if ($element_info['parent_order'] == 0) {
+                        $element = new $element_info['php_class']($element_info);
+                        $element_info_list[$element_info['order_by']] = $element;
+                        $main->addElement($element);
+                    // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
+                    } else {
                         $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
-                    }else{
-                        $element_info_list[$element_info['order_by']] = new $element_info['php_class']("<".$element_info['html_tag']." class=".$element_info['html_class']." >"."</".$element_info['html_tag'].">");
                         $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
                     }
                 }
-                HtmlUtils::dump("elementlist",$element_list);
 
-                // $articles = ModelSelector::getArticleModel()->fetchFrontPageArticles();
-                // $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
-
-                // $container = new ContainerElement($styling_container['main_div'], '</div>');
-                // $container->addElement(new AtomicElement('<h1 class="display-1"> Welcome to our website</h1>', ''));
-
-                // // outer row
-                // $row_container = new ContainerElement('<div class="row g-4 mb-5">', '</div>');
-
-                // // first article = featured, wrapped in col-md-8
-                // $featured = array_shift($articles);
-                // $featured_col = new ContainerElement('<div class="col-md-8">', '</div>');
-                // $featured_col->addElement(new Card(
-                //     image: $featured['imgFileName'],
-                //     title: $featured['title'],
-                //     summary: $featured['summary'],
-                //     article_id: $featured['id']
-                // ));
-                // $row_container->addElement($featured_col);
-
-                // // remaining articles = small cards, wrapped in col-md-4 > row > col-12 each
-                // $small_col = new ContainerElement('<div class="col-md-4">', '</div>');
-                // $small_row = new ContainerElement('<div class="row g-4">', '</div>');
-
-                // foreach ($articles as $a) {
-                //     $small_wrapper = new ContainerElement('<div class="col-12">', '</div>');
-                //     $small_wrapper->addElement(new Card(
-                //         image: $a['imgFileName'],
-                //         title: $a['title'],
-                //         summary: $a['summary'],
-                //         article_id: $a['id']
-                //     ));
-                //     $small_row->addElement($small_wrapper);
-                // }
-
-                // $small_col->addElement($small_row);
-                // $row_container->addElement($small_col);
-
-                // $container->addElement($row_container);
-                // $main->addElement($container);
                 break;
 
             case 'about':
@@ -345,7 +326,7 @@ class PageFactory
                     $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
                 }
 
-                HtmlUtils::dump("test",$this->response);
+                HtmlUtils::dump("test", $this->response);
                 $form_fields = $this->addCheckedUsingArray($form_fields, $this->response);
 
 
@@ -601,7 +582,7 @@ class PageFactory
 
 
         //add the footer to the body content
-        $this->htmlpage->addToBodyContent(new AtomicElement("<br>"));
+        $this->htmlpage->addToBodyContent(new AtomicElement(new ElementInfo(["text" => "<br>"])));
         $this->htmlpage->addToBodyContent(new Footer(
             text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
             class: $styling_system['footer']

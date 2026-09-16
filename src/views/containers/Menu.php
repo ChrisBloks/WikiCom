@@ -11,7 +11,7 @@ class Menu extends ContainerElement
 {
     public function __construct(string $class = "nav")
     {
-        $element_info = ["html_tag" => "ul", "html_class" => "nav"];
+        $element_info = ["html_tag" => "ul", "html_class" => $class];
         parent::__construct(new ElementInfo($element_info));
     }
 }
