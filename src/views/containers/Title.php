@@ -1,6 +1,7 @@
 <?php
 namespace Wiki\views\containers;
 
+use ArrayAccess;
 use Wiki\tools\utils\HtmlUtils;
 
 /**
@@ -10,8 +11,8 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class Title extends WrappedText
 {
-    public function __construct(string $text, string $class = '')
+    public function __construct(ArrayAccess $element_info)
     {
-        parent::__construct($text, "h1" . htmlutils::addClassAttr($class));
+        parent::__construct($element_info['title'], $element_info['html_tag'] . htmlutils::addClassAttr($element_info['html_class']));
     }
 }

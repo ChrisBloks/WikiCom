@@ -23,7 +23,8 @@ class ElementModel extends BaseModel
                         e_i.html_class,
                         e_i.php_class,
                         e_i.js_class,
-                        e_i.text
+                        e_i.text,
+                        e_i.id as element_id
                 FROM page_elements as p_e
                 JOIN page on p_e.page_id = page.id
                 JOIN element_info as e_i on p_e.element_id = e_i.id
@@ -33,15 +34,35 @@ class ElementModel extends BaseModel
 
         $result = $this->crud->selectMany($sql, $params);
 
+
         if (empty($result)) {
             $this->logError("Page has no Form");
             return false;
         }
 
         foreach ($result as $key => $value){
+            $lookup_info = $this->fetchLookupInfoByElementId($value['element_id']);
+            HtmlUtils::dump('test1',$value);
+            HtmlUtils::dump('test',$this->fetchLookupInfoResult($lookup_info,$value['element_id']));
             $result[$key] = new ElementInfo($value);
         }
 
+
+        return $result;
+    }
+
+        /**
+     * Fetches an article with the given user id
+     * @param int $element_id
+     * @return array|false a single article of form [id, title, lastEdit]
+     */
+    public function fetchLookupInfoByElementId(int $element_id): array|false
+    {
+        $sql = "SELECT  *
+                    FROM element_lookup_info
+                    WHERE element_id=:element_id";
+        $params = ['element_id' => $element_id];
+        $result = $this->crud->selectOne(sql: $sql, params: $params);
         return $result;
     }
 
@@ -204,39 +225,39 @@ class ElementModel extends BaseModel
      * 'column_names' Should specify the container name and value.
      * 'id' should specifiy in which article/user/page the container field lives
      *
-     * @param array $field_info see INPUT
+     * @param array $lookup_info see INPUT
      * @param string $parent_id id of the parent object holding this container element
      * @return array see OUTPUT
      */
-    public function fetchLookupInfo(array $field_info, string $parent_id): array
+    public function fetchLookupInfoResult(array $lookup_info, string $parent_id): array
     {
         // Basic SQL start
         $sql = "SELECT
-                    {$field_info['column_names']}
+                    {$lookup_info['column_names']}
                 FROM
-                    {$field_info['source_table']}
+                    {$lookup_info['source_table']}
                 ";
 
         // If a bridge table is required
-        if (!empty($field_info["bridge_table"])) {
-            [$bridge_table_column, $source_table_column] = explode(",", $field_info["bridge_values"]);
+        if (!empty($lookup_info["bridge_table"])) {
+            [$bridge_table_column, $source_table_column] = explode(",", $lookup_info["bridge_values"]);
 
-            $join_clause = "JOIN {$field_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
+            $join_clause = "JOIN {$lookup_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
             // If a LEFT JOIN is required
-            if (!empty($field_info['left_join_on'])) {
-                $join_clause = "LEFT " . $join_clause . " AND {$field_info["left_join_on"]} = {$parent_id}";
+            if (!empty($lookup_info['left_join_on'])) {
+                $join_clause = "LEFT " . $join_clause . " AND {$lookup_info["left_join_on"]} = {$parent_id}";
             }
             $sql .= $join_clause;
         }
 
         // If a WHERE value is specified
-        if (!empty($field_info["where_value"])) {
-            $sql .= " WHERE {$field_info['where_value']} = {$parent_id}";
+        if (!empty($lookup_info["where_"])) {
+            $sql .= " WHERE {$lookup_info['where_']} = {$parent_id}";
         }
 
-        // Always add an ORDER BY clause
-        $sql .= " ORDER BY {$field_info['order_by']}";
-
+        // // Always add an ORDER BY clause
+        // $sql .= " ORDER BY {$lookup_info['order_by']}";
+        HtmlUtils::dump("sql",$sql);
 
         // Execute the query
         $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_ASSOC);

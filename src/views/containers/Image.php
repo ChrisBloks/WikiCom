@@ -2,6 +2,7 @@
 // creates body text
 namespace Wiki\views\containers;
 
+use ArrayAccess;
 use Wiki\tools\utils\HtmlUtils;
 /**
  * Type of wrapped text specifically for images
@@ -10,8 +11,8 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class Image extends WrappedText
 {
-    public function __construct(string $name, string $class = '',)
+    public function __construct(ArrayAccess $element_info)
     {
-        parent::__construct('', 'img src=' . $name . '' . HtmlUtils::addClassAttr($class));
+        parent::__construct('', 'img src=' . \CONFIG::AUTHORIMGPATH.$element_info['image'] . '' . HtmlUtils::addClassAttr($element_info['html_class']));
     }
 }

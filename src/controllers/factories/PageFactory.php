@@ -146,12 +146,19 @@ class PageFactory
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
         foreach ($elements_info as &$element_info) {
-            switch ($element_info['name']) {
-                case "random_article":
+            switch (true) {
+                case $element_info['name'] === "random_article":
                     $excludelist = $excludelist ?? [];
                     $element_info['article'] = ModelSelector::getArticleModel()->fetchFrontPageArticles($excludelist);
                     $excludelist[] = $element_info['article']['id'];
                     break;
+                case str_contains($element_info['name'], 'about_'):
+                    $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
+                    $element_info['title'] = $aboutinfo['name'];
+                    $element_info['bodytext'] = $aboutinfo['description'];
+                    $element_info['image'] = $aboutinfo['imgFileName'];
+                    break;
+
                 default:
                     break;
             }
@@ -169,7 +176,7 @@ class PageFactory
                         $element = new $element_info['php_class']($element_info);
                         $element_info_list[$element_info['order_by']] = $element;
                         $main->addElement($element);
-                    // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
+                        // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
                     } else {
                         $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
                         $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
@@ -179,67 +186,34 @@ class PageFactory
                 break;
 
             case 'about':
-                $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
-
-                if ($this->response['userID'] == $this->response['aboutID']) {
-                    // Edit view: 
-                    $top_container = new ContainerElement($styling_container['top_div'], '</div>');
-                    $main_container = new ContainerElement($styling_container['main_div'], '</div>');
-                    $sub_container = new ContainerElement('<div>', '</div>');
-
-                    $formFactory = new FormFactory();
-                    $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
-                    $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-                    $form = $formFactory->createForm(
-                        form_info: $form_info,
-                        field_info: $form_fields,
-                        hidden_field_info: [
-                            'user' => $this->response['aboutID'],
-                            'page' => $this->page
-                        ],
-                        field_default_text: ["description" => $aboutinfo["description"]]
-                    );
-
-                    $top_container->addElement(new Title(
-                        text: $aboutinfo['name'],
-                        class: $styling_elements['name_class']
-                    ));
-
-                    $sub_container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: $styling_elements['img_class']
-                    ));
-
-                    $main->addElement($top_container);
-                    $main_container->addElement($sub_container);
-                    $main_container->addElement($form);
-                    $main->addElement($main_container);
-                } else {
-                    // Read-only view
-                    $main_container = new ContainerElement($styling_container['main_div_2'], '</div>');
-                    $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
-
-                    $sub_container->addElement(new Title(
-                        text: $aboutinfo['name'],
-                        class: $styling_elements['name_class']
-                    ));
-                    $sub_container->addElement(new BodyText(
-                        text: $aboutinfo['description'],
-                        class: $styling_elements['description_class']
-                    ));
-
-                    $main_container->addElement($sub_container);
-                    $main_container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: $styling_elements['img_class']
-                    ));
-
-                    $main->addElement($main_container);
+                foreach ($elements_info as $element_info) {
+                    // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
+                    if ($element_info['parent_order'] == 0) {
+                        $element = new $element_info['php_class']($element_info);
+                        $element_info_list[$element_info['order_by']] = $element;
+                        $main->addElement($element);
+                        // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
+                    } else {
+                        $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
+                        $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
+                    }
                 }
                 break;
             case 'contact':
+
+                foreach ($elements_info as $element_info) {
+                    HtmlUtils::dump("element",$element_info);
+                }
+
+
+                break;
             case 'login':
             case 'register':
+                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
+                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
+                HtmlUtils::dump("field",$form_fields);
+                HtmlUtils::dump("form",$form_info);
                 // main Div: image + text-div 
                 $main_container = new ContainerElement($styling_container['main_div'], '</div>');
 
@@ -247,8 +221,7 @@ class PageFactory
                 $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
                 $formFactory = new FormFactory();
 
-                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
-                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
 
                 $form = $formFactory->createForm(
                     form_info: $form_info,

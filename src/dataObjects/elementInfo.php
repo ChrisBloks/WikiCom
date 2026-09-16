@@ -20,6 +20,10 @@ class ElementInfo implements \arrayAccess
             'js_class',
             'text',
             'article',
+            'title',
+            'bodytext',
+            'image',
+            'element_id',
         ];
 
     private array $container = [];
