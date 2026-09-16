@@ -144,20 +144,6 @@ class PostRequestHandler extends BaseRequestHandler
                     $_SESSION['messages'][] = 'Message has been sent!';
                 }
                 break;
-
-            case 'editUser':
-                if ($validation_result['ok']) {
-
-                    $validation_result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
-
-                    if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
-                        $this->response['page'] = 'dashboard';
-                        $_SESSION['messages'][] = 'Your information has been updated.';
-                    } else {
-                        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-                    }
-                }
-                break;
             case 'editPassword':
                 if ($validation_result['ok']) {
                     $validation_result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);

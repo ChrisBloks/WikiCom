@@ -6,11 +6,11 @@ namespace Wiki\controllers;
 
 use Wiki\controllers\ValidationHandler as ControllersValidationHandler;
 use Wiki\tools\traits\tSingleton,
-    Wiki\models\ModelSelector,
-    Wiki\controllers\validators\BaseValidator,
-    Wiki\controllers\validationHandler,
-    Wiki\tools\utils\HtmlUtils,
-    Wiki\tools\utils\Utils;
+Wiki\models\ModelSelector,
+Wiki\controllers\validators\BaseValidator,
+Wiki\controllers\validationHandler,
+Wiki\tools\utils\HtmlUtils,
+Wiki\tools\utils\Utils;
 
 /**
  * Handler (controller) class for validating contact, login, and registration form submissions.
@@ -111,7 +111,6 @@ class UserHandler
      */
     public function handleUserInfoChange(array $validation_result): array
     {
-        // hoe komen we hier ookal weer aan?
         $user_id = $_SESSION['userID'];
         //Get the current userdata 
         $currentUser = ModelSelector::getUserInfoModel()->fetchUserInfoById($user_id);
@@ -126,7 +125,7 @@ class UserHandler
 
         // heb niet gekeken of validaties getrimmed worden voor spaties in validatie of dat het nodig is
         // kan evt weg
-        $new_name  = trim($validation_result['field_inputs']['name']  ?? '');
+        $new_name = trim($validation_result['field_inputs']['name'] ?? '');
         $new_email = trim($validation_result['field_inputs']['email'] ?? '');
         $new_description = trim($validation_result['field_inputs']['description'] ?? '');
 
@@ -142,11 +141,14 @@ class UserHandler
             if (move_uploaded_file($filevar["tmp_name"], $target_file)) {
                 // add new image path to DB
                 $fieldsToUpdate['imgFileName'] = $filename;
+                $validation_result['field_inputs']['imgFileName'] = $filename;
+                $validation_result['field_inputs']['avatar_url'] = $target_file;
             } else {
 
                 $validation_result['ok'] = false;
                 $validation_result['user_error'][] = "Sorry, there was an error uploading your file.";
-            };
+            }
+            ;
         } else {
             $filename = isset($about_old_info['imgFileName']) ? $currentUser['imgFileName'] : '';
         }
@@ -184,13 +186,20 @@ class UserHandler
 
         // start crud functions
         if (!empty($fieldsToUpdate)) {
-            $validation_result['ok'] = ModelSelector::getUserInfoModel()
+            $updateSuccess = ModelSelector::getUserInfoModel()
                 ->updateUserInfo(
                     fields: $fieldsToUpdate,
                     user_id: $user_id
                 );
+
+            if ($updateSuccess) {
+                $validation_result['ok'] = true;
+            } else {
+                $validation_result['ok'] = false;
+                $validation_result['user_error'][] = ModelSelector::getUserInfoModel()->getErrors() ?: 'Could not save your changes.';
+            }
         } else {
-            $validation_result['ok'] = true; // nothing to do isn't an error but should pass a message maybe?
+            $validation_result['ok'] = true;
         }
 
         return $validation_result;

@@ -26,6 +26,7 @@
   width: 100%;
 }
 
+
 .checkbox_group {
   max-height: 250px;
   overflow-y: auto;
@@ -48,8 +49,7 @@
 }
 
 .about-text {
-  width: 800px;
-  height: 400px;
+  height: 250px;
 }
 
 .article-text {
