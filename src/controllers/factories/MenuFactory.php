@@ -40,7 +40,7 @@ class MenuFactory
         if (!empty($item['submenu'])) {
             $menuItem = new MenuItem(
                 label: $item['label'],
-                href: $item['href'],
+                href: '?page='.$item['href'],
                 class: $link_class . ' dropdown-toggle',
                 attrs: [
                     'role' => 'button',

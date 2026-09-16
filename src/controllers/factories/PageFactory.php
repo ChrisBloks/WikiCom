@@ -65,6 +65,7 @@ class PageFactory
 
         $this->addBody();
 
+
         return $this->htmlpage;
     }
 
@@ -76,6 +77,7 @@ class PageFactory
 
     private function addScripts()
     {
+        
         // should move to a config or something instead of pasting links raw in the pagefactory
         $this->htmlpage->addToHeadContent(new AtomicElement(new ElementInfo([
             "text" => '

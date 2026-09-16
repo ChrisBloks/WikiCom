@@ -30,6 +30,8 @@ class AtomicElement implements iElement
                 ($element_info['label'] ?? "") .
                 ($element_info['text'] ?? "") .
                 ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
+        } else {
+            $this->html = ($element_info['text'] ?? "");
         }
     }
 
