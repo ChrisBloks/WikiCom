@@ -22,6 +22,11 @@ class ElementInfo implements iElementInfo
         'order_by',
         'parent_order',
         'closing_tag',
+        'article',
+        'title',
+        'bodytext',
+        'image',
+        'element_id'
     ];
 
     private array $container = [];

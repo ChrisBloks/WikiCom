@@ -2,6 +2,7 @@
 // creates body text
 namespace Wiki\views\containers;
 
+use ArrayAccess;
 use Wiki\tools\utils\HtmlUtils;
 /**
  * Type of wrapped text specifically for body text
@@ -10,8 +11,8 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class BodyText extends WrappedText
 {
-    public function __construct(string $text, string $class = '')
+    public function __construct(ArrayAccess $element_info)
     {
-        parent::__construct($text, 'div' . HtmlUtils::addClassAttr($class));
+        parent::__construct($element_info['bodytext'], $element_info['html_tag'] . HtmlUtils::addClassAttr($element_info['html_class']));
     }
 }
