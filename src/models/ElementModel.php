@@ -9,6 +9,7 @@ namespace Wiki\models;
 
 use Wiki\dataObjects\FormInfo,
 Wiki\dataObjects\ElementInfo,
+Wiki\dataObjects\Stack,
 Wiki\dataObjects\FieldInfo;
 use Wiki\tools\utils\HtmlUtils;
 
@@ -40,10 +41,9 @@ class ElementModel extends BaseModel
             return false;
         }
 
-        foreach ($result as $key => $value){
-            $lookup_info = $this->fetchLookupInfoByElementId($value['element_id']);
-            HtmlUtils::dump('test1',$value);
-            HtmlUtils::dump('test',$this->fetchLookupInfoResult($lookup_info,$value['element_id']));
+        foreach ($result as $key => $value) {
+            $value = $this->getLookupResult($value);
+
             $result[$key] = new ElementInfo($value);
         }
 
@@ -51,7 +51,31 @@ class ElementModel extends BaseModel
         return $result;
     }
 
-        /**
+    protected function getLookupResult($element_info){
+        $element_id = $element_info['element_id'];
+        $lookup_info_list = $this->fetchLookupInfoByElementId($element_id);
+        foreach ($lookup_info_list as $lookup_info){
+            switch($lookup_info['lookup_type']){
+                case 'form':
+                    $form_info = $this->fetchLookupInfoResult($lookup_info);
+                    $element_info['form_info'] = new FormInfo($form_info);
+                    break;
+                case 'field':
+                    $field_info = $this->fetchLookupInfoResult($lookup_info);
+                    $element_info['field_info'] = new FieldInfo($field_info);
+                    break;
+                case 'element':
+                    // get sub_element_id
+                    $sub_element_info = $this->fetchLookupInfoResult($lookup_info);
+                    $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
+                default:
+                    break;
+            }
+        }
+        return $element_info;
+    }
+
+    /**
      * Fetches an article with the given user id
      * @param int $element_id
      * @return array|false a single article of form [id, title, lastEdit]
@@ -59,10 +83,10 @@ class ElementModel extends BaseModel
     public function fetchLookupInfoByElementId(int $element_id): array|false
     {
         $sql = "SELECT  *
-                    FROM element_lookup_info
+                    FROM element_lookup_info as e_l_i
                     WHERE element_id=:element_id";
         $params = ['element_id' => $element_id];
-        $result = $this->crud->selectOne(sql: $sql, params: $params);
+        $result = $this->crud->selectMany(sql: $sql, params: $params);
         return $result;
     }
 
@@ -157,79 +181,10 @@ class ElementModel extends BaseModel
     }
 
     /**
-     * Find for a given container field the container names/values.
-     * 
-     * ```
-     * INPUT: 
-     * $field_info [array]: 
-     *          [
-     *          'source_table' => string, // Table to SELECT rows from 
-     *          'column_names' => string, // SHOULD BE [source_table.id, options_col, values_col]
-     *          'order_by' => string, // Equal to name of column on which to sort
-     *          'where_value' => string, // (optional) Value to match against $id (useless???)
-     *          'bridge_table' => string, // (optional) name of bridge table for JOIN
-     *          'bridge_values' => string, // (optonal) 'bridge_table.column,table_name.column' column names to use for bridge table
-     *          'left_join_on' => string // (optional) if specified, regular JOIN turns into a LEFT JOIN on 'left_join_on'
-     *          ];
-     * $parent_id [string] // The id of object (article, user, ... etc.) that contains this container field
-     * 
-     * OUTPUT [array]: // Array of subfield values
-     *          [
-     *          options_col => 
-     *              [ 
-     *              'id1' => x,
-     *              'id2' => y,
-     *              ...
-     *              ]
-     *          values_col =>
-     *              [ 
-     *              'id1' => a,
-     *              'id2' => b,
-     *              ...
-     *              ]
-     *          ];
-     * 
-     * EXAMPLE INPUT:
-     * $field_info [array]:
-     *          [
-     *          'source_table' => 'wiki_tag', // Source table
-     *          'column_names' => 'id,name,!isnull(article_id) as marked',
-     *          'order_by' => 'wiki_tag.name', 
-     *          'where_value' => '',
-     *          'bridge_table' => 'wiki_article_to_tag', // Getting an article's tags requires a bridge table
-     *          'bridge_values' => 'wiki_article_to_tag.wiki_tag_id,wiki_tag.id', // Link bridge table to source table.
-     *          'left_join_on' => 'wiki_article_to_tag.article_id' 
-     *              // LEFT JOIN bridge_table ON 
-     *              //      'wiki_article_to_tag.wiki_tag_id' = 'wiki_tag.id' AND
-     *              //      'wiki_article_to_tag.article_id' = 'parent_id'
-     *          ];
-     * $parent_id [string]: '3' // Article 3
-     * 
-     * OUTPUT: [array]: 
-     *          [
-     *          options => //name 
-     *              [
-     *              '1' => 'tag1',
-     *              '2' => 'tag42',
-     *              ...
-     *              ],
-     *          values => //marked
-     *              [
-     *              '1' => true,
-     *              '2' => false,
-     *              ...
-     *              ],
-     *          ]
-     * 
-     * ```
-     * 'column_names' Should specify the container name and value.
-     * 'id' should specifiy in which article/user/page the container field lives
-     *
      * @param array $lookup_info see INPUT
-     * @param string $parent_id id of the parent object holding this container element
      * @return array see OUTPUT
      */
-    public function fetchLookupInfoResult(array $lookup_info, string $parent_id): array
+    public function fetchLookupInfoResult(array $lookup_info): array
     {
         // Basic SQL start
         $sql = "SELECT
@@ -238,29 +193,28 @@ class ElementModel extends BaseModel
                     {$lookup_info['source_table']}
                 ";
 
-        // If a bridge table is required
-        if (!empty($lookup_info["bridge_table"])) {
-            [$bridge_table_column, $source_table_column] = explode(",", $lookup_info["bridge_values"]);
+        // // If a bridge table is required
+        // if (!empty($lookup_info["bridge_table"])) {
+        //     [$bridge_table_column, $source_table_column] = explode(",", $lookup_info["bridge_values"]);
 
-            $join_clause = "JOIN {$lookup_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
-            // If a LEFT JOIN is required
-            if (!empty($lookup_info['left_join_on'])) {
-                $join_clause = "LEFT " . $join_clause . " AND {$lookup_info["left_join_on"]} = {$parent_id}";
-            }
-            $sql .= $join_clause;
-        }
+        //     $join_clause = "JOIN {$lookup_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
+        //     // If a LEFT JOIN is required
+        //     if (!empty($lookup_info['left_join_on'])) {
+        //         $join_clause = "LEFT " . $join_clause . " AND {$lookup_info["left_join_on"]} = {$parent_id}";
+        //     }
+        //     $sql .= $join_clause;
+        // }
 
         // If a WHERE value is specified
         if (!empty($lookup_info["where_"])) {
-            $sql .= " WHERE {$lookup_info['where_']} = {$parent_id}";
+            $sql .= " WHERE {$lookup_info['where_']} = {$lookup_info['where_value']}";
         }
 
         // // Always add an ORDER BY clause
         // $sql .= " ORDER BY {$lookup_info['order_by']}";
-        HtmlUtils::dump("sql",$sql);
 
         // Execute the query
-        $result = $this->crud->selectMany(sql: $sql, params: [], fetch_mode: \PDO::FETCH_ASSOC);
+        $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);
 
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2026 at 04:58 PM
+-- Generation Time: Sep 16, 2026 at 04:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -93,7 +93,15 @@ INSERT INTO `element_info` (`id`, `name`, `html_tag`, `html_class`, `php_class`,
 (5, 'random_article', '', '', 'Wiki\\views\\containers\\Card', '', ''),
 (6, 'small_coll', 'div', 'col-md-4', 'Wiki\\views\\containers\\ContainerElement', '', ''),
 (7, 'small_row', 'div', 'row g-4', 'Wiki\\views\\containers\\ContainerElement', '', ''),
-(8, 'small_wrapper', 'div', 'col-12', 'Wiki\\views\\containers\\ContainerElement', '', '');
+(8, 'small_wrapper', 'div', 'col-12', 'Wiki\\views\\containers\\ContainerElement', '', ''),
+(9, 'about_title', 'h1', 'display-1 text-center border-bottom', 'Wiki\\views\\containers\\Title', '', ''),
+(10, 'about_description', 'div', 'fs-5 text-center', 'Wiki\\views\\containers\\BodyText', '', ''),
+(11, 'about_img', '', 'rounded-circle profile-pic d-flex justify-content-end mb-3', 'Wiki\\views\\containers\\Image', '', ''),
+(12, 'main_2', 'div', 'd-flex align-items-center w-75 mx-auto', 'Wiki\\views\\containers\\ContainerElement', '', ''),
+(13, 'sub', 'div', 'flex-grow-1', 'Wiki\\views\\containers\\ContainerElement', '', ''),
+(14, 'contact_form', '', 'form-group', 'Wiki\\controllers\\factories\\FormFactory', '', ''),
+(15, 'contact_name_field', '', '', '', '', ''),
+(16, '16', 'contact_field_email\r\n', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -104,12 +112,25 @@ INSERT INTO `element_info` (`id`, `name`, `html_tag`, `html_class`, `php_class`,
 CREATE TABLE `element_lookup_info` (
   `id` int(11) NOT NULL,
   `element_id` int(11) NOT NULL,
-  `source_table` int(11) NOT NULL,
-  `column_names` int(11) NOT NULL,
-  `where_` int(11) NOT NULL,
-  `join_table` int(11) NOT NULL,
-  `join_on_values` int(11) NOT NULL
+  `source_table` varchar(255) NOT NULL,
+  `column_names` varchar(255) NOT NULL,
+  `where_` varchar(255) NOT NULL,
+  `where_value` int(11) NOT NULL,
+  `join_table` varchar(255) NOT NULL,
+  `join_on_values` varchar(255) NOT NULL,
+  `lookup_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `element_lookup_info`
+--
+
+INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_names`, `where_`, `where_value`, `join_table`, `join_on_values`, `lookup_type`) VALUES
+(1, 14, 'form_info_t', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 14, '', '', 'form'),
+(2, 14, 'element_info', 'id as element_id', 'element_info.id', 15, '', '', 'element'),
+(3, 15, 'field_info_t', 'name,type,label,value,class', 'field_info_t.element_id', 15, '', '', 'field'),
+(4, 16, 'field_info_t', 'name,type,label,value,class', 'field_info_t.element_id', 16, '', '', 'field'),
+(5, 14, 'element_info', 'id as element_id', 'element_info.id', 16, '', '', 'element');
 
 -- --------------------------------------------------------
 
@@ -164,11 +185,21 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `form_info_id`, `label`
 
 CREATE TABLE `field_info_t` (
   `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `element_id` int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
   `label` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `value` varchar(255) NOT NULL,
+  `class` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `field_info_t`
+--
+
+INSERT INTO `field_info_t` (`id`, `name`, `element_id`, `type`, `label`, `value`, `class`) VALUES
+(1, 'name', 15, 'text', 'Your name:', '', 'contact-name form-control'),
+(2, 'email', 16, 'text', 'Your email:', '', 'contact-email form-control');
 
 -- --------------------------------------------------------
 
@@ -213,8 +244,18 @@ CREATE TABLE `form_info_t` (
   `element_id` int(11) NOT NULL,
   `action` varchar(255) NOT NULL,
   `method` varchar(255) NOT NULL,
-  `label` varchar(255) NOT NULL
+  `label` varchar(255) NOT NULL,
+  `submit_caption` varchar(255) NOT NULL,
+  `enctype` varchar(255) NOT NULL,
+  `submit_class` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `form_info_t`
+--
+
+INSERT INTO `form_info_t` (`id`, `element_id`, `action`, `method`, `label`, `submit_caption`, `enctype`, `submit_class`) VALUES
+(1, 14, '', 'POST', '', 'Send message', '', 'btn btn-primary btn-sm');
 
 -- --------------------------------------------------------
 
@@ -289,7 +330,8 @@ CREATE TABLE `page` (
 
 INSERT INTO `page` (`id`, `name`) VALUES
 (1, 'home'),
-(2, 'about');
+(2, 'about'),
+(3, 'contact');
 
 -- --------------------------------------------------------
 
@@ -318,7 +360,13 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (1, 7, 70, 60),
 (1, 8, 80, 70),
 (1, 5, 90, 80),
-(1, 5, 100, 80);
+(1, 5, 100, 80),
+(2, 12, 10, 0),
+(2, 13, 20, 10),
+(2, 9, 30, 20),
+(2, 10, 40, 20),
+(2, 11, 50, 10),
+(3, 14, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -704,7 +752,8 @@ ALTER TABLE `element_info`
 -- Indexes for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_element_info_to_look_up` (`element_id`);
 
 --
 -- Indexes for table `field_info`
@@ -717,7 +766,8 @@ ALTER TABLE `field_info`
 -- Indexes for table `field_info_t`
 --
 ALTER TABLE `field_info_t`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_element_info_to_field_info` (`element_id`);
 
 --
 -- Indexes for table `form_info`
@@ -730,7 +780,8 @@ ALTER TABLE `form_info`
 -- Indexes for table `form_info_t`
 --
 ALTER TABLE `form_info_t`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_element_info_to_form_info` (`element_id`);
 
 --
 -- Indexes for table `lookup_info`
@@ -851,13 +902,13 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `field_info`
@@ -869,7 +920,7 @@ ALTER TABLE `field_info`
 -- AUTO_INCREMENT for table `field_info_t`
 --
 ALTER TABLE `field_info_t`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `form_info`
@@ -881,7 +932,7 @@ ALTER TABLE `form_info`
 -- AUTO_INCREMENT for table `form_info_t`
 --
 ALTER TABLE `form_info_t`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lookup_info`
@@ -899,7 +950,7 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `styling_containers`
@@ -960,16 +1011,34 @@ ALTER TABLE `wiki_tag`
 --
 
 --
+-- Constraints for table `element_lookup_info`
+--
+ALTER TABLE `element_lookup_info`
+  ADD CONSTRAINT `fk_element_info_to_look_up` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
+
+--
 -- Constraints for table `field_info`
 --
 ALTER TABLE `field_info`
   ADD CONSTRAINT `field_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`);
 
 --
+-- Constraints for table `field_info_t`
+--
+ALTER TABLE `field_info_t`
+  ADD CONSTRAINT `fk_element_info_to_field_info` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
+
+--
 -- Constraints for table `form_info`
 --
 ALTER TABLE `form_info`
   ADD CONSTRAINT `website_info_to_form_info` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
+
+--
+-- Constraints for table `form_info_t`
+--
+ALTER TABLE `form_info_t`
+  ADD CONSTRAINT `fk_element_info_to_form_info` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
 
 --
 -- Constraints for table `lookup_info`
