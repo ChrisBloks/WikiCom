@@ -9,4 +9,5 @@ interface iElementInfo extends ArrayAccess
 {
     public function isEmpty(): bool;
     public function getHTMLAttributes(): array;
+    public function __toString(): string;
 }

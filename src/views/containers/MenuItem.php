@@ -3,6 +3,7 @@
 namespace Wiki\views\containers;
 
 use Wiki\dataObjects\ElementInfo;
+use Wiki\dataObjects\LinkedElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 /**
@@ -15,44 +16,29 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class Menuitem extends ContainerElement
 {
-    public function __construct(string $label, string $href, string $class = '', array $attrs = [], string $li_class = '')
+    public function __construct(string $label, string $href, string $class = '', ?array $attrs = null, string $li_class = '')
     {
-        HtmlUtils::dump('attrs', $attrs);
-        $safe_label = htmlspecialchars($label);
-        $safe_href = htmlspecialchars($href);
-
-        $element_info_inner = ["html_tag" => 'a href="?page=' . $safe_href . '" '. HtmlUtils::addAttrs($attrs) .'',"html_class" => $class];
-
-        $element_inner = new ContainerElement(new ElementInfo($element_info_inner));
-
-        $element_inner->addElement(new AtomicElement(new ElementInfo(["text" => $safe_label])));
-
-        parent::__construct(new ElementInfo(["html_tag" => 'li ',"html_class" => $li_class]));
-        $this->addElement($element_inner);
-    }
-
-
-    public function __construct2(string $label, string $href, string $class = '', array $attrs = [], string $li_class = '')
-    {
-        $safe_label = htmlspecialchars($label);
-        $safe_href = htmlspecialchars($href);
-
-        parent::__construct(
-            new ElementInfo([
+        $element_info = new LinkedElementInfo([
                 'html_tag' => 'li',
                 'class' => $li_class,
-            ])
-        );
+            ]);
+        foreach($attrs as $attr => $val){
+            $element_info[$attr] = $val;
+        }
+
+        parent::__construct($element_info);
 
         $this->addElement(
             new AtomicElement(
-                new ElementInfo([
+                new LinkedElementInfo([
                     'html_tag' => 'a',
-                    'href' => $safe_href,
+                    'href' => htmlspecialchars($href),
                     'class' => $class,
-                    'label' => $safe_label
+                    'label' => htmlspecialchars($label)
                 ])
             )
         );
+
+
     }
 }

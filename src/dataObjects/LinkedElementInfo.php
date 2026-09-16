@@ -11,7 +11,8 @@ class LinkedElementInfo extends ElementInfo
     static protected array $allowed_keys =
         [
             'html_tag',
-            'class',
+            'html_class',
+            'php_class',
             'href',
             'role',
             'data-bs-toggle',

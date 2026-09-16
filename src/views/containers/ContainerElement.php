@@ -31,8 +31,8 @@ class ContainerElement implements iElement
 
         if (isset($element_info['html_tag'])) {
             $this->html_before = "<{$element_info['html_tag']} ";
-            foreach ($element_info->getHTMLattributes() as $attr => $val) {
-                $this->html_before .= $attr . '="' . $val . '" ';
+            foreach ($element_info->getHTMLattributes() as $attr) {
+                $this->html_before .=  ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
             }
             $this->html_before .= ">" . ($element_info['text'] ?? "");
             $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
@@ -52,5 +52,12 @@ class ContainerElement implements iElement
         $str .= $this->html_after;
 
         return $str;
+    }
+
+    public function __toString(): string
+    {
+        return htmlentities($this->html_before) .
+            htmlentities($this->showChildElements()) .
+            htmlentities($this->html_after);
     }
 }

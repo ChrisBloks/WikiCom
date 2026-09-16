@@ -3,6 +3,7 @@
 namespace Wiki\dataObjects;
 
 use InvalidArgumentException;
+use Override;
 use Throwable;
 use Wiki\tools\interfaces\iElementInfo;
 use Wiki\tools\utils\HtmlUtils;
@@ -56,7 +57,7 @@ class ElementInfo implements iElementInfo
         if (in_array($offset, static::$allowed_keys, true)) {
             $this->container[$offset] = $value;
         } else {
-            throw new InvalidArgumentException("{$offset} is not an allowed key of ElementInfo!");
+            throw new InvalidArgumentException("{$offset} is not an allowed key of {$this}!");
         }
     }
 
@@ -72,5 +73,23 @@ class ElementInfo implements iElementInfo
 
     public function getHTMLAttributes(): array {
         return ['class', 'id', 'name'];
+    }
+
+    #[Override]
+    public function __toString(): string
+    {
+        
+        $get_class = (function () {
+            $class_name = get_class($this);
+            if ($pos = strrpos($class_name, '\\')) return substr($class_name, $pos + 1);
+            return $pos;
+        });
+
+        $s = "{$get_class()}:[";
+        foreach($this->container as $key => $value){
+            $s .= "{$key} => {$value}, ";
+        }
+        $s .= "]";
+        return $s;
     }
 }

@@ -20,7 +20,7 @@ class MenuFactory
     protected function buildMenu(array $menu_items, string $class = 'nav'): Menu
     {
         $menu = new Menu($class);
-
+        
         foreach ($menu_items as $item) {
             try {
                 $menu->addElement($this->buildMenuItem($item));
@@ -68,7 +68,6 @@ class MenuFactory
                 li_class: $li_class
             );
         }
-
         return $menuItem;
     }
 }
