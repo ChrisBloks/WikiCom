@@ -50,6 +50,7 @@ class MenuFactory
                 li_class: $li_class . ' dropdown'
             );
 
+            HtmlUtils::dump('submenu', $item['submenu']);
             $submenu = new Menu(class: 'dropdown-menu');
             foreach ($item['submenu'] as $subitem) {
                 try {
@@ -62,7 +63,7 @@ class MenuFactory
         } else {
             $menuItem = new MenuItem(
                 label: $item['label'],
-                href: $item['href'],
+                href: '?page='.$item['href'],
                 class: $link_class,
                 attrs: [],
                 li_class: $li_class

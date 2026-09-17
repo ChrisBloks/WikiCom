@@ -36,6 +36,8 @@ class ContainerElement implements iElement
             }
             $this->html_before .= ">" . ($element_info['text'] ?? "");
             $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
+        } else {
+            $this->html_before = ($element_info['text'] ?? "");
         }
         
     }

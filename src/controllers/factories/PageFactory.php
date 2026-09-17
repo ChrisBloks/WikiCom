@@ -79,25 +79,33 @@ class PageFactory
     {
         
         // should move to a config or something instead of pasting links raw in the pagefactory
-        $this->htmlpage->addToHeadContent(new AtomicElement(new ElementInfo([
-            "text" => '
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-                <link rel="stylesheet" href="./src/css/stylesheet.css">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">
-    '
-        ])));
+        $this->htmlpage
+            ->addToHeadContent(
+                new AtomicElement(
+                    new ElementInfo([
+                        "text" => '
+                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+                            <link rel="stylesheet" href="./src/css/stylesheet.css">
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">'
+                        ])
+                    )
+                );
 
-        $this->htmlpage->addToHeadContent(new AtomicElement(new ElementInfo([
-            "text" =>
-                '
-                <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-                <script src="./vendor/webcito/bs-markdown-editor/dist/bs-markdown-editor.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
-                <script src="./src/js/wiki.js"></script>
-                <script>hljs.highlightAll();</script>'
-        ])));
+        $this->htmlpage
+            ->addToHeadContent(
+                new AtomicElement(
+                    new ElementInfo([
+                        "text" => '
+                            <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+                            <script src="./vendor/webcito/bs-markdown-editor/dist/bs-markdown-editor.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                            <script src="./src/js/wiki.js"></script>
+                            <script>hljs.highlightAll();</script>'
+                        ])
+                    )
+                );
 
         switch ($this->page) {
             case 'editArticle':
