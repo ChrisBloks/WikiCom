@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 17 sep 2026 om 13:06
+-- Gegenereerd op: 17 sep 2026 om 13:42
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -157,7 +157,52 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (2, 14, 'element_info', 'id as element_id', 'element_info.id', 15, '', '', 'element'),
 (3, 15, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 15, '', '', 'field'),
 (4, 16, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 16, '', '', 'field'),
-(5, 14, 'element_info', 'id as element_id', 'element_info.id', 16, '', '', 'element');
+(5, 14, 'element_info', 'id as element_id', 'element_info.id', 16, '', '', 'element'),
+(6, 18, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 18, '', '', 'form'),
+(7, 19, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 19, '', '', 'field'),
+(8, 20, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 20, '', '', 'field'),
+(9, 18, 'element_info', 'id as element_id', 'element_info.id', 19, '', '', 'element'),
+(11, 18, 'element_info', 'id as element_id', 'element_info.id', 20, '', '', 'element'),
+(12, 21, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 21, '', '', 'form'),
+(13, 22, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 22, '', '', 'field'),
+(14, 23, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 23, '', '', 'field'),
+(15, 24, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 24, '', '', 'field'),
+(16, 21, 'element_info', 'id as element_id', 'element_info.id', 22, '', '', 'element'),
+(17, 21, 'element_info', 'id as element_id', 'element_info.id', 23, '', '', 'element'),
+(18, 21, 'element_info', 'id as element_id', 'element_info.id', 24, '', '', 'element'),
+(19, 25, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 25, '', '', 'form'),
+(20, 26, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 26, '', '', 'field'),
+(21, 27, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 27, '', '', 'field'),
+(22, 28, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 28, '', '', 'field'),
+(23, 29, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 29, '', '', 'field'),
+(24, 30, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 30, '', '', 'field'),
+(25, 25, 'element_info', 'id as element_id', 'element_info.id', 26, '', '', 'element'),
+(26, 25, 'element_info', 'id as element_id', 'element_info.id', 27, '', '', 'element'),
+(27, 25, 'element_info', 'id as element_id', 'element_info.id', 28, '', '', 'element'),
+(28, 25, 'element_info', 'id as element_id', 'element_info.id', 29, '', '', 'element'),
+(29, 25, 'element_info', 'id as element_id', 'element_info.id', 30, '', '', 'element'),
+(30, 31, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 31, '', '', 'form'),
+(31, 32, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 32, '', '', 'field'),
+(32, 33, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 33, '', '', 'field'),
+(33, 34, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 34, '', '', 'field'),
+(34, 31, 'element_info', 'id as element_id', 'element_info.id', 32, '', '', 'element'),
+(35, 31, 'element_info', 'id as element_id', 'element_info.id', 33, '', '', 'element'),
+(36, 31, 'element_info', 'id as element_id', 'element_info.id', 34, '', '', 'element'),
+(37, 35, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 35, '', '', 'form'),
+(38, 36, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 36, '', '', 'field'),
+(39, 37, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 37, '', '', 'field'),
+(40, 41, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 41, '', '', 'field'),
+(41, 42, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 42, '', '', 'field'),
+(42, 35, 'element_info', 'id as element_id', 'element_info.id', 36, '', '', 'element'),
+(43, 35, 'element_info', 'id as element_id', 'element_info.id', 37, '', '', 'element'),
+(44, 35, 'element_info', 'id as element_id', 'element_info.id', 41, '', '', 'element'),
+(45, 35, 'element_info', 'id as element_id', 'element_info.id', 42, '', '', 'element'),
+(46, 38, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 38, '', '', 'form'),
+(47, 39, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 39, '', '', 'field'),
+(48, 40, 'field_info', 'name,type,label,value,class', 'field_info_t.element_id', 40, '', '', 'field'),
+(49, 38, 'element_info', 'id as element_id', 'element_info.id', 39, '', '', 'element'),
+(50, 38, 'element_info', 'id as element_id', 'element_info.id', 40, '', '', 'element'),
+(51, 43, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 43, '', '', 'form');
 
 -- --------------------------------------------------------
 
@@ -836,7 +881,7 @@ ALTER TABLE `element_info`
 -- AUTO_INCREMENT voor een tabel `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT voor een tabel `field_info`
