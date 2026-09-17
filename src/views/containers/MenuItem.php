@@ -18,25 +18,24 @@ class Menuitem extends ContainerElement
 {
     public function __construct(string $label, string $href, string $class = '', ?array $attrs = null, string $li_class = '')
     {
-        $element_info = new LinkedElementInfo([
+        parent::__construct(
+            new LinkedElementInfo([
                 'html_tag' => 'li',
                 'class' => $li_class,
-            ]);
-        foreach($attrs as $attr => $val){
-            $element_info[$attr] = $val;
-        }
+            ]));
 
-        parent::__construct($element_info);
-
-        $this->addElement(
-            new AtomicElement(
-                new LinkedElementInfo([
+        $element_info = new LinkedElementInfo([
                     'html_tag' => 'a',
                     'href' => htmlspecialchars($href),
                     'class' => $class,
                     'label' => htmlspecialchars($label)
-                ])
-            )
+                    ]);
+        foreach($attrs as $attr => $val){
+            $element_info[$attr] = $val;
+        }
+
+        $this->addElement(
+            new AtomicElement($element_info)
         );
 
 
