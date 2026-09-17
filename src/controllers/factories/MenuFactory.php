@@ -50,7 +50,7 @@ class MenuFactory
                 li_class: $li_class . ' dropdown'
             );
 
-            HtmlUtils::dump('submenu', $item['submenu']);
+            // HtmlUtils::dump('submenu', $item['submenu']);
             $submenu = new Menu(class: 'dropdown-menu');
             foreach ($item['submenu'] as $subitem) {
                 try {

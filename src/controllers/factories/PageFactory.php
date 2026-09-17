@@ -163,10 +163,10 @@ class PageFactory
                     $excludelist[] = $element_info['article']['id'];
                     break;
                 case str_contains($element_info['name'], 'about_'):
-                    $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
-                    $element_info['title'] = $aboutinfo['name'];
-                    $element_info['bodytext'] = $aboutinfo['description'];
-                    $element_info['image'] = $aboutinfo['imgFileName'];
+                    $about_info = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
+                    $element_info['title'] = $about_info['name'];
+                    $element_info['bodytext'] = $about_info['description'];
+                    $element_info['image'] = $about_info['imgFileName'];
                     break;
 
                 default:
