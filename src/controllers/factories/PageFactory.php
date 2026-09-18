@@ -153,7 +153,6 @@ class PageFactory
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
-        HtmlUtils::dump("element_info", $elements_info);
         foreach ($elements_info as &$element_info) {
             switch (true) {
                 case $element_info['name'] === "random_article":
