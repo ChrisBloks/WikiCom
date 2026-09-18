@@ -153,7 +153,7 @@ class PageFactory
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
-        // HtmlUtils::dump("element_info", $elements_info);
+        HtmlUtils::dump("element_info", $elements_info);
         foreach ($elements_info as &$element_info) {
             switch (true) {
                 case $element_info['name'] === "random_article":
@@ -211,26 +211,13 @@ class PageFactory
             case 'contact':
 
                 $element_list = [];
+                $element_list[0] = $main;
                 foreach ($elements_info as $element_info) {
-                    HtmlUtils::dump("element_info", $element_info);
+                    
                     $element = ElementFactory::createElement($element_info);
-
-                    die();
-                    // HtmlUtils::dump('element_info', $element_info);
-                    // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
-                    if ($element_info['parent_order'] == 0) {
-                        $element = new $element_info['php_class']($element_info);
-                        $element_info_list[$element_info['order_by']] = $element;
-                        HtmlUtils::dump('element', $element);
-                        $main->addElement($element);
-                        // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
-                    } else {
-                        $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
-                        $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
-                    }
+                    $element_list[$element_info['order_by']] = $element;
+                    $element_list[$element_info['parent_order']]->addElement($element);
                 }
-
-
                 break;
             // case 'login':
             // case 'register':
@@ -371,7 +358,7 @@ class PageFactory
             //     // Inner text div: Title/Author/text/code
             //     $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
 
-            //     // Top div with title, author, tags and decription title
+            //     // Top div witt[$h title, author, tags and decription title
             //     $main_container->addElement(new Title(
             //         text: ucfirst($bodyinfo['title']),
             //         class: $styling_elements['title_class']

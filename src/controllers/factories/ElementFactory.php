@@ -15,12 +15,12 @@ class ElementFactory
         'Form' => 'Wiki\views\containers\Form',
         'text' =>  'Wiki\views\fields\InputField',
         'email' => 'Wiki\views\fields\InputField',
-        'textarea' => 'Wiki\views\fields\TextAreaField'
+        'textarea' => 'Wiki\views\fields\TextAreaField',
+        'ButtonField' => 'Wiki\views\fields\ButtonField',
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
-    HtmlUtils::dump('class:', self::$NAMESPACE[$element_info['php_class']]);  
-    return new self::$NAMESPACE[$element_info['php_class']]($element_info);
+        return new self::$NAMESPACE[$element_info['php_class']]($element_info);
     }
 
 

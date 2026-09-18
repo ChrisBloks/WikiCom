@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2026 at 04:30 PM
+-- Generation Time: Sep 18, 2026 at 12:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -99,9 +99,36 @@ INSERT INTO `element_info` (`id`, `name`, `html_tag`, `html_class`, `php_class`,
 (11, 'about_img', '', 'rounded-circle profile-pic d-flex justify-content-end mb-3', 'Wiki\\views\\containers\\Image', '', ''),
 (12, 'main_2', 'div', 'd-flex align-items-center w-75 mx-auto', 'Wiki\\views\\containers\\ContainerElement', '', ''),
 (13, 'sub', 'div', 'flex-grow-1', 'Wiki\\views\\containers\\ContainerElement', '', ''),
-(14, 'contact_form', '', 'form-group', 'Wiki\\controllers\\factories\\FormFactory', '', ''),
-(15, 'contact_name_field', '', '', '', '', ''),
-(16, '16', 'contact_field_email\r\n', '', '', '', '');
+(14, 'contact_form', 'form', 'form-group', 'Form', '', ''),
+(15, 'contact_name_field', '', '', 'text', '', ''),
+(16, 'contact_field_email', '', '', 'email', '', ''),
+(17, 'contact_field_message', '', '', 'textarea', '', ''),
+(18, 'log_in_form', '', 'form-group', 'Wiki\\controllers\\factories\\FormFactory', '', ''),
+(19, 'login_in_field_email', '', '', 'email', '', ''),
+(20, 'log_in_field_password', '', '', 'password', '', ''),
+(21, 'search_form', '', 'form-group', 'Wiki\\controllers\\factories\\FormFactory', '', ''),
+(22, 'search_field_author', '', '', 'SearchableCheckboxes', '', ''),
+(23, 'search_field_tag', '', '', 'SearchableCechboxes', '', ''),
+(24, 'search_field_sortby\r\n', '', '', 'select', '', ''),
+(25, 'article_form', '', 'form-group', 'Wiki\\controllers\\factories\\FormFactory', '', ''),
+(26, 'article_field_title', '', '', 'text', '', ''),
+(27, 'article_field_bodytext', '', '', 'textarea', '', ''),
+(28, 'article_field_codeblock', '', '', 'textarea', '', ''),
+(29, 'article_field_img', '', '', 'file', '', ''),
+(30, 'article_field_tags', '', '', 'SearchableCheckboxes', '', ''),
+(31, 'register_form', '', 'form-group', 'Wiki\\controllers\\factories\\FormFactory', '', ''),
+(32, 'register_field_name', '', '', 'text', '', ''),
+(33, 'register_field_email', '', '', 'email', '', ''),
+(34, 'register_field_new_password', '', '', 'new_password', '', ''),
+(35, 'edit_user_form', '', 'form-control mt-5', 'Wiki\\controllers\\factories\\FormFactory', '', ''),
+(36, 'edit_user_field_name', '', '', 'text', '', ''),
+(37, 'edit_user_field_email', '', '', 'email', '', ''),
+(38, 'edit_password_form', '', 'form-control mt-5', 'Wiki\\controllers\\factories\\FormFactory', '', ''),
+(39, 'edit_password_field_old', '', '', 'password', '', ''),
+(40, 'edit_password_field_new', '', '', 'new_password', '', ''),
+(41, 'edit_user_field_description', '', '', '', '', ''),
+(42, 'edit_user_field_img', '', '', '', '', ''),
+(43, 'create_new_article', '', 'form-group', 'Wiki\\controllers\\factories\\FormFactory', '', '');
 
 -- --------------------------------------------------------
 
@@ -126,11 +153,58 @@ CREATE TABLE `element_lookup_info` (
 --
 
 INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_names`, `where_`, `where_value`, `join_table`, `join_on_values`, `lookup_type`) VALUES
-(1, 14, 'form_info_t', 'action,method,label,submit_caption,enctype,submit_class', 'form_info_t.element_id', 14, '', '', 'form'),
-(2, 14, 'element_info', 'id as element_id', 'element_info.id', 15, '', '', 'element'),
-(3, 15, 'field_info_t', 'name,type,label,value,class', 'field_info_t.element_id', 15, '', '', 'field'),
-(4, 16, 'field_info_t', 'name,type,label,value,class', 'field_info_t.element_id', 16, '', '', 'field'),
-(5, 14, 'element_info', 'id as element_id', 'element_info.id', 16, '', '', 'element');
+(1, 14, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', 14, '', '', 'form'),
+(2, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', 15, '', '', 'element'),
+(3, 15, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 15, '', '', 'field'),
+(4, 16, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 16, '', '', 'field'),
+(5, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', 16, '', '', 'element'),
+(6, 18, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', 18, '', '', 'form'),
+(7, 19, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 19, '', '', 'field'),
+(8, 20, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 20, '', '', 'field'),
+(9, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', 19, '', '', 'element'),
+(11, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', 20, '', '', 'element'),
+(12, 21, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', 21, '', '', 'form'),
+(13, 22, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 22, '', '', 'field'),
+(14, 23, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 23, '', '', 'field'),
+(15, 24, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 24, '', '', 'field'),
+(16, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', 22, '', '', 'element'),
+(17, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', 23, '', '', 'element'),
+(18, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', 24, '', '', 'element'),
+(19, 25, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', 25, '', '', 'form'),
+(20, 26, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 26, '', '', 'field'),
+(21, 27, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 27, '', '', 'field'),
+(22, 28, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 28, '', '', 'field'),
+(23, 29, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 29, '', '', 'field'),
+(24, 30, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 30, '', '', 'field'),
+(25, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', 26, '', '', 'element'),
+(26, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', 27, '', '', 'element'),
+(27, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', 28, '', '', 'element'),
+(28, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', 29, '', '', 'element'),
+(29, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', 30, '', '', 'element'),
+(30, 31, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', 31, '', '', 'form'),
+(31, 32, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 32, '', '', 'field'),
+(32, 33, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 33, '', '', 'field'),
+(33, 34, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 34, '', '', 'field'),
+(34, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', 32, '', '', 'element'),
+(35, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', 33, '', '', 'element'),
+(36, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', 34, '', '', 'element'),
+(37, 35, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', 35, '', '', 'form'),
+(38, 36, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 36, '', '', 'field'),
+(39, 37, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 37, '', '', 'field'),
+(40, 41, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 41, '', '', 'field'),
+(41, 42, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 42, '', '', 'field'),
+(42, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', 36, '', '', 'element'),
+(43, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', 37, '', '', 'element'),
+(44, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', 41, '', '', 'element'),
+(45, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', 42, '', '', 'element'),
+(46, 38, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', 38, '', '', 'form'),
+(47, 39, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 39, '', '', 'field'),
+(48, 40, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 40, '', '', 'field'),
+(49, 38, 'element_info', 'id as element_id,php_class', 'element_info.id', 39, '', '', 'element'),
+(50, 38, 'element_info', 'id as element_id,php_class', 'element_info.id', 40, '', '', 'element'),
+(51, 43, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', 43, '', '', 'form'),
+(52, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', 17, '', '', 'element'),
+(53, 17, 'field_info', 'name,type,label,value,html_class', 'field_info.element_id', 17, '', '', 'field');
 
 -- --------------------------------------------------------
 
@@ -141,65 +215,41 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 CREATE TABLE `field_info` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `element_id` int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL,
-  `form_info_id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
-  `display_order` int(11) NOT NULL,
-  `optional` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `value` varchar(255) NOT NULL,
+  `html_class` varchar(255) NOT NULL,
+  `optional` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `field_info`
 --
 
-INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `form_info_id`, `label`, `display_order`, `optional`) VALUES
-(1, 'name', 'text', 'contact-name form-control', 1, 'Your name:', 0, 0),
-(2, 'email', 'email', 'contact-email form-control', 1, 'Your email:', 1, 0),
-(3, 'password', 'password', 'login-password form-control', 2, 'Password:', 2, 0),
-(4, 'description', 'textarea', 'about-text form-control', 5, 'About me:', 0, 1),
-(6, 'verifypassword', 'new_password', 'register-verifypassword form-control', 7, 'Verify password:', 5, 0),
-(7, 'Author', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author', 3, 'Filter by Author', 1, 1),
-(8, 'Tag', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', 3, 'Filter by Tag', 0, 1),
-(9, 'aboutimg', 'file', 'about-img-file form-control', 5, 'Upload file:', 1, 1),
-(12, 'message', 'textarea', 'message-text form-control', 1, 'Your message:', 2, 0),
-(13, 'email', 'email', 'login-email form-control', 2, 'Email:', 0, 0),
-(14, 'name', 'text', 'register-name form-control', 7, 'Your name:', 1, 0),
-(15, 'email', 'email', 'register-email form-control', 7, 'Your email:', 2, 0),
-(17, 'summary', 'textarea', 'article-text form-control', 4, 'Body Text', 15, 0),
-(18, 'codeBlock', 'textarea', 'article-codeblock form-control', 4, 'Codeblock', 16, 1),
-(19, 'articleimg', 'file', 'article-img-file form-control', 4, 'Upload File', 17, 1),
-(20, 'sortby', 'select', 'sort-by form-select', 3, 'Sort by', 3, 0),
-(25, 'title', 'text', 'article-title form-control', 4, 'Article title:', 13, 0),
-(26, 'existing_tag', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', 4, 'Article tags:', 14, 0),
-(29, 'name', 'text', 'editUser-userName form-control', 9, 'Change username:', 10, 1),
-(30, 'email', 'email', 'editUser-email form-control', 9, 'Edit email:', 20, 1),
-(33, 'password', 'password', 'editPassword-pw1 form-control', 10, 'Old password:', 0, 0),
-(34, 'newpassword', 'new_password', 'editPassword-pw2 form-control', 10, 'New password:', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `field_info_t`
---
-
-CREATE TABLE `field_info_t` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `element_id` int(11) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `label` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `field_info_t`
---
-
-INSERT INTO `field_info_t` (`id`, `name`, `element_id`, `type`, `label`, `value`, `class`) VALUES
-(1, 'name', 15, 'text', 'Your name:', '', 'contact-name form-control'),
-(2, 'email', 16, 'text', 'Your email:', '', 'contact-email form-control');
+INSERT INTO `field_info` (`id`, `name`, `element_id`, `type`, `label`, `value`, `html_class`, `optional`) VALUES
+(1, 'name', 15, 'text', 'Your name:', '', 'contact-name form-control', 0),
+(2, 'email', 16, 'text', 'Your email:', '', 'contact-email form-control', 0),
+(3, 'message', 17, 'textarea', 'Your message:', '', 'message-text form-control', 0),
+(4, 'email', 19, 'email', 'Email:', '', 'login-email form-control', 0),
+(5, 'password', 20, 'password', 'Password:', '', 'login-password form-control', 0),
+(6, 'Author', 22, 'SearchableCheckboxes', 'Filter by Author', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author', 1),
+(7, 'Tag', 23, 'SearchableCheckboxes', 'Filter by Tag', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', 1),
+(8, 'sortby', 24, 'select', 'Sort by', '', 'sort-by form-select', 0),
+(9, 'title', 26, 'text', 'Article title:', '', 'article-title form-control', 0),
+(10, 'bodytext', 27, 'textarea', 'Body Text', '', 'article-text form-control', 1),
+(11, 'codeblock', 28, 'textarea', 'Codeblock', '', 'article-codeblock form-control', 1),
+(12, 'articleimg', 29, 'file', 'Upload File', '', 'article-img-file form-control', 0),
+(13, 'articletags', 30, 'SearchableCheckboxes', 'Article tags:', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', 0),
+(14, 'name', 32, 'text', 'Your name:', '', 'register-name form-control', 0),
+(15, 'email', 33, 'email', 'Your email:', '', 'register-email form-control', 0),
+(16, 'newpassword', 34, 'new_password', 'Verify password:', '', 'register-verifypassword form-control', 0),
+(17, 'name', 36, 'text', 'Change username:', '', 'editUser-userName form-control', 1),
+(18, 'email', 37, 'email', 'Edit email:', '', 'editUser-email form-control', 1),
+(19, 'password', 39, 'password', 'Old password:', '', 'editPassword-pw1 form-control', 0),
+(20, 'newpassword', 40, 'new_password', 'New password:', '', 'editPassword-pw2 form-control', 0),
+(21, 'description', 41, 'textarea', 'About me:', '', 'about-text form-control', 1),
+(22, 'aboutimg', 42, 'file', 'Upload file:', '', 'about-img-file form-control', 1);
 
 -- --------------------------------------------------------
 
@@ -208,38 +258,6 @@ INSERT INTO `field_info_t` (`id`, `name`, `element_id`, `type`, `label`, `value`
 --
 
 CREATE TABLE `form_info` (
-  `id` int(11) NOT NULL,
-  `action` varchar(255) NOT NULL,
-  `method` varchar(25) NOT NULL,
-  `submit_caption` varchar(255) NOT NULL,
-  `website_info_id` int(11) NOT NULL,
-  `display_class` varchar(255) NOT NULL,
-  `enctype` varchar(30) NOT NULL,
-  `submit_class` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `form_info`
---
-
-INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_info_id`, `display_class`, `enctype`, `submit_class`) VALUES
-(1, '', 'POST', 'Send message', 3, 'form-group', '', 'btn btn-primary btn-sm'),
-(2, '', 'POST', 'Log in', 4, 'form-group', '', 'btn btn-primary btn-sm'),
-(3, '', 'POST', 'Filter', 6, 'form-group justify-content-start', '', 'btn btn-primary btn-sm'),
-(4, '', 'POST', 'SaveArticle\r\n', 7, 'form-group', 'multipart/form-data', 'btn btn-primary btn-sm'),
-(5, '', 'POST', 'Save About', 2, 'form-group', 'multipart/form-data', 'btn btn-primary btn-sm'),
-(6, '', 'GET', 'Create new article', 8, 'form-group', '', 'btn btn-primary btn-sm'),
-(7, '', 'POST', 'Register', 5, 'form-group', '', 'btn btn-primary btn-sm'),
-(9, '', 'POST', 'Change information', 10, 'form-control mt-5', '', 'btn btn-primary'),
-(10, '', 'POST', 'Save', 11, 'form-control mt-5', '', 'btn btn-primary');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `form_info_t`
---
-
-CREATE TABLE `form_info_t` (
   `id` int(11) NOT NULL,
   `element_id` int(11) NOT NULL,
   `action` varchar(255) NOT NULL,
@@ -251,40 +269,18 @@ CREATE TABLE `form_info_t` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `form_info_t`
+-- Dumping data for table `form_info`
 --
 
-INSERT INTO `form_info_t` (`id`, `element_id`, `action`, `method`, `label`, `submit_caption`, `enctype`, `submit_class`) VALUES
-(1, 14, '', 'POST', '', 'Send message', '', 'btn btn-primary btn-sm');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lookup_info`
---
-
-CREATE TABLE `lookup_info` (
-  `id` int(11) NOT NULL,
-  `source_table` varchar(255) NOT NULL,
-  `column_names` varchar(255) NOT NULL,
-  `order_by` varchar(255) NOT NULL,
-  `where_value` varchar(255) NOT NULL,
-  `bridge_table` varchar(255) NOT NULL,
-  `bridge_values` varchar(255) NOT NULL,
-  `left_join_on` varchar(255) NOT NULL,
-  `field_info_id` int(11) NOT NULL,
-  `lookup_class` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `lookup_info`
---
-
-INSERT INTO `lookup_info` (`id`, `source_table`, `column_names`, `order_by`, `where_value`, `bridge_table`, `bridge_values`, `left_join_on`, `field_info_id`, `lookup_class`) VALUES
-(1, 'wiki_tag\n', 'id as id,name as label', 'wiki_tag.name', '', '', '', '', 8, 'searchable tag_checkbox form-check-input'),
-(2, 'user', 'id as id,name as label', 'user.name', '', '', '', '', 7, 'searchable author_checkbox form-check-input'),
-(3, 'wiki_sortby_info', 'sortby_value as id ,sortby_name as label', 'wiki_sortby_info.sortby_name', '', '', '', '', 20, 'sort_by'),
-(4, 'wiki_tag\n', 'id as id,name as label,!isnull(article_id) as checked', 'wiki_tag.name', '', 'wiki_article_to_tag', 'wiki_tag_id,wiki_tag.id', 'article_id', 26, 'searchable tag_checkbox form-check-input');
+INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submit_caption`, `enctype`, `submit_class`) VALUES
+(1, 14, '', 'POST', '', 'Send message', '', 'btn btn-primary btn-sm'),
+(2, 18, '', 'POST', '', 'Log in', '', 'btn btn-primary btn-sm'),
+(3, 21, '', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
+(4, 25, '', 'POST', '', 'SaveArticle', 'multipart/form-data', 'btn btn-primary btn-sm'),
+(5, 31, '', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
+(6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary btn-sm'),
+(7, 35, '', 'POST', '', 'Change information', '', 'btn btn-primary'),
+(8, 38, '', 'POST', '', 'save', '', 'btn btn-primary');
 
 -- --------------------------------------------------------
 
@@ -760,13 +756,6 @@ ALTER TABLE `element_lookup_info`
 --
 ALTER TABLE `field_info`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `form_info_id` (`form_info_id`);
-
---
--- Indexes for table `field_info_t`
---
-ALTER TABLE `field_info_t`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_element_info_to_field_info` (`element_id`);
 
 --
@@ -774,21 +763,7 @@ ALTER TABLE `field_info_t`
 --
 ALTER TABLE `form_info`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `website_info_to_form_info` (`website_info_id`);
-
---
--- Indexes for table `form_info_t`
---
-ALTER TABLE `form_info_t`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_element_info_to_form_info` (`element_id`);
-
---
--- Indexes for table `lookup_info`
---
-ALTER TABLE `lookup_info`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_lookup_to_field` (`field_info_id`);
 
 --
 -- Indexes for table `menu_items`
@@ -902,43 +877,25 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT for table `field_info_t`
---
-ALTER TABLE `field_info_t`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `form_info`
 --
 ALTER TABLE `form_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `form_info_t`
---
-ALTER TABLE `form_info_t`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `lookup_info`
---
-ALTER TABLE `lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
@@ -1020,31 +977,13 @@ ALTER TABLE `element_lookup_info`
 -- Constraints for table `field_info`
 --
 ALTER TABLE `field_info`
-  ADD CONSTRAINT `field_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`);
-
---
--- Constraints for table `field_info_t`
---
-ALTER TABLE `field_info_t`
   ADD CONSTRAINT `fk_element_info_to_field_info` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
 
 --
 -- Constraints for table `form_info`
 --
 ALTER TABLE `form_info`
-  ADD CONSTRAINT `website_info_to_form_info` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
-
---
--- Constraints for table `form_info_t`
---
-ALTER TABLE `form_info_t`
   ADD CONSTRAINT `fk_element_info_to_form_info` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
-
---
--- Constraints for table `lookup_info`
---
-ALTER TABLE `lookup_info`
-  ADD CONSTRAINT `fk_lookup_to_field` FOREIGN KEY (`field_info_id`) REFERENCES `field_info` (`id`);
 
 --
 -- Constraints for table `page_elements`

@@ -2,6 +2,7 @@
 
 namespace Wiki\views\containers;
 
+use Override;
 use Wiki\tools\interfaces\iElementInfo,
     Wiki\tools\interfaces\iElement;
 use Wiki\tools\utils\HtmlUtils;
@@ -42,5 +43,11 @@ class AtomicElement implements iElement
 
     public function __toString(): string {
         return get_class($this) . ": " . htmlentities($this->html);
+    }
+
+    #[Override]
+    public function addElement(iElement $element): void
+    {
+        throw new \Exception('Tried to add an Element to a non-container');
     }
 }
