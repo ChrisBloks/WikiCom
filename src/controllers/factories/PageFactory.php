@@ -14,32 +14,33 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-Wiki\tools\traits\tErrorMessageCollector,
-Wiki\tools\exceptions\PageNotFoundException,
-Wiki\models\ModelSelector,
-Wiki\controllers\factories\MenuFactory,
-Wiki\views\BasePage,
-Wiki\views\Table,
-Wiki\views\containers\AtomicElement,
-Wiki\views\containers\Header,
-Wiki\views\containers\BodyText,
-Wiki\views\containers\Title,
-Wiki\views\containers\Image,
-Wiki\views\containers\AuthorText,
-Wiki\views\containers\Modal,
-Wiki\views\containers\CodeBlock,
-Wiki\views\containers\Footer,
-Wiki\views\containers\ContainerElement,
-Wiki\views\containers\MainElement,
-Wiki\views\containers\Rating,
-Wiki\views\containers\Card,
-Wiki\views\containers\NoticeMessage,
-League\CommonMark\GithubFlavoredMarkdownConverter,
-HTMLPurifier,
-HTMLPurifier_Config,
-Wiki\views\fields\ButtonField,
-InvalidArgumentException,
-Throwable;
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\Modal,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer,
+    Wiki\views\containers\ContainerElement,
+    Wiki\views\containers\MainElement,
+    Wiki\views\containers\Rating,
+    Wiki\views\containers\Toast,
+    Wiki\views\containers\Card,
+    Wiki\views\containers\NoticeMessage,
+    League\CommonMark\GithubFlavoredMarkdownConverter,
+    HTMLPurifier,
+    HTMLPurifier_Config,
+    Wiki\views\fields\ButtonField,
+    InvalidArgumentException,
+    Throwable;
 
 
 
@@ -133,8 +134,9 @@ class PageFactory
 
         $main = new MainElement();
         $notice_container = new ContainerElement('<div id="page-notices">', '</div>');
-        $notice_container->addElement(new NoticeMessage());
-        $main->addElement($notice_container);
+        // $notice_container->addElement(new NoticeMessage());
+        // $main->addElement($notice_container);
+        $main->addElement(new Toast());
         $main->addElement(new AtomicElement("<br>"));
 
 
@@ -513,6 +515,7 @@ class PageFactory
                     ]
                 );
                 $editUserModal = new Modal(id: 'editUserModal', title: 'Edit User Information');
+                $editUserModal->addElement(new AtomicElement('<div id="editUserModal-errors" class="alert alert-danger d-none"></div>'));
                 $editUserModal->addElement($editUserForm);
 
                 $editPasswordForm = $formFactory->createForm(
@@ -526,6 +529,7 @@ class PageFactory
                     field_default_text: []
                 );
                 $editPasswordModal = new Modal(id: 'editPasswordModal', title: 'Change Password');
+                $editPasswordModal->addElement(new AtomicElement('<div id="editPasswordModal-errors" class="alert alert-danger d-none"></div>'));
                 $editPasswordModal->addElement($editPasswordForm);
 
                 // Could be funny to add as a special modal but not needed
