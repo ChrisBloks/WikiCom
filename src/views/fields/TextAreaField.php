@@ -14,7 +14,7 @@ class TextAreaField extends BaseField implements iElement
     protected string $html;
     protected string $text;
 
-    public function __construct(string $name, string $class, string $label = "", string $text = "")
+    public function __construct(ElementInfo $element_info)
     {
         parent::__construct($name, $label, $class);
         $this->text = $text;

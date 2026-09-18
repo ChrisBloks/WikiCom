@@ -14,31 +14,31 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-Wiki\tools\traits\tErrorMessageCollector,
-Wiki\tools\exceptions\PageNotFoundException,
-Wiki\models\ModelSelector,
-Wiki\controllers\factories\MenuFactory,
-Wiki\views\BasePage,
-Wiki\views\Table,
-Wiki\views\containers\AtomicElement,
-Wiki\views\containers\Header,
-Wiki\views\containers\BodyText,
-Wiki\views\containers\Title,
-Wiki\views\containers\Card,
-Wiki\views\containers\Image,
-Wiki\views\containers\AuthorText,
-Wiki\views\containers\CodeBlock,
-Wiki\views\containers\Footer,
-Wiki\views\containers\ContainerElement,
-Wiki\views\containers\MainElement,
-Wiki\views\containers\Rating,
-Wiki\views\containers\NoticeMessage,
-League\CommonMark\GithubFlavoredMarkdownConverter,
-HTMLPurifier,
-HTMLPurifier_Config,
-Wiki\views\fields\ButtonField,
-InvalidArgumentException,
-Throwable;
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Card,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer,
+    Wiki\views\containers\ContainerElement,
+    Wiki\views\containers\MainElement,
+    Wiki\views\containers\Rating,
+    Wiki\views\containers\NoticeMessage,
+    League\CommonMark\GithubFlavoredMarkdownConverter,
+    HTMLPurifier,
+    HTMLPurifier_Config,
+    Wiki\views\fields\ButtonField,
+    InvalidArgumentException,
+    Throwable;
 use Wiki\dataObjects\ElementInfo;
 
 
@@ -62,10 +62,7 @@ class PageFactory
     {
         $this->addHead();
         $this->addScripts();
-
         $this->addBody();
-
-
         return $this->htmlpage;
     }
 
@@ -77,7 +74,7 @@ class PageFactory
 
     private function addScripts()
     {
-        
+
         // should move to a config or something instead of pasting links raw in the pagefactory
         $this->htmlpage
             ->addToHeadContent(
@@ -88,9 +85,9 @@ class PageFactory
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
                             <link rel="stylesheet" href="./src/css/stylesheet.css">
                             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">'
-                        ])
-                    )
-                );
+                    ])
+                )
+            );
 
         $this->htmlpage
             ->addToHeadContent(
@@ -103,9 +100,9 @@ class PageFactory
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
                             <script src="./src/js/wiki.js"></script>
                             <script>hljs.highlightAll();</script>'
-                        ])
-                    )
-                );
+                    ])
+                )
+            );
 
         switch ($this->page) {
             case 'editArticle':
@@ -136,6 +133,8 @@ class PageFactory
             $styling_system['header']
         ));
 
+
+
         // menu items
         // menu items from database
         // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
@@ -151,10 +150,10 @@ class PageFactory
         $main->addElement(new NoticeMessage());
         $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
-
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
+        // HtmlUtils::dump("element_info", $elements_info);
         foreach ($elements_info as &$element_info) {
             switch (true) {
                 case $element_info['name'] === "random_article":
@@ -211,11 +210,18 @@ class PageFactory
                 break;
             case 'contact':
 
+                $element_list = [];
                 foreach ($elements_info as $element_info) {
+                    HtmlUtils::dump("element_info", $element_info);
+                    $element = ElementFactory::createElement($element_info);
+
+                    die();
+                    // HtmlUtils::dump('element_info', $element_info);
                     // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
                     if ($element_info['parent_order'] == 0) {
                         $element = new $element_info['php_class']($element_info);
                         $element_info_list[$element_info['order_by']] = $element;
+                        HtmlUtils::dump('element', $element);
                         $main->addElement($element);
                         // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
                     } else {
@@ -595,6 +601,5 @@ class PageFactory
         unset($field);
 
         return $form_fields;
-
     }
 }

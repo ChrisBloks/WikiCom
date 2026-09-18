@@ -23,7 +23,7 @@ class MenuFactory
         
         
         foreach ($menu_items as $item) {
-            // HtmlUtils::dump("item", $item);
+            
             try {
                 $menu->addElement($this->buildMenuItem($item));
             } catch (\InvalidArgumentException $e) {
@@ -40,7 +40,7 @@ class MenuFactory
         }
 
         if (!empty($item['submenu'])) {
-            // HtmlUtils::dump('flag_submenu', 1);
+            
             $menuItem = new MenuItem(
                 label: $item['label'],
                 href: '?page='.$item['href'],
@@ -53,7 +53,7 @@ class MenuFactory
                 li_class: $li_class . ' dropdown'
             );
 
-            // HtmlUtils::dump('submenu', $item['submenu']);
+            
             $submenu = new Menu(class: 'dropdown-menu');
             foreach ($item['submenu'] as $subitem) {
                 try {

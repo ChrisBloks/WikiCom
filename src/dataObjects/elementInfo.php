@@ -39,6 +39,8 @@ class ElementInfo implements iElementInfo
             try {
                 $this[$key] = $value;
             } catch (InvalidArgumentException $e) {
+                // HtmlUtils::dump('error_msg', $e->getMessage());
+                // If attribute is invalid, the throw does not show up in an error...
                 if (!$permissive) {
                     throw $e;
                 }
@@ -60,6 +62,7 @@ class ElementInfo implements iElementInfo
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
+        if (empty($value)) return;
         if ($offset == 'class') $offset = 'html_class';
         if (in_array($offset, static::$allowed_keys, true)) {
             $this->container[$offset] = $value;

@@ -33,28 +33,30 @@ class ElementModel extends BaseModel
                 ORDER BY p_e.order_by;";
         $params = ["page" => $page_name];
 
+        
         $result = $this->crud->selectMany($sql, $params);
-
+        
 
         if (empty($result)) {
             $this->logError("Page has no Form");
             return false;
         }
-
+        
         foreach ($result as $key => $value) {
             $value = $this->getLookupResult($value);
-
             $result[$key] = new ElementInfo($value);
         }
-
+       
 
         return $result;
     }
 
-    protected function getLookupResult($element_info){
+    protected function getLookupResult(array $element_info){
         $element_id = $element_info['element_id'];
         $lookup_info_list = $this->fetchLookupInfoByElementId($element_id);
+        
         foreach ($lookup_info_list as $lookup_info){
+           
             switch($lookup_info['lookup_type']){
                 case 'form':
                     $form_info = $this->fetchLookupInfoResult($lookup_info);
@@ -63,11 +65,13 @@ class ElementModel extends BaseModel
                 case 'field':
                     $field_info = $this->fetchLookupInfoResult($lookup_info);
                     $element_info['field_info'] = new FieldInfo($field_info);
+                    
                     break;
                 case 'element':
                     // get sub_element_id
                     $sub_element_info = $this->fetchLookupInfoResult($lookup_info);
                     $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
+                    
                 default:
                     break;
             }
@@ -214,6 +218,7 @@ class ElementModel extends BaseModel
         // $sql .= " ORDER BY {$lookup_info['order_by']}";
 
         // Execute the query
+        // HtmlUtils::dump('sql', $sql);
         $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);
 
 
