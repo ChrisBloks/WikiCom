@@ -6,6 +6,7 @@
 
 namespace Wiki\views\fields;
 
+use Wiki\dataObjects\ElementInfo;
 use Wiki\views\fields\BaseField, Wiki\tools\interfaces\iElement;
 
 class TextAreaField extends BaseField implements iElement
@@ -14,14 +15,19 @@ class TextAreaField extends BaseField implements iElement
     protected string $html;
     protected string $text;
 
-    public function __construct(string $name, string $class, string $label = "", string $text = "")
+    public function __construct(ElementInfo $element_info)
     {
-        parent::__construct($name, $label, $class);
-        $this->text = $text;
+        $field_info = $element_info['field_info'];
+        parent::__construct(
+            name: $field_info['name'] ?? "", 
+            label: $field_info['label'] ?? "", 
+            class: $field_info['html_class'] ?? ""
+        );
+        $this->text = $field_info['text'] ?? "";
 
         // rows and cols should be variable eventually
-        $this->html .= '<textarea name="' . $name 
-                    . '" class="' . $class . '">' 
+        $this->html .= '<textarea name="' . $this->name 
+                    . '" class="' . $this->class . '">' 
                     . $this->text . '</textarea><br>';
     }
 

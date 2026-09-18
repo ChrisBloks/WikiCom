@@ -2,33 +2,52 @@
 
 namespace Wiki\views\containers;
 
-use Wiki\tools\interfaces, Wiki\tools\utils;
-use ArrayAccess,
-Wiki\tools\utils\HtmlUtils;
+use Override;
+use Wiki\tools\interfaces\iElementInfo,
+    Wiki\tools\interfaces\iElement;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Used to create html code
  * @var $html contains the html code
  * @var $class used to add class attributes
  */
-class AtomicElement implements interfaces\iElement
+class AtomicElement implements iElement
 {
     // properties
-    protected string $html_before;
-    protected string $html_after;
-    protected string $html;
+    private string $html = "";
 
-    public function __construct(ArrayAccess $element_info)
+    public function __construct(iElementInfo $element_info)
     {
-        $this->html_before = (isset($element_info['html_tag']) ? "<" . $element_info['html_tag'] . "" . HtmlUtils::addClassAttr($element_info['html_class']) . ">" : "");
-        $this->html_after = (isset($element_info['html_tag']) ? "</" . $element_info['html_tag'] . ">" : "");
+        if (isset($element_info['html_tag'])) {
+            $html_before = "<{$element_info['html_tag']} ";
+            foreach ($element_info->getHTMLattributes() as $attr) {
+                $html_before .=  ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
+            }
+            $html_before .= ">";
 
-        $this->html = $this->html_before .$element_info['text'].$this->html_after;
+            $this->html =
+                $html_before .
+                ($element_info['label'] ?? "") .
+                ($element_info['text'] ?? "") .
+                ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
+        } else {
+            $this->html = ($element_info['text'] ?? "");
+        }
     }
-
 
     public function show(): string
     {
         return $this->html;
+    }
+
+    public function __toString(): string {
+        return get_class($this) . ": " . htmlentities($this->html);
+    }
+
+    #[Override]
+    public function addElement(iElement $element): void
+    {
+        throw new \Exception('Tried to add an Element to a non-container');
     }
 }

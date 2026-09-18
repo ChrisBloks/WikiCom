@@ -10,8 +10,10 @@ use Wiki\tools\utils\Utils,
  */
 class NewPasswordValidator extends TextValidator
 {
-    public function validate(string $name, bool $optional = false): bool
+    public function validate(string $name, bool $optional = false, string $error_disp_name = ""): bool
     {
+        if (empty($error_disp_name)) $error_disp_name = $name;
+        
         // Get post variable based on name given
         $this->field_inputs['password_1'] = Utils::getRequestVar(
             key: 'password_1',
@@ -54,7 +56,7 @@ class NewPasswordValidator extends TextValidator
         if ($this->hasErrors()) {
             return false;
         } else {
-            return $this->validateFields(field_inputs: $this->field_inputs);
+            return $this->validateFields(field_inputs: $this->field_inputs, error_disp_name: $error_disp_name);
         }
     }
 
@@ -63,7 +65,7 @@ class NewPasswordValidator extends TextValidator
      * @param array $field_inputs
      * @return bool
      */
-    public function validateFields(array $field_inputs): bool
+    public function validateFields(array $field_inputs, string $error_disp_name): bool
     {
         //Check if password1 and password2 are equal
         if ($field_inputs['password_1'] === $field_inputs['password_2']) {

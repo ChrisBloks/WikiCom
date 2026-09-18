@@ -40,7 +40,7 @@ class FieldFactory
                     name: $field_def["name"],
                     class: $field_def["class"],
                     label: $field_def["label"],
-                    text: $field_text,
+                    text: $field_text
                 );
 
             case 'SearchableCheckboxes':

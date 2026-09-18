@@ -29,4 +29,9 @@ class WrappedText implements iElement
             . $this->text . PHP_EOL
             . '</' . $this->wrapper . '>' . PHP_EOL;
     }
+
+    public function addElement(iElement $element): void
+    {
+        throw new \Exception('Tried to add an Element to a non-container');
+    }
 }

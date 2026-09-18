@@ -67,4 +67,9 @@ abstract class BaseField implements iElement
                 '" id="' . $this->id .
                 '" class="' . $this->class . '" ';
     }
+
+    public function addElement(iElement $element): void
+    {
+        throw new \Exception('Tried to add an Element to a non-container');
+    }
 }

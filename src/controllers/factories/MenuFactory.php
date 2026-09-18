@@ -20,8 +20,10 @@ class MenuFactory
     protected function buildMenu(array $menu_items, string $class = 'nav'): Menu
     {
         $menu = new Menu($class);
-
+        
+        
         foreach ($menu_items as $item) {
+            
             try {
                 $menu->addElement($this->buildMenuItem($item));
             } catch (\InvalidArgumentException $e) {
@@ -38,9 +40,10 @@ class MenuFactory
         }
 
         if (!empty($item['submenu'])) {
+            
             $menuItem = new MenuItem(
                 label: $item['label'],
-                href: $item['href'],
+                href: '?page='.$item['href'],
                 class: $link_class . ' dropdown-toggle',
                 attrs: [
                     'role' => 'button',
@@ -50,6 +53,7 @@ class MenuFactory
                 li_class: $li_class . ' dropdown'
             );
 
+            
             $submenu = new Menu(class: 'dropdown-menu');
             foreach ($item['submenu'] as $subitem) {
                 try {
@@ -62,13 +66,12 @@ class MenuFactory
         } else {
             $menuItem = new MenuItem(
                 label: $item['label'],
-                href: $item['href'],
+                href: '?page='.$item['href'],
                 class: $link_class,
                 attrs: [],
                 li_class: $li_class
             );
         }
-
         return $menuItem;
     }
 }
