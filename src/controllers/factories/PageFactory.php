@@ -165,6 +165,7 @@ class PageFactory
         }
         unset($element_info);
 
+
         // page building
         switch ($this->page) {
             case 'home':
@@ -200,7 +201,6 @@ class PageFactory
                 }
                 break;
             case 'contact':
-
                 foreach ($elements_info as $element_info) {
                     // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
                     if ($element_info['parent_order'] == 0) {

@@ -11,7 +11,7 @@ class FieldInfo extends ElementInfo
     static protected array $allowed_keys =
         [
             'type',
-            'class',
+            'html_class',
             'name',
             'optional',
             'id',

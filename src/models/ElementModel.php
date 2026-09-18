@@ -42,6 +42,7 @@ class ElementModel extends BaseModel
         }
 
         foreach ($result as $key => $value) {
+
             $value = $this->getLookupResult($value);
 
             $result[$key] = new ElementInfo($value);
@@ -212,11 +213,10 @@ class ElementModel extends BaseModel
 
         // // Always add an ORDER BY clause
         // $sql .= " ORDER BY {$lookup_info['order_by']}";
-
         // Execute the query
         $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);
 
-
+                
 
         return $result;
     }
