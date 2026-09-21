@@ -13,6 +13,6 @@ class BodyText extends WrappedText
 {
     public function __construct(ArrayAccess $element_info)
     {
-        parent::__construct($element_info['bodytext'], $element_info['html_tag'] . HtmlUtils::addClassAttr($element_info['html_class']));
+        parent::__construct($element_info['text'] ?? "", $element_info['html_tag'] . HtmlUtils::addClassAttr($element_info['html_class']));
     }
 }

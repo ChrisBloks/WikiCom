@@ -3,6 +3,7 @@
 namespace Wiki\views\containers;
 
 use ArrayAccess;
+use Nette\Utils\Html;
 use Wiki\tools\utils\HtmlUtils;
 /**
  * Type of wrapped text specifically for images
