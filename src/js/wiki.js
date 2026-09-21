@@ -251,7 +251,7 @@ $(document).ready(function () {
   TagWidget.init();
   ArticleDelete.init();
   initPasswordLengthChecker();
-
+   
   // bind values to form
   AjaxForms.bind("#editUserModal form", {
     onSuccess: function (result) {
