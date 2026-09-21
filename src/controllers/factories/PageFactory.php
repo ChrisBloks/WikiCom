@@ -14,31 +14,33 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-Wiki\tools\traits\tErrorMessageCollector,
-Wiki\tools\exceptions\PageNotFoundException,
-Wiki\models\ModelSelector,
-Wiki\controllers\factories\MenuFactory,
-Wiki\views\BasePage,
-Wiki\views\Table,
-Wiki\views\containers\AtomicElement,
-Wiki\views\containers\Header,
-Wiki\views\containers\BodyText,
-Wiki\views\containers\Title,
-Wiki\views\containers\Card,
-Wiki\views\containers\Image,
-Wiki\views\containers\AuthorText,
-Wiki\views\containers\CodeBlock,
-Wiki\views\containers\Footer,
-Wiki\views\containers\ContainerElement,
-Wiki\views\containers\MainElement,
-Wiki\views\containers\Rating,
-Wiki\views\containers\NoticeMessage,
-League\CommonMark\GithubFlavoredMarkdownConverter,
-HTMLPurifier,
-HTMLPurifier_Config,
-Wiki\views\fields\ButtonField,
-InvalidArgumentException,
-Throwable;
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\Modal,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer,
+    Wiki\views\containers\ContainerElement,
+    Wiki\views\containers\MainElement,
+    Wiki\views\containers\Rating,
+    Wiki\views\containers\Toast,
+    Wiki\views\containers\Card,
+    Wiki\views\containers\NoticeMessage,
+    League\CommonMark\GithubFlavoredMarkdownConverter,
+    HTMLPurifier,
+    HTMLPurifier_Config,
+    Wiki\views\fields\ButtonField,
+    InvalidArgumentException,
+    Throwable;
 
 
 
@@ -122,7 +124,6 @@ class PageFactory
 
         // menu items
         // menu items from database
-        // verander createMenu($menu,items, isloggedin) naar true voor de andere  menustructuur
         $menu_items = ModelSelector::getWebsiteInfoModel()->fetchMenuItems($this->isLoggedIn);
         $menuFactory = new MenuFactory();
         $menu = $menuFactory->createMenu(
@@ -132,7 +133,10 @@ class PageFactory
         $this->htmlpage->addToBodyContent($menu);
 
         $main = new MainElement();
-        $main->addElement(new NoticeMessage());
+        $notice_container = new ContainerElement('<div id="page-notices">', '</div>');
+        // $notice_container->addElement(new NoticeMessage());
+        // $main->addElement($notice_container);
+        $main->addElement(new Toast());
         $main->addElement(new AtomicElement("<br>"));
 
 
@@ -143,9 +147,8 @@ class PageFactory
 
                 $articles = ModelSelector::getArticleModel()->fetchFrontPageArticles();
                 $pageinfo = ModelSelector::getWebsiteInfoModel()->fetchBodyText($this->page);
-
                 $container = new ContainerElement($styling_container['main_div'], '</div>');
-                $container->addElement(new AtomicElement('<h1 class="display-1"> Welcome to our website</h1>', ''));
+                $container->addElement(new Title($pageinfo['bodytext'], 'display-1 border-bottom mb-1'));
 
                 // outer row
                 $row_container = new ContainerElement('<div class="row g-4 mb-5">', '</div>');
@@ -186,61 +189,26 @@ class PageFactory
             case 'about':
                 $aboutinfo = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
 
-                if ($this->response['userID'] == $this->response['aboutID']) {
-                    // Edit view: 
-                    $top_container = new ContainerElement($styling_container['top_div'], '</div>');
-                    $main_container = new ContainerElement($styling_container['main_div'], '</div>');
-                    $sub_container = new ContainerElement('<div>', '</div>');
+                $main_container = new ContainerElement($styling_container['main_div_2'], '</div>');
+                $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
 
-                    $formFactory = new FormFactory();
-                    $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
-                    $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-                    $form = $formFactory->createForm(
-                        form_info: $form_info,
-                        field_info: $form_fields,
-                        hidden_field_info: [
-                            'user' => $this->response['aboutID'],
-                            'page' => $this->page
-                        ],
-                        field_default_text: ["description" => $aboutinfo["description"]]
-                    );
+                $sub_container->addElement(new Title(
+                    text: $aboutinfo['name'],
+                    class: $styling_elements['name_class']
+                ));
+                $sub_container->addElement(new BodyText(
+                    text: $aboutinfo['description'],
+                    class: $styling_elements['description_class']
+                ));
 
-                    $top_container->addElement(new Title(
-                        text: $aboutinfo['name'],
-                        class: $styling_elements['name_class']
-                    ));
+                $main_container->addElement($sub_container);
+                $main_container->addElement(new Image(
+                    name: './img/authors/' . $aboutinfo['imgFileName'],
+                    class: $styling_elements['img_class']
+                ));
 
-                    $sub_container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: $styling_elements['img_class']
-                    ));
+                $main->addElement($main_container);
 
-                    $main->addElement($top_container);
-                    $main_container->addElement($sub_container);
-                    $main_container->addElement($form);
-                    $main->addElement($main_container);
-                } else {
-                    // Read-only view
-                    $main_container = new ContainerElement($styling_container['main_div_2'], '</div>');
-                    $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
-
-                    $sub_container->addElement(new Title(
-                        text: $aboutinfo['name'],
-                        class: $styling_elements['name_class']
-                    ));
-                    $sub_container->addElement(new BodyText(
-                        text: $aboutinfo['description'],
-                        class: $styling_elements['description_class']
-                    ));
-
-                    $main_container->addElement($sub_container);
-                    $main_container->addElement(new Image(
-                        name: './img/authors/' . $aboutinfo['imgFileName'],
-                        class: $styling_elements['img_class']
-                    ));
-
-                    $main->addElement($main_container);
-                }
                 break;
             case 'contact':
             case 'login':
@@ -330,8 +298,6 @@ class PageFactory
                 } else {
                     $bodyinfo = ModelSelector::getArticleModel()->fetchArticleById($this->response['editArticleID']);
                 }
-
-                HtmlUtils::dump("test",$this->response);
                 $form_fields = $this->addCheckedUsingArray($form_fields, $this->response);
 
 
@@ -464,16 +430,17 @@ class PageFactory
                 //====================================================================================================
                 // table information
                 $columnsdata = ModelSelector::getWebsiteInfoModel()->fetchTableColumns(["id", "title", "lastEdit"]);
-                // add userID to fetcharticlebyUserId
                 $rowsdata = ModelSelector::getArticleModel()->fetchArticleByUserId($_SESSION['userID']);
 
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
 
+                //====================================================================================================
+                // profile picture - now clickable, opens the avatar modal instead of just displaying
                 $user_container->addElement(new Image(
                     name: './img/authors/' . $aboutinfo['imgFileName'],
-                    class: $styling_elements["img_class"]
+                    class: $styling_elements["img_class"] . ' clickable-avatar',
                 ));
 
                 $user_container->addElement(new Title(
@@ -481,6 +448,7 @@ class PageFactory
                     class: $styling_elements["user_title"]
                 ));
                 $left_container->addElement($user_container);
+
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: [],
@@ -489,27 +457,34 @@ class PageFactory
                 );
                 $left_container->addElement(new Title(
                     text: $aboutinfo['email'],
-                    class: $styling_elements["email_class"]
+                    class: $styling_elements["email_class"],
+                    attributes: [
+                        'id' => 'userEmailDisplay'
+                    ]
                 ));
                 $left_container->addElement(new Title(
                     text: "Create new article",
                     class: $styling_elements["new_article_title"]
                 ));
                 $left_container->addElement($form);
-                //===================================
-                // goto edit user info
 
+                //====================================================================================================
+                // edit user info / password - now open modals instead of navigating away
                 $left_container->addElement(new Title(
                     text: "Edit User information",
                     class: "fs-3 border-top mt-3"
                 ));
+
                 $left_container->addElement(new ButtonField(
                     type: "button",
                     name: 'Edit User Information',
                     class: 'btn btn-secondary mt-1',
                     label: 'Change user information',
-                    id: $_SESSION['userID'],
-                    href: 'main.php?page=editUser&id=' . $_SESSION['userID']
+                    id: $_SESSION['userID'] . '-edit-user-btn',
+                    attributes: [
+                        'data-bs-toggle' => 'modal',
+                        'data-bs-target' => '#editUserModal'
+                    ]
                 ));
 
                 $left_container->addElement(new ButtonField(
@@ -517,10 +492,62 @@ class PageFactory
                     name: 'Edit Password',
                     class: 'btn btn-danger mt-1',
                     label: 'Change Password',
-                    id: $_SESSION['userID'],
-                    href: 'main.php?page=editPassword&id=' . $_SESSION['userID']
+                    id: $_SESSION['userID'] . '-edit-pwd-btn',
+                    attributes: [
+                        'data-bs-toggle' => 'modal',
+                        'data-bs-target' => '#editPasswordModal'
+                    ]
                 ));
 
+                //====================================================================================================
+                // modals - built with your existing FormFactory forms, just wrapped in Modal instead of a page
+                $editUserForm = $formFactory->createForm(
+                    form_info: ModelSelector::getFormModel()->fetchFormInfo('editUser'),
+                    field_info: ModelSelector::getFormModel()->fetchFieldInfo('editUser'),
+                    hidden_field_info: [
+                        'page' => 'editUser',
+                        'action' => 'updateUserInfo',
+                        'id' => $_SESSION['userID']
+                    ],
+                    field_default_text: [
+                        'name' => $aboutinfo['name'],
+                        'email' => $aboutinfo['email'],
+                    ]
+                );
+                $editUserModal = new Modal(id: 'editUserModal', title: 'Edit User Information');
+                $editUserModal->addElement(new AtomicElement('<div id="editUserModal-errors" class="alert alert-danger d-none"></div>'));
+                $editUserModal->addElement($editUserForm);
+
+                $editPasswordForm = $formFactory->createForm(
+                    form_info: ModelSelector::getFormModel()->fetchFormInfo('editPassword'),
+                    field_info: ModelSelector::getFormModel()->fetchFieldInfo('editPassword'),
+                    hidden_field_info: [
+                        'page' => 'editPassword',
+                        'action' => 'updatePassword',
+                        'id' => $_SESSION['userID']
+                    ],
+                    field_default_text: []
+                );
+                $editPasswordModal = new Modal(id: 'editPasswordModal', title: 'Change Password');
+                $editPasswordModal->addElement(new AtomicElement('<div id="editPasswordModal-errors" class="alert alert-danger d-none"></div>'));
+                $editPasswordModal->addElement($editPasswordForm);
+
+                // Could be funny to add as a special modal but not needed
+                // -marius
+                // $avatarModal = new Modal(id: 'avatarModal', title: 'Change Profile Picture');
+                // $avatarModal->addElement(new AtomicElement(
+                //     '<img id="avatar-preview" src="./img/authors/' . htmlspecialchars($aboutinfo['imgFileName']) . '" '
+                //     . 'class="mb-2" style="max-width:150px;"><br>'
+                //     . '<input type="file" id="avatar-input" name="avatar" accept="image/*" class="form-control" hidden>'
+                //     . '<button type="button" class="btn btn-primary mt-2" onclick="document.getElementById(\'avatar-input\').click()">Choose photo</button>'
+                //     . '<button type="submit" id="avatar-save-btn" class="btn btn-success mt-2">Save</button>'
+                // ));
+
+                $left_container->addElement($editUserModal);
+                $left_container->addElement($editPasswordModal);
+                //$left_container->addElement($avatarModal);
+
+                //====================================================================================================
                 $tableFactory = new Table($columnsdata, $rowsdata);
                 $results_container->addElement(new Title(
                     text: "Articles",
@@ -533,49 +560,6 @@ class PageFactory
                 $container->addElement($row);
 
                 $main->addElement($container);
-                break;
-            case 'editUser':
-                // main Div: image + text-div 
-                $main_container = new ContainerElement($styling_container['main_div'], '</div>');
-
-                // sub text div: Title/Author/text/code
-                $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
-                $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
-                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-
-                //HtmlUtils::dump('form info', $form_info);
-                //HtmlUtils::dump('form fields', $form_fields);
-
-                $form = $formFactory->createForm(
-                    form_info: $form_info,
-                    field_info: $form_fields,
-                    hidden_field_info: ['page' => $this->page],
-                );
-                $sub_container->addElement($form);
-                $main_container->addElement($sub_container);
-                $main->addElement($main_container);
-                break;
-
-            case 'editPassword':
-                // main Div: image + text-div 
-                $main_container = new ContainerElement($styling_container['main_div'], '</div>');
-
-                // sub text div: Title/Author/text/code
-                $sub_container = new ContainerElement($styling_container['sub_div'], '</div>');
-                $formFactory = new FormFactory();
-                $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
-                $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
-
-                $form = $formFactory->createForm(
-                    form_info: $form_info,
-                    field_info: $form_fields,
-                    hidden_field_info: ['page' => $this->page],
-                );
-
-                $sub_container->addElement($form);
-                $main_container->addElement($sub_container);
-                $main->addElement($main_container);
                 break;
             default:
                 throw new PageNotFoundException("No page defined for: '. '$this->page.'");
@@ -608,6 +592,5 @@ class PageFactory
         unset($field);
 
         return $form_fields;
-
     }
 }

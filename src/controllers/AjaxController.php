@@ -2,7 +2,8 @@
 namespace Wiki\controllers;
 
 use BadMethodCallException;
-use Wiki\tools\interfaces\iController;
+use Wiki\tools\interfaces\iController,
+Wiki\models\ModelSelector;
 use Wiki\tools\utils\utils;
 use Wiki\controllers\ArticleHandler;
 use Wiki\tools\utils\HtmlUtils;
@@ -40,6 +41,7 @@ class AjaxController implements iController
     private function getRequest(): void
     {
         $this->request = [
+            'page' => utils::getRequestVar('page', true, 'home'),
             'action' => utils::getRequestVar('action', true, 'unknown'),
             'id' => utils::getRequestVar('id', true, null),
             'user_id' => utils::getSesVar('userID', null),
@@ -52,17 +54,17 @@ class AjaxController implements iController
     {
         switch ($this->request['action']) {
             case 'saveRating':
-                if(!$this->request['isLoggedIn']){
+                if (!$this->request['isLoggedIn']) {
                     throw new BadMethodCallException('Tried to save a rating without being logged in!');
-                }
-                else {
+                } else {
                     $rating = utils::getRequestVar('rating', true, null);
                     $article_id = utils::getRequestVar('article_id', true, null);
                     $articleHandler = new ArticleHandler();
                     $rating_info = $articleHandler->handleSaveRating(
                         user_id: $this->request['user_id'],
                         article_id: $article_id,
-                        rating: $rating);
+                        rating: $rating
+                    );
                     $this->response = [
                         'avg_rating' => $rating_info["AVGrating"],
                         'n_ratings' => $rating_info["Nratings"]
@@ -83,6 +85,67 @@ class AjaxController implements iController
                         'success' => true,
                         'deleted rows' => $delete_result,
                     ];
+                break;
+            case 'updateUserInfo':
+                $_SESSION['errors'] = [];
+                $_SESSION['messages'] = [];
+
+                $field_info = ModelSelector::getFormModel()
+                    ->fetchFieldInfo(page_name: $this->request['page']);
+
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+
+                $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+
+                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                    $result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
+
+                    $this->response = [
+                        'success' => $result['ok'],
+                        'errors' => $result['user_error'] ?? [],
+                        'message' => $result['ok'] ? 'Your information has been updated.' : 'Something went wrong.',
+                        'name' => $result['field_inputs']['name'] ?? null,
+                        'user_id' =>$this->request['user_id']?? null,
+                        'email' => $result['field_inputs']['email'] ?? null,
+                        'avatar_url' => $result['field_inputs']['avatar_url'] ?? null,
+                    ];
+                } else {
+                    $this->response = [
+                        'success' => false,
+                        'errors' => $validation_result['user_error'],
+                        'message' => 'Please fix the errors below.',
+                    ];
+                }
+                break;
+            case 'updatePassword':
+                $_SESSION['errors'] = [];
+                $_SESSION['messages'] = [];
+
+                $field_info = ModelSelector::getFormModel()
+                    ->fetchFieldInfo(page_name: $this->request['page']);
+
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+
+                $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+
+                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                    $result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);
+
+                    $this->response = [
+                        'success' => $result['ok'],
+                        'errors' => $result['user_error'] ?? [],
+                        'message' => $result['ok'] ? 'Password successfully changed.' : 'Something went wrong.',
+                    ];
+                } else {
+                    $this->response = [
+                        'success' => false,
+                        'errors' => $validation_result['user_error'],
+                        'message' => 'Please fix the errors below.',
+                    ];
+                }
+
                 break;
             default:
                 $this->response = [

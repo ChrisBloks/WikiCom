@@ -10,8 +10,8 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class Title extends WrappedText
 {
-    public function __construct(string $text, string $class = '')
+    public function __construct(string $text, string $class = '', array $attributes = [])
     {
-        parent::__construct($text, "h1" . htmlutils::addClassAttr($class));
+        parent::__construct($text, "h1" . htmlutils::addClassAttr($class). HtmlUtils::addAttrs($attributes));
     }
 }

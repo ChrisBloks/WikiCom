@@ -2,7 +2,9 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\views\fields\BaseField, Wiki\tools\interfaces\iElement;
+use Wiki\views\fields\BaseField, 
+    Wiki\tools\interfaces\iElement,
+    Wiki\tools\utils\HtmlUtils;
 
 /**
  * Class for adding a button field to a form
@@ -12,6 +14,7 @@ class ButtonField extends BaseField
 {
     protected string $type;
     protected ?string $href;
+    protected array $attributes;
 
     public function __construct(
         string $type,
@@ -19,12 +22,14 @@ class ButtonField extends BaseField
         string $class,
         string $label = "",
         string $id = "",
-        ?string $href = null
+        ?string $href = null,
+        array $attributes = []
     ) {
         parent::__construct($name, $label, $class);
         $this->type = $type;
         $this->href = $href;
-        if (!empty($id)){
+        $this->attributes = $attributes;
+        if (!empty($id)) {
             $this->id = $id;
         }
     }
@@ -36,7 +41,7 @@ class ButtonField extends BaseField
                         name="' . $this->name . '" 
                         id="' . $this->id . '" 
                         value="' . htmlspecialchars($this->label) . '" 
-                        class="' . $this->class . '" >';
+                        class="' . $this->class . '"' . HtmlUtils::addAttrs($this->attributes) . ' >';
 
         if ($this->href !== null) {
             return '<a href="' . $this->href . '">' . $input . '</a><br>';

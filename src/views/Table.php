@@ -85,7 +85,7 @@ class Table
      */
     protected function buildRows(): string
     {
-        $str = '<tbody class="table-group-divider"';
+        $str = '<tbody class="table-group-divider">';
 
         // for each array item in $rows
         foreach ($this->rows as $row_data) {

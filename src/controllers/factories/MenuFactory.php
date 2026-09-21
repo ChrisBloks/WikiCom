@@ -4,6 +4,7 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\traits\tErrorMessageCollector,
+Wiki\tools\utils\HtmlUtils,
     Wiki\views\containers\Menu,
     Wiki\views\containers\Menuitem;
 
@@ -19,7 +20,6 @@ class MenuFactory
     protected function buildMenu(array $menu_items, string $class = 'nav'): Menu
     {
         $menu = new Menu($class);
-
         foreach ($menu_items as $item) {
             try {
                 $menu->addElement($this->buildMenuItem($item));
@@ -35,7 +35,6 @@ class MenuFactory
         if (empty($item['label']) || empty($item['href'])) {
             $this->logError("Menu item missing required 'label' or 'href': ");
         }
-
         if (!empty($item['submenu'])) {
             $menuItem = new MenuItem(
                 label: $item['label'],
@@ -45,6 +44,7 @@ class MenuFactory
                     'role' => 'button',
                     'data-bs-toggle' => 'dropdown',
                     'aria-expanded' => 'false',
+                    'data-user-id' => $item['id'],
                 ],
                 li_class: $li_class . ' dropdown'
             );
@@ -63,7 +63,7 @@ class MenuFactory
                 label: $item['label'],
                 href: $item['href'],
                 class: $link_class,
-                attrs: [],
+                attrs: ['data-user-id' => $item['id']],
                 li_class: $li_class
             );
         }

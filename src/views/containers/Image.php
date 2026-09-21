@@ -10,8 +10,11 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class Image extends WrappedText
 {
-    public function __construct(string $name, string $class = '',)
+    public function __construct(string $name, string $class = '', array $attributes = [])
     {
-        parent::__construct('', 'img src=' . $name . '' . HtmlUtils::addClassAttr($class));
+        parent::__construct(
+            '',
+            'img src=' . $name . '' . HtmlUtils::addClassAttr($class) . HtmlUtils::addAttrs($attributes)
+        );
     }
 }

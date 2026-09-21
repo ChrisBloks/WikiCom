@@ -3,6 +3,7 @@
 namespace Wiki\controllers\validators;
 
 use Wiki\tools\interfaces\iValidator,
+    Wiki\tools\utils\HtmlUtils,
     Wiki\tools\traits\tErrorMessageCollector;
 
 

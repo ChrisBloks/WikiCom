@@ -29,7 +29,7 @@ class PostRequestHandler extends BaseRequestHandler
         // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
         $validation_result = (new ValidationHandler)
             ->validateFields(field_info: $field_info);
-
+            
         // If form was submitted correctly WRONG: add validation errors to response
         $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour
@@ -143,33 +143,7 @@ class PostRequestHandler extends BaseRequestHandler
                     );
                     $_SESSION['messages'][] = 'Message has been sent!';
                 }
-                break;
-
-            case 'editUser':
-                if ($validation_result['ok']) {
-
-                    $validation_result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
-
-                    if ($validation_result['ok'] && ($validation_result['field_inputs']['name'] || $validation_result['field_inputs']['email'])) {
-                        $this->response['page'] = 'dashboard';
-                        $_SESSION['messages'][] = 'Your information has been updated.';
-                    } else {
-                        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-                    }
-                }
-                break;
-            case 'editPassword':
-                if ($validation_result['ok']) {
-                    $validation_result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);
-
-                    if ($validation_result['ok']) {
-                        $this->response['page'] = 'dashboard';
-                        $_SESSION['messages'][] = 'Password successfully changed';
-                    } else {
-                        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-                    }
-                }
-                break;
+                break;    
             default:
                 throw new \Exception("Request couldnt be handled, please message an admin");
         }

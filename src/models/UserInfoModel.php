@@ -129,9 +129,8 @@ class UserInfoModel extends BaseModel
         return $result;
     }
 
-    public function updateUserInfo(array $fields, int $user_id): array|bool
+    public function updateUserInfo(array $fields, int $user_id): array| bool
     {
-
         if (empty($fields)) {
             return false;
         }
@@ -147,12 +146,13 @@ class UserInfoModel extends BaseModel
         $sql = "UPDATE user SET " . implode(', ', $setParts) . " WHERE id = :user_id";
 
         $result = $this->crud->doUpdate($sql, $params);
-        
-        if (empty($result)) {
+
+        if ($result === false) {
             $this->logError("Failed to update user info");
             return false;
         }
 
-        return $result;
+        // $result is an int here (0 or more) — query executed successfully either way
+        return true;
     }
 }
