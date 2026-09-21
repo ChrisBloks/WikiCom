@@ -151,6 +151,7 @@ class PageFactory
         $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
         // Maybe seperate controller
+        HtmlUtils::dump('page', $this->page);
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
         foreach ($elements_info as &$element_info) {

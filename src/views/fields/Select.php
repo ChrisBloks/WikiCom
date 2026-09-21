@@ -2,6 +2,7 @@
 
 namespace Wiki\views\fields;
 
+use Wiki\dataObjects\ElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 class Select extends BaseField
@@ -11,15 +12,21 @@ class Select extends BaseField
     protected string $selected_option;
     protected string $option_class;
 
-    public function __construct(string $name, string $label, string $class, array $options, string $selected_option = "", string $option_class = "")
+    public function __construct(ElementInfo $element_info, ?string $selected_option = null, string $default_option = 'rating')
+        //string $name, string $label, string $class, array $options, string $selected_option = "", string $option_class = ""
+        
     {
-        parent::__construct($name, $label, $class);
-        $this->options = $options;
-        $this->selected_option = $selected_option;
-        $this->option_class = $option_class;
+        parent::__construct(
+            name: $element_info['name'] ?? "",
+            label: $element_info['label'] ?? "",
+            class: $element_info['class'] ?? "");
+        $this->options = $element_info['options_info'];
+        $this->selected_option = $selected_option ?? $default_option;
+        $this->option_class = "";
     }
 
 
+    // TODO: Make sure the format works for rating and searchs
     public function show(): string
     {
         $ret = HtmlUtils::printLabel($this->id, $this->label)

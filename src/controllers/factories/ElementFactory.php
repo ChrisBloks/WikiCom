@@ -23,6 +23,8 @@ class ElementFactory
         'Title' => 'Wiki\views\containers\Title',
         'BodyText' => 'Wiki\views\containers\BodyText',
         'Image' => 'Wiki\views\containers\Image',
+        'SearchableCheckboxes' =>  'Wiki\views\fields\SearchableCheckboxes',
+        'Select' => 'Wiki\views\fields\Select'
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
