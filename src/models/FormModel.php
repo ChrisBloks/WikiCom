@@ -8,7 +8,7 @@
 namespace Wiki\models;
 
 use Wiki\dataObjects\FormInfo,
-    Wiki\dataObjects\FieldInfo;
+    wiki\tools\utils\HtmlUtils;
 
 class FormModel extends BaseModel
 {
@@ -27,7 +27,6 @@ class FormModel extends BaseModel
                         fi.class, 
                         fi.label,
                         fi.optional, 
-                        fi.error_disp_name,
                         li.*
                 FROM field_info fi
                 JOIN form_info fo ON fi.form_info_id = fo.id
@@ -37,7 +36,6 @@ class FormModel extends BaseModel
                 ORDER BY fi.display_order;";
         $params = ["page" => $page_name];
         $result = $this->crud->selectMany($sql, $params);
-
 
         if (empty($result)) {
             $this->logError("Page has no Form");
