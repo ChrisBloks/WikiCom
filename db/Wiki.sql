@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2026 at 11:58 AM
+-- Generation Time: Sep 22, 2026 at 01:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -108,7 +108,7 @@ INSERT INTO `element_info` (`id`, `name`, `html_tag`, `html_class`, `php_class`,
 (20, 'log_in_field_password', '', '', 'password', '', ''),
 (21, 'search_form', 'form', 'form-group', 'Form', '', ''),
 (22, 'search_field_author', '', '', 'SearchableCheckboxes', '', ''),
-(23, 'search_field_tag', '', '', 'SearchableCechboxes', '', ''),
+(23, 'search_field_tag', '', '', 'SearchableCheckboxes', '', ''),
 (24, 'search_field_sortby\r\n', '', '', 'select', '', ''),
 (25, 'article_form', '', 'form-group', 'Form', '', ''),
 (26, 'article_field_title', '', '', 'text', '', ''),

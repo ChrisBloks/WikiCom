@@ -12,25 +12,28 @@ class ElementFactory
 {
 
     private static array $NAMESPACE = [
-        'Form' => 'Wiki\views\containers\Form',
+        'form' => 'Wiki\views\containers\Form',
         'text' =>  'Wiki\views\fields\InputField',
         'email' => 'Wiki\views\fields\InputField',
         'password' => 'Wiki\views\fields\InputField',
         'new_password' => 'Wiki\views\fields\NewPassword',
         'textarea' => 'Wiki\views\fields\TextAreaField',
-        'ButtonField' => 'Wiki\views\fields\ButtonField',
-        'ContainerElement' => 'Wiki\views\containers\ContainerElement',
-        'AtomicElement' => 'Wiki\views\containers\AtomicElement',
-        'Card'  => 'Wiki\views\containers\Card',
-        'Title' => 'Wiki\views\containers\Title',
-        'BodyText' => 'Wiki\views\containers\BodyText',
-        'Image' => 'Wiki\views\containers\Image',
-        'SearchableCheckboxes' =>  'Wiki\views\fields\SearchableCheckboxes',
-        'Select' => 'Wiki\views\fields\Select'
+        'buttonfield' => 'Wiki\views\fields\ButtonField',
+        'containerelement' => 'Wiki\views\containers\ContainerElement',
+        'atomicElement' => 'Wiki\views\containers\AtomicElement',
+        'card'  => 'Wiki\views\containers\Card',
+        'title' => 'Wiki\views\containers\Title',
+        'bodyText' => 'Wiki\views\containers\BodyText',
+        'image' => 'Wiki\views\containers\Image',
+        'searchablecheckboxes' =>  'Wiki\views\fields\SearchableCheckboxes',
+        'select' => 'Wiki\views\fields\Select'
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
-        return new self::$NAMESPACE[$element_info['php_class']]($element_info);
+        HtmlUtils::dump('element_info', $element_info);
+        return new self::$NAMESPACE[
+            strtolower($element_info['php_class'])
+            ]($element_info);
     }
 
 
