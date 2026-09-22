@@ -103,55 +103,13 @@ class ElementModel extends BaseModel
      * Some fields require an extra sub array as information.
      * Therefore, if 'lookup_id' exists within the result of the first query a second query will be run.
      * @param string $page_name
-     * @param string $id
      * @return array|false
      */
-    public function fetchFieldInfo(string $page_name, string $id = '0'): array|false
+    public function fetchFieldInfo(string $page_name): array|false
     {
-        $sql = "SELECT  fi.type, 
-                        fi.name, 
-                        fi.class, 
-                        fi.label,
-                        fi.optional, 
-                        li.*
-                FROM field_info fi
-                JOIN form_info fo ON fi.form_info_id = fo.id
-                JOIN website_info wi ON wi.id = fo.website_info_id
-                LEFT JOIN lookup_info li on li.field_info_id = fi.id
-                WHERE wi.name = :page
-                ORDER BY fi.display_order;";
-        $params = ["page" => $page_name];
-        $result = $this->crud->selectMany($sql, $params);
-
-
-        if (empty($result)) {
-            $this->logError("Page has no Form");
-            return false;
-        }
-
-
-        foreach ($result as &$field_info) {
-            if (isset($field_info["id"])) {
-                $field_sub_info = $this->fetchLookupInfo(field_info: $field_info, parent_id: $id);
-                // format result
-                $subcontainer_info = [];
-                // Change the structure of the lookup info to what is needed is the form of options => [name => ""
-                //                                                                                      class => ""
-                //                                                                                      value => "" ...]
-                foreach ($field_sub_info as $id => $row) {
-                    // Loop over columns
-                    $column_name = 'options';
-                    $subcontainer_info[$column_name][$id]['name'] = $field_info['name'] . '[' . $row['label'] . ']';
-                    $subcontainer_info[$column_name][$id]['class'] = $field_info['lookup_class'];
-                    $subcontainer_info[$column_name][$id]['label'] = $row['label'];
-                    $subcontainer_info[$column_name][$id]['value'] = $row['id'];
-                    $subcontainer_info[$column_name][$id]['checked'] = $row['checked'];
-
-                }
-                $field_info = array_merge($field_info, $subcontainer_info);
-            }
-        }
-        unset($field_info);
+        $result = $this->fetchPageElements($page_name);
+        HtmlUtils::dump("page",$page_name);
+        HtmlUtils::dump("result",$result);
 
         return $result;
     }
