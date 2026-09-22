@@ -16,6 +16,7 @@ class ElementFactory
         'text' =>  'Wiki\views\fields\InputField',
         'email' => 'Wiki\views\fields\InputField',
         'password' => 'Wiki\views\fields\InputField',
+        'new_password' => 'Wiki\views\fields\NewPassword',
         'textarea' => 'Wiki\views\fields\TextAreaField',
         'ButtonField' => 'Wiki\views\fields\ButtonField',
         'ContainerElement' => 'Wiki\views\containers\ContainerElement',
