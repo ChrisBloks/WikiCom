@@ -155,12 +155,12 @@ class PageFactory
 
         foreach ($elements_info as &$element_info) {
             switch (true) {
-                case $element_info['name'] === "random_article":
+                case $element_info['element_name'] === "random_article":
                     $excludelist = $excludelist ?? [];
                     $element_info['article'] = ModelSelector::getArticleModel()->fetchFrontPageArticles($excludelist);
                     $excludelist[] = $element_info['article']['id'];
                     break;
-                case str_contains($element_info['name'], 'about_'):
+                case str_contains($element_info['element_name'], 'about_'):
                     $about_info = ModelSelector::getWebsiteInfoModel()->fetchAuthorAboutInfo($this->response['aboutID']);
                     $element_info['title'] = $about_info['name'];
                     $element_info['bodytext'] = $about_info['description'];

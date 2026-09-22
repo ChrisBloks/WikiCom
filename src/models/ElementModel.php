@@ -20,7 +20,7 @@ class ElementModel extends BaseModel
     {
         $sql = "SELECT  p_e.order_by,
                         p_e.parent_order,
-                        e_i.name,
+                        e_i.element_name,
                         e_i.html_tag,
                         e_i.html_class,
                         e_i.php_class,
@@ -71,6 +71,7 @@ class ElementModel extends BaseModel
                     // get sub_element_id
                     $sub_element_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
                     $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
+                    break;
                 case 'options':
                     $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
                     $element_info['options_info'] = $options_info;
@@ -106,7 +107,10 @@ class ElementModel extends BaseModel
      */
     public function fetchFieldInfo(string $page_name): array|false
     {
-        $result = $this->fetchPageElements($page_name);
+        $results = $this->fetchPageElements($page_name);
+        foreach ($results as $result){
+            
+        }
         HtmlUtils::dump("page",$page_name);
         HtmlUtils::dump("result",$result);
 

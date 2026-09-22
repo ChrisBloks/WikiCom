@@ -13,7 +13,7 @@ class SearchField extends InputField {
     public function __construct(ElementInfo $element_info) {
         parent::__construct(
             new ElementInfo([
-                'name' => $element_info['name'] ?? "",
+                'name' => $element_info['element_name'] ?? "",
                 'class' => $element_info['class'] ?? "", // form-control search-input
                 'id' => $element_info['id'] ?? "", // optional
                 'field_info' => new FieldInfo([
