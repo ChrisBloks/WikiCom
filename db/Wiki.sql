@@ -337,7 +337,7 @@ INSERT INTO `page` (`id`, `name`) VALUES
 (2, 'about'),
 (3, 'contact'),
 (4, 'login'),
-(5, 'register');
+(5, 'register'),
 (6, 'search');
 
 -- --------------------------------------------------------
@@ -381,7 +381,7 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (4, 18, 30, 20),
 (5, 1, 10, 0),
 (5, 13, 20, 10),
-(5, 31, 30, 20);
+(5, 31, 30, 20),
 (6, 44, 30, 0),
 (6, 45, 40, 30),
 (6, 46, 50, 40),
