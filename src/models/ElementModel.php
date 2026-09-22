@@ -7,6 +7,7 @@
 
 namespace Wiki\models;
 
+use InvalidArgumentException;
 use Wiki\dataObjects\FormInfo,
 Wiki\dataObjects\ElementInfo,
 Wiki\dataObjects\Stack,
@@ -59,22 +60,20 @@ class ElementModel extends BaseModel
            
             switch($lookup_info['lookup_type']){
                 case 'form':
-                    $form_info = $this->fetchLookupInfoResult($lookup_info);
+                    $form_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
                     $element_info['form_info'] = new FormInfo($form_info);
                     break;
                 case 'field':
-                    $field_info = $this->fetchLookupInfoResult($lookup_info);
+                    $field_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
                     $element_info['field_info'] = new FieldInfo($field_info);
                     break;
                 case 'element':
                     // get sub_element_id
-                    $sub_element_info = $this->fetchLookupInfoResult($lookup_info);
+                    $sub_element_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
                     $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
                 case 'options':
-                    $options_info = $this->fetchLookupInfoResult($lookup_info);
+                    $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
                     $element_info['options_info'] = $options_info;
-
-                    
                 default:
                     break;
             }
@@ -149,7 +148,7 @@ class ElementModel extends BaseModel
      * @param array $lookup_info see INPUT
      * @return array see OUTPUT
      */
-    public function fetchLookupInfoResult(array $lookup_info): array
+    public function fetchLookupInfoResult(array $lookup_info, string $mode = 'one'): array|false
     {
         // Basic SQL start
         $sql = "SELECT
@@ -179,7 +178,14 @@ class ElementModel extends BaseModel
         // $sql .= " ORDER BY {$lookup_info['order_by']}";
         // Execute the query
         // HtmlUtils::dump('sql', $sql);
-        $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);
+        if ($mode === 'one'){
+            $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);
+        } else if ($mode === 'many') {
+            $result = $this->crud->selectMany(sql: $sql, params: []);
+        } else {
+            throw new InvalidArgumentException("mode = {$mode} is not a valid input parameter for fetchLookupInfoResult");
+        }
+        
 
                 
 
