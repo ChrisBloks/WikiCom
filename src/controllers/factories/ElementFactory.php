@@ -17,9 +17,18 @@ class ElementFactory
         'email' => 'Wiki\views\fields\InputField',
         'textarea' => 'Wiki\views\fields\TextAreaField',
         'ButtonField' => 'Wiki\views\fields\ButtonField',
+        'ContainerElement' => 'Wiki\views\containers\ContainerElement',
+        'AtomicElement' => 'Wiki\views\containers\AtomicElement',
+        'Card'  => 'Wiki\views\containers\Card',
+        'Title' => 'Wiki\views\containers\Title',
+        'BodyText' => 'Wiki\views\containers\BodyText',
+        'Image' => 'Wiki\views\containers\Image',
+        'SearchableCheckboxes' =>  'Wiki\views\fields\SearchableCheckboxes',
+        'Select' => 'Wiki\views\fields\Select'
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
+        HtmlUtils::dump('element_info', $element_info);
         return new self::$NAMESPACE[$element_info['php_class']]($element_info);
     }
 

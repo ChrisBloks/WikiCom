@@ -2,27 +2,21 @@
 
 namespace Wiki\views\fields;
 
+use Wiki\dataObjects\ElementInfo;
+use Wiki\dataObjects\FieldInfo;
 use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
 use Wiki\views\containers\AtomicElement;
 
 
 class SearchableCheckboxes extends BaseField
 {
-    static protected array $required_attributes = ['name', 'label', 'class', 'options'];
     protected array $options = [];
     protected bool $addable_options = false;
 
-    public function __construct(array $field_info)
+    public function __construct(ElementInfo $element_info)
     {
-        // Check if all required attributes have been given
-        foreach($this->required_attributes as $attr){
-            try{
-                $field_info[$attr];
-            } 
-            catch (\Throwable $e) {
-                echo "Warning: tried to create Checkbox without a {$attr}. {$e->getMessage()}";
-            }
-        }
+
+        $field_info = $element_info['field_info'];
         
         // Set properties
         parent::__construct(
@@ -33,8 +27,8 @@ class SearchableCheckboxes extends BaseField
         );
 
         // Nested array. Each subarray is a field_info array for a checkbox.
-        $this->options = $field_info['options'];
-        $this->addable_options = (isset($field_info['addable_options'])) ? $field_info['addable_options']:false;
+        $this->options = $element_info['options_info'];
+        $this->addable_options = $field_info['addable_options'] ?? false;
     }
 
 
@@ -46,26 +40,30 @@ class SearchableCheckboxes extends BaseField
                 '>' . HtmlUtils::printLabel($this->id, $this->label);
 
         // Add search field
-        $search_field_info = [
-            'name' => 'searchField',
-            'class' => 'searchField form-control', // search-input',
-            'label' => '',
-        ];
-
-        $html .= (new SearchField($search_field_info))->show();
+        $html .= (new SearchField(
+                    new ElementInfo([
+                        'name' => 'searchField',
+                        'class' => 'searchField form-control', // search-input',
+                        'label' => '',
+                    ])
+                ))->show();
 
         if ($this->addable_options){
-            $html .= (new AtomicElement('<div id="add-tag-widget" class="d-flex gap-2 mt-2 mb-2">
-            <input type="text" id="new-tag-name"
-            class="form-control form-control-sm" placeholder="New tag">
-            <button type="button" id="add-tag-btn" 
-            class="btn btn-sm btn-secondary">Add tag</button>
-            </div>'))->show();
+            $html .= (new AtomicElement(
+                new FieldInfo([
+                    'text' => '<div id="add-tag-widget" class="d-flex gap-2 mt-2 mb-2">
+                        <input type="text" id="new-tag-name"
+                        class="form-control form-control-sm" placeholder="New tag">
+                        <button type="button" id="add-tag-btn" 
+                        class="btn btn-sm btn-secondary">Add tag</button>
+                        </div>'])
+            ))->show();
         }
 
         // Add checkboxgroup
         $html .= '<div class="checkbox_group">';
 
+        HtmlUtils::dump("options SearchableCheckboxes", $this->options);
         foreach ($this->options as $checkbox_info) {
             $html .= '<div class="checkbox_container">';
             $html .= (new Checkbox($checkbox_info))->show();

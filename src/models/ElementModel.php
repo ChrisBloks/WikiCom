@@ -38,14 +38,14 @@ class ElementModel extends BaseModel
         
 
         if (empty($result)) {
-            $this->logError("Page has no Form");
+            $this->logError("Page has no Elements");
             return false;
         }
         
-        foreach ($result as $key => $value) {
-
-            $value = $this->getLookupResult($value);
-            $result[$key] = new ElementInfo($value);
+        HtmlUtils::dump('result', $result);
+        foreach ($result as $row => $element_info) {
+            $element_info = $this->getLookupResult($element_info);
+            $result[$row] = new ElementInfo($element_info);
         }
        
 
@@ -66,12 +66,15 @@ class ElementModel extends BaseModel
                 case 'field':
                     $field_info = $this->fetchLookupInfoResult($lookup_info);
                     $element_info['field_info'] = new FieldInfo($field_info);
-                    
                     break;
                 case 'element':
                     // get sub_element_id
                     $sub_element_info = $this->fetchLookupInfoResult($lookup_info);
                     $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
+                case 'options':
+                    $options_info = $this->fetchLookupInfoResult($lookup_info);
+                    $element_info['options_info'] = $options_info;
+
                     
                 default:
                     break;

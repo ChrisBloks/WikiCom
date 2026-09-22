@@ -151,6 +151,7 @@ class PageFactory
         $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
         // Maybe seperate controller
+        HtmlUtils::dump('page', $this->page);
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
         foreach ($elements_info as &$element_info) {
@@ -173,52 +174,88 @@ class PageFactory
         }
         unset($element_info);
 
+        $element_list = [];
+        $element_list[0] = $main;
+        foreach ($elements_info as $element_info) {
+            $element = ElementFactory::createElement($element_info);
+            $element_list[$element_info['order_by']] = $element;
+            $element_list[$element_info['parent_order']]->addElement($element);
+        }
 
-        // page building
-        switch ($this->page) {
-            case 'home':
+        
+        // add the <main> to the body content
+        $this->htmlpage->addToBodyContent($main);
 
-                // loop through list of element info
-                foreach ($elements_info as $element_info) {
-                    // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
-                    if ($element_info['parent_order'] == 0) {
-                        $element = new $element_info['php_class']($element_info);
-                        $element_info_list[$element_info['order_by']] = $element;
-                        $main->addElement($element);
-                        // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
-                    } else {
-                        $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
-                        $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
+
+        //add the footer to the body content
+        $this->htmlpage->addToBodyContent(new AtomicElement(new ElementInfo(["text" => "<br>"])));
+        $this->htmlpage->addToBodyContent(new Footer(
+            text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
+            class: $styling_system['footer']
+        ));
+    }
+
+    public function addCheckedUsingArray($form_fields, $response)
+    {
+        foreach ($form_fields as &$field) {
+            if (!empty($response[$field['name']]) && is_array($response[$field['name']])) {
+                foreach ($field['options'] as $key => $option) {
+                    if (in_array($option['value'], $response[$field['name']])) {
+                        $field['options'][$key]['checked'] = 1;
                     }
                 }
+            }
+        }
+        unset($field);
 
-                break;
+        return $form_fields;
+    }
+}
 
-            case 'about':
-                foreach ($elements_info as $element_info) {
-                    // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
-                    if ($element_info['parent_order'] == 0) {
-                        $element = new $element_info['php_class']($element_info);
-                        $element_info_list[$element_info['order_by']] = $element;
-                        $main->addElement($element);
-                        // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
-                    } else {
-                        $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
-                        $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
-                    }
-                }
-                break;
-            case 'contact':
+// page building
+        // switch ($this->page) {
+        //     case 'home':
 
-                $element_list = [];
-                $element_list[0] = $main;
-                foreach ($elements_info as $element_info) {
-                    
-                    $element = ElementFactory::createElement($element_info);
-                    $element_list[$element_info['order_by']] = $element;
-                    $element_list[$element_info['parent_order']]->addElement($element);
-                }
-                break;
+        //         // loop through list of element info
+        //         foreach ($elements_info as $element_info) {
+        //             // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
+        //             if ($element_info['parent_order'] == 0) {
+        //                 $element = new $element_info['php_class']($element_info);
+        //                 $element_info_list[$element_info['order_by']] = $element;
+        //                 $main->addElement($element);
+        //                 // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
+        //             } else {
+        //                 $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
+        //                 $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
+        //             }
+        //         }
+
+        //         break;
+
+        //     case 'about':
+        //         foreach ($elements_info as $element_info) {
+        //             // if parent_order is 0 this is not a sub container create element using a class from php_class and add the element to the list
+        //             if ($element_info['parent_order'] == 0) {
+        //                 $element = new $element_info['php_class']($element_info);
+        //                 $element_info_list[$element_info['order_by']] = $element;
+        //                 $main->addElement($element);
+        //                 // if parent_order is not 0 this will be a subcontainer so created element needs to be added to a container based on parent_order
+        //             } else {
+        //                 $element_info_list[$element_info['order_by']] = new $element_info['php_class']($element_info);
+        //                 $element_info_list[$element_info['parent_order']]->addElement($element_info_list[$element_info['order_by']]);
+        //             }
+        //         }
+        //         break;
+        //     case 'contact':
+
+        //         $element_list = [];
+        //         $element_list[0] = $main;
+        //         foreach ($elements_info as $element_info) {
+        //             $element = ElementFactory::createElement($element_info);
+        //             $element_list[$element_info['order_by']] = $element;
+        //             $element_list[$element_info['parent_order']]->addElement($element);
+        //         }
+        //         break;
             // case 'login':
             // case 'register':
             //     $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page);
@@ -557,36 +594,8 @@ class PageFactory
             //     $main_container->addElement($sub_container);
             //     $main->addElement($main_container);
             //     break;
-            default:
-                throw new PageNotFoundException("No page defined for: '. '$this->page.'");
-        }
+        //     default:
+        //         throw new PageNotFoundException("No page defined for: '. '$this->page.'");
+        // }
 
         // end of switch statement
-        // add the <main> to the body content
-        $this->htmlpage->addToBodyContent($main);
-
-
-        //add the footer to the body content
-        $this->htmlpage->addToBodyContent(new AtomicElement(new ElementInfo(["text" => "<br>"])));
-        $this->htmlpage->addToBodyContent(new Footer(
-            text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
-            class: $styling_system['footer']
-        ));
-    }
-
-    public function addCheckedUsingArray($form_fields, $response)
-    {
-        foreach ($form_fields as &$field) {
-            if (!empty($response[$field['name']]) && is_array($response[$field['name']])) {
-                foreach ($field['options'] as $key => $option) {
-                    if (in_array($option['value'], $response[$field['name']])) {
-                        $field['options'][$key]['checked'] = 1;
-                    }
-                }
-            }
-        }
-        unset($field);
-
-        return $form_fields;
-    }
-}

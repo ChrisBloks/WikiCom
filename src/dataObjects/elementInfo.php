@@ -30,6 +30,7 @@ class ElementInfo implements iElementInfo
         'field_info',
         'form_info',
         'sub_fields',
+        'options_info'
     ];
 
     private array $container = [];
