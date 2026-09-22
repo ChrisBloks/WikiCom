@@ -31,6 +31,7 @@ class Form extends ContainerElement
 
         // Build opening tag
         $this->html_before = "<{$element_info['html_tag']} ";
+        HtmlUtils::dump("test",$this->html_before);
         // Add standard HTML attributes
         foreach ($element_info->getHTMLattributes() as $attr) {
             $this->html_before .=  ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
@@ -38,6 +39,7 @@ class Form extends ContainerElement
         // Add form HTML attributes
         $this->html_before .= 'method="'.$form_info['method'].'"';
         $this->html_before .= ">" . ($element_info['text'] ?? "");
+
         
         // Build closing tag
         $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");

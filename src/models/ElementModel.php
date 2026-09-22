@@ -42,7 +42,6 @@ class ElementModel extends BaseModel
             return false;
         }
         
-        HtmlUtils::dump('result', $result);
         foreach ($result as $row => $element_info) {
             $element_info = $this->getLookupResult($element_info);
             $result[$row] = new ElementInfo($element_info);

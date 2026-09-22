@@ -63,7 +63,6 @@ class SearchableCheckboxes extends BaseField
         // Add checkboxgroup
         $html .= '<div class="checkbox_group">';
 
-        HtmlUtils::dump("options SearchableCheckboxes", $this->options);
         foreach ($this->options as $checkbox_info) {
             $html .= '<div class="checkbox_container">';
             $html .= (new Checkbox($checkbox_info))->show();
