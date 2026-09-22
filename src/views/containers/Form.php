@@ -27,6 +27,7 @@ class Form extends ContainerElement
 
     public function __construct(ElementInfo $element_info)
     {
+        // HtmlUtils::dump('contact_form element info', $element_info);
         $form_info = $element_info['form_info'];
 
         // Build opening tag

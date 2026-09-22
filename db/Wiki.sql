@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2026 at 09:54 AM
+-- Generation Time: Sep 22, 2026 at 11:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -131,7 +131,9 @@ INSERT INTO `element_info` (`id`, `name`, `html_tag`, `html_class`, `php_class`,
 (43, 'create_new_article', '', 'form-group', 'Form', '', ''),
 (44, 'search_container', 'div', 'container-fluid', 'ContainerElement', '', ''),
 (45, 'search_row', 'div', 'row', 'ContainerElement', '', ''),
-(46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', 'ContainerElement', '', '');
+(46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', 'ContainerElement', '', ''),
+(47, 'search_table_container', 'div', 'table-responsive', 'ContainerElement', '', ''),
+(50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', 'ResultsTable', '', '');
 
 -- --------------------------------------------------------
 
@@ -375,7 +377,10 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (6, 44, 30, 0),
 (6, 45, 40, 30),
 (6, 46, 50, 40),
-(6, 21, 60, 50);
+(6, 21, 60, 50),
+(6, 46, 70, 30),
+(6, 47, 80, 70),
+(6, 50, 90, 70);
 
 -- --------------------------------------------------------
 
@@ -910,7 +915,7 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `element_lookup_info`
