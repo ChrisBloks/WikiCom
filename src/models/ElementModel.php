@@ -55,7 +55,6 @@ class ElementModel extends BaseModel
     protected function getLookupResult(array $element_info){
         $element_id = $element_info['element_id'];
         $lookup_info_list = $this->fetchLookupInfoByElementId($element_id);
-        
         foreach ($lookup_info_list as $lookup_info){
            
             switch($lookup_info['lookup_type']){

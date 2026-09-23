@@ -35,7 +35,7 @@ class ButtonField extends BaseField
                         'value="'.$field_info['value'].'" '.
                         '>';
 
-        $this->html .= ($field_info['text'] ?? "");
+        $this->html .= ($field_info['text'] ?? ($element_info['text']?? ""));
 
         // closing tag
         $this->html .= "</{$element_info['html_tag']}><br>";

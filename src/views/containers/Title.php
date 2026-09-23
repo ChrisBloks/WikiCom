@@ -13,6 +13,7 @@ class Title extends WrappedText
 {
     public function __construct(ArrayAccess $element_info)
     {
-        parent::__construct($element_info['title'], $element_info['html_tag'] . htmlutils::addClassAttr($element_info['html_class']));
+        $title = ((isset($element_info['title']))? $element_info['title']:$element_info['text']);
+        parent::__construct($title, $element_info['html_tag'] . htmlutils::addClassAttr($element_info['html_class']));
     }
 }
