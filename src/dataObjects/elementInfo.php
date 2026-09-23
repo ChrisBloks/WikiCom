@@ -53,6 +53,7 @@ class ElementInfo implements iElementInfo
 
     public function offsetExists(mixed $offset): bool
     {
+        if ($offset == 'class') $offset = 'html_class';
         return isset($this->container[$offset]);
     }
 
@@ -64,7 +65,7 @@ class ElementInfo implements iElementInfo
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if ($value === "") return;
+        // if ($value === "") return;
         if ($offset == 'class') $offset = 'html_class';
         if (in_array($offset, static::$allowed_keys, true)) {
             $this->container[$offset] = $value;
@@ -75,6 +76,7 @@ class ElementInfo implements iElementInfo
 
     public function offsetUnset(mixed $offset): void
     {
+        if ($offset == 'class') $offset = 'html_class';
         unset($this->container[$offset]);
     }
 

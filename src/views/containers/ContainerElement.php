@@ -29,14 +29,22 @@ class ContainerElement implements iElement
         $this->html_before = "";
         $this->html_after = "";
 
+        // Create opening tag
         if (isset($element_info['html_tag'])) {
             $this->html_before = "<{$element_info['html_tag']} ";
+
+            // Add potential HTML attributes
             foreach ($element_info->getHTMLattributes() as $attr) {
                 $this->html_before .=  ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
             }
             $this->html_before .= ">" . ($element_info['text'] ?? "");
+
+            // Add closing tag
             $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
-        } else {
+        } 
+
+        // just print the given text
+        else {
             $this->html_before = ($element_info['text'] ?? "");
         }
         

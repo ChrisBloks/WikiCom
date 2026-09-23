@@ -26,8 +26,7 @@ class SearchableCheckboxes extends BaseField
             value: $field_info['value']
         );
 
-        // Nested array. Each subarray is a field_info array for a checkbox.
-        $this->options = $element_info['options_info'];
+        $this->options = $element_info['options_info'][0];
         $this->addable_options = $field_info['addable_options'] ?? false;
     }
 
@@ -44,7 +43,10 @@ class SearchableCheckboxes extends BaseField
                     new ElementInfo([
                         'name' => 'searchField',
                         'class' => 'searchField form-control', // search-input',
-                        'label' => '',
+                        'field_info' => [
+                            'type' => 'text',
+                            'label' => ''
+                        ]
                     ])
                 ))->show();
 

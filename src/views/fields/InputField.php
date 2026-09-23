@@ -17,7 +17,7 @@ class InputField extends BaseField
         parent::__construct(
             name: $element_info['name'] ?? "",
             label: $element_info['field_info']['label'] ?? "",
-            class: $element_info['field_info']['html_class'] ?? ""
+            class: $element_info['html_class'] ?? ""
         );
         $this->type = $element_info['field_info']['type'] ?? throw new InvalidArgumentException("InputField did not receive a type!");
         $this->text = $element_info['field_info']['text'] ?? "";
@@ -30,7 +30,7 @@ class InputField extends BaseField
             . '<input type="' . $this->type . '"' . 
                     'name="' . $this->name . '"' .
                     'id="' . $this->id . '"' .
-                    (empty($this->value) ? "" : 'value="' . $this->text . '"') . 
+                    (empty($this->value) ? "" : 'value="' . $this->value . '"') . 
                     'class="' . $this->class . '" ><br>';
 
                         

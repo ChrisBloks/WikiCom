@@ -166,6 +166,8 @@ class PageFactory
                     $element_info['bodytext'] = $about_info['description'];
                     $element_info['image'] = $about_info['imgFileName'];
                     break;
+                case $element_info['name'] == "search_results_table":
+                    
 
                 default:
                     break;

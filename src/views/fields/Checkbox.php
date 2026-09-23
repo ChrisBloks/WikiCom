@@ -2,6 +2,7 @@
 
 namespace Wiki\views\fields;
 
+use ArrayAccess;
 use InvalidArgumentException;
 use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
 

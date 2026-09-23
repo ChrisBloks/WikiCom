@@ -73,7 +73,7 @@ class ElementModel extends BaseModel
                     $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
                 case 'options':
                     $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
-                    $element_info['options_info'] = $options_info;
+                    $element_info['options_info'][] = $options_info;
                 default:
                     break;
             }
@@ -107,9 +107,6 @@ class ElementModel extends BaseModel
     public function fetchFieldInfo(string $page_name): array|false
     {
         $result = $this->fetchPageElements($page_name);
-        HtmlUtils::dump("page",$page_name);
-        HtmlUtils::dump("result",$result);
-
         return $result;
     }
 
@@ -171,7 +168,13 @@ class ElementModel extends BaseModel
 
         // If a WHERE value is specified
         if (!empty($lookup_info["where_"])) {
-            $sql .= " WHERE {$lookup_info['where_']} = {$lookup_info['where_value']}";
+            if (explode(',',$lookup_info['where_value']) > 1){
+                $sql .= " WHERE {$lookup_info['where_']} IN ({$lookup_info['where_value']})";
+            }
+            else {
+                $sql .= " WHERE {$lookup_info['where_']} = {$lookup_info['where_value']}";
+            }
+            
         }
 
         // // Always add an ORDER BY clause
