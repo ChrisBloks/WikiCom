@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2026 at 09:25 AM
+-- Generation Time: Sep 23, 2026 at 10:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -134,7 +134,8 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `php
 (46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', 'ContainerElement', '', ''),
 (47, 'search_table_container', 'div', 'table-responsive', 'ContainerElement', '', ''),
 (50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', 'ResultsTable', '', ''),
-(51, 'log_in_hidden_page', '', '', 'Input', '', '');
+(51, 'log_in_hidden_page', '', '', 'Input', '', ''),
+(52, 'search_col_results', 'div', 'col-12 col-md-9 ps-4', 'ContainerElement', '', '');
 
 -- --------------------------------------------------------
 
@@ -214,8 +215,9 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (55, 23, 'wiki_tag', 'id,name', '', '', '', '', 'options'),
 (56, 22, 'user', 'id,name', '', '', '', '', 'options'),
 (57, 24, 'v_sortby_options', 'id,name', '', '', '', '', 'options'),
-(59, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', '51', '', '', 'element'),
-(60, 51, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '51', '', '', 'field');
+(59, 50, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'title\',\'author\',\'tags\',\'lastEdit\',\'rating\'', '', '', 'options'),
+(60, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', '51', '', '', 'element'),
+(61, 51, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '51', '', '', 'field');
 
 -- --------------------------------------------------------
 
@@ -377,7 +379,7 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (2, 9, 30, 20),
 (2, 10, 40, 20),
 (2, 11, 50, 10),
-(3, 12, 10, 0),
+(3, 1, 10, 0),
 (3, 13, 20, 10),
 (3, 14, 30, 20),
 (4, 1, 10, 0),
@@ -390,7 +392,7 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (6, 45, 40, 30),
 (6, 46, 50, 40),
 (6, 21, 60, 50),
-(6, 46, 70, 30),
+(6, 52, 70, 40),
 (6, 47, 80, 70),
 (6, 50, 90, 70);
 
@@ -927,13 +929,13 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `field_info`

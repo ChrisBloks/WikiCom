@@ -41,7 +41,7 @@ class SearchableCheckboxes extends BaseField
         // Add search field
         $html .= (new SearchField(
                     new ElementInfo([
-                        'name' => 'searchField',
+                        'element_name' => 'searchField',
                         'class' => 'searchField form-control', // search-input',
                         'field_info' => [
                             'type' => 'text',
