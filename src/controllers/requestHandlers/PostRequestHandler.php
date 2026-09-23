@@ -23,7 +23,7 @@ class PostRequestHandler extends BaseRequestHandler
         // Validate the posted Form
         // Get field type and name
         $field_info = ModelSelector::getElementModel()
-            ->fetchFieldInfo(page_name: $this->response['page']);
+            ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id',true));
 
         // Perform basic validation on contact fields, field inputs are retrieved internally
         // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']

@@ -15,7 +15,7 @@ class ElementInfo implements iElementInfo
         'html_tag',
         'html_class',
         'id',
-        'name',
+        'element_name',
         'text',
         'js_class',
         'php_class',

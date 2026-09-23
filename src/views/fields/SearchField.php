@@ -11,8 +11,8 @@ class SearchField extends InputField {
     protected string $placeholder;
 
     public function __construct(ElementInfo $element_info) {
-        HtmlUtils::dump("searchField element_info", $element_info);
-        HtmlUtils::dump((isset($element_info['class']) ? 'Foo' : 'Bar'), $element_info['class']);
+        // HtmlUtils::dump("searchField element_info", $element_info);
+        // HtmlUtils::dump((isset($element_info['class']) ? 'Foo' : 'Bar'), $element_info['class']);
         parent::__construct($element_info);
 
 

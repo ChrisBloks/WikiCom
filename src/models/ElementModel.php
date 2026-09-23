@@ -20,7 +20,7 @@ class ElementModel extends BaseModel
     {
         $sql = "SELECT  p_e.order_by,
                         p_e.parent_order,
-                        e_i.name,
+                        e_i.element_name,
                         e_i.html_tag,
                         e_i.html_class,
                         e_i.php_class,
@@ -71,6 +71,7 @@ class ElementModel extends BaseModel
                     // get sub_element_id
                     $sub_element_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
                     $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
+                    break;
                 case 'options':
                     $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
                     $element_info['options_info'][] = $options_info;
@@ -101,12 +102,23 @@ class ElementModel extends BaseModel
      * Gets the necessary field information for a given page.
      * Some fields require an extra sub array as information.
      * Therefore, if 'lookup_id' exists within the result of the first query a second query will be run.
-     * @param string $page_name
+     * @param string $element_id
      * @return array|false
      */
-    public function fetchFieldInfo(string $page_name): array|false
+    public function fetchFieldInfo(string $element_id): array|false
     {
-        $result = $this->fetchPageElements($page_name);
+        $result = [];
+        $lookups_info = $this->fetchLookupInfoByElementId($element_id);
+        foreach ($lookups_info as $lookup_info){
+            if ($lookup_info['source_table'] !='form_info'){
+            $lookup = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
+            $lookup_field = $this->getLookupResult($lookup);
+            if ($lookup_field['field_info']['type']!='hidden'){
+                $result[] = $lookup_field['field_info'];
+            }
+            }
+        }
+
         return $result;
     }
 

@@ -12,7 +12,7 @@ class FieldInfo extends ElementInfo
         [
             'type',
             'html_class',
-            'name',
+            'field_name',
             'optional',
             'id',
             'value',

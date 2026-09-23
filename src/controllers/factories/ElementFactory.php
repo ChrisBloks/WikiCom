@@ -13,9 +13,7 @@ class ElementFactory
 
     private static array $NAMESPACE = [
         'form' => 'Wiki\views\containers\Form',
-        'text' =>  'Wiki\views\fields\InputField',
-        'email' => 'Wiki\views\fields\InputField',
-        'password' => 'Wiki\views\fields\InputField',
+        'input' =>  'Wiki\views\fields\InputField',
         'new_password' => 'Wiki\views\fields\NewPassword',
         'textarea' => 'Wiki\views\fields\TextAreaField',
         'buttonfield' => 'Wiki\views\fields\ButtonField',
@@ -31,7 +29,6 @@ class ElementFactory
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
-        HtmlUtils::dump('element_info', $element_info);
         return new self::$NAMESPACE[
             strtolower($element_info['php_class'])
             ]($element_info);
