@@ -20,7 +20,7 @@ class SearchableCheckboxes extends BaseField
         
         // Set properties
         parent::__construct(
-            name: $field_info['name'], 
+            name: $field_info['field_name'], 
             label: $field_info['label'],
             class: $field_info['class'],
             value: $field_info['value']

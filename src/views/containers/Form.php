@@ -34,23 +34,24 @@ class Form extends ContainerElement
         $this->html_before = "<{$element_info['html_tag']} ";
         // Add standard HTML attributes
         foreach ($element_info->getHTMLattributes() as $attr) {
-            $this->html_before .=  ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
+            $this->html_before .= ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
         }
         // Add form HTML attributes
-        $this->html_before .= 'method="'.$form_info['method'].'"';
+        $this->html_before .= 'method="' . $form_info['method'] . '"';
         $this->html_before .= ">" . ($element_info['text'] ?? "");
 
-        
+
         // Build closing tag
         $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
 
 
         // Add all fields
-        foreach($element_info['sub_fields'] as $sub_element_info){
+        foreach ($element_info['sub_fields'] as $sub_element_info) {
             $sub_element_info = new ElementInfo($sub_element_info);
             $sub_element = ElementFactory::createElement($sub_element_info);
             $this->addElement($sub_element);
         }
+
 
         // Add button
         $button = ElementFactory::createElement(
@@ -66,6 +67,18 @@ class Form extends ContainerElement
             ])
         );
         $this->addElement($button);
+        // Add hidden field element ID
+        $hiddenfield = ElementFactory::createElement(
+            new ElementInfo([
+                'php_class' => 'Input',
+                'field_info' => new FieldInfo([
+                    'field_name' => 'element_id',
+                    'type' => 'hidden',
+                    'value' => $element_info['element_id'],
+                ])
+            ])
+        );
+        $this->addElement($hiddenfield);
 
     }
 

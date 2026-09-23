@@ -102,17 +102,22 @@ class ElementModel extends BaseModel
      * Gets the necessary field information for a given page.
      * Some fields require an extra sub array as information.
      * Therefore, if 'lookup_id' exists within the result of the first query a second query will be run.
-     * @param string $page_name
+     * @param string $element_id
      * @return array|false
      */
-    public function fetchFieldInfo(string $page_name): array|false
+    public function fetchFieldInfo(string $element_id): array|false
     {
-        $results = $this->fetchPageElements($page_name);
-        foreach ($results as $result){
-            
+        $result = [];
+        $lookups_info = $this->fetchLookupInfoByElementId($element_id);
+        foreach ($lookups_info as $lookup_info){
+            if ($lookup_info['source_table'] !='form_info'){
+            $lookup = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
+            $lookup_field = $this->getLookupResult($lookup);
+            if ($lookup_field['field_info']['type']!='hidden'){
+                $result[] = $lookup_field['field_info'];
+            }
+            }
         }
-        HtmlUtils::dump("page",$page_name);
-        HtmlUtils::dump("result",$result);
 
         return $result;
     }

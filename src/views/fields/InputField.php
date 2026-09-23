@@ -26,13 +26,13 @@ class InputField extends BaseField
 
     public function show(): string
     {
-        return HtmlUtils::printLabel($this->id, $this->label)
-            . '<input type="' . $this->type . '"' . 
-                    'name="' . $this->name . '"' .
-                    'id="' . $this->id . '"' .
-                    (empty($this->value) ? "" : 'value="' . $this->value . '"') . 
-                    'class="' . $this->class . '" ><br>';
-
-                        
+        return HtmlUtils::printLabel($this->id, $this->label) .
+            (($this->type === 'hidden') ? '<div style="display:none">' : "") .
+            '<input type="' . $this->type . '"' .
+            'name="' . $this->name . '"' .
+            'id="' . $this->id . '"' .
+            (empty($this->value) ? "" : 'value="' . $this->value . '"') .
+            'class="' . $this->class . '" ><br>' .
+            (($this->type === 'hidden') ? '</div>' : "");
     }
 }
