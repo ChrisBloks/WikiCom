@@ -44,7 +44,7 @@ class ElementModel extends BaseModel
         }
         
         foreach ($result as $row => $element_info) {
-            $element_info = $this->getLookupResult($element_info);
+            $element_info = $this->fetchElementDetails($element_info);
             $result[$row] = new ElementInfo($element_info);
         }
        
@@ -52,27 +52,27 @@ class ElementModel extends BaseModel
         return $result;
     }
 
-    protected function getLookupResult(array $element_info){
+    protected function fetchElementDetails(array $element_info){
         $element_id = $element_info['element_id'];
-        $lookup_info_list = $this->fetchLookupInfoByElementId($element_id);
+        $lookup_info_list = $this->fetchQueryDefinitionsByElementId($element_id);
         foreach ($lookup_info_list as $lookup_info){
            
-            switch($lookup_info['lookup_type']){
+            switch($lookup_info['query_result_type']){
                 case 'form':
-                    $form_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
+                    $form_info = $this->fetchQueryDefinitionResult($lookup_info, mode: 'one');
                     $element_info['form_info'] = new FormInfo($form_info);
                     break;
                 case 'field':
-                    $field_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
+                    $field_info = $this->fetchQueryDefinitionResult($lookup_info, mode: 'one');
                     $element_info['field_info'] = new FieldInfo($field_info);
                     break;
                 case 'element':
                     // get sub_element_id
-                    $sub_element_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
-                    $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
+                    $sub_element_info = $this->fetchQueryDefinitionResult($lookup_info, mode: 'one');
+                    $element_info['sub_fields'][] = $this->fetchElementDetails($sub_element_info);
                     break;
                 case 'options':
-                    $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
+                    $options_info = $this->fetchQueryDefinitionResult($lookup_info, mode: 'many');
                     $element_info['options_info'][] = $options_info;
                 default:
                     break;
@@ -86,10 +86,10 @@ class ElementModel extends BaseModel
      * @param int $element_id
      * @return array|false a single article of form [id, title, lastEdit]
      */
-    public function fetchLookupInfoByElementId(int $element_id): array|false
+    public function fetchQueryDefinitionsByElementId(int $element_id): array|false
     {
         $sql = "SELECT  *
-                    FROM element_lookup_info as e_l_i
+                    FROM query_definition as q_d
                     WHERE element_id=:element_id";
         $params = ['element_id' => $element_id];
         $result = $this->crud->selectMany(sql: $sql, params: $params);
@@ -107,11 +107,11 @@ class ElementModel extends BaseModel
     public function fetchFieldInfo(string $element_id): array|false
     {
         $result = [];
-        $lookups_info = $this->fetchLookupInfoByElementId($element_id);
+        $lookups_info = $this->fetchQueryDefinitionsByElementId($element_id);
         foreach ($lookups_info as $lookup_info){
             if ($lookup_info['source_table'] !='form_info'){
-            $lookup = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
-            $lookup_field = $this->getLookupResult($lookup);
+            $lookup = $this->fetchQueryDefinitionResult($lookup_info, mode: 'one');
+            $lookup_field = $this->fetchElementDetails($lookup);
             if ($lookup_field['field_info']['type']!='hidden'){
                 $result[] = $lookup_field['field_info'];
             }
@@ -156,7 +156,7 @@ class ElementModel extends BaseModel
      * @param array $lookup_info see INPUT
      * @return array see OUTPUT
      */
-    public function fetchLookupInfoResult(array $lookup_info, string $mode = 'one'): array|false
+    public function fetchQueryDefinitionResult(array $lookup_info, string $mode = 'one'): array|false
     {
         // Basic SQL start
         $sql = "SELECT
@@ -197,7 +197,7 @@ class ElementModel extends BaseModel
         } else if ($mode === 'many') {
             $result = $this->crud->selectMany(sql: $sql, params: []);
         } else {
-            throw new InvalidArgumentException("mode = {$mode} is not a valid input parameter for fetchLookupInfoResult");
+            throw new InvalidArgumentException("mode = {$mode} is not a valid input parameter for fetchQueryDefinitionResult");
         }
         
 
