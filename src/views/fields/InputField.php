@@ -14,7 +14,6 @@ class InputField extends BaseField
     protected string $name;
     public function __construct(ElementInfo $element_info)
     {
-        HtmlUtils::dump("test",$element_info['field_info']['value'] ?? "");
         parent::__construct(
             name: $element_info['field_info']['field_name'] ?? "",
             label: $element_info['field_info']['label'] ?? "",

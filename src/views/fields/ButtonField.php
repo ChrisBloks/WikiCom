@@ -17,7 +17,6 @@ class ButtonField extends BaseField
 
     public function __construct(ElementInfo $element_info) {
         $field_info = $element_info['field_info'];
-        HtmlUtils::dump("test",$field_info);
         parent::__construct(
             name: $field_info['name'] ?? "", 
             label: $field_info['label'] ?? "", 

@@ -213,7 +213,6 @@ class ElementModel extends BaseModel
 
     public function fetchDialogueAttributesByElementId($element_id)
     {
-        HtmlUtils::dump("test",$element_id);
         $sql = "SELECT  d_w.data_bs_type,
                         d_w.data_bs_value
                     FROM dialogue_window as d_w

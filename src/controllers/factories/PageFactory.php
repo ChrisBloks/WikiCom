@@ -195,7 +195,6 @@ class PageFactory
     protected function add_data_to_elements(array &$elements_info)
     {
         foreach ($elements_info as &$element_info) {
-            HtmlUtils::dump('adding data to element', $element_info);
 
             if (isset($element_info['sub_fields'])) {
                 $this->add_data_to_elements($element_info['sub_fields']);
@@ -217,7 +216,6 @@ class PageFactory
                     break;
                 // Check if the value for this hidden field should be in the response.
                 case $element_info['php_class'] == 'EditableArticle':
-
                     $article_info = ModelSelector::getArticleModel()
                         ->fetchArticleByID($this->response['editArticleID']);
                     $article_info['tags'] = ModelSelector::getArticleModel()
