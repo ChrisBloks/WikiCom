@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki`
+-- Database: `wiki_dev`
 --
-CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki`;
+CREATE DATABASE IF NOT EXISTS `wiki_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki_dev`;
 
 -- --------------------------------------------------------
 
@@ -352,7 +352,8 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 (5, 31, '', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
 (6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary btn-sm'),
 (7, 35, '', 'POST', '', 'Change information', '', 'btn btn-primary'),
-(8, 38, '', 'POST', '', 'save', '', 'btn btn-primary');
+(8, 38, '', 'POST', '', 'save', '', 'btn btn-primary'),
+(9, 53, '', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm');
 
 -- --------------------------------------------------------
 
@@ -1063,7 +1064,7 @@ ALTER TABLE `field_info`
 -- AUTO_INCREMENT for table `form_info`
 --
 ALTER TABLE `form_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `menu_items`

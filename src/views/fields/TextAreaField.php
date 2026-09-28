@@ -19,9 +19,9 @@ class TextAreaField extends BaseField implements iElement
     {
         $field_info = $element_info['field_info'];
         parent::__construct(
-            name: $field_info['name'] ?? "", 
+            name: $field_info['field_name'] ?? "", 
             label: $field_info['label'] ?? "", 
-            class: $field_info['html_class'] ?? ""
+            class: $element_info['html_class'] ?? " " . $field_info['html_class'] ?? " "
         );
         $this->text = $field_info['text'] ?? "";
 

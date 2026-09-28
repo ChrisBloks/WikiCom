@@ -153,38 +153,7 @@ class PageFactory
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
-        foreach ($elements_info as &$element_info) {
-            switch (true) {
-                case $element_info['element_name'] === "random_article":
-                    $excludelist = $excludelist ?? [];
-                    $element_info['article'] = ModelSelector::getArticleModel()->fetchFrontPageArticles($excludelist);
-                    $excludelist[] = $element_info['article']['id'];
-                    break;
-                case str_contains($element_info['element_name'], 'about_'):
-                case str_contains($element_info['element_name'], 'dashboard_'):
-                    $userID = ((isset($this->response['aboutID'])) ? $this->response['aboutID'] : $_SESSION['userID']);
-                    $about_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($userID);
-                    $element_info['title'] = $about_info['name'];
-                    $element_info['bodytext'] = $about_info['description'];
-                    $element_info['image'] = $about_info['imgFileName'];
-                    if (str_contains($element_info['element_name'], 'email')) {
-                        $element_info['title'] = $about_info['email'];
-                    }
-                    break;
-                case ($element_info['php_class']=='DialogueButton'):
-                    $element_info['attributes'] = ModelSelector::getElementModel()->fetchDialogueAttributesByElementId($element_info['element_id']);
-                    if (str_contains($element_info['element_name'],'edit_user')){
-                        $element_info['html_id'] = $_SESSION['userID'].$element_info['html_id'];
-                    }
-                    break;
-                case $element_info['name'] == "search_results_table":
-                    
-
-                default:
-                    break;
-            }
-        }
-        unset($element_info);
+        $this->add_data_to_elements($elements_info);
 
         $element_list = [];
         $element_list[0] = $main;
@@ -193,7 +162,6 @@ class PageFactory
             $element_list[$element_info['order_by']] = $element;
             $element_list[$element_info['parent_order']]->addElement($element);
         }
-
 
         // add the <main> to the body content
         $this->htmlpage->addToBodyContent($main);
@@ -221,6 +189,62 @@ class PageFactory
         unset($field);
 
         return $form_fields;
+    }
+
+
+    protected function add_data_to_elements(array &$elements_info)
+    {
+        foreach ($elements_info as &$element_info) {
+            HtmlUtils::dump('adding data to element', $element_info);
+
+            if (isset($element_info['sub_fields'])) {
+                $this->add_data_to_elements($element_info['sub_fields']);
+            }
+
+            switch (true) {
+                case $element_info['element_name'] === "random_article":
+                    $excludelist = $excludelist ?? [];
+                    $element_info['article'] = ModelSelector::getArticleModel()
+                        ->fetchFrontPageArticles($excludelist);
+                    $excludelist[] = $element_info['article']['id'];
+                    break;
+                case str_contains($element_info['element_name'], 'about_'):
+                    $about_info = ModelSelector::getWebsiteInfoModel()
+                        ->fetchAuthorAboutInfo($this->response['aboutID']);
+                    $element_info['title'] = $about_info['name'];
+                    $element_info['bodytext'] = $about_info['description'];
+                    $element_info['image'] = $about_info['imgFileName'];
+                    break;
+                // Check if the value for this hidden field should be in the response.
+                case $element_info['php_class'] == 'EditableArticle':
+
+                    $article_info = ModelSelector::getArticleModel()
+                        ->fetchArticleByID($this->response['editArticleID']);
+                    $article_info['tags'] = ModelSelector::getArticleModel()
+                        ->fetchArticleTags($this->response['editArticleID']);
+                    $element_info['article_info'] = $article_info;
+                    break;
+                case $element_info['php_class'] == 'HiddenField':
+                    // HtmlUtils::dump('Flag1', "");
+                    $value = $element_info['field_info']['value'];
+                    if ($value && $value[0] == '$') {
+                        $key = substr($value, 1);
+                        $element_info['field_info']['value'] = ($this->response[$key] ?? false);
+                    }
+                    break;
+                case ($element_info['php_class'] == 'DialogueButton'):
+                    $element_info['attributes'] = ModelSelector::getElementModel()->fetchDialogueAttributesByElementId($element_info['element_id']);
+                    if (str_contains($element_info['element_name'], 'edit_user')) {
+                        $element_info['html_id'] = $_SESSION['userID'] . $element_info['html_id'];
+                    }
+                    break;
+                case $element_info['element_name'] == "search_results_table":
+                default:
+                    break;
+            }
+        }
+        unset($element_info);
+        // HtmlUtils::dump('added data to element', $element_info);
     }
 }
 
