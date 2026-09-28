@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2026 at 03:54 PM
+-- Generation Time: Sep 28, 2026 at 04:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki_dev`
+-- Database: `wiki`
 --
-CREATE DATABASE IF NOT EXISTS `wiki_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki_dev`;
+CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki`;
 
 -- --------------------------------------------------------
 
@@ -132,11 +132,11 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (22, 'search_field_author', '', '', '', 'SearchableCheckboxes', '', ''),
 (23, 'search_field_tag', '', '', '', 'SearchableCheckboxes', '', ''),
 (24, 'search_field_sortby\r\n', '', '', '', 'select', '', ''),
-(25, 'article_form', '', 'form-group', '', 'Form', '', ''),
+(25, 'article_form', 'form', 'form-group', '', 'EditableArticle', '', ''),
 (26, 'article_field_title', '', '', '', 'Input', '', ''),
 (27, 'article_field_bodytext', '', '', '', 'textarea', '', ''),
 (28, 'article_field_codeblock', '', '', '', 'textarea', '', ''),
-(29, 'article_field_img', '', '', '', 'file', '', ''),
+(29, 'article_field_img', '', '', '', 'Input', '', ''),
 (30, 'article_field_tags', '', '', '', 'SearchableCheckboxes', '', ''),
 (31, 'register_form', 'form', 'form-group', '', 'Form', '', ''),
 (32, 'register_field_name', '', '', '', 'Input', '', ''),
@@ -177,7 +177,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (69, 'edit_user_modal_errors', 'div', 'alert alert-danger d-none', 'editUserModal-errors', 'AtomicElement', '', ''),
 (70, 'edit_password_modal_errors', 'div', 'alert alert-danger d-none', 'editPasswordModal-errors', 'AtomicElement', '', ''),
 (71, 'edit_article_form', 'form', 'form-group', '', 'EditableArticle', '', ''),
-(72, 'hidden_article_ID', 'input', '', '', 'HiddenField\r\n', '', ''),
+(72, 'hidden_article_ID', 'input', '', '', 'HiddenField', '', ''),
 (73, 'hidden_page', 'input', '', '', 'Input', '', ''),
 (74, 'edit_article_title', 'input', '', '', 'Input', '', '');
 
@@ -228,10 +228,10 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (23, 29, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '29', 0, 'field', 0),
 (24, 30, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '30', 0, 'field', 0),
 (25, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '26', 0, 'element', 10),
-(26, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '27', 0, 'element', 0),
-(27, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '28', 0, 'element', 0),
-(28, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '29', 0, 'element', 0),
-(29, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '30', 0, 'element', 0),
+(26, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '27', 0, 'element', 30),
+(27, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '28', 0, 'element', 40),
+(28, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '29', 0, 'element', 50),
+(29, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '30', 0, 'element', 20),
 (30, 31, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '31', 0, 'form', 0),
 (31, 32, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '32', 0, 'field', 0),
 (32, 33, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '33', 0, 'field', 0),
@@ -268,7 +268,7 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (65, 63, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '63', 0, 'field', 0),
 (66, 65, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '65', 0, 'field', 0),
 (67, 71, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '71', 0, 'form', 0),
-(68, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '72', 0, 'element', 0),
+(68, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '72', 0, 'element', 15),
 (69, 72, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '72', 0, 'field', 0),
 (70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0);
 
@@ -352,8 +352,7 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 (5, 31, '', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
 (6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary btn-sm'),
 (7, 35, '', 'POST', '', 'Change information', '', 'btn btn-primary'),
-(8, 38, '', 'POST', '', 'save', '', 'btn btn-primary'),
-(9, 53, '', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm');
+(8, 38, '', 'POST', '', 'save', '', 'btn btn-primary');
 
 -- --------------------------------------------------------
 
@@ -1064,7 +1063,7 @@ ALTER TABLE `field_info`
 -- AUTO_INCREMENT for table `form_info`
 --
 ALTER TABLE `form_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
