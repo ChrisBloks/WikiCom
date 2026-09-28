@@ -26,9 +26,13 @@ class ElementFactory
         'searchablecheckboxes' =>  'Wiki\views\fields\SearchableCheckboxes',
         'select' => 'Wiki\views\fields\Select',
         'resultstable' => 'Wiki\views\Table',
+        'hiddenfield' => 'Wiki\views\fields\HiddenField',
+        'editablearticle' => 'Wiki\views\containers\EditableArticle',
+        'textareafield' => 'Wiki\views\fields\TextAreaField'
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
+        HtmlUtils::dump('element_info', $element_info);
         return new self::$NAMESPACE[
             strtolower($element_info['php_class'])
             ]($element_info);

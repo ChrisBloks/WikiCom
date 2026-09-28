@@ -44,8 +44,9 @@ class ElementModel extends BaseModel
         }
         
         foreach ($result as $row => $element_info) {
-            $element_info = $this->getLookupResult($element_info);
-            $result[$row] = new ElementInfo($element_info);
+            $result[$row] = new ElementInfo(
+                $this->getLookupResult($element_info)
+            );
         }
        
 
@@ -70,7 +71,8 @@ class ElementModel extends BaseModel
                 case 'element':
                     // get sub_element_id
                     $sub_element_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
-                    $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
+                    // $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
+                    $element_info['sub_fields'][] = new ElementInfo($this->getLookupResult($sub_element_info));
                     break;
                 case 'options':
                     $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
@@ -78,6 +80,9 @@ class ElementModel extends BaseModel
                 default:
                     break;
             }
+        }
+        if (isset($lookup_info['element_order'])){
+            $element_info['element_order'] = $lookup_info['element_order'];
         }
         return $element_info;
     }
@@ -91,7 +96,8 @@ class ElementModel extends BaseModel
     {
         $sql = "SELECT  *
                     FROM element_lookup_info as e_l_i
-                    WHERE element_id=:element_id";
+                    WHERE element_id=:element_id
+                    ORDER BY element_order;";
         $params = ['element_id' => $element_id];
         $result = $this->crud->selectMany(sql: $sql, params: $params);
         return $result;
@@ -200,8 +206,6 @@ class ElementModel extends BaseModel
         } else {
             throw new InvalidArgumentException("mode = {$mode} is not a valid input parameter for fetchLookupInfoResult");
         }
-        
-
                 
 
         return $result;

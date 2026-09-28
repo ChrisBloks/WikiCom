@@ -30,7 +30,9 @@ class ElementInfo implements iElementInfo
         'field_info',
         'form_info',
         'sub_fields',
-        'options_info'
+        'options_info',
+        'article_info',
+        'element_order',
     ];
 
     private array $container = [];
@@ -57,10 +59,10 @@ class ElementInfo implements iElementInfo
         return isset($this->container[$offset]);
     }
 
-    public function offsetGet(mixed $offset): mixed
+    public function &offsetGet(mixed $offset): mixed
     {
         if ($offset == 'class') $offset = 'html_class';
-        return $this->container[$offset] ?? null;
+        return $this->container[$offset];
     }
 
     public function offsetSet(mixed $offset, mixed $value): void

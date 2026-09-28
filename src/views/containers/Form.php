@@ -37,17 +37,25 @@ class Form extends ContainerElement
             $this->html_before .= ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
         }
         // Add form HTML attributes
-        $this->html_before .= 'method="' . $form_info['method'] . '"';
-        $this->html_before .= ">" . ($element_info['text'] ?? "");
+        foreach(['action', 'method', 'enctype', ] as $attr){     
+            if (isset($form_info[$attr]) && !($form_info[$attr] == '""')){
+                $this->html_before .= $attr . '="' . $form_info[$attr] . '" ';
+            }
+            else {
+                 $this->html_before .= $attr . '="_" ';
+            }
+        }   
+        $this->html_before .= "><br>" . ($element_info['text'] ?? "");
 
 
         // Build closing tag
-        $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
+        $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}><br>" : "<br>");
+
+        // Sort fields based on element_order
 
 
         // Add all fields
         foreach ($element_info['sub_fields'] as $sub_element_info) {
-            $sub_element_info = new ElementInfo($sub_element_info);
             $sub_element = ElementFactory::createElement($sub_element_info);
             $this->addElement($sub_element);
         }
@@ -70,7 +78,7 @@ class Form extends ContainerElement
         // Add hidden field element ID
         $hiddenfield = ElementFactory::createElement(
             new ElementInfo([
-                'php_class' => 'Input',
+                'php_class' => 'HiddenField',
                 'field_info' => new FieldInfo([
                     'field_name' => 'element_id',
                     'type' => 'hidden',

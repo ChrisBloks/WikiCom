@@ -22,6 +22,7 @@ class FieldInfo extends ElementInfo
             'marked',
             'text',
             'label',
+            'element_order'
         ];
 
 }
