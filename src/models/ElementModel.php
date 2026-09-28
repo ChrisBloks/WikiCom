@@ -59,7 +59,7 @@ class ElementModel extends BaseModel
         $lookup_info_list = $this->fetchQueryDefinitionsByElementId($element_id);
         foreach ($lookup_info_list as $lookup_info) {
 
-            switch ($lookup_info['query_result_type']) {
+            switch ($lookup_info['lookup_type']) {
                 case 'form':
                     $form_info = $this->fetchQueryDefinitionResult($lookup_info, mode: 'one');
                     $element_info['form_info'] = new FormInfo($form_info);
@@ -91,7 +91,7 @@ class ElementModel extends BaseModel
     public function fetchQueryDefinitionsByElementId(int $element_id): array|false
     {
         $sql = "SELECT  *
-                    FROM query_definition as q_d
+                    FROM element_lookup_info as e_l_i
                     WHERE element_id=:element_id";
         $params = ['element_id' => $element_id];
         $result = $this->crud->selectMany(sql: $sql, params: $params);
