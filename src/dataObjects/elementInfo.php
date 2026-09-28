@@ -14,7 +14,7 @@ class ElementInfo implements iElementInfo
     [
         'html_tag',
         'html_class',
-        'id',
+        'html_id',
         'element_name',
         'text',
         'js_class',
@@ -30,6 +30,7 @@ class ElementInfo implements iElementInfo
         'field_info',
         'form_info',
         'sub_fields',
+        'attributes',
         'options_info'
     ];
 

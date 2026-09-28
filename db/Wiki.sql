@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 25 sep 2026 om 20:29
--- Serverversie: 10.4.32-MariaDB
--- PHP-versie: 8.2.12
+-- Generation Time: Sep 28, 2026 at 03:17 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `wiki`;
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `contact_messages`
+-- Table structure for table `contact_messages`
 --
 
 CREATE TABLE `contact_messages` (
@@ -38,7 +38,7 @@ CREATE TABLE `contact_messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `contact_messages`
+-- Dumping data for table `contact_messages`
 --
 
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
@@ -68,7 +68,28 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `element_info`
+-- Table structure for table `dialogue_window`
+--
+
+CREATE TABLE `dialogue_window` (
+  `id` int(11) NOT NULL,
+  `data_bs_type` varchar(255) NOT NULL,
+  `data_bs_value` varchar(255) NOT NULL,
+  `element_info_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dialogue_window`
+--
+
+INSERT INTO `dialogue_window` (`id`, `data_bs_type`, `data_bs_value`, `element_info_id`) VALUES
+(1, 'modal', '#editUserModal', 65),
+(2, 'modal', '#editPasswordModal', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `element_info`
 --
 
 CREATE TABLE `element_info` (
@@ -76,71 +97,90 @@ CREATE TABLE `element_info` (
   `element_name` varchar(255) NOT NULL,
   `html_tag` text NOT NULL,
   `html_class` varchar(255) NOT NULL,
+  `html_id` varchar(255) NOT NULL,
   `php_class` varchar(255) NOT NULL,
   `js_class` text NOT NULL,
   `text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `element_info`
+-- Dumping data for table `element_info`
 --
 
-INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `php_class`, `js_class`, `text`) VALUES
-(1, 'main', 'div', 'd-flex flex-column align-items-center w-75 mx-auto', 'ContainerElement', '', ''),
-(2, 'home_text', 'h1', 'display-1', 'AtomicElement', '', 'Welcome to our website'),
-(3, 'row_container', 'div', 'row g-4 mb-5', 'ContainerElement', '', ''),
-(4, 'featured_col', 'div', 'col-md-8', 'ContainerElement', '', ''),
-(5, 'random_article', '', '', 'Card', '', ''),
-(6, 'small_coll', 'div', 'col-md-4', 'ContainerElement', '', ''),
-(7, 'small_row', 'div', 'row g-4', 'ContainerElement', '', ''),
-(8, 'small_wrapper', 'div', 'col-12', 'ContainerElement', '', ''),
-(9, 'about_title', 'h1', 'display-1 text-center border-bottom', 'Title', '', ''),
-(10, 'about_description', 'div', 'fs-5 text-center', 'BodyText', '', ''),
-(11, 'about_img', '', 'rounded-circle profile-pic d-flex justify-content-end mb-3', 'Image', '', ''),
-(12, 'main_2', 'div', 'd-flex align-items-center w-75 mx-auto', 'ContainerElement', '', ''),
-(13, 'sub', 'div', 'flex-grow-1', 'ContainerElement', '', ''),
-(14, 'contact_form', 'form', 'form-group', 'Form', '', ''),
-(15, 'contact_name_field', '', '', 'Input', '', ''),
-(16, 'contact_field_email', '', '', 'Input', '', ''),
-(17, 'contact_field_message', '', '', 'textarea', '', ''),
-(18, 'log_in_form', 'form', 'form-group', 'Form', '', ''),
-(19, 'login_in_field_email', '', '', 'Input', '', ''),
-(20, 'log_in_field_password', '', '', 'Input', '', ''),
-(21, 'search_form', 'form', 'form-group', 'Form', '', ''),
-(22, 'search_field_author', '', '', 'SearchableCheckboxes', '', ''),
-(23, 'search_field_tag', '', '', 'SearchableCheckboxes', '', ''),
-(24, 'search_field_sortby\r\n', '', '', 'select', '', ''),
-(25, 'article_form', '', 'form-group', 'Form', '', ''),
-(26, 'article_field_title', '', '', 'Input', '', ''),
-(27, 'article_field_bodytext', '', '', 'textarea', '', ''),
-(28, 'article_field_codeblock', '', '', 'textarea', '', ''),
-(29, 'article_field_img', '', '', 'file', '', ''),
-(30, 'article_field_tags', '', '', 'SearchableCheckboxes', '', ''),
-(31, 'register_form', 'form', 'form-group', 'Form', '', ''),
-(32, 'register_field_name', '', '', 'Input', '', ''),
-(33, 'register_field_email', '', '', 'Input', '', ''),
-(34, 'register_field_new_password', '', '', 'new_password', '', ''),
-(35, 'edit_user_form', '', 'form-control mt-5', 'Form', '', ''),
-(36, 'edit_user_field_name', '', '', 'Input', '', ''),
-(37, 'edit_user_field_email', '', '', 'Input', '', ''),
-(38, 'edit_password_form', '', 'form-control mt-5', 'Form', '', ''),
-(39, 'edit_password_field_old', '', '', 'Input', '', ''),
-(40, 'edit_password_field_new', '', '', 'new_password', '', ''),
-(41, 'edit_user_field_description', '', '', '', '', ''),
-(42, 'edit_user_field_img', '', '', '', '', ''),
-(43, 'create_new_article', '', 'form-group', 'Form', '', ''),
-(44, 'search_container', 'div', 'container-fluid', 'ContainerElement', '', ''),
-(45, 'search_row', 'div', 'row', 'ContainerElement', '', ''),
-(46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', 'ContainerElement', '', ''),
-(47, 'search_table_container', 'div', 'table-responsive', 'ContainerElement', '', ''),
-(50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', 'ResultsTable', '', ''),
-(51, 'log_in_hidden_page', '', '', 'Input', '', ''),
-(52, 'search_col_results', 'div', 'col-12 col-md-9 ps-4', 'ContainerElement', '', '');
+INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `html_id`, `php_class`, `js_class`, `text`) VALUES
+(1, 'main', 'div', 'd-flex flex-column align-items-center w-75 mx-auto', '', 'ContainerElement', '', ''),
+(2, 'home_text', 'h1', 'display-1', '', 'AtomicElement', '', 'Welcome to our website'),
+(3, 'row_container', 'div', 'row g-4 mb-5', '', 'ContainerElement', '', ''),
+(4, 'featured_col', 'div', 'col-md-8', '', 'ContainerElement', '', ''),
+(5, 'random_article', '', '', '', 'Card', '', ''),
+(6, 'small_coll', 'div', 'col-md-4', '', 'ContainerElement', '', ''),
+(7, 'small_row', 'div', 'row g-4', '', 'ContainerElement', '', ''),
+(8, 'small_wrapper', 'div', 'col-12', '', 'ContainerElement', '', ''),
+(9, 'about_title', 'h1', 'display-1 text-center border-bottom', '', 'Title', '', ''),
+(10, 'about_description', 'div', 'fs-5 text-center', '', 'BodyText', '', ''),
+(11, 'about_img', '', 'rounded-circle profile-pic d-flex justify-content-end mb-3', '', 'Image', '', ''),
+(12, 'main_2', 'div', 'd-flex align-items-center w-75 mx-auto', '', 'ContainerElement', '', ''),
+(13, 'sub', 'div', 'flex-grow-1', '', 'ContainerElement', '', ''),
+(14, 'contact_form', 'form', 'form-group', '', 'Form', '', ''),
+(15, 'contact_name_field', '', '', '', 'Input', '', ''),
+(16, 'contact_field_email', '', '', '', 'Input', '', ''),
+(17, 'contact_field_message', '', '', '', 'textarea', '', ''),
+(18, 'log_in_form', 'form', 'form-group', '', 'Form', '', ''),
+(19, 'login_in_field_email', '', '', '', 'Input', '', ''),
+(20, 'log_in_field_password', '', '', '', 'Input', '', ''),
+(21, 'search_form', 'form', 'form-group', '', 'Form', '', ''),
+(22, 'search_field_author', '', '', '', 'SearchableCheckboxes', '', ''),
+(23, 'search_field_tag', '', '', '', 'SearchableCheckboxes', '', ''),
+(24, 'search_field_sortby\r\n', '', '', '', 'select', '', ''),
+(25, 'article_form', '', 'form-group', '', 'Form', '', ''),
+(26, 'article_field_title', '', '', '', 'Input', '', ''),
+(27, 'article_field_bodytext', '', '', '', 'textarea', '', ''),
+(28, 'article_field_codeblock', '', '', '', 'textarea', '', ''),
+(29, 'article_field_img', '', '', '', 'file', '', ''),
+(30, 'article_field_tags', '', '', '', 'SearchableCheckboxes', '', ''),
+(31, 'register_form', 'form', 'form-group', '', 'Form', '', ''),
+(32, 'register_field_name', '', '', '', 'Input', '', ''),
+(33, 'register_field_email', '', '', '', 'Input', '', ''),
+(34, 'register_field_new_password', '', '', '', 'new_password', '', ''),
+(35, 'edit_user_form', 'Form', 'form-control mt-5', '', 'Form', '', ''),
+(36, 'edit_user_field_name', '', '', '', 'Input', '', ''),
+(37, 'edit_user_field_email', '', '', '', 'Input', '', ''),
+(38, 'edit_password_form', 'Form', 'form-control mt-5', '', 'Form', '', ''),
+(39, 'edit_password_field_old', '', '', '', 'Input', '', ''),
+(40, 'edit_password_field_new', '', '', '', 'new_password', '', ''),
+(41, 'edit_user_field_description', '', '', '', 'textarea', '', ''),
+(42, 'edit_user_field_img', '', '', '', 'Image', '', ''),
+(43, 'create_new_article', 'form', 'form-group', '', 'Form', '', ''),
+(44, 'search_container', 'div', 'container-fluid', '', 'ContainerElement', '', ''),
+(45, 'search_row', 'div', 'row', '', 'ContainerElement', '', ''),
+(46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', '', ''),
+(47, 'search_table_container', 'div', 'table-responsive', '', 'ContainerElement', '', ''),
+(50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', '', 'ResultsTable', '', ''),
+(51, 'log_in_hidden_page', '', '', '', 'Input', '', ''),
+(52, 'search_col_results', 'div', 'col-12 col-md-9 ps-4', '', 'ContainerElement', '', ''),
+(53, 'container_fluid', 'div', 'container-fluid', '', 'ContainerElement', '', ''),
+(54, 'row_div', 'div', 'row', '', 'ContainerElement', '', ''),
+(55, 'filter_div', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', '', ''),
+(56, 'result_div', 'div', 'col-12 col-md-9 ps-4', '', 'ContainerElement', '', ''),
+(57, 'user_div', 'div', 'd-flex justify-content-center align-items-center align-items-end gap-3', '', 'ContainerElement', '', ''),
+(58, 'dashboard_image', '', 'p-2 dashboard-pic rounded mb-1', '', 'Image', '', ''),
+(59, 'dashboard_title', 'h1', 'p-2 fs-1 fw-bold align-middle', '', 'Title', '', ''),
+(60, 'dashboard_email', 'h1', 'fs-6', '', 'Title', '', ''),
+(61, 'new_article_title', 'div', 'd-flex justify-content-center h4 border-top', '', 'Title', '', 'Create new article'),
+(62, 'hidden_page_dashboard', '', '', '', 'Input', '', ''),
+(63, 'hidden_article_id_dashboard', '', '', '', 'Input', '', ''),
+(64, 'edit_user_information', 'h1', 'fs-3 border-top mt-3', '', 'Title', '', ''),
+(65, 'edit_user_info_button_dashboard', 'button', 'btn btn-secondary mt-1', '-edit-user-btn', 'DialogueButton', '', 'Edit User information'),
+(66, 'edit_user_password_button_dashboard', 'button', 'btn btn-danger mt-1', '-edit-pwd-btn', 'DialogueButton', '', 'Change Password'),
+(67, 'edit_user_modal', '', '', 'editUserModal', 'Modal', '', 'Edit User Information'),
+(68, 'edit_password_modal', '', '', 'editPasswordModal', 'Modal', '', 'Change Password'),
+(69, 'edit_user_modal_errors', 'div', 'alert alert-danger d-none', 'editUserModal-errors', 'AtomicElement', '', ''),
+(70, 'edit_password_modal_errors', 'div', 'alert alert-danger d-none', 'editPasswordModal-errors', 'AtomicElement', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `field_info`
+-- Table structure for table `field_info`
 --
 
 CREATE TABLE `field_info` (
@@ -155,7 +195,7 @@ CREATE TABLE `field_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `field_info`
+-- Dumping data for table `field_info`
 --
 
 INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `value`, `html_class`, `optional`) VALUES
@@ -181,12 +221,16 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (20, 'newpassword', 40, 'new_password', 'New password:', '', 'editPassword-pw2 form-control', 0),
 (21, 'description', 41, 'textarea', 'About me:', '', 'about-text form-control', 1),
 (22, 'aboutimg', 42, 'file', 'Upload file:', '', 'about-img-file form-control', 1),
-(23, 'page', 51, 'hidden', '', 'login', '', 0);
+(23, 'page', 51, 'hidden', '', 'login', '', 0),
+(24, 'page', 62, 'hidden', '', 'editArticle', '', 0),
+(25, 'id', 63, 'hidden', '', '0', '', 0),
+(26, 'Edit User Information', 65, 'Button', 'Change user information', '', 'btn btn-secondary mt-1', 1),
+(27, 'Edit Password', 66, 'Button', '', '', '', 1);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `form_info`
+-- Table structure for table `form_info`
 --
 
 CREATE TABLE `form_info` (
@@ -201,7 +245,7 @@ CREATE TABLE `form_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `form_info`
+-- Dumping data for table `form_info`
 --
 
 INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submit_caption`, `enctype`, `submit_class`) VALUES
@@ -217,7 +261,7 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `menu_items`
+-- Table structure for table `menu_items`
 --
 
 CREATE TABLE `menu_items` (
@@ -228,7 +272,7 @@ CREATE TABLE `menu_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `menu_items`
+-- Dumping data for table `menu_items`
 --
 
 INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
@@ -244,7 +288,7 @@ INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `page`
+-- Table structure for table `page`
 --
 
 CREATE TABLE `page` (
@@ -253,7 +297,7 @@ CREATE TABLE `page` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `page`
+-- Dumping data for table `page`
 --
 
 INSERT INTO `page` (`id`, `name`) VALUES
@@ -262,12 +306,13 @@ INSERT INTO `page` (`id`, `name`) VALUES
 (3, 'contact'),
 (4, 'login'),
 (5, 'register'),
-(6, 'search');
+(6, 'search'),
+(8, 'dashboard');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `page_elements`
+-- Table structure for table `page_elements`
 --
 
 CREATE TABLE `page_elements` (
@@ -278,7 +323,7 @@ CREATE TABLE `page_elements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `page_elements`
+-- Dumping data for table `page_elements`
 --
 
 INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`) VALUES
@@ -312,12 +357,31 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (6, 21, 60, 50),
 (6, 52, 70, 40),
 (6, 47, 80, 70),
-(6, 50, 90, 70);
+(6, 50, 90, 70),
+(8, 53, 10, 0),
+(8, 54, 20, 10),
+(8, 55, 30, 20),
+(8, 56, 40, 20),
+(8, 57, 50, 30),
+(8, 58, 60, 50),
+(8, 59, 70, 50),
+(8, 60, 80, 30),
+(8, 61, 90, 30),
+(8, 43, 100, 30),
+(8, 64, 110, 30),
+(8, 65, 120, 30),
+(8, 66, 130, 30),
+(8, 67, 140, 30),
+(8, 69, 150, 140),
+(8, 35, 160, 140),
+(8, 68, 170, 30),
+(8, 70, 180, 170),
+(8, 38, 190, 170);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `query_definition`
+-- Table structure for table `query_definition`
 --
 
 CREATE TABLE `query_definition` (
@@ -327,79 +391,97 @@ CREATE TABLE `query_definition` (
   `column_names` varchar(255) NOT NULL,
   `where_` varchar(255) NOT NULL,
   `where_value` varchar(255) NOT NULL,
-  `join_table` varchar(255) NOT NULL,
-  `join_on_values` varchar(255) NOT NULL,
+  `has_join` tinyint(1) NOT NULL,
   `query_result_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `query_definition`
+-- Dumping data for table `query_definition`
 --
 
-INSERT INTO `query_definition` (`id`, `element_id`, `source_table`, `column_names`, `where_`, `where_value`, `join_table`, `join_on_values`, `query_result_type`) VALUES
-(1, 14, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '14', '', '', 'form'),
-(2, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', '15', '', '', 'element'),
-(3, 15, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '15', '', '', 'field'),
-(4, 16, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '16', '', '', 'field'),
-(5, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', '16', '', '', 'element'),
-(6, 18, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '18', '', '', 'form'),
-(7, 19, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '19', '', '', 'field'),
-(8, 20, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '20', '', '', 'field'),
-(9, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', '19', '', '', 'element'),
-(11, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', '20', '', '', 'element'),
-(12, 21, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '21', '', '', 'form'),
-(13, 22, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '22', '', '', 'field'),
-(14, 23, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '23', '', '', 'field'),
-(15, 24, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '24', '', '', 'field'),
-(16, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', '22', '', '', 'element'),
-(17, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', '23', '', '', 'element'),
-(18, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', '24', '', '', 'element'),
-(19, 25, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '25', '', '', 'form'),
-(20, 26, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '26', '', '', 'field'),
-(21, 27, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '27', '', '', 'field'),
-(22, 28, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '28', '', '', 'field'),
-(23, 29, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '29', '', '', 'field'),
-(24, 30, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '30', '', '', 'field'),
-(25, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '26', '', '', 'element'),
-(26, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '27', '', '', 'element'),
-(27, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '28', '', '', 'element'),
-(28, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '29', '', '', 'element'),
-(29, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '30', '', '', 'element'),
-(30, 31, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '31', '', '', 'form'),
-(31, 32, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '32', '', '', 'field'),
-(32, 33, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '33', '', '', 'field'),
-(33, 34, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '34', '', '', 'field'),
-(34, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', '32', '', '', 'element'),
-(35, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', '33', '', '', 'element'),
-(36, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', '34', '', '', 'element'),
-(37, 35, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '35', '', '', 'form'),
-(38, 36, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '36', '', '', 'field'),
-(39, 37, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '37', '', '', 'field'),
-(40, 41, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '41', '', '', 'field'),
-(41, 42, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '42', '', '', 'field'),
-(42, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', '36', '', '', 'element'),
-(43, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', '37', '', '', 'element'),
-(44, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', '41', '', '', 'element'),
-(45, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', '42', '', '', 'element'),
-(46, 38, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '38', '', '', 'form'),
-(47, 39, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '39', '', '', 'field'),
-(48, 40, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '40', '', '', 'field'),
-(49, 38, 'element_info', 'id as element_id,php_class', 'element_info.id', '39', '', '', 'element'),
-(50, 38, 'element_info', 'id as element_id,php_class', 'element_info.id', '40', '', '', 'element'),
-(51, 43, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '43', '', '', 'form'),
-(52, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', '17', '', '', 'element'),
-(53, 17, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '17', '', '', 'field'),
-(55, 23, 'wiki_tag', 'id,name', '', '', '', '', 'options'),
-(56, 22, 'user', 'id,name', '', '', '', '', 'options'),
-(57, 24, 'v_sortby_options', 'id,name', '', '', '', '', 'options'),
-(59, 50, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'title\',\'author\',\'tags\',\'lastEdit\',\'rating\'', '', '', 'options'),
-(60, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', '51', '', '', 'element'),
-(61, 51, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '51', '', '', 'field');
+INSERT INTO `query_definition` (`id`, `element_id`, `source_table`, `column_names`, `where_`, `where_value`, `has_join`, `query_result_type`) VALUES
+(1, 14, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '14', 0, 'form'),
+(2, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', '15', 0, 'element'),
+(3, 15, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '15', 0, 'field'),
+(4, 16, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '16', 0, 'field'),
+(5, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', '16', 0, 'element'),
+(6, 18, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '18', 0, 'form'),
+(7, 19, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '19', 0, 'field'),
+(8, 20, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '20', 0, 'field'),
+(9, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', '19', 0, 'element'),
+(11, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', '20', 0, 'element'),
+(12, 21, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '21', 0, 'form'),
+(13, 22, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '22', 0, 'field'),
+(14, 23, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '23', 0, 'field'),
+(15, 24, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '24', 0, 'field'),
+(16, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', '22', 0, 'element'),
+(17, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', '23', 0, 'element'),
+(18, 21, 'element_info', 'id as element_id,php_class', 'element_info.id', '24', 0, 'element'),
+(19, 25, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '25', 0, 'form'),
+(20, 26, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '26', 0, 'field'),
+(21, 27, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '27', 0, 'field'),
+(22, 28, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '28', 0, 'field'),
+(23, 29, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '29', 0, 'field'),
+(24, 30, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '30', 0, 'field'),
+(25, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '26', 0, 'element'),
+(26, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '27', 0, 'element'),
+(27, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '28', 0, 'element'),
+(28, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '29', 0, 'element'),
+(29, 25, 'element_info', 'id as element_id,php_class', 'element_info.id', '30', 0, 'element'),
+(30, 31, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '31', 0, 'form'),
+(31, 32, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '32', 0, 'field'),
+(32, 33, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '33', 0, 'field'),
+(33, 34, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '34', 0, 'field'),
+(34, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', '32', 0, 'element'),
+(35, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', '33', 0, 'element'),
+(36, 31, 'element_info', 'id as element_id,php_class', 'element_info.id', '34', 0, 'element'),
+(37, 35, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '35', 0, 'form'),
+(38, 36, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '36', 0, 'field'),
+(39, 37, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '37', 0, 'field'),
+(40, 41, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '41', 0, 'field'),
+(41, 42, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '42', 0, 'field'),
+(42, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', '36', 0, 'element'),
+(43, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', '37', 0, 'element'),
+(44, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', '41', 0, 'element'),
+(45, 35, 'element_info', 'id as element_id,php_class', 'element_info.id', '42', 0, 'element'),
+(46, 38, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '38', 0, 'form'),
+(47, 39, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '39', 0, 'field'),
+(48, 40, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '40', 0, 'field'),
+(49, 38, 'element_info', 'id as element_id,php_class', 'element_info.id', '39', 0, 'element'),
+(50, 38, 'element_info', 'id as element_id,php_class', 'element_info.id', '40', 0, 'element'),
+(51, 43, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '43', 0, 'form'),
+(52, 14, 'element_info', 'id as element_id,php_class', 'element_info.id', '17', 0, 'element'),
+(53, 17, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '17', 0, 'field'),
+(55, 23, 'wiki_tag', 'id,name', '', '', 0, 'options'),
+(56, 22, 'user', 'id,name', '', '', 0, 'options'),
+(57, 24, 'v_sortby_options', 'id,name', '', '', 0, 'options'),
+(59, 50, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'title\',\'author\',\'tags\',\'lastEdit\',\'rating\'', 0, 'options'),
+(60, 18, 'element_info', 'id as element_id,php_class', 'element_info.id', '51', 0, 'element'),
+(61, 51, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '51', 0, 'field'),
+(62, 43, 'element_info', 'id as element_id,php_class', 'element_info.id', '62', 0, 'element'),
+(63, 43, 'element_info', 'id as element_id,php_class', 'element_info.id', '63', 0, 'element'),
+(64, 62, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '62', 0, 'field'),
+(65, 63, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '63', 0, 'field'),
+(66, 65, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '65', 0, 'field');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `styling_containers`
+-- Table structure for table `query_joins`
+--
+
+CREATE TABLE `query_joins` (
+  `id` int(11) NOT NULL,
+  `query_definition_id` int(11) NOT NULL,
+  `join_table` varchar(255) NOT NULL,
+  `join_left_value` varchar(255) NOT NULL,
+  `join_right_value` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `styling_containers`
 --
 
 CREATE TABLE `styling_containers` (
@@ -409,7 +491,7 @@ CREATE TABLE `styling_containers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `styling_containers`
+-- Dumping data for table `styling_containers`
 --
 
 INSERT INTO `styling_containers` (`id`, `name`, `styling`) VALUES
@@ -434,7 +516,7 @@ INSERT INTO `styling_containers` (`id`, `name`, `styling`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `styling_elements`
+-- Table structure for table `styling_elements`
 --
 
 CREATE TABLE `styling_elements` (
@@ -445,7 +527,7 @@ CREATE TABLE `styling_elements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `styling_elements`
+-- Dumping data for table `styling_elements`
 --
 
 INSERT INTO `styling_elements` (`id`, `website_info_id`, `class_name`, `class`) VALUES
@@ -472,7 +554,7 @@ INSERT INTO `styling_elements` (`id`, `website_info_id`, `class_name`, `class`) 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `styling_system`
+-- Table structure for table `styling_system`
 --
 
 CREATE TABLE `styling_system` (
@@ -482,7 +564,7 @@ CREATE TABLE `styling_system` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `styling_system`
+-- Dumping data for table `styling_system`
 --
 
 INSERT INTO `styling_system` (`id`, `name`, `styling`) VALUES
@@ -493,7 +575,7 @@ INSERT INTO `styling_system` (`id`, `name`, `styling`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `table_columns`
+-- Table structure for table `table_columns`
 --
 
 CREATE TABLE `table_columns` (
@@ -508,7 +590,7 @@ CREATE TABLE `table_columns` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `table_columns`
+-- Dumping data for table `table_columns`
 --
 
 INSERT INTO `table_columns` (`id`, `column_name`, `column_title`, `display_type`, `class_types`, `column_headers`, `display_order`, `href`) VALUES
@@ -522,7 +604,7 @@ INSERT INTO `table_columns` (`id`, `column_name`, `column_title`, `display_type`
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -535,7 +617,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
@@ -547,8 +629,8 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `descripti
 -- --------------------------------------------------------
 
 --
--- Stand-in structuur voor view `v_article_avg_rating`
--- (Zie onder voor de actuele view)
+-- Stand-in structure for view `v_article_avg_rating`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_article_avg_rating` (
 `id` int(11)
@@ -559,8 +641,8 @@ CREATE TABLE `v_article_avg_rating` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structuur voor view `v_sortby_options`
--- (Zie onder voor de actuele view)
+-- Stand-in structure for view `v_sortby_options`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_sortby_options` (
 `id` int(1)
@@ -570,7 +652,7 @@ CREATE TABLE `v_sortby_options` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `website_info`
+-- Table structure for table `website_info`
 --
 
 CREATE TABLE `website_info` (
@@ -580,7 +662,7 @@ CREATE TABLE `website_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `website_info`
+-- Dumping data for table `website_info`
 --
 
 INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
@@ -599,7 +681,7 @@ INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `website_info_to_styling_containers`
+-- Table structure for table `website_info_to_styling_containers`
 --
 
 CREATE TABLE `website_info_to_styling_containers` (
@@ -608,7 +690,7 @@ CREATE TABLE `website_info_to_styling_containers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `website_info_to_styling_containers`
+-- Dumping data for table `website_info_to_styling_containers`
 --
 
 INSERT INTO `website_info_to_styling_containers` (`website_info_id`, `styling_id`) VALUES
@@ -651,7 +733,7 @@ INSERT INTO `website_info_to_styling_containers` (`website_info_id`, `styling_id
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `wiki_article`
+-- Table structure for table `wiki_article`
 --
 
 CREATE TABLE `wiki_article` (
@@ -665,7 +747,7 @@ CREATE TABLE `wiki_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `wiki_article`
+-- Dumping data for table `wiki_article`
 --
 
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
@@ -677,7 +759,7 @@ INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `i
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `wiki_article_to_tag`
+-- Table structure for table `wiki_article_to_tag`
 --
 
 CREATE TABLE `wiki_article_to_tag` (
@@ -686,7 +768,7 @@ CREATE TABLE `wiki_article_to_tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `wiki_article_to_tag`
+-- Dumping data for table `wiki_article_to_tag`
 --
 
 INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
@@ -701,7 +783,7 @@ INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `wiki_rating`
+-- Table structure for table `wiki_rating`
 --
 
 CREATE TABLE `wiki_rating` (
@@ -711,7 +793,7 @@ CREATE TABLE `wiki_rating` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `wiki_rating`
+-- Dumping data for table `wiki_rating`
 --
 
 INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
@@ -724,7 +806,7 @@ INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `wiki_sortby_info`
+-- Table structure for table `wiki_sortby_info`
 --
 
 CREATE TABLE `wiki_sortby_info` (
@@ -734,7 +816,7 @@ CREATE TABLE `wiki_sortby_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `wiki_sortby_info`
+-- Dumping data for table `wiki_sortby_info`
 --
 
 INSERT INTO `wiki_sortby_info` (`id`, `sortby_name`, `sortby_value`) VALUES
@@ -744,7 +826,7 @@ INSERT INTO `wiki_sortby_info` (`id`, `sortby_name`, `sortby_value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `wiki_tag`
+-- Table structure for table `wiki_tag`
 --
 
 CREATE TABLE `wiki_tag` (
@@ -753,7 +835,7 @@ CREATE TABLE `wiki_tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `wiki_tag`
+-- Dumping data for table `wiki_tag`
 --
 
 INSERT INTO `wiki_tag` (`id`, `name`) VALUES
@@ -765,7 +847,7 @@ INSERT INTO `wiki_tag` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structuur voor de view `v_article_avg_rating`
+-- Structure for view `v_article_avg_rating`
 --
 DROP TABLE IF EXISTS `v_article_avg_rating`;
 
@@ -774,304 +856,342 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structuur voor de view `v_sortby_options`
+-- Structure for view `v_sortby_options`
 --
 DROP TABLE IF EXISTS `v_sortby_options`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_sortby_options`  AS SELECT 1 AS `id`, 'lastEdit' AS `name`union select 2 AS `2`,'rating' AS `rating`  ;
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `contact_messages`
+-- Indexes for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `element_info`
+-- Indexes for table `dialogue_window`
+--
+ALTER TABLE `dialogue_window`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_element_info_to_dialogue` (`element_info_id`);
+
+--
+-- Indexes for table `element_info`
 --
 ALTER TABLE `element_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `field_info`
+-- Indexes for table `field_info`
 --
 ALTER TABLE `field_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_element_info_to_field_info` (`element_id`);
 
 --
--- Indexen voor tabel `form_info`
+-- Indexes for table `form_info`
 --
 ALTER TABLE `form_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_element_info_to_form_info` (`element_id`);
 
 --
--- Indexen voor tabel `menu_items`
+-- Indexes for table `menu_items`
 --
 ALTER TABLE `menu_items`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `page`
+-- Indexes for table `page`
 --
 ALTER TABLE `page`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `page_elements`
+-- Indexes for table `page_elements`
 --
 ALTER TABLE `page_elements`
   ADD PRIMARY KEY (`page_id`,`order_by`),
   ADD KEY `fk_element_info_to_page_elements` (`element_id`);
 
 --
--- Indexen voor tabel `query_definition`
+-- Indexes for table `query_definition`
 --
 ALTER TABLE `query_definition`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_element_info_to_look_up` (`element_id`);
 
 --
--- Indexen voor tabel `styling_containers`
+-- Indexes for table `query_joins`
+--
+ALTER TABLE `query_joins`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_query_definition_to_join` (`query_definition_id`);
+
+--
+-- Indexes for table `styling_containers`
 --
 ALTER TABLE `styling_containers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `styling_elements`
+-- Indexes for table `styling_elements`
 --
 ALTER TABLE `styling_elements`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_website_info_dplay_classes` (`website_info_id`);
 
 --
--- Indexen voor tabel `styling_system`
+-- Indexes for table `styling_system`
 --
 ALTER TABLE `styling_system`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `table_columns`
+-- Indexes for table `table_columns`
 --
 ALTER TABLE `table_columns`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `column_key_unique` (`column_name`);
 
 --
--- Indexen voor tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `website_info`
+-- Indexes for table `website_info`
 --
 ALTER TABLE `website_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `website_info_to_styling_containers`
+-- Indexes for table `website_info_to_styling_containers`
 --
 ALTER TABLE `website_info_to_styling_containers`
   ADD PRIMARY KEY (`website_info_id`,`styling_id`),
   ADD KEY `styling_id` (`styling_id`);
 
 --
--- Indexen voor tabel `wiki_article`
+-- Indexes for table `wiki_article`
 --
 ALTER TABLE `wiki_article`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_article_to_user_id` (`user_id`);
 
 --
--- Indexen voor tabel `wiki_article_to_tag`
+-- Indexes for table `wiki_article_to_tag`
 --
 ALTER TABLE `wiki_article_to_tag`
   ADD PRIMARY KEY (`article_id`,`wiki_tag_id`),
   ADD KEY `fk_article_to_tag_tag_id` (`wiki_tag_id`);
 
 --
--- Indexen voor tabel `wiki_rating`
+-- Indexes for table `wiki_rating`
 --
 ALTER TABLE `wiki_rating`
   ADD PRIMARY KEY (`user_id`,`article_id`),
   ADD KEY `fk_rating_to_article_id` (`article_id`);
 
 --
--- Indexen voor tabel `wiki_sortby_info`
+-- Indexes for table `wiki_sortby_info`
 --
 ALTER TABLE `wiki_sortby_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `wiki_tag`
+-- Indexes for table `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `contact_messages`
+-- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT voor een tabel `element_info`
+-- AUTO_INCREMENT for table `dialogue_window`
+--
+ALTER TABLE `dialogue_window`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
--- AUTO_INCREMENT voor een tabel `field_info`
+-- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT voor een tabel `form_info`
+-- AUTO_INCREMENT for table `form_info`
 --
 ALTER TABLE `form_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT voor een tabel `menu_items`
+-- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT voor een tabel `page`
+-- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT voor een tabel `query_definition`
+-- AUTO_INCREMENT for table `query_definition`
 --
 ALTER TABLE `query_definition`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
--- AUTO_INCREMENT voor een tabel `styling_containers`
+-- AUTO_INCREMENT for table `query_joins`
+--
+ALTER TABLE `query_joins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `styling_containers`
 --
 ALTER TABLE `styling_containers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT voor een tabel `styling_elements`
+-- AUTO_INCREMENT for table `styling_elements`
 --
 ALTER TABLE `styling_elements`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT voor een tabel `styling_system`
+-- AUTO_INCREMENT for table `styling_system`
 --
 ALTER TABLE `styling_system`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT voor een tabel `table_columns`
+-- AUTO_INCREMENT for table `table_columns`
 --
 ALTER TABLE `table_columns`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT voor een tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT voor een tabel `website_info`
+-- AUTO_INCREMENT for table `website_info`
 --
 ALTER TABLE `website_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT voor een tabel `wiki_article`
+-- AUTO_INCREMENT for table `wiki_article`
 --
 ALTER TABLE `wiki_article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT voor een tabel `wiki_sortby_info`
+-- AUTO_INCREMENT for table `wiki_sortby_info`
 --
 ALTER TABLE `wiki_sortby_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT voor een tabel `wiki_tag`
+-- AUTO_INCREMENT for table `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
--- Beperkingen voor geëxporteerde tabellen
+-- Constraints for dumped tables
 --
 
 --
--- Beperkingen voor tabel `field_info`
+-- Constraints for table `dialogue_window`
+--
+ALTER TABLE `dialogue_window`
+  ADD CONSTRAINT `fk_element_info_to_dialogue` FOREIGN KEY (`element_info_id`) REFERENCES `element_info` (`id`);
+
+--
+-- Constraints for table `field_info`
 --
 ALTER TABLE `field_info`
   ADD CONSTRAINT `fk_element_info_to_field_info` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
 
 --
--- Beperkingen voor tabel `form_info`
+-- Constraints for table `form_info`
 --
 ALTER TABLE `form_info`
   ADD CONSTRAINT `fk_element_info_to_form_info` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
 
 --
--- Beperkingen voor tabel `page_elements`
+-- Constraints for table `page_elements`
 --
 ALTER TABLE `page_elements`
   ADD CONSTRAINT `fk_element_info_to_page_elements` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`),
   ADD CONSTRAINT `fk_page_to_page_elements` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`);
 
 --
--- Beperkingen voor tabel `query_definition`
+-- Constraints for table `query_definition`
 --
 ALTER TABLE `query_definition`
   ADD CONSTRAINT `fk_element_info_to_look_up` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
 
 --
--- Beperkingen voor tabel `styling_elements`
+-- Constraints for table `query_joins`
+--
+ALTER TABLE `query_joins`
+  ADD CONSTRAINT `fk_query_definition_to_join` FOREIGN KEY (`query_definition_id`) REFERENCES `query_definition` (`id`);
+
+--
+-- Constraints for table `styling_elements`
 --
 ALTER TABLE `styling_elements`
   ADD CONSTRAINT `fk_website_info_dplay_classes` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
 
 --
--- Beperkingen voor tabel `website_info_to_styling_containers`
+-- Constraints for table `website_info_to_styling_containers`
 --
 ALTER TABLE `website_info_to_styling_containers`
   ADD CONSTRAINT `website_info_to_styling_containers_ibfk_1` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `website_info_to_styling_containers_ibfk_2` FOREIGN KEY (`styling_id`) REFERENCES `styling_containers` (`id`);
 
 --
--- Beperkingen voor tabel `wiki_article`
+-- Constraints for table `wiki_article`
 --
 ALTER TABLE `wiki_article`
   ADD CONSTRAINT `fk_article_to_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 
 --
--- Beperkingen voor tabel `wiki_article_to_tag`
+-- Constraints for table `wiki_article_to_tag`
 --
 ALTER TABLE `wiki_article_to_tag`
   ADD CONSTRAINT `fk_article_to_tag_article_id` FOREIGN KEY (`article_id`) REFERENCES `wiki_article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_article_to_tag_tag_id` FOREIGN KEY (`wiki_tag_id`) REFERENCES `wiki_tag` (`id`) ON UPDATE CASCADE;
 
 --
--- Beperkingen voor tabel `wiki_rating`
+-- Constraints for table `wiki_rating`
 --
 ALTER TABLE `wiki_rating`
   ADD CONSTRAINT `fk_rating_to_article_id` FOREIGN KEY (`article_id`) REFERENCES `wiki_article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

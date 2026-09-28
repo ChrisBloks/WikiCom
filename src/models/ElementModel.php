@@ -23,6 +23,7 @@ class ElementModel extends BaseModel
                         e_i.element_name,
                         e_i.html_tag,
                         e_i.html_class,
+                        e_i.html_id,
                         e_i.php_class,
                         e_i.js_class,
                         e_i.text,
@@ -34,30 +35,31 @@ class ElementModel extends BaseModel
                 ORDER BY p_e.order_by;";
         $params = ["page" => $page_name];
 
-        
+
         $result = $this->crud->selectMany($sql, $params);
-        
+
 
         if (empty($result)) {
             $this->logError("Page has no Elements");
             return false;
         }
-        
+
         foreach ($result as $row => $element_info) {
             $element_info = $this->fetchElementDetails($element_info);
             $result[$row] = new ElementInfo($element_info);
         }
-       
+
 
         return $result;
     }
 
-    protected function fetchElementDetails(array $element_info){
+    protected function fetchElementDetails(array $element_info)
+    {
         $element_id = $element_info['element_id'];
         $lookup_info_list = $this->fetchQueryDefinitionsByElementId($element_id);
-        foreach ($lookup_info_list as $lookup_info){
-           
-            switch($lookup_info['query_result_type']){
+        foreach ($lookup_info_list as $lookup_info) {
+
+            switch ($lookup_info['query_result_type']) {
                 case 'form':
                     $form_info = $this->fetchQueryDefinitionResult($lookup_info, mode: 'one');
                     $element_info['form_info'] = new FormInfo($form_info);
@@ -108,13 +110,13 @@ class ElementModel extends BaseModel
     {
         $result = [];
         $lookups_info = $this->fetchQueryDefinitionsByElementId($element_id);
-        foreach ($lookups_info as $lookup_info){
-            if ($lookup_info['source_table'] !='form_info'){
-            $lookup = $this->fetchQueryDefinitionResult($lookup_info, mode: 'one');
-            $lookup_field = $this->fetchElementDetails($lookup);
-            if ($lookup_field['field_info']['type']!='hidden'){
-                $result[] = $lookup_field['field_info'];
-            }
+        foreach ($lookups_info as $lookup_info) {
+            if ($lookup_info['source_table'] != 'form_info') {
+                $lookup = $this->fetchQueryDefinitionResult($lookup_info, mode: 'one');
+                $lookup_field = $this->fetchElementDetails($lookup);
+                if ($lookup_field['field_info']['type'] != 'hidden') {
+                    $result[] = $lookup_field['field_info'];
+                }
             }
         }
 
@@ -179,31 +181,43 @@ class ElementModel extends BaseModel
 
         // If a WHERE value is specified
         if (!empty($lookup_info["where_"])) {
-            if (explode(',',$lookup_info['where_value']) > 1){
+            if (explode(',', $lookup_info['where_value']) > 1) {
                 $sql .= " WHERE {$lookup_info['where_']} IN ({$lookup_info['where_value']})";
-            }
-            else {
+            } else {
                 $sql .= " WHERE {$lookup_info['where_']} = {$lookup_info['where_value']}";
             }
-            
+
         }
 
         // // Always add an ORDER BY clause
         // $sql .= " ORDER BY {$lookup_info['order_by']}";
         // Execute the query
         // HtmlUtils::dump('sql', $sql);
-        if ($mode === 'one'){
+        if ($mode === 'one') {
             $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);
         } else if ($mode === 'many') {
             $result = $this->crud->selectMany(sql: $sql, params: []);
         } else {
             throw new InvalidArgumentException("mode = {$mode} is not a valid input parameter for fetchQueryDefinitionResult");
         }
-        
 
-                
+
+
 
         return $result;
+    }
+
+    public function fetchDialogueAttributesByElementId($element_id)
+    {
+        HtmlUtils::dump("test",$element_id);
+        $sql = "SELECT  d_w.data_bs_type,
+                        d_w.data_bs_value
+                    FROM dialogue_window as d_w
+                    WHERE element_info_id=:element_id";
+        $params = ['element_id' => $element_id];
+        $result = $this->crud->selectMany(sql: $sql, params: $params,fetch_mode:\PDO::FETCH_ASSOC);
+        return $result[0];
+
     }
 
 

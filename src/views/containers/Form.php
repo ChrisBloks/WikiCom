@@ -68,18 +68,29 @@ class Form extends ContainerElement
         );
         $this->addElement($button);
         // Add hidden field element ID
-        $hiddenfield = ElementFactory::createElement(
-            new ElementInfo([
-                'php_class' => 'Input',
-                'field_info' => new FieldInfo([
-                    'field_name' => 'element_id',
-                    'type' => 'hidden',
-                    'value' => $element_info['element_id'],
-                ])
-            ])
-        );
-        $this->addElement($hiddenfield);
+        $has_visible_sub_field = false;
 
+        foreach ($element_info['sub_fields'] ?? [] as $sub_field) {
+            if ($sub_field['field_info']['type'] !== 'hidden') {
+                $has_visible_sub_field = true;
+                break;
+            }
+        }
+
+        if ($has_visible_sub_field) {
+            $hiddenfield = ElementFactory::createElement(
+                new ElementInfo([
+                    'php_class' => 'Input',
+                    'field_info' => new FieldInfo([
+                        'field_name' => 'element_id',
+                        'type' => 'hidden',
+                        'value' => $element_info['element_id'],
+                    ])
+                ])
+            );
+
+            $this->addElement($hiddenfield);
+        }
     }
 
 }

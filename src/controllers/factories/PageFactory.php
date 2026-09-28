@@ -171,8 +171,14 @@ class PageFactory
                         $element_info['title'] = $about_info['email'];
                     }
                     break;
+                case ($element_info['php_class']=='DialogueButton'):
+                    $element_info['attributes'] = ModelSelector::getElementModel()->fetchDialogueAttributesByElementId($element_info['element_id']);
+                    if (str_contains($element_info['element_name'],'edit_user')){
+                        $element_info['html_id'] = $_SESSION['userID'].$element_info['html_id'];
+                    }
+                    break;
                 case $element_info['name'] == "search_results_table":
-
+                    
 
                 default:
                     break;
