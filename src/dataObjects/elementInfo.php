@@ -89,7 +89,7 @@ class ElementInfo implements iElementInfo
     }
 
     public function getHTMLAttributes(): array {
-        return ['class', 'id', 'name'];
+        return ['class' => 'class', 'html_id'=>'id', 'name' => 'name'];
     }
 
     #[Override]

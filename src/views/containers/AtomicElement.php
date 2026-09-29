@@ -21,8 +21,8 @@ class AtomicElement implements iElement
     {
         if (isset($element_info['html_tag'])) {
             $html_before = "<{$element_info['html_tag']} ";
-            foreach ($element_info->getHTMLattributes() as $attr) {
-                $html_before .=  ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
+            foreach ($element_info->getHTMLattributes() as $key => $attr) {
+                $html_before .=  ($element_info[$key] ? $attr . '="' . $element_info[$key] . '" ' : "");
             }
             $html_before .= ">";
 

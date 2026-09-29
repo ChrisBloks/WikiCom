@@ -34,6 +34,7 @@ class Menuitem extends ContainerElement
             $element_info[$attr] = $val;
         }
 
+
         $this->addElement(
             new AtomicElement($element_info)
         );
