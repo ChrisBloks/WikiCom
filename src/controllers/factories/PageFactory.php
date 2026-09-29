@@ -124,8 +124,6 @@ class PageFactory
     public function addBody()
     {
         $styling_system = ModelSelector::getWebsiteInfoModel()->fetchSystemStyling();
-        $styling_container = ModelSelector::getWebsiteInfoModel()->fetchContainerStylingByPage($this->page);
-        $styling_elements = ModelSelector::getWebsiteInfoModel()->fetchElementStylingByPage($this->page);
 
         // title
         $this->htmlpage->addToBodyContent(new Header(
