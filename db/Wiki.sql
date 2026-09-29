@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2026 at 09:52 AM
+-- Generation Time: Sep 29, 2026 at 03:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,8 +73,8 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 
 CREATE TABLE `dialogue_window` (
   `id` int(11) NOT NULL,
-  `data_bs_type` varchar(255) NOT NULL,
-  `data_bs_value` varchar(255) NOT NULL,
+  `data-bs-toggle` varchar(255) NOT NULL,
+  `data-bs-target` varchar(255) NOT NULL,
   `element_info_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -82,9 +82,9 @@ CREATE TABLE `dialogue_window` (
 -- Dumping data for table `dialogue_window`
 --
 
-INSERT INTO `dialogue_window` (`id`, `data_bs_type`, `data_bs_value`, `element_info_id`) VALUES
+INSERT INTO `dialogue_window` (`id`, `data-bs-toggle`, `data-bs-target`, `element_info_id`) VALUES
 (1, 'modal', '#editUserModal', 65),
-(2, 'modal', '#editPasswordModal', 1);
+(2, 'modal', '#editPasswordModal', 66);
 
 -- --------------------------------------------------------
 
@@ -149,8 +149,8 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (39, 'edit_password_field_old', '', '', '', 'Input', '', ''),
 (40, 'edit_password_field_new', '', '', '', 'new_password', '', ''),
 (41, 'edit_user_field_description', '', '', '', 'textarea', '', ''),
-(42, 'edit_user_field_img', '', '', '', 'Image', '', ''),
-(43, 'create_new_article', 'form', 'form-group', '', 'Form', '', ''),
+(42, 'edit_user_field_img', '', '', '', 'Input', '', ''),
+(43, 'create_new_article', 'form', '', '', 'Form', '', ''),
 (44, 'search_container', 'div', 'container-fluid', '', 'ContainerElement', '', ''),
 (45, 'search_row', 'div', 'row', '', 'ContainerElement', '', ''),
 (46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', '', ''),
@@ -163,25 +163,28 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (55, 'filter_div', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', '', ''),
 (56, 'result_div', 'div', 'col-12 col-md-9 ps-4', '', 'ContainerElement', '', ''),
 (57, 'user_div', 'div', 'd-flex justify-content-center align-items-center align-items-end gap-3', '', 'ContainerElement', '', ''),
-(58, 'dashboard_image', '', 'p-2 dashboard-pic rounded mb-1', '', 'Image', '', ''),
-(59, 'dashboard_title', 'h1', 'p-2 fs-1 fw-bold align-middle', '', 'Title', '', ''),
-(60, 'dashboard_email', 'h1', 'fs-6', '', 'Title', '', ''),
-(61, 'new_article_title', 'div', 'd-flex justify-content-center h4 border-top', '', 'Title', '', 'Create new article'),
-(62, 'hidden_page_dashboard', '', '', '', 'Input', '', ''),
-(63, 'hidden_article_id_dashboard', '', '', '', 'Input', '', ''),
-(64, 'edit_user_information', 'h1', 'fs-3 border-top mt-3', '', 'Title', '', ''),
-(65, 'edit_user_info_button_dashboard', 'button', 'btn btn-secondary mt-1', '-edit-user-btn', 'DialogueButton', '', 'Edit User information'),
-(66, 'edit_user_password_button_dashboard', 'button', 'btn btn-danger mt-1', '-edit-pwd-btn', 'DialogueButton', '', 'Change Password'),
+(58, 'dashboard_image', '', 'p-2 dashboard-pic rounded mb-1 dashboard-pic', '', 'Image', '', ''),
+(59, 'dashboard_title', 'h1', 'd-flex justify-content-center fs-3 userNameDisplay', '', 'Title', '', ''),
+(60, 'dashboard_email', 'h1', 'd-flex justify-content-center fs-6 userEmailDisplay', '', 'Title', '', ''),
+(61, 'new_article_title', 'h1', 'd-flex justify-content-center h4 border-top', '', 'Title', '', 'Create new article'),
+(62, 'hidden_page_dashboard', '', '', '', 'HiddenField', '', ''),
+(63, 'hidden_article_id_dashboard', '', '', '', 'HiddenField', '', ''),
+(64, 'edit_user_information', 'h1', 'd-flex justify-content-center h4 border-top', '', 'Title', '', 'Edit user information'),
+(65, 'edit_user_info_button_dashboard', 'button', 'btn btn-secondary mx-auto d-block', '-edit-user-btn', 'DialogueButton', '', 'Edit User information'),
+(66, 'edit_user_password_button_dashboard', 'button', 'btn btn-danger mx-auto d-block', '-edit-pwd-btn', 'DialogueButton', '', 'Change Password'),
 (67, 'edit_user_modal', '', '', 'editUserModal', 'Modal', '', 'Edit User Information'),
 (68, 'edit_password_modal', '', '', 'editPasswordModal', 'Modal', '', 'Change Password'),
 (69, 'edit_user_modal_errors', 'div', 'alert alert-danger d-none', 'editUserModal-errors', 'AtomicElement', '', ''),
 (70, 'edit_password_modal_errors', 'div', 'alert alert-danger d-none', 'editPasswordModal-errors', 'AtomicElement', '', ''),
 (71, 'edit_article_form', 'form', 'form-group', '', 'EditableArticle', '', ''),
-(72, 'hidden_article_ID', 'input', '', '', 'HiddenField', '', ''),
-(73, 'hidden_page', 'input', '', '', 'Input', '', ''),
+(72, 'hidden_article_ID', '', '', '', 'HiddenField', '', ''),
+(73, 'hidden_page', '', '', '', 'HiddenField', '', ''),
 (74, 'edit_article_title', 'input', '', '', 'Input', '', ''),
 (75, 'table_article_title_dashboard', 'h1', 'fs-2', '', 'Title', '', 'Articles'),
-(76, 'table_dashboard', 'table', 'table table-search table-hover table-striped table-bordered', '', 'DashboardTable', '', '');
+(76, 'table_dashboard', 'table', 'table table-search table-hover table-striped table-bordered', '', 'DashboardTable', '', ''),
+(100, 'hidden_page_edit_user', '', '', '', 'HiddenField', '', ''),
+(101, 'hidden_action_edit_user', '', '', '', 'HiddenField', '', ''),
+(102, 'hidden_id_edit_user', '', '', '', 'HiddenField', '', '');
 
 -- --------------------------------------------------------
 
@@ -273,7 +276,13 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (68, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '72', 0, 'element', 15),
 (69, 72, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '72', 0, 'field', 0),
 (70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
-(71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0);
+(71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0),
+(90, 35, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '100', 0, 'element', 0),
+(91, 35, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '101', 0, 'element', 0),
+(92, 35, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '102', 0, 'element', 0),
+(93, 100, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '100', 0, 'field', 0),
+(94, 101, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '101', 0, 'field', 0),
+(95, 102, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '102', 0, 'field', 0);
 
 -- --------------------------------------------------------
 
@@ -324,7 +333,10 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (25, 'id', 63, 'hidden', '', '0', '', 0),
 (26, 'Edit User Information', 65, 'Button', 'Change user information', '', 'btn btn-secondary mt-1', 1),
 (27, 'Edit Password', 66, 'Button', '', '', '', 1),
-(28, 'articleID', 72, 'hidden', '', '$editArticleID', '', 0);
+(28, 'articleID', 72, 'hidden', '', '$editArticleID', '', 0),
+(29, 'page', 100, 'hidden', '', 'editUser', '', 0),
+(30, 'action', 101, 'hidden', '', 'updateUserInfo', '', 0),
+(31, 'id', 102, 'hidden', '', '#userID', '', 0);
 
 -- --------------------------------------------------------
 
@@ -353,7 +365,7 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 (3, 21, '', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
 (4, 25, '', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm'),
 (5, 31, '', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
-(6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary btn-sm'),
+(6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary mx-auto d-block'),
 (7, 35, '', 'POST', '', 'Change information', '', 'btn btn-primary'),
 (8, 38, '', 'POST', '', 'save', '', 'btn btn-primary');
 
@@ -467,7 +479,7 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (8, 56, 40, 20),
 (8, 57, 50, 30),
 (8, 58, 60, 50),
-(8, 59, 70, 50),
+(8, 59, 70, 30),
 (8, 60, 80, 30),
 (8, 61, 90, 30),
 (8, 43, 100, 30),
@@ -1050,19 +1062,19 @@ ALTER TABLE `dialogue_window`
 -- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `form_info`

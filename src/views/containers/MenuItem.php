@@ -24,6 +24,7 @@ class Menuitem extends ContainerElement
                 'class' => $li_class,
             ]));
 
+        
         $element_info = new LinkedElementInfo([
                     'html_tag' => 'a',
                     'href' => htmlspecialchars($href),
@@ -33,7 +34,6 @@ class Menuitem extends ContainerElement
         foreach($attrs as $attr => $val){
             $element_info[$attr] = $val;
         }
-
 
         $this->addElement(
             new AtomicElement($element_info)

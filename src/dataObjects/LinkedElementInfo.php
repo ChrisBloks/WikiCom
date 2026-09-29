@@ -17,12 +17,13 @@ class LinkedElementInfo extends ElementInfo
             'role',
             'data-bs-toggle',
             'aria-expanded',
-            'label'
+            'label',
+            'data-user-id'
         ];
 
     #[Override]
     public function getHTMLAttributes(): array
     {
-        return ['class'=>'class', 'href'=>'href', 'role'=>'role', 'data-bs-toggle'=>'data-bs-toggle', 'aria-expanded' =>'aria-expanded' ];
+        return ['class'=>'class', 'href'=>'href', 'role'=>'role', 'data-bs-toggle'=>'data-bs-toggle', 'aria-expanded' =>'aria-expanded','data-user-id' => 'data-user-id', ];
     }
 }
