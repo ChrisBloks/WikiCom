@@ -78,6 +78,9 @@ class ElementModel extends BaseModel
                 case 'options':
                     $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
                     $element_info['options_info'][] = $options_info;
+                case 'aria_attributes':
+                    $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
+                    $element_info['aria_attributes'] = $options_info;
                 default:
                     break;
             }

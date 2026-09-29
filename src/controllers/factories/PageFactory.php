@@ -14,31 +14,31 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-Wiki\tools\traits\tErrorMessageCollector,
-Wiki\tools\exceptions\PageNotFoundException,
-Wiki\models\ModelSelector,
-Wiki\controllers\factories\MenuFactory,
-Wiki\views\BasePage,
-Wiki\views\Table,
-Wiki\views\containers\AtomicElement,
-Wiki\views\containers\Header,
-Wiki\views\containers\BodyText,
-Wiki\views\containers\Title,
-Wiki\views\containers\Card,
-Wiki\views\containers\Image,
-Wiki\views\containers\AuthorText,
-Wiki\views\containers\CodeBlock,
-Wiki\views\containers\Footer,
-Wiki\views\containers\ContainerElement,
-Wiki\views\containers\MainElement,
-Wiki\views\containers\Rating,
-Wiki\views\containers\NoticeMessage,
-League\CommonMark\GithubFlavoredMarkdownConverter,
-HTMLPurifier,
-HTMLPurifier_Config,
-Wiki\views\fields\ButtonField,
-InvalidArgumentException,
-Throwable;
+    Wiki\tools\traits\tErrorMessageCollector,
+    Wiki\tools\exceptions\PageNotFoundException,
+    Wiki\models\ModelSelector,
+    Wiki\controllers\factories\MenuFactory,
+    Wiki\views\BasePage,
+    Wiki\views\Table,
+    Wiki\views\containers\AtomicElement,
+    Wiki\views\containers\Header,
+    Wiki\views\containers\BodyText,
+    Wiki\views\containers\Title,
+    Wiki\views\containers\Card,
+    Wiki\views\containers\Image,
+    Wiki\views\containers\AuthorText,
+    Wiki\views\containers\CodeBlock,
+    Wiki\views\containers\Footer,
+    Wiki\views\containers\ContainerElement,
+    Wiki\views\containers\MainElement,
+    Wiki\views\containers\Rating,
+    Wiki\views\containers\NoticeMessage,
+    League\CommonMark\GithubFlavoredMarkdownConverter,
+    HTMLPurifier,
+    HTMLPurifier_Config,
+    Wiki\views\fields\ButtonField,
+    InvalidArgumentException,
+    Throwable;
 use Wiki\dataObjects\ElementInfo;
 
 
@@ -233,14 +233,32 @@ class PageFactory
                     }
                     break;
                 case ($element_info['php_class'] == 'DialogueButton'):
-                    $element_info['attributes'] = ModelSelector::getElementModel()->fetchDialogueAttributesByElementId($element_info['element_id']);
+                    $element_info['attributes'] = ModelSelector::getElementModel()
+                        ->fetchDialogueAttributesByElementId($element_info['element_id']);
                     if (str_contains($element_info['element_name'], 'edit_user')) {
                         $element_info['html_id'] = $_SESSION['userID'] . $element_info['html_id'];
                     }
                     break;
                 case $element_info['element_name'] == "table_dashboard":
-                    $element_info['options_info'][] = ModelSelector::getArticleModel()->fetchArticleByUserId($_SESSION['userID']);
-                break;
+                    $element_info['options_info'][] = ModelSelector::getArticleModel()
+                        ->fetchArticleByUserId($_SESSION['userID']);
+                    break;
+                case $element_info['php_class'] == "TagButtonContainer":
+                    $element_info['options_info'][0] = ModelSelector::getArticleModel()
+                        ->fetchArticleTags($this->response['articleID']);
+                    break;
+
+                case $element_info['element_name'] == 'article_text_img_div':
+                    $article_info = ModelSelector::getArticleModel()
+                        ->fetchArticleByID($this->response['articleID']);
+                    
+                    foreach($element_info['sub_fields'] as $sub_element_info){
+                        if($sub_element_info['element_name'] == 'article_body_text'){
+                            $sub_element_info['text'] = $article_info['summary'];
+                        }
+                    }
+                    
+                    break;
                 case $element_info['element_name'] == "search_results_table":
                 default:
                     break;

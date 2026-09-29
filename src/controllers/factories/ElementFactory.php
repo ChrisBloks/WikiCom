@@ -31,10 +31,14 @@ class ElementFactory
         'modal' => 'Wiki\views\containers\Modal',
         'hiddenfield' => 'Wiki\views\fields\HiddenField',
         'editablearticle' => 'Wiki\views\containers\EditableArticle',
-        'textareafield' => 'Wiki\views\fields\TextAreaField'
+        'textareafield' => 'Wiki\views\fields\TextAreaField',
+        'toast' => 'Wiki\views\containers\Toast',
+        'rating' => 'Wiki\views\containers\Rating',
+        'tagbuttoncontainer' => 'Wiki\views\containers\TagButtonContainer',
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
+        HtmlUtils::dump('Creating element:', $element_info);
         return new self::$NAMESPACE[
             strtolower($element_info['php_class'])
             ]($element_info);

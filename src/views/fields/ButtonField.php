@@ -3,7 +3,6 @@
 namespace Wiki\views\fields;
 
 use Wiki\dataObjects\ElementInfo;
-use Wiki\views\fields\BaseField, Wiki\tools\interfaces\iElement;
 use Wiki\tools\utils\HtmlUtils;
 
 /**

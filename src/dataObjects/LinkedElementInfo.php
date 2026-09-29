@@ -17,7 +17,8 @@ class LinkedElementInfo extends ElementInfo
             'role',
             'data-bs-toggle',
             'aria-expanded',
-            'label'
+            'label',
+            'field_info'
         ];
 
     #[Override]

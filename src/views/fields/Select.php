@@ -19,7 +19,7 @@ class Select extends BaseField
         parent::__construct(
             name: $field_info['name'] ?? "",
             label: $field_info['label'] ?? "",
-            class: $field_info['html_class'] ?? "");
+            class: $element_info['html_class'] ?? "");
         $this->options = $element_info['options_info'][0];
         $this->selected_option = $selected_option ?? $default_option;
         $this->option_class = "";
