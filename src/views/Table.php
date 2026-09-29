@@ -97,7 +97,7 @@ class Table implements iElement
 
             //for columns, each row gets an identifier of that column
             foreach ($this->columns as $identifier => $column) {
-                $value = $row_data[$identifier] ?? null;
+                $value = $row_data[$column['column_name']] ?? null;
                 $str .= $this->buildCell($column, $value, $row_data);
             }
 

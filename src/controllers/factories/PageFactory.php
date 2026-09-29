@@ -208,11 +208,15 @@ class PageFactory
                     $excludelist[] = $element_info['article']['id'];
                     break;
                 case str_contains($element_info['element_name'], 'about_'):
-                    $about_info = ModelSelector::getWebsiteInfoModel()
-                        ->fetchAuthorAboutInfo($this->response['aboutID']);
+                case str_contains($element_info['element_name'], 'dashboard_'):
+                    $userID = ((isset($this->response['aboutID'])) ? $this->response['aboutID'] : $_SESSION['userID']);
+                    $about_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($userID);
                     $element_info['title'] = $about_info['name'];
                     $element_info['bodytext'] = $about_info['description'];
                     $element_info['image'] = $about_info['imgFileName'];
+                    if (str_contains($element_info['element_name'], 'email')) {
+                        $element_info['title'] = $about_info['email'];
+                    }
                     break;
                 // Check if the value for this hidden field should be in the response.
                 case $element_info['php_class'] == 'EditableArticle':
@@ -236,6 +240,9 @@ class PageFactory
                         $element_info['html_id'] = $_SESSION['userID'] . $element_info['html_id'];
                     }
                     break;
+                case $element_info['element_name'] == "table_dashboard":
+                    $element_info['options_info'][] = ModelSelector::getArticleModel()->fetchArticleByUserId($_SESSION['userID']);
+                break;
                 case $element_info['element_name'] == "search_results_table":
                 default:
                     break;

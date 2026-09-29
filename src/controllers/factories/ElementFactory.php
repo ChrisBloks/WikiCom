@@ -26,6 +26,7 @@ class ElementFactory
         'searchablecheckboxes' =>  'Wiki\views\fields\SearchableCheckboxes',
         'select' => 'Wiki\views\fields\Select',
         'resultstable' => 'Wiki\views\Table',
+        'dashboardtable' => 'Wiki\views\Table',
         'dialoguebutton' => 'Wiki\views\fields\DialogueButton',
         'modal' => 'Wiki\views\containers\Modal',
         'hiddenfield' => 'Wiki\views\fields\HiddenField',
