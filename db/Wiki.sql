@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2026 at 04:15 PM
+-- Generation Time: Sep 29, 2026 at 09:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -179,7 +179,9 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (71, 'edit_article_form', 'form', 'form-group', '', 'EditableArticle', '', ''),
 (72, 'hidden_article_ID', 'input', '', '', 'HiddenField', '', ''),
 (73, 'hidden_page', 'input', '', '', 'Input', '', ''),
-(74, 'edit_article_title', 'input', '', '', 'Input', '', '');
+(74, 'edit_article_title', 'input', '', '', 'Input', '', ''),
+(75, 'table_article_title_dashboard', 'h1', 'fs-2', '', 'Title', '', 'Articles'),
+(76, 'table_dashboard', 'table', 'table table-search table-hover table-striped table-bordered', '', 'DashboardTable', '', '');
 
 -- --------------------------------------------------------
 
@@ -270,7 +272,8 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (67, 71, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '71', 0, 'form', 0),
 (68, 25, 'element_info', 'id as element_id,element_name,php_class', 'element_info.id', '72', 0, 'element', 15),
 (69, 72, 'field_info', 'field_name,type,label,value,html_class,optional', 'field_info.element_id', '72', 0, 'field', 0),
-(70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0);
+(70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
+(71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0);
 
 -- --------------------------------------------------------
 
@@ -476,7 +479,9 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (8, 35, 160, 140),
 (8, 68, 170, 30),
 (8, 70, 180, 170),
-(8, 38, 190, 170);
+(8, 38, 190, 170),
+(8, 75, 200, 40),
+(8, 76, 210, 40);
 
 -- --------------------------------------------------------
 
@@ -1045,13 +1050,13 @@ ALTER TABLE `dialogue_window`
 -- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `field_info`
