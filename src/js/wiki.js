@@ -71,7 +71,6 @@ const AjaxForms = {
       const $submitBtn = $form.find('[type="submit"]');
       this.setLoading($submitBtn, true);
       $errorBox.addClass("d-none");
-
       // ajax-call
       $.ajax({
         url: "main.php",

@@ -90,9 +90,11 @@ class AjaxController implements iController
                 $_SESSION['errors'] = [];
                 $_SESSION['messages'] = [];
 
-                $field_info = ModelSelector::getFormModel()
-                    ->fetchFieldInfo(page_name: $this->request['page']);
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
 
+                // Perform basic validation on contact fields, field inputs are retrieved internally
+                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
                 $validation_result = (new ValidationHandler)
                     ->validateFields(field_info: $field_info);
 
@@ -106,7 +108,7 @@ class AjaxController implements iController
                         'errors' => $result['user_error'] ?? [],
                         'message' => $result['ok'] ? 'Your information has been updated.' : 'Something went wrong.',
                         'name' => $result['field_inputs']['name'] ?? null,
-                        'user_id' =>$this->request['user_id']?? null,
+                        'user_id' => $this->request['user_id'] ?? null,
                         'email' => $result['field_inputs']['email'] ?? null,
                         'avatar_url' => $result['field_inputs']['avatar_url'] ?? null,
                     ];
