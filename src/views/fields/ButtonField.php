@@ -48,6 +48,6 @@ class ButtonField extends BaseField
             return '<a href="' . $this->href . '">' . $this->html . '</a><br>';
         }
 
-        return $this->html . '<br>';
+        return $this->html . '';
     }
 }

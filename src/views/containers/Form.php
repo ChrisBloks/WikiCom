@@ -44,11 +44,11 @@ class Form extends ContainerElement
                 $this->html_before .= $attr . '="_" ';
             }
         }
-        $this->html_before .= "><br>" . ($element_info['text'] ?? "");
+        $this->html_before .= ">" . ($element_info['text'] ?? "");
 
 
         // Build closing tag
-        $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}><br>" : "<br>");
+        $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
 
         // Sort fields based on element_order
 
