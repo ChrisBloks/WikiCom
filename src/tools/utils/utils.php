@@ -2,6 +2,8 @@
 
 namespace Wiki\tools\utils;
 
+use ArrayAccess;
+
 class Utils
 {
     /**
@@ -54,5 +56,14 @@ class Utils
     public static function getSesVar(string $key, mixed $default = ""): mixed
     {
         return self::getValueFromArray($key, $_SESSION, $default);
+    }
+
+    public static function get_array_element_where(array|ArrayAccess $arr, callable $fn): mixed {
+        foreach($arr as $element){
+            if ($fn($element)){
+                return $element;
+            }
+        }
+        return False;
     }
 }

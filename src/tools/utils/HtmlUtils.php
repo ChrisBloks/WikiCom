@@ -9,7 +9,7 @@ class HtmlUtils
     public static function printLabel(string $id, string $label)
     {
         return
-            '<label for="' . $id . '">' . $label . '</label><br>';
+            '<label for="' . $id . '">' . $label . '</label>';
     }
 
     // function to better display var_dump function

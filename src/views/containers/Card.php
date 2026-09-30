@@ -1,18 +1,20 @@
 <?php
 namespace Wiki\views\containers;
 
+use ArrayAccess;
 use Wiki\tools\interfaces\iElement;
+use Wiki\tools\utils\HtmlUtils;
 
 class Card extends WrappedText
 {
 
-    public function __construct(string $image, string $title, string $summary, int $article_id)
+    public function __construct(ArrayAccess $element_info)
     {
         parent::__construct($this->createCard(
-            image: $image,
-            title: $title,
-            summary: $summary,
-            article_id: $article_id
+            image: $element_info['article']['imgFileName'],
+            title: $element_info['article']['title'],
+            summary: $element_info['article']['summary'],
+            article_id: $element_info['article']['id']
         ), 
         'div class ="col"');
     }

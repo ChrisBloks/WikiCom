@@ -3,10 +3,13 @@
  *   Marius 2026
  *   ToDo: allow showing of rating count
  */
+
 namespace Wiki\views\containers;
 
+use Wiki\dataObjects\ElementInfo;
+use Wiki\dataObjects\FieldInfo;
 use Wiki\views\containers\ContainerElement,
-Wiki\views\fields\Select;
+    Wiki\views\fields\Select;
 use Wiki\views\fields\ButtonField;
 use Wiki\views\fields\HiddenField;
 use Wiki\tools\utils\HtmlUtils;
@@ -21,39 +24,58 @@ use Wiki\tools\utils\HtmlUtils;
 class Rating extends ContainerElement
 {
 
-    public function __construct(float $rating, int $article_id, bool $display_only = false, bool $ratable = false, int $count =0)
+    public function __construct(ElementInfo $element_info)
     {
-        parent::__construct('<div class="rating_div">', '</div>');
+        parent::__construct($element_info);
+
+        $rating = $element_info['options_info']['rating'] ?? 0;
+        $display_only = $element_info['options_info']['display_only'] ?? false;
+        $ratable = $element_info['options_info']['ratable'] ?? false;
+        $article_id = $element_info['options_info']['article_id'] ?? -1;
+        $count = $element_info['options_info']['count'] ?? '?';
+
 
         $max = 5;
         $percent = ($rating / $max) * 100;
+
 
         // Add interactive element
         if (!$display_only && $ratable) {
             // Add dropdown
             $this->addElement(
                 new Select(
-                    name: "rating_dropdown_" . $article_id,
-                    label: "Rate this article",
-                    class: "rating_select",
-                    options: [
-                        1 => 1,
-                        2 => 2,
-                        3 => 3,
-                        4 => 4,
-                        5 => 5
-                    ],
-                    option_class: "rating_option"
-                )
+                    new ElementInfo([
+                    'element_name' => "rating_dropdown_" . $article_id,
+                    'html_class' => "rating_select",
+                    'field_info' => new FieldInfo([
+                        'label' => "Rate this article"
+                    ]),
+                    'options_info' => [
+                        [
+                            ['id' => 1, 'name' => 1],
+                            ['id' => 2, 'name' => 2],
+                            ['id' => 3, 'name' => 3],
+                            ['id' => 4, 'name' => 4],
+                            ['id' => 5, 'name' => 5],
+                        ],
+                        'rating_option'
+                    ]
+                ]))
             );
 
             // Add button
             $this->addElement(
                 new ButtonField(
-                    type: "button",
-                    name: "rating_button",
-                    class: "rating_button",
-                    label: 'Submit rating'
+                    new ElementInfo([
+                        'html_tag' => "input",
+                        'element_name' => "rating_button",
+                        'html_class' => "rating_button",
+                        'field_info' => new FieldInfo([
+                            'type' => "button",
+                            'label' => 'Submit rating',
+                            'value' => "Submit rating",
+                        ])
+                    ])
                 )
             );
         }
@@ -61,27 +83,32 @@ class Rating extends ContainerElement
         // Add display element
         $this->addElement(
             new AtomicElement(
-                html: '<div class="star-ratings">
-                        <div class="fill-ratings" style="width: '.$percent.'%;">
-                            <span>★★★★★</span>
-                        </div>
-                        <div class="empty-ratings">
-                            <span>★★★★★</span> 
-                        </div>
-                        <div class="count-rating">
-                        ('.$count.')
-                        </div>
-                        </div>'
+                new ElementInfo([
+                    'text' => '<div class="star-ratings">
+                            <div class="fill-ratings" style="width: ' . $percent . '%;">
+                                <span>★★★★★</span>
+                            </div>
+                            <div class="empty-ratings">
+                                <span>★★★★★</span> 
+                            </div>
+                            <div class="count-rating">
+                            (' . $count . ')
+                            </div>
+                            </div>'
+                ])
             )
         );
 
         // Add hidden element
         $this->addElement(
             new HiddenField(
-                name: 'article_id',
-                value: $article_id
+                new ElementInfo([
+                    'element_name' => 'article_id',
+                    'field_info' => new FieldInfo([
+                        'value' => $article_id
+                    ])
+                ]) 
             )
         );
     }
 }
-

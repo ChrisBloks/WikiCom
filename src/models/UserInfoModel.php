@@ -40,24 +40,6 @@ class UserInfoModel extends BaseModel
         return $result;
     }
 
-
-
-    /**
-     * Check if an email is already present in the database.
-     * True if an email was matched, false otherwise.
-     * @param string $email
-     * @return bool
-     */
-    public function checkEmailExists(string $email): bool
-    {
-        $sql = "SELECT email FROM user 
-                        WHERE email=:email";
-        $params = ["email" => $email];
-        $result = $this->crud->selectOne($sql, $params);
-        return !empty($result);
-    }
-
-
     /**
      * Save a new user to the database.
      * @param string $username

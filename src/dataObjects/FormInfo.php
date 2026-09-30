@@ -12,12 +12,10 @@ class FormInfo extends ElementInfo
             'method',
             'submit_caption',
             'enctype',
-            'display_class',
             'submit_class',
             'id',
             'action',
             'method',
-            'style',
             'text',
             'label',
         ];

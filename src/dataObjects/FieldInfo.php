@@ -11,8 +11,7 @@ class FieldInfo extends ElementInfo
     static protected array $allowed_keys =
         [
             'type',
-            'class',
-            'name',
+            'field_name',
             'optional',
             'id',
             'value',
@@ -22,6 +21,7 @@ class FieldInfo extends ElementInfo
             'marked',
             'text',
             'label',
+            'element_order'
         ];
 
 }

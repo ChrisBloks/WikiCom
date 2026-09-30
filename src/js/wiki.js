@@ -71,7 +71,6 @@ const AjaxForms = {
       const $submitBtn = $form.find('[type="submit"]');
       this.setLoading($submitBtn, true);
       $errorBox.addClass("d-none");
-
       // ajax-call
       $.ajax({
         url: "main.php",
@@ -86,6 +85,7 @@ const AjaxForms = {
             if (typeof options.onSuccess === 'function') options.onSuccess(result);
             bootstrap.Modal.getInstance($modal[0])?.hide();
           } else if ($errorBox.length) {
+            console.log(result);
             const messages = result.errors && result.errors.length ? result.errors : [result.message];
             $errorBox.html(messages.map((msg) => `<div>${msg}</div>`).join(""));
             $errorBox.removeClass("d-none");

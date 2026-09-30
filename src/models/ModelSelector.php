@@ -20,7 +20,8 @@ abstract class ModelSelector
         "getFormModel" => "Wiki\models\FormModel",
         "getWebsiteInfoModel" => "Wiki\models\WebsiteInfoModel",
         "getRatingModel" => "Wiki\models\RatingModel",
-        "getUserInfoModel" => "Wiki\models\UserInfoModel"
+        "getUserInfoModel" => "Wiki\models\UserInfoModel",
+        "getElementModel" => "Wiki\models\ElementModel"
     ];
 
     /**

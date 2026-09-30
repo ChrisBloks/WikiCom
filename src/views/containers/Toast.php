@@ -2,6 +2,8 @@
 
 namespace Wiki\views\containers;
 
+use Override;
+use Wiki\dataObjects\ElementInfo;
 use Wiki\tools\utils\HtmlUtils,
     Wiki\tools\interfaces\iElement;
 
@@ -10,6 +12,15 @@ use Wiki\tools\utils\HtmlUtils,
  */
 class Toast implements iElement
 {
+
+    protected ElementInfo $element_info;
+
+    public function __construct(ElementInfo $element_info)
+    {
+        $this->element_info = $element_info;
+    }
+
+
     /** stores all notice messages based on type
      * in a string with class attribute
      */
@@ -19,8 +30,7 @@ class Toast implements iElement
 
         $str = '';
         // stacking container
-        $str .= '<div aria-live="polite" aria-atomic="true" class="position-relative">';
-        $str .= '<div class="toast-container top-0 end-0 p-3" id="toast-container">';
+        $str .= '<div class="' . $this->element_info['html_class'] . '" id="' . $this->element_info['html_id'] . '">';
 
         foreach ($notices as $notice) {
 
@@ -64,5 +74,9 @@ class Toast implements iElement
         }
 
         return $notices;
+    }
+    public function addElement(iElement $element): void
+    {
+        throw new \Exception('Not implemented');
     }
 }
