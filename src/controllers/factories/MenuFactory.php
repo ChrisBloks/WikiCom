@@ -35,14 +35,14 @@ class MenuFactory
 
     protected function buildMenuItem(array $item, string $link_class = 'nav-link', string $li_class = 'nav-item')
     {
-        if (empty($item['label']) || empty($item['href'])) {
-            $this->logError("Menu item missing required 'label' or 'href': ");
+        if (empty($item['label']) || empty($item['page_value'])) {
+            $this->logError("Menu item missing required 'label' or 'page_value': ");
         }
         if (!empty($item['submenu'])) {
 
             $menuItem = new MenuItem(
                 label: $item['label'],
-                href: '?page='.$item['href'],
+                page_value: '?page='.$item['page_value'],
                 class: $link_class . ' dropdown-toggle',
                 attrs: [
                     'role' => 'button',
@@ -67,7 +67,7 @@ class MenuFactory
         } else {
             $menuItem = new MenuItem(
                 label: $item['label'],
-                href: '?page='.$item['href'],
+                page_value: '?page='.$item['page_value'],
                 class: $link_class,
                 attrs: ['data-user-id' => $item['id'] ?? -1],
                 li_class: $li_class
