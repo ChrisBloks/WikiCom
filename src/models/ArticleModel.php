@@ -156,7 +156,7 @@ class ArticleModel extends BaseModel
 
         foreach ($result as $key => $article){
             $result[$key]['tags'] = implode(",",$this->fetchArticleTags($article['id']));
-            $result[$key]['Author'] = ModelSelector::getUserInfoModel()->fetchUserInfoById($article['user_id'])['name'];
+            $result[$key]['Author'] = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($article['user_id'])['name'];
         }
 
         return $result;
