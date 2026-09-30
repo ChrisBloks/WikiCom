@@ -13,6 +13,7 @@
 
 namespace Wiki\controllers\factories;
 
+use ArrayAccess;
 use Wiki\tools\utils\HtmlUtils,
     Wiki\tools\traits\tErrorMessageCollector,
     Wiki\tools\exceptions\PageNotFoundException,
@@ -50,6 +51,8 @@ class PageFactory
     protected bool $isLoggedIn;
     protected array $response;
     private BasePage $htmlpage;
+    protected array|ArrayAccess $article_info;
+
     public function __construct(array $response)
     {
         $this->response = $response;
@@ -190,12 +193,20 @@ class PageFactory
     }
 
 
+    // TODO: Clean up this function
     protected function add_data_to_elements(array &$elements_info)
     {
         foreach ($elements_info as &$element_info) {
 
             if (isset($element_info['sub_fields'])) {
                 $this->add_data_to_elements($element_info['sub_fields']);
+            }
+
+            if ($this->response['page'] == 'article' || $this->response['page'] == 'editArticle'){
+                if(!isset($this->article_info)){
+                    $this->article_info = ModelSelector::getArticleModel()
+                        ->fetchArticleByID($this->response['articleID'] ?? $this->response['editArticleID'] ?? []);
+                }
             }
 
             switch (true) {
@@ -218,11 +229,9 @@ class PageFactory
                     break;
                 // Check if the value for this hidden field should be in the response.
                 case $element_info['php_class'] == 'EditableArticle':
-                    $article_info = ModelSelector::getArticleModel()
-                        ->fetchArticleByID($this->response['editArticleID']);
-                    $article_info['tags'] = ModelSelector::getArticleModel()
+                    $this->article_info['tags'] = ModelSelector::getArticleModel()
                         ->fetchArticleTags($this->response['editArticleID']);
-                    $element_info['article_info'] = $article_info;
+                    $element_info['article_info'] = $this->article_info;
                     break;
                 case $element_info['php_class'] == 'HiddenField':
                     // HtmlUtils::dump('Flag1', "");
@@ -249,17 +258,22 @@ class PageFactory
                     break;
 
                 case $element_info['element_name'] == 'article_text_img_div':
-                    $article_info = ModelSelector::getArticleModel()
-                        ->fetchArticleByID($this->response['articleID']);
-                    
                     foreach($element_info['sub_fields'] as $sub_element_info){
                         if($sub_element_info['element_name'] == 'article_body_text'){
-                            $sub_element_info['text'] = $article_info['summary'];
+                            $sub_element_info['text'] = $this->article_info['summary'];
                         }
                     }
                     
                     break;
-                case $element_info['element_name'] == "search_results_table":
+                case $element_info['element_name'] == "article_code_block":
+                    $element_info['text'] = $this->article_info['codeBlock'];
+                    break;
+                case $element_info['element_name'] == "article_title":
+                    $element_info['text'] = $this->article_info['title'];
+                    break;
+                case $element_info['element_name'] == "article_author_name":
+                    $element_info['text'] = $this->article_info['name'];
+                    break;
                 default:
                     break;
             }

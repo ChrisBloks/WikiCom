@@ -35,6 +35,7 @@ class ElementFactory
         'toast' => 'Wiki\views\containers\Toast',
         'rating' => 'Wiki\views\containers\Rating',
         'tagbuttoncontainer' => 'Wiki\views\containers\TagButtonContainer',
+        'codeblock' => 'Wiki\views\containers\CodeBlock'
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
