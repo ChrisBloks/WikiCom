@@ -13,7 +13,7 @@ class LinkedElementInfo extends ElementInfo
             'html_tag',
             'html_class',
             'php_class',
-            'href',
+            'page_value',
             'role',
             'data-bs-toggle',
             'aria-expanded',
@@ -25,6 +25,6 @@ class LinkedElementInfo extends ElementInfo
     #[Override]
     public function getHTMLAttributes(): array
     {
-        return ['class'=>'class', 'href'=>'href', 'role'=>'role', 'data-bs-toggle'=>'data-bs-toggle', 'aria-expanded' =>'aria-expanded','data-user-id' => 'data-user-id', ];
+        return ['class'=>'class', 'page_value'=>'href', 'role'=>'role', 'data-bs-toggle'=>'data-bs-toggle', 'aria-expanded' =>'aria-expanded','data-user-id' => 'data-user-id', ];
     }
 }

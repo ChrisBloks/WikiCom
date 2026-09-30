@@ -151,7 +151,6 @@ class PageFactory
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
-
         $this->add_data_to_elements($elements_info);
 
 
