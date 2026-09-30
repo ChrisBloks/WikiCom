@@ -45,7 +45,7 @@ class ElementModel extends BaseModel
 
         foreach ($result as $row => $element_info) {
             $result[$row] = new ElementInfo(
-                $this->getLookupResult($element_info)
+                $this->fetchLookupResult($element_info)
             );
         }
 
@@ -53,7 +53,7 @@ class ElementModel extends BaseModel
         return $result;
     }
 
-    protected function getLookupResult(array $element_info)
+    protected function fetchLookupResult(array $element_info)
     {
         $element_id = $element_info['element_id'];
         $lookup_info_list = $this->fetchLookupInfoByElementId($element_id);
@@ -71,7 +71,7 @@ class ElementModel extends BaseModel
                 case 'element':
                     // get sub_element_id
                     $sub_element_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
-                    $element_info['sub_fields'][] = new ElementInfo($this->getLookupResult($sub_element_info));
+                    $element_info['sub_fields'][] = new ElementInfo($this->fetchLookupResult($sub_element_info));
                     break;
                 case 'options':
                     $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
@@ -120,7 +120,7 @@ class ElementModel extends BaseModel
         foreach ($lookups_info as $lookup_info) {
             if ($lookup_info['source_table'] != 'form_info') {
                 $lookup = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
-                $lookup_field = $this->getLookupResult($lookup);
+                $lookup_field = $this->fetchLookupResult($lookup);
                 if ($lookup_field['field_info']['type'] != 'hidden') {
                     $result[] = $lookup_field['field_info'];
                 }
@@ -143,18 +143,6 @@ class ElementModel extends BaseModel
                     {$lookup_info['source_table']}
                 ";
 
-        // // If a bridge table is required
-        // if (!empty($lookup_info["bridge_table"])) {
-        //     [$bridge_table_column, $source_table_column] = explode(",", $lookup_info["bridge_values"]);
-
-        //     $join_clause = "JOIN {$lookup_info["bridge_table"]} ON {$bridge_table_column} = {$source_table_column}";
-        //     // If a LEFT JOIN is required
-        //     if (!empty($lookup_info['left_join_on'])) {
-        //         $join_clause = "LEFT " . $join_clause . " AND {$lookup_info["left_join_on"]} = {$parent_id}";
-        //     }
-        //     $sql .= $join_clause;
-        // }
-
         // If a WHERE value is specified
         if (!empty($lookup_info["where_"])) {
             if (explode(',', $lookup_info['where_value']) > 1) {
@@ -164,9 +152,6 @@ class ElementModel extends BaseModel
             }
 
         }
-
-        // // Always add an ORDER BY clause
-        // $sql .= " ORDER BY {$lookup_info['order_by']}";
         // Execute the query
         if ($mode === 'one') {
             $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);

@@ -11,33 +11,14 @@ use Wiki\tools\utils\HtmlUtils;
 
 class WebsiteInfoModel extends BaseModel
 {
-    /*
-    * method gets body text based on the page name
-    *
-    * @params page name
-    */
-    public function fetchBodyText(string $page_name): array|false
-    {
-        $sql = "SELECT bodytext
-                FROM website_info 
-                WHERE name=:page";
-        $params = ["page" => $page_name];
-        $result = $this->crud->selectOne($sql, $params);
-        if (empty($result)) {
-            $this->logError("Page has no Body text");
-            return false;
-        }
 
-
-        return $result;
-    }
 
     /*
     * method gets user info based on user id
     *
     * @params user id
     */
-    public function fetchAuthorAboutInfo(string $user_id, string $page_name = "about"): array|false
+    public function fetchAuthorAboutInfo(string $user_id): array|false
     {
         $sql = "SELECT name,description,imgFileName FROM user 
                 WHERE id=:userid";
