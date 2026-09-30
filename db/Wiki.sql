@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki_test`
+-- Database: `wiki`
 --
-CREATE DATABASE IF NOT EXISTS `wiki_test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki_test`;
+CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki`;
 
 -- --------------------------------------------------------
 
