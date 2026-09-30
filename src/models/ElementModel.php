@@ -71,7 +71,6 @@ class ElementModel extends BaseModel
                 case 'element':
                     // get sub_element_id
                     $sub_element_info = $this->fetchLookupInfoResult($lookup_info, mode: 'one');
-                    // $element_info['sub_fields'][] = $this->getLookupResult($sub_element_info);
                     $element_info['sub_fields'][] = new ElementInfo($this->getLookupResult($sub_element_info));
                     break;
                 case 'options':

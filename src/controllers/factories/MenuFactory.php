@@ -69,7 +69,7 @@ class MenuFactory
                 label: $item['label'],
                 href: '?page='.$item['href'],
                 class: $link_class,
-                attrs: ['data-user-id' => $item['id']],
+                attrs: ['data-user-id' => $item['id'] ?? -1],
                 li_class: $li_class
             );
         }

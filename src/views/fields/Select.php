@@ -22,7 +22,7 @@ class Select extends BaseField
             class: $element_info['html_class'] ?? "");
         $this->options = $element_info['options_info'][0];
         $this->selected_option = $selected_option ?? $default_option;
-        $this->option_class =  $element_info['options_info'][1];
+        $this->option_class = $element_info['options_info'][1] ?? "";
     }
 
 
@@ -30,6 +30,7 @@ class Select extends BaseField
     public function show(): string
     {
         $ret = HtmlUtils::printLabel($this->id, $this->label)
+            . '<br>' 
             . '<select' . $this->baseAttribs() . ">";
 
         foreach ($this->options as $option) {
