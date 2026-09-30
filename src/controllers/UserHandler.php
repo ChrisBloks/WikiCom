@@ -113,7 +113,7 @@ class UserHandler
     {
         $user_id = $_SESSION['userID'];
         //Get the current userdata 
-        $currentUser = ModelSelector::getUserInfoModel()->fetchUserInfoById($user_id);
+        $currentUser = ModelSelector::getUserInfoModel()->fetchUserPrivateInfoById($user_id);
 
         if ($currentUser === false) {
             $validation_result['ok'] = false;
@@ -215,7 +215,7 @@ class UserHandler
     {
         // fetch information
         $user_id = $_SESSION['userID'];
-        $user_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($user_id);
+        $user_info = ModelSelector::getUserInfoModel()->fetchUserPrivateInfoById($user_id);
 
         // failed query
         if ($user_info === false) {

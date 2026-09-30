@@ -98,7 +98,30 @@ class UserInfoModel extends BaseModel
      * @param int $user_id
      * @return array|false
      */
-    public function fetchUserInfoById(int $user_id): array|false
+    public function fetchUserPublicInfoById(int $user_id): array|false
+    {
+        $sql = "SELECT user.name,
+                       user.email,
+                       user.imgFileName,
+                       user.description
+                FROM user 
+                WHERE id=:user_id";
+        $params = ['user_id' => $user_id];
+        $result = $this->crud->selectOne($sql, $params);
+
+        if (empty($result)) {
+            $this->logError("No user with this id");
+            $result = false;
+        }
+        return $result;
+    }
+
+        /**
+     * Fetches a user's info from the database based on user_id
+     * @param int $user_id
+     * @return array|false
+     */
+    public function fetchUserPrivateInfoById(int $user_id): array|false
     {
         $sql = "SELECT * FROM user 
                         WHERE id=:user_id";
