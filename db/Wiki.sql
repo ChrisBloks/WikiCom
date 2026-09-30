@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2026 at 11:47 AM
+-- Generation Time: Sep 30, 2026 at 01:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki`
+-- Database: `wiki_test`
 --
-CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki`;
+CREATE DATABASE IF NOT EXISTS `wiki_test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki_test`;
 
 -- --------------------------------------------------------
 
@@ -195,10 +195,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (68, 'edit_password_modal', '', '', 'editPasswordModal', 'Modal', 'Change Password'),
 (69, 'edit_user_modal_errors', 'div', 'alert alert-danger d-none', 'editUserModal-errors', 'AtomicElement', ''),
 (70, 'edit_password_modal_errors', 'div', 'alert alert-danger d-none', 'editPasswordModal-errors', 'AtomicElement', ''),
-(71, 'edit_article_form', 'form', 'form-group', '', 'EditableArticle', ''),
 (72, 'hidden_article_ID', '', '', '', 'HiddenField', ''),
-(73, 'hidden_page', '', '', '', 'HiddenField', ''),
-(74, 'edit_article_title', 'input', '', '', 'Input', ''),
 (75, 'table_article_title_dashboard', 'h1', 'fs-2', '', 'Title', 'Articles'),
 (76, 'table_dashboard', 'table', 'table table-search table-hover table-striped table-bordered', '', 'DashboardTable', ''),
 (77, 'toast_div', 'div', 'position-relative', '', 'ContainerElement', ''),
@@ -208,8 +205,6 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (81, 'article_author_name', 'h3', 'text-center', '', 'AtomicElement', '$authorName'),
 (82, 'rating_div', 'div', 'rating_div', '', 'Rating', ''),
 (83, 'tag_button_container', 'div', 'd-flex flex-wrap gap-2 mb-3 border-top border-bottom py-2\r\n', '', 'TagButtonContainer', ''),
-(84, 'tag_button', 'a', '', '', 'TagButton', ''),
-(85, 'description', 'h1', 'h4 mb-4', '', 'AtomicElement', 'Description'),
 (86, 'article_text_img_div', 'div', 'd-flex flex-grow-1', '', 'ContainerElement', ''),
 (87, 'article_body_text', 'div', 'container fs-6 text-start', '', 'ContainerElement', '$article_body_text'),
 (88, 'article_body_img', 'img', 'rounded article-pic mx-auto d-flex ms-3', '', 'Image', ''),
@@ -310,7 +305,6 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (64, 62, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '62', 0, 'field', 0),
 (65, 63, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '63', 0, 'field', 0),
 (66, 65, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '65', 0, 'field', 0),
-(67, 71, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '71', 0, 'form', 0),
 (68, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '72', 0, 'element', 15),
 (69, 72, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '72', 0, 'field', 0),
 (70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
@@ -560,93 +554,6 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `query_joins`
---
-
-CREATE TABLE `query_joins` (
-  `id` int(11) NOT NULL,
-  `query_definition_id` int(11) NOT NULL,
-  `join_table` varchar(255) NOT NULL,
-  `join_left_value` varchar(255) NOT NULL,
-  `join_right_value` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `styling_containers`
---
-
-CREATE TABLE `styling_containers` (
-  `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `styling` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `styling_containers`
---
-
-INSERT INTO `styling_containers` (`id`, `name`, `styling`) VALUES
-(1, 'main_div', '<div class=\"d-flex flex-column align-items-center w-75 mx-auto\">'),
-(2, 'top_div', '<div class=\"flex-grow-1\">'),
-(4, 'main_div_2', '<div class=\"d-flex align-items-center w-75 mx-auto\">'),
-(5, 'sub_div', '<div class=\"flex-grow-1\">'),
-(6, 'container_div', '<div class=\"container-fluid\">'),
-(7, 'row_div', '<div class=\"row\">'),
-(8, 'filter_div', '<div class=\"col-12 col-md-3 border-end pe-4\">'),
-(9, 'result_div', '<div class=\"col-12 col-md-9 ps-4\">'),
-(10, 'table_div', '<div class=\"table-responsive\">'),
-(11, 'table_class', 'table table-search table-hover table-striped table-bordered'),
-(12, 'main_div', '<div class=\"align-items-center w-75 mx-auto\">'),
-(13, 'sub_div', '<div class=\"d-flex flex-grow-1\">'),
-(14, 'horizontal_rule', '<hr class=\"w-75 mx-auto my-4\">'),
-(15, 'bot_div', '<div class=\"align-items-center w-75 mx-auto mt-4\">'),
-(16, 'user_div', '<div class=\"d-flex justify-content-center align-items-center align-items-end gap-3\">'),
-(17, 'tag_div', '<div class=\"d-flex flex-wrap gap-2 mb-3 border-top border-bottom py-2\">'),
-(18, 'add_tag_div', '<div id=\"add-tag-widget\" class=\"d-flex gap-2 mt-2 mb-2\">');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `styling_elements`
---
-
-CREATE TABLE `styling_elements` (
-  `id` int(11) NOT NULL,
-  `website_info_id` int(11) NOT NULL,
-  `class_name` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `styling_elements`
---
-
-INSERT INTO `styling_elements` (`id`, `website_info_id`, `class_name`, `class`) VALUES
-(1, 1, 'bodytext_class', 'text-center'),
-(2, 2, 'description_class', 'fs-5 text-center'),
-(3, 2, 'name_class', 'display-1 text-center border-bottom'),
-(4, 9, 'title_class', 'text-center'),
-(5, 9, 'author_class', 'text-center'),
-(6, 9, 'body_class', 'container fs-6 text-start'),
-(7, 9, 'codeblock_class', 'container-lg fs-6 col-15'),
-(8, 9, 'img_class', 'rounded article-pic mx-auto d-flex ms-3'),
-(9, 2, 'img_class', 'rounded-circle profile-pic d-flex justify-content-end mb-3'),
-(11, 8, 'img_class', 'p-2 dashboard-pic rounded mb-1'),
-(12, 8, 'user_title', 'p-2 fs-1 fw-bold align-middle'),
-(13, 8, 'new_article_title', 'd-flex justify-content-center h4 border-top'),
-(14, 8, 'articles_class', 'fs-2'),
-(15, 9, 'article_script', '<script src=\"./src/js/articlePage.js\"></script>'),
-(16, 9, 'button_class', 'button button-sm'),
-(17, 9, 'description_class', 'h4 mb-4'),
-(18, 7, 'tag_input_class', '<input type=\"text\" id=\"new-tag-name\"\r\n                                                    class=\"form-control form-control-sm\" placeholder=\"New tag\">'),
-(19, 7, 'tag_button_class', '<button type=\"button\" id=\"add-tag-btn\" \r\n                                                    class=\"btn btn-sm btn-secondary\">Add tag</button>'),
-(20, 8, 'email_class', 'fs-6');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `styling_system`
 --
 
@@ -741,87 +648,6 @@ CREATE TABLE `v_sortby_options` (
 `id` int(1)
 ,`name` varchar(8)
 );
-
--- --------------------------------------------------------
-
---
--- Table structure for table `website_info`
---
-
-CREATE TABLE `website_info` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `bodytext` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `website_info`
---
-
-INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
-(1, 'home', 'Welkom op onze hoofdpagina.'),
-(2, 'about', 'This is the bodytext for about from the database'),
-(3, 'contact', ''),
-(4, 'login', ''),
-(5, 'register', ''),
-(6, 'search', ''),
-(7, 'editArticle', ''),
-(8, 'dashboard', ''),
-(9, 'article', ''),
-(10, 'editUser', ''),
-(11, 'editPassword', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `website_info_to_styling_containers`
---
-
-CREATE TABLE `website_info_to_styling_containers` (
-  `website_info_id` int(11) NOT NULL,
-  `styling_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `website_info_to_styling_containers`
---
-
-INSERT INTO `website_info_to_styling_containers` (`website_info_id`, `styling_id`) VALUES
-(1, 1),
-(2, 1),
-(2, 2),
-(2, 4),
-(2, 5),
-(3, 1),
-(3, 5),
-(4, 1),
-(4, 5),
-(5, 1),
-(5, 5),
-(6, 6),
-(6, 7),
-(6, 8),
-(6, 9),
-(6, 10),
-(6, 11),
-(7, 1),
-(7, 5),
-(7, 18),
-(8, 6),
-(8, 7),
-(8, 8),
-(8, 9),
-(8, 11),
-(8, 16),
-(9, 12),
-(9, 13),
-(9, 14),
-(9, 15),
-(9, 17),
-(10, 1),
-(10, 5),
-(11, 1),
-(11, 5);
 
 -- --------------------------------------------------------
 
@@ -1025,26 +851,6 @@ ALTER TABLE `page_elements`
   ADD KEY `fk_element_info_to_page_elements` (`element_id`);
 
 --
--- Indexes for table `query_joins`
---
-ALTER TABLE `query_joins`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_query_definition_to_join` (`query_definition_id`);
-
---
--- Indexes for table `styling_containers`
---
-ALTER TABLE `styling_containers`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `styling_elements`
---
-ALTER TABLE `styling_elements`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_website_info_dplay_classes` (`website_info_id`);
-
---
 -- Indexes for table `styling_system`
 --
 ALTER TABLE `styling_system`
@@ -1062,19 +868,6 @@ ALTER TABLE `table_columns`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `website_info`
---
-ALTER TABLE `website_info`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `website_info_to_styling_containers`
---
-ALTER TABLE `website_info_to_styling_containers`
-  ADD PRIMARY KEY (`website_info_id`,`styling_id`),
-  ADD KEY `styling_id` (`styling_id`);
 
 --
 -- Indexes for table `wiki_article`
@@ -1169,24 +962,6 @@ ALTER TABLE `page`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `query_joins`
---
-ALTER TABLE `query_joins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `styling_containers`
---
-ALTER TABLE `styling_containers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `styling_elements`
---
-ALTER TABLE `styling_elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
 -- AUTO_INCREMENT for table `styling_system`
 --
 ALTER TABLE `styling_system`
@@ -1202,12 +977,6 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `website_info`
---
-ALTER TABLE `website_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
@@ -1262,25 +1031,6 @@ ALTER TABLE `form_info`
 ALTER TABLE `page_elements`
   ADD CONSTRAINT `fk_element_info_to_page_elements` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`),
   ADD CONSTRAINT `fk_page_to_page_elements` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`);
-
---
--- Constraints for table `query_joins`
---
-ALTER TABLE `query_joins`
-  ADD CONSTRAINT `fk_query_definition_to_join` FOREIGN KEY (`query_definition_id`) REFERENCES `element_lookup_info` (`id`);
-
---
--- Constraints for table `styling_elements`
---
-ALTER TABLE `styling_elements`
-  ADD CONSTRAINT `fk_website_info_dplay_classes` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
-
---
--- Constraints for table `website_info_to_styling_containers`
---
-ALTER TABLE `website_info_to_styling_containers`
-  ADD CONSTRAINT `website_info_to_styling_containers_ibfk_1` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `website_info_to_styling_containers_ibfk_2` FOREIGN KEY (`styling_id`) REFERENCES `styling_containers` (`id`);
 
 --
 -- Constraints for table `wiki_article`
