@@ -214,8 +214,8 @@ class ElementModel extends BaseModel
 
     public function fetchDialogueAttributesByElementId($element_id)
     {
-        $sql = "SELECT  d_w.data_bs_type,
-                        d_w.data_bs_value
+        $sql = "SELECT  d_w.`data-bs-toggle`,
+                        d_w.`data-bs-target`
                     FROM dialogue_window as d_w
                     WHERE element_info_id=:element_id";
         $params = ['element_id' => $element_id];

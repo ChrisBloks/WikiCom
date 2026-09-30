@@ -153,9 +153,10 @@ class PageFactory
 
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
-        // HtmlUtils::dump('elements_info', $elements_info);
+
 
         $this->add_data_to_elements($elements_info);
+
 
         $element_list = [];
         $element_list[0] = $main;
@@ -240,6 +241,11 @@ class PageFactory
                         $key = substr($value, 1);
                         $element_info['field_info']['value'] = ($this->response[$key] ?? false);
                     }
+                    if ($value && $value[0] == '#') {
+                        $key = substr($value, 1);
+                        $element_info['field_info']['value'] = ($_SESSION[$key] ?? false);
+                    }
+                    
                     break;
                 case ($element_info['php_class'] == 'DialogueButton'):
                     $element_info['attributes'] = ModelSelector::getElementModel()
@@ -251,6 +257,15 @@ class PageFactory
                 case $element_info['element_name'] == "table_dashboard":
                     $element_info['options_info'][] = ModelSelector::getArticleModel()
                         ->fetchArticleByUserId($_SESSION['userID']);
+                break;
+                case $element_info['element_name'] == "edit_user_form":
+                    $about_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($_SESSION['userID']);
+                    foreach ($element_info['sub_fields'] as &$sub_field){
+                        if ($sub_field['field_info']['type'] != 'hidden'){
+                        $sub_field['field_info']['value'] = $about_info[$sub_field['field_info']['field_name']] ?? "";
+                        }
+                    }
+                    unset($sub_field);
                     break;
                 case $element_info['php_class'] == "TagButtonContainer":
                     $element_info['options_info'][0] = ModelSelector::getArticleModel()

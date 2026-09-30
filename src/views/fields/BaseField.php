@@ -25,12 +25,13 @@ abstract class BaseField implements iElement
     protected string $class;
     protected mixed $value;
 
-    public function __construct(string $name, string $label, string $class, mixed $value = "")
+    public function __construct(string $name, string $label, string $class, mixed $value = "",string $id = "")
     {
         self::$instance_count++;
         $this->value = $value;
         $this->name = $name;
-        $this->id = $name . "-" . self::$instance_count;
+        //$this->id = $name . "-" . self::$instance_count;
+        $this->id = $id;
         $this->label = $label;
         $this->class = $class;
         $this->html = '';

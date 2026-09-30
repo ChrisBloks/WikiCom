@@ -5,6 +5,7 @@ namespace Wiki\views\fields;
 use Override;
 use Wiki\dataObjects\ElementInfo;
 use Wiki\tools\interfaces\iElement;
+use Wiki\tools\utils\HtmlUtils;
 
 class HiddenField implements iElement
 {

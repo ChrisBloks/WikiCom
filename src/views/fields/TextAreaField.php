@@ -8,6 +8,7 @@ namespace Wiki\views\fields;
 
 use Wiki\dataObjects\ElementInfo;
 use Wiki\views\fields\BaseField, Wiki\tools\interfaces\iElement;
+use Wiki\tools\utils\HtmlUtils;
 
 class TextAreaField extends BaseField implements iElement
 {
@@ -21,7 +22,7 @@ class TextAreaField extends BaseField implements iElement
         parent::__construct(
             name: $field_info['field_name'] ?? "", 
             label: $field_info['label'] ?? "", 
-            class: $element_info['html_class'] ?? " " . $field_info['html_class'] ?? " "
+            class: $element_info['html_class'] ?? " "
         );
         $this->text = $field_info['text'] ?? "";
 

@@ -17,7 +17,7 @@ class NewPassword extends BaseField implements iElement
         parent::__construct(
             name: $field_info['name'] ?? "", 
             label: $field_info['label'] ?? "", 
-            class: $field_info['html_class'] ?? ""
+            class: $element_info['html_class'] ?? ""
         );
     }
 

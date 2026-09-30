@@ -40,7 +40,7 @@ class MenuFactory
         }
 
         if (!empty($item['submenu'])) {
-            
+
             $menuItem = new MenuItem(
                 label: $item['label'],
                 href: '?page='.$item['href'],
@@ -57,6 +57,7 @@ class MenuFactory
             $submenu = new Menu(class: 'dropdown-menu');
             foreach ($item['submenu'] as $subitem) {
                 try {
+    
                     $submenu->addElement($this->buildMenuItem($subitem, 'dropdown-item', ''));
                 } catch (\InvalidArgumentException $e) {
                     $this->logError($e->getMessage());
@@ -68,7 +69,7 @@ class MenuFactory
                 label: $item['label'],
                 href: '?page='.$item['href'],
                 class: $link_class,
-                attrs: [],
+                attrs: ['data-user-id' => $item['id']],
                 li_class: $li_class
             );
         }

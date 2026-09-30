@@ -10,7 +10,7 @@ class Modal extends ContainerElement
 {
     public function __construct(iElementInfo $element_info)
     {
-        $this->html_before = '<div class="modal fade modal-lg" id="' . htmlspecialchars($element_info['id']) . '" tabindex="-1" aria-hidden="true">'
+        $this->html_before = '<div class="modal fade modal-lg" id="' . htmlspecialchars($element_info['html_id']) . '" tabindex="-1" aria-hidden="true">'
             . '<div class="modal-dialog modal-dialog-centered">'
             . '<div class="modal-content">'
             . '<div class="modal-header">'
