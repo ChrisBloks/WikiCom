@@ -201,7 +201,6 @@ class ElementModel extends BaseModel
         // // Always add an ORDER BY clause
         // $sql .= " ORDER BY {$lookup_info['order_by']}";
         // Execute the query
-        // HtmlUtils::dump('sql', $sql);
         if ($mode === 'one') {
             $result = $this->crud->selectOne(sql: $sql, params: []);//, fetch_mode: \PDO::FETCH_ASSOC);
         } else if ($mode === 'many') {

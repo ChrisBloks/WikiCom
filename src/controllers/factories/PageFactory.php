@@ -234,7 +234,6 @@ class PageFactory
                     $element_info['article_info'] = $this->article_info;
                     break;
                 case $element_info['php_class'] == 'HiddenField':
-                    // HtmlUtils::dump('Flag1', "");
                     $value = $element_info['field_info']['value'];
                     if ($value && $value[0] == '$') {
                         $key = substr($value, 1);
@@ -275,8 +274,6 @@ class PageFactory
                     $element_info['text'] = $this->article_info['name'];
                     break;
                 case $element_info['element_name'] == "article_body_img":
-                    HtmlUtils::dump('', $this->article_info);
-                    HtmlUtils::dump('', $this->response);
                     $element_info['image'] = \CONFIG::ARTICLEIMGPATH . $this->article_info['imgFileName'];
                     break;
                 case $element_info['element_name'] == "rating_div":
@@ -292,7 +289,6 @@ class PageFactory
             }
         }
         unset($element_info);
-        // HtmlUtils::dump('added data to element', $element_info);
     }
 }
 
