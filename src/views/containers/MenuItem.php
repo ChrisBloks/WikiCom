@@ -16,7 +16,7 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class Menuitem extends ContainerElement
 {
-    public function __construct(string $label, string $href, string $class = '', ?array $attrs = null, string $li_class = '')
+    public function __construct(string $label, string $page_value, string $class = '', ?array $attrs = null, string $li_class = '')
     {
         parent::__construct(
             new LinkedElementInfo([
@@ -27,7 +27,7 @@ class Menuitem extends ContainerElement
         
         $element_info = new LinkedElementInfo([
                     'html_tag' => 'a',
-                    'href' => htmlspecialchars($href),
+                    'page_value' => htmlspecialchars($page_value),
                     'class' => $class,
                     'label' => htmlspecialchars($label)
                     ]);
