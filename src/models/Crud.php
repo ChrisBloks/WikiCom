@@ -145,7 +145,6 @@ class Crud
      */
     public function prepareAndExecute(string $sql, ?array $params): \PDOStatement|false
     {
-        // HtmlUtils::dump('SQL', $sql);
         try {
             $stmt = $this->db->prepare(query: $sql);
             $stmt->execute(params: $params);
