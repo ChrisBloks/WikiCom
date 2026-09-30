@@ -130,41 +130,6 @@ class WebsiteInfoModel extends BaseModel
         return $result;
     }
 
-    public function fetchElementStylingByPage(string $page_name): array
-    {
-        $sql = "SELECT class_name, class 
-                FROM styling_elements as se
-                JOIN  website_info as wi on wi.id = se.website_info_id
-                WHERE wi.name = :page";
-        $params = ["page" => $page_name];
-        $classrows = $this->crud->selectMany($sql, $params);
-
-        $classes = [];
-        foreach ($classrows as $row) {
-            $classes[$row['class_name']] = $row['class'];
-        }
-
-
-        return $classes;
-    }
-
-    public function fetchContainerStylingByPage(string $page_name):array
-    {
-        $sql = "SELECT styling.name, styling.styling
-                FROM styling_containers as styling
-                JOIN website_info_to_styling_containers as wits on wits.styling_id = styling.id
-                JOIN website_info as wi on wi.id = wits.website_info_id
-                WHERE wi.name = :page";
-        $params = ["page" => $page_name];
-        $stylingrows = $this->crud->selectMany($sql,$params);
-
-        $styling = [];
-        foreach ($stylingrows as $row){
-            $styling[$row['name']] = $row['styling'];
-        }
-
-        return $styling;
-    }
 
     public function fetchSystemStyling():array
     {

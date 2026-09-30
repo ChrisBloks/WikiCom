@@ -131,37 +131,6 @@ class ElementModel extends BaseModel
     }
 
     /**
-     * Get the form information of a given page.
-     * Returns a value for 'action', 'method', 'submit_caption', 'enctype', and 'display_class'
-     * @param string $page_name
-     * @return array ['action, 'method', 'submit_caption', 'encype', 'display_class']
-     */
-    public function fetchFormInfo(string $page_name): \arrayAccess|false
-    {
-        $sql = "SELECT DISTINCT fo.action, 
-                                fo.method, 
-                                fo.submit_caption,
-                                fo.enctype,
-                                fo.display_class,
-                                fo.submit_class,
-                                fo.id
-                FROM form_info fo
-                JOIN website_info wi ON fo.website_info_id = wi.id
-                WHERE wi.name = :page";
-        $params = ["page" => $page_name];
-        $result = $this->crud->selectMany(sql: $sql, params: $params);
-
-        // If the query was succesful, extract the first row
-        if ($result !== false && count($result) == 1) {
-            $result = $result[0];
-        }
-
-        $form_info = new FormInfo($result, true);
-
-        return $form_info;
-    }
-
-    /**
      * @param array $lookup_info see INPUT
      * @return array see OUTPUT
      */
@@ -221,32 +190,6 @@ class ElementModel extends BaseModel
         $result = $this->crud->selectMany(sql: $sql, params: $params,fetch_mode:\PDO::FETCH_ASSOC);
         return $result[0];
 
-    }
-
-
-
-    /**
-     * Get all fields belonging to a given wiki page
-     * @param string $page_name
-     * @return array|false array of page names (strings) if query succesful, false otherwise
-     */
-    public function fetchFieldNames(string $page_name): array|false
-    {
-        $sql = "SELECT  fi.name 
-                FROM field_info fi
-                JOIN form_info fo ON fi.form_info_id = fo.id
-                JOIN website_info wi ON wi.id = fo.website_info_id
-                WHERE wi.name = :page
-                ORDER BY fi.display_order;";
-        $params = ["page" => $page_name];
-        $result = $this->crud->selectMany($sql, $params, \PDO::FETCH_COLUMN);
-
-        if (empty($result)) {
-            $this->logError("Page has no Form");
-            return false;
-        }
-        unset($value);
-        return $result;
     }
 }
 
