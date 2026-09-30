@@ -22,7 +22,7 @@ class SearchableCheckboxes extends BaseField
         parent::__construct(
             name: $field_info['field_name'], 
             label: $field_info['label'],
-            class: $field_info['class'],
+            class: $element_info['class'] ?? "",
             value: $field_info['value']
         );
 

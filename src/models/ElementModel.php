@@ -25,7 +25,6 @@ class ElementModel extends BaseModel
                         e_i.html_class,
                         e_i.html_id,
                         e_i.php_class,
-                        e_i.js_class,
                         e_i.text,
                         e_i.id as element_id
                 FROM page_elements as p_e

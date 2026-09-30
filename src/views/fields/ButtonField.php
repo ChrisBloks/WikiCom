@@ -20,7 +20,7 @@ class ButtonField extends BaseField
         parent::__construct(
             name: $field_info['name'] ?? "", 
             label: $field_info['label'] ?? "", 
-            class: $field_info['html_class'] ?? ""
+            class: $element_info['html_class'] ?? ""
         );
 
         $this->href = $element_info['href'] ?? null;
