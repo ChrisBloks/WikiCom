@@ -29,8 +29,8 @@ class Rating extends ContainerElement
         parent::__construct($element_info);
 
         $rating = $element_info['options_info']['rating'] ?? 0;
-        $display_only = $element_info['options_info']['display_only'] ?? true;
-        $ratable = $element_info['options_info']['ratable'] ?? true;
+        $display_only = $element_info['options_info']['display_only'] ?? false;
+        $ratable = $element_info['options_info']['ratable'] ?? false;
         $article_id = $element_info['options_info']['article_id'] ?? -1;
         $count = $element_info['options_info']['count'] ?? '?';
 
@@ -50,13 +50,13 @@ class Rating extends ContainerElement
                     'field_info' => new FieldInfo([
                         'label' => "Rate this article"
                     ]),
-                    'options' => [
+                    'options_info' => [
                         [
-                            1 => 1,
-                            2 => 2,
-                            3 => 3,
-                            4 => 4,
-                            5 => 5
+                            ['id' => 1, 'name' => 1],
+                            ['id' => 2, 'name' => 2],
+                            ['id' => 3, 'name' => 3],
+                            ['id' => 4, 'name' => 4],
+                            ['id' => 5, 'name' => 5],
                         ],
                         'rating_option'
                     ]
@@ -67,11 +67,13 @@ class Rating extends ContainerElement
             $this->addElement(
                 new ButtonField(
                     new ElementInfo([
+                        'html_tag' => "input",
                         'element_name' => "rating_button",
                         'html_class' => "rating_button",
                         'field_info' => new FieldInfo([
                             'type' => "button",
-                            'label' => 'Submit rating'
+                            'label' => 'Submit rating',
+                            'value' => "Submit rating",
                         ])
                     ])
                 )

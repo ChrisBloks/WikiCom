@@ -274,6 +274,19 @@ class PageFactory
                 case $element_info['element_name'] == "article_author_name":
                     $element_info['text'] = $this->article_info['name'];
                     break;
+                case $element_info['element_name'] == "article_body_img":
+                    HtmlUtils::dump('', $this->article_info);
+                    HtmlUtils::dump('', $this->response);
+                    $element_info['image'] = \CONFIG::ARTICLEIMGPATH . $this->article_info['imgFileName'];
+                    break;
+                case $element_info['element_name'] == "rating_div":
+                    $element_info['options_info']['rating'] = $this->article_info['rating'];
+                    $element_info['options_info']['count'] = $this->article_info['n_ratings'];
+                    if($this->response['isLoggedIn']){
+                        $element_info['options_info']['ratable'] = True;
+                    }
+                    $element_info['options_info']['article_id'] = $this->response['articleID'];
+                    break;
                 default:
                     break;
             }

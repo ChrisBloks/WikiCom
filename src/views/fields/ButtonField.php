@@ -17,9 +17,9 @@ class ButtonField extends BaseField
     public function __construct(ElementInfo $element_info) {
         $field_info = $element_info['field_info'];
         parent::__construct(
-            name: $field_info['name'] ?? "", 
+            name: $element_info['element_name'] ?? "", 
             label: $field_info['label'] ?? "", 
-            class: $field_info['html_class'] ?? ""
+            class: $element_info['html_class'] ?? ""
         );
 
         $this->href = $element_info['href'] ?? null;

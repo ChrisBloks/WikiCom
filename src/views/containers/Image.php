@@ -14,6 +14,7 @@ class Image extends WrappedText
 {
     public function __construct(ArrayAccess $element_info)
     {
-        parent::__construct('', 'img src=' . \CONFIG::AUTHORIMGPATH.$element_info['image'] . '' . HtmlUtils::addClassAttr($element_info['html_class']));
+
+        parent::__construct('', 'img src=' . $element_info['image'] . '' . HtmlUtils::addClassAttr($element_info['html_class']));
     }
 }
