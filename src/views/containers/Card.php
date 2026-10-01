@@ -2,7 +2,9 @@
 namespace Wiki\views\containers;
 
 use Wiki\tools\interfaces\iElement;
-
+/**
+ * Creates bootstrap card elements with image, title, summary
+ */
 class Card extends WrappedText
 {
 
@@ -29,7 +31,7 @@ class Card extends WrappedText
         $str .= '<div class="card-body d-flex flex-column">';
         $str .= '<h5 class="card-title">' . htmlspecialchars($title) . '</h5>';
         $str .= '<p class="card-text text-muted">' . htmlspecialchars($summary) . '</p>';
-        $str .= '<a href="?page=article&id=' . $article_id . '" class="btn btn-outline-primary mt-auto">Read Article</a>';
+        $str .= '<a href="?page=article&id=' . (string) $article_id . '" class="btn btn-outline-primary mt-auto">Read Article</a>';
         $str .= '</div>'; 
         $str .= '</div>'; 
 

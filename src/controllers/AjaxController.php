@@ -151,6 +151,7 @@ class AjaxController implements iController
                 $this->response = [
                     'success' => false,
                     'message' => 'Unknown AJAX action: ' . $this->request['action'],
+                    'POST' => $this->request,
                 ];
         }
     }

@@ -14,33 +14,33 @@
 namespace Wiki\controllers\factories;
 
 use Wiki\tools\utils\HtmlUtils,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\tools\exceptions\PageNotFoundException,
-    Wiki\models\ModelSelector,
-    Wiki\controllers\factories\MenuFactory,
-    Wiki\views\BasePage,
-    Wiki\views\Table,
-    Wiki\views\containers\AtomicElement,
-    Wiki\views\containers\Header,
-    Wiki\views\containers\BodyText,
-    Wiki\views\containers\Title,
-    Wiki\views\containers\Image,
-    Wiki\views\containers\AuthorText,
-    Wiki\views\containers\Modal,
-    Wiki\views\containers\CodeBlock,
-    Wiki\views\containers\Footer,
-    Wiki\views\containers\ContainerElement,
-    Wiki\views\containers\MainElement,
-    Wiki\views\containers\Rating,
-    Wiki\views\containers\Toast,
-    Wiki\views\containers\Card,
-    Wiki\views\containers\NoticeMessage,
-    League\CommonMark\GithubFlavoredMarkdownConverter,
-    HTMLPurifier,
-    HTMLPurifier_Config,
-    Wiki\views\fields\ButtonField,
-    InvalidArgumentException,
-    Throwable;
+Wiki\tools\traits\tErrorMessageCollector,
+Wiki\tools\exceptions\PageNotFoundException,
+Wiki\models\ModelSelector,
+Wiki\controllers\factories\MenuFactory,
+Wiki\views\BasePage,
+Wiki\views\Table,
+Wiki\views\containers\AtomicElement,
+Wiki\views\containers\Header,
+Wiki\views\containers\BodyText,
+Wiki\views\containers\Title,
+Wiki\views\containers\Image,
+Wiki\views\containers\AuthorText,
+Wiki\views\containers\Modal,
+Wiki\views\containers\CodeBlock,
+Wiki\views\containers\Footer,
+Wiki\views\containers\ContainerElement,
+Wiki\views\containers\MainElement,
+Wiki\views\containers\Rating,
+Wiki\views\containers\Toast,
+Wiki\views\containers\Card,
+Wiki\views\containers\NoticeMessage,
+League\CommonMark\GithubFlavoredMarkdownConverter,
+HTMLPurifier,
+HTMLPurifier_Config,
+Wiki\views\fields\ButtonField,
+InvalidArgumentException,
+Throwable;
 
 
 
@@ -89,8 +89,8 @@ class PageFactory
             '
                 <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-                <script src="./vendor/webcito/bs-markdown-editor/dist/bs-markdown-editor.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                
                 <script src="./src/js/wiki.js"></script>
                 <script>hljs.highlightAll();</script>'
         ));
@@ -247,7 +247,6 @@ class PageFactory
 
 
                 $form_fields = $this->addCheckedUsingArray($form_fields, $this->response);
-
                 $form = $formFactory->createForm(
                     form_info: $form_info,
                     field_info: $form_fields,
@@ -293,6 +292,7 @@ class PageFactory
                 $formFactory = new FormFactory();
                 $form_fields = ModelSelector::getFormModel()->fetchFieldInfo($this->page, $this->response['editArticleID']); //give article tag
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
+
                 if ($this->response['editArticleID'] == 0) {
                     $bodyinfo = isset($this->response['bodyinfo']) ? $this->response['bodyinfo'] : [];
                 } else {
@@ -437,10 +437,10 @@ class PageFactory
                 $form_info = ModelSelector::getFormModel()->fetchFormInfo($this->page);
 
                 //====================================================================================================
-                // profile picture - now clickable, opens the avatar modal instead of just displaying
+                // profile picture 
                 $user_container->addElement(new Image(
                     name: './img/authors/' . $aboutinfo['imgFileName'],
-                    class: $styling_elements["img_class"] . ' clickable-avatar',
+                    class: $styling_elements["img_class"]
                 ));
 
                 $user_container->addElement(new Title(
