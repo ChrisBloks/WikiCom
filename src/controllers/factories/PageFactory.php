@@ -86,27 +86,14 @@ class PageFactory
     '));
 
         $this->htmlpage->addToHeadContent(new AtomicElement(
-            '
+            '   <script type="module" src="./src/js/main.js"></script>
                 <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
-                
-                <script src="./src/js/wiki.js"></script>
                 <script>hljs.highlightAll();</script>'
         ));
 
-        switch ($this->page) {
-            case 'editArticle':
-            case 'search':
-                $this->htmlpage->addToHeadContent(
-                    new AtomicElement(
-                        '<script src="./src/js/searchPage.js"></script>'
-                    )
-                );
-                break;
-            default:
-                break;
-        }
+
     }
 
 
