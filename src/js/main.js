@@ -6,6 +6,12 @@
  *    document.body.dataset.page
  * 
  * - Marius
+ * 
+ * OR 
+ *  shown in bootstrap.js
+ * 
+ * OR
+ *  minify js
  */
 
 
