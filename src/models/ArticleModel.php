@@ -27,7 +27,7 @@ class ArticleModel extends BaseModel
      * @param int $article_id
      * @return array|false a single article of form [article.title, user.name, article.summary, article.codeblock, article.imgFileName, article.lateEdit]
      */
-    public function fetchArticleById(int $article_id): array|false
+    public function fetchArticleById(int $article_id, bool $get_tags = False): array|false
     {
         $sql = "SELECT
                     article.title,
@@ -47,6 +47,11 @@ class ArticleModel extends BaseModel
                     article.id =:article_id;";
         $params = ['article_id' => $article_id];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
+
+        if ($get_tags){
+            $tags = $this->fetchArticleTags($article_id);
+            $result = [$result, $tags];
+        }
         return $result;
     }
 
@@ -92,11 +97,11 @@ class ArticleModel extends BaseModel
      * @param string $sortBy defines contents of the SORT BY clause.
      * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
      */
-    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy =''): array|false
+    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ''): array|false
     {
         // Check if sortBy is a valid sorting method
 
-        $sortBy = (empty($sortBy)) ? 'lastEdit':$sortBy;
+        $sortBy = (empty($sortBy)) ? 'lastEdit' : $sortBy;
 
         $base_select_clause = "SELECT DISTINCT 
                                 article.id,
@@ -111,7 +116,7 @@ class ArticleModel extends BaseModel
                 " ,user.name as author" : // get the authors
                 ""); // get average rating
 
-                $from_clause = " FROM wiki_article as article";
+        $from_clause = " FROM wiki_article as article";
 
         // Building the JOIN and WHERE clauses
         // For storing mapping of placeholder to variables for PREPARED statement
@@ -154,8 +159,8 @@ class ArticleModel extends BaseModel
 
         $result = $this->crud->selectMany(sql: $sql, params: $params);
 
-        foreach ($result as $key => $article){
-            $result[$key]['tags'] = implode(",",$this->fetchArticleTags($article['id']));
+        foreach ($result as $key => $article) {
+            $result[$key]['tags'] = implode(",", $this->fetchArticleTags($article['id']));
             $result[$key]['Author'] = ModelSelector::getUserInfoModel()->fetchUserInfoById($article['user_id'])['name'];
         }
 
@@ -340,26 +345,24 @@ class ArticleModel extends BaseModel
         return $this->crud->doDelete(sql: $sql, params: $params);
     }
 
-public function fetchFrontPageArticles(array $exclude_list = []): array|false
-{
-    if (!empty($exclude_list)) {
-        $placeholders = implode(',', array_fill(0, count($exclude_list), '?'));
-        $sql = "SELECT *
+    public function fetchRandomArticle(array $exclude_list = []): array|false
+    {
+        if (!empty($exclude_list)) {
+            $placeholders = implode(',', array_fill(0, count($exclude_list), '?'));
+            $sql = "SELECT *
                 FROM wiki_article
                 WHERE id NOT IN ($placeholders)
                 ORDER BY RAND()
                 LIMIT 1";
-        $params = array_values($exclude_list);
-    } else {
-        $sql = 'SELECT *
+            $params = array_values($exclude_list);
+        } else {
+            $sql = 'SELECT *
                 FROM wiki_article
                 ORDER BY RAND()
                 LIMIT 1';
-        $params = [];
+            $params = [];
+        }
+
+        return $this->crud->selectOne($sql, $params);
     }
-
-    return $this->crud->selectOne($sql, $params);
-}
-
-
 }

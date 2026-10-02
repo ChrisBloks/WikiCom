@@ -8,6 +8,7 @@
 namespace Wiki\models;
 
 use InvalidArgumentException;
+use Nette\Utils\Html;
 use Wiki\dataObjects\FormInfo,
 Wiki\dataObjects\ElementInfo,
 Wiki\dataObjects\Stack,
@@ -47,9 +48,25 @@ class ElementModel extends BaseModel
             $result[$row] = new ElementInfo(
                 $this->fetchLookupResult($element_info)
             );
+            $result[$row]['response_variables'] = $this->fetchElementVariables($element_info);
         }
 
 
+        return $result;
+    }
+
+    protected function fetchElementVariables(array $element_info){
+        // HtmlUtils::dump('element_info', $element_info);
+        $sql = "SELECT 
+                    `res_var`.`variable`
+                FROM 
+                    `element_to_variables` AS `el_to_var`
+                    JOIN `response_variables` AS `res_var`
+                        ON
+                            `el_to_var`.`element_id`=:element_id AND
+                            `el_to_var`.`variable_id`=`res_var`.id;";
+        $params = ['element_id' => $element_info['element_id']];
+        $result = $this->crud->selectMany(sql: $sql, params: $params, fetch_mode:\PDO::FETCH_COLUMN);
         return $result;
     }
 

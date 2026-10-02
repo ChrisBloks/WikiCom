@@ -11,10 +11,10 @@ class Card extends WrappedText
     public function __construct(ArrayAccess $element_info)
     {
         parent::__construct($this->createCard(
-            image: $element_info['article']['imgFileName'],
-            title: $element_info['article']['title'],
-            summary: $element_info['article']['summary'],
-            article_id: $element_info['article']['id']
+            image: $element_info['article_info']['imgFileName'],
+            title: $element_info['article_info']['title'],
+            summary: $element_info['article_info']['summary'],
+            article_id: $element_info['article_info']['id']
         ), 
         'div class ="col"');
     }

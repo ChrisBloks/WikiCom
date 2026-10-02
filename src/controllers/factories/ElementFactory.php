@@ -39,6 +39,7 @@ class ElementFactory
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
+        // HtmlUtils::dump('Creating Element', $element_info);
         return new self::$NAMESPACE[
             strtolower($element_info['php_class'])
             ]($element_info);

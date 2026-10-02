@@ -4,7 +4,7 @@ class Config
     const SERVERNAME = 'localhost';
     const USERNAME = 'root';
     const PASSWORD = 'Pannekoek2!';
-    const DB = 'Wiki';
+    const DB = 'Wiki_dev';
     const AUTHORIMGPATH = "./img/authors/";
     const ARTICLEIMGPATH = "./img/article/";
 

@@ -14,6 +14,7 @@
 namespace Wiki\controllers\factories;
 
 use ArrayAccess;
+use Wiki\controllers\ElementHandler;
 use Wiki\tools\utils\HtmlUtils,
     Wiki\tools\traits\tErrorMessageCollector,
     Wiki\models\ModelSelector,
@@ -152,7 +153,9 @@ class PageFactory
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
 
-        $this->add_data_to_elements($elements_info);
+        // Add necessary variables
+        $element_handler = new ElementHandler($this->response);
+        $element_handler->addDataToElementList($elements_info);
 
 
         $element_list = [];
