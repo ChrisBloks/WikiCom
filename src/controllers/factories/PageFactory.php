@@ -120,7 +120,6 @@ class PageFactory
         $this->htmlpage->addToBodyContent($menu);
 
         $main = new MainElement();
-        $notice_container = new ContainerElement('<div id="page-notices">', '</div>');
         // $notice_container->addElement(new NoticeMessage());
         // $main->addElement($notice_container);
         $main->addElement(new Toast());

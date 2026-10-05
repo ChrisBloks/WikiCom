@@ -1,7 +1,10 @@
 // ============================================================
 // AjaxForms: generic form handling
 // ============================================================
-import {ajaxPOST} from "./Ajax.js"
+// requires toasts to be active on the page
+
+// import { toasts } from "../components/Toasts.js";
+import {ajaxPOST} from "./Ajax.js";
 
 export const AjaxForms = {
   // starts a spinner on the submit button on a form
