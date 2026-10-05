@@ -50,7 +50,7 @@ class ArticleModel extends BaseModel
 
         if ($get_tags){
             $tags = $this->fetchArticleTags($article_id);
-            $result = [$result, $tags];
+            $result['tags'] = $tags;
         }
         return $result;
     }

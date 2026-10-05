@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2026 at 01:26 PM
+-- Generation Time: Oct 05, 2026 at 10:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,8 +18,47 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki`
+-- Database: `wiki_dev`
 --
+CREATE DATABASE IF NOT EXISTS `wiki_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki_dev`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `application_data`
+--
+
+CREATE TABLE `application_data` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `application_data`
+--
+
+INSERT INTO `application_data` (`id`, `name`) VALUES
+(1, '$random_article'),
+(2, '$author_name'),
+(3, '$article_info'),
+(4, '$article_title'),
+(5, '$article_author'),
+(6, '$article_text'),
+(7, '$article_code'),
+(8, '$article_id'),
+(9, '$user_id'),
+(10, '$article_img'),
+(11, '$article_rating'),
+(12, '$author_text'),
+(13, '$author_image'),
+(14, '$user_email'),
+(15, '$user_img'),
+(16, '$user_name'),
+(17, '$article_tags'),
+(18, '$user_articles'),
+(19, '$dialogue_attributes'),
+(20, '$add_user_id_to_html_id');
 
 -- --------------------------------------------------------
 
@@ -331,6 +370,47 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `element_to_application_data`
+--
+
+CREATE TABLE `element_to_application_data` (
+  `id` int(11) NOT NULL,
+  `element_id` int(11) NOT NULL,
+  `application_data_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `element_to_application_data`
+--
+
+INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data_id`) VALUES
+(1, 5, 1),
+(2, 9, 2),
+(3, 10, 12),
+(4, 11, 13),
+(5, 60, 14),
+(6, 58, 15),
+(7, 59, 16),
+(8, 25, 3),
+(9, 25, 17),
+(10, 76, 18),
+(11, 65, 19),
+(12, 65, 20),
+(13, 66, 19),
+(14, 66, 20),
+(15, 81, 5),
+(16, 88, 10),
+(17, 87, 6),
+(18, 92, 7),
+(19, 80, 4),
+(20, 82, 11),
+(21, 72, 8),
+(22, 102, 9),
+(23, 105, 9);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `field_info`
 --
 
@@ -622,8 +702,7 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `descripti
 (1, 'Danny122', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christiannn', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
-(11, 'Marius', '$2y$10$jfrLazl/cMPd5NNnTjE7r.F5zdLA6QtRe3Neu1sZCI8QssAwbPMYG', 'test@gmail.com', 'author_11.png', '1234'),
-(12, 'test', '$2y$10$atD3C58A5CTlEUdTlp1Lje7jv8XVTcu31ZCgo34Gc/ppNfJ4UbfTy', 'marius@email.com', '', '');
+(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
 
 -- --------------------------------------------------------
 
@@ -671,7 +750,7 @@ CREATE TABLE `wiki_article` (
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
 (1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11'),
 (28, 'PHP', 1, 'PHP is een scripttaal en is vergelijkbaar met Perl, Python en Ruby. Qua syntaxis lijkt PHP het meest op C, maar net als bij veel andere scripttalen moeten variabelen voorafgegaan worden door een dollarteken $. Dit is overgenomen uit de scripttaal Perl, waarvan PHP mede is afgeleid. In tegenstelling tot C is het in PHP wel mogelijk om naast procedureel programmeren ook objectgeoriënteerd te programmeren, net als in bijvoorbeeld Java, C++ en C#. In de eerste versies van PHP was het objectgeoriënteerd programmeren nog heel beperkt. Pas sinds versie 5 zijn de meest essentiële functies hiervoor allemaal beschikbaar.', '$url = &quot;http://nl.wikipedia.org/wiki/PHP&quot;;\r\n\r\necho &quot;U bevindt zich momenteel op $url. Welkom!&quot;;\r\n// Of\r\necho &quot;U bevindt zich momenteel op &quot;.$url.&quot;. Welkom!&quot;;', 'article_0.jpeg', '2026-09-08'),
-(29, 'New article', 1, 'This is the body text.', '', 'article_0.jpg', '2026-09-08'),
+(29, 'New article', 1, 'This is the body text.', '', 'article_0.png', '2026-09-08'),
 (31, 'test', 1, 'testd', '', '', '2026-09-11');
 
 -- --------------------------------------------------------
@@ -785,6 +864,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `application_data`
+--
+ALTER TABLE `application_data`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `aria_attributes`
 --
 ALTER TABLE `aria_attributes`
@@ -815,6 +900,14 @@ ALTER TABLE `element_info`
 ALTER TABLE `element_lookup_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_element_info_to_look_up` (`element_id`);
+
+--
+-- Indexes for table `element_to_application_data`
+--
+ALTER TABLE `element_to_application_data`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_el2var_element_info` (`element_id`),
+  ADD KEY `fk_el2var_response_variables` (`application_data_id`);
 
 --
 -- Indexes for table `field_info`
@@ -907,6 +1000,12 @@ ALTER TABLE `wiki_tag`
 --
 
 --
+-- AUTO_INCREMENT for table `application_data`
+--
+ALTER TABLE `application_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `aria_attributes`
 --
 ALTER TABLE `aria_attributes`
@@ -935,6 +1034,12 @@ ALTER TABLE `element_info`
 --
 ALTER TABLE `element_lookup_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+
+--
+-- AUTO_INCREMENT for table `element_to_application_data`
+--
+ALTER TABLE `element_to_application_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `field_info`
@@ -976,7 +1081,7 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `wiki_article`

@@ -48,24 +48,23 @@ class ElementModel extends BaseModel
             $result[$row] = new ElementInfo(
                 $this->fetchLookupResult($element_info)
             );
-            $result[$row]['response_variables'] = $this->fetchElementVariables($element_info);
         }
 
 
         return $result;
     }
 
-    protected function fetchElementVariables(array $element_info){
+    public function fetchElementVariables(int $element_id){
         // HtmlUtils::dump('element_info', $element_info);
         $sql = "SELECT 
-                    `res_var`.`variable`
+                    `app_data`.`name`
                 FROM 
-                    `element_to_variables` AS `el_to_var`
-                    JOIN `response_variables` AS `res_var`
+                    `element_to_application_data` AS `el_to_app_data`
+                    JOIN `application_data` AS `app_data`
                         ON
-                            `el_to_var`.`element_id`=:element_id AND
-                            `el_to_var`.`variable_id`=`res_var`.id;";
-        $params = ['element_id' => $element_info['element_id']];
+                            `el_to_app_data`.`element_id`=:element_id AND
+                            `el_to_app_data`.`application_data_id`=`app_data`.id;";
+        $params = ['element_id' => $element_id];
         $result = $this->crud->selectMany(sql: $sql, params: $params, fetch_mode:\PDO::FETCH_COLUMN);
         return $result;
     }
