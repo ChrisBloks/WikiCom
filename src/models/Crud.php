@@ -29,10 +29,10 @@ class Crud
      */
     private static function connectDB(): \PDO
     {
-        $servername = \Config::SERVERNAME;
-        $dbname = \Config::DB;
-        $username = \Config::USERNAME;
-        $password = \Config::PASSWORD;
+        $servername = \Config::servername();
+        $dbname = \Config::db();
+        $username = \Config::username();
+        $password = \Config::password();
 
         return new \PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     }
