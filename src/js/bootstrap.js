@@ -1,4 +1,4 @@
-// example of how only loading components when needed would work maybe?
+// example of how only loading components when needed could work maybe?
 
 // lets say I need only: toasts, article_delete, and ajax-forms (dashboard):
 // php side:
