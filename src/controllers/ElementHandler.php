@@ -5,6 +5,7 @@ namespace Wiki\controllers;
 use Wiki\controllers\factories\ElementFactory;
 use Wiki\dataObjects\ElementInfo;
 use Wiki\models\ModelSelector;
+use Wiki\tools\Queue;
 use Wiki\tools\utils\HtmlUtils;
 
 class ElementHandler {
@@ -130,11 +131,18 @@ class ElementHandler {
             }
             // Add the appData to the $element_info
 
-            $ret_arr = &$element_info;
-            foreach(explode(',', $key) as $sub_key){
-                
+            $arr = &$element_info;
+            $keys = new Queue(explode(',', $key));
+            $i = 0; // Safety for preventing infinite loop
+            while(true && $i < 100){
+                $sub_key = $keys->next();
+                if($keys->isEmpty()){
+                    $arr[$sub_key] = $app_data;
+                    break;
+                }
+                $arr = &$arr[$sub_key];
+                $i++;
             }
-            $element_info[$key] = $app_data;
         }
         // HtmlUtils::dump('Element', $element_info);
     }
