@@ -96,29 +96,29 @@ class PageFactory
                     new ElementInfo([
                         "text" => '
                             <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+                            <script type="module" src="./src/js/main.js"></script>
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
                             <script src="./vendor/webcito/bs-markdown-editor/dist/bs-markdown-editor.js"></script>
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
-                            <script src="./src/js/wiki.js"></script>
                             <script>hljs.highlightAll();</script>'
                     ])
                 )
             );
 
-        switch ($this->page) {
-            case 'editArticle':
-            case 'search':
-                $this->htmlpage->addToHeadContent(
-                    new AtomicElement(
-                        new ElementInfo(
-                            ["text" => '<script src="./src/js/searchPage.js"></script>']
-                        )
-                    )
-                );
-                break;
-            default:
-                break;
-        }
+        // switch ($this->page) {
+        //     case 'editArticle':
+        //     case 'search':
+        //         $this->htmlpage->addToHeadContent(
+        //             new AtomicElement(
+        //                 new ElementInfo(
+        //                     ["text" => '<script src="./src/js/searchPage.js"></script>']
+        //                 )
+        //             )
+        //         );
+        //         break;
+        //     default:
+        //         break;
+        // }
     }
 
 
@@ -152,7 +152,6 @@ class PageFactory
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
         $this->add_data_to_elements($elements_info);
-
 
         $element_list = [];
         $element_list[0] = $main;

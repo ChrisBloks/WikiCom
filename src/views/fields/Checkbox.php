@@ -15,8 +15,8 @@ class Checkbox extends BaseField
     {
         // Set properties
         parent::__construct(
-            name: 'checkbox_'.$field_info['name'], 
-            label: $field_info['name'],
+            name: $field_info['name'], 
+            label: $field_info['label'],
             class: $field_info['class'] ?? "serachable tag_checkbox form-check-input", // TODO: Place this in the database somehow?
             value: $field_info['id'], // For a checkbox, its value should be equal to its id.
         );
