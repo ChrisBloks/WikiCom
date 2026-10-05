@@ -32,5 +32,5 @@ class Config
     public static function servername(): string { return self::get('servername', 'DB_HOST', 'localhost'); }
     public static function username(): string   { return self::get('username',   'DB_USER', 'root'); }
     public static function password(): string   { return self::get('password',   'DB_PASSWORD', ''); }
-    public static function db(): string         { return self::get('db',         'DB_NAME', 'Wiki'); }
+    public static function db(): string         { return self::get('db',         'DB_NAME', 'wiki'); }
 }
