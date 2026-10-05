@@ -151,7 +151,6 @@ class PageFactory
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
-
         $this->add_data_to_elements($elements_info);
 
 
@@ -218,10 +217,10 @@ class PageFactory
                 case str_contains($element_info['element_name'], 'about_'):
                 case str_contains($element_info['element_name'], 'dashboard_'):
                     $userID = ((isset($this->response['aboutID'])) ? $this->response['aboutID'] : $_SESSION['userID']);
-                    $about_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($userID);
+                    $about_info = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($userID);
                     $element_info['title'] = $about_info['name'];
-                    $element_info['bodytext'] = $about_info['description'];
-                    $element_info['image'] = $about_info['imgFileName'];
+                    $element_info['text'] = $about_info['description'];
+                    $element_info['image'] = \CONFIG::AUTHORIMGPATH .$about_info['imgFileName'];
                     if (str_contains($element_info['element_name'], 'email')) {
                         $element_info['title'] = $about_info['email'];
                     }
@@ -256,10 +255,10 @@ class PageFactory
                         ->fetchArticleByUserId($_SESSION['userID']);
                 break;
                 case $element_info['element_name'] == "edit_user_form":
-                    $about_info = ModelSelector::getUserInfoModel()->fetchUserInfoById($_SESSION['userID']);
+                    $user_info = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($_SESSION['userID']);
                     foreach ($element_info['sub_fields'] as &$sub_field){
                         if ($sub_field['field_info']['type'] != 'hidden'){
-                        $sub_field['field_info']['value'] = $about_info[$sub_field['field_info']['field_name']] ?? "";
+                        $sub_field['field_info']['value'] = $user_info[$sub_field['field_info']['field_name']] ?? "";
                         }
                     }
                     unset($sub_field);

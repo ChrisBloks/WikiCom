@@ -59,7 +59,7 @@ class WebsiteInfoModel extends BaseModel
         $placeholders = implode(',', array_fill(0, count($excluded), '?'));
 
 
-        $sql = "SELECT mi.label, mi.href
+        $sql = "SELECT mi.label, mi.page_value
             FROM menu_items mi
             WHERE mi.label NOT IN ($placeholders)
             ORDER BY mi.display_order";
@@ -67,7 +67,7 @@ class WebsiteInfoModel extends BaseModel
 
         $authorlist = [];
         foreach ($this->fetchAuthor() as $id => $name) {
-            $authorlist[] = ["id" => $id,"label" => $name, "href" => "about&author=" . $id . ""];
+            $authorlist[] = ["id" => $id,"label" => $name, "page_value" => "about&author=" . $id . ""];
         }
 
         foreach ($result as &$item) {
