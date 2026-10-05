@@ -35,7 +35,7 @@ class ElementInfo implements iElementInfo
         'element_order',
         'aria_attributes',
         'href',
-        'response_variables',
+        'application_data',
     ];
 
     private array $container = [];

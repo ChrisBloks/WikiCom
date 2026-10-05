@@ -28,9 +28,10 @@ class ElementHandler {
                 $this->addDataToElementList($element_info['sub_fields']);
             }
             
-            $element_info['response_variables'] = ModelSelector::getElementModel()->fetchElementVariables($element_info['element_id']);
+            $element_info['application_data'] = ModelSelector::getElementModel()->fetchElementVariables($element_info['element_id']);
             // HtmlUtils::dump('Element', $element_info);
-            if(isset($element_info['response_variables']) && !empty($element_info['response_variables'])){
+            if(isset($element_info['application_data']) && !empty($element_info['application_data'])){
+                HtmlUtils::dump('Element_info', $element_info);
                 $this->addDataToElement($element_info);
             }
         }
@@ -38,86 +39,102 @@ class ElementHandler {
 
     // TODO: Currently a problem that variables get slotted into seemingly random locations (i.e. into 'title' sometimes, into 'bodytext' other times)
     public function addDataToElement(ElementInfo &$element_info){
-        $response_variables = &$element_info['response_variables'];
+        $application_data = &$element_info['application_data'];
         
-        foreach($response_variables as $key => $var){
+        foreach($application_data as $key => $var){
             switch ($var){
-                case '$random_article':
-                    $random_article_info = ModelSelector::getArticleModel()->fetchRandomArticle($this->fetched_random_articles);
-                    $this->fetched_random_articles[] = $random_article_info['id'];
-                    $element_info['article_info'] = $random_article_info;
+                case '[*ADD_USER_TO_HTML_ID*]':
+                    $app_data = $this->response['userID'] . $element_info['html_id'];
                     break;
-                case '$author_name':
-                    $about_info = $this->getUserInfo($this->response['aboutID']);
-                    $element_info['title'] = $about_info['name'];
-                    break;
-                case '$author_text':
-                    $about_info = $this->getUserInfo($this->response['aboutID']);
-                    $element_info['bodytext'] = $about_info['description'];
-                    break;
-                case '$author_image':
-                    $about_info = $this->getUserInfo($this->response['aboutID']);
-                    $element_info['image'] = \CONFIG::AUTHORIMGPATH . $about_info['imgFileName'];
-                    break;
-                case '$article_info':
+                case '[*ARTICLE_AUTHOR*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $element_info['article_info'] = $article_info;
+                    $app_data = $article_info['name'];
                     break;
-                case '$user_email':
-                    $user_info = $this->getUserInfo($this->response['userID']);
-                    $element_info['title'] = $user_info['email'];
+                case '[*ARTICLE_CODE*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = $article_info['codeBlock'];
                     break;
-                case '$user_img':
-                    $user_info = $this->getUserInfo($this->response['userID']);
-                    $element_info['image'] = \CONFIG::AUTHORIMGPATH . $user_info['imgFileName'];
+                case '[*ARTICLE_ID*]':
+                    $app_data = $this->response['articleID'];
                     break;
-                case '$user_name':
-                    $user_info = $this->getUserInfo($this->response['userID']);
-                    $element_info['title'] = $user_info['name'];
+                case '[*ARTICLE_IMG*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = \CONFIG::ARTICLEIMGPATH . $article_info['imgFileName'];
                     break;
-                case '$user_articles':
-                    $user_articles = ModelSelector::getArticleModel()->fetchArticleByUserId($this->response['userID']);
-                    $element_info['options_info'][] = $user_articles;
-                case '$dialogue_attributes':
-                    $element_info['attributes'] = ModelSelector::getElementModel()
+                case '[*ARTICLE_INFO*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = $article_info;
+                    break;
+                case '[*IS_LOGGED_IN*]':
+                    $app_data =$this->response['isLoggedIn'];
+                    break;
+                case '[*ARTICLE_N_RATINGS*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = $article_info['n_ratings'];
+                    break;
+                case '[*ARTICLE_RATING*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = $article_info['rating'];
+                    break;
+                case '[*ARTICLE_TEXT*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = $article_info['summary'];
+                    break;
+                case '[*ARTICLE_TITLE*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = $article_info['title'];
+                    break;
+                case '[*AUTHOR_IMAGE*]':
+                    $about_info = $this->getUserInfo($this->response['aboutID']);
+                    $app_data = \CONFIG::AUTHORIMGPATH . $about_info['imgFileName'];
+                    break;
+                case '[*AUTHOR_NAME*]':
+                    $about_info = $this->getUserInfo($this->response['aboutID']);
+                    $app_data = $about_info['name'];
+                    break;
+                case '[*AUTHOR_TEXT*]':
+                    $about_info = $this->getUserInfo($this->response['aboutID']);
+                    $app_data = $about_info['description'];
+                    break;
+                case '[*DIALOGUE_ATTRIBUTES*]':
+                    $app_data = ModelSelector::getElementModel()
                         ->fetchDialogueAttributesByElementId($element_info['element_id']);
                     break;
-                case '$add_user_id_to_html_id':
-                    $element_info['html_id'] = $this->response['userID'] . $element_info['html_id'];
+                case '[*RANDOM_ARTICLE*]':
+                    $random_article_info = ModelSelector::getArticleModel()->fetchRandomArticle($this->fetched_random_articles);
+                    $this->fetched_random_articles[] = $random_article_info['id'];
+                    $app_data = $random_article_info;
                     break;
-                case '$article_author':
-                    $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $element_info['text'] = $article_info['name'];
+                case '[*USER_ARTICLES*]':
+                    $user_articles = ModelSelector::getArticleModel()->fetchArticleByUserId($this->response['userID']);
+                    $app_data = $user_articles;
                     break;
-                case '$article_img':
-                    $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $element_info['image'] = \CONFIG::ARTICLEIMGPATH . $article_info['imgFileName'];
+                case '[*USER_EMAIL*]':
+                    $user_info = $this->getUserInfo($this->response['userID']);
+                    $app_data = $user_info['email'];
                     break;
-                case '$article_code':
-                    $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $element_info['text'] = $article_info['codeBlock'];
+                case '[*USER_ID*]':
+                    $app_data = $this->response['userID'];
                     break;
-                case '$article_text':
-                    $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $element_info['text'] = $article_info['summary'];
+                case '[*USER_IMG*]':
+                    $user_info = $this->getUserInfo($this->response['userID']);
+                    $app_data = \CONFIG::AUTHORIMGPATH . $user_info['imgFileName'];
                     break;
-                case '$article_title':
-                    $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $element_info['text'] = $article_info['title'];
-                    break;
-                case '$article_rating':
-                    $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $element_info['options_info']['rating'] = $article_info['rating'];
-                    $element_info['options_info']['count'] = $article_info['n_ratings'];
-                    if($this->response['isLoggedIn']){
-                        $element_info['options_info']['ratable'] = True;
-                    }
-                    $element_info['options_info']['article_id'] = $this->response['articleID'];
+                case '[*USER_NAME*]]':
+                    $user_info = $this->getUserInfo($this->response['userID']);
+                    $app_data = $user_info['name'];
                     break;
                 default:
-                    $response_variables[$key] = "{$var} not recognized!";
+                    $app_data = "{$var} not recognized!";
                     break;
             }
+            // Add the appData to the $element_info
+
+            $ret_arr = &$element_info;
+            foreach(explode(',', $key) as $sub_key){
+                
+            }
+            $element_info[$key] = $app_data;
         }
         // HtmlUtils::dump('Element', $element_info);
     }
