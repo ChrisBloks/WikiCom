@@ -30,6 +30,7 @@ import { MarkdownToolbar } from "./components/MarkdownEditor.js";
 import { saveRating } from "./services/SaveRating.js";
 import { updateCheckboxGroup, resetCheckboxesToDefault, } from "./components/checkboxes.js";
 
+// document.ready
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOMContent loaded");
 
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       el.classList.add("align-middle");
     });
 
+    // editArticle add tag widget
   const widget = document.querySelector("#add-tag-widget");
   const checkboxgroup = document.querySelector(".checkbox_group");
   if (widget && checkboxgroup) {

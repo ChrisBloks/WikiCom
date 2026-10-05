@@ -11,7 +11,7 @@ export const AjaxForms = {
     button.disabled = isLoading;
   },
 
-  // binf the form for the call
+  // bind the form to the page
   bind(formSelector, options = {}) {
     const form = document.querySelector(formSelector);
     if (!form) return;
