@@ -5,6 +5,9 @@ namespace Wiki\views;
 use Wiki\tools\utils,
     Wiki\views\containers\Form;
 use Wiki\views\fields\HiddenField;
+use Wiki\views\containers\DeleteForm;
+use Dom\Element;
+use Wiki\dataObjects\ElementInfo;
 /**
  * Creates several options in a table cell that correspond to a set of actions
  * actions are database->delete article or editpage
@@ -49,15 +52,19 @@ class FirstCell
      */
     private function _buildDeleteForm(): string
     {
-        $form = new Form(
+        $form = new DeleteForm(
             action: 'main.php',
             method: 'POST',
             submit_caption: '&#10060;',
             class: "ajax-delete-form",
             submit_class: 'btn btn-danger btn-sm delete-button'
         );
-        $form->addElement(new HiddenField(name: 'page', value: $this->delete_page));
-        $form->addElement(new HiddenField(name: 'id', value: (string) $this->page_id));
+        $form->addElement(new HiddenField(
+            new ElementInfo(['field_info' => ['field_name' => 'page','value' => $this->delete_page]])
+            ));
+        $form->addElement(new HiddenField(
+            new ElementInfo(['field_info' => ['field_name' => 'id','value' => $this->page_id]])
+            ));
         return $form->show();
     }
 

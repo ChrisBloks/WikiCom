@@ -3,37 +3,50 @@
 namespace Wiki\dataObjects;
 
 use InvalidArgumentException;
+use Override;
 use Throwable;
+use Wiki\tools\interfaces\iElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
-class ElementInfo implements \arrayAccess
+class ElementInfo implements iElementInfo
 {
-
     static private array $allowed_keys =
-        [
-            'php_class',
-            'tag',
-            'name',
-            'html_class',
-            'id',
-            'value',
-            'type',
-            'action',
-            'method',
-            'style',
-            'text',
-            'label',
-        ];
+    [
+        'html_tag',
+        'html_class',
+        'html_id',
+        'element_name',
+        'text',
+        'php_class',
+        'order_by',
+        'parent_order',
+        'closing_tag',
+        'article',
+        'title',
+        'bodytext',
+        'image',
+        'element_id',
+        'field_info',
+        'form_info',
+        'sub_fields',
+        'attributes',
+        'options_info',
+        'article_info',
+        'element_order',
+        'aria_attributes',
+        'href',
+    ];
 
     private array $container = [];
 
-    public function __construct(array $attributes, bool $permissive = false)
+    public function __construct(array $attributes = [], bool $permissive = false)
     {
         foreach ($attributes as $key => $value) {
             try {
                 $this[$key] = $value;
-            } 
-            catch (InvalidArgumentException $e) {
+            } catch (InvalidArgumentException $e) {
+                HtmlUtils::dump('error_msg', $e->getMessage());
+                // If attribute is invalid, the throw does not show up in an error...
                 if (!$permissive) {
                     throw $e;
                 }
@@ -44,26 +57,57 @@ class ElementInfo implements \arrayAccess
 
     public function offsetExists(mixed $offset): bool
     {
+        if ($offset == 'class') $offset = 'html_class';
         return isset($this->container[$offset]);
     }
 
-    public function offsetGet(mixed $offset): mixed
+    public function &offsetGet(mixed $offset): mixed
     {
-        return $this->container[$offset] ?? null;
+        if ($offset == 'class') $offset = 'html_class';
+        return $this->container[$offset];
     }
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
+        // if ($value === "") return;
+        if ($offset == 'class') $offset = 'html_class';
         if (in_array($offset, static::$allowed_keys, true)) {
             $this->container[$offset] = $value;
         } else {
-            throw new InvalidArgumentException("{$offset} is not an allowed key of ElementInfo!");
+            throw new InvalidArgumentException("{$offset} is not an allowed key of {$this}!");
         }
     }
 
-
     public function offsetUnset(mixed $offset): void
     {
+        if ($offset == 'class') $offset = 'html_class';
         unset($this->container[$offset]);
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->container);
+    }
+
+    public function getHTMLAttributes(): array {
+        return ['class' => 'class', 'html_id'=>'id', 'name' => 'name'];
+    }
+
+    #[Override]
+    public function __toString(): string
+    {
+        
+        $get_class = (function () {
+            $class_name = get_class($this);
+            if ($pos = strrpos($class_name, '\\')) return substr($class_name, $pos + 1);
+            return $pos;
+        });
+
+        $s = "{$get_class()}:[";
+        foreach($this->container as $key => $value){
+            $s .= "{$key} => {$value}, ";
+        }
+        $s .= "]";
+        return $s;
     }
 }

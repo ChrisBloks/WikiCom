@@ -34,7 +34,7 @@ class ValidationHandler
             // Validate the field according to its type
             $validation_result = $this->validatorlist[$field['type']]
                 ->validate(
-                    name: $field['name'],
+                    name: $field['field_name'],
                     optional: $field['optional'],
                     error_disp_name: $field['error_disp_name']
                 );

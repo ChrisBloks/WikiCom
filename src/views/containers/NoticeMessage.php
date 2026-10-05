@@ -58,4 +58,9 @@ class NoticeMessage implements iElement
 
         return $notices;
     }
+
+    public function addElement(iElement $element): void
+    {
+        throw new \Exception('Tried to add an Element to a non-container');
+    }
 }

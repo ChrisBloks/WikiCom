@@ -10,7 +10,7 @@ use Wiki\tools\utils\Utils,
  */
 class NewPasswordValidator extends TextValidator
 {
-    public function validate(string $name, bool $optional = false, string $error_disp_name = ""): bool
+    public function validate(string $name, bool $optional = false, ?string $error_disp_name = ""): bool
     {
         if (empty($error_disp_name)) $error_disp_name = $name;
         

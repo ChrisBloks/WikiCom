@@ -2,24 +2,19 @@
 
 namespace Wiki\views\fields;
 
+use Wiki\dataObjects\ElementInfo;
+use Wiki\dataObjects\FieldInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 class SearchField extends InputField {
 
     protected string $placeholder;
 
-    public function __construct(array $field_info) {
+    public function __construct(ElementInfo $element_info) {
+        parent::__construct($element_info);
 
-        parent::__construct(
-            type: "text",
-            name: $field_info['name'],
-            class: $field_info['class'], // form-control search-input
-            label: $field_info['label'] ?? "", // optional
-            text: $field_info['text'] ?? "", // optional
-            id: $field_info['id'] ?? "" // optional
-        );
 
-        $this->placeholder = $field_info['placeholder'] ?? 'Search...';
+        $this->placeholder = $element_info['field_info']['placeholder'] ?? 'Search...';
     }
 
     public function show(): string {

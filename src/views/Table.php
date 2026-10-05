@@ -2,6 +2,9 @@
 
 namespace Wiki\views;
 
+use Override;
+use Wiki\dataObjects\ElementInfo;
+use Wiki\tools\interfaces\iElement;
 use Wiki\tools\utils\HtmlUtils, Wiki\config, Wiki\views\containers\Rating;
 
 /**
@@ -15,16 +18,18 @@ use Wiki\tools\utils\HtmlUtils, Wiki\config, Wiki\views\containers\Rating;
  *                  dependant on display_type of the $columns
  * @var string $page_value Value of target page for possible href redirect
  */
-class Table
+class Table implements iElement
 {
+    protected string $class;
     protected array $columns;
     protected array $rows;
     public string $page_value;
 
-    public function __construct(array $columns, array $rows)
+    public function __construct(ElementInfo $element_info)
     {
-        $this->columns = $columns;
-        $this->rows = $rows;
+        $this->class = $element_info['html_class'] ?? "";
+        $this->columns = $element_info['options_info'][0];
+        $this->rows = $element_info['options_info'][1] ?? [];
     }
 
     /**
@@ -32,9 +37,9 @@ class Table
      * @param mixed $tableClass Adds html class to table element
      * @return string string containing the table element
      */
-    public function createTable(?string $tableClass = null): string
+    public function show(): string
     {
-        $str = $this->startTable($tableClass);
+        $str = $this->startTable();
         $str .= $this->buildHeadRow();
         $str .= $this->buildRows();
         $str .= $this->endTable();
@@ -43,12 +48,11 @@ class Table
 
     /**
      * Starts the table element
-     * @param mixed $tableClass Adds html class to table element
      * @return string string containing the <table> string
      */
-    protected function startTable(?string $tableClass): string
+    protected function startTable(): string
     {
-        return '<table' . HtmlUtils::addClassAttr($tableClass) . '>';
+        return '<table' . HtmlUtils::addClassAttr($this->class) . '>';
     }
 
     /**
@@ -93,7 +97,7 @@ class Table
 
             //for columns, each row gets an identifier of that column
             foreach ($this->columns as $identifier => $column) {
-                $value = $row_data[$identifier] ?? null;
+                $value = $row_data[$column['column_name']] ?? null;
                 $str .= $this->buildCell($column, $value, $row_data);
             }
 
@@ -149,4 +153,12 @@ class Table
                 throw new \InvalidArgumentException('Unknown display_type: '. $column['display_type']);
         }
     }
+
+    #[Override]
+    function addElement(iElement $element): void
+    {
+        throw new \Exception('Not implemented');
+    }
+
+    
 }
