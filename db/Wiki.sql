@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2026 at 11:36 AM
+-- Generation Time: Oct 06, 2026 at 11:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -454,7 +454,7 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (32, 'page', 103, 'hidden', '', 'editPassword', 0),
 (33, 'action', 104, 'hidden', '', 'updatePassword', 0),
 (34, 'id', 105, 'hidden', '', '#userID', 0),
-(35, 'action', 104, 'hidden', '', 'searchArticle', 0);
+(35, 'action', 106, 'hidden', '', 'searchArticle', 0);
 
 -- --------------------------------------------------------
 
