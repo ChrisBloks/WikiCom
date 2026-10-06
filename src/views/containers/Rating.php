@@ -30,9 +30,11 @@ class Rating extends ContainerElement
 
         $rating = $element_info['options_info']['rating'] ?? 0;
         $display_only = $element_info['options_info']['display_only'] ?? false;
-        $ratable = $element_info['options_info']['ratable'] ?? false;
+        $ratable = 
+            ($element_info['options_info']['is_logged_in'] ?? false) && 
+            ($element_info['options_info']['user_id'] ?? -1) != ($element_info['options_info']['author_id'] ?? -1);
         $article_id = $element_info['options_info']['article_id'] ?? -1;
-        $count = $element_info['options_info']['count'] ?? '?';
+        $count = $element_info['options_info']['n_ratings'] ?? '?';
 
 
         $max = 5;

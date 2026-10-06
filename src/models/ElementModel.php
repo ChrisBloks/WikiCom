@@ -8,6 +8,7 @@
 namespace Wiki\models;
 
 use InvalidArgumentException;
+use Nette\Utils\Html;
 use Wiki\dataObjects\FormInfo,
 Wiki\dataObjects\ElementInfo,
 Wiki\dataObjects\Stack,
@@ -53,6 +54,29 @@ class ElementModel extends BaseModel
         return $result;
     }
 
+    public function fetchElementVariables(int $element_id){
+        // HtmlUtils::dump('element_info', $element_info);
+        $sql = "SELECT 
+                    `app_data`.`name`,
+                    `app_data`.`element_info_key`
+                FROM 
+                    `element_to_application_data` AS `el_to_app_data`
+                    JOIN `application_data` AS `app_data`
+                        ON
+                            `el_to_app_data`.`element_id`=:element_id AND
+                            `el_to_app_data`.`application_data_id`=`app_data`.id;";
+        $params = ['element_id' => $element_id];
+        $result = $this->crud->selectMany(sql: $sql, params: $params); #, fetch_mode:\PDO::FETCH_COLUMN);
+        
+        $application_data = [];
+        foreach($result as $row){ // array with keys 'name' and 'element_info_key'
+            // HtmlUtils::dump('$result', $row);
+            $application_data[$row['element_info_key']] = $row['name'];
+        }
+
+        return $application_data;
+    }
+
     protected function fetchLookupResult(array $element_info)
     {
         $element_id = $element_info['element_id'];
@@ -76,9 +100,6 @@ class ElementModel extends BaseModel
                 case 'options':
                     $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
                     $element_info['options_info'][] = $options_info;
-                case 'aria_attributes':
-                    $options_info = $this->fetchLookupInfoResult($lookup_info, mode: 'many');
-                    $element_info['aria_attributes'] = $options_info;
                 default:
                     break;
             }

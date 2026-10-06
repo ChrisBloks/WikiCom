@@ -151,10 +151,34 @@ class AjaxController implements iController
                 }
 
                 break;
+            case 'searchArticle':
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                // Perform basic validation on contact fields, field inputs are retrieved internally
+                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+
+                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+
+                $this->response['articles_info'] = ModelSelector::getArticleModel()->fetchArticleBySearch(
+                    author_ids:$validation_result['field_inputs']['Tag'] ?? [],
+                    tag_ids:$validation_result['field_inputs']['Author'] ?? [],
+                    sortBy:$validation_result['field_inputs']['sortby'] ?? []
+                );
+
+                $this->response['success'] = true;
+
+                //$element = ElementFactory::createElement($element_info);
+                }
+
+                break;
             default:
                 $this->response = [
                     'success' => false,
                     'message' => 'Unknown AJAX action: ' . $this->request['action'],
+                    'POST' => $this->request,
                 ];
         }
     }

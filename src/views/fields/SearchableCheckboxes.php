@@ -12,6 +12,7 @@ class SearchableCheckboxes extends BaseField
 {
     protected array $options = [];
     protected bool $addable_options = false;
+    protected string $array_name;
 
     public function __construct(ElementInfo $element_info)
     {
@@ -26,6 +27,7 @@ class SearchableCheckboxes extends BaseField
             value: $field_info['value']
         );
 
+        $this->array_name = $field_info['field_name'];
         $this->options = $element_info['options_info'][0];
         $this->addable_options = $field_info['addable_options'] ?? false;
     }
@@ -66,6 +68,8 @@ class SearchableCheckboxes extends BaseField
         $html .= '<div class="checkbox_group">';
 
         foreach ($this->options as $checkbox_info) {
+            $checkbox_info['label'] = $checkbox_info['name'];
+            $checkbox_info['name'] = $this->array_name . '['.$checkbox_info['name'].']';
             $html .= '<div class="checkbox_container">';
             $html .= (new Checkbox($checkbox_info))->show();
             $html .= '</div>';

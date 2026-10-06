@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2026 at 04:23 PM
+-- Generation Time: Oct 06, 2026 at 10:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,30 +18,51 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki`
+-- Database: `wiki_dev`
 --
-CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki`;
+CREATE DATABASE IF NOT EXISTS `wiki_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki_dev`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aria_attributes`
+-- Table structure for table `application_data`
 --
 
-CREATE TABLE `aria_attributes` (
+CREATE TABLE `application_data` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `element_info_key` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `aria_attributes`
+-- Dumping data for table `application_data`
 --
 
-INSERT INTO `aria_attributes` (`id`, `name`, `value`) VALUES
-(1, 'aria-live', 'polite'),
-(2, 'aria-atomic', 'true');
+INSERT INTO `application_data` (`id`, `name`, `element_info_key`) VALUES
+(1, '[*RANDOM_ARTICLE*]', 'article_info'),
+(2, '[*AUTHOR_NAME*]', 'title'),
+(3, '[*ARTICLE_INFO*]', 'article_info'),
+(4, '[*ARTICLE_TITLE*]', 'text'),
+(5, '[*ARTICLE_AUTHOR*]', 'text'),
+(6, '[*ARTICLE_TEXT*]', 'text'),
+(7, '[*ARTICLE_CODE*]', 'text'),
+(8, '[*ARTICLE_ID*]', 'options_info,article_id'),
+(9, '[*USER_ID*]', 'options_info,user_id'),
+(10, '[*ARTICLE_IMG*]', 'image'),
+(11, '[*ARTICLE_RATING*]', 'options_info,rating'),
+(12, '[*AUTHOR_TEXT*]', 'text'),
+(13, '[*AUTHOR_IMAGE*]', 'image'),
+(14, '[*USER_EMAIL*]', 'text'),
+(15, '[*USER_IMG*]', 'image'),
+(16, '[*USER_NAME*]', 'text'),
+(17, '[*ARTICLE_TAGS*]', 'article_info,tags'),
+(18, '[*USER_ARTICLES*]', 'options_info,articles'),
+(19, '[*DIALOGUE_ATTRIBUTES*]', 'attributes'),
+(20, '[*ADD_USER_ID_TO_HTML_ID*]', 'html_id'),
+(21, '[*ARTICLE_N_RATINGS*]', 'options_info,n_ratings'),
+(22, '[*IS_LOGGED_IN*]', 'options_info,is_logged_in'),
+(23, '[*ARTICLE_AUTHOR_ID*]', 'options_info,author_id');
 
 -- --------------------------------------------------------
 
@@ -333,6 +354,51 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `element_to_application_data`
+--
+
+CREATE TABLE `element_to_application_data` (
+  `id` int(11) NOT NULL,
+  `element_id` int(11) NOT NULL,
+  `application_data_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `element_to_application_data`
+--
+
+INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data_id`) VALUES
+(1, 5, 1),
+(2, 9, 2),
+(3, 10, 12),
+(4, 11, 13),
+(5, 60, 14),
+(6, 58, 15),
+(7, 59, 16),
+(8, 25, 3),
+(9, 25, 17),
+(10, 76, 18),
+(11, 65, 19),
+(12, 65, 20),
+(13, 66, 19),
+(14, 66, 20),
+(15, 81, 5),
+(16, 88, 10),
+(17, 87, 6),
+(18, 92, 7),
+(19, 80, 4),
+(20, 82, 11),
+(21, 72, 8),
+(22, 102, 9),
+(23, 105, 9),
+(24, 82, 21),
+(25, 82, 22),
+(26, 82, 9),
+(27, 82, 23);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `field_info`
 --
 
@@ -488,6 +554,7 @@ CREATE TABLE `page_elements` (
 --
 
 INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`) VALUES
+(1, 77, 9, 0),
 (1, 1, 10, 0),
 (1, 2, 20, 10),
 (1, 3, 30, 10),
@@ -498,20 +565,25 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (1, 8, 80, 70),
 (1, 5, 90, 80),
 (1, 5, 100, 80),
+(2, 77, 9, 0),
 (2, 12, 10, 0),
 (2, 13, 20, 10),
 (2, 9, 30, 20),
 (2, 10, 40, 20),
 (2, 11, 50, 10),
+(3, 77, 9, 0),
 (3, 1, 10, 0),
 (3, 13, 20, 10),
 (3, 14, 30, 20),
+(4, 77, 9, 0),
 (4, 1, 10, 0),
 (4, 13, 20, 10),
 (4, 18, 30, 20),
+(5, 77, 9, 0),
 (5, 1, 10, 0),
 (5, 13, 20, 10),
 (5, 31, 30, 20),
+(6, 77, 9, 0),
 (6, 44, 30, 0),
 (6, 45, 40, 30),
 (6, 46, 50, 40),
@@ -519,9 +591,11 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (6, 52, 70, 40),
 (6, 47, 80, 70),
 (6, 50, 90, 70),
+(7, 77, 9, 0),
 (7, 1, 10, 0),
 (7, 13, 20, 10),
 (7, 25, 30, 20),
+(8, 77, 9, 0),
 (8, 53, 10, 0),
 (8, 54, 20, 10),
 (8, 55, 30, 20),
@@ -543,7 +617,7 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (8, 38, 190, 170),
 (8, 75, 200, 40),
 (8, 76, 210, 40),
-(9, 77, 10, 0),
+(9, 77, 9, 0),
 (9, 79, 20, 0),
 (9, 82, 30, 20),
 (9, 83, 40, 20),
@@ -621,8 +695,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny12219', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
-(7, 'Christiannn', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
+(1, 'Danny122', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
+(7, 'Christiannn', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
 (11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
 
@@ -672,7 +746,8 @@ CREATE TABLE `wiki_article` (
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
 (1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11'),
 (28, 'PHP', 1, 'PHP is een scripttaal en is vergelijkbaar met Perl, Python en Ruby. Qua syntaxis lijkt PHP het meest op C, maar net als bij veel andere scripttalen moeten variabelen voorafgegaan worden door een dollarteken $. Dit is overgenomen uit de scripttaal Perl, waarvan PHP mede is afgeleid. In tegenstelling tot C is het in PHP wel mogelijk om naast procedureel programmeren ook objectgeoriënteerd te programmeren, net als in bijvoorbeeld Java, C++ en C#. In de eerste versies van PHP was het objectgeoriënteerd programmeren nog heel beperkt. Pas sinds versie 5 zijn de meest essentiële functies hiervoor allemaal beschikbaar.', '$url = &quot;http://nl.wikipedia.org/wiki/PHP&quot;;\r\n\r\necho &quot;U bevindt zich momenteel op $url. Welkom!&quot;;\r\n// Of\r\necho &quot;U bevindt zich momenteel op &quot;.$url.&quot;. Welkom!&quot;;', 'article_0.jpeg', '2026-09-08'),
-(29, 'New article', 1, 'This is the body text.', '', 'article_0.jpg', '2026-09-08');
+(29, 'New article', 1, 'This is the body text.', '', 'article_0.png', '2026-09-08'),
+(31, 'test', 1, 'testd', '', '', '2026-09-11');
 
 -- --------------------------------------------------------
 
@@ -693,7 +768,10 @@ INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
 (1, 1),
 (28, 53),
 (28, 54),
-(29, 54);
+(29, 54),
+(31, 53),
+(31, 54),
+(31, 55);
 
 -- --------------------------------------------------------
 
@@ -782,9 +860,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
--- Indexes for table `aria_attributes`
+-- Indexes for table `application_data`
 --
-ALTER TABLE `aria_attributes`
+ALTER TABLE `application_data`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -812,6 +890,14 @@ ALTER TABLE `element_info`
 ALTER TABLE `element_lookup_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_element_info_to_look_up` (`element_id`);
+
+--
+-- Indexes for table `element_to_application_data`
+--
+ALTER TABLE `element_to_application_data`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_el2var_element_info` (`element_id`),
+  ADD KEY `fk_el2var_response_variables` (`application_data_id`);
 
 --
 -- Indexes for table `field_info`
@@ -904,10 +990,10 @@ ALTER TABLE `wiki_tag`
 --
 
 --
--- AUTO_INCREMENT for table `aria_attributes`
+-- AUTO_INCREMENT for table `application_data`
 --
-ALTER TABLE `aria_attributes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `application_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -932,6 +1018,12 @@ ALTER TABLE `element_info`
 --
 ALTER TABLE `element_lookup_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+
+--
+-- AUTO_INCREMENT for table `element_to_application_data`
+--
+ALTER TABLE `element_to_application_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `field_info`
@@ -1008,6 +1100,13 @@ ALTER TABLE `dialogue_window`
 --
 ALTER TABLE `element_lookup_info`
   ADD CONSTRAINT `fk_element_info_to_look_up` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
+
+--
+-- Constraints for table `element_to_application_data`
+--
+ALTER TABLE `element_to_application_data`
+  ADD CONSTRAINT `fk_el_to_app_data_application_data_id` FOREIGN KEY (`application_data_id`) REFERENCES `application_data` (`id`),
+  ADD CONSTRAINT `fk_el_to_app_data_element_id` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
 
 --
 -- Constraints for table `field_info`

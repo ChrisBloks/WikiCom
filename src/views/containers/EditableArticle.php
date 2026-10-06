@@ -35,6 +35,7 @@ class EditableArticle extends Form {
         }
 
         // Add tags
+        HtmlUtils::dump('element_info', $element_info);
         $tags = $element_info['article_info']['tags'];
         $checkbox_group = Utils::get_array_element_where(
             arr: $element_info['sub_fields'],
