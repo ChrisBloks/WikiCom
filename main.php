@@ -17,7 +17,7 @@ switch ($user) {
 }
 
 use Wiki\controllers\MainController, \ManKind\tools as TOOLS;
-
+var_dump($_POST);
 // TODO : configfile with LOGpath for error writing
 // ToDo: dsdsdsd
 // @todo bfadb
