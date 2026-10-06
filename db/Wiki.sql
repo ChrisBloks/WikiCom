@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2026 at 11:56 AM
+-- Generation Time: Oct 06, 2026 at 03:54 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,7 +62,11 @@ INSERT INTO `application_data` (`id`, `name`, `element_info_key`) VALUES
 (20, '[*ADD_USER_ID_TO_HTML_ID*]', 'html_id'),
 (21, '[*ARTICLE_N_RATINGS*]', 'options_info,n_ratings'),
 (22, '[*IS_LOGGED_IN*]', 'options_info,is_logged_in'),
-(23, '[*ARTICLE_AUTHOR_ID*]', 'options_info,author_id');
+(23, '[*ARTICLE_AUTHOR_ID*]', 'options_info,author_id'),
+(24, '[*USER_NAME*]', 'field_info,value'),
+(25, '[*USER_EMAIL*]', 'field_info,value'),
+(26, '[*USER_TEXT*]', 'field_info,text'),
+(27, '[*USER_ID*]', 'field_info,value');
 
 -- --------------------------------------------------------
 
@@ -233,13 +237,8 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (90, 'codeblock_div', 'div', 'align-items-center w-100 mx-auto mt-4', '', 'ContainerElement', ''),
 (91, 'code_block_header', 'h1', 'h4', '', 'AtomicElement', 'Code'),
 (92, 'article_code_block', 'code', 'container-lg fs-6 col-15 hljs language-php', '', 'CodeBlock', '$article_code'),
-(100, 'hidden_page_edit_user', '', '', '', 'HiddenField', ''),
-(101, 'hidden_action_edit_user', '', '', '', 'HiddenField', ''),
 (102, 'hidden_id_edit_user', '', '', '', 'HiddenField', ''),
-(103, 'hidden_page_edit_password', '', '', '', 'HiddenField', ''),
-(104, 'hidden_action_edit_password', '', '', '', 'HiddenField', ''),
-(105, 'hidden_id_edit_password', '', '', '', 'HiddenField', ''),
-(106, 'hidden_action_search_article', '', '', '', 'HiddenField', '');
+(105, 'hidden_id_edit_password', '', '', '', 'HiddenField', '');
 
 -- --------------------------------------------------------
 
@@ -339,20 +338,10 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (78, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '88', 0, 'element', 20),
 (79, 90, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '91', 0, 'element', 10),
 (80, 90, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '92', 0, 'element', 20),
-(90, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '100', 0, 'element', 0),
-(91, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '101', 0, 'element', 0),
 (92, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '102', 0, 'element', 0),
-(93, 100, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '100', 0, 'field', 0),
-(94, 101, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '101', 0, 'field', 0),
 (95, 102, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '102', 0, 'field', 0),
-(96, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '103', 0, 'element', 0),
-(97, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '104', 0, 'element', 0),
 (98, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '105', 0, 'element', 0),
-(99, 103, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '103', 0, 'field', 0),
-(100, 104, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '104', 0, 'field', 0),
-(101, 105, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '105', 0, 'field', 0),
-(102, 21, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '106', 0, 'element', 0),
-(103, 106, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '106', 0, 'field', 0);
+(101, 105, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '105', 0, 'field', 0);
 
 -- --------------------------------------------------------
 
@@ -397,7 +386,12 @@ INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data
 (24, 82, 21),
 (25, 82, 22),
 (26, 82, 9),
-(27, 82, 23);
+(27, 82, 23),
+(28, 36, 24),
+(29, 37, 25),
+(30, 41, 26),
+(31, 102, 27),
+(32, 105, 27);
 
 -- --------------------------------------------------------
 
@@ -448,13 +442,8 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (26, 'Edit User Information', 65, 'Button', 'Change user information', '', 1),
 (27, 'Edit Password', 66, 'Button', '', '', 1),
 (28, 'articleID', 72, 'hidden', '', '$editArticleID', 0),
-(29, 'page', 100, 'hidden', '', 'editUser', 0),
-(30, 'action', 101, 'hidden', '', 'updateUserInfo', 0),
-(31, 'id', 102, 'hidden', '', '#userID', 0),
-(32, 'page', 103, 'hidden', '', 'editPassword', 0),
-(33, 'action', 104, 'hidden', '', 'updatePassword', 0),
-(34, 'id', 105, 'hidden', '', '#userID', 0),
-(35, 'action', 106, 'hidden', '', 'searchArticle', 0);
+(31, 'id', 102, 'hidden', '', '', 0),
+(36, 'id', 105, 'hidden', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -480,12 +469,12 @@ CREATE TABLE `form_info` (
 INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submit_caption`, `enctype`, `submit_class`) VALUES
 (1, 14, '', 'POST', '', 'Send message', '', 'btn btn-primary btn-sm'),
 (2, 18, '', 'POST', '', 'Log in', '', 'btn btn-primary btn-sm'),
-(3, 21, '', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
+(3, 21, 'searchArticle', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
 (4, 25, '', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm'),
 (5, 31, '', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
 (6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary mx-auto d-block'),
-(7, 35, '', 'POST', '', 'Change information', '', 'btn btn-primary'),
-(8, 38, '', 'POST', '', 'save', '', 'btn btn-primary');
+(7, 35, 'updateUserInfo', 'POST', '', 'Change information', '', 'btn btn-primary'),
+(8, 38, 'updatePassword', 'POST', '', 'save', '', 'btn btn-primary');
 
 -- --------------------------------------------------------
 
@@ -997,7 +986,7 @@ ALTER TABLE `wiki_tag`
 -- AUTO_INCREMENT for table `application_data`
 --
 ALTER TABLE `application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -1015,7 +1004,7 @@ ALTER TABLE `dialogue_window`
 -- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `element_lookup_info`
@@ -1027,13 +1016,13 @@ ALTER TABLE `element_lookup_info`
 -- AUTO_INCREMENT for table `element_to_application_data`
 --
 ALTER TABLE `element_to_application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `form_info`
