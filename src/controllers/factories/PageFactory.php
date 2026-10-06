@@ -15,6 +15,7 @@ namespace Wiki\controllers\factories;
 
 use ArrayAccess,
 Wiki\tools\traits\tErrorMessageCollector,
+wiki\tools\utils\HtmlUtils,
 Wiki\models\ModelSelector,
 Wiki\controllers\factories\MenuFactory,
 Wiki\views\BasePage,
@@ -25,6 +26,7 @@ Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
 Wiki\dataObjects\ElementInfo;
 use Wiki\controllers\ElementHandler;
+use Nette\Utils\Html;
 
 class PageFactory
 {
@@ -133,6 +135,7 @@ class PageFactory
 
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
+
 
 
         // Add necessary variables
