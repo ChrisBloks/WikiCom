@@ -30,8 +30,6 @@ class PostRequestHandler extends BaseRequestHandler
         $validation_result = (new ValidationHandler)
             ->validateFields(field_info: $field_info);
         
-        HtmlUtils::dump("validation result", $validation_result);
-        HtmlUtils::dump("request", $request);
 
         // If form was submitted correctly WRONG: add validation errors to response
         $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);

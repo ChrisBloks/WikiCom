@@ -167,7 +167,6 @@ class AjaxController implements iController
                     tag_ids:$validation_result['field_inputs']['Author'] ?? [],
                     sortBy:$validation_result['field_inputs']['sortby'] ?? []
                 );
-
                 $this->response['success'] = true;
 
                 //$element = ElementFactory::createElement($element_info);
