@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2026 at 11:30 AM
+-- Generation Time: Oct 06, 2026 at 11:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki_dev`
+-- Database: `wiki`
 --
-CREATE DATABASE IF NOT EXISTS `wiki_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki_dev`;
+CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki`;
 
 -- --------------------------------------------------------
 
@@ -402,51 +402,6 @@ INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data
 -- --------------------------------------------------------
 
 --
--- Table structure for table `element_to_application_data`
---
-
-CREATE TABLE `element_to_application_data` (
-  `id` int(11) NOT NULL,
-  `element_id` int(11) NOT NULL,
-  `application_data_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `element_to_application_data`
---
-
-INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data_id`) VALUES
-(1, 5, 1),
-(2, 9, 2),
-(3, 10, 12),
-(4, 11, 13),
-(5, 60, 14),
-(6, 58, 15),
-(7, 59, 16),
-(8, 25, 3),
-(9, 25, 17),
-(10, 76, 18),
-(11, 65, 19),
-(12, 65, 20),
-(13, 66, 19),
-(14, 66, 20),
-(15, 81, 5),
-(16, 88, 10),
-(17, 87, 6),
-(18, 92, 7),
-(19, 80, 4),
-(20, 82, 11),
-(21, 72, 8),
-(22, 102, 9),
-(23, 105, 9),
-(24, 82, 21),
-(25, 82, 22),
-(26, 82, 9),
-(27, 82, 23);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `field_info`
 --
 
@@ -499,7 +454,7 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (32, 'page', 103, 'hidden', '', 'editPassword', 0),
 (33, 'action', 104, 'hidden', '', 'updatePassword', 0),
 (34, 'id', 105, 'hidden', '', '#userID', 0),
-(35, 'action', 106, 'hidden', '', 'searchArticle', 0);
+(35, 'action', 104, 'hidden', '', 'searchArticle', 0);
 
 -- --------------------------------------------------------
 
@@ -1067,12 +1022,6 @@ ALTER TABLE `element_info`
 --
 ALTER TABLE `element_lookup_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
-
---
--- AUTO_INCREMENT for table `element_to_application_data`
---
-ALTER TABLE `element_to_application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `element_to_application_data`
