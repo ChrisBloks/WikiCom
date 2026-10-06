@@ -13,32 +13,17 @@
 
 namespace Wiki\controllers\factories;
 
-use ArrayAccess;
-use Wiki\tools\utils\HtmlUtils,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\models\ModelSelector,
-    Wiki\controllers\factories\MenuFactory,
-    Wiki\views\BasePage,
-    Wiki\views\Table,
-    Wiki\views\containers\AtomicElement,
-    Wiki\views\containers\Header,
-    Wiki\views\containers\BodyText,
-    Wiki\views\containers\Title,
-    Wiki\views\containers\Card,
-    Wiki\views\containers\Image,
-    Wiki\views\containers\CodeBlock,
-    Wiki\views\containers\Footer,
-    Wiki\views\containers\ContainerElement,
-    Wiki\views\containers\MainElement,
-    Wiki\views\containers\Rating,
-    Wiki\views\containers\NoticeMessage,
-    League\CommonMark\GithubFlavoredMarkdownConverter,
-    HTMLPurifier,
-    HTMLPurifier_Config,
-    Wiki\views\fields\ButtonField,
-    InvalidArgumentException,
-    Throwable;
-use Wiki\dataObjects\ElementInfo;
+use ArrayAccess,
+Wiki\tools\traits\tErrorMessageCollector,
+Wiki\models\ModelSelector,
+Wiki\controllers\factories\MenuFactory,
+Wiki\views\BasePage,
+Wiki\views\containers\AtomicElement,
+Wiki\views\containers\Header,
+Wiki\views\containers\Toast,
+Wiki\views\containers\Footer,
+Wiki\views\containers\MainElement,
+Wiki\dataObjects\ElementInfo;
 
 
 
@@ -94,16 +79,15 @@ class PageFactory
             ->addToHeadContent(
                 new AtomicElement(
                     new ElementInfo([
-                        "text" => '
+                        "text" => '   <script type="module" src="./src/js/main.js"></script>
                             <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-                            <script src="./vendor/webcito/bs-markdown-editor/dist/bs-markdown-editor.js"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
-                            <script src="./src/js/wiki.js"></script>
-                            <script>hljs.highlightAll();</script>'
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                                        <script>hljs.highlightAll();</script>'
                     ])
                 )
             );
+
 
         switch ($this->page) {
             case 'editArticle':
@@ -145,7 +129,7 @@ class PageFactory
         $this->htmlpage->addToBodyContent($menu);
 
         $main = new MainElement();
-        $main->addElement(new NoticeMessage());
+        $main->addElement(new Toast());
         $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
         // Maybe seperate controller
@@ -200,8 +184,8 @@ class PageFactory
                 $this->add_data_to_elements($element_info['sub_fields']);
             }
 
-            if ($this->response['page'] == 'article' || $this->response['page'] == 'editArticle'){
-                if(!isset($this->article_info)){
+            if ($this->response['page'] == 'article' || $this->response['page'] == 'editArticle') {
+                if (!isset($this->article_info)) {
                     $this->article_info = ModelSelector::getArticleModel()
                         ->fetchArticleByID($this->response['articleID'] ?? $this->response['editArticleID'] ?? []);
                 }
@@ -220,7 +204,7 @@ class PageFactory
                     $about_info = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($userID);
                     $element_info['title'] = $about_info['name'];
                     $element_info['text'] = $about_info['description'];
-                    $element_info['image'] = \CONFIG::AUTHORIMGPATH .$about_info['imgFileName'];
+                    $element_info['image'] = \CONFIG::AUTHORIMGPATH . $about_info['imgFileName'];
                     if (str_contains($element_info['element_name'], 'email')) {
                         $element_info['title'] = $about_info['email'];
                     }
@@ -241,7 +225,7 @@ class PageFactory
                         $key = substr($value, 1);
                         $element_info['field_info']['value'] = ($_SESSION[$key] ?? false);
                     }
-                    
+
                     break;
                 case ($element_info['php_class'] == 'DialogueButton'):
                     $element_info['attributes'] = ModelSelector::getElementModel()
@@ -253,12 +237,12 @@ class PageFactory
                 case $element_info['element_name'] == "table_dashboard":
                     $element_info['options_info'][] = ModelSelector::getArticleModel()
                         ->fetchArticleByUserId($_SESSION['userID']);
-                break;
+                    break;
                 case $element_info['element_name'] == "edit_user_form":
                     $user_info = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($_SESSION['userID']);
-                    foreach ($element_info['sub_fields'] as &$sub_field){
-                        if ($sub_field['field_info']['type'] != 'hidden'){
-                        $sub_field['field_info']['value'] = $user_info[$sub_field['field_info']['field_name']] ?? "";
+                    foreach ($element_info['sub_fields'] as &$sub_field) {
+                        if ($sub_field['field_info']['type'] != 'hidden') {
+                            $sub_field['field_info']['value'] = $user_info[$sub_field['field_info']['field_name']] ?? "";
                         }
                     }
                     unset($sub_field);
@@ -269,12 +253,12 @@ class PageFactory
                     break;
 
                 case $element_info['element_name'] == 'article_text_img_div':
-                    foreach($element_info['sub_fields'] as $sub_element_info){
-                        if($sub_element_info['element_name'] == 'article_body_text'){
+                    foreach ($element_info['sub_fields'] as $sub_element_info) {
+                        if ($sub_element_info['element_name'] == 'article_body_text') {
                             $sub_element_info['text'] = $this->article_info['summary'];
                         }
                     }
-                    
+
                     break;
                 case $element_info['element_name'] == "article_code_block":
                     $element_info['text'] = $this->article_info['codeBlock'];
@@ -291,7 +275,7 @@ class PageFactory
                 case $element_info['element_name'] == "rating_div":
                     $element_info['options_info']['rating'] = $this->article_info['rating'];
                     $element_info['options_info']['count'] = $this->article_info['n_ratings'];
-                    if($this->response['isLoggedIn']){
+                    if ($this->response['isLoggedIn']) {
                         $element_info['options_info']['ratable'] = True;
                     }
                     $element_info['options_info']['article_id'] = $this->response['articleID'];
