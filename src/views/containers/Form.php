@@ -33,7 +33,7 @@ class Form extends ContainerElement
         // Build opening tag
         $this->html_before = "<{$element_info['html_tag']} ";
         // Add standard HTML attributes
-        foreach ($element_info->getHTMLattributes() as $key =>$attr) {
+        foreach ($element_info->getHTMLattributes() as $key => $attr) {
             $this->html_before .= ($element_info[$key] ? $attr . '="' . $element_info[$key] . '" ' : "");
         }
         // Add form HTML attributes
@@ -84,6 +84,19 @@ class Form extends ContainerElement
                 break;
             }
         }
+
+        $hiddenfield = ElementFactory::createElement(
+            new ElementInfo([
+                'php_class' => 'HiddenField',
+                'field_info' => new FieldInfo([
+                    'field_name' => 'action',
+                    'type' => 'hidden',
+                    'value' => $form_info['action'],
+                ])
+            ])
+        );
+
+        $this->addElement($hiddenfield);
 
         if ($has_visible_sub_field) {
             $hiddenfield = ElementFactory::createElement(
