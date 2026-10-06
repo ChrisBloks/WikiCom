@@ -162,9 +162,11 @@ class AjaxController implements iController
 
                 if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
 
+                $this->response['validation_result'] = $validation_result;
+
                 $this->response['articles_info'] = ModelSelector::getArticleModel()->fetchArticleBySearch(
-                    author_ids:$validation_result['field_inputs']['Tag'] ?? [],
-                    tag_ids:$validation_result['field_inputs']['Author'] ?? [],
+                    author_ids:$validation_result['field_inputs']['Author'] ?? [],
+                    tag_ids:$validation_result['field_inputs']['Tag'] ?? [],
                     sortBy:$validation_result['field_inputs']['sortby'] ?? []
                 );
                 $this->response['success'] = true;
