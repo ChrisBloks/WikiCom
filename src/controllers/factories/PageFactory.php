@@ -129,7 +129,7 @@ class PageFactory
         $this->htmlpage->addToBodyContent($menu);
 
         $main = new MainElement();
-        $main->addElement(new Toast());
+        $main->addElement(new Toast(new ElementInfo));
         $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
         // Maybe seperate controller
