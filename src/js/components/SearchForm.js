@@ -15,9 +15,9 @@ export const SearchForm = {
                 let rows = search_table.tHead.rows[0].cells;
                 let ids = Array.from(rows, (x) => x.id);
                 result.articles_info.forEach(function (article) {
-                    var row = tbody.insertRow(0);
+                    let row = tbody.insertRow(0);
                     ids.forEach(function (row_id) {
-                        var cell = row.insertCell();
+                        let cell = row.insertCell();
                         switch (row_id) {
                             case "title":
                                 cell.innerHTML = `<a href="?page=article&id=${article.id}">${article[row_id] || ""}</a>`;

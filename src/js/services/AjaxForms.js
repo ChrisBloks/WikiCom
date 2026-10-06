@@ -35,10 +35,12 @@ export const AjaxForms = {
 
       // start fetch()
       try {
+        let FormData_var = new FormData(form);
+        FormData_var.append("action", form.getAttribute("action"));
         await ajaxPOST(
           "main.php",
           "json",
-          new FormData(form),
+          FormData_var,
           (result) => {
             if (result.success) {
               // show result messages in toasts
