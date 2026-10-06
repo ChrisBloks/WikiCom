@@ -24,8 +24,7 @@ Wiki\views\containers\Toast,
 Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
 Wiki\dataObjects\ElementInfo;
-
-
+use Wiki\controllers\ElementHandler;
 
 class PageFactory
 {
@@ -135,7 +134,10 @@ class PageFactory
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
-        $this->add_data_to_elements($elements_info);
+
+        // Add necessary variables
+        $element_handler = new ElementHandler($this->response);
+        $element_handler->addDataToElementList($elements_info);
 
         $element_list = [];
         $element_list[0] = $main;
@@ -171,118 +173,5 @@ class PageFactory
         unset($field);
 
         return $form_fields;
-    }
-
-
-    // TODO: Clean up this function
-    protected function add_data_to_elements(array &$elements_info)
-    {
-        foreach ($elements_info as &$element_info) {
-
-            if (isset($element_info['sub_fields'])) {
-                $this->add_data_to_elements($element_info['sub_fields']);
-            }
-
-            if ($this->response['page'] == 'article' || $this->response['page'] == 'editArticle') {
-                if (!isset($this->article_info)) {
-                    $this->article_info = ModelSelector::getArticleModel()
-                        ->fetchArticleByID($this->response['articleID'] ?? $this->response['editArticleID'] ?? []);
-                }
-            }
-
-            switch (true) {
-                case $element_info['element_name'] === "random_article":
-                    $excludelist = $excludelist ?? [];
-                    $element_info['article'] = ModelSelector::getArticleModel()
-                        ->fetchFrontPageArticles($excludelist);
-                    $excludelist[] = $element_info['article']['id'];
-                    break;
-                case str_contains($element_info['element_name'], 'about_'):
-                case str_contains($element_info['element_name'], 'dashboard_'):
-                    $userID = ((isset($this->response['aboutID'])) ? $this->response['aboutID'] : $_SESSION['userID']);
-                    $about_info = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($userID);
-                    $element_info['title'] = $about_info['name'];
-                    $element_info['text'] = $about_info['description'];
-                    $element_info['image'] = \CONFIG::AUTHORIMGPATH . $about_info['imgFileName'];
-                    if (str_contains($element_info['element_name'], 'email')) {
-                        $element_info['title'] = $about_info['email'];
-                    }
-                    break;
-                // Check if the value for this hidden field should be in the response.
-                case $element_info['php_class'] == 'EditableArticle':
-                    $this->article_info['tags'] = ModelSelector::getArticleModel()
-                        ->fetchArticleTags($this->response['editArticleID']);
-                    $element_info['article_info'] = $this->article_info;
-                    break;
-                case $element_info['php_class'] == 'HiddenField':
-                    $value = $element_info['field_info']['value'];
-                    if ($value && $value[0] == '$') {
-                        $key = substr($value, 1);
-                        $element_info['field_info']['value'] = ($this->response[$key] ?? false);
-                    }
-                    if ($value && $value[0] == '#') {
-                        $key = substr($value, 1);
-                        $element_info['field_info']['value'] = ($_SESSION[$key] ?? false);
-                    }
-
-                    break;
-                case ($element_info['php_class'] == 'DialogueButton'):
-                    $element_info['attributes'] = ModelSelector::getElementModel()
-                        ->fetchDialogueAttributesByElementId($element_info['element_id']);
-                    if (str_contains($element_info['element_name'], 'edit_user')) {
-                        $element_info['html_id'] = $_SESSION['userID'] . $element_info['html_id'];
-                    }
-                    break;
-                case $element_info['element_name'] == "table_dashboard":
-                    $element_info['options_info'][] = ModelSelector::getArticleModel()
-                        ->fetchArticleByUserId($_SESSION['userID']);
-                    break;
-                case $element_info['element_name'] == "edit_user_form":
-                    $user_info = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($_SESSION['userID']);
-                    foreach ($element_info['sub_fields'] as &$sub_field) {
-                        if ($sub_field['field_info']['type'] != 'hidden') {
-                            $sub_field['field_info']['value'] = $user_info[$sub_field['field_info']['field_name']] ?? "";
-                        }
-                    }
-                    unset($sub_field);
-                    break;
-                case $element_info['php_class'] == "TagButtonContainer":
-                    $element_info['options_info'][0] = ModelSelector::getArticleModel()
-                        ->fetchArticleTags($this->response['articleID']);
-                    break;
-
-                case $element_info['element_name'] == 'article_text_img_div':
-                    foreach ($element_info['sub_fields'] as $sub_element_info) {
-                        if ($sub_element_info['element_name'] == 'article_body_text') {
-                            $sub_element_info['text'] = $this->article_info['summary'];
-                        }
-                    }
-
-                    break;
-                case $element_info['element_name'] == "article_code_block":
-                    $element_info['text'] = $this->article_info['codeBlock'];
-                    break;
-                case $element_info['element_name'] == "article_title":
-                    $element_info['text'] = $this->article_info['title'];
-                    break;
-                case $element_info['element_name'] == "article_author_name":
-                    $element_info['text'] = $this->article_info['name'];
-                    break;
-                case $element_info['element_name'] == "article_body_img":
-                    $element_info['image'] = \CONFIG::ARTICLEIMGPATH . $this->article_info['imgFileName'];
-                    break;
-                case $element_info['element_name'] == "rating_div":
-                    $element_info['options_info']['rating'] = $this->article_info['rating'];
-                    $element_info['options_info']['count'] = $this->article_info['n_ratings'];
-                    if ($this->response['isLoggedIn']) {
-                        $element_info['options_info']['ratable'] = True;
-                    }
-                    $element_info['options_info']['article_id'] = $this->response['articleID'];
-                    break;
-                default:
-                    break;
-            }
-        }
-        unset($element_info);
     }
 }

@@ -26,7 +26,7 @@ class ElementFactory
         'searchablecheckboxes' =>  'Wiki\views\fields\SearchableCheckboxes',
         'select' => 'Wiki\views\fields\Select',
         'resultstable' => 'Wiki\views\Table',
-        'dashboardtable' => 'Wiki\views\Table',
+        'dashboardtable' => 'Wiki\views\DashboardTable',
         'dialoguebutton' => 'Wiki\views\fields\DialogueButton',
         'modal' => 'Wiki\views\containers\Modal',
         'hiddenfield' => 'Wiki\views\fields\HiddenField',
@@ -39,6 +39,7 @@ class ElementFactory
     ];
 
     public static function createElement(ElementInfo $element_info): iElement {
+        // HtmlUtils::dump('Creating Element', $element_info);
         return new self::$NAMESPACE[
             strtolower($element_info['php_class'])
             ]($element_info);
