@@ -29,7 +29,10 @@ class PostRequestHandler extends BaseRequestHandler
         // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
         $validation_result = (new ValidationHandler)
             ->validateFields(field_info: $field_info);
-            
+        
+        HtmlUtils::dump("validation result", $validation_result);
+        HtmlUtils::dump("request", $request);
+
         // If form was submitted correctly WRONG: add validation errors to response
         $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour
@@ -133,6 +136,7 @@ class PostRequestHandler extends BaseRequestHandler
                 }
                 break;
             case 'contact':
+                echo 'contact validation reached';
                 // On succesful contact form validation, save input to the database
                 if ($validation_result['ok']) {
                     $field_inputs = $validation_result['field_inputs'];
