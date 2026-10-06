@@ -3,7 +3,6 @@
 // ============================================================
 import { ajaxPOST } from "../services/Ajax.js";
 
-
 export const ArticleDelete = {
   init() {
     // on submit

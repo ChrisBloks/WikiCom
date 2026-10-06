@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       el.classList.add("align-middle");
     });
 
-  // editArticle add tag widget
+    // editArticle add tag widget
   const widget = document.querySelector("#add-tag-widget");
   const checkboxgroup = document.querySelector(".checkbox_group");
   if (widget && checkboxgroup) {
@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   saveRating.init();
   SearchForm.init();
 
+  //bind ajax form
   AjaxForms.bind("#editUserModal form", {
     onSuccess: function (result) {
       if (result.name) {
@@ -94,6 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
     starRatings.style.width = fillSpan.offsetWidth + "px";
   }
 
+document.querySelectorAll(".checkbox_group").forEach(function (checkbox_group) {
+  resetCheckboxesToDefault(checkbox_group);
+});
 
   // searchbar update (js)
   document.querySelectorAll(".searchField").forEach(function (search_field) {
@@ -103,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCheckboxGroup(checkbox_group, this.value, 1);
     });
   });
-
 
 
 });
