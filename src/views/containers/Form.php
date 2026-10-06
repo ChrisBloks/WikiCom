@@ -2,7 +2,13 @@
 
 namespace Wiki\views\containers;
 
+use Wiki\controllers\factories\ElementFactory;
+use Wiki\dataObjects\ElementInfo;
+use Wiki\dataObjects\FieldInfo;
+use Wiki\dataObjects\FormInfo;
+use Wiki\tools\interfaces\iElementInfo;
 use Wiki\tools\utils, Wiki\views\fields;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Builds a form element with an action and a submit button
@@ -20,15 +26,79 @@ class Form extends ContainerElement
     // properties
     protected array $hiddenfields;
 
-    public function __construct(string $action, string $method, string $submit_caption, string $class = "",string $enctype = "", string $submit_class='')
+    public function __construct(ElementInfo $element_info)
     {
-        $this->html_before = '<form action="' . $action . '" method="' . $method . '" ' . utils\HtmlUtils::addClassAttr($class) . 'enctype="'.$enctype.'">';
+        $form_info = $element_info['form_info'];
 
-        $this->html_after = '<button type="submit" value="submit"'
-                            . utils\HtmlUtils::addClassAttr($submit_class) 
-                            .'><span class="spinner-border spinner-border-sm d-none" role="status"></span>' 
-                            . $submit_caption 
-                            . ' </button></form>';
+        // Build opening tag
+        $this->html_before = "<{$element_info['html_tag']} ";
+        // Add standard HTML attributes
+        foreach ($element_info->getHTMLattributes() as $attr) {
+            $this->html_before .= ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
+        }
+        // Add form HTML attributes
+        foreach (['action', 'method', 'enctype',] as $attr) {
+            if (isset($form_info[$attr]) && !($form_info[$attr] == '""')) {
+                $this->html_before .= $attr . '="' . $form_info[$attr] . '" ';
+            } else {
+                $this->html_before .= $attr . '="_" ';
+            }
+        }
+        $this->html_before .= ">" . ($element_info['text'] ?? "");
+
+
+        // Build closing tag
+        $this->html_after = ($element_info['closing_tag'] !== false ? "</{$element_info['html_tag']}>" : "");
+
+        // Sort fields based on element_order
+
+
+        // Add all fields
+        foreach ($element_info['sub_fields'] as $sub_element_info) {
+            $sub_element = ElementFactory::createElement($sub_element_info);
+            $this->addElement($sub_element);
+        }
+
+
+        // Add button
+        $button = ElementFactory::createElement(
+            new ElementInfo([
+                'html_tag' => 'button',
+                'php_class' => 'ButtonField',
+                'html_class' => $form_info['submit_class'],
+                'field_info' => new FieldInfo([
+                    'type' => 'submit',
+                    'value' => 'submit',
+                    'text' => '<span class="spinner-border spinner-border-sm d-none" role="status"></span>' . $form_info['submit_caption']
+                ])
+            ])
+        );
+        $this->addElement($button);
+        // Add hidden field element ID
+
+        $has_visible_sub_field = false;
+
+        foreach ($element_info['sub_fields'] ?? [] as $sub_field) {
+            if ($sub_field['field_info']['type'] !== 'hidden') {
+                $has_visible_sub_field = true;
+                break;
+            }
+        }
+
+        if ($has_visible_sub_field) {
+            $hiddenfield = ElementFactory::createElement(
+                new ElementInfo([
+                    'php_class' => 'HiddenField',
+                    'field_info' => new FieldInfo([
+                        'field_name' => 'element_id',
+                        'type' => 'hidden',
+                        'value' => $element_info['element_id'],
+                    ])
+                ])
+            );
+
+            $this->addElement($hiddenfield);
+        }
     }
 
 }

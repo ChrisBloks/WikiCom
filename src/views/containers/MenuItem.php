@@ -2,6 +2,8 @@
 
 namespace Wiki\views\containers;
 
+use Wiki\dataObjects\ElementInfo;
+use Wiki\dataObjects\LinkedElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 /**
@@ -14,16 +16,29 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class Menuitem extends ContainerElement
 {
-    public function __construct(string $label, string $href, string $class = '', array $attrs = [], string $li_class = '')
+    public function __construct(string $label, string $page_value, string $class = '', ?array $attrs = null, string $li_class = '')
     {
-        $safe_label = htmlspecialchars($label);
-        $safe_href = htmlspecialchars($href);
-
         parent::__construct(
-            '<li' . HtmlUtils::addClassAttr($li_class) . '>' .
-                '<a href="?page=' . $safe_href . '"' . HtmlUtils::addClassAttr($class) . HtmlUtils::addAttrs($attrs) . '>' .
-                $safe_label . '</a>',
-            "</li>"
+            new LinkedElementInfo([
+                'html_tag' => 'li',
+                'class' => $li_class,
+            ]));
+
+        
+        $element_info = new LinkedElementInfo([
+                    'html_tag' => 'a',
+                    'page_value' => htmlspecialchars($page_value),
+                    'class' => $class,
+                    'label' => htmlspecialchars($label)
+                    ]);
+        foreach($attrs as $attr => $val){
+            $element_info[$attr] = $val;
+        }
+
+        $this->addElement(
+            new AtomicElement($element_info)
         );
+
+
     }
 }

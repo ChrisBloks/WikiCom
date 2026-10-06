@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2026 at 01:10 PM
+-- Generation Time: Sep 30, 2026 at 04:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `wiki`
 --
+CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aria_attributes`
+--
+
+CREATE TABLE `aria_attributes` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `aria_attributes`
+--
+
+INSERT INTO `aria_attributes` (`id`, `name`, `value`) VALUES
+(1, 'aria-live', 'polite'),
+(2, 'aria-atomic', 'true');
 
 -- --------------------------------------------------------
 
@@ -66,47 +88,303 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dialogue_window`
+--
+
+CREATE TABLE `dialogue_window` (
+  `id` int(11) NOT NULL,
+  `data-bs-toggle` varchar(255) NOT NULL,
+  `data-bs-target` varchar(255) NOT NULL,
+  `element_info_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dialogue_window`
+--
+
+INSERT INTO `dialogue_window` (`id`, `data-bs-toggle`, `data-bs-target`, `element_info_id`) VALUES
+(1, 'modal', '#editUserModal', 65),
+(2, 'modal', '#editPasswordModal', 66);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `element_info`
+--
+
+CREATE TABLE `element_info` (
+  `id` int(11) NOT NULL,
+  `element_name` varchar(255) NOT NULL,
+  `html_tag` text NOT NULL,
+  `html_class` varchar(255) NOT NULL,
+  `html_id` varchar(255) NOT NULL,
+  `php_class` varchar(255) NOT NULL,
+  `text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `element_info`
+--
+
+INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `html_id`, `php_class`, `text`) VALUES
+(1, 'main', 'div', 'd-flex flex-column align-items-center w-75 mx-auto', '', 'ContainerElement', ''),
+(2, 'home_text', 'h1', 'display-1', '', 'AtomicElement', 'Welcome to our website'),
+(3, 'row_container', 'div', 'row g-4 mb-5', '', 'ContainerElement', ''),
+(4, 'featured_col', 'div', 'col-md-8', '', 'ContainerElement', ''),
+(5, 'random_article', '', '', '', 'Card', ''),
+(6, 'small_coll', 'div', 'col-md-4', '', 'ContainerElement', ''),
+(7, 'small_row', 'div', 'row g-4', '', 'ContainerElement', ''),
+(8, 'small_wrapper', 'div', 'col-12', '', 'ContainerElement', ''),
+(9, 'about_title', 'h1', 'display-1 text-center border-bottom', '', 'Title', ''),
+(10, 'about_description', 'div', 'fs-5 text-center', '', 'BodyText', ''),
+(11, 'about_img', '', 'rounded-circle profile-pic d-flex justify-content-end mb-3', '', 'Image', ''),
+(12, 'main_2', 'div', 'd-flex align-items-center w-75 mx-auto', '', 'ContainerElement', ''),
+(13, 'sub', 'div', 'flex-grow-1', '', 'ContainerElement', ''),
+(14, 'contact_form', 'form', 'form-group', '', 'Form', ''),
+(15, 'contact_name_field', '', 'contact-name form-control', '', 'Input', ''),
+(16, 'contact_field_email', '', 'contact-email form-control', '', 'Input', ''),
+(17, 'contact_field_message', '', 'message-text form-control', '', 'textarea', ''),
+(18, 'log_in_form', 'form', 'form-group', '', 'Form', ''),
+(19, 'login_in_field_email', '', 'login-email form-control', '', 'Input', ''),
+(20, 'log_in_field_password', '', 'login-password form-control', '', 'Input', ''),
+(21, 'search_form', 'form', 'form-group', '', 'Form', ''),
+(22, 'search_field_author', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author', '', 'SearchableCheckboxes', ''),
+(23, 'search_field_tag', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', '', 'SearchableCheckboxes', ''),
+(24, 'search_field_sortby\r\n', '', 'sort-by form-select', '', 'select', ''),
+(25, 'article_form', 'form', 'form-group', '', 'EditableArticle', ''),
+(26, 'article_field_title', '', 'article-title form-control', '', 'Input', ''),
+(27, 'article_field_bodytext', '', 'article-text form-control', '', 'textarea', ''),
+(28, 'article_field_codeblock', '', 'article-codeblock form-control', '', 'textarea', ''),
+(29, 'article_field_img', '', 'article-img-file form-control', '', 'Input', ''),
+(30, 'article_field_tags', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', '', 'SearchableCheckboxes', ''),
+(31, 'register_form', 'form', 'form-group', '', 'Form', ''),
+(32, 'register_field_name', '', 'register-name form-control', '', 'Input', ''),
+(33, 'register_field_email', '', 'register-email form-control', '', 'Input', ''),
+(34, 'register_field_new_password', '', 'register-verifypassword form-control', '', 'new_password', ''),
+(35, 'edit_user_form', 'Form', 'form-control mt-5', '', 'Form', ''),
+(36, 'edit_user_field_name', '', 'editUser-userName form-control', '', 'Input', ''),
+(37, 'edit_user_field_email', '', 'editUser-email form-control', '', 'Input', ''),
+(38, 'edit_password_form', 'Form', 'form-control mt-5', '', 'Form', ''),
+(39, 'edit_password_field_old', '', 'editPassword-pw1 form-control', '', 'Input', ''),
+(40, 'edit_password_field_new', '', 'editPassword-pw2 form-control', '', 'new_password', ''),
+(41, 'edit_user_field_description', '', 'about-text form-control', '', 'textarea', ''),
+(42, 'edit_user_field_img', '', 'about-img-file form-control', '', 'Input', ''),
+(43, 'create_new_article', 'form', '', '', 'Form', ''),
+(44, 'search_container', 'div', 'container-fluid', '', 'ContainerElement', ''),
+(45, 'search_row', 'div', 'row', '', 'ContainerElement', ''),
+(46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', ''),
+(47, 'search_table_container', 'div', 'table-responsive', '', 'ContainerElement', ''),
+(50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', '', 'ResultsTable', ''),
+(51, 'log_in_hidden_page', '', '', '', 'Input', ''),
+(52, 'search_col_results', 'div', 'col-12 col-md-9 ps-4', '', 'ContainerElement', ''),
+(53, 'container_fluid', 'div', 'container-fluid', '', 'ContainerElement', ''),
+(54, 'row_div', 'div', 'row', '', 'ContainerElement', ''),
+(55, 'filter_div', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', ''),
+(56, 'result_div', 'div', 'col-12 col-md-9 ps-4', '', 'ContainerElement', ''),
+(57, 'user_div', 'div', 'd-flex justify-content-center align-items-center align-items-end gap-3', '', 'ContainerElement', ''),
+(58, 'dashboard_image', '', 'p-2 dashboard-pic rounded mb-1 dashboard-pic', '', 'Image', ''),
+(59, 'dashboard_title', 'h1', 'd-flex justify-content-center fs-3 userNameDisplay', '', 'Title', ''),
+(60, 'dashboard_email', 'h1', 'd-flex justify-content-center fs-6 userEmailDisplay', '', 'Title', ''),
+(61, 'new_article_title', 'h1', 'd-flex justify-content-center h4 border-top', '', 'Title', 'Create new article'),
+(62, 'hidden_page_dashboard', '', '', '', 'HiddenField', ''),
+(63, 'hidden_article_id_dashboard', '', '', '', 'HiddenField', ''),
+(64, 'edit_user_information', 'h1', 'd-flex justify-content-center h4 border-top', '', 'Title', 'Edit user information'),
+(65, 'edit_user_info_button_dashboard', 'button', 'btn btn-secondary mx-auto d-block', '-edit-user-btn', 'DialogueButton', 'Edit User information'),
+(66, 'edit_user_password_button_dashboard', 'button', 'btn btn-danger mx-auto d-block', '-edit-pwd-btn', 'DialogueButton', 'Change Password'),
+(67, 'edit_user_modal', '', '', 'editUserModal', 'Modal', 'Edit User Information'),
+(68, 'edit_password_modal', '', '', 'editPasswordModal', 'Modal', 'Change Password'),
+(69, 'edit_user_modal_errors', 'div', 'alert alert-danger d-none', 'editUserModal-errors', 'AtomicElement', ''),
+(70, 'edit_password_modal_errors', 'div', 'alert alert-danger d-none', 'editPasswordModal-errors', 'AtomicElement', ''),
+(72, 'hidden_article_ID', '', '', '', 'HiddenField', ''),
+(75, 'table_article_title_dashboard', 'h1', 'fs-2', '', 'Title', 'Articles'),
+(76, 'table_dashboard', 'table', 'table table-search table-hover table-striped table-bordered', '', 'DashboardTable', ''),
+(77, 'toast_div', 'div', 'position-relative', '', 'ContainerElement', ''),
+(78, 'toast_container', 'div', 'toast-container top-0 end-0 p-3', 'toast-container', 'Toast', ''),
+(79, 'article_body_div', 'div', 'align-items-center w-75 mx-auto', '', 'ContainerElement', ''),
+(80, 'article_title', 'h1', 'text-center', '', 'AtomicElement', '$articleTitle'),
+(81, 'article_author_name', 'h3', 'text-center', '', 'AtomicElement', '$authorName'),
+(82, 'rating_div', 'div', 'rating_div', '', 'Rating', ''),
+(83, 'tag_button_container', 'div', 'd-flex flex-wrap gap-2 mb-3 border-top border-bottom py-2\r\n', '', 'TagButtonContainer', ''),
+(86, 'article_text_img_div', 'div', 'd-flex flex-grow-1', '', 'ContainerElement', ''),
+(87, 'article_body_text', 'div', 'container fs-6 text-start', '', 'ContainerElement', '$article_body_text'),
+(88, 'article_body_img', 'img', 'rounded article-pic mx-auto d-flex ms-3', '', 'Image', ''),
+(89, 'horizontal_line', 'hr', 'w-100 mx-auto mt-4', '', 'AtomicElement', ''),
+(90, 'codeblock_div', 'div', 'align-items-center w-100 mx-auto mt-4', '', 'ContainerElement', ''),
+(91, 'code_block_header', 'h1', 'h4', '', 'AtomicElement', 'Code'),
+(92, 'article_code_block', 'code', 'container-lg fs-6 col-15 hljs language-php', '', 'CodeBlock', '$article_code'),
+(100, 'hidden_page_edit_user', '', '', '', 'HiddenField', ''),
+(101, 'hidden_action_edit_user', '', '', '', 'HiddenField', ''),
+(102, 'hidden_id_edit_user', '', '', '', 'HiddenField', ''),
+(103, 'hidden_page_edit_password', '', '', '', 'HiddenField', ''),
+(104, 'hidden_action_edit_password', '', '', '', 'HiddenField', ''),
+(105, 'hidden_id_edit_password', '', '', '', 'HiddenField', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `element_lookup_info`
+--
+
+CREATE TABLE `element_lookup_info` (
+  `id` int(11) NOT NULL,
+  `element_id` int(11) NOT NULL,
+  `source_table` varchar(255) NOT NULL,
+  `column_names` varchar(255) NOT NULL,
+  `where_` varchar(255) NOT NULL,
+  `where_value` varchar(255) NOT NULL,
+  `has_join` tinyint(1) NOT NULL,
+  `lookup_type` varchar(255) NOT NULL,
+  `element_order` int(3) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `element_lookup_info`
+--
+
+INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_names`, `where_`, `where_value`, `has_join`, `lookup_type`, `element_order`) VALUES
+(1, 14, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '14', 0, 'form', 0),
+(2, 14, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '15', 0, 'element', 0),
+(3, 15, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '15', 0, 'field', 0),
+(4, 16, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '16', 0, 'field', 0),
+(5, 14, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '16', 0, 'element', 0),
+(6, 18, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '18', 0, 'form', 0),
+(7, 19, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '19', 0, 'field', 0),
+(8, 20, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '20', 0, 'field', 0),
+(9, 18, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '19', 0, 'element', 0),
+(11, 18, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '20', 0, 'element', 0),
+(12, 21, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '21', 0, 'form', 0),
+(13, 22, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '22', 0, 'field', 0),
+(14, 23, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '23', 0, 'field', 0),
+(15, 24, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '24', 0, 'field', 0),
+(16, 21, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '22', 0, 'element', 0),
+(17, 21, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '23', 0, 'element', 0),
+(18, 21, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '24', 0, 'element', 0),
+(19, 25, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '25', 0, 'form', 0),
+(20, 26, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '26', 0, 'field', 0),
+(21, 27, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '27', 0, 'field', 0),
+(22, 28, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '28', 0, 'field', 0),
+(23, 29, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '29', 0, 'field', 0),
+(24, 30, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '30', 0, 'field', 0),
+(25, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '26', 0, 'element', 10),
+(26, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '27', 0, 'element', 30),
+(27, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '28', 0, 'element', 40),
+(28, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '29', 0, 'element', 50),
+(29, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '30', 0, 'element', 20),
+(30, 31, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '31', 0, 'form', 0),
+(31, 32, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '32', 0, 'field', 0),
+(32, 33, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '33', 0, 'field', 0),
+(33, 34, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '34', 0, 'field', 0),
+(34, 31, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '32', 0, 'element', 0),
+(35, 31, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '33', 0, 'element', 0),
+(36, 31, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '34', 0, 'element', 0),
+(37, 35, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '35', 0, 'form', 0),
+(38, 36, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '36', 0, 'field', 0),
+(39, 37, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '37', 0, 'field', 0),
+(40, 41, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '41', 0, 'field', 0),
+(41, 42, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '42', 0, 'field', 0),
+(42, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '36', 0, 'element', 0),
+(43, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '37', 0, 'element', 0),
+(44, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '41', 0, 'element', 0),
+(45, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '42', 0, 'element', 0),
+(46, 38, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '38', 0, 'form', 0),
+(47, 39, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '39', 0, 'field', 0),
+(48, 40, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '40', 0, 'field', 0),
+(49, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '39', 0, 'element', 0),
+(50, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '40', 0, 'element', 0),
+(51, 43, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '43', 0, 'form', 0),
+(52, 14, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '17', 0, 'element', 0),
+(53, 17, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '17', 0, 'field', 0),
+(55, 23, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
+(56, 22, 'user', 'id,name', '', '', 0, 'options', 0),
+(57, 24, 'v_sortby_options', 'id,name', '', '', 0, 'options', 0),
+(59, 50, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'title\',\'author\',\'tags\',\'lastEdit\',\'rating\'', 0, 'options', 0),
+(60, 18, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '51', 0, 'element', 0),
+(61, 51, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '51', 0, 'field', 0),
+(62, 43, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '62', 0, 'element', 0),
+(63, 43, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '63', 0, 'element', 0),
+(64, 62, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '62', 0, 'field', 0),
+(65, 63, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '63', 0, 'field', 0),
+(66, 65, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '65', 0, 'field', 0),
+(68, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '72', 0, 'element', 15),
+(69, 72, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '72', 0, 'field', 0),
+(70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
+(71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0),
+(72, 77, 'aria_attributes', 'name,value', 'id', '1,2', 0, 'aria_attributes', 0),
+(73, 77, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '78', 0, 'element', 10),
+(74, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '80', 0, 'element', 10),
+(75, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '81', 0, 'element', 20),
+(77, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '87', 0, 'element', 10),
+(78, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '88', 0, 'element', 20),
+(79, 90, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '91', 0, 'element', 10),
+(80, 90, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '92', 0, 'element', 20),
+(90, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '100', 0, 'element', 0),
+(91, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '101', 0, 'element', 0),
+(92, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '102', 0, 'element', 0),
+(93, 100, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '100', 0, 'field', 0),
+(94, 101, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '101', 0, 'field', 0),
+(95, 102, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '102', 0, 'field', 0),
+(96, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '103', 0, 'element', 0),
+(97, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '104', 0, 'element', 0),
+(98, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '105', 0, 'element', 0),
+(99, 103, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '103', 0, 'field', 0),
+(100, 104, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '104', 0, 'field', 0),
+(101, 105, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '105', 0, 'field', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `field_info`
 --
 
 CREATE TABLE `field_info` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `field_name` varchar(255) NOT NULL,
+  `element_id` int(11) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL,
-  `form_info_id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
-  `display_order` int(11) NOT NULL,
-  `optional` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `value` varchar(255) NOT NULL,
+  `optional` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `field_info`
 --
 
-INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `form_info_id`, `label`, `display_order`, `optional`) VALUES
-(1, 'name', 'text', 'contact-name form-control', 1, 'Your name:', 0, 0),
-(2, 'email', 'email', 'contact-email form-control', 1, 'Your email:', 1, 0),
-(3, 'password', 'password', 'login-password form-control', 2, 'Password:', 2, 0),
-(4, 'description', 'textarea', 'about-text form-control', 9, 'About me:', 30, 1),
-(6, 'verifypassword', 'new_password', 'register-verifypassword form-control', 7, 'Verify password:', 5, 0),
-(7, 'Author', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author', 3, 'Filter by Author', 1, 1),
-(8, 'Tag', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', 3, 'Filter by Tag', 0, 1),
-(9, 'aboutimg', 'file', 'about-img-file form-control', 9, 'Upload file:', 40, 1),
-(12, 'message', 'textarea', 'message-text form-control', 1, 'Your message:', 2, 0),
-(13, 'email', 'email', 'login-email form-control', 2, 'Email:', 0, 0),
-(14, 'name', 'text', 'register-name form-control', 7, 'Your name:', 1, 0),
-(15, 'email', 'email', 'register-email form-control', 7, 'Your email:', 2, 0),
-(17, 'summary', 'textarea', 'article-text form-control', 4, 'Body Text', 15, 0),
-(18, 'codeBlock', 'textarea', 'article-codeblock form-control', 4, 'Codeblock', 16, 1),
-(19, 'articleimg', 'file', 'article-img-file form-control', 4, 'Upload File', 17, 1),
-(20, 'sortby', 'select', 'sort-by form-select', 3, 'Sort by', 3, 0),
-(25, 'title', 'text', 'article-title form-control', 4, 'Article title:', 13, 0),
-(26, 'existing_tag', 'SearchableCheckboxes', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', 4, 'Article tags:', 14, 0),
-(29, 'name', 'text', 'editUser-userName form-control', 9, 'Change username:', 10, 1),
-(30, 'email', 'email', 'editUser-email form-control', 9, 'Edit email:', 20, 1),
-(33, 'password', 'password', 'editPassword-pw1 form-control', 10, 'Old password:', 0, 0),
-(34, 'newpassword', 'new_password', 'editPassword-pw2 form-control', 10, 'New password:', 0, 0);
+INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `value`, `optional`) VALUES
+(1, 'name', 15, 'text', 'Your name:', '', 0),
+(2, 'email', 16, 'text', 'Your email:', '', 0),
+(3, 'message', 17, 'textarea', 'Your message:', '', 0),
+(4, 'email', 19, 'email', 'Email:', '', 0),
+(5, 'password', 20, 'password', 'Password:', '', 0),
+(6, 'Author', 22, 'SearchableCheckboxes', 'Filter by Author', '', 1),
+(7, 'Tag', 23, 'SearchableCheckboxes', 'Filter by Tag', '', 1),
+(8, 'sortby', 24, 'select', 'Sort by', '', 0),
+(9, 'title', 26, 'text', 'Article title:', '', 0),
+(10, 'bodytext', 27, 'textarea', 'Body Text', '', 1),
+(11, 'codeblock', 28, 'textarea', 'Codeblock', '', 1),
+(12, 'articleimg', 29, 'file', 'Upload File', '', 0),
+(13, 'articletags', 30, 'SearchableCheckboxes', 'Article tags:', '', 0),
+(14, 'name', 32, 'text', 'Your name:', '', 0),
+(15, 'email', 33, 'email', 'Your email:', '', 0),
+(16, 'newpassword', 34, 'new_password', 'Verify password:', '', 0),
+(17, 'name', 36, 'text', 'Change username:', '', 1),
+(18, 'email', 37, 'email', 'Edit email:', '', 1),
+(19, 'password', 39, 'password', 'Old password:', '', 0),
+(20, 'newpassword', 40, 'new_password', 'New password:', '', 0),
+(21, 'description', 41, 'textarea', 'About me:', '', 1),
+(22, 'aboutimg', 42, 'file', 'Upload file:', '', 1),
+(23, 'page', 51, 'hidden', '', 'login', 0),
+(24, 'page', 62, 'hidden', '', 'editArticle', 0),
+(25, 'id', 63, 'hidden', '', '0', 0),
+(26, 'Edit User Information', 65, 'Button', 'Change user information', '', 1),
+(27, 'Edit Password', 66, 'Button', '', '', 1),
+(28, 'articleID', 72, 'hidden', '', '$editArticleID', 0),
+(29, 'page', 100, 'hidden', '', 'editUser', 0),
+(30, 'action', 101, 'hidden', '', 'updateUserInfo', 0),
+(31, 'id', 102, 'hidden', '', '#userID', 0),
+(32, 'page', 103, 'hidden', '', 'editPassword', 0),
+(33, 'action', 104, 'hidden', '', 'updatePassword', 0),
+(34, 'id', 105, 'hidden', '', '#userID', 0);
 
 -- --------------------------------------------------------
 
@@ -116,12 +394,12 @@ INSERT INTO `field_info` (`id`, `name`, `type`, `class`, `form_info_id`, `label`
 
 CREATE TABLE `form_info` (
   `id` int(11) NOT NULL,
+  `element_id` int(11) NOT NULL,
   `action` varchar(255) NOT NULL,
-  `method` varchar(25) NOT NULL,
+  `method` varchar(255) NOT NULL,
+  `label` varchar(255) NOT NULL,
   `submit_caption` varchar(255) NOT NULL,
-  `website_info_id` int(11) NOT NULL,
-  `display_class` varchar(255) NOT NULL,
-  `enctype` varchar(30) NOT NULL,
+  `enctype` varchar(255) NOT NULL,
   `submit_class` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -129,45 +407,15 @@ CREATE TABLE `form_info` (
 -- Dumping data for table `form_info`
 --
 
-INSERT INTO `form_info` (`id`, `action`, `method`, `submit_caption`, `website_info_id`, `display_class`, `enctype`, `submit_class`) VALUES
-(1, '', 'POST', 'Send message', 3, 'form-group', '', 'btn btn-primary btn-sm'),
-(2, '', 'POST', 'Log in', 4, 'form-group', '', 'btn btn-primary btn-sm'),
-(3, '', 'POST', 'Filter', 6, 'form-group justify-content-start', '', 'btn btn-primary btn-sm'),
-(4, '', 'POST', 'SaveArticle\r\n', 7, 'form-group', 'multipart/form-data', 'btn btn-primary btn-sm'),
-(5, '', 'POST', 'Save About', 2, 'form-group', 'multipart/form-data', 'btn btn-primary btn-sm'),
-(6, '', 'GET', 'Create new article', 8, 'form-group', '', 'btn btn-primary btn-sm'),
-(7, '', 'POST', 'Register', 5, '', '', 'btn btn-primary btn-sm'),
-(9, '', 'POST', 'Change information', 10, '', 'multipart/form-data', 'btn btn-primary'),
-(10, '', 'POST', 'Save', 11, '', '', 'btn btn-primary');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lookup_info`
---
-
-CREATE TABLE `lookup_info` (
-  `id` int(11) NOT NULL,
-  `source_table` varchar(255) NOT NULL,
-  `column_names` varchar(255) NOT NULL,
-  `order_by` varchar(255) NOT NULL,
-  `where_value` varchar(255) NOT NULL,
-  `bridge_table` varchar(255) NOT NULL,
-  `bridge_values` varchar(255) NOT NULL,
-  `left_join_on` varchar(255) NOT NULL,
-  `field_info_id` int(11) NOT NULL,
-  `lookup_class` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `lookup_info`
---
-
-INSERT INTO `lookup_info` (`id`, `source_table`, `column_names`, `order_by`, `where_value`, `bridge_table`, `bridge_values`, `left_join_on`, `field_info_id`, `lookup_class`) VALUES
-(1, 'wiki_tag\n', 'id as id,name as label', 'wiki_tag.name', '', '', '', '', 8, 'searchable tag_checkbox form-check-input'),
-(2, 'user', 'id as id,name as label', 'user.name', '', '', '', '', 7, 'searchable author_checkbox form-check-input'),
-(3, 'wiki_sortby_info', 'sortby_value as id ,sortby_name as label', 'wiki_sortby_info.sortby_name', '', '', '', '', 20, 'sort_by'),
-(4, 'wiki_tag\n', 'id as id,name as label,!isnull(article_id) as checked', 'wiki_tag.name', '', 'wiki_article_to_tag', 'wiki_tag_id,wiki_tag.id', 'article_id', 26, 'searchable tag_checkbox form-check-input');
+INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submit_caption`, `enctype`, `submit_class`) VALUES
+(1, 14, '', 'POST', '', 'Send message', '', 'btn btn-primary btn-sm'),
+(2, 18, '', 'POST', '', 'Log in', '', 'btn btn-primary btn-sm'),
+(3, 21, '', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
+(4, 25, '', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm'),
+(5, 31, '', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
+(6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary mx-auto d-block'),
+(7, 35, '', 'POST', '', 'Change information', '', 'btn btn-primary'),
+(8, 38, '', 'POST', '', 'save', '', 'btn btn-primary');
 
 -- --------------------------------------------------------
 
@@ -178,7 +426,7 @@ INSERT INTO `lookup_info` (`id`, `source_table`, `column_names`, `order_by`, `wh
 CREATE TABLE `menu_items` (
   `id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
-  `href` varchar(255) NOT NULL,
+  `page_value` varchar(255) NOT NULL,
   `display_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -186,7 +434,7 @@ CREATE TABLE `menu_items` (
 -- Dumping data for table `menu_items`
 --
 
-INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
+INSERT INTO `menu_items` (`id`, `label`, `page_value`, `display_order`) VALUES
 (1, 'Home', 'home', 0),
 (2, 'About', 'about', 1),
 (3, 'Contact', 'contact', 2),
@@ -199,75 +447,109 @@ INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `styling_containers`
+-- Table structure for table `page`
 --
 
-CREATE TABLE `styling_containers` (
+CREATE TABLE `page` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `styling` varchar(255) NOT NULL
+  `name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `styling_containers`
+-- Dumping data for table `page`
 --
 
-INSERT INTO `styling_containers` (`id`, `name`, `styling`) VALUES
-(1, 'main_div', '<div class=\"d-flex flex-column align-items-center w-75 mx-auto\">'),
-(2, 'top_div', '<div class=\"flex-grow-1\">'),
-(4, 'main_div_2', '<div class=\"d-flex align-items-center w-75 mx-auto\">'),
-(5, 'sub_div', '<div class=\"flex-grow-1\">'),
-(6, 'container_div', '<div class=\"container-fluid\">'),
-(7, 'row_div', '<div class=\"row\">'),
-(8, 'filter_div', '<div class=\"col-12 col-md-3 border-end pe-4\">'),
-(9, 'result_div', '<div class=\"col-12 col-md-9 ps-4\">'),
-(10, 'table_div', '<div class=\"table-responsive\">'),
-(11, 'table_class', 'table table-search table-hover table-striped table-bordered'),
-(12, 'main_div', '<div class=\"align-items-center w-75 mx-auto\">'),
-(13, 'sub_div', '<div class=\"d-flex flex-grow-1\">'),
-(14, 'horizontal_rule', '<hr class=\"w-75 mx-auto my-4\">'),
-(15, 'bot_div', '<div class=\"align-items-center w-75 mx-auto mt-4\">'),
-(16, 'user_div', '<div class=\"d-flex align-items-bottom border-bottom gap-3\">'),
-(17, 'tag_div', '<div class=\"d-flex flex-wrap gap-2 mb-3 border-top border-bottom py-2\">'),
-(18, 'add_tag_div', '<div id=\"add-tag-widget\" class=\"d-flex gap-2 mt-2 mb-2\">');
+INSERT INTO `page` (`id`, `name`) VALUES
+(1, 'home'),
+(2, 'about'),
+(3, 'contact'),
+(4, 'login'),
+(5, 'register'),
+(6, 'search'),
+(7, 'editArticle'),
+(8, 'dashboard'),
+(9, 'article');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `styling_elements`
+-- Table structure for table `page_elements`
 --
 
-CREATE TABLE `styling_elements` (
-  `id` int(11) NOT NULL,
-  `website_info_id` int(11) NOT NULL,
-  `class_name` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL
+CREATE TABLE `page_elements` (
+  `page_id` int(11) NOT NULL,
+  `element_id` int(11) NOT NULL,
+  `order_by` int(11) NOT NULL,
+  `parent_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `styling_elements`
+-- Dumping data for table `page_elements`
 --
 
-INSERT INTO `styling_elements` (`id`, `website_info_id`, `class_name`, `class`) VALUES
-(1, 1, 'bodytext_class', 'text-center'),
-(2, 2, 'description_class', 'fs-5 text-center'),
-(3, 2, 'name_class', 'display-1 text-center border-bottom'),
-(4, 9, 'title_class', 'text-center'),
-(5, 9, 'author_class', 'text-center'),
-(6, 9, 'body_class', 'container fs-6 text-start'),
-(7, 9, 'codeblock_class', 'container-lg fs-6 col-15'),
-(8, 9, 'img_class', 'rounded article-pic mx-auto d-flex ms-3'),
-(9, 2, 'img_class', 'rounded-circle profile-pic d-flex justify-content-end mb-3'),
-(11, 8, 'img_class', 'p-2 dashboard-pic rounded mb-1'),
-(12, 8, 'user_title', 'p-2 fs-1 fw-bold align-bottom text-wrap userNameDisplay'),
-(13, 8, 'new_article_title', 'd-flex justify-content-center h4 border-top'),
-(14, 8, 'articles_class', 'fs-2'),
-(15, 9, 'article_script', '<script src=\"./src/js/articlePage.js\"></script>'),
-(16, 9, 'button_class', 'button button-sm'),
-(17, 9, 'description_class', 'h4 mb-4'),
-(18, 7, 'tag_input_class', '<input type=\"text\" id=\"new-tag-name\"\r\n                                                    class=\"form-control form-control-sm\" placeholder=\"New tag\">'),
-(19, 7, 'tag_button_class', '<button type=\"button\" id=\"add-tag-btn\" \r\n                                                    class=\"btn btn-sm btn-secondary\">Add tag</button>'),
-(20, 8, 'email_class', 'fs-6 userEmailDisplay');
+INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`) VALUES
+(1, 1, 10, 0),
+(1, 2, 20, 10),
+(1, 3, 30, 10),
+(1, 4, 40, 30),
+(1, 5, 50, 40),
+(1, 6, 60, 30),
+(1, 7, 70, 60),
+(1, 8, 80, 70),
+(1, 5, 90, 80),
+(1, 5, 100, 80),
+(2, 12, 10, 0),
+(2, 13, 20, 10),
+(2, 9, 30, 20),
+(2, 10, 40, 20),
+(2, 11, 50, 10),
+(3, 1, 10, 0),
+(3, 13, 20, 10),
+(3, 14, 30, 20),
+(4, 1, 10, 0),
+(4, 13, 20, 10),
+(4, 18, 30, 20),
+(5, 1, 10, 0),
+(5, 13, 20, 10),
+(5, 31, 30, 20),
+(6, 44, 30, 0),
+(6, 45, 40, 30),
+(6, 46, 50, 40),
+(6, 21, 60, 50),
+(6, 52, 70, 40),
+(6, 47, 80, 70),
+(6, 50, 90, 70),
+(7, 1, 10, 0),
+(7, 13, 20, 10),
+(7, 25, 30, 20),
+(8, 53, 10, 0),
+(8, 54, 20, 10),
+(8, 55, 30, 20),
+(8, 56, 40, 20),
+(8, 57, 50, 30),
+(8, 58, 60, 50),
+(8, 59, 70, 30),
+(8, 60, 80, 30),
+(8, 61, 90, 30),
+(8, 43, 100, 30),
+(8, 64, 110, 30),
+(8, 65, 120, 30),
+(8, 66, 130, 30),
+(8, 67, 140, 30),
+(8, 69, 150, 140),
+(8, 35, 160, 140),
+(8, 68, 170, 30),
+(8, 70, 180, 170),
+(8, 38, 190, 170),
+(8, 75, 200, 40),
+(8, 76, 210, 40),
+(9, 77, 10, 0),
+(9, 79, 20, 0),
+(9, 82, 30, 20),
+(9, 83, 40, 20),
+(9, 86, 60, 20),
+(9, 89, 70, 20),
+(9, 90, 80, 20);
 
 -- --------------------------------------------------------
 
@@ -339,11 +621,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny12', '$2y$10$0UIJllrDci5.4ibTGhUp3OlP0oOGcmqlF5DowGJ0Mce0Zc./RKPrm', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
-(7, 'Christian', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
+(1, 'Danny12219', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
+(7, 'Christiannn', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', ''),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
-(11, 'Marius', '$2y$10$jfrLazl/cMPd5NNnTjE7r.F5zdLA6QtRe3Neu1sZCI8QssAwbPMYG', 'test@gmail.com', 'author_11.png', '1234'),
-(12, 'test', '$2y$10$atD3C58A5CTlEUdTlp1Lje7jv8XVTcu31ZCgo34Gc/ppNfJ4UbfTy', 'marius@email.com', '', '');
+(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
 
 -- --------------------------------------------------------
 
@@ -360,83 +641,13 @@ CREATE TABLE `v_article_avg_rating` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `website_info`
+-- Stand-in structure for view `v_sortby_options`
+-- (See below for the actual view)
 --
-
-CREATE TABLE `website_info` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `bodytext` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `website_info`
---
-
-INSERT INTO `website_info` (`id`, `name`, `bodytext`) VALUES
-(1, 'home', 'Welkom op onze hoofdpagina.'),
-(2, 'about', 'This is the bodytext for about from the database'),
-(3, 'contact', ''),
-(4, 'login', ''),
-(5, 'register', ''),
-(6, 'search', ''),
-(7, 'editArticle', ''),
-(8, 'dashboard', ''),
-(9, 'article', ''),
-(10, 'editUser', ''),
-(11, 'editPassword', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `website_info_to_styling_containers`
---
-
-CREATE TABLE `website_info_to_styling_containers` (
-  `website_info_id` int(11) NOT NULL,
-  `styling_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `website_info_to_styling_containers`
---
-
-INSERT INTO `website_info_to_styling_containers` (`website_info_id`, `styling_id`) VALUES
-(1, 1),
-(2, 1),
-(2, 2),
-(2, 4),
-(2, 5),
-(3, 1),
-(3, 5),
-(4, 1),
-(4, 5),
-(5, 1),
-(5, 5),
-(6, 6),
-(6, 7),
-(6, 8),
-(6, 9),
-(6, 10),
-(6, 11),
-(7, 1),
-(7, 5),
-(7, 18),
-(8, 6),
-(8, 7),
-(8, 8),
-(8, 9),
-(8, 11),
-(8, 16),
-(9, 12),
-(9, 13),
-(9, 14),
-(9, 15),
-(9, 17),
-(10, 1),
-(10, 5),
-(11, 1),
-(11, 5);
+CREATE TABLE `v_sortby_options` (
+`id` int(1)
+,`name` varchar(8)
+);
 
 -- --------------------------------------------------------
 
@@ -460,9 +671,8 @@ CREATE TABLE `wiki_article` (
 
 INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `summary`, `codeBlock`, `imgFileName`, `lastEdit`) VALUES
 (1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\n    {\n        return \'?\' . http_build_query($params);\n    }', 'article1.jpeg', '2026-08-11'),
-(28, 'PHP', 1, 'PHP is een scripttaal en is vergelijkbaar met Perl, Python en Ruby. Qua syntaxis lijkt PHP het meest op C, maar net als bij veel andere scripttalen moeten variabelen voorafgegaan worden door een dollarteken $. Dit is overgenomen uit de scripttaal Perl, waarvan PHP mede is afgeleid. In tegenstelling tot C is het in PHP wel mogelijk om naast procedureel programmeren ook objectgeoriënteerd te programmeren, net als in bijvoorbeeld Java, C++ en C#. In de eerste versies van PHP was het objectgeoriënteerd programmeren nog heel beperkt. Pas sinds versie 5 zijn de meest essentiële functies hiervoor allemaal beschikbaar.', '$url = &quot;http://nl.wikipedia.org/wiki/PHP&quot;;\r\n\r\necho &quot;U bevindt zich momenteel op $url. Welkom!&quot;;\r\n// Of\r\necho &quot;U bevindt zich momenteel op &quot;.$url.&quot;. Welkom!&quot;;', 'article_28.png', '2026-09-08'),
-(29, 'New article', 1, 'This is the body text.', '', 'article_29.jpg', '2026-09-08'),
-(31, 'test', 1, 'testd', '', '', '2026-09-11');
+(28, 'PHP', 1, 'PHP is een scripttaal en is vergelijkbaar met Perl, Python en Ruby. Qua syntaxis lijkt PHP het meest op C, maar net als bij veel andere scripttalen moeten variabelen voorafgegaan worden door een dollarteken $. Dit is overgenomen uit de scripttaal Perl, waarvan PHP mede is afgeleid. In tegenstelling tot C is het in PHP wel mogelijk om naast procedureel programmeren ook objectgeoriënteerd te programmeren, net als in bijvoorbeeld Java, C++ en C#. In de eerste versies van PHP was het objectgeoriënteerd programmeren nog heel beperkt. Pas sinds versie 5 zijn de meest essentiële functies hiervoor allemaal beschikbaar.', '$url = &quot;http://nl.wikipedia.org/wiki/PHP&quot;;\r\n\r\necho &quot;U bevindt zich momenteel op $url. Welkom!&quot;;\r\n// Of\r\necho &quot;U bevindt zich momenteel op &quot;.$url.&quot;. Welkom!&quot;;', 'article_0.jpeg', '2026-09-08'),
+(29, 'New article', 1, 'This is the body text.', '', 'article_0.jpg', '2026-09-08');
 
 -- --------------------------------------------------------
 
@@ -483,10 +693,7 @@ INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
 (1, 1),
 (28, 53),
 (28, 54),
-(29, 54),
-(31, 53),
-(31, 54),
-(31, 55);
+(29, 54);
 
 -- --------------------------------------------------------
 
@@ -561,9 +768,24 @@ DROP TABLE IF EXISTS `v_article_avg_rating`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_article_avg_rating`  AS SELECT `a`.`id` AS `id`, avg(`r`.`rating`) AS `AVGrating`, count(`r`.`rating`) AS `Nratings` FROM (`wiki_article` `a` left join `wiki_rating` `r` on(`a`.`id` = `r`.`article_id`)) GROUP BY `a`.`id` ;
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_sortby_options`
+--
+DROP TABLE IF EXISTS `v_sortby_options`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_sortby_options`  AS SELECT 1 AS `id`, 'lastEdit' AS `name`union select 2 AS `2`,'rating' AS `rating`  ;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `aria_attributes`
+--
+ALTER TABLE `aria_attributes`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `contact_messages`
@@ -572,25 +794,38 @@ ALTER TABLE `contact_messages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dialogue_window`
+--
+ALTER TABLE `dialogue_window`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_element_info_to_dialogue` (`element_info_id`);
+
+--
+-- Indexes for table `element_info`
+--
+ALTER TABLE `element_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `element_lookup_info`
+--
+ALTER TABLE `element_lookup_info`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_element_info_to_look_up` (`element_id`);
+
+--
 -- Indexes for table `field_info`
 --
 ALTER TABLE `field_info`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `form_info_id` (`form_info_id`);
+  ADD KEY `fk_element_info_to_field_info` (`element_id`);
 
 --
 -- Indexes for table `form_info`
 --
 ALTER TABLE `form_info`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `website_info_to_form_info` (`website_info_id`);
-
---
--- Indexes for table `lookup_info`
---
-ALTER TABLE `lookup_info`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_lookup_to_field` (`field_info_id`);
+  ADD KEY `fk_element_info_to_form_info` (`element_id`);
 
 --
 -- Indexes for table `menu_items`
@@ -599,17 +834,17 @@ ALTER TABLE `menu_items`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `styling_containers`
+-- Indexes for table `page`
 --
-ALTER TABLE `styling_containers`
+ALTER TABLE `page`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `styling_elements`
+-- Indexes for table `page_elements`
 --
-ALTER TABLE `styling_elements`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_website_info_dplay_classes` (`website_info_id`);
+ALTER TABLE `page_elements`
+  ADD PRIMARY KEY (`page_id`,`order_by`),
+  ADD KEY `fk_element_info_to_page_elements` (`element_id`);
 
 --
 -- Indexes for table `styling_system`
@@ -629,19 +864,6 @@ ALTER TABLE `table_columns`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `website_info`
---
-ALTER TABLE `website_info`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `website_info_to_styling_containers`
---
-ALTER TABLE `website_info_to_styling_containers`
-  ADD PRIMARY KEY (`website_info_id`,`styling_id`),
-  ADD KEY `styling_id` (`styling_id`);
 
 --
 -- Indexes for table `wiki_article`
@@ -682,10 +904,34 @@ ALTER TABLE `wiki_tag`
 --
 
 --
+-- AUTO_INCREMENT for table `aria_attributes`
+--
+ALTER TABLE `aria_attributes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `dialogue_window`
+--
+ALTER TABLE `dialogue_window`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `element_info`
+--
+ALTER TABLE `element_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
+-- AUTO_INCREMENT for table `element_lookup_info`
+--
+ALTER TABLE `element_lookup_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `field_info`
@@ -697,13 +943,7 @@ ALTER TABLE `field_info`
 -- AUTO_INCREMENT for table `form_info`
 --
 ALTER TABLE `form_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `lookup_info`
---
-ALTER TABLE `lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
@@ -712,16 +952,10 @@ ALTER TABLE `menu_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `styling_containers`
+-- AUTO_INCREMENT for table `page`
 --
-ALTER TABLE `styling_containers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `styling_elements`
---
-ALTER TABLE `styling_elements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `page`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `styling_system`
@@ -739,12 +973,6 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `website_info`
---
-ALTER TABLE `website_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
@@ -770,35 +998,35 @@ ALTER TABLE `wiki_tag`
 --
 
 --
+-- Constraints for table `dialogue_window`
+--
+ALTER TABLE `dialogue_window`
+  ADD CONSTRAINT `fk_element_info_to_dialogue` FOREIGN KEY (`element_info_id`) REFERENCES `element_info` (`id`);
+
+--
+-- Constraints for table `element_lookup_info`
+--
+ALTER TABLE `element_lookup_info`
+  ADD CONSTRAINT `fk_element_info_to_look_up` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
+
+--
 -- Constraints for table `field_info`
 --
 ALTER TABLE `field_info`
-  ADD CONSTRAINT `field_info_ibfk_1` FOREIGN KEY (`form_info_id`) REFERENCES `form_info` (`id`);
+  ADD CONSTRAINT `fk_element_info_to_field_info` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
 
 --
 -- Constraints for table `form_info`
 --
 ALTER TABLE `form_info`
-  ADD CONSTRAINT `website_info_to_form_info` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
+  ADD CONSTRAINT `fk_element_info_to_form_info` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`);
 
 --
--- Constraints for table `lookup_info`
+-- Constraints for table `page_elements`
 --
-ALTER TABLE `lookup_info`
-  ADD CONSTRAINT `fk_lookup_to_field` FOREIGN KEY (`field_info_id`) REFERENCES `field_info` (`id`);
-
---
--- Constraints for table `styling_elements`
---
-ALTER TABLE `styling_elements`
-  ADD CONSTRAINT `fk_website_info_dplay_classes` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`);
-
---
--- Constraints for table `website_info_to_styling_containers`
---
-ALTER TABLE `website_info_to_styling_containers`
-  ADD CONSTRAINT `website_info_to_styling_containers_ibfk_1` FOREIGN KEY (`website_info_id`) REFERENCES `website_info` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `website_info_to_styling_containers_ibfk_2` FOREIGN KEY (`styling_id`) REFERENCES `styling_containers` (`id`);
+ALTER TABLE `page_elements`
+  ADD CONSTRAINT `fk_element_info_to_page_elements` FOREIGN KEY (`element_id`) REFERENCES `element_info` (`id`),
+  ADD CONSTRAINT `fk_page_to_page_elements` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`);
 
 --
 -- Constraints for table `wiki_article`
