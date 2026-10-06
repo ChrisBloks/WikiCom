@@ -60,7 +60,8 @@ class PageController implements iController
                 default: ($this->posted ? '' : 'home'
                 )
             ),
-            'isLoggedIn' => isset($_SESSION['userID'])
+            'isLoggedIn' => isset($_SESSION['userID']),
+            'userID' => $_SESSION['userID'] ?? -1,
         ];
     }
 

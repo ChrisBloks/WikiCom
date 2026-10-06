@@ -48,7 +48,7 @@ class MenuFactory
                     'role' => 'button',
                     'data-bs-toggle' => 'dropdown',
                     'aria-expanded' => 'false',
-                    'data-user-id' => $item['id'],
+                    'data-user-id' => $item['id'] ?? -1,
                 ],
                 li_class: $li_class . ' dropdown'
             );

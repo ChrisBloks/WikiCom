@@ -29,7 +29,10 @@ class PostRequestHandler extends BaseRequestHandler
         // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
         $validation_result = (new ValidationHandler)
             ->validateFields(field_info: $field_info);
-            
+        
+        HtmlUtils::dump("validation result", $validation_result);
+        HtmlUtils::dump("request", $request);
+
         // If form was submitted correctly WRONG: add validation errors to response
         $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
         // If form was submmitted CORRECT: get page-specific behaviour
@@ -97,7 +100,7 @@ class PostRequestHandler extends BaseRequestHandler
             case 'dashboard':
                 break;
             case 'editArticle':
-                $this->response['editArticleID'] = Utils::getRequestVar('articleID', true);
+                $this->response['articleID'] = Utils::getRequestVar('articleID', true);
                 $this->response['userID'] = Utils::getSesVar('userID');
                 $this->response['bodyinfo']['title'] = $validation_result['field_inputs']['title'];
                 $this->response['bodyinfo']['summary'] = $validation_result['field_inputs']['summary'];
@@ -112,27 +115,28 @@ class PostRequestHandler extends BaseRequestHandler
                         $validation_result = ArticleHandler::getInstance()
                             ->handleArticleSubmission(
                                 validation_result: $validation_result,
-                                article_id: $this->response['editArticleID'],
+                                article_id: $this->response['articleID'],
                                 user_id: $this->response['userID']
                             );
 
                         if (isset($validation_result['field_inputs']['new_article_id'])) {
-                            $this->response['editArticleID'] = $validation_result['field_inputs']['new_article_id'];
+                            $this->response['articleID'] = $validation_result['field_inputs']['new_article_id'];
                         }
 
                         if ($validation_result['ok']) {
                             $this->response['page'] = 'article';
-                            $this->response['articleID'] = $this->response['editArticleID'];
+                            $this->response['articleID'] = $this->response['articleID'];
                             $_SESSION['messages'][] = 'Article has been submitted!';
                         }
                     }
                     // This is a post request for creating a new article
                     else {
-                        $this->response['editArticleID'] = 0;
+                        $this->response['articleID'] = 0;
                     }
                 }
                 break;
             case 'contact':
+                echo 'contact validation reached';
                 // On succesful contact form validation, save input to the database
                 if ($validation_result['ok']) {
                     $field_inputs = $validation_result['field_inputs'];
