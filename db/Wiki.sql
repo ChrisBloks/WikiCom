@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2026 at 10:12 AM
+-- Generation Time: Oct 06, 2026 at 10:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -492,7 +492,7 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 CREATE TABLE `menu_items` (
   `id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
-  `href` varchar(255) NOT NULL,
+  `page_value` varchar(255) NOT NULL,
   `display_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -500,7 +500,7 @@ CREATE TABLE `menu_items` (
 -- Dumping data for table `menu_items`
 --
 
-INSERT INTO `menu_items` (`id`, `label`, `href`, `display_order`) VALUES
+INSERT INTO `menu_items` (`id`, `label`, `page_value`, `display_order`) VALUES
 (1, 'Home', 'home', 0),
 (2, 'About', 'about', 1),
 (3, 'Contact', 'contact', 2),

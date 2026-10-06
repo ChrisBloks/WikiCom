@@ -80,6 +80,10 @@ class ElementHandler {
                 case '[*ARTICLE_RATING*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
                     $app_data = $article_info['rating'];
+                case '[*ARTICLE_TAGS*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = $article_info['tags'];
+                    break;
                     break;
                 case '[*ARTICLE_TEXT*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
@@ -154,7 +158,7 @@ class ElementHandler {
     // For caching user info
     private function getUserInfo(int $user_id){
         if(!isset($this->user_info[$user_id])){
-            $this->user_info[$user_id] = ModelSelector::getUserInfoModel()->fetchUserInfoById($user_id);
+            $this->user_info[$user_id] = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($user_id);
         }
         return $this->user_info[$user_id];
     }
