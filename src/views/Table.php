@@ -129,14 +129,6 @@ class Table implements iElement
             case 'date':
                 $formatted = $value !== null ? date('Y-m-d', strtotime((string) $value)) : '';
                 return "<td$classAttr>" . htmlspecialchars($formatted) . '</td>';
-            // cell should contain a rating (5stars)
-            case 'rating':
-                return "<td$classAttr>" . (new Rating(
-                                rating: (float) $value,
-                                article_id: $row_data['id'],
-                                display_only: true,
-                                count : $row_data['Nratings']
-                            ))->show() . '</td>';
             // cell contains the first cell actions
             case 'first_cell':
                 return "<td$classAttr>" . (new FirstCell(
