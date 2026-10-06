@@ -70,7 +70,7 @@ class ElementModel extends BaseModel
         
         $application_data = [];
         foreach($result as $row){ // array with keys 'name' and 'element_info_key'
-            HtmlUtils::dump('$result', $row);
+            // HtmlUtils::dump('$result', $row);
             $application_data[$row['element_info_key']] = $row['name'];
         }
 

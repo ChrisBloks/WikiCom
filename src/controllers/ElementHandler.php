@@ -32,8 +32,8 @@ class ElementHandler {
             $element_info['application_data'] = ModelSelector::getElementModel()->fetchElementVariables($element_info['element_id']);
             // HtmlUtils::dump('Element', $element_info);
             if(isset($element_info['application_data']) && !empty($element_info['application_data'])){
-                HtmlUtils::dump('Element_info', $element_info);
                 $this->addDataToElement($element_info);
+                // HtmlUtils::dump('Element_info', $element_info);
             }
         }
     }
@@ -50,6 +50,10 @@ class ElementHandler {
                 case '[*ARTICLE_AUTHOR*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
                     $app_data = $article_info['name'];
+                    break;
+                case '[*ARTICLE_AUTHOR_ID*]':
+                    $article_info = $this->getArticleInfo($this->response['articleID']);
+                    $app_data = $article_info['user_id'];
                     break;
                 case '[*ARTICLE_CODE*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
@@ -121,7 +125,7 @@ class ElementHandler {
                     $user_info = $this->getUserInfo($this->response['userID']);
                     $app_data = \CONFIG::AUTHORIMGPATH . $user_info['imgFileName'];
                     break;
-                case '[*USER_NAME*]]':
+                case '[*USER_NAME*]':
                     $user_info = $this->getUserInfo($this->response['userID']);
                     $app_data = $user_info['name'];
                     break;
