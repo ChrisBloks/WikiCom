@@ -204,6 +204,7 @@ class AjaxController implements iController
                         'message' => 'Please fix the errors below.',
                     ];
                 }
+                break;
             case 'registerUser':
                 $errors = [];
 

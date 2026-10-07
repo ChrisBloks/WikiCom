@@ -22,12 +22,10 @@ export const AjaxForms = {
 
     // get vars
     const modal = form.closest(".modal");
-    
+
     const errorBox = modal ? modal.querySelector('[id$="-errors"]') : null;
-    console.log(form);
     // on submit:
     form.addEventListener("submit", async (e) => {
-      console.log("test");
       e.preventDefault();
       // disable submit button and start loading thingy
       const submitBtn = form.querySelector('[type="submit"]');
@@ -44,7 +42,9 @@ export const AjaxForms = {
             if (result.success) {
               // show result messages in toasts
               options.onSuccess?.(result);
-              Toasts.show("message", result.message);
+              if (result.message.length > 0) {
+                Toasts.show("message", result.message)
+              }
               if (modal) bootstrap.Modal.getInstance(modal)?.hide();
             } else if (errorBox) {
               // if the response has errors, display them too

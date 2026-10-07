@@ -11,7 +11,6 @@ export const ContactForm = {
     AjaxForms.bind("#contact_form", {
       onSuccess: function (_) {
         console.log('Succes!');
-        Toasts.show("message", "Message sent successfully!");
         // Go to login page
       },
     });
