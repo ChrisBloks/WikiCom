@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki`
+-- Database: `wiki_dev`
 --
-CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki`;
+CREATE DATABASE IF NOT EXISTS `wiki_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki_dev`;
 
 -- --------------------------------------------------------
 
@@ -172,7 +172,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (18, 'log_in_form', 'form', 'form-group', '', 'Form', ''),
 (19, 'login_in_field_email', '', 'login-email form-control', '', 'Input', ''),
 (20, 'log_in_field_password', '', 'login-password form-control', '', 'Input', ''),
-(21, 'search_form', 'form', 'form-group', 'search_form', 'Form', ''),
+(21, 'search_form', 'form', 'form-group', '', 'Form', ''),
 (22, 'search_field_author', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author', '', 'SearchableCheckboxes', ''),
 (23, 'search_field_tag', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', '', 'SearchableCheckboxes', ''),
 (24, 'search_field_sortby\r\n', '', 'sort-by form-select', '', 'select', ''),
@@ -182,7 +182,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (28, 'article_field_codeblock', '', 'article-codeblock form-control', '', 'textarea', ''),
 (29, 'article_field_img', '', 'article-img-file form-control', '', 'Input', ''),
 (30, 'article_field_tags', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', '', 'SearchableCheckboxes', ''),
-(31, 'register_form', 'form', 'form-group', '', 'Form', ''),
+(31, 'register_form', 'form', 'form-group ajax-userRegister-form', '', 'Form', ''),
 (32, 'register_field_name', '', 'register-name form-control', '', 'Input', ''),
 (33, 'register_field_email', '', 'register-email form-control', '', 'Input', ''),
 (34, 'register_field_new_password', '', 'register-verifypassword form-control', '', 'new_password', ''),
@@ -199,7 +199,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (45, 'search_row', 'div', 'row', '', 'ContainerElement', ''),
 (46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', ''),
 (47, 'search_table_container', 'div', 'table-responsive', '', 'ContainerElement', ''),
-(50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', 'search_table', 'ResultsTable', ''),
+(50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', '', 'ResultsTable', ''),
 (51, 'log_in_hidden_page', '', '', '', 'Input', ''),
 (52, 'search_col_results', 'div', 'col-12 col-md-9 ps-4', '', 'ContainerElement', ''),
 (53, 'container_fluid', 'div', 'container-fluid', '', 'ContainerElement', ''),
@@ -238,6 +238,8 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (91, 'code_block_header', 'h1', 'h4', '', 'AtomicElement', 'Code'),
 (92, 'article_code_block', 'code', 'container-lg fs-6 col-15 hljs language-php', '', 'CodeBlock', '$article_code'),
 (102, 'hidden_id_edit_user', '', '', '', 'HiddenField', ''),
+(103, 'hidden_page_edit_password', '', '', '', 'HiddenField', ''),
+(104, 'hidden_action_edit_password', '', '', '', 'HiddenField', ''),
 (105, 'hidden_id_edit_password', '', '', '', 'HiddenField', '');
 
 -- --------------------------------------------------------
@@ -331,7 +333,7 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
 (71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0),
 (72, 77, 'aria_attributes', 'name,value', 'id', '1,2', 0, 'aria_attributes', 0),
-(73, 77, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '78', 0, 'element', 10),
+(73, 77, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag,html_id', 'element_info.id', '78', 0, 'element', 10),
 (74, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '80', 0, 'element', 10),
 (75, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '81', 0, 'element', 20),
 (77, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '87', 0, 'element', 10),
@@ -341,6 +343,8 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (92, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '102', 0, 'element', 0),
 (95, 102, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '102', 0, 'field', 0),
 (98, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '105', 0, 'element', 0),
+(99, 103, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '103', 0, 'field', 0),
+(100, 104, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '104', 0, 'field', 0),
 (101, 105, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '105', 0, 'field', 0);
 
 -- --------------------------------------------------------
@@ -442,7 +446,12 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (26, 'Edit User Information', 65, 'Button', 'Change user information', '', 1),
 (27, 'Edit Password', 66, 'Button', '', '', 1),
 (28, 'articleID', 72, 'hidden', '', '$editArticleID', 0),
-(31, 'id', 102, 'hidden', '', '', 0),
+(29, 'page', 100, 'hidden', '', 'editUser', 0),
+(30, 'action', 101, 'hidden', '', 'updateUserInfo', 0),
+(31, 'id', 102, 'hidden', '', '#userID', 0),
+(32, 'page', 103, 'hidden', '', 'editPassword', 0),
+(33, 'action', 104, 'hidden', '', 'updatePassword', 0),
+(34, 'id', 105, 'hidden', '', '#userID', 0);
 (36, 'id', 105, 'hidden', '', '', 0);
 
 -- --------------------------------------------------------
@@ -471,7 +480,7 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 (2, 18, '', 'POST', '', 'Log in', '', 'btn btn-primary btn-sm'),
 (3, 21, 'searchArticle', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
 (4, 25, '', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm'),
-(5, 31, '', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
+(5, 31, 'registerUser', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
 (6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary mx-auto d-block'),
 (7, 35, 'updateUserInfo', 'POST', '', 'Change information', '', 'btn btn-primary'),
 (8, 38, 'updatePassword', 'POST', '', 'save', '', 'btn btn-primary');
@@ -691,7 +700,8 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `descripti
 (1, 'Danny122', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christiannn', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
-(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
+(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', ''),
+(12, 'Louk', '$2y$10$K.kUyST2RMPtrlBPSjD//ezzoYpGYiSGEkBcIpxOFaGL5mxwiy9uq', 'Loul@emai.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -1010,7 +1020,7 @@ ALTER TABLE `element_info`
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `element_to_application_data`
@@ -1058,7 +1068,7 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `wiki_article`

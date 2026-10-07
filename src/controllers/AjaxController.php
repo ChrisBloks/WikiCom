@@ -175,6 +175,46 @@ class AjaxController implements iController
                 }
 
                 break;
+            case 'registerUser':
+                $errors = [];
+
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(
+                        element_id: Utils::getRequestVar(
+                            key: 'element_id',
+                            frompost: True
+                        )
+                    );
+
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+                $errors = array_merge($errors, $validation_result['user_error']);
+                if(!$validation_result['ok']){
+                    $this->response = [
+                        'success' => False,
+                        'errors' => $errors 
+                    ];
+                    break;
+                }
+
+                $validation_result = UserHandler::getInstance()
+                    ->handleRegistration(validation_result: $validation_result);
+                $errors = array_merge($errors, $validation_result['user_error']);
+                if(!$validation_result['ok']){
+                    $this->response = [
+                        'success' => False,
+                        'errors' => $errors 
+                    ];
+                    break;
+                }
+                
+                // All stages of validation succesful
+                $this->response = [
+                    'page' => 'login',
+                    'success' => True,
+                    'message' => 'Registration was successful!'
+                ];
+                break;
             default:
                 $this->response = [
                     'success' => false,

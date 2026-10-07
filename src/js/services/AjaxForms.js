@@ -42,8 +42,8 @@ export const AjaxForms = {
           (result) => {
             if (result.success) {
               // show result messages in toasts
-              Toasts.show("message", result.message);
               options.onSuccess?.(result);
+              Toasts.show("message", result.message);
               if (modal) bootstrap.Modal.getInstance(modal)?.hide();
             } else if (errorBox) {
               // if the response has errors, display them too
