@@ -22,13 +22,14 @@ class TextAreaField extends BaseField implements iElement
         parent::__construct(
             name: $field_info['field_name'] ?? "", 
             label: $field_info['label'] ?? "", 
-            class: $element_info['html_class'] ?? " "
+            class: $element_info['html_class'] ?? " ",
+            id : $element_info['html_id'] ?? " "
         );
         $this->text = $field_info['text'] ?? "";
 
         // rows and cols should be variable eventually
         $this->html .= '<textarea name="' . $this->name 
-                    . '" class="' . $this->class . '">' 
+                    . '" class="' . $this->class . '" id="' . $this->id . '">' 
                     . $this->text . '</textarea><br>';
     }
 

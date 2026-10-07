@@ -175,6 +175,36 @@ class AjaxController implements iController
                 }
 
                 break;
+            case 'saveContactMessage':
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                // Perform basic validation on contact fields, field inputs are retrieved internally
+                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+
+                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                    $field_inputs = $validation_result['field_inputs'];
+                    ModelSelector::getWebsiteInfoModel()->saveContact(
+                        name: $field_inputs['name'],
+                        email: $field_inputs['email'],
+                        message: $field_inputs['message']
+                    );
+
+                    $this->response = [
+                        'success' => true,
+                        'errors' => $validation_result['user_error'] ?? [],
+                        'message' => 'Your message has been sent.',
+                    ];
+                } else {
+                    $this->response = [
+                        'success' => false,
+                        'errors' => $validation_result['user_error'],
+                        'message' => 'Please fix the errors below.',
+                    ];
+                }
+                break;
             default:
                 $this->response = [
                     'success' => false,

@@ -4,7 +4,7 @@
 // requires toasts to be active on the page
 
 // import { toasts } from "../components/Toasts.js";
-import {ajaxPOST} from "./Ajax.js";
+import { ajaxPOST } from "./Ajax.js";
 import { Toasts } from "../components/Toasts.js";
 
 export const AjaxForms = {
@@ -57,7 +57,11 @@ export const AjaxForms = {
 
               errorBox.classList.remove("d-none");
             } else {
-              Toasts.show("error", result.message || "Something went wrong.");
+              if (result.errors?.length == 0) {
+                Toasts.show("error", "Something went wrong.");
+              } else {
+                result.errors?.forEach((msg) => Toasts.show("error", msg));
+              }
             }
           },
           (error) => {
