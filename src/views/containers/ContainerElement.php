@@ -26,7 +26,6 @@ class ContainerElement implements iElement
 
     public function __construct(iElementInfo $element_info)
     {
-
         $this->html_before = "";
         $this->html_after = "";
 
@@ -35,8 +34,8 @@ class ContainerElement implements iElement
             $this->html_before = "<{$element_info['html_tag']} ";
 
             // Add potential HTML attributes
-            foreach ($element_info->getHTMLattributes() as $attr) {
-                $this->html_before .=  ($element_info[$attr] ? $attr . '="' . $element_info[$attr] . '" ' : "");
+            foreach ($element_info->getHTMLattributes() as $key =>$attr) {
+                $this->html_before .=  ($element_info[$key] ? $attr . '="' . $element_info[$key] . '" ' : "");
             }
 
             // Check if optional attributes have been added
