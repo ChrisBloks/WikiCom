@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2026 at 03:54 PM
+-- Generation Time: Oct 07, 2026 at 02:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wiki_dev`
+-- Database: `wiki`
 --
-CREATE DATABASE IF NOT EXISTS `wiki_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki_dev`;
+CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `wiki`;
 
 -- --------------------------------------------------------
 
@@ -168,14 +168,14 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (11, 'about_img', '', 'rounded-circle profile-pic d-flex justify-content-end mb-3', '', 'Image', ''),
 (12, 'main_2', 'div', 'd-flex align-items-center w-75 mx-auto', '', 'ContainerElement', ''),
 (13, 'sub', 'div', 'flex-grow-1', '', 'ContainerElement', ''),
-(14, 'contact_form', 'form', 'form-group', '', 'Form', ''),
-(15, 'contact_name_field', '', 'contact-name form-control', '', 'Input', ''),
-(16, 'contact_field_email', '', 'contact-email form-control', '', 'Input', ''),
-(17, 'contact_field_message', '', 'message-text form-control', '', 'textarea', ''),
+(14, 'contact_form', 'form', 'form-group', 'contact_form', 'Form', ''),
+(15, 'contact_name_field', '', 'contact-name form-control', 'name_input', 'Input', ''),
+(16, 'contact_field_email', '', 'contact-email form-control', 'email_input', 'Input', ''),
+(17, 'contact_field_message', '', 'message-text form-control', 'message_input', 'textarea', ''),
 (18, 'log_in_form', 'form', 'form-group', '', 'Form', ''),
 (19, 'login_in_field_email', '', 'login-email form-control', '', 'Input', ''),
 (20, 'log_in_field_password', '', 'login-password form-control', '', 'Input', ''),
-(21, 'search_form', 'form', 'form-group', '', 'Form', ''),
+(21, 'search_form', 'form', 'form-group', 'search_form', 'Form', ''),
 (22, 'search_field_author', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_author', '', 'SearchableCheckboxes', ''),
 (23, 'search_field_tag', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', '', 'SearchableCheckboxes', ''),
 (24, 'search_field_sortby\r\n', '', 'sort-by form-select', '', 'select', ''),
@@ -185,7 +185,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (28, 'article_field_codeblock', '', 'article-codeblock form-control', '', 'textarea', ''),
 (29, 'article_field_img', '', 'article-img-file form-control', '', 'Input', ''),
 (30, 'article_field_tags', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', '', 'SearchableCheckboxes', ''),
-(31, 'register_form', 'form', 'form-group ajax-userRegister-form', '', 'Form', ''),
+(31, 'register_form', 'form', 'form-group', 'register_user_form', 'Form', ''),
 (32, 'register_field_name', '', 'register-name form-control', '', 'Input', ''),
 (33, 'register_field_email', '', 'register-email form-control', '', 'Input', ''),
 (34, 'register_field_new_password', '', 'register-verifypassword form-control', '', 'new_password', ''),
@@ -202,7 +202,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (45, 'search_row', 'div', 'row', '', 'ContainerElement', ''),
 (46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', ''),
 (47, 'search_table_container', 'div', 'table-responsive', '', 'ContainerElement', ''),
-(50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', '', 'ResultsTable', ''),
+(50, 'search_table', 'table', 'table table-search table-hover table-striped table-bordered', 'search_table', 'ResultsTable', ''),
 (51, 'log_in_hidden_page', '', '', '', 'Input', ''),
 (52, 'search_col_results', 'div', 'col-12 col-md-9 ps-4', '', 'ContainerElement', ''),
 (53, 'container_fluid', 'div', 'container-fluid', '', 'ContainerElement', ''),
@@ -241,8 +241,6 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (91, 'code_block_header', 'h1', 'h4', '', 'AtomicElement', 'Code'),
 (92, 'article_code_block', 'code', 'container-lg fs-6 col-15 hljs language-php', '', 'CodeBlock', '$article_code'),
 (102, 'hidden_id_edit_user', '', '', '', 'HiddenField', ''),
-(103, 'hidden_page_edit_password', '', '', '', 'HiddenField', ''),
-(104, 'hidden_action_edit_password', '', '', '', 'HiddenField', ''),
 (105, 'hidden_id_edit_password', '', '', '', 'HiddenField', '');
 
 -- --------------------------------------------------------
@@ -269,85 +267,83 @@ CREATE TABLE `element_lookup_info` (
 
 INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_names`, `where_`, `where_value`, `has_join`, `lookup_type`, `element_order`) VALUES
 (1, 14, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '14', 0, 'form', 0),
-(2, 14, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '15', 0, 'element', 0),
+(2, 14, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '15', 0, 'element', 0),
 (3, 15, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '15', 0, 'field', 0),
 (4, 16, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '16', 0, 'field', 0),
-(5, 14, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '16', 0, 'element', 0),
+(5, 14, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '16', 0, 'element', 0),
 (6, 18, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '18', 0, 'form', 0),
 (7, 19, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '19', 0, 'field', 0),
 (8, 20, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '20', 0, 'field', 0),
-(9, 18, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '19', 0, 'element', 0),
-(11, 18, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '20', 0, 'element', 0),
+(9, 18, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '19', 0, 'element', 0),
+(11, 18, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '20', 0, 'element', 0),
 (12, 21, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '21', 0, 'form', 0),
 (13, 22, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '22', 0, 'field', 0),
 (14, 23, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '23', 0, 'field', 0),
 (15, 24, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '24', 0, 'field', 0),
-(16, 21, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '22', 0, 'element', 0),
-(17, 21, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '23', 0, 'element', 0),
-(18, 21, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '24', 0, 'element', 0),
+(16, 21, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '22', 0, 'element', 0),
+(17, 21, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '23', 0, 'element', 0),
+(18, 21, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '24', 0, 'element', 0),
 (19, 25, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '25', 0, 'form', 0),
 (20, 26, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '26', 0, 'field', 0),
 (21, 27, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '27', 0, 'field', 0),
 (22, 28, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '28', 0, 'field', 0),
 (23, 29, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '29', 0, 'field', 0),
 (24, 30, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '30', 0, 'field', 0),
-(25, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '26', 0, 'element', 10),
-(26, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '27', 0, 'element', 30),
-(27, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '28', 0, 'element', 40),
-(28, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '29', 0, 'element', 50),
-(29, 25, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '30', 0, 'element', 20),
+(25, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '26', 0, 'element', 10),
+(26, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '27', 0, 'element', 30),
+(27, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '28', 0, 'element', 40),
+(28, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '29', 0, 'element', 50),
+(29, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '30', 0, 'element', 20),
 (30, 31, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '31', 0, 'form', 0),
 (31, 32, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '32', 0, 'field', 0),
 (32, 33, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '33', 0, 'field', 0),
 (33, 34, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '34', 0, 'field', 0),
-(34, 31, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '32', 0, 'element', 0),
-(35, 31, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '33', 0, 'element', 0),
-(36, 31, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '34', 0, 'element', 0),
+(34, 31, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '32', 0, 'element', 0),
+(35, 31, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '33', 0, 'element', 0),
+(36, 31, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '34', 0, 'element', 0),
 (37, 35, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '35', 0, 'form', 0),
 (38, 36, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '36', 0, 'field', 0),
 (39, 37, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '37', 0, 'field', 0),
 (40, 41, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '41', 0, 'field', 0),
 (41, 42, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '42', 0, 'field', 0),
-(42, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '36', 0, 'element', 0),
-(43, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '37', 0, 'element', 0),
-(44, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '41', 0, 'element', 0),
-(45, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '42', 0, 'element', 0),
+(42, 35, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '36', 0, 'element', 0),
+(43, 35, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '37', 0, 'element', 0),
+(44, 35, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '41', 0, 'element', 0),
+(45, 35, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '42', 0, 'element', 0),
 (46, 38, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '38', 0, 'form', 0),
 (47, 39, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '39', 0, 'field', 0),
 (48, 40, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '40', 0, 'field', 0),
-(49, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '39', 0, 'element', 0),
-(50, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '40', 0, 'element', 0),
+(49, 38, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '39', 0, 'element', 0),
+(50, 38, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '40', 0, 'element', 0),
 (51, 43, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '43', 0, 'form', 0),
-(52, 14, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '17', 0, 'element', 0),
+(52, 14, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '17', 0, 'element', 0),
 (53, 17, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '17', 0, 'field', 0),
 (55, 23, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
 (56, 22, 'user', 'id,name', '', '', 0, 'options', 0),
 (57, 24, 'v_sortby_options', 'id,name', '', '', 0, 'options', 0),
 (59, 50, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'title\',\'author\',\'tags\',\'lastEdit\',\'rating\'', 0, 'options', 0),
-(60, 18, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '51', 0, 'element', 0),
+(60, 18, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '51', 0, 'element', 0),
 (61, 51, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '51', 0, 'field', 0),
-(62, 43, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '62', 0, 'element', 0),
-(63, 43, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '63', 0, 'element', 0),
+(62, 43, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '62', 0, 'element', 0),
+(63, 43, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '63', 0, 'element', 0),
 (64, 62, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '62', 0, 'field', 0),
 (65, 63, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '63', 0, 'field', 0),
 (66, 65, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '65', 0, 'field', 0),
-(68, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '72', 0, 'element', 15),
+(68, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '72', 0, 'element', 15),
 (69, 72, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '72', 0, 'field', 0),
 (70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
 (71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0),
 (72, 77, 'aria_attributes', 'name,value', 'id', '1,2', 0, 'aria_attributes', 0),
-(73, 77, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag,html_id', 'element_info.id', '78', 0, 'element', 10),
-(74, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '80', 0, 'element', 10),
-(75, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '81', 0, 'element', 20),
-(77, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '87', 0, 'element', 10),
-(78, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '88', 0, 'element', 20),
-(79, 90, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '91', 0, 'element', 10),
-(80, 90, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '92', 0, 'element', 20),
-(92, 35, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '102', 0, 'element', 0),
+(73, 77, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '78', 0, 'element', 10),
+(74, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '80', 0, 'element', 10),
+(75, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '81', 0, 'element', 20),
+(77, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '87', 0, 'element', 10),
+(78, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '88', 0, 'element', 20),
+(79, 90, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '91', 0, 'element', 10),
+(80, 90, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '92', 0, 'element', 20),
+(92, 35, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '102', 0, 'element', 0),
 (95, 102, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '102', 0, 'field', 0),
-(98, 38, 'element_info', 'id as element_id,element_name,php_class,html_class', 'element_info.id', '105', 0, 'element', 0),
-(99, 103, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '103', 0, 'field', 0),
-(100, 104, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '104', 0, 'field', 0),
+(98, 38, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id', 'element_info.id', '105', 0, 'element', 0),
 (101, 105, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '105', 0, 'field', 0);
 
 -- --------------------------------------------------------
@@ -422,7 +418,7 @@ CREATE TABLE `field_info` (
 
 INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `value`, `optional`) VALUES
 (1, 'name', 15, 'text', 'Your name:', '', 0),
-(2, 'email', 16, 'text', 'Your email:', '', 0),
+(2, 'email', 16, 'email', 'Your email:', '', 0),
 (3, 'message', 17, 'textarea', 'Your message:', '', 0),
 (4, 'email', 19, 'email', 'Email:', '', 0),
 (5, 'password', 20, 'password', 'Password:', '', 0),
@@ -449,12 +445,7 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (26, 'Edit User Information', 65, 'Button', 'Change user information', '', 1),
 (27, 'Edit Password', 66, 'Button', '', '', 1),
 (28, 'articleID', 72, 'hidden', '', '$editArticleID', 0),
-(29, 'page', 100, 'hidden', '', 'editUser', 0),
-(30, 'action', 101, 'hidden', '', 'updateUserInfo', 0),
-(31, 'id', 102, 'hidden', '', '#userID', 0),
-(32, 'page', 103, 'hidden', '', 'editPassword', 0),
-(33, 'action', 104, 'hidden', '', 'updatePassword', 0),
-(34, 'id', 105, 'hidden', '', '#userID', 0);
+(31, 'id', 102, 'hidden', '', '', 0),
 (36, 'id', 105, 'hidden', '', '', 0);
 
 -- --------------------------------------------------------
@@ -479,7 +470,7 @@ CREATE TABLE `form_info` (
 --
 
 INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submit_caption`, `enctype`, `submit_class`) VALUES
-(1, 14, '', 'POST', '', 'Send message', '', 'btn btn-primary btn-sm'),
+(1, 14, 'saveContactMessage', 'POST', '', 'Send message', '', 'btn btn-primary btn-sm'),
 (2, 18, '', 'POST', '', 'Log in', '', 'btn btn-primary btn-sm'),
 (3, 21, 'searchArticle', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
 (4, 25, '', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm'),
@@ -700,11 +691,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny122', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
+(1, 'Danny12', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christiannn', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
-(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', ''),
-(12, 'Louk', '$2y$10$K.kUyST2RMPtrlBPSjD//ezzoYpGYiSGEkBcIpxOFaGL5mxwiy9uq', 'Loul@emai.com', '', '');
+(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
 
 -- --------------------------------------------------------
 
@@ -1005,7 +995,7 @@ ALTER TABLE `application_data`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `dialogue_window`
@@ -1023,7 +1013,7 @@ ALTER TABLE `element_info`
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `element_to_application_data`
@@ -1071,7 +1061,7 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `wiki_article`
