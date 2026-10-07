@@ -31,6 +31,7 @@ import { saveRating } from "./services/SaveRating.js";
 import { updateCheckboxGroup, resetCheckboxesToDefault, } from "./components/Checkboxes.js";
 import { SearchForm } from "./components/searchForm.js";
 import { ContactForm } from "./components/ContactForm.js";
+import { RegisterUser } from "./components/RegisterUser.js";
 
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -65,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   saveRating.init();
   SearchForm.init();
   ContactForm.init();
+  RegisterUser.init();
 
   //bind ajax form
   AjaxForms.bind("#editUserModal form", {
