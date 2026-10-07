@@ -4,7 +4,7 @@ import { Toasts } from "../components/Toasts.js";
 export const RegisterUser = {
   init() {
     console.log("Initing RegisterUser");
-    AjaxForms.bind(".ajax-userRegister-form", {
+    AjaxForms.bind("#register_user_form", {
       onSuccess: function (_) {
         console.log('Succes!');
         Toasts.show("message", "Yippieeee");
