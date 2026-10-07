@@ -108,7 +108,10 @@ INSERT INTO `contact_messages` (`id`, `name`, `email`, `date`, `message`) VALUES
 (19, 'Test', 'danny@email.com', '2026-09-08', 'dfsdf'),
 (20, 'Test', 'dannytest@email.com', '2026-09-08', 'ddd'),
 (21, 'd', 'danny@email.com', '2026-09-08', 'test'),
-(22, 'Test', 'danny@email.com', '2026-09-08', 'd');
+(22, 'Test', 'danny@email.com', '2026-09-08', 'd'),
+(23, 'd', 'd', '2026-10-07', 'd'),
+(24, 'd', 'd', '2026-10-07', 'd'),
+(25, 'Test', 'danny@email.com', '2026-10-07', 'dsaasd');
 
 -- --------------------------------------------------------
 
