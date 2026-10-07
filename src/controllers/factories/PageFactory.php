@@ -128,8 +128,8 @@ class PageFactory
         $this->htmlpage->addToBodyContent($menu);
 
         $main = new MainElement();
-        $main->addElement(new Toast(new ElementInfo()));
-        $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
+        // $main->addElement(new Toast(new ElementInfo()));
+        // $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);

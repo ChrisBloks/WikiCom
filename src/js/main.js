@@ -30,6 +30,7 @@ import { MarkdownToolbar } from "./components/MarkdownEditor.js";
 import { saveRating } from "./services/SaveRating.js";
 import { updateCheckboxGroup, resetCheckboxesToDefault, } from "./components/Checkboxes.js";
 import { SearchForm } from "./components/searchForm.js";
+import { RegisterUser } from "./components/RegisterUser.js";
 
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -63,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   MarkdownToolbar.init(".article-text");
   saveRating.init();
   SearchForm.init();
+  RegisterUser.init();
 
   //bind ajax form
   AjaxForms.bind("#editUserModal form", {
