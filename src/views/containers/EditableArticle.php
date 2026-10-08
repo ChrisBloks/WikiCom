@@ -23,14 +23,14 @@ class EditableArticle extends Form {
                 $sub_field['field_info']['value'] = $element_info['article_info']['title'];
             }
 
-            // Add summary
+            // Add bodytext
             if($sub_field['field_info']['field_name'] == 'bodytext'){
-                $sub_field['field_info']['text'] = $element_info['article_info']['summary'];
+                $sub_field['field_info']['text'] = $element_info['article_info']['bodytext'];
             }
 
             // Add codeblock
             if($sub_field['field_info']['field_name'] == 'codeblock'){
-                $sub_field['field_info']['text'] = $element_info['article_info']['codeBlock'];
+                $sub_field['field_info']['text'] = $element_info['article_info']['codeblock'];
             }
         }
 

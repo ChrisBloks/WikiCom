@@ -10,7 +10,6 @@ export const EditArticleForm = {
     AjaxForms.bind("#edit_article_form", {
       onSuccess: function (_) {
         console.log('Succes!');
-        // Go to login page
       },
     });
   },

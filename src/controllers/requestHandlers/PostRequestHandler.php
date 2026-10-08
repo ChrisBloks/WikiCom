@@ -101,8 +101,8 @@ class PostRequestHandler extends BaseRequestHandler
                 $this->response['articleID'] = Utils::getRequestVar('articleID', true);
                 $this->response['userID'] = Utils::getSesVar('userID');
                 $this->response['bodyinfo']['title'] = $validation_result['field_inputs']['title'];
-                $this->response['bodyinfo']['summary'] = $validation_result['field_inputs']['summary'];
-                $this->response['bodyinfo']['codeBlock'] = $validation_result['field_inputs']['codeBlock'];
+                $this->response['bodyinfo']['bodytext'] = $validation_result['field_inputs']['bodytext'];
+                $this->response['bodyinfo']['codeblock'] = $validation_result['field_inputs']['codeblock'];
                 $this->response['existing_tag'] = $validation_result['field_inputs']['existing_tag'];
 
 

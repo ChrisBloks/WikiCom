@@ -11,7 +11,7 @@ export const ContactForm = {
     AjaxForms.bind("#contact_form", {
       onSuccess: function (_) {
         console.log('Succes!');
-        // Go to login page
+
       },
     });
   },

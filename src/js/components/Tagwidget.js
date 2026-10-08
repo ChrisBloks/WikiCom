@@ -38,7 +38,7 @@ export const TagWidget = {
 
     const safeId = tagName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     const checkboxHtml =
-      `<input type="checkbox" name="existing_tag[${safeId}]" id="new-tag-${safeId}" class="Existing-tag form-check-input" value="0" checked>` +
+      `<input type="checkbox" name="articletags[${safeId}]" id="new-tag-${safeId}" class="Existing-tag form-check-input" value="0" checked>` +
       `<label for="new-tag-${safeId}">${escapeHtml(tagName)}</label><br>`;
 
     document
