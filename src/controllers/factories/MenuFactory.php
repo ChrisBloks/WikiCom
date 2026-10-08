@@ -72,6 +72,7 @@ class MenuFactory
                 attrs: [
                     'data-user-id' => $item['id'] ?? -1,
                     'data-target-page' => $item['page_value']
+                    
                 ],
                 li_class: $li_class
             );
