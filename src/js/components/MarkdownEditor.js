@@ -42,13 +42,15 @@ export const MarkdownToolbar = {
   init(textareaSelector) {
     document.querySelectorAll(textareaSelector).forEach((textarea) => {
       const toolbar = document.createElement("div");
-      toolbar.className = "markdown-toolbar";
+      toolbar.className = "markdown-toolbar btn-group w-100 mb-2";
+      toolbar.setAttribute("role", "group")
 
       // loop over this.buttons, create a <button> for each,
       this.buttons.forEach(function (btnConfig) {
         // create button
         const btnEl = document.createElement("button");
         btnEl.type = "button";
+        btnEl.className = "btn btn- ";
 
         // give label and tooltip
         btnEl.textContent = btnConfig.label;

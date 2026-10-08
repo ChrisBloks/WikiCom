@@ -8,30 +8,33 @@ use Wiki\models\ModelSelector;
 use Wiki\tools\Queue;
 use Wiki\tools\utils\HtmlUtils;
 
-class ElementHandler {
+class ElementHandler
+{
 
     protected array $article_info = []; // list of [title, name, summary, codeBlock, imgFileName, lastEdit, user_id, rating, n_ratings]
     protected array $fetched_random_articles = []; // list of [id]
     protected array $user_info = []; // list of [id, name, password, email, imgFileName, description]
     protected array $response;
 
-    public function __construct(array $response){
+    public function __construct(array $response)
+    {
         // HtmlUtils::dump('response', $response);
         $this->response = $response;
     }
 
-    public function addDataToElementList(array &$elements){
-        
-        foreach($elements as $element_info){
+    public function addDataToElementList(array &$elements)
+    {
 
-            if(isset($element_info['sub_fields'])){
+        foreach ($elements as $element_info) {
+
+            if (isset($element_info['sub_fields'])) {
                 // HtmlUtils::dump('TRIGGERED SUBFIELD', []);
                 $this->addDataToElementList($element_info['sub_fields']);
             }
-            
+
             $element_info['application_data'] = ModelSelector::getElementModel()->fetchElementVariables($element_info['element_id']);
             // HtmlUtils::dump('Element', $element_info);
-            if(isset($element_info['application_data']) && !empty($element_info['application_data'])){
+            if (isset($element_info['application_data']) && !empty($element_info['application_data'])) {
                 $this->addDataToElement($element_info);
                 // HtmlUtils::dump('Element_info', $element_info);
             }
@@ -39,11 +42,12 @@ class ElementHandler {
     }
 
     // TODO: Currently a problem that variables get slotted into seemingly random locations (i.e. into 'title' sometimes, into 'bodytext' other times)
-    public function addDataToElement(ElementInfo &$element_info){
+    public function addDataToElement(ElementInfo &$element_info)
+    {
         $application_data = &$element_info['application_data'];
-        
-        foreach($application_data as $key => $var){
-            switch ($var){
+
+        foreach ($application_data as $key => $var) {
+            switch ($var) {
                 case '[*ADD_USER_TO_HTML_ID*]':
                     $app_data = $this->response['userID'] . $element_info['html_id'];
                     break;
@@ -71,7 +75,7 @@ class ElementHandler {
                     $app_data = $article_info;
                     break;
                 case '[*IS_LOGGED_IN*]':
-                    $app_data =$this->response['isLoggedIn'];
+                    $app_data = $this->response['isLoggedIn'];
                     break;
                 case '[*ARTICLE_N_RATINGS*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
@@ -80,10 +84,10 @@ class ElementHandler {
                 case '[*ARTICLE_RATING*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
                     $app_data = $article_info['rating'];
+                    break;
                 case '[*ARTICLE_TAGS*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
                     $app_data = $article_info['tags'];
-                    break;
                     break;
                 case '[*ARTICLE_TEXT*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
@@ -142,9 +146,9 @@ class ElementHandler {
             $arr = &$element_info;
             $keys = new Queue(explode(',', $key));
             $i = 0; // Safety for preventing infinite loop
-            while(true && $i < 100){
+            while (true && $i < 100) {
                 $sub_key = $keys->next();
-                if($keys->isEmpty()){
+                if ($keys->isEmpty()) {
                     $arr[$sub_key] = $app_data;
                     break;
                 }
@@ -156,19 +160,21 @@ class ElementHandler {
     }
 
     // For caching user info
-    private function getUserInfo(int $user_id){
-        if(!isset($this->user_info[$user_id])){
+    private function getUserInfo(int $user_id)
+    {
+        if (!isset($this->user_info[$user_id])) {
             $this->user_info[$user_id] = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($user_id);
         }
         return $this->user_info[$user_id];
     }
 
     //For checking caching article info, if this article has already been fetched, use the cache
-    private function getArticleInfo(int $article_id){
-        if (!isset($this->article_info[$article_id])){
-            $article_info =  ModelSelector::getArticleModel()->fetchArticleById($article_id, get_tags: True);
+    private function getArticleInfo(int $article_id)
+    {
+        if (!isset($this->article_info[$article_id])) {
+            $article_info = ModelSelector::getArticleModel()->fetchArticleById($article_id, get_tags: True);
             $this->article_info[$article_id] = $article_info;
-           
+
         }
         return $this->article_info[$article_id];
     }

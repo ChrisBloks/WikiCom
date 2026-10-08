@@ -43,7 +43,7 @@ class PageFactory
         $this->htmlpage = new BasePage;
     }
 
-    public function show()
+    public function buildPage()
     {
         $this->addHead();
         $this->addScripts();
@@ -87,21 +87,6 @@ class PageFactory
                     ])
                 )
             );
-
-        // switch ($this->page) {
-        //     case 'editArticle':
-        //     case 'search':
-        //         $this->htmlpage->addToHeadContent(
-        //             new AtomicElement(
-        //                 new ElementInfo(
-        //                     ["text" => '<script src="./src/js/searchPage.js"></script>']
-        //                 )
-        //             )
-        //         );
-        //         break;
-        //     default:
-        //         break;
-        // }
     }
 
 

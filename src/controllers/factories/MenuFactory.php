@@ -5,8 +5,8 @@ namespace Wiki\controllers\factories;
 
 use Wiki\tools\traits\tErrorMessageCollector,
 Wiki\tools\utils\HtmlUtils,
-    Wiki\views\containers\Menu,
-    Wiki\views\containers\Menuitem;
+Wiki\views\containers\Menu,
+Wiki\views\containers\Menuitem;
 
 class MenuFactory
 {
@@ -20,10 +20,10 @@ class MenuFactory
     protected function buildMenu(array $menu_items, string $class = 'nav'): Menu
     {
         $menu = new Menu($class);
-        
-        
+
+
         foreach ($menu_items as $item) {
-            
+
             try {
                 $menu->addElement($this->buildMenuItem($item));
             } catch (\InvalidArgumentException $e) {
@@ -42,7 +42,7 @@ class MenuFactory
 
             $menuItem = new MenuItem(
                 label: $item['label'],
-                page_value: '?page='.$item['page_value'],
+                page_value: '?page=' . $item['page_value'],
                 class: $link_class . ' dropdown-toggle',
                 attrs: [
                     'role' => 'button',
@@ -53,11 +53,11 @@ class MenuFactory
                 li_class: $li_class . ' dropdown'
             );
 
-            
+
             $submenu = new Menu(class: 'dropdown-menu');
             foreach ($item['submenu'] as $subitem) {
                 try {
-    
+
                     $submenu->addElement($this->buildMenuItem($subitem, 'dropdown-item', ''));
                 } catch (\InvalidArgumentException $e) {
                     $this->logError($e->getMessage());
@@ -67,9 +67,12 @@ class MenuFactory
         } else {
             $menuItem = new MenuItem(
                 label: $item['label'],
-                page_value: '?page='.$item['page_value'],
+                page_value: '?page=' . $item['page_value'],
                 class: $link_class,
-                attrs: ['data-user-id' => $item['id'] ?? -1],
+                attrs: [
+                    'data-user-id' => $item['id'] ?? -1,
+                    'data-target-page' => $item['page_value']
+                ],
                 li_class: $li_class
             );
         }

@@ -22,16 +22,18 @@ class Menuitem extends ContainerElement
             new LinkedElementInfo([
                 'html_tag' => 'li',
                 'class' => $li_class,
-            ]));
 
-        
+            ])
+        );
+
+
         $element_info = new LinkedElementInfo([
-                    'html_tag' => 'a',
-                    'page_value' => htmlspecialchars($page_value),
-                    'class' => $class,
-                    'label' => htmlspecialchars($label)
-                    ]);
-        foreach($attrs as $attr => $val){
+            'html_tag' => 'a',
+            'page_value' => htmlspecialchars($page_value),
+            'class' => $class,
+            'label' => htmlspecialchars($label),
+        ]);
+        foreach ($attrs as $attr => $val) {
             $element_info[$attr] = $val;
         }
 

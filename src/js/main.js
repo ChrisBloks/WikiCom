@@ -21,6 +21,7 @@
 // ==============================================================
 
 // imports
+import { Router } from "./services/Router.js";
 import { AjaxForms } from "./services/AjaxForms.js";
 import { ArticleDelete } from "./components/ArticleDelete.js"
 import { TagWidget } from "./components/Tagwidget.js";
@@ -34,6 +35,8 @@ import { SearchForm } from "./components/searchForm.js";
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOMContent loaded");
+  // ALWAYS INIT
+  Router.init();
 
   // tables in dashboard
   const table = document.querySelector(".d-flex.flex-grow-1 table");
