@@ -45,7 +45,6 @@ class ElementHandler
     public function addDataToElement(ElementInfo &$element_info)
     {
         $application_data = &$element_info['application_data'];
-
         foreach ($application_data as $key => $var) {
             switch ($var) {
                 case '[*ADD_USER_TO_HTML_ID*]':

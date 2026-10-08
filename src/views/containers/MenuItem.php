@@ -19,29 +19,12 @@ class Menuitem extends ContainerElement
     public function __construct(string $label, string $page_value, string $class = '', ?array $attrs = null, string $li_class = '')
     {
         parent::__construct(
-            new LinkedElementInfo([
+            new ElementInfo([
                 'html_tag' => 'li',
-                'class' => $li_class,
-                'data-target-page' => $page_value
-
+                'text' => htmlspecialchars($label),
+                'class' => $li_class . ' ' . $class . ' clickable' ,
+                'data-target-page' => $page_value ?? -1,
             ])
         );
-
-
-        $element_info = new LinkedElementInfo([
-            'html_tag' => 'a',
-            'page_value' => htmlspecialchars($page_value),
-            'class' => $class,
-            'label' => htmlspecialchars($label),
-        ]);
-        foreach ($attrs as $attr => $val) {
-            $element_info[$attr] = $val;
-        }
-
-        $this->addElement(
-            new AtomicElement($element_info)
-        );
-
-
     }
 }
