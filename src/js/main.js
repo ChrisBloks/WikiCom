@@ -1,19 +1,10 @@
-/**
- *  Loads js functions on document.ready
- * 2 options for the future:
- *  1. Split the main.js into different files like article.js, dashboard.js and import them on page load
- *  2. Create a switch statement in the main that loads the components based on
- *    document.body.dataset.page
- * 
- * - Marius
- * 
- * OR 
- *  shown in bootstrap.js
- * 
- * OR
- *  minify js
- */
+// TODO: group A — run ONCE per real page load
+//       Router, QuickActions
+//       Running these again after a swap would stack duplicate listeners.
 
+// TODO: group B — wrap in a function initPage() — run on load AND after every swap
+//       binds, MarkdownToolbar, TagWidget, rating buttons, 
+//       search fields, Toasts.initExisting, ...
 
 
 // ==============================================================
