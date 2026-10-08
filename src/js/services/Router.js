@@ -5,8 +5,8 @@ export const Router = {
     document.addEventListener("click", async (event) => {
       // remove parent node once we've removed the <a> part
       const page = event.target.parentElement.dataset.targetPage;
+      if (!page) return;
 
-      
       event.preventDefault();
       console.log("menu clicked!");
       console.log(page);
