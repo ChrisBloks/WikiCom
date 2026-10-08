@@ -2,10 +2,12 @@
 
 namespace Wiki\views;
 
-use Wiki\dataObjects\ElementInfo;
-use Wiki\models\ElementModel;
-use Wiki\views\containers\ContainerElement;
-use Wiki\tools\interfaces\iElement;
+use Wiki\dataObjects\ElementInfo,
+    Wiki\models\ElementModel,
+    Wiki\views\containers\ContainerElement,
+    Wiki\tools\interfaces\iElement,
+    Wiki\views\BodyContainer;
+
 /**
  * Allows addition of elements to the head or body section of a HTML page
  * @var ContainerElement $head_container Contains all elements needed in the <head> of a page
@@ -17,12 +19,12 @@ class BasePage extends HtmlDoc
     //properties
     private ContainerElement $head_container;
 
-    private ContainerElement $body_container;
+    private BodyContainer $body_container;
 
     public function __construct()
     {
         $this->head_container = new ContainerElement(new ElementInfo());
-        $this->body_container = new ContainerElement(new ElementInfo());
+        $this->body_container = new BodyContainer();
     }
 
     /**
@@ -39,7 +41,7 @@ class BasePage extends HtmlDoc
      */
     protected function bodyContent(): void
     {
-        echo $this->body_container->show();
+        echo $this->body_container->getBodyContent();
     }
 
     /**
@@ -52,13 +54,8 @@ class BasePage extends HtmlDoc
         $this->head_container->addElement($element);
     }
 
-    /**
-     * Adds an element to the body container
-     * @param iElement $element Element that you want to add to the body
-     * @return void
-     */
-    public function addToBodyContent(iElement $element): void
+    public function addToBodyContent(iElement $element)
     {
-        $this->body_container->addElement($element);
+        return $this->body_container->addToBodyContent($element);
     }
 }
