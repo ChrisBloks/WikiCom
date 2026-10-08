@@ -19,8 +19,8 @@ export const Router = {
           if (!Array.isArray(response)) return;
           console.log("response reached")
           response.forEach(({ selector, content }) => {
-            console.log(selector);
-            console.log(content);
+            // console.log(selector);
+            // console.log(content);
             try {
               document.querySelector(selector).innerHTML = content;
             } catch (e) {
