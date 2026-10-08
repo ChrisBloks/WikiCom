@@ -56,9 +56,9 @@ class PageFactory
         return $this->htmlpage;
     }
 
-    public function buildBody(){
+    public function buildBody(): string{
         $this->addBody();
-        return $this->htmlpage;
+        return $this->htmlpage->show();
     }
 
 
