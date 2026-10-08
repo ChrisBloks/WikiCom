@@ -1,18 +1,20 @@
-import { ajaxGET } from "./Ajax.js";
+import { ajaxPOST } from "./Ajax.js";
 
 export const Router = {
   init() {
     document.addEventListener("click", async (event) => {
-      const link = event.target.closest(".nav-link a, a.nav-link");
-      if (!link) return;
+      // remove parent node once we've removed the <a> part
+      const page = event.target.parentElement.dataset.targetPage;
 
+      
       event.preventDefault();
       console.log("menu clicked!");
-      console.log(link.href);
+      console.log(page);
 
-      await ajaxGET(
-        link.href,
+      await ajaxPOST(
+        "main.php",
         "json",
+        {action: 'goToPage', page: page},
         (response) => {
           if (!Array.isArray(response)) return;
 
