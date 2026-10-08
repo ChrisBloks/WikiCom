@@ -135,8 +135,3 @@ div.SearchableCheckboxes {
   border: 1px solid;
   border-radius: 50%;
 }
-
-li.clickable:hover {
-  cursor:pointer;
-  background-color: rgba(115, 153, 184, 0.714);
-}

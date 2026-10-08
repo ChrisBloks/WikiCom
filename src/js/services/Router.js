@@ -3,8 +3,8 @@ import { ajaxPOST } from "./Ajax.js";
 export const Router = {
   init() {
     document.addEventListener("click", async (event) => {
-      const page = event.target.dataset.targetPage;
-      console.log(event.target);
+      // remove parent node once we've removed the <a> part
+      const page = event.target.parentElement.dataset.targetPage;
       if (!page) return;
 
       event.preventDefault();
@@ -19,6 +19,8 @@ export const Router = {
           if (!Array.isArray(response)) return;
           console.log("response reached")
           response.forEach(({ selector, content }) => {
+            console.log(selector);
+            console.log(content);
             try {
               document.querySelector(selector).innerHTML = content;
             } catch (e) {

@@ -49,7 +49,7 @@ class MenuFactory
                     'data-bs-toggle' => 'dropdown',
                     'aria-expanded' => 'false',
                     'data-user-id' => $item['id'] ?? -1,
-                    // 'data-target-page' => $item['page_value']
+                    'data-target-page' => $item['page_value']
                 ],
                 li_class: $li_class . ' dropdown',
 
@@ -73,7 +73,7 @@ class MenuFactory
                 class: $link_class,
                 attrs: [
                     'data-user-id' => $item['id'] ?? -1,
-                    'data-target-page' => 'no'//$item['page_value']
+                    'data-target-page' => $item['page_value']
                 ],
                 li_class: $li_class
             );
