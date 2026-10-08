@@ -34,8 +34,7 @@ class PageFactory
     private string $page;
     protected bool $isLoggedIn;
     protected array $response;
-    private BasePage $htmlpage;
-    private BodyContainer $body;
+    private BasePage|BodyContainer $htmlpage;
     protected array|ArrayAccess $article_info;
 
     public function __construct(array $response)
@@ -56,9 +55,9 @@ class PageFactory
         return $this->htmlpage;
     }
 
-    public function buildBody(): string{
+    public function buildBody(): ?string{
         $this->addBody();
-        return $this->htmlpage->show();
+        return $this->htmlpage->getBodyContent();
     }
 
 

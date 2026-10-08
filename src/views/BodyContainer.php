@@ -14,7 +14,7 @@ class BodyContainer
     {
         $this->body_container = new ContainerElement(new ElementInfo());
     }
-    public function show(): string
+    public function getBodyContent(): string
     {
         return $this->body_container->show();
     }

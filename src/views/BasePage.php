@@ -41,7 +41,7 @@ class BasePage extends HtmlDoc
      */
     protected function bodyContent(): void
     {
-        echo $this->body_container->show();
+        echo $this->body_container->getBodyContent();
     }
 
     /**
@@ -63,8 +63,8 @@ class BasePage extends HtmlDoc
         return $this->head_container->show();
     }
 
-    public function returnBodyContent(){
-        return $this->body_container->show();
+    public function getBodyContent(){
+        return $this->body_container->getBodyContent();
     }
 
 }
