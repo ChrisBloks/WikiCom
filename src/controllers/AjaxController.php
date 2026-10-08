@@ -57,7 +57,7 @@ class AjaxController implements iController
             case 'goToPage':
                 $new_body_content = (new PageFactory($this->request))->buildBody();
                 $this->response = [
-                    ['selector' => 'main', 'content' => $new_body_content]
+                    ['selector' => 'body', 'content' => $new_body_content]
                 ];
                 break;
             case 'saveRating':
