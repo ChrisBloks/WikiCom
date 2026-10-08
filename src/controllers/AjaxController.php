@@ -6,6 +6,7 @@ use Wiki\tools\interfaces\iController,
 Wiki\models\ModelSelector;
 use Wiki\tools\utils\utils;
 use Wiki\controllers\ArticleHandler;
+use Wiki\controllers\factories\PageFactory;
 use Wiki\tools\utils\HtmlUtils;
 
 class AjaxController implements iController
@@ -53,6 +54,12 @@ class AjaxController implements iController
     private function validateRequest(): void
     {
         switch ($this->request['action']) {
+            case 'goToPage':
+                $new_body_content = (new PageFactory($this->request))->buildBody();
+                $this->response = [
+                    ['selector' => 'main', 'content' => $new_body_content]
+                ];
+                break;
             case 'saveRating':
                 if (!$this->request['isLoggedIn']) {
                     throw new BadMethodCallException('Tried to save a rating without being logged in!');

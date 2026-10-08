@@ -56,6 +56,11 @@ class PageFactory
         return $this->htmlpage;
     }
 
+    public function buildBody(){
+        $this->addBody();
+        return $this->htmlpage;
+    }
+
 
     private function addHead()
     {
