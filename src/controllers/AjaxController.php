@@ -48,6 +48,19 @@ class AjaxController implements iController
             'user_id' => utils::getSesVar('userID', null),
             'isLoggedIn' => isset($_SESSION['userID'])
         ];
+
+        // TODO: review this bullshit
+        // For extracting GET-style params from the 'page' value
+        $page = $this->request['page'];
+        if(str_contains($page, '&')){
+            $page_params = explode('&',  htmlspecialchars_decode($page));
+            $this->request['page'] = $page_params[0];
+            foreach(array_slice($page_params, 1) as $param){
+                $param_key_val = explode('=', $param);
+                $this->request[$param_key_val[0]] = $param_key_val[1];
+            }
+        }
+        // HtmlUtils::dump('request', $this->request);
     }
 
     // decide what to do based on the action, fill $this->request
