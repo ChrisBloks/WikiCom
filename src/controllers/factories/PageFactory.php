@@ -25,7 +25,8 @@ use ArrayAccess,
     Wiki\views\containers\Footer,
     Wiki\views\containers\MainElement,
     Wiki\dataObjects\ElementInfo,
-    Wiki\controllers\ElementHandler;
+    Wiki\controllers\ElementHandler,
+    Wiki\tools\utils\HtmlUtils;
 
 class PageFactory
 {
@@ -43,7 +44,7 @@ class PageFactory
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
 
-        // if an async is coming in
+        // if an async is coming in make async call
         $this->htmlpage = ($response['async'] ? new BodyContainer() : new BasePage());
     }
 

@@ -22,6 +22,7 @@ class Menuitem extends ContainerElement
             new LinkedElementInfo([
                 'html_tag' => 'li',
                 'class' => $li_class,
+                'data-target-page' => $page_value
 
             ])
         );

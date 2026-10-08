@@ -42,15 +42,17 @@ class MenuFactory
 
             $menuItem = new MenuItem(
                 label: $item['label'],
-                page_value: '?page=' . $item['page_value'],
+                page_value: $item['page_value'],
                 class: $link_class . ' dropdown-toggle',
                 attrs: [
                     'role' => 'button',
                     'data-bs-toggle' => 'dropdown',
                     'aria-expanded' => 'false',
                     'data-user-id' => $item['id'] ?? -1,
+                    'data-target-page' => $item['page_value']
                 ],
-                li_class: $li_class . ' dropdown'
+                li_class: $li_class . ' dropdown',
+
             );
 
 
@@ -67,7 +69,7 @@ class MenuFactory
         } else {
             $menuItem = new MenuItem(
                 label: $item['label'],
-                page_value: '?page=' . $item['page_value'],
+                page_value: $item['page_value'],
                 class: $link_class,
                 attrs: [
                     'data-user-id' => $item['id'] ?? -1,

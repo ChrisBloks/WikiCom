@@ -8,6 +8,7 @@ export const Router = {
 
       event.preventDefault();
       console.log("menu clicked!");
+      console.log(link.href);
 
       await ajaxGET(
         link.href,

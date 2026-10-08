@@ -19,7 +19,7 @@ class BodyContainer
         return $this->body_container->show();
     }
 
-    public function addToBodyContent(iElement $element): void
+    public function addToBodyContent(iElement $element)
     {
         return $this->body_container->addElement($element);
     }
