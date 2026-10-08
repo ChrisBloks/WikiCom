@@ -45,7 +45,7 @@ class AjaxController implements iController
             'page' => utils::getRequestVar('page', true, 'home'),
             'action' => utils::getRequestVar('action', true, 'unknown'),
             'id' => utils::getRequestVar('id', true, null),
-            'user_id' => utils::getSesVar('userID', null),
+            'userID' => utils::getSesVar('userID', null),
             'isLoggedIn' => isset($_SESSION['userID'])
         ];
 
@@ -81,7 +81,7 @@ class AjaxController implements iController
                     $article_id = utils::getRequestVar('article_id', true, null);
                     $articleHandler = new ArticleHandler();
                     $rating_info = $articleHandler->handleSaveRating(
-                        user_id: $this->request['user_id'],
+                        user_id: $this->request['userID'],
                         article_id: $article_id,
                         rating: $rating
                     );
@@ -128,7 +128,7 @@ class AjaxController implements iController
                         'errors' => $result['user_error'] ?? [],
                         'message' => $result['ok'] ? 'Your information has been updated.' : 'Something went wrong.',
                         'name' => $result['field_inputs']['name'] ?? null,
-                        'user_id' => $this->request['user_id'] ?? null,
+                        'userID' => $this->request['userID'] ?? null,
                         'email' => $result['field_inputs']['email'] ?? null,
                         'avatar_url' => $result['field_inputs']['avatar_url'] ?? null,
                     ];
