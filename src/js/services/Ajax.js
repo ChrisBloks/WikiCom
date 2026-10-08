@@ -29,3 +29,27 @@ export async function ajaxPOST(url, response_type, data, success, fail) {
 
   success(result);
 }
+
+export async function ajaxGET(url, response_type, success, fail) {
+  let result;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: { "X-Requested-With": "XMLHttpRequest" },
+    });
+
+    if (!response.ok) {
+      return fail(await response.text());
+    }
+
+    // if its json, use json. Otherwise text. Might need XML later?
+    result =
+      response_type === "json" ? await response.json() : await response.text();
+  } catch (error) {
+    // network failure OR invalid JSON from the server
+    return fail(error.message || "Network error");
+  }
+
+  success(result);
+}

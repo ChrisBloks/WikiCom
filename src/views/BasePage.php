@@ -58,4 +58,13 @@ class BasePage extends HtmlDoc
     {
         return $this->body_container->addToBodyContent($element);
     }
+
+    public function returnHeadContent(){
+        return $this->head_container->show();
+    }
+
+    public function returnBodyContent(){
+        return $this->body_container->show();
+    }
+
 }

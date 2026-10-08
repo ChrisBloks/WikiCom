@@ -47,7 +47,7 @@ class PageFactory
         $this->htmlpage = ($response['async'] ? new BodyContainer() : new BasePage());
     }
 
-    public function show()
+    public function buildPage()
     {
         $this->addHead();
         $this->addScripts();
