@@ -24,14 +24,12 @@ export const Router = {
             console.log(page);
 
             await ajaxGET(
-              "main.php?action=" + page,
+              "main.php?reqType=async&action=" + page,
               "json",
               (response) => {
                 if (!Array.isArray(response)) return;
                 console.log("response reached")
                 response.forEach(({ selector, content }) => {
-                  // console.log(selector);
-                  // console.log(content);
                   try {
                     document.querySelector(selector).innerHTML = content;
                   } catch (e) {

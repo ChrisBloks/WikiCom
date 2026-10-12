@@ -20,7 +20,7 @@ export const ArticleDelete = {
 
       // start ASYNC
       await ajaxPOST(
-        "main.php",
+        "main.php?reqType=async",
         "json",
         { action: "deleteArticle", id: articleId },
         (response) => {
