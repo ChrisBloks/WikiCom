@@ -399,6 +399,12 @@ class AjaxController implements iController
                         ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
                     ];
                     break;
+                default:
+                    $this->response = [
+                        'success' => false,
+                        'message' => 'Unknown AJAX action: ' . $this->request['action'],
+                        'POST' => $this->request,
+                    ];
             }
         }
     }
