@@ -130,6 +130,7 @@ class PageFactory
 
 
         // Add necessary variables
+        // HtmlUtils::dump('response', $this->response);
         $element_handler = new ElementHandler($this->response);
         $element_handler->addDataToElementList($elements_info);
 

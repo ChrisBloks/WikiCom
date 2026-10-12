@@ -12,12 +12,14 @@ use Wiki\tools\utils\HtmlUtils;
 class AjaxController implements iController
 {
 
+    private bool $posted;
     private array $request;
     private array $response;
 
 
     public function __construct()
     {
+        $this->posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
     }
 
     public function handleRequest(): void
@@ -42,37 +44,55 @@ class AjaxController implements iController
     private function getRequest(): void
     {
         $this->request = [
-            'page' => utils::getRequestVar('page', true, 'home'),
-            'action' => utils::getRequestVar('action', true, 'unknown'),
-            'id' => utils::getRequestVar('id', true, null),
-            'userID' => utils::getSesVar('userID', null),
-            'isLoggedIn' => isset($_SESSION['userID'])
+            'action' => Utils::getRequestVar(
+                key: 'action',
+                frompost: $this->posted,
+                default: 'home'
+                ),
+            'id' => utils::getRequestVar('id', $this->posted, null),
+            'userID' => utils::getSesVar('userID', -1),
+            'isLoggedIn' => (utils::getSesVar('userID', -1) > 0)
         ];
-
-        // TODO: review this bullshit
-        // For extracting GET-style params from the 'page' value
-        $page = $this->request['page'];
-        if(str_contains($page, '&')){
-            $page_params = explode('&',  htmlspecialchars_decode($page));
-            $this->request['page'] = $page_params[0];
-            foreach(array_slice($page_params, 1) as $param){
-                $param_key_val = explode('=', $param);
-                $this->request[$param_key_val[0]] = $param_key_val[1];
-            }
-        }
-        // HtmlUtils::dump('request', $this->request);
     }
 
     // decide what to do based on the action, fill $this->request
     private function validateRequest(): void
     {
         switch ($this->request['action']) {
-            case 'goToPage':
+            // ====================================================
+            // GET CASES (should move to a different controller?)
+            // ====================================================
+            case 'pageHome':
+            case 'pageContact':
+            case 'pageSearch':
+            case 'pageRegister':
+            case 'pageLogin':
+            case 'pageDashbaord':
+            case 'pageEditArticle':
+            case 'pageArticle':
+                $page = lcfirst(substr($this->request['action'], 4));
+                $this->request['page'] = $page;
                 $new_body_content = (new PageFactory($this->request))->buildBody();
                 $this->response = [
                     ['selector' => 'body', 'content' => $new_body_content]
                 ];
                 break;
+            case 'pageAbout':
+                $this->request['aboutID'] = Utils::getRequestVar(
+                    key: 'author',
+                    frompost: false,
+                    default: -1
+                );
+                $page = lcfirst(substr($this->request['action'], 4));
+                $this->request['page'] = $page;
+                $new_body_content = (new PageFactory($this->request))->buildBody();
+                $this->response = [
+                    ['selector' => 'body', 'content' => $new_body_content]
+                ];
+                break;
+            // ====================================================
+            // POST CASES 
+            // ====================================================
             case 'saveRating':
                 if (!$this->request['isLoggedIn']) {
                     throw new BadMethodCallException('Tried to save a rating without being logged in!');

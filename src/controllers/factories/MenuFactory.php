@@ -42,7 +42,8 @@ class MenuFactory
 
             $menuItem = new MenuItem(
                 label: $item['label'],
-                class: $link_class . ' dropdown-toggle',
+                page_value: $item['page_value'],
+                class: 'dropdown-toggle',
                 attrs: [
                     'role' => 'button',
                     'data-bs-toggle' => 'dropdown',
@@ -58,7 +59,7 @@ class MenuFactory
             foreach ($item['submenu'] as $subitem) {
                 try {
 
-                    $submenu->addElement($this->buildMenuItem($subitem, 'dropdown-item', ''));
+                    $submenu->addElement($this->buildMenuItem($subitem, $link_class . ' dropdown-item', ''));
                 } catch (\InvalidArgumentException $e) {
                     $this->logError($e->getMessage());
                 }
@@ -72,7 +73,6 @@ class MenuFactory
                 attrs: [
                     'data-user-id' => $item['id'] ?? -1,
                     'data-target-page' => $item['page_value']
-                    
                 ],
                 li_class: $li_class
             );
