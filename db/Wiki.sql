@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2026 at 11:53 AM
+-- Generation Time: Oct 12, 2026 at 12:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -412,7 +412,8 @@ INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data
 (30, 41, 26),
 (31, 102, 27),
 (32, 105, 27),
-(33, 72, 28);
+(33, 72, 28),
+(34, 82, 8);
 
 -- --------------------------------------------------------
 
@@ -713,7 +714,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny12', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
+(1, 'Danny12', '$2y$10$5u98k0LZarKnzLeIgANPpOb2e5si298S3xfxNNOD2TTZvH5ZYrckC', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christiannn', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'christian@email.com', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
 (11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
@@ -765,7 +766,7 @@ INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `bodytext`, `codeblock`, `
 (1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\r\n    {\r\n        return &#039;?&#039; . http_build_query($params);\r\n    }', 'article1.jpeg', '2026-10-12'),
 (28, 'PHP', 1, 'PHP is een scripttaal en is vergelijkbaar met Perl, Python en Ruby. Qua syntaxis lijkt PHP het meest op C, maar net als bij veel andere scripttalen moeten variabelen voorafgegaan worden door een dollarteken $. Dit is overgenomen uit de scripttaal Perl, waarvan PHP mede is afgeleid. In tegenstelling tot C is het in PHP wel mogelijk om naast procedureel programmeren ook objectgeoriënteerd te programmeren, net als in bijvoorbeeld Java, C++ en C#. In de eerste versies van PHP was het objectgeoriënteerd programmeren nog heel beperkt. Pas sinds versie 5 zijn de meest essentiële functies hiervoor allemaal beschikbaar.', '$url = &quot;http://nl.wikipedia.org/wiki/PHP&quot;;\r\n\r\necho &quot;U bevindt zich momenteel op $url. Welkom!&quot;;\r\n// Of\r\necho &quot;U bevindt zich momenteel op &quot;.$url.&quot;. Welkom!&quot;;', 'article_0.jpeg', '2026-09-08'),
 (29, 'New article', 1, 'This is the body text.', '', 'article_0.png', '2026-09-08'),
-(31, 'test', 1, 'testd', '', '', '2026-09-11');
+(31, 'test 2', 1, 'testdd', 'v', 'article_31.png', '2026-10-12');
 
 -- --------------------------------------------------------
 
@@ -789,7 +790,6 @@ INSERT INTO `wiki_article_to_tag` (`article_id`, `wiki_tag_id`) VALUES
 (28, 53),
 (28, 54),
 (29, 54),
-(31, 53),
 (31, 54),
 (31, 55);
 
@@ -811,9 +811,9 @@ CREATE TABLE `wiki_rating` (
 
 INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
 (1, 1, 4),
-(7, 1, 1),
+(7, 1, 5),
 (7, 28, 3),
-(7, 29, 4),
+(7, 29, 3),
 (8, 1, 1);
 
 -- --------------------------------------------------------
@@ -1044,7 +1044,7 @@ ALTER TABLE `element_lookup_info`
 -- AUTO_INCREMENT for table `element_to_application_data`
 --
 ALTER TABLE `element_to_application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `field_info`
