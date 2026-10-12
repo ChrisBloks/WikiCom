@@ -4,7 +4,7 @@ namespace Wiki\controllers;
 
 use BadMethodCallException;
 use Wiki\tools\interfaces\iController,
-    Wiki\models\ModelSelector;
+Wiki\models\ModelSelector;
 use Wiki\tools\utils\utils;
 use Wiki\controllers\ArticleHandler;
 use Wiki\controllers\factories\PageFactory;
@@ -183,7 +183,17 @@ class AjaxController implements iController
                         $this->response['success'] = true;
 
                         //$element = ElementFactory::createElement($element_info);
+                    } else {
+                        $this->response = [
+                            'success' => false,
+                            'errors' => $validation_result['user_error'],
+                            'message' => 'Please fix the errors below.',
+                        ];
                     }
+                    break;
+                case 'saveContactMessage':
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
 
                     // Perform basic validation on contact fields, field inputs are retrieved internally
                     // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
@@ -364,7 +374,7 @@ class AjaxController implements iController
                     $this->request['page'] = $page;
                     $new_body_content = (new PageFactory($this->request))->buildBody();
                     $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content]
+                        ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
                     ];
                     break;
                 case 'pageAbout':
@@ -377,7 +387,7 @@ class AjaxController implements iController
                     $this->request['page'] = $page;
                     $new_body_content = (new PageFactory($this->request))->buildBody();
                     $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content]
+                        ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
                     ];
                     break;
                 case 'pageLogout':
@@ -386,7 +396,7 @@ class AjaxController implements iController
                     $this->request['isLoggedIn'] = false;
                     $new_body_content = (new PageFactory($this->request))->buildBody();
                     $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content]
+                        ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
                     ];
                     break;
             }

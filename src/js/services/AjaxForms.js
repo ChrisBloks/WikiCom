@@ -35,7 +35,7 @@ export const AjaxForms = {
       // start fetch()
       try {
         await ajaxPOST(
-          "main.php",
+          "main.php?reqType=ajax",
           "json",
           new FormData(form),
           (result) => {
