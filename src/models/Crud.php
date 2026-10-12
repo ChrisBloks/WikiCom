@@ -150,6 +150,7 @@ class Crud
             $stmt->execute(params: $params);
             return $stmt;
         } catch (\PDOException $e) {
+            $this->logError("Crud prepareAndExecute failed.");
             $this->logError($e->getMessage());
             return false;
         }

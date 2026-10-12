@@ -60,7 +60,8 @@ class PageController implements iController
                 default: ($this->posted ? '' : 'home'
                 )
             ),
-            'isLoggedIn' => isset($_SESSION['userID'])
+            'isLoggedIn' => isset($_SESSION['userID']),
+            'userID' => $_SESSION['userID'] ?? -1,
         ];
     }
 
@@ -85,10 +86,16 @@ class PageController implements iController
     public function showResponse(): void
     {
         $PageFactory = new PageFactory($this->response);
-        $this->response_page = $PageFactory->show();
+        $this->response_page = $PageFactory->buildPage();
+
         // if response page is not null -> show page
         if (!is_null($this->response_page)) {
+            // HtmlUtils::dump("response_page", $this->response_page);
             $this->response_page->show();
+            
+            
         }
     }
+
+
 }

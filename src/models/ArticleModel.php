@@ -25,15 +25,15 @@ class ArticleModel extends BaseModel
     /**
      * Fetches an article from the database with given id
      * @param int $article_id
-     * @return array|false a single article of form [article.title, user.name, article.summary, article.codeblock, article.imgFileName, article.lateEdit]
+     * @return array|false a single article of form [article.title, user.name, article.bodytext, article.codeblock, article.imgFileName, article.lateEdit]
      */
-    public function fetchArticleById(int $article_id): array|false
+    public function fetchArticleById(int $article_id, bool $get_tags = False): array|false
     {
         $sql = "SELECT
                     article.title,
                         user.name,
-                        article.summary,
-                        article.codeBlock,
+                        article.bodytext,
+                        article.codeblock,
                         article.imgFileName,
                     article.lastEdit,
                     article.user_id,
@@ -47,6 +47,11 @@ class ArticleModel extends BaseModel
                     article.id =:article_id;";
         $params = ['article_id' => $article_id];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
+
+        if ($get_tags){
+            $tags = $this->fetchArticleTags($article_id);
+            $result['tags'] = $tags;
+        }
         return $result;
     }
 
@@ -90,18 +95,18 @@ class ArticleModel extends BaseModel
      * @param array $author_ids array of ints.
      * @param array $tag_ids array of ints.
      * @param string $sortBy defines contents of the SORT BY clause.
-     * @return array|false Array of articles where each article has form [id, title, summary, lastEdit]
+     * @return array|false Array of articles where each article has form [id, title, bodytext, lastEdit]
      */
-    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy =''): array|false
+    public function fetchArticleBySearch(array $author_ids = [], array $tag_ids = [], string $sortBy = ''): array|false
     {
         // Check if sortBy is a valid sorting method
 
-        $sortBy = (empty($sortBy)) ? 'lastEdit':$sortBy;
+        $sortBy = (empty($sortBy)) ? 'lastEdit' : $sortBy;
 
         $base_select_clause = "SELECT DISTINCT 
                                 article.id,
                                 article.title, 
-                                article.summary,
+                                article.bodytext,
                                 article.user_id, 
                                 article.lastEdit AS lastEdit";
 
@@ -111,7 +116,7 @@ class ArticleModel extends BaseModel
                 " ,user.name as author" : // get the authors
                 ""); // get average rating
 
-                $from_clause = " FROM wiki_article as article";
+        $from_clause = " FROM wiki_article as article";
 
         // Building the JOIN and WHERE clauses
         // For storing mapping of placeholder to variables for PREPARED statement
@@ -199,20 +204,20 @@ class ArticleModel extends BaseModel
     /**
      * Saves new article to the database given the article info
      * @param string $article_title
-     * @param string $article_summary
-     * @param string $article_codeBlock
+     * @param string $article_bodytext
+     * @param string $article_codeblock
      * @param string $imgFileName
      * @param int $user_id id of the author.
      * @return int|false
      */
-    public function saveNewArticleInfo(string $article_title, string $article_summary, string $article_codeBlock, string $imgFileName, int $user_id): int|false
+    public function saveNewArticleInfo(string $article_title, string $article_bodytext, string $article_codeblock, string $imgFileName, int $user_id): int|false
     {
-        $sql = "INSERT INTO wiki_article (title, summary, codeBlock, imgFileName, user_id, lastEdit)
-                    VALUES (:title,:summary,:codeBlock,:imgFileName,:user_id,:lastEdit)";
+        $sql = "INSERT INTO wiki_article (title, bodytext, codeblock, imgFileName, user_id, lastEdit)
+                    VALUES (:title,:bodytext,:codeblock,:imgFileName,:user_id,:lastEdit)";
         $params = [
             ':title' => $article_title,
-            ':summary' => $article_summary,
-            ':codeBlock' => $article_codeBlock,
+            ':bodytext' => $article_bodytext,
+            ':codeblock' => $article_codeblock,
             ':imgFileName' => $imgFileName,
             ':user_id' => $user_id,
             ':lastEdit' => date(format: 'Y-m-d'),
@@ -228,18 +233,18 @@ class ArticleModel extends BaseModel
      * Updates an existing article
      * @param int $article_id 
      * @param string $article_title
-     * @param string $article_summary
-     * @param string $article_codeBlock
+     * @param string $article_bodytext
+     * @param string $article_codeblock
      * @param string $imgFileName
      * @param int $user_id id of the author
      * @return bool
      */
-    public function saveExistingArticleInfo(int $article_id, string $article_title, string $article_summary, string $article_codeBlock, string $imgFileName, int $user_id): int|false
+    public function saveExistingArticleInfo(int $article_id, string $article_title, string $article_bodytext, string $article_codeblock, string $imgFileName, int $user_id): int|false
     {
         $sql = "UPDATE  wiki_article
                     SET     title = :title,
-                            summary = :summary,
-                            codeBlock = :codeBlock,
+                            bodytext = :bodytext,
+                            codeblock = :codeblock,
                             imgFileName = :imgFileName,
                             lastEdit = :lastEdit
                     WHERE   id = :article_id
@@ -247,8 +252,8 @@ class ArticleModel extends BaseModel
         $params = [
             ":article_id" => $article_id,
             ':title' => $article_title,
-            ':summary' => $article_summary,
-            ':codeBlock' => $article_codeBlock,
+            ':bodytext' => $article_bodytext,
+            ':codeblock' => $article_codeblock,
             ':imgFileName' => $imgFileName,
             ':user_id' => $user_id,
             ':lastEdit' => date('Y-m-d'),
@@ -340,26 +345,24 @@ class ArticleModel extends BaseModel
         return $this->crud->doDelete(sql: $sql, params: $params);
     }
 
-public function fetchFrontPageArticles(array $exclude_list = []): array|false
-{
-    if (!empty($exclude_list)) {
-        $placeholders = implode(',', array_fill(0, count($exclude_list), '?'));
-        $sql = "SELECT *
+    public function fetchRandomArticle(array $exclude_list = []): array|false
+    {
+        if (!empty($exclude_list)) {
+            $placeholders = implode(',', array_fill(0, count($exclude_list), '?'));
+            $sql = "SELECT *
                 FROM wiki_article
                 WHERE id NOT IN ($placeholders)
                 ORDER BY RAND()
                 LIMIT 1";
-        $params = array_values($exclude_list);
-    } else {
-        $sql = 'SELECT *
+            $params = array_values($exclude_list);
+        } else {
+            $sql = 'SELECT *
                 FROM wiki_article
                 ORDER BY RAND()
                 LIMIT 1';
-        $params = [];
+            $params = [];
+        }
+
+        return $this->crud->selectOne($sql, $params);
     }
-
-    return $this->crud->selectOne($sql, $params);
-}
-
-
 }

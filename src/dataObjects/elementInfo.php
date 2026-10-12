@@ -35,6 +35,8 @@ class ElementInfo implements iElementInfo
         'element_order',
         'aria_attributes',
         'href',
+        'application_data',
+        'data-target-page',
     ];
 
     private array $container = [];
@@ -90,7 +92,7 @@ class ElementInfo implements iElementInfo
     }
 
     public function getHTMLAttributes(): array {
-        return ['class' => 'class', 'html_id'=>'id', 'name' => 'name'];
+        return ['class' => 'class', 'html_id'=>'id', 'name' => 'name', 'data-target-page' => 'data-target-page'];
     }
 
     #[Override]

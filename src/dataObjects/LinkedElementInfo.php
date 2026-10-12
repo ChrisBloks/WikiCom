@@ -20,11 +20,12 @@ class LinkedElementInfo extends ElementInfo
             'label',
             'field_info',
             'data-user-id',
+            'data-target-page'
         ];
 
     #[Override]
     public function getHTMLAttributes(): array
     {
-        return ['class'=>'class', 'page_value'=>'href', 'role'=>'role', 'data-bs-toggle'=>'data-bs-toggle', 'aria-expanded' =>'aria-expanded','data-user-id' => 'data-user-id', ];
+        return ['class'=>'class', 'page_value'=>'href', 'role'=>'role', 'data-bs-toggle'=>'data-bs-toggle', 'aria-expanded' =>'aria-expanded','data-user-id' => 'data-user-id', 'data-target-page' => 'data-target-page'];
     }
 }

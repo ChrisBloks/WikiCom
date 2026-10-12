@@ -23,14 +23,14 @@ class NewPassword extends BaseField implements iElement
 
     public function show(): string
     {
-        return HtmlUtils::printLabel($this->id, "Password: ")
+        return HtmlUtils::printLabel("newpassword-1", "Password: ")
                 . '<input type=     "password" 
                             name=   "password_1" 
                             id=     "newpassword-1" 
                             value=  "" 
                             class="' . $this->class . '"
                             data-min-length="' . \Config::MIN_PW_LENGTH . '" ><br>'.
-                HtmlUtils::printLabel($this->id, "Verify Password: ")
+                HtmlUtils::printLabel("newpassword-2", "Verify Password: ")
                 . '<input type=     "password" 
                             name=   "password_2" 
                             id=     "newpassword-2" 

@@ -20,14 +20,17 @@ use Wiki\tools\utils\HtmlUtils, Wiki\config, Wiki\views\containers\Rating;
  */
 class Table implements iElement
 {
-    protected string $class;
+    protected string $attr;
     protected array $columns;
     protected array $rows;
     public string $page_value;
 
     public function __construct(ElementInfo $element_info)
     {
-        $this->class = $element_info['html_class'] ?? "";
+        $this->attr = " ";
+        foreach ($element_info->getHTMLAttributes() as $key => $attr) {
+            $this->attr .= ($element_info[$key] ? $attr . '="' . $element_info[$key] . '" ' : "");
+        }
         $this->columns = $element_info['options_info'][0];
         $this->rows = $element_info['options_info'][1] ?? [];
     }
@@ -52,7 +55,7 @@ class Table implements iElement
      */
     protected function startTable(): string
     {
-        return '<table' . HtmlUtils::addClassAttr($this->class) . '>';
+        return '<table' . $this->attr . '>';
     }
 
     /**
@@ -74,7 +77,7 @@ class Table implements iElement
 
         // add a column to the head of a table
         foreach ($this->columns as $column) {
-            $str .= '<th' . HtmlUtils::addClassAttr($column['column_headers'] ?? null) . '>'
+            $str .= '<th' . HtmlUtils::addClassAttr($column['column_headers'] ?? null) .'id ="' . $column['column_name'] . '" >'
                 . htmlspecialchars($column['column_title'])
                 . '</th>';
         }
@@ -126,14 +129,6 @@ class Table implements iElement
             case 'date':
                 $formatted = $value !== null ? date('Y-m-d', strtotime((string) $value)) : '';
                 return "<td$classAttr>" . htmlspecialchars($formatted) . '</td>';
-            // cell should contain a rating (5stars)
-            case 'rating':
-                return "<td$classAttr>" . (new Rating(
-                                rating: (float) $value,
-                                article_id: $row_data['id'],
-                                display_only: true,
-                                count : $row_data['Nratings']
-                            ))->show() . '</td>';
             // cell contains the first cell actions
             case 'first_cell':
                 return "<td$classAttr>" . (new FirstCell(
