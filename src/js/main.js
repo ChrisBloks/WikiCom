@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   AjaxForms.bind("#editPasswordModal form", {
     onSuccess: function () {
-      Toasts.show("message", "Password successfully changed.");
+      console.log("Password changed successfully");
     },
   });
   const fillSpan = document.querySelector(".fill-ratings span");
