@@ -28,3 +28,8 @@ $C[0] = "BAR";
 print_r($B);
 echo '<br>';
 print_r($A);
+
+echo '<pre>';
+print_r($_SERVER);
+echo '</pre>';
+

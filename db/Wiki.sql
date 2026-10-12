@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2026 at 10:24 AM
+-- Generation Time: Oct 12, 2026 at 10:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -178,7 +178,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (28, 'article_field_codeblock', '', 'article-codeblock form-control', '', 'textarea', ''),
 (29, 'article_field_img', '', 'article-img-file form-control', '', 'Input', ''),
 (30, 'article_field_tags', '', 'SearchableCheckboxes fw-bold mb-1 border border-3 filter_tags', '', 'SearchableCheckboxes', ''),
-(31, 'register_form', 'form', 'form-group', '', 'Form', ''),
+(31, 'register_form', 'form', 'form-group ajax-userRegister-form', '', 'Form', ''),
 (32, 'register_field_name', '', 'register-name form-control', '', 'Input', ''),
 (33, 'register_field_email', '', 'register-email form-control', '', 'Input', ''),
 (34, 'register_field_new_password', '', 'register-verifypassword form-control', '', 'new_password', ''),
@@ -331,7 +331,7 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
 (71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0),
 (72, 77, 'aria_attributes', 'name,value', 'id', '1,2', 0, 'aria_attributes', 0),
-(73, 77, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '78', 0, 'element', 10),
+(73, 77, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag,html_id', 'element_info.id', '78', 0, 'element', 10),
 (74, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '80', 0, 'element', 10),
 (75, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '81', 0, 'element', 20),
 (77, 86, 'element_info', 'id as element_id,element_name,php_class,html_class,html_tag', 'element_info.id', '87', 0, 'element', 10),
@@ -394,7 +394,8 @@ INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data
 (24, 82, 21),
 (25, 82, 22),
 (26, 82, 9),
-(27, 82, 23);
+(27, 82, 23),
+(28, 82, 8);
 
 -- --------------------------------------------------------
 
@@ -478,7 +479,7 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 (2, 18, '', 'POST', '', 'Log in', '', 'btn btn-primary btn-sm'),
 (3, 21, '', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
 (4, 25, '', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm'),
-(5, 31, '', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
+(5, 31, 'registerUser', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
 (6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary mx-auto d-block'),
 (7, 35, '', 'POST', '', 'Change information', '', 'btn btn-primary'),
 (8, 38, '', 'POST', '', 'save', '', 'btn btn-primary');
@@ -501,13 +502,13 @@ CREATE TABLE `menu_items` (
 --
 
 INSERT INTO `menu_items` (`id`, `label`, `page_value`, `display_order`) VALUES
-(1, 'Home', 'home', 0),
-(2, 'About', 'about', 1),
-(3, 'Contact', 'contact', 2),
-(4, 'Search', 'search', 3),
-(5, 'Register', 'register', 4),
-(6, 'Login', 'login', 5),
-(7, 'Dashboard', 'dashboard', 6),
+(1, 'Home', 'pageHome', 0),
+(2, 'About', 'pageAbout', 1),
+(3, 'Contact', 'pageContact', 2),
+(4, 'Search', 'pageSearch', 3),
+(5, 'Register', 'pageRegister', 4),
+(6, 'Login', 'pageLogin', 5),
+(7, 'Dashboard', 'pageDashboard', 6),
 (8, 'Logout', 'logout', 7);
 
 -- --------------------------------------------------------
@@ -698,7 +699,8 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `descripti
 (1, 'Danny122', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christiannn', '$2y$10$DdCUW.k/k8cMZd3CKEP/IO5v/itkF1gekox1Jamu48tOroQ1PjMiW', 'christian@email.com', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
-(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
+(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', ''),
+(12, 'Louk', '$2y$10$K.kUyST2RMPtrlBPSjD//ezzoYpGYiSGEkBcIpxOFaGL5mxwiy9uq', 'Loul@emai.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -791,7 +793,7 @@ CREATE TABLE `wiki_rating` (
 
 INSERT INTO `wiki_rating` (`user_id`, `article_id`, `rating`) VALUES
 (1, 1, 4),
-(7, 1, 1),
+(7, 1, 5),
 (7, 28, 3),
 (7, 29, 4),
 (8, 1, 1);
@@ -1023,7 +1025,7 @@ ALTER TABLE `element_lookup_info`
 -- AUTO_INCREMENT for table `element_to_application_data`
 --
 ALTER TABLE `element_to_application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `field_info`
@@ -1065,7 +1067,7 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `wiki_article`

@@ -1,11 +1,4 @@
 import { ajaxGET } from "./Ajax.js";
-import { ArticleDelete } from "../components/ArticleDelete.js"
-import { TagWidget } from "../components/Tagwidget.js";
-import { initPasswordLengthChecker } from "../components/PasswordLengthChecker.js";
-import { Toasts } from "../components/Toasts.js";
-import { MarkdownToolbar } from "../components/MarkdownEditor.js";
-import { saveRating } from "../services/SaveRating.js";
-import { SearchForm } from "../components/searchForm.js";
 
 export const Router = {
   init() {
