@@ -5,13 +5,13 @@ export const ResponseHandler = {
     // ==============================================================================
     // ASSUMPTION: response is an array of [[selector, content, status], [selector, content, status], ...]
     handleResponse(response) {
-        response.forEach(element => this.handle(element));
+        response.forEach(element => _handle(element));
         // Add menu eventListeners
         Router.init();
     },
     // ==============================================================================
     // ASSUMPTION: item = [selector, content, status];
-    handle(item) {
+    _handle(item) {
         let selector, content, status;
         [selector, content, status] = item;
 

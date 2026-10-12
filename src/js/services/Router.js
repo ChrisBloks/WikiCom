@@ -9,14 +9,14 @@ export const Router = {
       function (nav_item) {
         if (nav_item.classList.contains('wiki-initialized')) return;
         else {
-          addMenuListener(nav_item);
+          _addMenuListener(nav_item);
           nav_item.classList.add('wiki-initialized');
         }
       }
     );
   },
   // ==============================================================================
-  addMenuListener(nav_item) {
+  _addMenuListener(nav_item) {
     nav_item.addEventListener(
       "click",
       async (event) => {
