@@ -17,7 +17,7 @@ export const Router = {
             console.log(page);
 
             await ajaxGET(
-              "main.php?reqType=async&action=" + page,
+              "main.php?reqType=ajax&action=" + page,
               "json",
               (response) => {
                 if (!Array.isArray(response)) return;

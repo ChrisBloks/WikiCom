@@ -199,7 +199,7 @@ class AjaxController implements iController
                 case 'pageSearch':
                 case 'pageRegister':
                 case 'pageLogin':
-                case 'pageDashbaord':
+                case 'pageDashboard':
                 case 'pageEditArticle':
                 case 'pageArticle':
                     $page = lcfirst(substr($this->request['action'], 4));
@@ -217,6 +217,15 @@ class AjaxController implements iController
                     );
                     $page = lcfirst(substr($this->request['action'], 4));
                     $this->request['page'] = $page;
+                    $new_body_content = (new PageFactory($this->request))->buildBody();
+                    $this->response = [
+                        ['selector' => 'body', 'content' => $new_body_content]
+                    ];
+                    break;
+                case 'pageLogout':
+                    session_unset();
+                    $this->request['page'] = 'home';
+                    $this->request['isLoggedIn'] = false;
                     $new_body_content = (new PageFactory($this->request))->buildBody();
                     $this->response = [
                         ['selector' => 'body', 'content' => $new_body_content]
