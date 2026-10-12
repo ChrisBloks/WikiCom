@@ -32,6 +32,7 @@ import { updateCheckboxGroup, resetCheckboxesToDefault, } from "./components/Che
 import { SearchForm } from "./components/searchForm.js";
 import { ContactForm } from "./components/ContactForm.js";
 import { RegisterUser } from "./components/RegisterUser.js";
+import { LoginForm } from "./components/LoginForm.js";
 
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   SearchForm.init();
   ContactForm.init();
   RegisterUser.init();
+  LoginForm.init();
 
   //bind ajax form
   AjaxForms.bind("#editUserModal form", {
