@@ -29,6 +29,7 @@ class ElementHandler
 
             if (isset($element_info['sub_fields'])) {
                 // HtmlUtils::dump('TRIGGERED SUBFIELD', []);
+
                 $this->addDataToElementList($element_info['sub_fields']);
             }
 
@@ -126,6 +127,10 @@ class ElementHandler
                     $user_info = $this->getUserInfo($this->response['userID']);
                     $app_data = $user_info['email'];
                     break;
+                case '[*USER_TEXT*]':
+                    $user_info = $this->getUserInfo($this->response['userID']);
+                    $app_data = $user_info['description'];
+                    break;
                 case '[*USER_ID*]':
                     $app_data = $this->response['userID'];
                     break;
@@ -156,7 +161,6 @@ class ElementHandler
                 $i++;
             }
         }
-        // HtmlUtils::dump('Element', $element_info);
     }
 
     // For caching user info

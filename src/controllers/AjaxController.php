@@ -1,9 +1,10 @@
 <?php
+
 namespace Wiki\controllers;
 
 use BadMethodCallException;
 use Wiki\tools\interfaces\iController,
-Wiki\models\ModelSelector;
+    Wiki\models\ModelSelector;
 use Wiki\tools\utils\utils;
 use Wiki\controllers\ArticleHandler;
 use Wiki\controllers\factories\PageFactory;
@@ -222,6 +223,106 @@ class AjaxController implements iController
                         ['selector' => 'body', 'content' => $new_body_content]
                     ];
                     break;
+                case 'searchArticle':
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                    // Perform basic validation on contact fields, field inputs are retrieved internally
+                    // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                    $validation_result = (new ValidationHandler)
+                        ->validateFields(field_info: $field_info);
+
+                    if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+
+                        $this->response['validation_result'] = $validation_result;
+
+                        $this->response['articles_info'] = ModelSelector::getArticleModel()->fetchArticleBySearch(
+                            author_ids: $validation_result['field_inputs']['Author'] ?? [],
+                            tag_ids: $validation_result['field_inputs']['Tag'] ?? [],
+                            sortBy: $validation_result['field_inputs']['sortby'] ?? []
+                        );
+                        $this->response['success'] = true;
+
+                        //$element = ElementFactory::createElement($element_info);
+                    }
+
+                    break;
+                case 'saveContactMessage':
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                    // Perform basic validation on contact fields, field inputs are retrieved internally
+                    // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                    $validation_result = (new ValidationHandler)
+                        ->validateFields(field_info: $field_info);
+
+                    if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                        $field_inputs = $validation_result['field_inputs'];
+                        ModelSelector::getWebsiteInfoModel()->saveContact(
+                            name: $field_inputs['name'],
+                            email: $field_inputs['email'],
+                            message: $field_inputs['message']
+                        );
+
+                        $this->response = [
+                            'success' => true,
+                            'errors' => $validation_result['user_error'] ?? [],
+                            'message' => 'Your message has been sent.',
+                        ];
+                    } else {
+                        $this->response = [
+                            'success' => false,
+                            'errors' => $validation_result['user_error'],
+                            'message' => 'Please fix the errors below.',
+                        ];
+                    }
+                    break;
+                case 'registerUser':
+                    $errors = [];
+
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(
+                            element_id: Utils::getRequestVar(
+                                key: 'element_id',
+                                frompost: True
+                            )
+                        );
+
+                    $validation_result = (new ValidationHandler)
+                        ->validateFields(field_info: $field_info);
+                    $errors = array_merge($errors, $validation_result['user_error']);
+                    if (!$validation_result['ok']) {
+                        $this->response = [
+                            'success' => False,
+                            'errors' => $errors
+                        ];
+                        break;
+                    }
+
+                    $validation_result = UserHandler::getInstance()
+                        ->handleRegistration(validation_result: $validation_result);
+                    $errors = array_merge($errors, $validation_result['user_error']);
+                    if (!$validation_result['ok']) {
+                        $this->response = [
+                            'success' => False,
+                            'errors' => $errors
+                        ];
+                        break;
+                    }
+
+                    // All stages of validation succesful
+                    $this->response = [
+                        'page' => 'login',
+                        'success' => True,
+                        'message' => 'Registration was successful!'
+                    ];
+                    break;
+                default:
+                    $this->response = [
+                        'success' => false,
+                        'message' => 'Unknown AJAX action: ' . $this->request['action'],
+                        'POST' => $this->request,
+                    ];
             }
         }
     }
@@ -235,7 +336,4 @@ class AjaxController implements iController
 
         // future XML implementation
     }
-
-
-
 }

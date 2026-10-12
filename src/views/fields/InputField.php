@@ -18,11 +18,12 @@ class InputField extends BaseField
             name: $element_info['field_info']['field_name'] ?? "",
             label: $element_info['field_info']['label'] ?? "",
             class:  $element_info['html_class'] ?? " ",
-            id: $element_info['html_id'] ?? " ",
+            id: $element_info['html_id'] ?? $element_info['field_info']['field_name'] . self::$instance_count,
         );
         $this->type = $element_info['field_info']['type'] ?? throw new InvalidArgumentException("InputField did not receive a type!");
         $this->text = $element_info['field_info']['text'] ?? "";
         $this->value = $element_info['field_info']['value'] ?? "";
+
     }
 
     public function show(): string

@@ -14,19 +14,20 @@
 namespace Wiki\controllers\factories;
 
 use ArrayAccess,
-    Wiki\tools\traits\tErrorMessageCollector,
-    Wiki\models\ModelSelector,
-    Wiki\controllers\factories\MenuFactory,
-    Wiki\views\BasePage,
-    Wiki\views\BodyContainer,
-    Wiki\views\containers\AtomicElement,
-    Wiki\views\containers\Header,
-    Wiki\views\containers\Toast,
-    Wiki\views\containers\Footer,
-    Wiki\views\containers\MainElement,
-    Wiki\dataObjects\ElementInfo,
-    Wiki\controllers\ElementHandler,
-    Wiki\tools\utils\HtmlUtils;
+Wiki\tools\traits\tErrorMessageCollector,
+wiki\tools\utils\HtmlUtils,
+Wiki\models\ModelSelector,
+Wiki\controllers\factories\MenuFactory,
+Wiki\views\BasePage,
+Wiki\views\containers\AtomicElement,
+Wiki\views\containers\Header,
+Wiki\views\containers\Toast,
+Wiki\views\containers\Footer,
+Wiki\views\containers\MainElement,
+Wiki\dataObjects\ElementInfo;
+use Wiki\controllers\ElementHandler;
+use Nette\Utils\Html;
+use Wiki\views\BodyContainer;
 
 class PageFactory
 {
@@ -122,11 +123,12 @@ class PageFactory
         $this->htmlpage->addToBodyContent($menu);
 
         $main = new MainElement();
-        $main->addElement(new Toast(new ElementInfo()));
+        //s$main->addElement(new Toast(new ElementInfo(["html_class" => "toast-container position-fixed top-0 end-0 p-3","html_id" => "toast-container"])));
         $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
+
 
 
         // Add necessary variables

@@ -4,7 +4,7 @@
 // requires toasts to be active on the page
 
 // import { toasts } from "../components/Toasts.js";
-import {ajaxPOST} from "./Ajax.js";
+import { ajaxPOST } from "./Ajax.js";
 import { Toasts } from "../components/Toasts.js";
 
 export const AjaxForms = {
@@ -22,12 +22,11 @@ export const AjaxForms = {
 
     // get vars
     const modal = form.closest(".modal");
-    const errorBox = modal ? modal.querySelector('[id$="-errors"]') : null;
 
+    const errorBox = modal ? modal.querySelector('[id$="-errors"]') : null;
     // on submit:
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       // disable submit button and start loading thingy
       const submitBtn = form.querySelector('[type="submit"]');
       this.setLoading(submitBtn, true);
@@ -42,8 +41,10 @@ export const AjaxForms = {
           (result) => {
             if (result.success) {
               // show result messages in toasts
-              Toasts.show("message", result.message);
               options.onSuccess?.(result);
+              if (result.message.length > 0) {
+                Toasts.show("message", result.message)
+              }
               if (modal) bootstrap.Modal.getInstance(modal)?.hide();
             } else if (errorBox) {
               // if the response has errors, display them too
@@ -57,7 +58,11 @@ export const AjaxForms = {
 
               errorBox.classList.remove("d-none");
             } else {
-              Toasts.show("error", result.message || "Something went wrong.");
+              if (result.errors?.length == 0) {
+                Toasts.show("error", "Something went wrong.");
+              } else {
+                result.errors?.forEach((msg) => Toasts.show("error", msg));
+              }
             }
           },
           (error) => {
