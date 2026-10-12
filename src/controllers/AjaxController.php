@@ -330,7 +330,7 @@ class AjaxController implements iController
                             ->handleArticleSubmission(
                                 validation_result: $validation_result,
                                 article_id: $this->response['articleID'],
-                                user_id: $this->request['user_id']
+                                user_id: $this->request['userID']
                             );
 
                         if (isset($validation_result['field_inputs']['new_article_id'])) {
