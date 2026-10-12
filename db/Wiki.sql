@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2026 at 12:52 PM
+-- Generation Time: Oct 12, 2026 at 01:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,7 +67,8 @@ INSERT INTO `application_data` (`id`, `name`, `element_info_key`) VALUES
 (25, '[*USER_EMAIL*]', 'field_info,value'),
 (26, '[*USER_TEXT*]', 'field_info,text'),
 (27, '[*USER_ID*]', 'field_info,value'),
-(28, '[*ARTICLE_ID*]', 'field_info,value');
+(28, '[*ARTICLE_ID*]', 'field_info,value'),
+(29, '[*ARTICLE_TAGS*]', 'options_info');
 
 -- --------------------------------------------------------
 
@@ -413,7 +414,8 @@ INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data
 (31, 102, 27),
 (32, 105, 27),
 (33, 72, 28),
-(34, 82, 8);
+(34, 82, 8),
+(35, 83, 29);
 
 -- --------------------------------------------------------
 
@@ -1014,7 +1016,7 @@ ALTER TABLE `wiki_tag`
 -- AUTO_INCREMENT for table `application_data`
 --
 ALTER TABLE `application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -1044,7 +1046,7 @@ ALTER TABLE `element_lookup_info`
 -- AUTO_INCREMENT for table `element_to_application_data`
 --
 ALTER TABLE `element_to_application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `field_info`
