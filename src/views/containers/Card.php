@@ -3,6 +3,7 @@ namespace Wiki\views\containers;
 
 use ArrayAccess;
 use Wiki\tools\interfaces\iElement;
+use Wiki\tools\utils\HtmlUtils;
 /**
  * Creates bootstrap card elements with image, title, bodytext
  */
