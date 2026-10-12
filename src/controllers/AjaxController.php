@@ -390,7 +390,7 @@ class AjaxController implements iController
                         ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
                     ];
                     break;
-                case 'pageLogout':
+                case 'logout':
                     session_unset();
                     $this->request['page'] = 'home';
                     $this->request['isLoggedIn'] = false;
