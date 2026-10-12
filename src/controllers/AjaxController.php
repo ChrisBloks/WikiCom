@@ -330,18 +330,26 @@ class AjaxController implements iController
                             ->handleArticleSubmission(
                                 validation_result: $validation_result,
                                 article_id: $this->response['articleID'],
-                                user_id: $this->request['user_id']
+                                user_id: $this->request['userID']
                             );
 
                         if (isset($validation_result['field_inputs']['new_article_id'])) {
                             $this->response['articleID'] = $validation_result['field_inputs']['new_article_id'];
                         }
-
+                        // ToDo: create new factory and return the article page
                         if ($validation_result['ok']) {
+                            // this is an ugly fix, there is probably a better way to do this
+                            $this->response['page'] = 'article';
+                            $this->response['isLoggedIn'] = True;
+                            $new_body_content = (new PageFactory($this->response))->buildBody();
+                            $body_array = [
+                                ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageArticle']
+                            ];
                             $this->response = [
                                 'page' => 'article',
                                 'success' => True,
-                                'message' => 'Article has been submitted!'
+                                'message' => 'Article submission was successful!',
+                                'html' => $body_array,
                             ];
                         } else {
                             $this->response = [

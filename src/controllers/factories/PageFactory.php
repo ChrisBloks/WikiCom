@@ -26,6 +26,7 @@ Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
 Wiki\dataObjects\ElementInfo,
 Wiki\controllers\ElementHandler;
+use Wiki\tools\utils\HtmlUtils;
 
 class PageFactory
 {
@@ -127,7 +128,6 @@ class PageFactory
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
-
         // Add necessary variables
         // HtmlUtils::dump('response', $this->response);
         $element_handler = new ElementHandler($this->response);
@@ -140,6 +140,7 @@ class PageFactory
             $element_list[$element_info['order_by']] = $element;
             $element_list[$element_info['parent_order']]->addElement($element);
         }
+
 
         // add the <main> to the body content
         $this->htmlpage->addToBodyContent($main);
