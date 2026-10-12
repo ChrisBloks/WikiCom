@@ -28,7 +28,6 @@ class Rating extends ContainerElement
     {
         parent::__construct($element_info);
 
-        HtmlUtils::dump('',$element_info);
         $rating = $element_info['options_info']['rating'] ?? 0;
         $display_only = $element_info['options_info']['display_only'] ?? false;
         $ratable = 

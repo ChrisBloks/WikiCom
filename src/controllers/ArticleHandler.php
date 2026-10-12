@@ -54,7 +54,7 @@ class ArticleHandler
 
         // check for tags if they already exist
         $new_article_tags = [];
-        foreach ($validation_result['field_inputs']['existing_tag'] as $key => $value) {
+        foreach ($validation_result['field_inputs']['articletags'] as $key => $value) {
             if ((int) $value === 0) {
                 $tagcheck = ModelSelector::getArticleModel()->checkTagExists(tag_name: $key);
                 if (empty($tagcheck)) {
@@ -62,7 +62,7 @@ class ArticleHandler
                 } else {
                     $value = $tagcheck['id'];
                 }
-                $validation_result['field_inputs']['existing_tag'][$key] = $value;
+                $validation_result['field_inputs']['articletags'][$key] = $value;
             }
 
             if ($isNewArticle) {
@@ -113,8 +113,8 @@ class ArticleHandler
             if ($isNewArticle) {
                 $new_article_id = ModelSelector::getArticleModel()->saveNewArticleInfo(
                     article_title: $validation_result['field_inputs']['title'],
-                    article_summary: $validation_result['field_inputs']['summary'],
-                    article_codeBlock: $validation_result['field_inputs']['codeBlock'] ?? '',
+                    article_bodytext: $validation_result['field_inputs']['bodytext'],
+                    article_codeblock: $validation_result['field_inputs']['codeblock'] ?? '',
                     imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
                     user_id: $user_id
                 );
@@ -139,8 +139,8 @@ class ArticleHandler
                 $update_result = ModelSelector::getArticleModel()->saveExistingArticleInfo(
                     article_id: $article_id,
                     article_title: $validation_result['field_inputs']['title'],
-                    article_summary: $validation_result['field_inputs']['summary'],
-                    article_codeBlock: $validation_result['field_inputs']['codeBlock'] ?? '',
+                    article_bodytext: $validation_result['field_inputs']['bodytext'],
+                    article_codeblock: $validation_result['field_inputs']['codeblock'] ?? '',
                     imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
                     user_id: $user_id
                 );

@@ -2,9 +2,10 @@
 
 namespace Wiki\controllers;
 
-use Wiki\tools\interfaces;
-use Wiki\tools\utils\Utils;
-use Wiki\controllers\AjaxController;
+use Wiki\tools\interfaces,
+    Wiki\tools\utils\Utils,
+    Wiki\tools\utils\HtmlUtils,
+    Wiki\controllers\AjaxController;
 
 /**
  * Controller class for initial request handling and forwarding request to the correct subcontroller.
@@ -22,8 +23,8 @@ class MainController
      */
     public function __construct()
     {
+        $this->posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
         $this->request = [
-            'posted' => $this->posted,
             'reqType' => Utils::getRequestVar(
                 key: 'reqType',
                 frompost: $this->posted,
@@ -48,7 +49,7 @@ class MainController
      */
     private function getHandler(): interfaces\iController
     {
-        switch ($this->request['reqtype']) {
+        switch ($this->request['reqType']) {
             case 'ajax':
                 return new AjaxController();
             default:

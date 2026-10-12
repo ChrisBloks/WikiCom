@@ -166,73 +166,12 @@ class AjaxController implements iController
                     $field_info = ModelSelector::getElementModel()
                         ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
 
-                    // Perform basic validation on contact fields, field inputs are retrieved internally
-                    // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
                     $validation_result = (new ValidationHandler)
                         ->validateFields(field_info: $field_info);
 
                     if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
 
-                        $this->response['articles_info'] = ModelSelector::getArticleModel()->fetchArticleBySearch(
-                            author_ids: $validation_result['field_inputs']['Tag'] ?? [],
-                            tag_ids: $validation_result['field_inputs']['Author'] ?? [],
-                            sortBy: $validation_result['field_inputs']['sortby'] ?? []
-                        );
-
-                        $this->response['success'] = true;
-
-                        //$element = ElementFactory::createElement($element_info);
-                    }
-
-                    break;
-                default:
-                    $this->response = [
-                        'success' => false,
-                        'message' => 'Unknown AJAX action: ' . $this->request['action'],
-                        'POST' => $this->request,
-                    ];
-            }
-        } else {
-            // GET requests
-            switch ($this->request['action']) {
-                case 'pageHome':
-                case 'pageContact':
-                case 'pageSearch':
-                case 'pageRegister':
-                case 'pageLogin':
-                case 'pageDashbaord':
-                case 'pageEditArticle':
-                case 'pageArticle':
-                    $page = lcfirst(substr($this->request['action'], 4));
-                    $this->request['page'] = $page;
-                    $new_body_content = (new PageFactory($this->request))->buildBody();
-                    $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content]
-                    ];
-                    break;
-                case 'pageAbout':
-                    $this->request['aboutID'] = Utils::getRequestVar(
-                        key: 'author',
-                        frompost: false,
-                        default: -1
-                    );
-                    $page = lcfirst(substr($this->request['action'], 4));
-                    $this->request['page'] = $page;
-                    $new_body_content = (new PageFactory($this->request))->buildBody();
-                    $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content]
-                    ];
-                    break;
-                case 'searchArticle':
-                    $field_info = ModelSelector::getElementModel()
-                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
-
-                    // Perform basic validation on contact fields, field inputs are retrieved internally
-                    // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
-                    $validation_result = (new ValidationHandler)
-                        ->validateFields(field_info: $field_info);
-
-                    if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                        $this->response['validation_result'] = $validation_result;
 
                         $this->response['validation_result'] = $validation_result;
 
@@ -245,11 +184,6 @@ class AjaxController implements iController
 
                         //$element = ElementFactory::createElement($element_info);
                     }
-
-                    break;
-                case 'saveContactMessage':
-                    $field_info = ModelSelector::getElementModel()
-                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
 
                     // Perform basic validation on contact fields, field inputs are retrieved internally
                     // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
@@ -317,12 +251,144 @@ class AjaxController implements iController
                         'message' => 'Registration was successful!'
                     ];
                     break;
+                case 'loginUser':
+                    $errors = [];
+
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(
+                            element_id: Utils::getRequestVar(
+                                key: 'element_id',
+                                frompost: True
+                            )
+                        );
+
+                    $validation_result = (new ValidationHandler)
+                        ->validateFields(field_info: $field_info);
+                    $errors = array_merge($errors, $validation_result['user_error']);
+                    if (!$validation_result['ok']) {
+                        $this->response = [
+                            'success' => False,
+                            'errors' => $errors
+                        ];
+                        break;
+                    }
+
+                    $validation_result = UserHandler::getInstance()
+                        ->handleUserLogin(validation_result: $validation_result);
+                    $errors = array_merge($errors, $validation_result['user_error']);
+                    if (!$validation_result['ok']) {
+                        $this->response = [
+                            'success' => False,
+                            'errors' => $errors
+                        ];
+                        break;
+                    }
+
+                    // All stages of validation succesful
+                    $this->response = [
+                        'page' => 'home',
+                        'success' => True,
+                        'message' => 'Login was successful!'
+                    ];
+                    break;
+                case 'saveArticle':
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                    // Perform basic validation on contact fields, field inputs are retrieved internally
+                    // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                    $validation_result = (new ValidationHandler)
+                        ->validateFields(field_info: $field_info);
+
+                    $this->response['bodyinfo']['title'] = $validation_result['field_inputs']['title'];
+                    $this->response['bodyinfo']['bodytext'] = $validation_result['field_inputs']['bodytext'];
+                    $this->response['bodyinfo']['codeBlock'] = $validation_result['field_inputs']['codeblock'];
+                    $this->response['articletags'] = $validation_result['field_inputs']['articletags'];
+                    $this->response['articleID'] = Utils::getRequestVar('articleID', true);
+
+
+                    if ($validation_result['ok']) {
+                        // This is the post request for editing or saving a (new) article
+
+                        $validation_result = ArticleHandler::getInstance()
+                            ->handleArticleSubmission(
+                                validation_result: $validation_result,
+                                article_id: $this->response['articleID'],
+                                user_id: $this->request['user_id']
+                            );
+
+                        if (isset($validation_result['field_inputs']['new_article_id'])) {
+                            $this->response['articleID'] = $validation_result['field_inputs']['new_article_id'];
+                        }
+
+                        if ($validation_result['ok']) {
+                            $this->response = [
+                                'page' => 'article',
+                                'success' => True,
+                                'message' => 'Article has been submitted!'
+                            ];
+                        } else {
+                            $this->response = [
+                                'success' => false,
+                                'errors' => $validation_result['user_error'],
+                                'message' => 'Please fix the errors below.',
+                            ];
+                        }
+                    } else {
+                        $this->response = [
+                            'success' => false,
+                            'errors' => $validation_result['user_error'],
+                            'message' => 'Please fix the errors below.',
+                        ];
+                    }
+                    break;
                 default:
                     $this->response = [
                         'success' => false,
                         'message' => 'Unknown AJAX action: ' . $this->request['action'],
                         'POST' => $this->request,
                     ];
+            }
+        } else {
+            // GET requests
+            switch ($this->request['action']) {
+                case 'pageHome':
+                case 'pageContact':
+                case 'pageSearch':
+                case 'pageRegister':
+                case 'pageLogin':
+                case 'pageDashboard':
+                case 'pageEditArticle':
+                case 'pageArticle':
+                    $page = lcfirst(substr($this->request['action'], 4));
+                    $this->request['page'] = $page;
+                    $new_body_content = (new PageFactory($this->request))->buildBody();
+                    $this->response = [
+                        ['selector' => 'body', 'content' => $new_body_content]
+                    ];
+                    break;
+                case 'pageAbout':
+                    $this->request['aboutID'] = Utils::getRequestVar(
+                        key: 'author',
+                        frompost: false,
+                        default: -1
+                    );
+                    $page = lcfirst(substr($this->request['action'], 4));
+                    $this->request['page'] = $page;
+                    $new_body_content = (new PageFactory($this->request))->buildBody();
+                    $this->response = [
+                        ['selector' => 'body', 'content' => $new_body_content]
+                    ];
+                    break;
+                case 'pageLogout':
+                    session_unset();
+                    $this->request['page'] = 'home';
+                    $this->request['isLoggedIn'] = false;
+                    $new_body_content = (new PageFactory($this->request))->buildBody();
+                    $this->response = [
+                        ['selector' => 'body', 'content' => $new_body_content]
+                    ];
+                    break;
             }
         }
     }

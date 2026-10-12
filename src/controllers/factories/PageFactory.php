@@ -15,19 +15,17 @@ namespace Wiki\controllers\factories;
 
 use ArrayAccess,
 Wiki\tools\traits\tErrorMessageCollector,
-wiki\tools\utils\HtmlUtils,
 Wiki\models\ModelSelector,
 Wiki\controllers\factories\MenuFactory,
 Wiki\views\BasePage,
+Wiki\views\BodyContainer,
 Wiki\views\containers\AtomicElement,
 Wiki\views\containers\Header,
 Wiki\views\containers\Toast,
 Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
-Wiki\dataObjects\ElementInfo;
-use Wiki\controllers\ElementHandler;
-use Nette\Utils\Html;
-use Wiki\views\BodyContainer;
+Wiki\dataObjects\ElementInfo,
+Wiki\controllers\ElementHandler;
 
 class PageFactory
 {
@@ -52,7 +50,7 @@ class PageFactory
     {
         $this->addHead();
         $this->addScripts();
-        $this->addBody();
+        $this->buildBody();
         return $this->htmlpage;
     }
 
@@ -128,7 +126,6 @@ class PageFactory
 
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
-
 
 
         // Add necessary variables
