@@ -10,8 +10,7 @@ export const ContactForm = {
     console.log("Initing ContactForm");
     AjaxForms.bind("#contact_form", {
       onSuccess: function (_) {
-        console.log('Succes!');
-
+        console.log('ContactForm succes!');
       },
     });
   },

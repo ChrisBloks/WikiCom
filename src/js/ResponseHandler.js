@@ -1,4 +1,5 @@
 import { ContactForm } from "./components/ContactForm.js";
+import { RegisterUser } from "./components/RegisterUser.js";
 import { Router } from "./services/Router.js";
 
 
@@ -37,9 +38,10 @@ export const ResponseHandler = {
                 case 'pageAbout':
                     break; // Do nothing
                 case 'pageContact':
-                    // ContactForm.init();
+                    ContactForm.init();
                     break;
                 case 'pageRegister':
+                    RegisterUser.init();
                     break;
                 case 'pageLogin':
                     break;
