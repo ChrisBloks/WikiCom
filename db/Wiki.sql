@@ -526,7 +526,7 @@ INSERT INTO `menu_items` (`id`, `label`, `page_value`, `display_order`) VALUES
 (5, 'Register', 'pageRegister', 4),
 (6, 'Login', 'pageLogin', 5),
 (7, 'Dashboard', 'pageDashboard', 6),
-(8, 'Logout', 'Logout', 7);
+(8, 'Logout', 'logout', 7);
 
 -- --------------------------------------------------------
 
