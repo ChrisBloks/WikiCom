@@ -50,7 +50,7 @@ export const MarkdownToolbar = {
         // create button
         const btnEl = document.createElement("button");
         btnEl.type = "button";
-        btnEl.className = "btn btn- ";
+        btnEl.className = "btn btn-secondary ";
 
         // give label and tooltip
         btnEl.textContent = btnConfig.label;
