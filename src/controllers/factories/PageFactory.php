@@ -137,7 +137,6 @@ class PageFactory
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
 
-
         // Add necessary variables
         $element_handler = new ElementHandler($this->response);
         $element_handler->addDataToElementList($elements_info);
