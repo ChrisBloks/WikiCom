@@ -284,6 +284,7 @@ class AjaxController implements iController
                     'success' => True,
                     'message' => 'Login was successful!'
                 ];
+                break;
             case 'saveArticle':
                 $field_info = ModelSelector::getElementModel()
                     ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
