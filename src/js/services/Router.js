@@ -1,15 +1,16 @@
 import { ResponseHandler } from "../responseHandler.js";
 import { ajaxGET } from "./Ajax.js";
 
-export const Router = {
+export const Router = { 
   // ==============================================================================
   init() {
+    console.log('Router init');
     const nav_items = document.querySelectorAll('a.nav-link');
     nav_items.forEach(
       function (nav_item) {
         if (nav_item.classList.contains('wiki-initialized')) return;
         else {
-          _addMenuListener(nav_item);
+          Router._addMenuListener(nav_item);
           nav_item.classList.add('wiki-initialized');
         }
       }
@@ -29,7 +30,7 @@ export const Router = {
         console.log(page);
 
         await ajaxGET(
-          "main.php?reqType=async&action=" + page,
+          "main.php?reqType=ajax&action=" + page,
           "json",
           (response) => {
             if (!Array.isArray(response)) return;
