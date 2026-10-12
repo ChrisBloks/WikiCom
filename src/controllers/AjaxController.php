@@ -48,7 +48,7 @@ class AjaxController implements iController
                 key: 'action',
                 frompost: $this->posted,
                 default: 'home'
-                ),
+            ),
             'id' => utils::getRequestVar('id', $this->posted, null),
             'userID' => utils::getSesVar('userID', -1),
             'isLoggedIn' => (utils::getSesVar('userID', -1) > 0)
@@ -58,168 +58,171 @@ class AjaxController implements iController
     // decide what to do based on the action, fill $this->request
     private function validateRequest(): void
     {
-        switch ($this->request['action']) {
-            // ====================================================
-            // GET CASES (should move to a different controller?)
-            // ====================================================
-            case 'pageHome':
-            case 'pageContact':
-            case 'pageSearch':
-            case 'pageRegister':
-            case 'pageLogin':
-            case 'pageDashbaord':
-            case 'pageEditArticle':
-            case 'pageArticle':
-                $page = lcfirst(substr($this->request['action'], 4));
-                $this->request['page'] = $page;
-                $new_body_content = (new PageFactory($this->request))->buildBody();
-                $this->response = [
-                    ['selector' => 'body', 'content' => $new_body_content]
-                ];
-                break;
-            case 'pageAbout':
-                $this->request['aboutID'] = Utils::getRequestVar(
-                    key: 'author',
-                    frompost: false,
-                    default: -1
-                );
-                $page = lcfirst(substr($this->request['action'], 4));
-                $this->request['page'] = $page;
-                $new_body_content = (new PageFactory($this->request))->buildBody();
-                $this->response = [
-                    ['selector' => 'body', 'content' => $new_body_content]
-                ];
-                break;
-            // ====================================================
-            // POST CASES 
-            // ====================================================
-            case 'saveRating':
-                if (!$this->request['isLoggedIn']) {
-                    throw new BadMethodCallException('Tried to save a rating without being logged in!');
-                } else {
-                    $rating = utils::getRequestVar('rating', true, null);
-                    $article_id = utils::getRequestVar('article_id', true, null);
+        if ($this->posted) {
+            switch ($this->request['action']) {
+                // ====================================================
+                // POST CASES 
+                // ====================================================
+                case 'saveRating':
+                    if (!$this->request['isLoggedIn']) {
+                        throw new BadMethodCallException('Tried to save a rating without being logged in!');
+                    } else {
+                        $rating = utils::getRequestVar('rating', true, null);
+                        $article_id = utils::getRequestVar('article_id', true, null);
+                        $articleHandler = new ArticleHandler();
+                        $rating_info = $articleHandler->handleSaveRating(
+                            user_id: $this->request['userID'],
+                            article_id: $article_id,
+                            rating: $rating
+                        );
+                        $this->response = [
+                            'avg_rating' => $rating_info["AVGrating"],
+                            'n_ratings' => $rating_info["Nratings"]
+                        ];
+                    }
+                    break;
+                case 'deleteArticle':
                     $articleHandler = new ArticleHandler();
-                    $rating_info = $articleHandler->handleSaveRating(
-                        user_id: $this->request['userID'],
-                        article_id: $article_id,
-                        rating: $rating
+                    $delete_result = $articleHandler->handleDeleteArticle(
+                        article_id: (int) $this->request['id'],
+                        userId: (int) $_SESSION['userID']
                     );
-                    $this->response = [
-                        'avg_rating' => $rating_info["AVGrating"],
-                        'n_ratings' => $rating_info["Nratings"]
-                    ];
-                }
-                break;
-            case 'deleteArticle':
-                $articleHandler = new ArticleHandler();
-                $delete_result = $articleHandler->handleDeleteArticle(
-                    article_id: (int) $this->request['id'],
-                    userId: (int) $_SESSION['userID']
-                );
-                if ($delete_result === false) {
-                    throw new \Exception('Failed to delete article');
-                }
-                $this->response =
-                    [
-                        'success' => true,
-                        'deleted rows' => $delete_result,
-                    ];
-                break;
-            case 'updateUserInfo':
-                $_SESSION['errors'] = [];
-                $_SESSION['messages'] = [];
+                    if ($delete_result === false) {
+                        throw new \Exception('Failed to delete article');
+                    }
+                    $this->response =
+                        [
+                            'success' => true,
+                            'deleted rows' => $delete_result,
+                        ];
+                    break;
+                case 'updateUserInfo':
+                    $_SESSION['errors'] = [];
+                    $_SESSION['messages'] = [];
 
-                $field_info = ModelSelector::getElementModel()
-                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
 
-                // Perform basic validation on contact fields, field inputs are retrieved internally
-                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
-                $validation_result = (new ValidationHandler)
-                    ->validateFields(field_info: $field_info);
+                    // Perform basic validation on contact fields, field inputs are retrieved internally
+                    // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                    $validation_result = (new ValidationHandler)
+                        ->validateFields(field_info: $field_info);
 
-                $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+                    $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
 
-                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
-                    $result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
+                    if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                        $result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
 
-                    $this->response = [
-                        'success' => $result['ok'],
-                        'errors' => $result['user_error'] ?? [],
-                        'message' => $result['ok'] ? 'Your information has been updated.' : 'Something went wrong.',
-                        'name' => $result['field_inputs']['name'] ?? null,
-                        'userID' => $this->request['userID'] ?? null,
-                        'email' => $result['field_inputs']['email'] ?? null,
-                        'avatar_url' => $result['field_inputs']['avatar_url'] ?? null,
-                    ];
-                } else {
+                        $this->response = [
+                            'success' => $result['ok'],
+                            'errors' => $result['user_error'] ?? [],
+                            'message' => $result['ok'] ? 'Your information has been updated.' : 'Something went wrong.',
+                            'name' => $result['field_inputs']['name'] ?? null,
+                            'userID' => $this->request['userID'] ?? null,
+                            'email' => $result['field_inputs']['email'] ?? null,
+                            'avatar_url' => $result['field_inputs']['avatar_url'] ?? null,
+                        ];
+                    } else {
+                        $this->response = [
+                            'success' => false,
+                            'errors' => $validation_result['user_error'],
+                            'message' => 'Please fix the errors below.',
+                        ];
+                    }
+                    break;
+                case 'updatePassword':
+                    $_SESSION['errors'] = [];
+                    $_SESSION['messages'] = [];
+
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                    // Perform basic validation on contact fields, field inputs are retrieved internally
+                    // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                    $validation_result = (new ValidationHandler)
+                        ->validateFields(field_info: $field_info);
+
+                    $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+
+                    if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                        $result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);
+
+                        $this->response = [
+                            'success' => $result['ok'],
+                            'errors' => $result['user_error'] ?? [],
+                            'message' => $result['ok'] ? 'Password successfully changed.' : 'Something went wrong.',
+                        ];
+                    } else {
+                        $this->response = [
+                            'success' => false,
+                            'errors' => $validation_result['user_error'],
+                            'message' => 'Please fix the errors below.',
+                        ];
+                    }
+
+                    break;
+                case 'searchArticle':
+                    $field_info = ModelSelector::getElementModel()
+                        ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                    // Perform basic validation on contact fields, field inputs are retrieved internally
+                    // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                    $validation_result = (new ValidationHandler)
+                        ->validateFields(field_info: $field_info);
+
+                    if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+
+                        $this->response['articles_info'] = ModelSelector::getArticleModel()->fetchArticleBySearch(
+                            author_ids: $validation_result['field_inputs']['Tag'] ?? [],
+                            tag_ids: $validation_result['field_inputs']['Author'] ?? [],
+                            sortBy: $validation_result['field_inputs']['sortby'] ?? []
+                        );
+
+                        $this->response['success'] = true;
+
+                        //$element = ElementFactory::createElement($element_info);
+                    }
+
+                    break;
+                default:
                     $this->response = [
                         'success' => false,
-                        'errors' => $validation_result['user_error'],
-                        'message' => 'Please fix the errors below.',
+                        'message' => 'Unknown AJAX action: ' . $this->request['action'],
+                        'POST' => $this->request,
                     ];
-                }
-                break;
-            case 'updatePassword':
-                $_SESSION['errors'] = [];
-                $_SESSION['messages'] = [];
-
-                $field_info = ModelSelector::getElementModel()
-                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
-
-                // Perform basic validation on contact fields, field inputs are retrieved internally
-                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
-                $validation_result = (new ValidationHandler)
-                    ->validateFields(field_info: $field_info);
-
-                $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-
-                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
-                    $result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);
-
+            }
+        } else {
+            // GET requests
+            switch ($this->request['action']) {
+                case 'pageHome':
+                case 'pageContact':
+                case 'pageSearch':
+                case 'pageRegister':
+                case 'pageLogin':
+                case 'pageDashbaord':
+                case 'pageEditArticle':
+                case 'pageArticle':
+                    $page = lcfirst(substr($this->request['action'], 4));
+                    $this->request['page'] = $page;
+                    $new_body_content = (new PageFactory($this->request))->buildBody();
                     $this->response = [
-                        'success' => $result['ok'],
-                        'errors' => $result['user_error'] ?? [],
-                        'message' => $result['ok'] ? 'Password successfully changed.' : 'Something went wrong.',
+                        ['selector' => 'body', 'content' => $new_body_content]
                     ];
-                } else {
+                    break;
+                case 'pageAbout':
+                    $this->request['aboutID'] = Utils::getRequestVar(
+                        key: 'author',
+                        frompost: false,
+                        default: -1
+                    );
+                    $page = lcfirst(substr($this->request['action'], 4));
+                    $this->request['page'] = $page;
+                    $new_body_content = (new PageFactory($this->request))->buildBody();
                     $this->response = [
-                        'success' => false,
-                        'errors' => $validation_result['user_error'],
-                        'message' => 'Please fix the errors below.',
+                        ['selector' => 'body', 'content' => $new_body_content]
                     ];
-                }
-
-                break;
-            case 'searchArticle':
-                $field_info = ModelSelector::getElementModel()
-                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
-
-                // Perform basic validation on contact fields, field inputs are retrieved internally
-                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
-                $validation_result = (new ValidationHandler)
-                    ->validateFields(field_info: $field_info);
-
-                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
-
-                $this->response['articles_info'] = ModelSelector::getArticleModel()->fetchArticleBySearch(
-                    author_ids:$validation_result['field_inputs']['Tag'] ?? [],
-                    tag_ids:$validation_result['field_inputs']['Author'] ?? [],
-                    sortBy:$validation_result['field_inputs']['sortby'] ?? []
-                );
-
-                $this->response['success'] = true;
-
-                //$element = ElementFactory::createElement($element_info);
-                }
-
-                break;
-            default:
-                $this->response = [
-                    'success' => false,
-                    'message' => 'Unknown AJAX action: ' . $this->request['action'],
-                    'POST' => $this->request,
-                ];
+                    break;
+            }
         }
     }
 

@@ -3,6 +3,7 @@
 namespace Wiki\controllers;
 
 use Wiki\tools\interfaces;
+use Wiki\tools\utils\Utils;
 use Wiki\controllers\AjaxController;
 
 /**
@@ -12,6 +13,7 @@ use Wiki\controllers\AjaxController;
 class MainController
 {
     protected bool $posted;
+    protected array $request;
     protected bool $async;
     protected string $action;
 
@@ -20,7 +22,15 @@ class MainController
      */
     public function __construct()
     {
-        $this->async = isset($_SERVER['HTTP_X_REQUESTED_WITH']);
+        $this->request = [
+            'posted' => $this->posted,
+            'reqType' => Utils::getRequestVar(
+                key: 'reqType',
+                frompost: $this->posted,
+                default: ($this->posted ? '' : 'home'
+                )
+            ),
+        ];
     }
 
     /**
@@ -38,13 +48,11 @@ class MainController
      */
     private function getHandler(): interfaces\iController
     {
-        // Ajax request. Action is equal to a specific update
-        if ($this->async) {
-            return new AjaxController();
+        switch ($this->request['reqtype']) {
+            case 'ajax':
+                return new AjaxController();
+            default:
+                return new PageController();
         }
-
-        // Default
-        // Non-ajax request. Action is equal to the requested page
-        return new PageController();
     }
 }
