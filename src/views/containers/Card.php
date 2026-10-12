@@ -4,7 +4,7 @@ namespace Wiki\views\containers;
 use ArrayAccess;
 use Wiki\tools\interfaces\iElement;
 /**
- * Creates bootstrap card elements with image, title, summary
+ * Creates bootstrap card elements with image, title, bodytext
  */
 class Card extends WrappedText
 {
@@ -14,13 +14,13 @@ class Card extends WrappedText
         parent::__construct($this->createCard(
             image: $element_info['article_info']['imgFileName'],
             title: $element_info['article_info']['title'],
-            summary: $element_info['article_info']['summary'],
+            bodytext: $element_info['article_info']['bodytext'],
             article_id: $element_info['article_info']['id']
         ), 
         'div class ="col"');
     }
 
-    private function createCard(string $image, string $title, string $summary, int $article_id)
+    private function createCard(string $image, string $title, string $bodytext, int $article_id)
     {
         $str = '<div class="card h-100 shadow-sm">';
 
@@ -31,7 +31,7 @@ class Card extends WrappedText
 
         $str .= '<div class="card-body d-flex flex-column">';
         $str .= '<h5 class="card-title">' . htmlspecialchars($title) . '</h5>';
-        $str .= '<p class="card-text text-muted">' . htmlspecialchars($summary) . '</p>';
+        $str .= '<p class="card-text text-muted">' . htmlspecialchars($bodytext) . '</p>';
         $str .= '<a href="?page=article&id=' . (string) $article_id . '" class="btn btn-outline-primary mt-auto">Read Article</a>';
         $str .= '</div>'; 
         $str .= '</div>'; 

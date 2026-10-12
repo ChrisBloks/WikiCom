@@ -23,10 +23,10 @@ export const saveRating = {
                         console.log(rating_div.querySelector("div.star-ratings"));
                         let percent = response['avg_rating'] / 5 * 100
                         rating_div.querySelector("div.star-ratings")
-                            .innerHTML('<div class="fill-ratings" style="width: ' + percent + '%;">'
+                            .innerHTML = '<div class="fill-ratings" style="width: ' + percent + '%;">'
                                 + '<span>★★★★★</span></div><div class="empty-ratings">'
                                 + '<span>★★★★★</span></div><div class="count-rating">'
-                                + '(' + response['n_ratings'] + ')</div>');
+                                + '(' + response['n_ratings'] + ')</div>';
 
                         console.log('saveRating Succesful');
                     },

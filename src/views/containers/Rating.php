@@ -106,6 +106,7 @@ class Rating extends ContainerElement
                 new ElementInfo([
                     'element_name' => 'article_id',
                     'field_info' => new FieldInfo([
+                        'field_name' => 'article_id',
                         'value' => $article_id
                     ])
                 ]) 
