@@ -33,6 +33,7 @@ import { SearchForm } from "./components/searchForm.js";
 import { ContactForm } from "./components/ContactForm.js";
 import { RegisterUser } from "./components/RegisterUser.js";
 import { LoginForm } from "./components/LoginForm.js";
+import { EditArticleForm } from "./components/EditArticle.js";
 
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       el.classList.add("align-middle");
     });
 
-    // editArticle add tag widget
+  // editArticle add tag widget
   const widget = document.querySelector("#add-tag-widget");
   const checkboxgroup = document.querySelector(".checkbox_group");
   if (widget && checkboxgroup) {
@@ -69,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ContactForm.init();
   RegisterUser.init();
   LoginForm.init();
+  EditArticleForm.init();
 
   //bind ajax form
   AjaxForms.bind("#editUserModal form", {
@@ -101,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
     starRatings.style.width = fillSpan.offsetWidth + "px";
   }
 
-document.querySelectorAll(".checkbox_group").forEach(function (checkbox_group) {
-  resetCheckboxesToDefault(checkbox_group);
-});
+  document.querySelectorAll(".checkbox_group").forEach(function (checkbox_group) {
+    resetCheckboxesToDefault(checkbox_group);
+  });
 
   // searchbar update (js)
   document.querySelectorAll(".searchField").forEach(function (search_field) {

@@ -11,7 +11,7 @@ use Wiki\tools\utils\HtmlUtils;
 class ElementHandler
 {
 
-    protected array $article_info = []; // list of [title, name, summary, codeBlock, imgFileName, lastEdit, user_id, rating, n_ratings]
+    protected array $article_info = []; // list of [title, name, bodytext, codeblock, imgFileName, lastEdit, user_id, rating, n_ratings]
     protected array $fetched_random_articles = []; // list of [id]
     protected array $user_info = []; // list of [id, name, password, email, imgFileName, description]
     protected array $response;
@@ -63,7 +63,7 @@ class ElementHandler
                     break;
                 case '[*ARTICLE_CODE*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $app_data = $article_info['codeBlock'];
+                    $app_data = $article_info['codeblock'];
                     break;
                 case '[*ARTICLE_ID*]':
                     $app_data = $this->response['articleID'];
@@ -93,7 +93,7 @@ class ElementHandler
                     break;
                 case '[*ARTICLE_TEXT*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
-                    $app_data = $article_info['summary'];
+                    $app_data = $article_info['bodytext'];
                     break;
                 case '[*ARTICLE_TITLE*]':
                     $article_info = $this->getArticleInfo($this->response['articleID']);
