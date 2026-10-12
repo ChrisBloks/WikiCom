@@ -1,7 +1,17 @@
 <?php
 
-include('C:\xampp\htdocs\Educom\Wiki\src\tools\Queue.php');
-use Wiki\tools\Queue;
+// reserved words
+// request type:  
+// reqType
+    // can be:
+    // ajax -> ajaxController
+        // POST 
+            // action
+        // GET 
+            // action
+        // POST GET REQ
+    // pdf/api
+    // etc
 
 $A = ['a', 'b', 'c'];
 
@@ -28,3 +38,8 @@ $C[0] = "BAR";
 print_r($B);
 echo '<br>';
 print_r($A);
+
+echo '<pre>';
+print_r($_SERVER);
+echo '</pre>';
+

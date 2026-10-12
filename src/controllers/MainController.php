@@ -2,8 +2,10 @@
 
 namespace Wiki\controllers;
 
-use Wiki\tools\interfaces;
-use Wiki\controllers\AjaxController;
+use Wiki\tools\interfaces,
+    Wiki\tools\utils\Utils,
+    Wiki\tools\utils\HtmlUtils,
+    Wiki\controllers\AjaxController;
 
 /**
  * Controller class for initial request handling and forwarding request to the correct subcontroller.
@@ -12,6 +14,7 @@ use Wiki\controllers\AjaxController;
 class MainController
 {
     protected bool $posted;
+    protected array $request;
     protected bool $async;
     protected string $action;
 
@@ -20,7 +23,15 @@ class MainController
      */
     public function __construct()
     {
-        $this->async = isset($_SERVER['HTTP_X_REQUESTED_WITH']);
+        $this->posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
+        $this->request = [
+            'reqType' => Utils::getRequestVar(
+                key: 'reqType',
+                frompost: $this->posted,
+                default: ($this->posted ? '' : 'home'
+                )
+            ),
+        ];
     }
 
     /**
@@ -38,13 +49,11 @@ class MainController
      */
     private function getHandler(): interfaces\iController
     {
-        // Ajax request. Action is equal to a specific update
-        if ($this->async) {
-            return new AjaxController();
+        switch ($this->request['reqType']) {
+            case 'ajax':
+                return new AjaxController();
+            default:
+                return new PageController();
         }
-
-        // Default
-        // Non-ajax request. Action is equal to the requested page
-        return new PageController();
     }
 }

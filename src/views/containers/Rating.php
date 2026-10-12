@@ -36,7 +36,6 @@ class Rating extends ContainerElement
         $article_id = $element_info['options_info']['article_id'] ?? -1;
         $count = $element_info['options_info']['n_ratings'] ?? '?';
 
-
         $max = 5;
         $percent = ($rating / $max) * 100;
 

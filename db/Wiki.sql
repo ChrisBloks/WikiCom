@@ -519,13 +519,13 @@ CREATE TABLE `menu_items` (
 --
 
 INSERT INTO `menu_items` (`id`, `label`, `page_value`, `display_order`) VALUES
-(1, 'Home', 'home', 0),
-(2, 'About', 'about', 1),
-(3, 'Contact', 'contact', 2),
-(4, 'Search', 'search', 3),
-(5, 'Register', 'register', 4),
-(6, 'Login', 'login', 5),
-(7, 'Dashboard', 'dashboard', 6),
+(1, 'Home', 'pageHome', 0),
+(2, 'About', 'pageAbout', 1),
+(3, 'Contact', 'pageContact', 2),
+(4, 'Search', 'pageSearch', 3),
+(5, 'Register', 'pageRegister', 4),
+(6, 'Login', 'pageLogin', 5),
+(7, 'Dashboard', 'pageDashboard', 6),
 (8, 'Logout', 'logout', 7);
 
 -- --------------------------------------------------------
@@ -719,7 +719,8 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `descripti
 (1, 'Danny12', '$2y$10$5u98k0LZarKnzLeIgANPpOb2e5si298S3xfxNNOD2TTZvH5ZYrckC', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christiannn', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'christian@email.com', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
-(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
+(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', ''),
+(12, 'Louk', '$2y$10$K.kUyST2RMPtrlBPSjD//ezzoYpGYiSGEkBcIpxOFaGL5mxwiy9uq', 'Loul@emai.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -1088,7 +1089,7 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `wiki_article`

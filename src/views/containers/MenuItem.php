@@ -16,22 +16,25 @@ use Wiki\tools\utils\HtmlUtils;
  */
 class Menuitem extends ContainerElement
 {
-    public function __construct(string $label, string $page_value, string $class = '', ?array $attrs = null, string $li_class = '')
+    public function __construct(string $label, ?string $page_value = null, string $class = '', ?array $attrs = null, string $li_class = '')
     {
+        $element_info = new ElementInfo([
+            'html_tag' => 'li',
+            'class' => $li_class,
+        ]);
+        $page_value ? $element_info['data-target-page'] = $page_value : '';
         parent::__construct(
-            new LinkedElementInfo([
-                'html_tag' => 'li',
-                'class' => $li_class,
-            ]));
+            $element_info
+        );
 
-        
+
         $element_info = new LinkedElementInfo([
-                    'html_tag' => 'a',
-                    'page_value' => htmlspecialchars($page_value),
-                    'class' => $class,
-                    'label' => htmlspecialchars($label)
-                    ]);
-        foreach($attrs as $attr => $val){
+            'html_tag' => 'a',
+            'page_value' => htmlspecialchars($page_value),
+            'class' => $class,
+            'label' => htmlspecialchars($label),
+        ]);
+        foreach ($attrs as $attr => $val) {
             $element_info[$attr] = $val;
         }
 

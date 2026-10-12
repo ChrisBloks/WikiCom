@@ -15,18 +15,17 @@ namespace Wiki\controllers\factories;
 
 use ArrayAccess,
 Wiki\tools\traits\tErrorMessageCollector,
-wiki\tools\utils\HtmlUtils,
 Wiki\models\ModelSelector,
 Wiki\controllers\factories\MenuFactory,
 Wiki\views\BasePage,
+Wiki\views\BodyContainer,
 Wiki\views\containers\AtomicElement,
 Wiki\views\containers\Header,
 Wiki\views\containers\Toast,
 Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
-Wiki\dataObjects\ElementInfo;
-use Wiki\controllers\ElementHandler;
-use Nette\Utils\Html;
+Wiki\dataObjects\ElementInfo,
+Wiki\controllers\ElementHandler;
 
 class PageFactory
 {
@@ -34,7 +33,7 @@ class PageFactory
     private string $page;
     protected bool $isLoggedIn;
     protected array $response;
-    private BasePage $htmlpage;
+    private BasePage|BodyContainer $htmlpage;
     protected array|ArrayAccess $article_info;
 
     public function __construct(array $response)
@@ -42,15 +41,22 @@ class PageFactory
         $this->response = $response;
         $this->page = $response['page'];
         $this->isLoggedIn = $response['isLoggedIn'];
-        $this->htmlpage = new BasePage;
+
+        // if an async is coming in make async call
+        $this->htmlpage = ($response['async'] ? new BodyContainer() : new BasePage());
     }
 
-    public function show()
+    public function buildPage()
     {
         $this->addHead();
         $this->addScripts();
-        $this->addBody();
+        $this->buildBody();
         return $this->htmlpage;
+    }
+
+    public function buildBody(): ?string{
+        $this->addBody();
+        return $this->htmlpage->getBodyContent();
     }
 
 
@@ -89,21 +95,6 @@ class PageFactory
                     ])
                 )
             );
-
-        // switch ($this->page) {
-        //     case 'editArticle':
-        //     case 'search':
-        //         $this->htmlpage->addToHeadContent(
-        //             new AtomicElement(
-        //                 new ElementInfo(
-        //                     ["text" => '<script src="./src/js/searchPage.js"></script>']
-        //                 )
-        //             )
-        //         );
-        //         break;
-        //     default:
-        //         break;
-        // }
     }
 
 
@@ -138,6 +129,7 @@ class PageFactory
 
 
         // Add necessary variables
+        // HtmlUtils::dump('response', $this->response);
         $element_handler = new ElementHandler($this->response);
         $element_handler->addDataToElementList($elements_info);
 

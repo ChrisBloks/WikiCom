@@ -82,7 +82,6 @@ export function orderCheckboxes(checkbox_group, search_input, max_distance) {
       div.style.display = "none";
     }
 
-    //              [int => [jQuery, int, string]]
     checkbox_array[index] = [div, string_distance, label_text];
   });
 

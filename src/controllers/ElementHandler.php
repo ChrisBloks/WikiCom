@@ -36,7 +36,6 @@ class ElementHandler
             $element_info['application_data'] = ModelSelector::getElementModel()->fetchElementVariables($element_info['element_id']);
             // HtmlUtils::dump('Element', $element_info);
             if (isset($element_info['application_data']) && !empty($element_info['application_data'])) {
-
                 $this->addDataToElement($element_info);
                 // HtmlUtils::dump('Element_info', $element_info);
             }
@@ -100,15 +99,15 @@ class ElementHandler
                     $app_data = $article_info['title'];
                     break;
                 case '[*AUTHOR_IMAGE*]':
-                    $about_info = $this->getUserInfo($this->response['aboutID']);
+                    $about_info = $this->getUserInfo($this->response['aboutID'] ?? $this->response['author'] ?? -1);
                     $app_data = \CONFIG::AUTHORIMGPATH . $about_info['imgFileName'];
                     break;
                 case '[*AUTHOR_NAME*]':
-                    $about_info = $this->getUserInfo($this->response['aboutID']);
+                    $about_info = $this->getUserInfo($this->response['aboutID'] ?? $this->response['author'] ?? -1);
                     $app_data = $about_info['name'];
                     break;
                 case '[*AUTHOR_TEXT*]':
-                    $about_info = $this->getUserInfo($this->response['aboutID']);
+                    $about_info = $this->getUserInfo($this->response['aboutID'] ?? $this->response['author'] ?? -1);
                     $app_data = $about_info['description'];
                     break;
                 case '[*DIALOGUE_ATTRIBUTES*]':
