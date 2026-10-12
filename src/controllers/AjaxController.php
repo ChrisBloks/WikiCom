@@ -297,7 +297,7 @@ class AjaxController implements iController
                     $this->request['isLoggedIn'] = true;
                     $new_body_content = (new PageFactory($this->request))->buildBody();
                     $body_array = [
-                        ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
+                        ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
                     ];
                     // All stages of validation succesful
                     $this->response = [
@@ -402,7 +402,7 @@ class AjaxController implements iController
                     $this->request['isLoggedIn'] = false;
                     $new_body_content = (new PageFactory($this->request))->buildBody();
                     $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
+                        ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
                     ];
                     break;
                 default:
