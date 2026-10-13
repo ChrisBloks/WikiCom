@@ -21,7 +21,7 @@ Wiki\views\BasePage,
 Wiki\views\BodyContainer,
 Wiki\views\containers\AtomicElement,
 Wiki\views\containers\Header,
-Wiki\views\containers\Toast,
+Wiki\tools\utils\HtmlUtils,
 Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
 Wiki\dataObjects\ElementInfo,
@@ -49,12 +49,16 @@ class PageFactory
     public function buildPage()
     {
         $this->addHead();
+
         $this->addScripts();
-        $this->buildBody();
+
+        $this->addBody();
+
         return $this->htmlpage;
     }
 
-    public function buildBody(): ?string{
+    public function buildBody(): ?string
+    {
         $this->addBody();
         return $this->htmlpage->getBodyContent();
     }
@@ -62,7 +66,7 @@ class PageFactory
 
     private function addHead()
     {
-        $this->htmlpage->addtoHeadContent(new AtomicElement(new ElementInfo(["html_tag" => "title", "text" => "Testpage"])));
+        $this->htmlpage->addtoHeadContent(new AtomicElement(new ElementInfo(["html_tag" => "title", "text" => ucfirst($this->page)])));
     }
 
     private function addScripts()
@@ -143,6 +147,7 @@ class PageFactory
 
         // add the <main> to the body content
         $this->htmlpage->addToBodyContent($main);
+
 
 
         //add the footer to the body content

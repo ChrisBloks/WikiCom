@@ -73,7 +73,7 @@ class PageController implements iController
     protected function validateRequest(): void
     {
         // Get correct handler
-        $requestHandler = ($this->request['posted'] ? new PostRequestHandler() : new GetRequestHandler());
+        $requestHandler = new GetRequestHandler();
 
         // Validate requets and retrieve page object
         $this->response = $requestHandler->handleRequest($this->request);
@@ -87,13 +87,12 @@ class PageController implements iController
     {
         $PageFactory = new PageFactory($this->response);
         $this->response_page = $PageFactory->buildPage();
-
         // if response page is not null -> show page
         if (!is_null($this->response_page)) {
             // HtmlUtils::dump("response_page", $this->response_page);
             $this->response_page->show();
-            
-            
+
+
         }
     }
 

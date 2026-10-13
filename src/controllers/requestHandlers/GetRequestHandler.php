@@ -56,6 +56,8 @@ class GetRequestHandler extends BaseRequestHandler
                 $this->response['aboutID'] = Utils::getRequestVar('author', false);
                 $this->response['userID'] = Utils::getSesVar('userID');
                 break;
+            default:
+                $this->response['page'] = 'home';
         }
 
         return $this->response;
