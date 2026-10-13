@@ -14,44 +14,8 @@ class PageGetRequestHandler extends BaseRequestHandler
         $this->response = $request;
 
         switch ($request['page']) {
-            case 'logout':
-                $this->response['page'] = 'home';
-                $this->response['isLoggedIn'] = false;
-                session_unset();
-                break;
             case 'article':
                 $this->response['articleID'] = Utils::getRequestVar('id', false);
-                break;
-            case 'search':
-                $this->response['Tag'] = [
-                    Utils::getRequestNumber(
-                        key: 'tag',
-                        frompost: false,
-                        default: ''
-                    ) // For some reason getRequestVar does not work consistently here 
-                ];
-                $this->response['Author'] = [];
-                $this->response['sortby'] = '';
-                break;
-            case 'editArticle':
-                $this->response['userID'] = Utils::getSesVar('userID');
-                $this->response['articleID'] = Utils::getRequestVar('id', false);
-                if (empty($this->response['articleID'])) {
-                    $this->response['articleID'] = 0;
-                } else {
-                    $article_info = ModelSelector::getArticleModel()->fetchArticleByID($this->response['articleID']);
-                    // TODO: remove this before merging
-                    if ( $this->response['userID'] != $article_info['user_id']) {
-                        $_SESSION['errors'][] = "You are not authorized to edit this article.";
-                    }
-                }
-                break;
-            case 'dashboard':
-                break;
-            case 'about';
-                $this->response['aboutID'] = Utils::getRequestVar('author', false);
-                $this->response['userID'] = Utils::getSesVar('userID');
-                break;
             default:
                 // $this->response['page'] = 'home';
                 break;

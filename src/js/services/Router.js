@@ -1,4 +1,4 @@
-import { ResponseHandler } from "../responseHandler.js";
+import { ResponseHandler } from "../ResponseHandler.js";
 import { ajaxGET } from "./Ajax.js";
 import { HistoryTracking } from "./HistoryTracking.js";
 

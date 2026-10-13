@@ -14,6 +14,11 @@ class Config
     private static function get(string $key, string $envName, string $default): string
     {
         // Load optional personal overrides once (this file is NOT in GitHub)
+        // make local config.local.php with just
+        // <?php
+        // return ['' => '']
+        // with your own settings of phpmyadmin
+
         if (self::$local === null) {
             $file = __DIR__ . '/config.local.php';
             self::$local = file_exists($file) ? require $file : [];

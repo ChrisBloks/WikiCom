@@ -6,10 +6,7 @@ use
 Wiki\tools\interfaces\iController,
 Wiki\controllers\requestHandlers\PostRequestHandler,
 Wiki\tools\utils\utils,
-Wiki\controllers\ArticleHandler,
-Wiki\controllers\factories\PageFactory,
-Wiki\tools\utils\HtmlUtils;
-use Wiki\controllers\requestHandlers\AjaxGetRequestHandler;
+Wiki\controllers\requestHandlers\AjaxGetRequestHandler;
 
 class AjaxController implements iController
 {

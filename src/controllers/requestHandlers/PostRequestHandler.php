@@ -16,17 +16,16 @@ class PostRequestHandler extends BaseRequestHandler
     // TODO: add validationHandler as dependency injection?
     public function handleRequest(array $request): array
     {
-
-        switch ($request['page']) {
+        switch ($request['action']) {
             case 'saveRating':
-                if (!$this->request['isLoggedIn']) {
+                if (!$request['isLoggedIn']) {
                     throw new \BadMethodCallException('Tried to save a rating without being logged in!');
                 } else {
                     $rating = utils::getRequestVar('rating', true, null);
                     $article_id = utils::getRequestVar('article_id', true, null);
                     $articleHandler = new ArticleHandler();
                     $rating_info = $articleHandler->handleSaveRating(
-                        user_id: $this->request['userID'],
+                        user_id: $request['userID'],
                         article_id: $article_id,
                         rating: $rating
                     );
@@ -39,7 +38,7 @@ class PostRequestHandler extends BaseRequestHandler
             case 'deleteArticle':
                 $articleHandler = new ArticleHandler();
                 $delete_result = $articleHandler->handleDeleteArticle(
-                    article_id: (int) $this->request['id'],
+                    article_id: (int) $request['id'],
                     userId: (int) $_SESSION['userID']
                 );
                 if ($delete_result === false) {
@@ -73,7 +72,7 @@ class PostRequestHandler extends BaseRequestHandler
                         'errors' => $result['user_error'] ?? [],
                         'message' => $result['ok'] ? 'Your information has been updated.' : 'Something went wrong.',
                         'name' => $result['field_inputs']['name'] ?? null,
-                        'userID' => $this->request['userID'] ?? null,
+                        'userID' => $request['userID'] ?? null,
                         'email' => $result['field_inputs']['email'] ?? null,
                         'avatar_url' => $result['field_inputs']['avatar_url'] ?? null,
                     ];
@@ -247,9 +246,9 @@ class PostRequestHandler extends BaseRequestHandler
                     ];
                     break;
                 }
-                $this->request['page'] = 'home';
-                $this->request['isLoggedIn'] = true;
-                $new_body_content = (new PageFactory($this->request))->buildBody();
+                $request['page'] = 'home';
+                $request['isLoggedIn'] = true;
+                $new_body_content = (new PageFactory($request))->buildBody();
                 $body_array = [
                     ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
                 ];
@@ -279,12 +278,11 @@ class PostRequestHandler extends BaseRequestHandler
 
                 if ($validation_result['ok']) {
                     // This is the post request for editing or saving a (new) article
-
                     $validation_result = ArticleHandler::getInstance()
                         ->handleArticleSubmission(
                             validation_result: $validation_result,
                             article_id: $this->response['articleID'],
-                            user_id: $this->request['user_id']
+                            user_id: $request['userID']
                         );
 
                     if (isset($validation_result['field_inputs']['new_article_id'])) {
@@ -292,10 +290,18 @@ class PostRequestHandler extends BaseRequestHandler
                     }
 
                     if ($validation_result['ok']) {
+                        $request['page'] = 'article';
+                        $request['articleID'] = $this->response['articleID'];
+                        $new_body_content = (new PageFactory($request))->buildBody();
+                        $body_array = [
+                            ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
+                        ];
+                        // All stages of validation succesful
                         $this->response = [
                             'page' => 'article',
                             'success' => True,
-                            'message' => 'Article has been submitted!'
+                            'message' => 'Article was successfully saved!',
+                            'html' => $body_array,
                         ];
                     } else {
                         $this->response = [
@@ -315,8 +321,8 @@ class PostRequestHandler extends BaseRequestHandler
             default:
                 $this->response = [
                     'success' => false,
-                    'message' => 'Unknown AJAX action: ' . $this->request['action'],
-                    'POST' => $this->request,
+                    'message' => 'Unknown AJAX action: ' . $request['action'],
+                    'POST' => $request,
                 ];
 
 
