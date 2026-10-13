@@ -9,7 +9,7 @@ namespace Wiki\views\containers;
 use Wiki\dataObjects\ElementInfo;
 use Wiki\dataObjects\FieldInfo;
 use Wiki\views\containers\ContainerElement,
-    Wiki\views\fields\Select;
+Wiki\views\fields\Select;
 use Wiki\views\fields\ButtonField;
 use Wiki\views\fields\HiddenField;
 use Wiki\tools\utils\HtmlUtils;
@@ -28,10 +28,11 @@ class Rating extends ContainerElement
     {
         parent::__construct($element_info);
 
+
         $rating = $element_info['options_info']['rating'] ?? 0;
         $display_only = $element_info['options_info']['display_only'] ?? false;
-        $ratable = 
-            ($element_info['options_info']['is_logged_in'] ?? false) && 
+        $ratable =
+            ($element_info['options_info']['is_logged_in'] ?? false) &&
             ($element_info['options_info']['user_id'] ?? -1) != ($element_info['options_info']['author_id'] ?? -1);
         $article_id = $element_info['options_info']['article_id'] ?? -1;
         $count = $element_info['options_info']['n_ratings'] ?? '?';
@@ -39,29 +40,29 @@ class Rating extends ContainerElement
         $max = 5;
         $percent = ($rating / $max) * 100;
 
-
         // Add interactive element
         if (!$display_only && $ratable) {
             // Add dropdown
             $this->addElement(
                 new Select(
                     new ElementInfo([
-                    'element_name' => "rating_dropdown_" . $article_id,
-                    'html_class' => "rating_select",
-                    'field_info' => new FieldInfo([
-                        'label' => "Rate this article"
-                    ]),
-                    'options_info' => [
-                        [
-                            ['id' => 1, 'name' => 1],
-                            ['id' => 2, 'name' => 2],
-                            ['id' => 3, 'name' => 3],
-                            ['id' => 4, 'name' => 4],
-                            ['id' => 5, 'name' => 5],
-                        ],
-                        'rating_option'
-                    ]
-                ]))
+                        'element_name' => "rating_dropdown_" . $article_id,
+                        'html_class' => "rating_select",
+                        'field_info' => new FieldInfo([
+                            'label' => "Rate this article"
+                        ]),
+                        'options_info' => [
+                            [
+                                ['id' => 1, 'name' => 1],
+                                ['id' => 2, 'name' => 2],
+                                ['id' => 3, 'name' => 3],
+                                ['id' => 4, 'name' => 4],
+                                ['id' => 5, 'name' => 5],
+                            ],
+                            'rating_option'
+                        ]
+                    ])
+                )
             );
 
             // Add button
@@ -100,6 +101,7 @@ class Rating extends ContainerElement
             )
         );
 
+
         // Add hidden element
         $this->addElement(
             new HiddenField(
@@ -109,7 +111,7 @@ class Rating extends ContainerElement
                         'field_name' => 'article_id',
                         'value' => $article_id
                     ])
-                ]) 
+                ])
             )
         );
     }

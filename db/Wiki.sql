@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2026 at 03:39 PM
+-- Generation Time: Oct 13, 2026 at 11:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -211,7 +211,7 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (40, 'edit_password_field_new', '', 'editPassword-pw2 form-control', '', 'new_password', ''),
 (41, 'edit_user_field_description', '', 'about-text form-control', '', 'textarea', ''),
 (42, 'edit_user_field_img', '', 'about-img-file form-control', '', 'Input', ''),
-(43, 'create_new_article', 'form', '', '', 'Form', ''),
+(43, 'create_new_article', 'button', 'btn btn-primary mx-auto d-block', 'create_new_article_button', 'Buttonfield', 'Create new article'),
 (44, 'search_container', 'div', 'container-fluid', '', 'ContainerElement', ''),
 (45, 'search_row', 'div', 'row', '', 'ContainerElement', ''),
 (46, 'search_col', 'div', 'col-12 col-md-3 border-end pe-4', '', 'ContainerElement', ''),
@@ -332,24 +332,19 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (48, 40, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '40', 0, 'field', 0),
 (49, 38, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '39', 0, 'element', 0),
 (50, 38, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '40', 0, 'element', 0),
-(51, 43, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '43', 0, 'form', 0),
 (52, 14, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '17', 0, 'element', 0),
 (53, 17, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '17', 0, 'field', 0),
 (55, 23, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
 (56, 22, 'user', 'id,name', '', '', 0, 'options', 0),
 (57, 24, 'v_sortby_options', 'id,name', '', '', 0, 'options', 0),
-(59, 50, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'title\',\'author\',\'tags\',\'lastEdit\',\'rating\'', 0, 'options', 0),
+(59, 50, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,page_value,display_order', 'column_name', '\'title\',\'author\',\'tags\',\'lastEdit\',\'rating\'', 0, 'options', 0),
 (60, 18, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '51', 0, 'element', 0),
 (61, 51, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '51', 0, 'field', 0),
-(62, 43, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '62', 0, 'element', 0),
-(63, 43, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '63', 0, 'element', 0),
-(64, 62, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '62', 0, 'field', 0),
-(65, 63, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '63', 0, 'field', 0),
 (66, 65, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '65', 0, 'field', 0),
 (68, 25, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '72', 0, 'element', 15),
 (69, 72, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '72', 0, 'field', 0),
 (70, 30, 'wiki_tag', 'id,name', '', '', 0, 'options', 0),
-(71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,href,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0),
+(71, 76, 'table_columns', 'column_name,column_title,display_type,class_types,column_headers,page_value,display_order', 'column_name', '\'id\',\'title\',\'lastEdit\'', 0, 'options', 0),
 (72, 77, 'aria_attributes', 'name,value', 'id', '1,2', 0, 'aria_attributes', 0),
 (73, 77, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '78', 0, 'element', 10),
 (74, 79, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '80', 0, 'element', 10),
@@ -362,7 +357,8 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (95, 102, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '102', 0, 'field', 0),
 (98, 38, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '105', 0, 'element', 0),
 (101, 105, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '105', 0, 'field', 0),
-(105, 109, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '109', 0, 'field', 0);
+(105, 109, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '109', 0, 'field', 0),
+(106, 110, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '110', 0, 'field', 0);
 
 -- --------------------------------------------------------
 
@@ -447,7 +443,7 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (7, 'Tag', 23, 'SearchableCheckboxes', 'Filter by Tag', '', 1),
 (8, 'sortby', 24, 'select', 'Sort by', '', 0),
 (9, 'title', 26, 'text', 'Article title:', '', 0),
-(10, 'bodytext', 27, 'textarea', 'Body Text', '', 1),
+(10, 'bodytext', 27, 'textarea', 'Body Text', '', 0),
 (11, 'codeblock', 28, 'textarea', 'Codeblock', '', 1),
 (12, 'articleimg', 29, 'file', 'Upload File', '', 1),
 (13, 'articletags', 30, 'SearchableCheckboxes', 'Article tags:', '', 0),
@@ -461,14 +457,13 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (21, 'description', 41, 'textarea', 'About me:', '', 1),
 (22, 'aboutimg', 42, 'file', 'Upload file:', '', 1),
 (23, 'page', 51, 'hidden', '', 'login', 0),
-(24, 'page', 62, 'hidden', '', 'editArticle', 0),
-(25, 'id', 63, 'hidden', '', '0', 0),
 (26, 'Edit User Information', 65, 'Button', 'Change user information', '', 1),
 (27, 'Edit Password', 66, 'Button', '', '', 1),
 (28, 'articleID', 72, 'hidden', '', '$editArticleID', 0),
 (31, 'id', 102, 'hidden', '', '', 0),
 (36, 'id', 105, 'hidden', '', '', 0),
-(37, 'new_tag', 109, 'text', '', '', 0);
+(37, 'new_tag', 109, 'text', '', '', 0),
+(38, 'new_tag_button', 110, 'button', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -497,7 +492,6 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 (3, 21, 'searchArticle', 'POST', '', 'Filter', '', 'btn btn-primary btn-sm'),
 (4, 25, 'saveArticle', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm'),
 (5, 31, 'registerUser', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
-(6, 43, '', 'GET', '', 'Create new article', '', 'btn btn-primary mx-auto d-block'),
 (7, 35, 'updateUserInfo', 'POST', '', 'Change information', '', 'btn btn-primary'),
 (8, 38, 'updatePassword', 'POST', '', 'save', '', 'btn btn-primary');
 
@@ -681,16 +675,16 @@ CREATE TABLE `table_columns` (
   `class_types` varchar(255) NOT NULL,
   `column_headers` varchar(255) NOT NULL DEFAULT '0',
   `display_order` int(11) NOT NULL,
-  `href` varchar(255) NOT NULL
+  `page_value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `table_columns`
 --
 
-INSERT INTO `table_columns` (`id`, `column_name`, `column_title`, `display_type`, `class_types`, `column_headers`, `display_order`, `href`) VALUES
+INSERT INTO `table_columns` (`id`, `column_name`, `column_title`, `display_type`, `class_types`, `column_headers`, `display_order`, `page_value`) VALUES
 (1, 'id', 'Actions', 'first_cell', 'first_cell', 'first_cellTableHead', 0, ''),
-(2, 'title', 'Title', 'Title', 'articletitle', 'articletitleTableHead', 10, 'main.php?page=article&id='),
+(2, 'title', 'Title', 'Title', 'articletitle', 'articletitleTableHead', 10, 'pageArticle'),
 (3, 'lastEdit', 'Last edited', 'date', 'lastEdit', 'lastEditTableHead', 40, ''),
 (5, 'rating', 'Average Rating', 'rating', 'rating', 'ratingTableHead', 30, ''),
 (6, 'tags', 'Tags', 'string', 'tags_class', 'tagsTableHead', 20, ''),
@@ -716,7 +710,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `description`) VALUES
-(1, 'Danny12', '$2y$10$5u98k0LZarKnzLeIgANPpOb2e5si298S3xfxNNOD2TTZvH5ZYrckC', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
+(1, 'Danny123', '$2y$10$5u98k0LZarKnzLeIgANPpOb2e5si298S3xfxNNOD2TTZvH5ZYrckC', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christiannn', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'christian@email.com', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
 (11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
@@ -768,7 +762,7 @@ INSERT INTO `wiki_article` (`id`, `title`, `user_id`, `bodytext`, `codeblock`, `
 (1, 'http build query', 1, 'Met deze functie kun je een HTTPS url samenstellen aan de hand van parameters.', 'public static function buildUrl(array $params = []): string\r\n    {\r\n        return &#039;?&#039; . http_build_query($params);\r\n    }', 'article1.jpeg', '2026-10-12'),
 (28, 'PHP', 1, 'PHP is een scripttaal en is vergelijkbaar met Perl, Python en Ruby. Qua syntaxis lijkt PHP het meest op C, maar net als bij veel andere scripttalen moeten variabelen voorafgegaan worden door een dollarteken $. Dit is overgenomen uit de scripttaal Perl, waarvan PHP mede is afgeleid. In tegenstelling tot C is het in PHP wel mogelijk om naast procedureel programmeren ook objectgeoriënteerd te programmeren, net als in bijvoorbeeld Java, C++ en C#. In de eerste versies van PHP was het objectgeoriënteerd programmeren nog heel beperkt. Pas sinds versie 5 zijn de meest essentiële functies hiervoor allemaal beschikbaar.', '$url = &quot;http://nl.wikipedia.org/wiki/PHP&quot;;\r\n\r\necho &quot;U bevindt zich momenteel op $url. Welkom!&quot;;\r\n// Of\r\necho &quot;U bevindt zich momenteel op &quot;.$url.&quot;. Welkom!&quot;;', 'article_0.jpeg', '2026-09-08'),
 (29, 'New article', 1, 'This is the body text.', '', 'article_0.png', '2026-09-08'),
-(31, 'test 2', 1, 'testdd', 'v', 'article_31.png', '2026-10-12');
+(31, 'test', 1, '**test**', 'test', 'article_31.jpg', '2026-10-12');
 
 -- --------------------------------------------------------
 
@@ -1040,7 +1034,7 @@ ALTER TABLE `element_info`
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `element_to_application_data`
@@ -1052,7 +1046,7 @@ ALTER TABLE `element_to_application_data`
 -- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `form_info`
@@ -1094,7 +1088,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `wiki_article`
 --
 ALTER TABLE `wiki_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `wiki_sortby_info`
@@ -1106,7 +1100,7 @@ ALTER TABLE `wiki_sortby_info`
 -- AUTO_INCREMENT for table `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- Constraints for dumped tables
