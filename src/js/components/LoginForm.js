@@ -2,7 +2,7 @@
 // LoginForm: AJAX login form handling
 // ============================================================
 import { AjaxForms } from "../services/AjaxForms.js";
-import { ResponseHandler } from "../responseHandler.js";
+import { ResponseHandler } from "../ResponseHandler.js";
 
 
 export const LoginForm = {
