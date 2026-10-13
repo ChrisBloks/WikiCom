@@ -4,6 +4,12 @@ import { ContactForm } from "./components/ContactForm.js";
 import { RegisterUser } from "./components/RegisterUser.js";
 import { LoginForm } from "./components/LoginForm.js";
 import { EditArticleForm } from "./components/EditArticle.js";
+import { DashboardEvents } from "./components/DashboardEvents.js";
+import { TagWidget } from "./components/Tagwidget.js";
+import { updateCheckboxGroup, resetCheckboxesToDefault, } from "./components/Checkboxes.js";
+import { saveRating } from "./services/SaveRating.js";
+
+
 
 export const ResponseHandler = {
     // ==============================================================================
@@ -52,24 +58,67 @@ export const ResponseHandler = {
                     console.log("Login form initialized");
                     break;
                 case 'pageSearch':
+                    //tag searchbar
+                    document.querySelectorAll(".checkbox_group").forEach(function (checkbox_group) {
+                        resetCheckboxesToDefault(checkbox_group);
+                    });
+
+                    // searchbar update (js)
+                    document.querySelectorAll(".searchField").forEach(function (search_field) {
+                        search_field.addEventListener("input", function (_) {
+                            console.log("input change");
+                            let checkbox_group = this.parentNode.querySelector(".checkbox_group");
+                            updateCheckboxGroup(checkbox_group, this.value, 1);
+                        });
+                    });
                     SearchForm.init();
                     console.log('Search form initialized');
                     break;
                 case 'pageDashboard':
+                    DashboardEvents.init();
+                    console.log("Dashboard events initialized")
                     break;
                 case 'pageArticle':
+                    // scales stars correctly
+                    const fillSpan = document.querySelector(".fill-ratings span");
+                    const starRatings = document.querySelector(".star-ratings");
+                    if (fillSpan && starRatings) {
+                        starRatings.style.width = fillSpan.offsetWidth + "px";
+                    }
+                    saveRating.init();
                     break;
                 case 'pageEditArticle':
+                    // editArticle add tag widget
+                    TagWidget.init();
+                    const widget = document.querySelector("#add-tag-widget");
+                    const checkboxgroup = document.querySelector(".checkbox_group");
+                    if (widget && checkboxgroup) {
+                        checkboxgroup.parentNode.insertBefore(widget, checkboxgroup);
+                    }
+
+                    //tag searchbar
+                    document.querySelectorAll(".checkbox_group").forEach(function (checkbox_group) {
+                        resetCheckboxesToDefault(checkbox_group);
+                    });
+
+                    // searchbar update (js)
+                    document.querySelectorAll(".searchField").forEach(function (search_field) {
+                        search_field.addEventListener("input", function (_) {
+                            console.log("input change");
+                            let checkbox_group = this.parentNode.querySelector(".checkbox_group");
+                            updateCheckboxGroup(checkbox_group, this.value, 1);
+                        });
+                    });
                     EditArticleForm.init()
                     console.log('Edit article form initialized');
                     break;
-                
+
                 default:
                     console.log('ResponseHandler error, status: ' + status + ' not recognized.');
                     break;
             }
         }
-        
+
     },
     // ==============================================================================
 }

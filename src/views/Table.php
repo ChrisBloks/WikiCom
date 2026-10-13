@@ -16,7 +16,7 @@ use Wiki\tools\utils\HtmlUtils, Wiki\config, Wiki\views\containers\Rating;
  *              [column_headers] => should be class type specifically for the table head
  * @var array $rows [strings => string] Contains the row values for a table
  *                  dependant on display_type of the $columns
- * @var string $page_value Value of target page for possible href redirect
+ * @var string $page_value Value of target page for possible page_value redirect
  */
 class Table implements iElement
 {
@@ -142,7 +142,7 @@ class Table implements iElement
                 return "<td$classAttr>" . htmlspecialchars((string) $value) . '</td>';
             // cell contains title
             case 'Title':
-                return '<td'.$classAttr.'><a href="'.$column['href'].''.$row_data['id'].'">' . htmlspecialchars((string) $value) . '</a></td>';
+                return '<td'.$classAttr.'><a class="cell-link" page_value="'.$column['page_value'].''.$row_data['id'].'" data-targetPage = '.$column['page_value'].' data-id ='.$row_data['id'].'>' . htmlspecialchars((string) $value) . '</a></td>';
 
             default:
                 throw new \InvalidArgumentException('Unknown display_type: '. $column['display_type']);

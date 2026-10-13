@@ -31,7 +31,8 @@ class ButtonField extends BaseField
         // Construct opening tag
         $this->html .= "<{$element_info['html_tag']} " .
                         'id="' . $this->id . '"'.
-                        'class="'. $element_info['html_class'] .'"'. HtmlUtils::addAttrs($element_info['attributes'] ?? []) .
+                        'class="'. $element_info['html_class'] .'"
+                        '. HtmlUtils::addAttrs($element_info['attributes'] ?? []) .
                         'type="'.$field_info['type'].'" '.
                         'value="'.$field_info['value'].'" '.
                         '>';
