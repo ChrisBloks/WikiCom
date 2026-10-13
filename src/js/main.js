@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ArticleDelete.init();
   initPasswordLengthChecker();
   MarkdownToolbar.init(".article-text");
-  saveRating.init();
   SearchForm.init();
   ContactForm.init();
   RegisterUser.init();

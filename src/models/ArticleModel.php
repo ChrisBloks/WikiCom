@@ -1,9 +1,9 @@
 <?php
 /* ArticleModel
-*  Danny
-*  08/2026
-*  ArticleModel class gives al the methods needed to pull or insert article information from database
-*/
+ *  Danny
+ *  08/2026
+ *  ArticleModel class gives al the methods needed to pull or insert article information from database
+ */
 
 namespace Wiki\models;
 
@@ -48,7 +48,7 @@ class ArticleModel extends BaseModel
         $params = ['article_id' => $article_id];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
 
-        if ($get_tags){
+        if ($get_tags) {
             $tags = $this->fetchArticleTags($article_id);
             $result['tags'] = $tags;
         }
@@ -128,7 +128,7 @@ class ArticleModel extends BaseModel
 
             // check if any tags are given and build IN clause
             if (!empty($tag_ids)) {
-                $join_clause .=  ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
+                $join_clause .= ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
                     ' JOIN wiki_tag ON wiki_tag.id = att.wiki_tag_id';
                 [$in_clause, $placeholder_mapping] = $this->buildInClause(reference: 'att.wiki_tag_id', values: $tag_ids, prefix: 'tag');
                 $where_statements[] = $in_clause;
@@ -159,8 +159,8 @@ class ArticleModel extends BaseModel
 
         $result = $this->crud->selectMany(sql: $sql, params: $params);
 
-        foreach ($result as $key => $article){
-            $result[$key]['tags'] = implode(",",$this->fetchArticleTags($article['id']));
+        foreach ($result as $key => $article) {
+            $result[$key]['tags'] = implode(",", $this->fetchArticleTags($article['id']));
             $result[$key]['Author'] = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($article['user_id'])['name'];
         }
 
@@ -364,5 +364,57 @@ class ArticleModel extends BaseModel
         }
 
         return $this->crud->selectOne($sql, $params);
+    }
+
+
+    public function fetchAllArticles(): array|false
+    {
+        $sql = "SELECT `title` FROM `wiki_article`";
+        return $this->crud->selectMany($sql, []);
+    }
+
+    public function fetchAllTags(): array|false
+    {
+        $sql = "SELECT `name` FROM `wiki_tag`";
+        return $this->crud->selectMany($sql, []);
+    }
+
+    public function fetchArticlesByUserID(int $user_id): array|false
+    {
+        $sql = "SELECT `title` FROM wiki_article WHERE `user_id`=:user_id";
+        $params = ['user_id' => $user_id];
+        return $this->crud->selectMany(sql: $sql, params: $params);
+    }
+
+    public function fetchArticlesByTag(string $tag): array|false
+    {
+        $sql = "SELECT
+                    *
+                FROM
+                    `wiki_article`
+                LEFT JOIN wiki_article_to_tag wat ON
+                    `wiki_article.id`=`wat.article_id`
+                LEFT JOIN wiki_tag wt ON
+                    `wt.id`=`wat.wiki_tag_id`
+                WHERE
+                `wt.name`=:tag";
+        $params = ['tag' => $tag];
+        return $this->crud->selectMany(sql: $sql, params: $params);
+    }
+
+    public function fetchArticlesByTagAndUserId(string $tag, int $user_id): array | false
+    {
+                $sql = "SELECT
+                    *
+                FROM
+                    `wiki_article`
+                LEFT JOIN wiki_article_to_tag wat ON
+                    `wiki_article.id` = `wat.article_id`
+                LEFT JOIN wiki_tag wt ON
+                    `wt.id`=`wat.wiki_tag_id`
+                WHERE
+                `wt.name`=:tag AND `wiki_article.user_id` =:user_id";
+        $params = ['tag' => $tag, 'user_id' => $user_id];
+        return $this->crud->selectMany(sql: $sql, params: $params);
     }
 }
