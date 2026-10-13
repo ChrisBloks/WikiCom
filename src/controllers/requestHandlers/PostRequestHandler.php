@@ -16,8 +16,7 @@ class PostRequestHandler extends BaseRequestHandler
     // TODO: add validationHandler as dependency injection?
     public function handleRequest(array $request): array
     {
-
-        switch ($request['page']) {
+        switch ($request['action']) {
             case 'saveRating':
                 if (!$this->request['isLoggedIn']) {
                     throw new \BadMethodCallException('Tried to save a rating without being logged in!');

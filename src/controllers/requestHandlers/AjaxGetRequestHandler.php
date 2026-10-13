@@ -21,10 +21,18 @@ class AjaxGetRequestHandler extends BaseGetRequestHandler
             case 'pageRegister':
             case 'pageLogin':
             case 'pageDashboard':
+                $page = lcfirst(substr($this->request['action'], 4));
+                $this->request['page'] = $page;
+                $new_body_content = (new PageFactory($this->request))->buildBody();
+                $this->response = [
+                    ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
+                ];
+                break;
             case 'pageEditArticle':
             case 'pageArticle':
                 $page = lcfirst(substr($this->request['action'], 4));
                 $this->request['page'] = $page;
+                $this->request['articleID'] = Utils::getRequestVar('articleID',false,0,true);
                 $new_body_content = (new PageFactory($this->request))->buildBody();
                 $this->response = [
                     ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
