@@ -9,14 +9,11 @@ Wiki\controllers\AjaxController;
 
 /**
  * Controller class for initial request handling and forwarding request to the correct subcontroller.
- * @var bool $async true if MainController is accessed through an AJAX request, otherwise false.
  */
 class MainController
 {
     protected bool $posted;
     protected array $request;
-    protected bool $async;
-    protected string $action;
 
     /**
      * __construct

@@ -21,7 +21,7 @@ import { Toasts } from "./components/Toasts.js";
 import { MarkdownToolbar } from "./components/MarkdownEditor.js";
 import { saveRating } from "./services/SaveRating.js";
 import { updateCheckboxGroup, resetCheckboxesToDefault, } from "./components/Checkboxes.js";
-import { SearchForm } from "./components/searchForm.js";
+import { SearchForm } from "./components/SearchForm.js";
 import { ContactForm } from "./components/ContactForm.js";
 import { RegisterUser } from "./components/RegisterUser.js";
 import { LoginForm } from "./components/LoginForm.js";
