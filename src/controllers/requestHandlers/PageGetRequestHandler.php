@@ -53,9 +53,11 @@ class PageGetRequestHandler extends BaseRequestHandler
                 $this->response['userID'] = Utils::getSesVar('userID');
                 break;
             default:
-                $this->response['page'] = 'home';
+                // $this->response['page'] = 'home';
+                break;
         }
 
+        
         return $this->response;
     }
 

@@ -26,7 +26,6 @@ Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
 Wiki\dataObjects\ElementInfo,
 Wiki\controllers\ElementHandler;
-use Wiki\tools\utils\HtmlUtils;
 
 class PageFactory
 {

@@ -2,6 +2,7 @@
 
 export const HistoryTracking = {
     add(action) {
+        console.log('Adding History: ' + action);
         let data, unused, url;
         data = {'action': action};
         unused = "";
@@ -19,7 +20,7 @@ export const HistoryTracking = {
                 unused = 'Unknown action in HistoryTracking!';
                 break;
         }
-        
+
         history.pushState(data, unused, url);
     }
 }
