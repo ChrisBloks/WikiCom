@@ -19,9 +19,7 @@ import { TagWidget } from "./components/Tagwidget.js";
 import { initPasswordLengthChecker } from "./components/PasswordLengthChecker.js";
 import { Toasts } from "./components/Toasts.js";
 import { MarkdownToolbar } from "./components/MarkdownEditor.js";
-import { saveRating } from "./services/SaveRating.js";
-import { updateCheckboxGroup, resetCheckboxesToDefault, } from "./components/Checkboxes.js";
-import { SearchForm } from "./components/searchForm.js";
+import { SearchForm } from "./components/SearchForm.js";
 import { ContactForm } from "./components/ContactForm.js";
 import { RegisterUser } from "./components/RegisterUser.js";
 import { LoginForm } from "./components/LoginForm.js";
@@ -44,12 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       el.classList.add("align-middle");
     });
 
-  // editArticle add tag widget
-  const widget = document.querySelector("#add-tag-widget");
-  const checkboxgroup = document.querySelector(".checkbox_group");
-  if (widget && checkboxgroup) {
-    checkboxgroup.parentNode.insertBefore(widget, checkboxgroup);
-  }
+
 
   //===========================================================
   // inits
@@ -66,49 +59,17 @@ document.addEventListener("DOMContentLoaded", () => {
   LoginForm.init();
   EditArticleForm.init();
 
-  //bind ajax form
-  AjaxForms.bind("#editUserModal form", {
-    onSuccess: function (result) {
-      if (result.name) {
-        document.querySelector(".userNameDisplay").textContent = result.name;
-        document.querySelector(
-          `[data-user-id="${result.user_id}"]`,
-        ).textContent = result.name;
-      }
-      if (result.email) {
-        document.querySelector(".userEmailDisplay").textContent = result.email;
-      }
-      if (result.avatar_url) {
-        const bustedUrl = result.avatar_url + "?t=" + Date.now();
-        document.querySelector(".dashboard-pic").src = bustedUrl;
-      }
-    },
-  });
+  // document.querySelectorAll(".checkbox_group").forEach(function (checkbox_group) {
+  //   resetCheckboxesToDefault(checkbox_group);
+  // });
 
-  AjaxForms.bind("#editPasswordModal form", {
-    onSuccess: function () {
-      console.log("Password changed successfully");
-    },
-  });
-  const fillSpan = document.querySelector(".fill-ratings span");
-  const starRatings = document.querySelector(".star-ratings");
-
-  if (fillSpan && starRatings) {
-    starRatings.style.width = fillSpan.offsetWidth + "px";
-  }
-
-  document.querySelectorAll(".checkbox_group").forEach(function (checkbox_group) {
-    resetCheckboxesToDefault(checkbox_group);
-  });
-
-  // searchbar update (js)
-  document.querySelectorAll(".searchField").forEach(function (search_field) {
-    search_field.addEventListener("input", function (_) {
-      console.log("input change");
-      let checkbox_group = this.parentNode.querySelector(".checkbox_group");
-      updateCheckboxGroup(checkbox_group, this.value, 1);
-    });
-  });
-
+  // // searchbar update (js)
+  // document.querySelectorAll(".searchField").forEach(function (search_field) {
+  //   search_field.addEventListener("input", function (_) {
+  //     console.log("input change");
+  //     let checkbox_group = this.parentNode.querySelector(".checkbox_group");
+  //     updateCheckboxGroup(checkbox_group, this.value, 1);
+  //   });
+  // });
 
 });

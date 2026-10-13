@@ -8,6 +8,7 @@ use Wiki\views\fields\HiddenField;
 use Wiki\views\containers\DeleteForm;
 use Dom\Element;
 use Wiki\dataObjects\ElementInfo;
+use Wiki\views\fields\ButtonField;
 /**
  * Creates several options in a table cell that correspond to a set of actions
  * actions are database->delete article or editpage
@@ -38,34 +39,31 @@ class FirstCell
         $editUrl = utils\Url::buildUrl(['page' => $this->target_page, 'id' => $this->page_id]);
 
         $str = '<div class="d-flex gap-2 align-items-center">';
-        $str .= '<a href="' . $editUrl . '" class="btn btn-primary btn-sm">'
+        $str .= '<a data-targetpage="page'.ucfirst($this->target_page)
+            .'" data-id='.$this->page_id
+            .' class="btn btn-primary btn-sm cell-link">'
             . $this->_actionLink($this->page_id, '&#10000;', 'Update')
             . '</a>';
-        $str .= $this->_buildDeleteForm();
+        $str .= $this->_buildDeleteButton();
         $str .= '</div>';
         return $str;
     }
 
     /**
-     * Sends form request to delete an article
-     * @return string HTML-string containing the form
+     * Sends button request to delete an article
+     * @return string HTML-string containing the button
      */
-    private function _buildDeleteForm(): string
+    private function _buildDeletebutton(): string
     {
-        $form = new DeleteForm(
-            action: 'main.php',
-            method: 'POST',
-            submit_caption: '&#10060;',
-            class: "ajax-delete-form",
-            submit_class: 'btn btn-danger btn-sm delete-button'
+        $button = new ButtonField(
+            new ElementInfo([
+                'html_tag' => 'button',
+                'class' => 'ajax-delete-button btn btn-danger btn-sm delete-button',
+                'attributes' => ['data-article-ID' => $this->page_id], 
+                'field_info' => ['text' => '&nbsp;'.'&#10005;'.'&nbsp;'], 
+            ])
         );
-        $form->addElement(new HiddenField(
-            new ElementInfo(['field_info' => ['field_name' => 'page','value' => $this->delete_page]])
-            ));
-        $form->addElement(new HiddenField(
-            new ElementInfo(['field_info' => ['field_name' => 'id','value' => $this->page_id]])
-            ));
-        return $form->show();
+        return $button->show();
     }
 
     /**

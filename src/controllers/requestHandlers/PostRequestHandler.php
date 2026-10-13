@@ -3,12 +3,12 @@
 namespace Wiki\controllers\requestHandlers;
 
 use Wiki\tools\utils\Utils,
-    Wiki\tools\utils\HtmlUtils,
-    Wiki\controllers\UserHandler,
-    Wiki\controllers\ArticleHandler,
-    Wiki\controllers\ValidationHandler,
-    Wiki\models\ModelSelector;
-use Monolog\Test\TestCase;
+Wiki\tools\utils\HtmlUtils,
+Wiki\controllers\UserHandler,
+Wiki\controllers\ArticleHandler,
+Wiki\controllers\ValidationHandler,
+Wiki\models\ModelSelector,
+Wiki\controllers\factories\PageFactory;
 
 class PostRequestHandler extends BaseRequestHandler
 {
@@ -16,138 +16,309 @@ class PostRequestHandler extends BaseRequestHandler
     // TODO: add validationHandler as dependency injection?
     public function handleRequest(array $request): array
     {
-        $this->response = $request;
-        $_SESSION['errors'] = [];
-        $_SESSION['messages'] = [];
-
-        // Validate the posted Form
-        // Get field type and name
-        $field_info = ModelSelector::getElementModel()
-            ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id',true));
-
-        // Perform basic validation on contact fields, field inputs are retrieved internally
-        // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
-        $validation_result = (new ValidationHandler)
-            ->validateFields(field_info: $field_info);
-        
-
-        // If form was submitted correctly WRONG: add validation errors to response
-        $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-        // If form was submmitted CORRECT: get page-specific behaviour
-        // Get page-speicifc behaviour
-        switch ($request['page']) {
-            case 'register':
-                if ($validation_result['ok']) {
-
-                    // handle if registration is allowed
-                    $validation_result = UserHandler::getInstance()
-                        ->handleRegistration(validation_result: $validation_result);
-
-                    // Add all (if any) error messages to the response array
-                    $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-
-                    // Registration was successful
-                    if ($validation_result['ok'] !== false) {
-                        $this->response['page'] = 'login';
-                        $_SESSION['messages'][] = 'Registration was successful!';
-                    }
+        switch ($request['action']) {
+            case 'saveRating':
+                if (!$this->request['isLoggedIn']) {
+                    throw new \BadMethodCallException('Tried to save a rating without being logged in!');
+                } else {
+                    $rating = utils::getRequestVar('rating', true, null);
+                    $article_id = utils::getRequestVar('article_id', true, null);
+                    $articleHandler = new ArticleHandler();
+                    $rating_info = $articleHandler->handleSaveRating(
+                        user_id: $this->request['userID'],
+                        article_id: $article_id,
+                        rating: $rating
+                    );
+                    $this->response = [
+                        'avg_rating' => $rating_info["AVGrating"],
+                        'n_ratings' => $rating_info["Nratings"]
+                    ];
                 }
                 break;
+            case 'deleteArticle':
+                $articleHandler = new ArticleHandler();
+                $delete_result = $articleHandler->handleDeleteArticle(
+                    article_id: (int) $this->request['id'],
+                    userId: (int) $_SESSION['userID']
+                );
+                if ($delete_result === false) {
+                    throw new \Exception('Failed to delete article');
+                }
+                $this->response =
+                    [
+                        'success' => true,
+                        'deleted rows' => $delete_result,
+                    ];
+                break;
+            case 'updateUserInfo':
+                $_SESSION['errors'] = [];
+                $_SESSION['messages'] = [];
 
-            case 'login':
-                if ($validation_result['ok']) {
-                    // Validate user inputs and on succes: get logged-in user's info
-                    $validation_result = UserHandler::getInstance()
-                        ->handleUserLogin(validation_result: $validation_result);
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
 
-                    // Add all (if any) error messages to the response array
-                    $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+                // Perform basic validation on contact fields, field inputs are retrieved internally
+                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
 
-                    // If log in was succesful, if the login was unsuccesful, errors are stored in $response
-                    if ($validation_result['ok']) {
-                        // Update response
-                        $this->response['page'] = 'home';
-                        $this->response['isLoggedIn'] = true;
-                        $_SESSION['messages'][] = 'Login was successful!';
-                    }
+                $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+
+                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                    $result = UserHandler::getInstance()->handleUserInfoChange($validation_result);
+
+                    $this->response = [
+                        'success' => $result['ok'],
+                        'errors' => $result['user_error'] ?? [],
+                        'message' => $result['ok'] ? 'Your information has been updated.' : 'Something went wrong.',
+                        'name' => $result['field_inputs']['name'] ?? null,
+                        'userID' => $this->request['userID'] ?? null,
+                        'email' => $result['field_inputs']['email'] ?? null,
+                        'avatar_url' => $result['field_inputs']['avatar_url'] ?? null,
+                    ];
+                } else {
+                    $this->response = [
+                        'success' => false,
+                        'errors' => $validation_result['user_error'],
+                        'message' => 'Please fix the errors below.',
+                    ];
                 }
                 break;
+            case 'updatePassword':
+                $_SESSION['errors'] = [];
+                $_SESSION['messages'] = [];
 
-            case 'about':
-                $this->response['aboutID'] = Utils::getRequestVar('author', false);
-                $this->response['userID'] = Utils::getSesVar('userID');
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
 
-                if ($validation_result['ok']) {
-                    // checks if image is correct and saves about info
-                    $validation_result = UserHandler::getInstance()->handleUserAboutInfo($validation_result);
-                    // if there are any errors save them in response
-                    $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
-                    if ($validation_result['ok']) {
-                        $_SESSION['messages'][] = 'User information is saved!';
-                    }
+                // Perform basic validation on contact fields, field inputs are retrieved internally
+                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+
+                $_SESSION['errors'] = array_merge($_SESSION['errors'], $validation_result['user_error']);
+
+                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+                    $result = UserHandler::getInstance()->handleUserPasswordChange($validation_result);
+
+                    $this->response = [
+                        'success' => $result['ok'],
+                        'errors' => $result['user_error'] ?? [],
+                        'message' => $result['ok'] ? 'Password successfully changed.' : 'Something went wrong.',
+                    ];
+                } else {
+                    $this->response = [
+                        'success' => false,
+                        'errors' => $validation_result['user_error'],
+                        'message' => 'Please fix the errors below.',
+                    ];
+                }
+
+                break;
+            case 'searchArticle':
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+
+                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
+
+                    $this->response['validation_result'] = $validation_result;
+
+                    $this->response['validation_result'] = $validation_result;
+
+                    $this->response['articles_info'] = ModelSelector::getArticleModel()->fetchArticleBySearch(
+                        author_ids: $validation_result['field_inputs']['Author'] ?? [],
+                        tag_ids: $validation_result['field_inputs']['Tag'] ?? [],
+                        sortBy: $validation_result['field_inputs']['sortby'] ?? []
+                    );
+                    $this->response['success'] = true;
+
+                    //$element = ElementFactory::createElement($element_info);
+                } else {
+                    $this->response = [
+                        'success' => false,
+                        'errors' => $validation_result['user_error'],
+                        'message' => 'Please fix the errors below.',
+                    ];
                 }
                 break;
-            case 'search':
-                $this->response['Tag'] = $validation_result['field_inputs']['Tag'] ?? [];
-                $this->response['Author'] = $validation_result['field_inputs']['Author'] ?? [];
-                $this->response['sortby'] = $validation_result['field_inputs']['sortby'];
-                break;
-            case 'rateArticle':
-                // This is actually an ajax function
-                break;
-            case 'dashboard':
-                break;
-            case 'editArticle':
-                $this->response['articleID'] = Utils::getRequestVar('articleID', true);
-                $this->response['userID'] = Utils::getSesVar('userID');
-                $this->response['bodyinfo']['title'] = $validation_result['field_inputs']['title'];
-                $this->response['bodyinfo']['bodytext'] = $validation_result['field_inputs']['bodytext'];
-                $this->response['bodyinfo']['codeblock'] = $validation_result['field_inputs']['codeblock'];
-                $this->response['existing_tag'] = $validation_result['field_inputs']['existing_tag'];
+            case 'saveContactMessage':
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
 
+                // Perform basic validation on contact fields, field inputs are retrieved internally
+                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
 
-                if ($validation_result['ok']) {
-                    // This is the post request for editing or saving a (new) article
-                    if (Utils::getRequestVar('action', true) == 'saveArticle') {
-
-                        $validation_result = ArticleHandler::getInstance()
-                            ->handleArticleSubmission(
-                                validation_result: $validation_result,
-                                article_id: $this->response['articleID'],
-                                user_id: $this->response['userID']
-                            );
-
-                        if (isset($validation_result['field_inputs']['new_article_id'])) {
-                            $this->response['articleID'] = $validation_result['field_inputs']['new_article_id'];
-                        }
-
-                        if ($validation_result['ok']) {
-                            $this->response['page'] = 'article';
-                            $this->response['articleID'] = $this->response['articleID'];
-                            $_SESSION['messages'][] = 'Article has been submitted!';
-                        }
-                    }
-                    // This is a post request for creating a new article
-                    else {
-                        $this->response['articleID'] = 0;
-                    }
-                }
-                break;
-            case 'contact':
-                echo 'contact validation reached';
-                // On succesful contact form validation, save input to the database
-                if ($validation_result['ok']) {
+                if ($validation_result['ok'] && isset($validation_result['field_inputs'])) {
                     $field_inputs = $validation_result['field_inputs'];
                     ModelSelector::getWebsiteInfoModel()->saveContact(
                         name: $field_inputs['name'],
                         email: $field_inputs['email'],
                         message: $field_inputs['message']
                     );
-                    $_SESSION['messages'][] = 'Message has been sent!';
+
+                    $this->response = [
+                        'success' => true,
+                        'errors' => $validation_result['user_error'] ?? [],
+                        'message' => 'Your message has been sent.',
+                    ];
+                } else {
+                    $this->response = [
+                        'success' => false,
+                        'errors' => $validation_result['user_error'],
+                        'message' => 'Please fix the errors below.',
+                    ];
                 }
-                break;    
+                break;
+            case 'registerUser':
+                $errors = [];
+
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(
+                        element_id: Utils::getRequestVar(
+                            key: 'element_id',
+                            frompost: True
+                        )
+                    );
+
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+                $errors = array_merge($errors, $validation_result['user_error']);
+                if (!$validation_result['ok']) {
+                    $this->response = [
+                        'success' => False,
+                        'errors' => $errors
+                    ];
+                    break;
+                }
+
+                $validation_result = UserHandler::getInstance()
+                    ->handleRegistration(validation_result: $validation_result);
+                $errors = array_merge($errors, $validation_result['user_error']);
+                if (!$validation_result['ok']) {
+                    $this->response = [
+                        'success' => False,
+                        'errors' => $errors
+                    ];
+                    break;
+                }
+
+                // All stages of validation succesful
+                $this->response = [
+                    'page' => 'login',
+                    'success' => True,
+                    'message' => 'Registration was successful!'
+                ];
+                break;
+            case 'loginUser':
+                $errors = [];
+
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(
+                        element_id: Utils::getRequestVar(
+                            key: 'element_id',
+                            frompost: True
+                        )
+                    );
+
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+                $errors = array_merge($errors, $validation_result['user_error']);
+                if (!$validation_result['ok']) {
+                    $this->response = [
+                        'success' => False,
+                        'errors' => $errors
+                    ];
+                    break;
+                }
+
+                $validation_result = UserHandler::getInstance()
+                    ->handleUserLogin(validation_result: $validation_result);
+                $errors = array_merge($errors, $validation_result['user_error']);
+                if (!$validation_result['ok']) {
+                    $this->response = [
+                        'success' => False,
+                        'errors' => $errors
+                    ];
+                    break;
+                }
+                $this->request['page'] = 'home';
+                $this->request['isLoggedIn'] = true;
+                $new_body_content = (new PageFactory($this->request))->buildBody();
+                $body_array = [
+                    ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
+                ];
+                // All stages of validation succesful
+                $this->response = [
+                    'page' => 'home',
+                    'success' => True,
+                    'message' => 'Login was successful!',
+                    'html' => $body_array,
+                ];
+                break;
+            case 'saveArticle':
+                $field_info = ModelSelector::getElementModel()
+                    ->fetchFieldInfo(element_id: Utils::getRequestVar('element_id', true));
+
+                // Perform basic validation on contact fields, field inputs are retrieved internally
+                // $validaton_result will contain keys ['ok', 'user_error', 'field_inputs']
+                $validation_result = (new ValidationHandler)
+                    ->validateFields(field_info: $field_info);
+
+                $this->response['bodyinfo']['title'] = $validation_result['field_inputs']['title'];
+                $this->response['bodyinfo']['bodytext'] = $validation_result['field_inputs']['bodytext'];
+                $this->response['bodyinfo']['codeBlock'] = $validation_result['field_inputs']['codeblock'];
+                $this->response['articletags'] = $validation_result['field_inputs']['articletags'];
+                $this->response['articleID'] = Utils::getRequestVar('articleID', true);
+
+
+                if ($validation_result['ok']) {
+                    // This is the post request for editing or saving a (new) article
+
+                    $validation_result = ArticleHandler::getInstance()
+                        ->handleArticleSubmission(
+                            validation_result: $validation_result,
+                            article_id: $this->response['articleID'],
+                            user_id: $this->request['user_id']
+                        );
+
+                    if (isset($validation_result['field_inputs']['new_article_id'])) {
+                        $this->response['articleID'] = $validation_result['field_inputs']['new_article_id'];
+                    }
+
+                    if ($validation_result['ok']) {
+                        $this->response = [
+                            'page' => 'article',
+                            'success' => True,
+                            'message' => 'Article has been submitted!'
+                        ];
+                    } else {
+                        $this->response = [
+                            'success' => false,
+                            'errors' => $validation_result['user_error'],
+                            'message' => 'Please fix the errors below.',
+                        ];
+                    }
+                } else {
+                    $this->response = [
+                        'success' => false,
+                        'errors' => $validation_result['user_error'],
+                        'message' => 'Please fix the errors below.',
+                    ];
+                }
+                break;
             default:
-                throw new \Exception("Request couldnt be handled, please message an admin");
+                $this->response = [
+                    'success' => false,
+                    'message' => 'Unknown AJAX action: ' . $this->request['action'],
+                    'POST' => $this->request,
+                ];
+
+
         }
         return $this->response;
     }

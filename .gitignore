@@ -2,3 +2,4 @@
 /img
 /logs
 /vendor
+/config/config.local.php
