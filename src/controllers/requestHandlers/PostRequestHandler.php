@@ -17,7 +17,7 @@ class PostRequestHandler extends BaseRequestHandler
     public function handleRequest(array $request): array
     {
 
-        switch ($request['page']) {
+        switch ($request['action']) {
             case 'saveRating':
                 if (!$this->request['isLoggedIn']) {
                     throw new \BadMethodCallException('Tried to save a rating without being logged in!');
