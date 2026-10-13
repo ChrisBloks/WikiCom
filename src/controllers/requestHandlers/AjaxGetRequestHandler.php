@@ -13,7 +13,7 @@ class AjaxGetRequestHandler extends BaseGetRequestHandler
     public function handleRequest(array $request): array
     {
         $this->request = $request;
-        
+
         switch ($this->request['action']) {
             case 'pageHome':
             case 'pageContact':
@@ -29,7 +29,7 @@ class AjaxGetRequestHandler extends BaseGetRequestHandler
                 $this->response = [
                     ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
                 ];
-                return $this->response;
+                break;
             case 'pageAbout':
                 $this->request['aboutID'] = Utils::getRequestVar(
                     key: 'author',
@@ -42,8 +42,7 @@ class AjaxGetRequestHandler extends BaseGetRequestHandler
                 $this->response = [
                     ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
                 ];
-                return $this->response;
-
+                break;
             case 'logout':
                 session_unset();
                 $this->request['page'] = 'home';
@@ -52,15 +51,15 @@ class AjaxGetRequestHandler extends BaseGetRequestHandler
                 $this->response = [
                     ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
                 ];
-                return $this->response;
+                break;
             default:
                 $this->response = [
                     'success' => false,
                     'message' => 'Unknown AJAX action: ' . $this->request['action'],
                     'POST' => $this->request,
                 ];
-                return $this->response;
-
+                break;
         }
+        return $this->response;
     }
 }
