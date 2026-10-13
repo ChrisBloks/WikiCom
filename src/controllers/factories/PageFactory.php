@@ -26,6 +26,7 @@ Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
 Wiki\dataObjects\ElementInfo,
 Wiki\controllers\ElementHandler;
+use Wiki\tools\utils\HtmlUtils;
 
 class PageFactory
 {
@@ -43,7 +44,8 @@ class PageFactory
         $this->isLoggedIn = $response['isLoggedIn'];
 
         // if an async is coming in make async call
-        $this->htmlpage = ($response['async'] ? new BodyContainer() : new BasePage());
+        $async = $response['async'] ?? false;
+        $this->htmlpage = ($async ? new BodyContainer() : new BasePage());
     }
 
     public function buildPage()

@@ -1,5 +1,6 @@
 import { ResponseHandler } from "../responseHandler.js";
 import { ajaxGET } from "./Ajax.js";
+import { HistoryTracking } from "./HistoryTracking.js";
 
 export const Router = { 
   // ==============================================================================
@@ -29,8 +30,6 @@ export const Router = {
         console.log("menu clicked!");
         console.log(page);
 
-        pushState
-
         await ajaxGET(
           "main.php?reqType=ajax&action=" + page,
           "json",
@@ -38,11 +37,7 @@ export const Router = {
             if (!Array.isArray(response)) return;
             console.log("response reached")
             ResponseHandler.handleResponse(response);
-            history.pushState(
-              {'page': page},
-              "",
-              "main.php?reqType=page&page=" + page
-            )
+            HistoryTracking.add(page);
           },
           (error) => console.error("Content unable to be loaded:", error),
         );
