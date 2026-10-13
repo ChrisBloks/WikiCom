@@ -87,13 +87,10 @@ class PageController implements iController
     {
         $PageFactory = new PageFactory($this->response);
         $this->response_page = $PageFactory->buildPage();
-
+        // $_SESSION['currentPage'] = $this->response['page'];
         // if response page is not null -> show page
         if (!is_null($this->response_page)) {
-            // HtmlUtils::dump("response_page", $this->response_page);
             $this->response_page->show();
-            
-            
         }
     }
 

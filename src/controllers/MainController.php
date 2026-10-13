@@ -30,6 +30,9 @@ class MainController
                 default: 'home'
             ),
         ];
+
+        //Page tracking
+        // if (!isset($_SESSION['currentPage'])){$_SESSION['currentPage'] = 'home';}
     }
 
     /**

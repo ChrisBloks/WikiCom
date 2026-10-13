@@ -418,6 +418,8 @@ class AjaxController implements iController
     // turn $this->response into actual output — you're taking it from here
     private function showResponse(): void
     {
+        //$_SESSION['currentPage'] = $this->response['page'];
+
         // json stuff goes here?
         header("Content-type: application/json");
         echo json_encode($this->response);
