@@ -24,6 +24,7 @@ import { ContactForm } from "./components/ContactForm.js";
 import { RegisterUser } from "./components/RegisterUser.js";
 import { LoginForm } from "./components/LoginForm.js";
 import { EditArticleForm } from "./components/EditArticle.js";
+import { saveRating } from "./services/SaveRating.js";
 
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
