@@ -84,10 +84,7 @@ class PageController implements iController
         $this->response_page = $PageFactory->buildPage();
         // if response page is not null -> show page
         if (!is_null($this->response_page)) {
-            // HtmlUtils::dump("response_page", $this->response_page);
             $this->response_page->show();
-
-
         }
     }
 

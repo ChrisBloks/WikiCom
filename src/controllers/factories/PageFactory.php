@@ -43,7 +43,8 @@ class PageFactory
         $this->isLoggedIn = $response['isLoggedIn'];
 
         // if an async is coming in make async call
-        $this->htmlpage = ($response['async'] ? new BodyContainer() : new BasePage());
+        $async = $response['async'] ?? false;
+        $this->htmlpage = ($async ? new BodyContainer() : new BasePage());
     }
 
     public function buildPage()

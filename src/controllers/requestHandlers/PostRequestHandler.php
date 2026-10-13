@@ -278,7 +278,6 @@ class PostRequestHandler extends BaseRequestHandler
 
                 if ($validation_result['ok']) {
                     // This is the post request for editing or saving a (new) article
-
                     $validation_result = ArticleHandler::getInstance()
                         ->handleArticleSubmission(
                             validation_result: $validation_result,
@@ -291,10 +290,18 @@ class PostRequestHandler extends BaseRequestHandler
                     }
 
                     if ($validation_result['ok']) {
+                        $request['page'] = 'article';
+                        $request['articleID'] = $this->response['articleID'];
+                        $new_body_content = (new PageFactory($request))->buildBody();
+                        $body_array = [
+                            ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
+                        ];
+                        // All stages of validation succesful
                         $this->response = [
                             'page' => 'article',
                             'success' => True,
-                            'message' => 'Article has been submitted!'
+                            'message' => 'Article was successfully saved!',
+                            'html' => $body_array,
                         ];
                     } else {
                         $this->response = [

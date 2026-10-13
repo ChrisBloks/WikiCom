@@ -1,5 +1,6 @@
 import { ResponseHandler } from "../ResponseHandler.js";
 import { ajaxGET } from "./Ajax.js";
+import { HistoryTracking } from "./HistoryTracking.js";
 
 export const Router = { 
   // ==============================================================================
@@ -36,6 +37,7 @@ export const Router = {
             if (!Array.isArray(response)) return;
             console.log("response reached")
             ResponseHandler.handleResponse(response);
+            HistoryTracking.add(page);
           },
           (error) => console.error("Content unable to be loaded:", error),
         );
