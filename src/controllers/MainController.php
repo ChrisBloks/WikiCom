@@ -47,6 +47,8 @@ class MainController
         switch ($this->request['reqType']) {
             case 'ajax':
                 return new AjaxController();
+            case 'API':
+                return new APIController();
             default:
                 return new PageController();
         }
