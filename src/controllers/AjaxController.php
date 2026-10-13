@@ -9,6 +9,7 @@ Wiki\tools\utils\utils,
 Wiki\controllers\ArticleHandler,
 Wiki\controllers\factories\PageFactory,
 Wiki\tools\utils\HtmlUtils;
+use Wiki\controllers\requestHandlers\AjaxGetRequestHandler;
 
 class AjaxController implements iController
 {
@@ -60,54 +61,11 @@ class AjaxController implements iController
     private function validateRequest(): void
     {
         if ($this->posted) {
+            // POST requests
             $this->response = (new PostRequestHandler)->handleRequest($this->request);
         } else {
             // GET requests
-            switch ($this->request['action']) {
-                case 'pageHome':
-                case 'pageContact':
-                case 'pageSearch':
-                case 'pageRegister':
-                case 'pageLogin':
-                case 'pageDashboard':
-                case 'pageEditArticle':
-                case 'pageArticle':
-                    $page = lcfirst(substr($this->request['action'], 4));
-                    $this->request['page'] = $page;
-                    $new_body_content = (new PageFactory($this->request))->buildBody();
-                    $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
-                    ];
-                    break;
-                case 'pageAbout':
-                    $this->request['aboutID'] = Utils::getRequestVar(
-                        key: 'author',
-                        frompost: false,
-                        default: -1
-                    );
-                    $page = lcfirst(substr($this->request['action'], 4));
-                    $this->request['page'] = $page;
-                    $new_body_content = (new PageFactory($this->request))->buildBody();
-                    $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content, 'status' => $this->request['action']]
-                    ];
-                    break;
-                case 'logout':
-                    session_unset();
-                    $this->request['page'] = 'home';
-                    $this->request['isLoggedIn'] = false;
-                    $new_body_content = (new PageFactory($this->request))->buildBody();
-                    $this->response = [
-                        ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
-                    ];
-                    break;
-                default:
-                    $this->response = [
-                        'success' => false,
-                        'message' => 'Unknown AJAX action: ' . $this->request['action'],
-                        'POST' => $this->request,
-                    ];
-            }
+            $this->response = (new AjaxGetRequestHandler)->handleRequest($this->request);
         }
     }
 

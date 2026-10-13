@@ -6,7 +6,7 @@ use Wiki\models\ModelSelector;
 use Wiki\tools\utils\HtmlUtils;
 use Wiki\tools\utils\Utils;
 
-class GetRequestHandler extends BaseRequestHandler
+class PageGetRequestHandler extends BaseRequestHandler
 {
     public function handleRequest(array $request): array
     {
@@ -41,14 +41,10 @@ class GetRequestHandler extends BaseRequestHandler
                 } else {
                     $article_info = ModelSelector::getArticleModel()->fetchArticleByID($this->response['articleID']);
                     // TODO: remove this before merging
-                    if (false && $this->response['userID'] != $article_info['user_id']) {
-                        $this->response['page'] = 'article';
-                        $this->response['articleID'] = $this->response['articleID'];
+                    if ( $this->response['userID'] != $article_info['user_id']) {
                         $_SESSION['errors'][] = "You are not authorized to edit this article.";
                     }
                 }
-
-
                 break;
             case 'dashboard':
                 break;

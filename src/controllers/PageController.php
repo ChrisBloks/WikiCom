@@ -8,9 +8,7 @@ Wiki\tools\traits\tErrorMessageCollector,
 Wiki\tools\utils\Utils,
 Wiki\tools\utils\HtmlUtils,
 Wiki\controllers\factories\PageFactory,
-Wiki\controllers\requestHandlers\GetRequestHandler,
-Wiki\controllers\requestHandlers\PostRequestHandler;
-
+Wiki\controllers\requestHandlers\PageGetRequestHandler;
 /**
  * PageController class for handling non-AJAX requests.
  * @uses tErrorMessageCollector
@@ -72,11 +70,8 @@ class PageController implements iController
      */
     protected function validateRequest(): void
     {
-        // Get correct handler
-        $requestHandler = new GetRequestHandler();
-
         // Validate requets and retrieve page object
-        $this->response = $requestHandler->handleRequest($this->request);
+        $this->response = (new PageGetRequestHandler)->handleRequest($this->request);
     }
 
     /**
