@@ -21,7 +21,7 @@ Wiki\views\BasePage,
 Wiki\views\BodyContainer,
 Wiki\views\containers\AtomicElement,
 Wiki\views\containers\Header,
-Wiki\views\containers\Toast,
+Wiki\tools\utils\HtmlUtils,
 Wiki\views\containers\Footer,
 Wiki\views\containers\MainElement,
 Wiki\dataObjects\ElementInfo,
@@ -51,12 +51,16 @@ class PageFactory
     public function buildPage()
     {
         $this->addHead();
+
         $this->addScripts();
-        $this->buildBody();
+
+        $this->addBody();
+
         return $this->htmlpage;
     }
 
-    public function buildBody(): ?string{
+    public function buildBody(): ?string
+    {
         $this->addBody();
         return $this->htmlpage->getBodyContent();
     }
@@ -64,7 +68,7 @@ class PageFactory
 
     private function addHead()
     {
-        $this->htmlpage->addtoHeadContent(new AtomicElement(new ElementInfo(["html_tag" => "title", "text" => "Testpage"])));
+        $this->htmlpage->addtoHeadContent(new AtomicElement(new ElementInfo(["html_tag" => "title", "text" => ucfirst($this->page)])));
     }
 
     private function addScripts()
@@ -88,12 +92,13 @@ class PageFactory
             ->addToHeadContent(
                 new AtomicElement(
                     new ElementInfo([
-                        "text" => '   <script type="module" src="./src/js/main.js"></script>
+                        "text" => '   
+                            <script type="module" src="./src/js/main.js"></script>
                             <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
                             <script type="module" src="./src/js/main.js"></script>
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
-                                        <script>hljs.highlightAll();</script>'
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                            <script>hljs.highlightAll();</script>'
                     ])
                 )
             );
@@ -129,7 +134,6 @@ class PageFactory
         // Maybe seperate controller
         $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
 
-
         // Add necessary variables
         // HtmlUtils::dump('response', $this->response);
         $element_handler = new ElementHandler($this->response);
@@ -143,8 +147,10 @@ class PageFactory
             $element_list[$element_info['parent_order']]->addElement($element);
         }
 
+
         // add the <main> to the body content
         $this->htmlpage->addToBodyContent($main);
+
 
 
         //add the footer to the body content

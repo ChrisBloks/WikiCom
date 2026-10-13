@@ -1,5 +1,5 @@
 import { Router } from "./services/Router.js";
-import { SearchForm } from "./components/searchForm.js";
+import { SearchForm } from "./components/SearchForm.js";
 import { ContactForm } from "./components/ContactForm.js";
 import { RegisterUser } from "./components/RegisterUser.js";
 import { LoginForm } from "./components/LoginForm.js";
