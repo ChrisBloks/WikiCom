@@ -11,9 +11,9 @@ class APIController implements iController
     private bool $posted;
     private array $request;
     private array $response;
+    
     public function handleRequest()
     {
-
         $this->getRequest();
         $this->validateRequest();
         $this->showResponse();
