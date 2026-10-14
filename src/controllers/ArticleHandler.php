@@ -19,7 +19,8 @@ class ArticleHandler
     use tSingleton;
 
     // Sends a new rating to the database and retrieves the new avg rating
-    public function handleSaveRating(int $user_id, int $article_id, int $rating){
+    public function handleSaveRating(int $user_id, int $article_id, int $rating)
+    {
         $rating_model = ModelSelector::getRatingModel();
         $rating_model->saveRating(
             user_id: $user_id,
@@ -133,7 +134,7 @@ class ArticleHandler
                 // if no new image given, keep the article's existing image
                 if (empty($validation_result['field_inputs']['articleimg'])) {
                     $article_info = ModelSelector::getArticleModel()->fetchArticleById($article_id);
-                    $validation_result['field_inputs']['articleimg'] = isset($article_info['imgFileName']) ? $article_info['imgFileName']:'';
+                    $validation_result['field_inputs']['articleimg'] = isset($article_info['imgFileName']) ? $article_info['imgFileName'] : '';
                 }
 
                 $update_result = ModelSelector::getArticleModel()->saveExistingArticleInfo(
@@ -184,6 +185,10 @@ class ArticleHandler
             // query runs but cant find article id
             return false;
         }
+
+        // delete unattached tags
+        ModelSelector::getArticleModel()->deleteUnattachedTags();
+
         // query succesful, return rowcount
         return $result;
     }

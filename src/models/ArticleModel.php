@@ -365,4 +365,15 @@ class ArticleModel extends BaseModel
 
         return $this->crud->selectOne($sql, $params);
     }
+
+    public function deleteUnattachedTags()
+    {
+        $sql = "DELETE t
+                FROM wiki_tag AS t
+                LEFT JOIN wiki_article_to_tag AS watt
+                ON watt.wiki_tag_id = t.id
+                WHERE watt.wiki_tag_id IS NULL;";
+        return $this->crud->doDelete(sql: $sql, params:[]);
+
+    }
 }
