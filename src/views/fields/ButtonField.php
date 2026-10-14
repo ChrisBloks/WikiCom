@@ -2,7 +2,7 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\dataObjects\ElementInfo;
+use Wiki\tools\dataObjects\ElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 /**

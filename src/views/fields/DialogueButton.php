@@ -1,8 +1,8 @@
 <?php
 
 namespace Wiki\views\fields;
-use Wiki\views\fields\ButtonField;
-use Wiki\dataObjects\ElementInfo;
+
+use Wiki\tools\dataObjects\ElementInfo;
 
 class DialogueButton extends ButtonField{
     public function __construct(ElementInfo $element_info){

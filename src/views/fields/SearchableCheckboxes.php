@@ -2,11 +2,10 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\dataObjects\ElementInfo;
-use Wiki\dataObjects\FieldInfo;
-use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
-use Wiki\views\containers\AtomicElement;
-
+use Wiki\tools\dataObjects\ElementInfo;
+use Wiki\tools\dataObjects\FieldInfo;
+use Wiki\tools\utils\HtmlUtils;
+use Wiki\views\elements\atomics\AtomicElement;
 
 class SearchableCheckboxes extends BaseField
 {
