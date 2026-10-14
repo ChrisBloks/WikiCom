@@ -1,9 +1,9 @@
 <?php
 /* ArticleModel
-*  Danny
-*  08/2026
-*  ArticleModel class gives al the methods needed to pull or insert article information from database
-*/
+ *  Danny
+ *  08/2026
+ *  ArticleModel class gives al the methods needed to pull or insert article information from database
+ */
 
 namespace Wiki\models;
 
@@ -48,7 +48,7 @@ class ArticleModel extends BaseModel
         $params = ['article_id' => $article_id];
         $result = $this->crud->selectOne(sql: $sql, params: $params);
 
-        if ($get_tags){
+        if ($get_tags) {
             $tags = $this->fetchArticleTags($article_id);
             $result['tags'] = $tags;
         }
@@ -79,13 +79,13 @@ class ArticleModel extends BaseModel
      */
     public function fetchArticleTags(int $article_id): array|false
     {
-        $sql = "SELECT `name`
+        $sql = "SELECT `id`,`name`
                 FROM
                     wiki_tag
                 JOIN wiki_article_to_tag ON wiki_article_to_tag.wiki_tag_id = wiki_tag.id
                 WHERE article_id =:article_id";
         $params = ["article_id" => $article_id];
-        return $this->crud->selectMany($sql, $params, \PDO::FETCH_COLUMN);
+        return $this->crud->selectMany($sql, $params, \PDO::FETCH_KEY_PAIR);
     }
 
     /**
@@ -128,7 +128,7 @@ class ArticleModel extends BaseModel
 
             // check if any tags are given and build IN clause
             if (!empty($tag_ids)) {
-                $join_clause .=  ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
+                $join_clause .= ' JOIN wiki_article_to_tag att ON att.article_id = article.id' .
                     ' JOIN wiki_tag ON wiki_tag.id = att.wiki_tag_id';
                 [$in_clause, $placeholder_mapping] = $this->buildInClause(reference: 'att.wiki_tag_id', values: $tag_ids, prefix: 'tag');
                 $where_statements[] = $in_clause;
@@ -159,8 +159,8 @@ class ArticleModel extends BaseModel
 
         $result = $this->crud->selectMany(sql: $sql, params: $params);
 
-        foreach ($result as $key => $article){
-            $result[$key]['tags'] = implode(",",$this->fetchArticleTags($article['id']));
+        foreach ($result as $key => $article) {
+            $result[$key]['tags'] = implode(",", $this->fetchArticleTags($article['id']));
             $result[$key]['Author'] = ModelSelector::getUserInfoModel()->fetchUserPublicInfoById($article['user_id'])['name'];
         }
 

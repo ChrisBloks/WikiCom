@@ -20,8 +20,12 @@ class TagButtonContainer extends ContainerElement
             $tagButton = new ButtonField(
                 new ElementInfo([
                     'html_tag' => 'input',
-                    'html_class' => 'button button-sm',
+                    'html_class' => 'button button-sm tag_button_article',
                     'element_name' => $tag_id,
+                    'attributes' => [
+                        'data-tag-id' => $tag_id,
+                        'data-tag-name' => $tag_name
+                    ],
                     'field_info' => [
                         'type' => 'button',
                         'value' => $tag_name

@@ -10,8 +10,9 @@ import { DashboardEvents } from "../components/DashboardEvents.js";
 import { TagWidget } from "../components/Tagwidget.js";
 import { updateCheckboxGroup, resetCheckboxesToDefault, } from "../components/Checkboxes.js";
 import { saveRating } from "../services/SaveRating.js";
+import { ArticleEvents} from "../components/ArticleEvents.js";
 
-export function EventBinder(page) {
+export function bindEvents(page) {
 
     if (page) {
         switch (page) {
@@ -53,6 +54,8 @@ export function EventBinder(page) {
                 break;
             case 'article':
                 // scales stars correctly
+                ArticleEvents.init();
+                console.log('Article events initialized');
                 const fillSpan = document.querySelector(".fill-ratings span");
                 const starRatings = document.querySelector(".star-ratings");
                 if (fillSpan && starRatings) {

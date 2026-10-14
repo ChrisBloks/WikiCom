@@ -13,12 +13,11 @@
 
 // imports
 import { Router } from "./services/Router.js";
-import { ArticleDelete } from "./components/ArticleDelete.js"
 import { TagWidget } from "./components/Tagwidget.js";
 import { initPasswordLengthChecker } from "./components/PasswordLengthChecker.js";
 import { Toasts } from "./components/Toasts.js";
 import { MarkdownToolbar } from "./components/MarkdownEditor.js";
-import { EventBinder } from "./utils/EventBinder.js";
+import { bindEvents } from "./utils/bindEvents.js";
 
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -44,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //===========================================================
   Toasts.initExisting();
   TagWidget.init();
-  ArticleDelete.init();
   initPasswordLengthChecker();
   MarkdownToolbar.init(".article-text");
 
@@ -53,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const match = url.match(/[?&]page=([^&#]*)/);
   const page = match ? match[1] : 'home';
-  EventBinder(page);
+  bindEvents(page);
 
 
 });

@@ -1,5 +1,5 @@
 import { Router } from "./services/Router.js";
-import { EventBinder } from "./utils/EventBinder.js";
+import { bindEvents } from "./utils/bindEvents.js";
 
 
 
@@ -33,7 +33,7 @@ export const ResponseHandler = {
         let page = status.slice(4).toLowerCase();
 
         // Handle status (add EventListeners)
-        EventBinder(page);
+        bindEvents(page);
 
     },
     // ==============================================================================
