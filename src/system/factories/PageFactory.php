@@ -1,0 +1,176 @@
+<?php
+// common parameters:
+// Todo: save all commands as string and loop
+// is instance of: checken voor interface class
+/* values to obtain from outside:
+ *$isloggedIn;
+ *$page_value;
+ *$article_id;
+ *$user_ids;
+ *$tag_ids;
+ *$sortBy;
+ */
+
+namespace Wiki\system\factories;
+
+use ArrayAccess;
+use Wiki\views\elements\containers\MainElement;
+use Wiki\models\ModelSelector;
+use Wiki\system\handlers\ElementHandler;
+use Wiki\tools\dataObjects\ElementInfo;
+use Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\views\doc\BasePage;
+use Wiki\views\doc\BodyContainer;
+use Wiki\views\elements\atomics\AtomicElement;
+use Wiki\views\elements\atomics\Footer;
+use Wiki\views\elements\atomics\Header;
+
+class PageFactory
+{
+    use tErrorMessageCollector;
+    private string $page;
+    protected bool $isLoggedIn;
+    protected array $response;
+    private BasePage|BodyContainer $htmlpage;
+    protected array|ArrayAccess $article_info;
+
+    public function __construct(array $response)
+    {
+        $this->response = $response;
+        $this->page = $response['page'];
+        $this->isLoggedIn = $response['isLoggedIn'];
+
+        // if an async is coming in make async call
+        $async = $response['async'] ?? false;
+        $this->htmlpage = ($async ? new BodyContainer() : new BasePage());
+    }
+
+    public function buildPage()
+    {
+        $this->addHead();
+
+        $this->addScripts();
+
+        $this->addBody();
+
+        return $this->htmlpage;
+    }
+
+    public function buildBody(): ?string
+    {
+        $this->addBody();
+        return $this->htmlpage->getBodyContent();
+    }
+
+
+    private function addHead()
+    {
+        $this->htmlpage->addtoHeadContent(new AtomicElement(new ElementInfo(["html_tag" => "title", "text" => ucfirst($this->page)])));
+    }
+
+    private function addScripts()
+    {
+
+        // should move to a config or something instead of pasting links raw in the pagefactory
+        $this->htmlpage
+            ->addToHeadContent(
+                new AtomicElement(
+                    new ElementInfo([
+                        "text" => '
+                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+                            <link rel="stylesheet" href="./src/css/stylesheet.css">
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/default.min.css">'
+                    ])
+                )
+            );
+
+        $this->htmlpage
+            ->addToHeadContent(
+                new AtomicElement(
+                    new ElementInfo([
+                        "text" => '   
+                            <script type="module" src="./src/js/main.js"></script>
+                            <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+                            <script type="module" src="./src/js/main.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+                            <script>hljs.highlightAll();</script>'
+                    ])
+                )
+            );
+    }
+
+
+    public function addBody()
+    {
+        $styling_system = ModelSelector::getWebsiteInfoModel()->fetchSystemStyling();
+
+        // title
+        $this->htmlpage->addToBodyContent(new Header(
+            ucfirst($this->page),
+            $styling_system['header']
+        ));
+
+
+
+        // menu items
+        // menu items from database
+        $menu_items = ModelSelector::getWebsiteInfoModel()->fetchMenuItems($this->isLoggedIn);
+        $menuFactory = new MenuFactory();
+        $menu = $menuFactory->createMenu(
+            menu_items: $menu_items,
+            class: $styling_system['menu_items']
+        );
+        $this->htmlpage->addToBodyContent($menu);
+
+        $main = new MainElement();
+        //s$main->addElement(new Toast(new ElementInfo(["html_class" => "toast-container position-fixed top-0 end-0 p-3","html_id" => "toast-container"])));
+        $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
+
+        // Maybe seperate controller
+        $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
+
+        // Add necessary variables
+        // HtmlUtils::dump('response', $this->response);
+        $element_handler = new ElementHandler($this->response);
+        $element_handler->addDataToElementList($elements_info);
+
+        $element_list = [];
+        $element_list[0] = $main;
+        foreach ($elements_info as $element_info) {
+            $element = ElementFactory::createElement($element_info);
+            $element_list[$element_info['order_by']] = $element;
+            $element_list[$element_info['parent_order']]->addElement($element);
+        }
+
+
+        // add the <main> to the body content
+        $this->htmlpage->addToBodyContent($main);
+
+
+
+        //add the footer to the body content
+        $this->htmlpage->addToBodyContent(new AtomicElement(new ElementInfo(["text" => "<br>"])));
+        $this->htmlpage->addToBodyContent(new Footer(
+            text: 'Christian, Danny, & Marius &copy' . date("Y") . '',
+            class: $styling_system['footer']
+        ));
+    }
+
+    public function addCheckedUsingArray($form_fields, $response)
+    {
+        foreach ($form_fields as &$field) {
+            if (!empty($response[$field['name']]) && is_array($response[$field['name']])) {
+                foreach ($field['options'] as $key => $option) {
+                    if (in_array($option['value'], $response[$field['name']])) {
+                        $field['options'][$key]['checked'] = 1;
+                    }
+                }
+            }
+        }
+        unset($field);
+
+        return $form_fields;
+    }
+}

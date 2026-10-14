@@ -1,0 +1,70 @@
+<?php
+
+namespace Wiki\system\validators;
+
+use Wiki\tools\interfaces\iValidator;
+use Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\tools\utils\Utils;
+
+/**
+ * Text validation class that defines basic 1st line of defence validation. If succesful, calls more specific validation behaviour as defined in child classes.
+ * @uses tErrorMessageCollector
+ * @var array $field_inputs array containing user inputs
+ */
+class TextValidator implements iValidator
+{
+    use tErrorMessageCollector;
+
+    protected array $field_inputs = [];
+
+    /**
+     * Checks if all fields were correctly filled in an optionally calls more specific validation behaviour.
+     * @param string $name
+     * @return bool true if all validation steps were succesful, false otherwise.
+     */
+    public function validate(string $name, bool $optional = false, ?string $error_disp_name = ""): bool
+    {
+        if (empty($error_disp_name)) $error_disp_name = $name;
+
+        // Get post variable based on name given
+        $this->field_inputs[$name] = Utils::getRequestVar(
+            key: $name,
+            frompost: true
+        );
+        // If field was left empty, log an error
+        if (empty($this->field_inputs[$name])) {
+            if ($optional == false) {
+                $this->logError(message:  $error_disp_name . ' was not filled in!');
+            } else {
+                return true;
+            }
+        }
+
+        // If there are errors, return false, otherwise call the page-specific validator to check the values
+        if ($this->hasErrors()) {
+            return false;
+        } else {
+            return $this->validateFields(field_inputs: $this->field_inputs, error_disp_name: $error_disp_name);
+        }
+    }
+
+
+    /**
+     * Retrieve the field inputs property
+     * @return array
+     */
+    public function getFieldInputs(): array
+    {
+        return $this->field_inputs;
+    }
+
+    /**
+     * Page-specific validation behaviour. Should be overwritten by child classes.
+     * @param ?array $field_inputs user inputs
+     * @return bool
+     */
+    public function validateFields(array $field_inputs, string $error_disp_name): bool
+    {
+        return true;
+    }
+}

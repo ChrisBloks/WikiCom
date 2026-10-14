@@ -1,0 +1,92 @@
+<?php
+
+namespace Wiki\page\controllers;
+
+use Wiki\page\handlers\PageGetRequestHandler;
+use Wiki\system\factories\PageFactory;
+use Wiki\tools\interfaces\iController;
+use Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\tools\utils\Utils;
+use Wiki\views\doc\BasePage;
+
+/**
+ * PageController class for handling non-AJAX requests.
+ * @uses tErrorMessageCollector
+ * @var bool $posted true if the page was requested through a POST request, otherwise false.
+ * @var array $request Contains boolean 'posted' and string 'page'.
+ * @var array $response Becomes equal to $request when method validateRequest() is reached.
+ * @var BasePage $response_page page produced by the PageController.
+ */
+class PageController implements iController
+{
+    use tErrorMessageCollector;
+    private bool $posted;
+    private array $request;
+    private ?array $response;
+    private ?BasePage $response_page = NULL;
+
+    /**
+     * __construct
+     */
+    public function __construct()
+    {
+        $this->posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
+    }
+
+    /**
+     * Calls the get, validate and show functions in sequence.
+     * @return void
+     */
+    public function handleRequest(): void
+    {
+        $this->getRequest();
+        $this->validateRequest();
+        $this->showResponse();
+    }
+
+    /**
+     * Extract the specified page from the request.
+     * @return void
+     */
+    public function getRequest(): void
+    {
+        $this->request = [
+            'posted' => $this->posted,
+            'page' => Utils::getRequestVar(
+                key: 'page',
+                frompost: $this->posted,
+                default: ($this->posted ? '' : 'home'
+                )
+            ),
+            'isLoggedIn' => isset($_SESSION['userID']),
+            'userID' => $_SESSION['userID'] ?? -1,
+        ];
+    }
+
+
+    /**
+     * Call the relevant validator based on the current request. Should set $this->response_page before terminating
+     * @return void
+     */
+    protected function validateRequest(): void
+    {
+        // Validate requets and retrieve page object
+        $this->response = (new PageGetRequestHandler)->handleRequest($this->request);
+    }
+
+    /**
+     * If page generation was succesful, call its show function.
+     * @return void
+     */
+    public function showResponse(): void
+    {
+        $PageFactory = new PageFactory($this->response);
+        $this->response_page = $PageFactory->buildPage();
+        // if response page is not null -> show page
+        if (!is_null($this->response_page)) {
+            $this->response_page->show();
+        }
+    }
+
+
+}
