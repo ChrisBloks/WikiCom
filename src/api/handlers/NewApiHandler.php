@@ -1,6 +1,6 @@
 <?php
 
-namespace Wiki\api\controllers;
+namespace Wiki\api\handlers;
 
 use Wiki\tools\utils\Utils,
     CONFIG;
@@ -34,11 +34,11 @@ class NewApiHandler
         try {
             // start buffer
             ob_start();
-           
             // get API action
             $this->action = Utils::getRequestVar('action', false, '');
             // create associated handler and execute it
             $this->createHandler();
+
             $this->executeHandler();
             ob_end_flush();
         }

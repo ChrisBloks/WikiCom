@@ -7,7 +7,7 @@ class Config
     const LOGPATH = "./logs";
     const FIRST_CELL_TARGET = "editArticle";
     const MIN_PW_LENGTH = 4;
-    const APICLASSPATH = "./src/api/actions";
+    const APICLASSPATH = "./src/api/actions/";
 
     // Database settings: these differ per machine
     private static ?array $local = null;

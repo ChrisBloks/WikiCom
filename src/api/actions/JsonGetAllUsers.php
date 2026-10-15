@@ -1,7 +1,7 @@
 <?php
 
 namespace Wiki\api\actions;
-use wiki\models\ModelSelector;
+use Wiki\models\ModelSelector;
 
 class JsonGetAllUsers extends BaseJsonAction{
 

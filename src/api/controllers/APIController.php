@@ -2,9 +2,9 @@
 
 namespace Wiki\api\controllers;
 
-use Wiki\api\Handlers\APIHandler;
-use Wiki\tools\interfaces\iController;
-use Wiki\tools\utils\Utils;
+use Wiki\api\handlers\NewApiHandler,
+    Wiki\tools\interfaces\iController,
+    Wiki\tools\utils\Utils;
 
 class APIController implements iController
 {
@@ -14,18 +14,18 @@ class APIController implements iController
 
     public function __construct()
     {
-        $this->posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
     }
 
     public function handleRequest()
     {
         try {
-        $this->getRequest();
-        $this->validateRequest();
-        $this->showResponse();
-        }
-        catch (\Exception){
-
+            $this->getRequest();
+            $this->validateRequest();
+            $this->showResponse();
+        } catch (\Exception) {
+            http_response_code(500);
+            header("Content-type: application/json");
+            echo json_encode(['error' => 'Internal server error']);
         }
     }
 
@@ -34,17 +34,17 @@ class APIController implements iController
         $this->request = [
             'action' => Utils::getRequestVar(
                 key: 'action',
-                frompost: $this->posted,
-                default: 'home'
+                frompost: false,
+                default: ''
             ),
         ];
     }
 
     private function validateRequest()
     {
-        $this->response = (new APIHandler)->handleRequest($this->request);
+        $this->response = (new NewApiHandler)->handleRequest();
     }
-    
+
     private function showResponse()
     {
         // switch statement later that can return html, json, or xml
