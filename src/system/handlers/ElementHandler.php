@@ -5,6 +5,7 @@ namespace Wiki\system\handlers;
 use Wiki\models\ModelSelector;
 use Wiki\tools\dataObjects\ElementInfo;
 use Wiki\tools\Queue;
+use Wiki\tools\utils\HtmlUtils;
 
 class ElementHandler
 {
