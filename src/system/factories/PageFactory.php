@@ -158,19 +158,4 @@ class PageFactory
         ));
     }
 
-    public function addCheckedUsingArray($form_fields, $response)
-    {
-        foreach ($form_fields as &$field) {
-            if (!empty($response[$field['name']]) && is_array($response[$field['name']])) {
-                foreach ($field['options'] as $key => $option) {
-                    if (in_array($option['value'], $response[$field['name']])) {
-                        $field['options'][$key]['checked'] = 1;
-                    }
-                }
-            }
-        }
-        unset($field);
-
-        return $form_fields;
-    }
 }
