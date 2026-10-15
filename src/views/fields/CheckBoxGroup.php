@@ -2,8 +2,7 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
-
+use Wiki\tools\utils\HtmlUtils;
 
 class CheckBoxGroup extends BaseField
 {

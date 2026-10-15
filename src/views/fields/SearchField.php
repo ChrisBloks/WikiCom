@@ -2,8 +2,7 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\dataObjects\ElementInfo;
-use Wiki\dataObjects\FieldInfo;
+use Wiki\tools\dataObjects\ElementInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 class SearchField extends InputField {

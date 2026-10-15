@@ -3,8 +3,8 @@
 namespace Wiki\views\fields;
 
 use InvalidArgumentException;
-use Wiki\dataObjects\ElementInfo;
-use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
+use Wiki\tools\dataObjects\ElementInfo;
+use Wiki\tools\utils\HtmlUtils;
 
 class InputField extends BaseField
 {

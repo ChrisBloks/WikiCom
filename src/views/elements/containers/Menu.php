@@ -1,0 +1,17 @@
+<?php
+namespace Wiki\views\elements\containers;
+
+use Wiki\tools\dataObjects\ElementInfo;
+use Wiki\tools\utils\HtmlUtils;
+
+/**
+ * Start of a menu element
+ */
+class Menu extends ContainerElement
+{
+    public function __construct(string $class = "nav")
+    {
+        $element_info = ["html_tag" => "ul", "html_class" => $class];
+        parent::__construct(new ElementInfo($element_info));
+    }
+}

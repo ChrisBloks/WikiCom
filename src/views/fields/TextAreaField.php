@@ -6,9 +6,8 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\dataObjects\ElementInfo;
-use Wiki\views\fields\BaseField, Wiki\tools\interfaces\iElement;
-use Wiki\tools\utils\HtmlUtils;
+use Wiki\tools\dataObjects\ElementInfo;
+use Wiki\tools\interfaces\iElement;
 
 class TextAreaField extends BaseField implements iElement
 {

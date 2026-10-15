@@ -2,8 +2,9 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\tools\interfaces\iElement, Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
 use ArrayAccess;
+use Wiki\tools\interfaces\iElement;
+use Wiki\tools\utils\HtmlUtils;
 
 class NewPassword extends BaseField implements iElement
 {

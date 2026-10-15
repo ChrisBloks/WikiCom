@@ -9,10 +9,10 @@ namespace Wiki\models;
 
 use InvalidArgumentException;
 use Nette\Utils\Html;
-use Wiki\dataObjects\FormInfo,
-Wiki\dataObjects\ElementInfo,
-Wiki\dataObjects\Stack,
-Wiki\dataObjects\FieldInfo;
+use Wiki\tools\dataObjects\FormInfo,
+Wiki\dataObjects\Stack;
+use Wiki\tools\dataObjects\ElementInfo;
+use Wiki\tools\dataObjects\FieldInfo;
 use Wiki\tools\utils\HtmlUtils;
 
 class ElementModel extends BaseModel

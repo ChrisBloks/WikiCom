@@ -116,7 +116,7 @@ class UserInfoModel extends BaseModel
         return $result;
     }
 
-        /**
+    /**
      * Fetches a user's info from the database based on user_id
      * @param int $user_id
      * @return array|false
@@ -134,7 +134,7 @@ class UserInfoModel extends BaseModel
         return $result;
     }
 
-    public function updateUserInfo(array $fields, int $user_id): array| bool
+    public function updateUserInfo(array $fields, int $user_id): array|bool
     {
         if (empty($fields)) {
             return false;
@@ -160,4 +160,20 @@ class UserInfoModel extends BaseModel
         // $result is an int here (0 or more) — query executed successfully either way
         return true;
     }
+
+
+    public function fetchAllUsers(): array|false
+    {
+
+        $sql = "SELECT `name` FROM users";
+        $params = [];
+        $result = $this->crud->selectMany($sql, $params);
+
+        if ($result == false) {
+            $this->logError("Failed to fetch users");
+            $result = false;
+        }
+        return $result;
+    }
+
 }

@@ -2,10 +2,7 @@
 
 namespace Wiki\views\fields;
 
-use ArrayAccess;
-use InvalidArgumentException;
-use Wiki\views\fields\BaseField, Wiki\tools\utils\HtmlUtils;
-
+use Wiki\tools\utils\HtmlUtils;
 
 class Checkbox extends BaseField
 {

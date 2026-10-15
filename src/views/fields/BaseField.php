@@ -2,7 +2,8 @@
 
 namespace Wiki\views\fields;
 
-use Wiki\tools\interfaces\iElement, Wiki\tools\utils\HtmlUtils;
+use Wiki\tools\interfaces\iElement;
+use Wiki\tools\utils\HtmlUtils;
 
 /**
  * Basic field type that can be added to a form. Should be extended by child classes.
