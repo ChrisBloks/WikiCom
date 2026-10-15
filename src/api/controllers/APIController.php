@@ -2,8 +2,9 @@
 
 namespace Wiki\api\controllers;
 
-use Wiki\api\Handlers\APIHandler;
+use Wiki\api\handlers\newAPIHandler;
 use Wiki\tools\interfaces\iController;
+use Wiki\tools\utils\HtmlUtils;
 use Wiki\tools\utils\Utils;
 
 class APIController implements iController
@@ -22,7 +23,7 @@ class APIController implements iController
         try {
         $this->getRequest();
         $this->validateRequest();
-        $this->showResponse();
+        //$this->showResponse();
         }
         catch (\Exception){
 
@@ -42,7 +43,8 @@ class APIController implements iController
 
     private function validateRequest()
     {
-        $this->response = (new APIHandler)->handleRequest($this->request);
+
+        (new NewApiHandler)->handleRequest();
     }
     
     private function showResponse()

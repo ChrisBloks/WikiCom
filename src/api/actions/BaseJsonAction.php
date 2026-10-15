@@ -2,8 +2,7 @@
 
 namespace Wiki\api\actions;
 
-use Wiki\api\handlers\BaseAPIFunction,
-    Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\tools\traits\tErrorMessageCollector;
 abstract class BaseJsonAction extends BaseAsyncAction
 {
     use tErrorMessageCollector;

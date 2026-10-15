@@ -1,14 +1,17 @@
 <?php
 
 namespace Wiki\api\actions;
-use wiki\models\ModelSelector;
+use Wiki\models\ModelSelector,
+    Wiki\tools\utils\Utils;
+use Wiki\tools\utils\HtmlUtils;
 
-class JsonGetAllArticlesByTag extends BaseJsonAction{
+class JsonGetArticlesByTag extends BaseJsonAction{
 
 
     protected function _getData(): bool
     {
-        $this->data = ModelSelector::getArticleModel()->fetchArticlesByTag();
+        $tag = Utils::getRequestVar('tag', false);
+        $this->data = ModelSelector::getArticleModel()->fetchArticlesByTag(tag_name:$tag);
         if (!$this->data){
             return false;
         }

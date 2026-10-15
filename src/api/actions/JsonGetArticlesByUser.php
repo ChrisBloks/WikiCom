@@ -1,15 +1,18 @@
 <?php
 
 namespace Wiki\api\actions;
-use wiki\models\ModelSelector;
+use Wiki\models\ModelSelector,
+Wiki\tools\utils\Utils;
 
-class JsonGetAllArticlesByUser extends BaseJsonAction{
+class JsonGetArticlesByUser extends BaseJsonAction
+{
 
 
     protected function _getData(): bool
     {
-        $this->data = ModelSelector::getArticleModel()->fetchArticlesByUserID();
-        if (!$this->data){
+        $user_id = Utils::getRequestNumber('userId', false);
+        $this->data = ModelSelector::getArticleModel()->fetchArticlesByUserID(user_id: $user_id);
+        if (!$this->data) {
             return false;
         }
         return true;

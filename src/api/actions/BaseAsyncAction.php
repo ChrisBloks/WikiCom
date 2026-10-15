@@ -2,6 +2,8 @@
 
 namespace Wiki\api\actions;
 use Wiki\tools\interfaces\iAPIfunction;
+use Wiki\tools\utils\HtmlUtils;
+
 
 abstract class BaseAsyncAction implements iAPIFunction
 {
@@ -11,7 +13,7 @@ abstract class BaseAsyncAction implements iAPIFunction
     {
         if ($this->_getData())
         {
-            return $this->_sendData();
+            $this->_sendData();
         } 
         return false;
     }    

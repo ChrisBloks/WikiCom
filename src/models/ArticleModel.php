@@ -369,7 +369,12 @@ class ArticleModel extends BaseModel
 
     public function fetchAllArticles(): array|false
     {
-        $sql = "SELECT `title` FROM `wiki_article`";
+        $sql = "SELECT `article`.`title`,
+                        `user`.`name`,
+                        `article`.`bodytext`,
+                        `article`.`codeblock`,
+                        `article`.`imgFileName`, 
+                        FROM `wiki_article`";
         return $this->crud->selectMany($sql, []);
     }
 
@@ -386,19 +391,19 @@ class ArticleModel extends BaseModel
         return $this->crud->selectMany(sql: $sql, params: $params);
     }
 
-    public function fetchArticlesByTag(string $tag): array|false
+    public function fetchArticlesByTag(string $tag_name): array|false
     {
         $sql = "SELECT
                     *
                 FROM
                     `wiki_article`
                 LEFT JOIN wiki_article_to_tag wat ON
-                    `wiki_article.id`=`wat.article_id`
+                    `wiki_article`.`id`=`wat`.`article_id`
                 LEFT JOIN wiki_tag wt ON
-                    `wt.id`=`wat.wiki_tag_id`
+                    `wt`.`id`=`wat`.`wiki_tag_id`
                 WHERE
-                `wt.name`=:tag";
-        $params = ['tag' => $tag];
+                `wt`.`name`=:tag_name";
+        $params = ['tag_name' => $tag_name];
         return $this->crud->selectMany(sql: $sql, params: $params);
     }
 
@@ -409,11 +414,11 @@ class ArticleModel extends BaseModel
                 FROM
                     `wiki_article`
                 LEFT JOIN wiki_article_to_tag wat ON
-                    `wiki_article.id` = `wat.article_id`
+                    `wiki_article`.`id` = `wat`.`article_id`
                 LEFT JOIN wiki_tag wt ON
-                    `wt.id`=`wat.wiki_tag_id`
+                    `wt`.`id`=`wat`.`wiki_tag_id`
                 WHERE
-                `wt.name`=:tag AND `wiki_article.user_id` =:user_id";
+                `wt`.`name`=:tag AND `wiki_article`.`user_id` =:user_id";
         $params = ['tag' => $tag, 'user_id' => $user_id];
         return $this->crud->selectMany(sql: $sql, params: $params);
     }

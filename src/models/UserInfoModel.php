@@ -165,7 +165,7 @@ class UserInfoModel extends BaseModel
     public function fetchAllUsers(): array|false
     {
 
-        $sql = "SELECT `name` FROM users";
+        $sql = "SELECT `name` FROM user";
         $params = [];
         $result = $this->crud->selectMany($sql, $params);
 

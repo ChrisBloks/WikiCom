@@ -1,7 +1,9 @@
 <?php
 
 namespace Wiki\api\actions;
-use wiki\models\ModelSelector;
+use Wiki\models\ModelSelector;
+use Wiki\tools\utils\HtmlUtils;
+use Wiki\api\actions\BaseJsonAction;
 
 class JsonGetAllArticles extends BaseJsonAction{
 

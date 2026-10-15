@@ -1,10 +1,11 @@
 <?php
 
-namespace Wiki\api\controllers;
+namespace Wiki\api\handlers;
 
 use Wiki\tools\utils\Utils,
-    CONFIG;
+CONFIG;
 use Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\tools\utils\HtmlUtils;
 
 class NewApiHandler
 {
@@ -18,47 +19,46 @@ class NewApiHandler
     public function __construct()
     {
         $this->routing = [
-            'getAllUsers'           => 'JsonGetAllUsers',
-            'getAllArticles'        => 'JsonGetAllArticles',
-            'getAllTags'            => 'JsonGetAllTags',
-            'getArticlesByUser'     => 'JsonGetArticlesByUser',
-            'getArticlesByTag'      => 'JsonGetArticlesByTag',
-            'getArticlesByUserTag'  => 'JsonGetArticlesByUserTag',
-            'getArticleById'        => 'JsonGetArticleById',
+            'getAllUsers' => 'JsonGetAllUsers',
+            'getAllArticles' => 'JsonGetAllArticles',
+            'getAllTags' => 'JsonGetAllTags',
+            'getArticlesByUser' => 'JsonGetArticlesByUser',
+            'getArticlesByTag' => 'JsonGetArticlesByTag',
+            'getArticlesByUserTag' => 'JsonGetArticlesByUserTag',
+            'getArticleById' => 'JsonGetArticleById',
         ];
     }
 
     //==============================================================================
     public function handleRequest()
     {
-        try {
+        // try {
             // start buffer
             ob_start();
-           
             // get API action
             $this->action = Utils::getRequestVar('action', false, '');
             // create associated handler and execute it
             $this->createHandler();
             $this->executeHandler();
             ob_end_flush();
-        }
-        catch (\Throwable $t) {
-            ob_end_clean();
-            $this->logError($t);
-        } catch (\Exception $e) {
-            ob_end_clean();
-            $this->logError($e);
-        }
+        // } catch (\Throwable $t) {
+        //     ob_end_clean();
+        //     $this->logError($t);
+        // } catch (\Exception $e) {
+        //     ob_end_clean();
+        //     $this->logError($e);
+        // }
     }
     //==============================================================================
     private function createHandler()
     {
+
         if (array_key_exists($this->action, $this->routing)) {
+
             $class = $this->routing[$this->action];
-            require_once CONFIG::APICLASSPATH . $class . ".php";
-            $this->handler = new $class(
-                action: $this->action
-            );
+
+            $class_path = CONFIG::APICLASSPATH . $class;
+            $this->handler = new $class_path();
         } else {
             throw new \Exception("Oops api call didnt work");
         }
@@ -67,7 +67,7 @@ class NewApiHandler
     private function executeHandler()
     {
         if ($this->handler) {
-            $this->handler->execute();
+            return $this->handler->execute();
         }
     }
 
