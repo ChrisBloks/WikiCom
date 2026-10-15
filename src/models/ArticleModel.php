@@ -370,11 +370,10 @@ class ArticleModel extends BaseModel
     public function fetchAllArticles(): array|false
     {
         $sql = "SELECT `article`.`title`,
-                        `user`.`name`,
                         `article`.`bodytext`,
                         `article`.`codeblock`,
-                        `article`.`imgFileName`, 
-                        FROM `wiki_article`";
+                        `article`.`imgFileName` 
+                        FROM `wiki_article` as `article`";
         return $this->crud->selectMany($sql, []);
     }
 
