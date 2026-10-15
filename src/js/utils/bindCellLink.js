@@ -3,6 +3,7 @@
 // ============================================================
 import { ajaxGET } from "../services/Ajax.js";
 import { ResponseHandler } from "../ResponseHandler.js";
+import { HistoryTracking } from "../services/HistoryTracking.js";
 
 export function bindCellLink() {
     let links = document.getElementsByClassName("cell-link");
@@ -19,6 +20,8 @@ export function bindCellLink() {
                     if (!Array.isArray(response)) return;
                     console.log("response reached");
                     ResponseHandler.handleResponse(response);
+                    console.log('bindCellLink {page}: ' + page);
+                    HistoryTracking.add(page, [parseInt(articleID)]);
                 },
                 (error) => console.error("Content unable to be loaded:", error),
             );

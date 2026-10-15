@@ -1,4 +1,5 @@
 import { ResponseHandler } from "../ResponseHandler.js";
+import { stringFunc } from "../utils/stringFunc.js";
 import { ajaxGET } from "./Ajax.js";
 
 
@@ -24,9 +25,16 @@ export const HistoryNavigation = {
                     return;
                 }
 
-                action = action.slice(4).toLowerCase(); // Extract page target
+                action = action.slice(4); //.toLowerCase(); // Extract page target
+                action = stringFunc.lowerCaseFirst(action);
                 url = window.location.href.split('main')[0]; // Extract local URL 
                 url += "main.php?reqType=page&page=" + action // Attach the server request
+                
+
+                if (action == 'article' || action == 'editArticle'){ // if the target action is an article, require an articleID
+                    url += '&articleID=' + event.state.article_id;
+                }
+  
                 navigation.navigate(url);
             
             }

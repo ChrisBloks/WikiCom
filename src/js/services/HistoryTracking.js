@@ -1,7 +1,7 @@
 
 
 export const HistoryTracking = {
-    add(action) {
+    add(action, params=[]) {
         console.log('Adding History: ' + action);
         let data, unused, url;
         data = {'action': action};
@@ -9,6 +9,14 @@ export const HistoryTracking = {
         url = "main.php?reqType=page&page=" ;
 
         switch (true) {
+            case action == 'pageArticle':
+                url += 'article&articleID=' + params[0];
+                data.article_id = params[0];
+                break;
+            case action == 'pageEditArticle':
+                url += 'editArticle&articleID=' + params[0];
+                data.article_id = params[0];
+                break;
             case action.substring(0,4) == 'page':
                 url += action.slice(4).toLowerCase();
                 break;
@@ -22,6 +30,7 @@ export const HistoryTracking = {
         }
         
         history.pushState(data, unused, url);
+        // console.log(params[0]);
         // console.log('url: ', url);
         // console.log(history.state);
         
