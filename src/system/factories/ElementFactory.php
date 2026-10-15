@@ -32,7 +32,7 @@ class ElementFactory
         'toast' => 'Wiki\views\elements\atomics\Toast',
         'rating' => 'Wiki\views\elements\containers\Rating',
         'tagbuttoncontainer' => 'Wiki\views\elements\containers\TagButtonContainer',
-        'codeblock' => 'Wiki\views\elements\containers\CodeBlock',
+        'codeblock' => 'Wiki\views\elements\atomics\CodeBlock',
         'button' => 'Wiki\views\fields\Buttonfield',
     ];
 
