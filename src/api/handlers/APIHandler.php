@@ -12,6 +12,7 @@ class APIHandler
     protected $handler;
     protected array $routing;
 
+    // routing for classes
     public function __construct(){
         $this->routing = [
             'getAllUsers'       => 'JsonGetAllUsers',

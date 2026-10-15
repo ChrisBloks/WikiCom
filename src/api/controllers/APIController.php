@@ -19,9 +19,14 @@ class APIController implements iController
 
     public function handleRequest()
     {
+        try {
         $this->getRequest();
         $this->validateRequest();
         $this->showResponse();
+        }
+        catch (\Exception){
+
+        }
     }
 
     private function getRequest()
