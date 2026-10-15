@@ -8,7 +8,7 @@ class JsonGetArticleById extends BaseJsonAction
 {
     protected function _getData(): bool
     {
-        $article_id = Utils::getRequestNumber('articleId', false);
+        $article_id = Utils::getRequestVar('articleId', false);
         $this->data = ModelSelector::getArticleModel()->fetchArticleById(article_id:$article_id);
         if (!$this->data){
             return false;

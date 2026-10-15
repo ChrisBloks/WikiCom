@@ -383,9 +383,14 @@ class ArticleModel extends BaseModel
         return $this->crud->selectMany($sql, []);
     }
 
-    public function fetchArticlesByUserID(int $user_id): array|false
+    public function fetchArticlesByUserIdAPI(int $user_id): array|false
     {
-        $sql = "SELECT `title` FROM wiki_article WHERE `user_id`=:user_id";
+        $sql = "SELECT `article`.`title`,
+                        `article`.`bodytext`,
+                        `article`.`codeblock`,
+                        `article`.`imgFileName` 
+                        FROM `wiki_article` as `article` 
+                        WHERE `user_id`=:user_id";
         $params = ['user_id' => $user_id];
         return $this->crud->selectMany(sql: $sql, params: $params);
     }
