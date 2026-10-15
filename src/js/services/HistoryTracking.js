@@ -20,7 +20,10 @@ export const HistoryTracking = {
                 unused = 'Unknown action in HistoryTracking!';
                 break;
         }
-
+        
         history.pushState(data, unused, url);
+        // console.log('url: ', url);
+        // console.log(history.state);
+        
     }
 }

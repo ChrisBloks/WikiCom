@@ -6,6 +6,7 @@ use Wiki\page\handlers\PageGetRequestHandler;
 use Wiki\system\factories\PageFactory;
 use Wiki\tools\interfaces\iController;
 use Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\tools\utils\HtmlUtils;
 use Wiki\tools\utils\Utils;
 use Wiki\views\doc\BasePage;
 
@@ -86,6 +87,7 @@ class PageController implements iController
         if (!is_null($this->response_page)) {
             $this->response_page->show();
         }
+        // HtmlUtils::dump('response', $this->response);
     }
 
 

@@ -18,6 +18,7 @@ import { initPasswordLengthChecker } from "./components/PasswordLengthChecker.js
 import { Toasts } from "./components/Toasts.js";
 import { MarkdownToolbar } from "./components/MarkdownEditor.js";
 import { bindEvents } from "./utils/bindEvents.js";
+import { HistoryNavigation } from "./services/HistoryNavigation.js";
 
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -53,5 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const page = match ? match[1] : 'home';
   bindEvents(page);
 
+  HistoryNavigation.init();
 
 });
