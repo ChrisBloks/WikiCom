@@ -402,9 +402,9 @@ class ArticleModel extends BaseModel
         return $this->crud->selectMany(sql: $sql, params: $params);
     }
 
-    public function fetchArticlesByTagAndUserId(string $tag, int $user_id): array | false
+    public function fetchArticlesByTagAndUserId(string $tag, int $user_id): array|false
     {
-                $sql = "SELECT
+        $sql = "SELECT
                     *
                 FROM
                     `wiki_article`
@@ -416,5 +416,16 @@ class ArticleModel extends BaseModel
                 `wt.name`=:tag AND `wiki_article.user_id` =:user_id";
         $params = ['tag' => $tag, 'user_id' => $user_id];
         return $this->crud->selectMany(sql: $sql, params: $params);
+    }
+
+    public function deleteUnattachedTags()
+    {
+        $sql = "DELETE t
+                FROM wiki_tag AS t
+                LEFT JOIN wiki_article_to_tag AS watt
+                ON watt.wiki_tag_id = t.id
+                WHERE watt.wiki_tag_id IS NULL;";
+        return $this->crud->doDelete(sql: $sql, params: []);
+
     }
 }
