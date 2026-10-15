@@ -15,7 +15,6 @@ class APIController implements iController
 
     public function __construct()
     {
-        $this->posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
     }
 
     public function handleRequest()
@@ -35,8 +34,8 @@ class APIController implements iController
         $this->request = [
             'action' => Utils::getRequestVar(
                 key: 'action',
-                frompost: $this->posted,
-                default: 'home'
+                frompost: false,
+                default: ''
             ),
         ];
     }
@@ -46,7 +45,7 @@ class APIController implements iController
 
         (new NewApiHandler)->handleRequest();
     }
-    
+
     private function showResponse()
     {
         // switch statement later that can return html, json, or xml

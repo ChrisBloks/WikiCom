@@ -39,6 +39,7 @@ class NewApiHandler
             $this->action = Utils::getRequestVar('action', false, '');
             // create associated handler and execute it
             $this->createHandler();
+
             $this->executeHandler();
             ob_end_flush();
         // } catch (\Throwable $t) {
