@@ -1,0 +1,23 @@
+<!doctype html>
+<script>
+    // const body = { action: "getAllUsers" };
+    // const body = { action: "getAllArticles" };
+    // const body = { action: "getAllTags" };
+    // const body = { action: "getArticlesByUser", userId: 1 };
+    // const body = { action: "getArticlesByTag", tag: 'code' };
+    // const body = { action: "getArticlesByUserTag", userId: 1, tag: 'code' };
+    const body = { action: "getArticleById", articleId: 1 };
+    (async () => {
+        try {
+            const r = await fetch("main.php?reqType=API", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+            const t = await r.text();
+            document.body.textContent = t;
+        } catch (e) {
+            document.body.textContent = e;
+        }
+    })();
+</script>

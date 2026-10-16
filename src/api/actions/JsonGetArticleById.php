@@ -3,13 +3,13 @@
 namespace Wiki\api\actions;
 use Wiki\models\ModelSelector,
     Wiki\tools\utils\Utils;
+use Wiki\tools\utils\HtmlUtils;
 
 class JsonGetArticleById extends BaseJsonAction
 {
     protected function _getData(): bool
     {
-        $article_id = Utils::getRequestVar('articleId', false);
-        $this->data = ModelSelector::getArticleModel()->fetchArticleById(article_id:$article_id);
+        $this->data = ModelSelector::getArticleModel()->fetchArticleById(article_id:$this->request['articleId']);
         if (!$this->data){
             return false;
         }

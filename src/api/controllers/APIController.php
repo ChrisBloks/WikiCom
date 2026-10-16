@@ -2,6 +2,7 @@
 
 namespace Wiki\api\controllers;
 
+use HTMLPurifier_UnitConverter;
 use Wiki\api\handlers\APIHandler;
 use Wiki\tools\interfaces\iController;
 use Wiki\tools\utils\HtmlUtils;
@@ -15,34 +16,38 @@ class APIController implements iController
 
     public function __construct()
     {
+        $this->posted = ($_SERVER['REQUEST_METHOD'] === 'POST');
     }
+
 
     public function handleRequest()
     {
         try {
-        $this->getRequest();
-        $this->validateRequest();
-        //$this->showResponse();
-        }
-        catch (\Exception){
+            $this->getRequest();
+            $this->validateRequest();
+            //$this->showResponse();
+        } catch (\Exception) {
 
         }
     }
 
     private function getRequest()
     {
-        $this->request = [
-            'action' => Utils::getRequestVar(
-                key: 'action',
-                frompost: false,
-                default: ''
-            ),
-        ];
+        if ($this->posted) {
+            $this->request = json_decode(file_get_contents('php://input'), true); 
+        }
+        // $this->request = [
+        //     'action' => Utils::getRequestVar(
+        //         key: 'action',
+        //         frompost: false,
+        //         default: ''
+        //     ),
+        // ];
     }
 
     private function validateRequest()
     {
-        (new APIHandler)->handleRequest();
+        (new APIHandler)->handleRequest($this->request);
     }
 
     // private function showResponse()

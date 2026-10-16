@@ -30,15 +30,15 @@ class APIHandler
     }
 
     //==============================================================================
-    public function handleRequest()
+    public function handleRequest($request)
     {
         // try {
             // start buffer
             ob_start();
             // get API action
-            $this->action = Utils::getRequestVar('action', false, '');
+            $this->action = $request['action'];
             // create associated handler and execute it
-            $this->createHandler();
+            $this->createHandler($request);
 
             $this->executeHandler();
             ob_end_flush();
@@ -51,7 +51,7 @@ class APIHandler
         // }
     }
     //==============================================================================
-    private function createHandler()
+    private function createHandler($request)
     {
 
         if (array_key_exists($this->action, $this->routing)) {
@@ -59,7 +59,7 @@ class APIHandler
             $class = $this->routing[$this->action];
 
             $class_path = CONFIG::APICLASSPATH . $class;
-            $this->handler = new $class_path();
+            $this->handler = new $class_path($request);
         } else {
             throw new \Exception("Oops api call didnt work");
         }
