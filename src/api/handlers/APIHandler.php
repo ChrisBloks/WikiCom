@@ -1,65 +1,75 @@
 <?php
 
-namespace Wiki\api\Handlers;
+namespace Wiki\api\handlers;
 
-use Wiki\models\ArticleModel;
-use Wiki\models\UserInfoModel;
-use Wiki\tools\utils\Utils;
+use Wiki\tools\utils\Utils,
+CONFIG;
+use Wiki\tools\traits\tErrorMessageCollector;
+use Wiki\tools\utils\HtmlUtils;
 
 class APIHandler
 {
-    protected string $func;
+    //properties
+    protected string $action;
     protected $handler;
     protected array $routing;
 
-    // routing for classes
-    public function __construct(){
+    use tErrorMessageCollector;
+
+    public function __construct()
+    {
         $this->routing = [
-            'getAllUsers'       => 'JsonGetAllUsers',
-            'getAllArticles'    => 'JsonGetAllArticles',
-            'getAllTags'        => 'JsonGetAllTags',
+            'getAllUsers' => 'JsonGetAllUsers',
+            'getAllArticles' => 'JsonGetAllArticles',
+            'getAllTags' => 'JsonGetAllTags',
             'getArticlesByUser' => 'JsonGetArticlesByUser',
-            'getArticlesByTag'  => 'JsonGetArticlesByTag',
+            'getArticlesByTag' => 'JsonGetArticlesByTag',
             'getArticlesByUserTag' => 'JsonGetArticlesByUserTag',
-            'getArticleById'    => 'JsonGetArticleById',  
+            'getArticleById' => 'JsonGetArticleById',
         ];
     }
 
-    public function handleRequest(array $request){
+    //==============================================================================
+    public function handleRequest()
+    {
+        // try {
+            // start buffer
+            ob_start();
+            // get API action
+            $this->action = Utils::getRequestVar('action', false, '');
+            // create associated handler and execute it
+            $this->createHandler();
 
-        $response = $request;
-        switch ($request['action']) {
-            case 'getAllUsers':
-                $response['result'] = (new UserInfoModel)->fetchAllUsers();
-                break;
-            case 'getAllArticles':
-                $response['result'] = (new ArticleModel)->fetchAllArticles();
-                break;
-            case 'getAllTags':
-                $response['result'] = (new ArticleModel)->fetchAllTags();
-                break;
-            case 'getArticlesByUser':
-                $user_id = Utils::getRequestVar('userID', false, 0, true);
-                $response['result'] = (new ArticleModel)->fetchArticlesByUserID($user_id);
-                break;
-            case 'getArticlesByTag':
-                $tag = Utils::getRequestVar('tag', false, 0, true);
-                $response['result'] = (new ArticleModel)->fetchArticlesByTag($tag);
-                break;
-            case 'getArticlesByUserTag':
-                $tag = Utils::getRequestVar('tag', false, 0, true);
-                $user_id = Utils::getRequestVar('userID', false, 0, true);
-                $response['result'] = (new ArticleModel)->fetchArticlesByTagAndUserId($tag, $user_id);
-                break;
-            case 'getArticleById':
-                $article_id = Utils::getRequestVar('articleID', false, 0, true);
-                $response['result'] = (new ArticleModel)->fetchArticleById($article_id);
-                break;
-            default:
-                $response['error'] = 'action ' . $request['action'] . ' not recognized in APIHandler!';
-                break;
-        }
-
-        return $response;
+            $this->executeHandler();
+            ob_end_flush();
+        // } catch (\Throwable $t) {
+        //     ob_end_clean();
+        //     $this->logError($t);
+        // } catch (\Exception $e) {
+        //     ob_end_clean();
+        //     $this->logError($e);
+        // }
     }
+    //==============================================================================
+    private function createHandler()
+    {
+
+        if (array_key_exists($this->action, $this->routing)) {
+
+            $class = $this->routing[$this->action];
+
+            $class_path = CONFIG::APICLASSPATH . $class;
+            $this->handler = new $class_path();
+        } else {
+            throw new \Exception("Oops api call didnt work");
+        }
+    }
+    //==============================================================================
+    private function executeHandler()
+    {
+        if ($this->handler) {
+            return $this->handler->execute();
+        }
+    }
+
 }

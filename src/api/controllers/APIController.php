@@ -2,7 +2,7 @@
 
 namespace Wiki\api\controllers;
 
-use Wiki\api\handlers\newAPIHandler;
+use Wiki\api\handlers\APIHandler;
 use Wiki\tools\interfaces\iController;
 use Wiki\tools\utils\HtmlUtils;
 use Wiki\tools\utils\Utils;
@@ -42,14 +42,13 @@ class APIController implements iController
 
     private function validateRequest()
     {
-
-        (new NewApiHandler)->handleRequest();
+        (new APIHandler)->handleRequest();
     }
 
-    private function showResponse()
-    {
-        // switch statement later that can return html, json, or xml
-        header("Content-type: application/json");
-        echo json_encode($this->response);
-    }
+    // private function showResponse()
+    // {
+    //     // switch statement later that can return html, json, or xml
+    //     header("Content-type: application/json");
+    //     echo json_encode($this->response);
+    // }
 }
