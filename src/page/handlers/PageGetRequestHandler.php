@@ -14,7 +14,9 @@ class PageGetRequestHandler extends BaseRequestHandler
 
         switch ($request['page']) {
             case 'article':
+            case 'editArticle':
                 $this->response['articleID'] = Utils::getRequestVar('articleID', false);
+                break;
             default:
                 // $this->response['page'] = 'home';
                 break;

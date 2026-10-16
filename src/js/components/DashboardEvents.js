@@ -5,6 +5,7 @@ import { ajaxPOST } from "../services/Ajax.js";
 import { AjaxForms } from "../services/AjaxForms.js";
 import { ajaxGET } from "../services/Ajax.js";
 import { ResponseHandler } from "../ResponseHandler.js";
+import { bindCellLink } from "../utils/bindCellLink.js";
 
 
 export const DashboardEvents = {
@@ -81,25 +82,7 @@ export const DashboardEvents = {
         // ============================================================
         // Cell link in table event
         // ============================================================
-        let links = document.getElementsByClassName("cell-link");
-
-        for (let link of links) {
-            link.addEventListener("click", async function (_) {
-                let articleID = link.dataset.id;
-                let page = link.dataset.targetpage;
-                await ajaxGET(
-                    "main.php?reqType=ajax&action=" + page + "&articleID=" + articleID,
-                    "json",
-                    (response) => {
-                        if (!Array.isArray(response)) return;
-                        console.log("response reached")
-                        ResponseHandler.handleResponse(response);
-                    },
-                    (error) => console.error("Content unable to be loaded:", error),
-                );
-            }
-            )
-        }
+        bindCellLink();
 
         // ============================================================
         // Edit user info model event

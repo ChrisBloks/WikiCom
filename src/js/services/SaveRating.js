@@ -14,7 +14,7 @@ export const saveRating = {
                 let user_rating = rating_div.querySelector("select.rating_select").value;
 
                 await ajaxPOST(
-                    "main.php",
+                    "main.php?reqType=ajax",
                     "json",
                     { action: "saveRating", rating: user_rating, article_id: article_id },
                     (response) => {

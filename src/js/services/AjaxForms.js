@@ -42,7 +42,7 @@ export const AjaxForms = {
             if (result.success) {
               // show result messages in toasts
               options.onSuccess?.(result);
-              if (result.message.length > 0) {
+              if (result.message?.length > 0) {
                 Toasts.show("message", result.message)
               }
               if (modal) bootstrap.Modal.getInstance(modal)?.hide();

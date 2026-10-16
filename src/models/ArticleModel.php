@@ -79,13 +79,13 @@ class ArticleModel extends BaseModel
      */
     public function fetchArticleTags(int $article_id): array|false
     {
-        $sql = "SELECT `name`
+        $sql = "SELECT `id`,`name`
                 FROM
                     wiki_tag
                 JOIN wiki_article_to_tag ON wiki_article_to_tag.wiki_tag_id = wiki_tag.id
                 WHERE article_id =:article_id";
         $params = ["article_id" => $article_id];
-        return $this->crud->selectMany($sql, $params, \PDO::FETCH_COLUMN);
+        return $this->crud->selectMany($sql, $params, \PDO::FETCH_KEY_PAIR);
     }
 
     /**
@@ -434,7 +434,7 @@ class ArticleModel extends BaseModel
                 LEFT JOIN wiki_article_to_tag AS watt
                 ON watt.wiki_tag_id = t.id
                 WHERE watt.wiki_tag_id IS NULL;";
-        return $this->crud->doDelete(sql: $sql, params: []);
+        return $this->crud->doDelete(sql: $sql, params:[]);
 
     }
 }

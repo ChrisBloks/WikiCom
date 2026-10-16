@@ -13,17 +13,12 @@
 
 // imports
 import { Router } from "./services/Router.js";
-import { AjaxForms } from "./services/AjaxForms.js";
-import { ArticleDelete } from "./components/ArticleDelete.js"
 import { TagWidget } from "./components/Tagwidget.js";
 import { initPasswordLengthChecker } from "./components/PasswordLengthChecker.js";
 import { Toasts } from "./components/Toasts.js";
 import { MarkdownToolbar } from "./components/MarkdownEditor.js";
-import { SearchForm } from "./components/SearchForm.js";
-import { ContactForm } from "./components/ContactForm.js";
-import { RegisterUser } from "./components/RegisterUser.js";
-import { LoginForm } from "./components/LoginForm.js";
-import { EditArticleForm } from "./components/EditArticle.js";
+import { bindEvents } from "./utils/bindEvents.js";
+import { HistoryNavigation } from "./services/HistoryNavigation.js";
 
 // document.ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,26 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
   //===========================================================
   Toasts.initExisting();
   TagWidget.init();
-  ArticleDelete.init();
   initPasswordLengthChecker();
   MarkdownToolbar.init(".article-text");
-  SearchForm.init();
-  ContactForm.init();
-  RegisterUser.init();
-  LoginForm.init();
-  EditArticleForm.init();
 
-  // document.querySelectorAll(".checkbox_group").forEach(function (checkbox_group) {
-  //   resetCheckboxesToDefault(checkbox_group);
-  // });
 
-  // // searchbar update (js)
-  // document.querySelectorAll(".searchField").forEach(function (search_field) {
-  //   search_field.addEventListener("input", function (_) {
-  //     console.log("input change");
-  //     let checkbox_group = this.parentNode.querySelector(".checkbox_group");
-  //     updateCheckboxGroup(checkbox_group, this.value, 1);
-  //   });
-  // });
+  let url = window.location.href;
+
+  const match = url.match(/[?&]page=([^&#]*)/);
+  const page = match ? match[1] : 'home';
+  bindEvents(page);
+
+  HistoryNavigation.init();
 
 });
