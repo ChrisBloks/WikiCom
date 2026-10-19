@@ -24,6 +24,7 @@ use Wiki\views\doc\BodyContainer;
 use Wiki\views\elements\atomics\AtomicElement;
 use Wiki\views\elements\atomics\Footer;
 use Wiki\views\elements\atomics\Header;
+use Wiki\views\elements\atomics\NoticeMessage;
 
 class PageFactory
 {
@@ -133,15 +134,23 @@ class PageFactory
 
         // Add necessary variables
         // HtmlUtils::dump('response', $this->response);
-        $element_handler = new ElementHandler($this->response);
-        $element_handler->addDataToElementList($elements_info);
+        try {
+            $element_handler = new ElementHandler($this->response);
+            $element_handler->addDataToElementList($elements_info);
+        
 
-        $element_list = [];
-        $element_list[0] = $main;
-        foreach ($elements_info as $element_info) {
-            $element = ElementFactory::createElement($element_info);
-            $element_list[$element_info['order_by']] = $element;
-            $element_list[$element_info['parent_order']]->addElement($element);
+            $element_list = [];
+            $element_list[0] = $main;
+            foreach ($elements_info as $element_info) {
+                $element = ElementFactory::createElement($element_info);
+                $element_list[$element_info['order_by']] = $element;
+                $element_list[$element_info['parent_order']]->addElement($element);
+            }
+        } catch (\Throwable $e) {
+            $_SESSION['errors'][] = '404 page "' . $this->page . '" not found!';
+            $main->addElement(
+                new NoticeMessage()
+            );
         }
 
 
