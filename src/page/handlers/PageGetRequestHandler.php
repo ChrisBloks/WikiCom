@@ -19,7 +19,6 @@ class PageGetRequestHandler extends BaseRequestHandler
                 $this->response['articleID'] = Utils::getRequestVar('articleID', false);
                 break;
             case 'editArticle':
-                HtmlUtils::dump('response', $this->response);
                 $this->response['articleID'] = Utils::getRequestVar('articleID', false);
                 $author_id = ModelSelector::getArticleModel()->fetchAuthor($this->response['articleID']);
                 if($this->response['userID'] != $author_id){
@@ -28,7 +27,6 @@ class PageGetRequestHandler extends BaseRequestHandler
                 }
                 break;
             case 'dashboard':
-                HtmlUtils::dump('response', $this->response);
                 if(!$this->response['isLoggedIn']){
                     $_SESSION['errors'][] = '403 Forbidden';
                     $this->response['page'] = 'home';
