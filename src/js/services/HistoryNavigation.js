@@ -15,7 +15,6 @@ export const HistoryNavigation = {
                 }
 
                 action = event.state.action;
-                // console.log(action);
 
                 if(!action){ // The top state of history has no action attached to it
                     return;
@@ -34,8 +33,8 @@ export const HistoryNavigation = {
                 if (action == 'article' || action == 'editArticle'){ // if the target action is an article, require an articleID
                     url += '&articleID=' + event.state.article_id;
                 }
-  
-                navigation.navigate(url);
+                console.log(url);
+                //navigation.navigate(url);
             
             }
         );

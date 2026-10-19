@@ -3,5 +3,9 @@
 export const stringFunc = {
     lowerCaseFirst(text) {
         return String(text).charAt(0).toLowerCase() + String(text).slice(1);
+    },
+
+    upperCaseFirst(text) {
+        return String(text).charAt(0).toUpperCase() + String(text).slice(1);
     }
 }

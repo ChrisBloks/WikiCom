@@ -1,9 +1,12 @@
+import { stringFunc } from "../utils/stringFunc.js";
+
 export const HistoryTracking = {
     init() {
         let url,
             url_params,
             params = [],
-            current_page;
+            current_page,
+            articleID;
 
         url = window.location.href.split("&page=");
 
@@ -15,11 +18,11 @@ export const HistoryTracking = {
             // params.lenght >= 2
             url_params = url[1].split("&");
             current_page = url_params[0];
-            if (current_page in ["article, editArticle"]) {
+            if (["article" , "editArticle"].includes(current_page)) {
                 articleID = url_params[1].split("=")[1];
                 params = [parseInt(articleID)];
             }
-            HistoryTracking.add("page"+current_page, params, true);
+            HistoryTracking.add("page"+stringFunc.upperCaseFirst(current_page), params, true);
         }
     },
     add(action, params = [], replace = false) {
@@ -30,7 +33,7 @@ export const HistoryTracking = {
         url = "main.php?reqType=page&page=";
 
         switch (true) {
-            case action == "pageArticle":
+            case ['pageArticle','article'].includes(action):
                 url += "article&articleID=" + params[0];
                 data.article_id = params[0];
                 break;
