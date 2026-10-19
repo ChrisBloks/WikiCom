@@ -26,7 +26,7 @@ use Wiki\views\elements\atomics\AtomicElement;
 use Wiki\views\elements\atomics\Footer;
 use Wiki\views\elements\atomics\Header;
 use Wiki\views\elements\atomics\NoticeMessage;
-
+use \ManKind\tools as TOOLS;
 class PageFactory
 {
     use tErrorMessageCollector;
@@ -152,10 +152,7 @@ class PageFactory
                 $element_list[$element_info['parent_order']]->addElement($element);
             }
         } catch (\Throwable $e) {
-            $_SESSION['errors'][] = $e->getMessage();
-            $main->addElement(
-                new NoticeMessage()
-            );
+            TOOLS\dev\Logger::_error($e);
         }
 
 

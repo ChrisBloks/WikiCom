@@ -57,7 +57,7 @@ abstract class HtmlDoc
     }
 
     // hardcoded that the body is a flex container, at least as tall as the viewport
-    private function beginBody(): void
+    protected function beginBody(): void
     {
         echo '<body class="d-flex flex-column min-vh-100">';
     }

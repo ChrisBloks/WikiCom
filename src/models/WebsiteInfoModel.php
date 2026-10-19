@@ -124,4 +124,15 @@ class WebsiteInfoModel extends BaseModel
 
         return $styling;
     }
+
+    public function getValidPages(bool $is_logged_in):array
+    {
+        if ($is_logged_in){
+            return ['home','about','contact','search','dashboard','logout','editArticle','article'];
+        }
+        else{
+            return ['home','about','contact','search','register','login','article'];
+        }
+
+    }
 }

@@ -9,6 +9,7 @@ use Wiki\tools\traits\tErrorMessageCollector;
 use Wiki\tools\utils\HtmlUtils;
 use Wiki\tools\utils\Utils;
 use Wiki\views\doc\BasePage;
+use Wiki\views\doc\ErrorPage;
 
 /**
  * PageController class for handling non-AJAX requests.
@@ -81,11 +82,16 @@ class PageController implements iController
      */
     public function showResponse(): void
     {
+        if ($this->response['page'] == 'Error'){
+            (new ErrorPage()) ->show();
+        }
+        else{
         $PageFactory = new PageFactory($this->response);
         $this->response_page = $PageFactory->buildPage();
         // if response page is not null -> show page
         if (!is_null($this->response_page)) {
             $this->response_page->show();
+        }
         }
         // HtmlUtils::dump('response', $this->response);
     }

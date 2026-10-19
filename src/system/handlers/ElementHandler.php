@@ -6,7 +6,7 @@ use Wiki\models\ModelSelector;
 use Wiki\tools\dataObjects\ElementInfo;
 use Wiki\tools\Queue;
 use Wiki\tools\utils\HtmlUtils;
-
+use \ManKind\tools as TOOLS;
 class ElementHandler
 {
 
@@ -38,7 +38,7 @@ class ElementHandler
                 try{
                     $this->addDataToElement($element_info);
                 } catch (\Throwable $e) {
-                    $_SESSION['errors'][] = $e->getMessage();
+                    TOOLS\dev\Logger::_error($e);
                 }
                 
                 // HtmlUtils::dump('Element_info', $element_info);
