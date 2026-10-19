@@ -10,7 +10,7 @@ class JsonGetAllArticles extends BaseJsonAction{
 
     protected function _getData(): bool
     {
-        $this->data = ModelSelector::getArticleModel()->fetchAllArticles();
+        $this->data = ModelSelector::getArticleModel()->fetchAllArticlesAPI();
         if (!$this->data){
             return false;
         }

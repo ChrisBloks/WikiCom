@@ -367,7 +367,7 @@ class ArticleModel extends BaseModel
     }
 
 
-    public function fetchAllArticles(): array|false
+    public function fetchAllArticlesAPI(): array|false
     {
         $sql = "SELECT `article`.`title`,
                         `article`.`bodytext`,
@@ -383,6 +383,18 @@ class ArticleModel extends BaseModel
         return $this->crud->selectMany($sql, []);
     }
 
+        public function fetchArticleByIdAPI(int $article_id): array|false
+    {
+        $sql = "SELECT `article`.`title`,
+                        `article`.`bodytext`,
+                        `article`.`codeblock`,
+                        `article`.`imgFileName` 
+                        FROM `wiki_article` as `article` 
+                        WHERE `article`.`id`=:article_id";
+        $params = ['article_id' => $article_id];
+        return $this->crud->selectMany(sql: $sql, params: $params);
+    }
+
     public function fetchArticlesByUserIdAPI(int $user_id): array|false
     {
         $sql = "SELECT `article`.`title`,
@@ -395,14 +407,17 @@ class ArticleModel extends BaseModel
         return $this->crud->selectMany(sql: $sql, params: $params);
     }
 
-    public function fetchArticlesByTag(string $tag_name): array|false
+    public function fetchArticlesByTagAPI(string $tag_name): array|false
     {
         $sql = "SELECT
-                    *
+                    `article`.`title`,
+                        `article`.`bodytext`,
+                        `article`.`codeblock`,
+                        `article`.`imgFileName` 
                 FROM
-                    `wiki_article`
+                    `wiki_article` as `article`
                 LEFT JOIN wiki_article_to_tag wat ON
-                    `wiki_article`.`id`=`wat`.`article_id`
+                    `article`.`id`=`wat`.`article_id`
                 LEFT JOIN wiki_tag wt ON
                     `wt`.`id`=`wat`.`wiki_tag_id`
                 WHERE
@@ -411,18 +426,21 @@ class ArticleModel extends BaseModel
         return $this->crud->selectMany(sql: $sql, params: $params);
     }
 
-    public function fetchArticlesByTagAndUserId(string $tag, int $user_id): array|false
+    public function fetchArticlesByTagAndUserIdAPI(string $tag, int $user_id): array|false
     {
         $sql = "SELECT
-                    *
+                    `article`.`title`,
+                        `article`.`bodytext`,
+                        `article`.`codeblock`,
+                        `article`.`imgFileName` 
                 FROM
-                    `wiki_article`
+                    `wiki_article` as `article`
                 LEFT JOIN wiki_article_to_tag wat ON
-                    `wiki_article`.`id` = `wat`.`article_id`
+                    `article`.`id` = `wat`.`article_id`
                 LEFT JOIN wiki_tag wt ON
                     `wt`.`id`=`wat`.`wiki_tag_id`
                 WHERE
-                `wt`.`name`=:tag AND `wiki_article`.`user_id` =:user_id";
+                `wt`.`name`=:tag AND `article`.`user_id` =:user_id";
         $params = ['tag' => $tag, 'user_id' => $user_id];
         return $this->crud->selectMany(sql: $sql, params: $params);
     }
@@ -434,7 +452,7 @@ class ArticleModel extends BaseModel
                 LEFT JOIN wiki_article_to_tag AS watt
                 ON watt.wiki_tag_id = t.id
                 WHERE watt.wiki_tag_id IS NULL;";
-        return $this->crud->doDelete(sql: $sql, params:[]);
+        return $this->crud->doDelete(sql: $sql, params: []);
 
     }
 }

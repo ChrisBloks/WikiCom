@@ -10,7 +10,7 @@ class JsonGetArticlesByTag extends BaseJsonAction{
 
     protected function _getData(): bool
     {
-        $this->data = ModelSelector::getArticleModel()->fetchArticlesByTag(tag_name:$this->request['tag']);
+        $this->data = ModelSelector::getArticleModel()->fetchArticlesByTagAPI(tag_name:$this->request['tag']);
         if (!$this->data){
             return false;
         }

@@ -9,7 +9,7 @@ class JsonGetArticleById extends BaseJsonAction
 {
     protected function _getData(): bool
     {
-        $this->data = ModelSelector::getArticleModel()->fetchArticleById(article_id:$this->request['articleId']);
+        $this->data = ModelSelector::getArticleModel()->fetchArticleByIdAPI(article_id:$this->request['articleId']);
         if (!$this->data){
             return false;
         }
