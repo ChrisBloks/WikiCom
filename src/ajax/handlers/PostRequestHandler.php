@@ -207,11 +207,18 @@ class PostRequestHandler extends BaseRequestHandler
                     break;
                 }
 
-                // All stages of validation succesful
+                $request['page'] = 'login';
+                $request['isLoggedIn'] = false;
+                $new_body_content = (new PageFactory($request))->buildBody();
+                $body_array = [
+                    ['selector' => 'body', 'content' => $new_body_content, 'status' => 'pageHome']
+                ];
+
                 $this->response = [
                     'page' => 'login',
                     'success' => True,
-                    'message' => 'Registration was successful!'
+                    'message' => 'Registration was successful!',
+                    'html' => $body_array,
                 ];
                 break;
             case 'loginUser':

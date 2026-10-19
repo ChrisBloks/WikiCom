@@ -6,6 +6,7 @@ use Wiki\tools\utils\Utils,
 CONFIG;
 use Wiki\tools\traits\tErrorMessageCollector;
 use Wiki\tools\utils\HtmlUtils;
+use Wiki\models\ModelSelector;
 
 class APIHandler
 {
@@ -13,6 +14,7 @@ class APIHandler
     protected string $action;
     protected $handler;
     protected array $routing;
+    protected string $api_key;
 
     use tErrorMessageCollector;
 
@@ -33,15 +35,25 @@ class APIHandler
     public function handleRequest($request)
     {
         // try {
-            // start buffer
-            ob_start();
-            // get API action
-            $this->action = $request['action'];
+        // start buffer
+        ob_start();
+        // get API action
+        $this->action = $request['action'];
+        //check api key
+        $this->api_key = $request['api_key'] ?? '';
+        $api_check = ModelSelector::getUserInfoModel()->checkAPIKey($this->api_key);
+
+        if ($api_check) {
             // create associated handler and execute it
             $this->createHandler($request);
 
             $this->executeHandler();
-            ob_end_flush();
+        } else {
+            header("Content-type: application/json");
+            echo 'Api key is not correct';
+        }
+
+        ob_end_flush();
         // } catch (\Throwable $t) {
         //     ob_end_clean();
         //     $this->logError($t);
@@ -68,7 +80,13 @@ class APIHandler
     private function executeHandler()
     {
         if ($this->handler) {
-            return $this->handler->execute();
+            $api_check = ModelSelector::getUserInfoModel()->addCountAPIKey($this->api_key);
+            if ($api_check) {
+                return $this->handler->execute();
+            } else {
+                header("Content-type: application/json");
+                echo 'Api request failed';
+            }
         }
     }
 

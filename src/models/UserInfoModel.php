@@ -176,4 +176,54 @@ class UserInfoModel extends BaseModel
         return $result;
     }
 
+    public function saveAPIKey(string $user_id, string $api_key): int|false
+    {
+
+        $sql = "INSERT INTO api_keys (user_id,api_key,creation_date) 
+                        VALUES (:user_id,:api_key,:creation_date)";
+        $params = [
+            "user_id" => $user_id,
+            "api_key" => $api_key,
+            "creation_date" => date(format: 'Y-m-d')
+        ];
+        $result = $this->crud->doInsert($sql, $params);
+        if ($result == false) {
+            $this->logError("Api save failed");
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function checkAPIKey(string $api_key)
+    {
+        $sql = "SELECT * FROM api_keys 
+                        WHERE api_key=:api_key";
+        $params = ['api_key' => $api_key];
+        $result = $this->crud->selectOne($sql, $params);
+
+        if (empty($result)) {
+            $this->logError("No api key");
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function addCountAPIKey($api_key)
+    {
+        $sql = "UPDATE api_keys
+                SET last_used_date = :last_used_date,
+                    count = count + 1
+                WHERE api_key = :api_key";
+        ;
+        $params = [
+            "last_used_date" => date(format: 'Y-m-d'),
+            "api_key" => $api_key
+        ];
+        $result = $this->crud->doUpdate($sql, $params);
+        if (empty($result)) {
+            $this->logError("Request is not counted");
+            $result = false;
+        }
+        return $result;
+    }
 }

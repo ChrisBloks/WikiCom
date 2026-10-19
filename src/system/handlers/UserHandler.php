@@ -89,6 +89,11 @@ class UserHandler
             // Registration was successful
             if ($registrationResult !== false) {
                 $validation_result['ok'] = $registrationResult;
+                $api_key = password_hash($user_info['email'].rand(1,100),PASSWORD_DEFAULT);
+                $api_key_result = ModelSelector::getUserInfoModel()->saveAPIKey($registrationResult,$api_key);
+                if ($api_key_result !== false){
+                    $validation_result['ok'] = $registrationResult;
+                }
             }
             // Store model errors 
             else {
