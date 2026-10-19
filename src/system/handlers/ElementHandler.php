@@ -35,7 +35,12 @@ class ElementHandler
             $element_info['application_data'] = ModelSelector::getElementModel()->fetchElementVariables($element_info['element_id']);
             // HtmlUtils::dump('Element', $element_info);
             if (isset($element_info['application_data']) && !empty($element_info['application_data'])) {
-                $this->addDataToElement($element_info);
+                try{
+                    $this->addDataToElement($element_info);
+                } catch (\Throwable $e) {
+                    $_SESSION['errors'][] = $e->getMessage();
+                }
+                
                 // HtmlUtils::dump('Element_info', $element_info);
             }
         }

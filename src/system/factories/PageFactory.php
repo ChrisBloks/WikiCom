@@ -14,6 +14,7 @@
 namespace Wiki\system\factories;
 
 use ArrayAccess;
+use Exception;
 use Wiki\views\elements\containers\MainElement;
 use Wiki\models\ModelSelector;
 use Wiki\system\handlers\ElementHandler;
@@ -129,12 +130,16 @@ class PageFactory
         //s$main->addElement(new Toast(new ElementInfo(["html_class" => "toast-container position-fixed top-0 end-0 p-3","html_id" => "toast-container"])));
         $main->addElement(new AtomicElement(new ElementInfo(["text" => "<br>"])));
 
-        // Maybe seperate controller
-        $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
+        
 
-        // Add necessary variables
-        // HtmlUtils::dump('response', $this->response);
+        
         try {
+            // Maybe seperate controller
+            $elements_info = ModelSelector::getElementModel()->fetchPageElements($this->page);
+            if(!$elements_info) throw new Exception('Could not retrieve elements for page ' . $this->page);
+
+            // Add necessary variables
+            // HtmlUtils::dump('response', $this->response);
             $element_handler = new ElementHandler($this->response);
             $element_handler->addDataToElementList($elements_info);
         
@@ -147,7 +152,7 @@ class PageFactory
                 $element_list[$element_info['parent_order']]->addElement($element);
             }
         } catch (\Throwable $e) {
-            $_SESSION['errors'][] = '404 page "' . $this->page . '" not found!';
+            $_SESSION['errors'][] = $e->getMessage();
             $main->addElement(
                 new NoticeMessage()
             );

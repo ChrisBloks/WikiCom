@@ -72,6 +72,21 @@ class ArticleModel extends BaseModel
         return $result;
     }
 
+
+    public function fetchAuthor(int $article_id): array|false
+    {
+        $sql = "SELECT
+                    `user`.name
+                FROM
+                    `wiki_article`
+                    JOIN `user` ON
+                        `wiki_article`.`id` = :article_id AND
+                        `wiki_article`.`user_id` = `user`.`id`;";
+        $params = ['article_id' => $article_id];
+        $result = $this->crud->selectOne(sql: $sql, params: $params);
+        return $result;
+    }
+
     /**
      * Get all tags from the database associated with a given article
      * @param int $article_id
