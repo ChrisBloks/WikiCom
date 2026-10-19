@@ -6,6 +6,7 @@ use Wiki\ajax\controllers\AjaxController;
 use Wiki\api\controllers\APIController;
 use Wiki\page\controllers\PageController;
 use Wiki\tools\interfaces;
+use Wiki\tools\utils\HtmlUtils;
 use Wiki\tools\utils\Utils;
 
 /**
