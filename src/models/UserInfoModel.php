@@ -208,7 +208,7 @@ class UserInfoModel extends BaseModel
         return $result;
     }
 
-    public function addCountAPIKey($api_key)
+    public function addCountAPIKey(string $api_key)
     {
         $sql = "UPDATE api_keys
                 SET last_used_date = :last_used_date,
@@ -224,6 +224,15 @@ class UserInfoModel extends BaseModel
             $this->logError("Request is not counted");
             $result = false;
         }
+        return $result;
+    }
+
+    public function fetchAPIKeyByUser(string $user_id)
+    {
+        $sql = "SELECT api_key FROM api_keys 
+                        WHERE api_keys.user_id=:user_id";
+        $params = ["user_id" => $user_id];
+        $result = $this->crud->selectOne($sql, $params);
         return $result;
     }
 }

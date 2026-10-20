@@ -19,7 +19,6 @@ export const AjaxForms = {
   bind(formSelector, options = {}) {
     const form = document.querySelector(formSelector);
     if (!form) return;
-
     // get vars
     const modal = form.closest(".modal");
 
@@ -45,7 +44,12 @@ export const AjaxForms = {
               if (result.message?.length > 0) {
                 Toasts.show("message", result.message)
               }
-              if (modal) bootstrap.Modal.getInstance(modal)?.hide();
+              if (result.model) {
+                console.log("model");
+              }
+              else {
+                if (modal) bootstrap.Modal.getInstance(modal)?.hide();
+              }
             } else if (errorBox) {
               // if the response has errors, display them too
               const messages = result.errors?.length

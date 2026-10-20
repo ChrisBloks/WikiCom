@@ -17,7 +17,6 @@ class ElementHandler
 
     public function __construct(array $response)
     {
-        // HtmlUtils::dump('response', $response);
         $this->response = $response;
     }
 
@@ -35,12 +34,12 @@ class ElementHandler
             $element_info['application_data'] = ModelSelector::getElementModel()->fetchElementVariables($element_info['element_id']);
             // HtmlUtils::dump('Element', $element_info);
             if (isset($element_info['application_data']) && !empty($element_info['application_data'])) {
-                try{
+                try {
                     $this->addDataToElement($element_info);
                 } catch (\Throwable $e) {
                     TOOLS\dev\Logger::_error($e);
                 }
-                
+
                 // HtmlUtils::dump('Element_info', $element_info);
             }
         }
@@ -144,6 +143,10 @@ class ElementHandler
                 case '[*USER_NAME*]':
                     $user_info = $this->getUserInfo($this->response['userID']);
                     $app_data = $user_info['name'];
+                    break;
+                case '[*API_KEY*]':
+                    $api_key = ModelSelector::getUserInfoModel()->fetchAPIKeyByUser($this->response['userID'])['api_key'];
+                    $app_data = $api_key;
                     break;
                 default:
                     $app_data = "{$var} not recognized!";

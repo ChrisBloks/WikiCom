@@ -106,6 +106,17 @@ export const DashboardEvents = {
         });
 
         // ============================================================
+        // API Key info model event
+        // ============================================================
+        AjaxForms.bind("#apiKeyModal form", {
+            onSuccess: function (result) {
+                if (result.api_key){
+                    document.getElementById("api_key_field").value = result.api_key;
+                }
+            },
+        });
+
+        // ============================================================
         // Edit user password model event
         // ============================================================
 

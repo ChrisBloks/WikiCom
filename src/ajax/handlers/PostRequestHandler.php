@@ -8,6 +8,7 @@ use Wiki\system\handlers\ArticleHandler;
 use Wiki\system\handlers\BaseRequestHandler;
 use Wiki\system\handlers\UserHandler;
 use Wiki\system\handlers\ValidationHandler;
+use Wiki\tools\utils\HtmlUtils;
 use Wiki\tools\utils\Utils;
 
 class PostRequestHandler extends BaseRequestHandler
@@ -323,6 +324,37 @@ class PostRequestHandler extends BaseRequestHandler
                         'errors' => $validation_result['user_error'],
                         'message' => 'Please fix the errors below.',
                     ];
+                }
+                break;
+            case 'requestAPIKey':
+                $api_key = ModelSelector::getUserInfoModel()->fetchAPIKeybyUser($_SESSION['userID'])['api_key'];
+                if ($api_key != false) {
+                    $this->response = [
+                        'page' => 'dashboard',
+                        'success' => True,
+                        'model' => True,
+                        'api_key' => $api_key,
+                        'message' => 'API key request was successfull!',
+                    ];
+                } else {
+                    $user_info = ModelSelector::getUserInfoModel()->fetchUserPrivateInfoById($_SESSION['userID']);
+                    $api_key = password_hash($user_info['email'] . rand(1, 100), PASSWORD_DEFAULT);
+                    $api_key_result = ModelSelector::getUserInfoModel()->saveAPIKey($_SESSION['userID'], $api_key);
+                    if ($api_key_result !== false) {
+                        $api_key = ModelSelector::getUserInfoModel()->fetchAPIKeybyUser($_SESSION['userID'])['api_key'];
+                        $this->response = [
+                            'page' => 'dashboard',
+                            'success' => True,
+                            'model' => True,
+                            'api_key' => $api_key,
+                            'message' => 'API key request was successfull!',
+                        ];
+                    } else {
+                        $this->response = [
+                            'success' => false,
+                            'message' => 'API key request failed',
+                        ];
+                    }
                 }
                 break;
             default:
