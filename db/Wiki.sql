@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2026 at 01:03 PM
+-- Generation Time: Oct 20, 2026 at 03:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,8 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `wiki_dev`
 --
-CREATE DATABASE IF NOT EXISTS `wiki_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `wiki_dev`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `api_keys`
+--
+
+CREATE TABLE `api_keys` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `api_key` text NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_used_date` date NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `api_keys`
+--
+
+INSERT INTO `api_keys` (`id`, `user_id`, `api_key`, `creation_date`, `last_used_date`, `count`) VALUES
+(8, 20, '$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm', '2026-10-19', '2026-10-19', 2),
+(9, 1, '$2y$10$S1xPMgypODOdvE4uB/o2auKVGBaz7pGNIn3MR8.doJfaQR62ZYkOG', '2026-10-20', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -68,7 +89,8 @@ INSERT INTO `application_data` (`id`, `name`, `element_info_key`) VALUES
 (26, '[*USER_TEXT*]', 'field_info,text'),
 (27, '[*USER_ID*]', 'field_info,value'),
 (28, '[*ARTICLE_ID*]', 'field_info,value'),
-(29, '[*ARTICLE_TAGS*]', 'options_info');
+(29, '[*ARTICLE_TAGS*]', 'options_info'),
+(30, '[*API_KEY*]', 'field_info,text');
 
 -- --------------------------------------------------------
 
@@ -146,7 +168,8 @@ CREATE TABLE `dialogue_window` (
 
 INSERT INTO `dialogue_window` (`id`, `data-bs-toggle`, `data-bs-target`, `element_info_id`) VALUES
 (1, 'modal', '#editUserModal', 65),
-(2, 'modal', '#editPasswordModal', 66);
+(2, 'modal', '#editPasswordModal', 66),
+(3, 'modal', '#apiKeyModal', 111);
 
 -- --------------------------------------------------------
 
@@ -258,7 +281,11 @@ INSERT INTO `element_info` (`id`, `element_name`, `html_tag`, `html_class`, `htm
 (105, 'hidden_id_edit_password', '', '', '', 'HiddenField', ''),
 (108, 'add_tag_div', 'div', 'd-flex mt-3 mb-3 h-75', 'add-tag-widget', 'ContainerElement', ''),
 (109, 'tag_input_class', 'input', 'form-control', 'new-tag-name', 'Input', 'New tag'),
-(110, 'add_tag_button', 'button', 'btn btn-sm btn-secondary', 'add-tag-btn', 'Button', 'Add tag');
+(110, 'add_tag_button', 'button', 'btn btn-sm btn-secondary', 'add-tag-btn', 'Button', 'Add tag'),
+(111, 'api_key_button_dashboard', 'button', 'btn btn-secondary mx-auto d-block', 'api-key-btn', 'DialogueButton', 'API Key Request'),
+(112, 'api_key_modal', '', '', 'apiKeyModal', 'Modal', 'Api Key'),
+(113, 'api_key_form', 'Form', 'form-control mt-5', '', 'Form', ''),
+(114, 'api_key_field', '', 'api_key form-control', 'api_key_field', 'Textarea', '');
 
 -- --------------------------------------------------------
 
@@ -358,7 +385,10 @@ INSERT INTO `element_lookup_info` (`id`, `element_id`, `source_table`, `column_n
 (98, 38, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '105', 0, 'element', 0),
 (101, 105, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '105', 0, 'field', 0),
 (105, 109, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '109', 0, 'field', 0),
-(106, 110, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '110', 0, 'field', 0);
+(106, 110, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '110', 0, 'field', 0),
+(107, 113, 'form_info', 'action,method,label,submit_caption,enctype,submit_class', 'form_info.element_id', '113', 0, 'form', 0),
+(108, 113, 'element_info', 'id as element_id,element_name,php_class,html_class,html_id,html_tag', 'element_info.id', '114', 0, 'element', 0),
+(109, 114, 'field_info', 'field_name,type,label,value,optional', 'field_info.element_id', '114', 0, 'field', 0);
 
 -- --------------------------------------------------------
 
@@ -411,7 +441,9 @@ INSERT INTO `element_to_application_data` (`id`, `element_id`, `application_data
 (32, 105, 27),
 (33, 72, 28),
 (34, 82, 8),
-(35, 83, 29);
+(35, 83, 29),
+(36, 111, 19),
+(37, 114, 30);
 
 -- --------------------------------------------------------
 
@@ -463,7 +495,8 @@ INSERT INTO `field_info` (`id`, `field_name`, `element_id`, `type`, `label`, `va
 (31, 'id', 102, 'hidden', '', '', 0),
 (36, 'id', 105, 'hidden', '', '', 0),
 (37, 'new_tag', 109, 'text', '', '', 0),
-(38, 'new_tag_button', 110, 'button', '', '', 0);
+(38, 'new_tag_button', 110, 'button', '', '', 0),
+(39, 'api_key', 114, 'textarea', 'API Key:', '', 1);
 
 -- --------------------------------------------------------
 
@@ -493,7 +526,8 @@ INSERT INTO `form_info` (`id`, `element_id`, `action`, `method`, `label`, `submi
 (4, 25, 'saveArticle', 'POST', '', 'Save Article', 'multipart/form-data', 'btn btn-primary btn-sm'),
 (5, 31, 'registerUser', 'POST', '', 'Register', '', 'btn btn-primary btn-sm'),
 (7, 35, 'updateUserInfo', 'POST', '', 'Change information', '', 'btn btn-primary'),
-(8, 38, 'updatePassword', 'POST', '', 'save', '', 'btn btn-primary');
+(8, 38, 'updatePassword', 'POST', '', 'save', '', 'btn btn-primary'),
+(9, 113, 'requestAPIKey', 'POST', '', 'API Key Request', '', 'btn btn-primary');
 
 -- --------------------------------------------------------
 
@@ -632,6 +666,9 @@ INSERT INTO `page_elements` (`page_id`, `element_id`, `order_by`, `parent_order`
 (8, 38, 190, 170),
 (8, 75, 200, 40),
 (8, 76, 210, 40),
+(8, 111, 220, 30),
+(8, 112, 230, 30),
+(8, 113, 240, 230),
 (9, 77, 9, 0),
 (9, 79, 20, 0),
 (9, 82, 30, 20),
@@ -713,7 +750,8 @@ INSERT INTO `user` (`id`, `name`, `password`, `email`, `imgFileName`, `descripti
 (1, 'Danny123', '$2y$10$5u98k0LZarKnzLeIgANPpOb2e5si298S3xfxNNOD2TTZvH5ZYrckC', 'danny@email.com', 'author_1.png', 'Hoi ik ben Marius, een van de makers van deze website.'),
 (7, 'Christiannn', '$2y$10$VeY8X0yMrxhmG3A6dQt6vOTV.K8S3W0hrBuCB4R0uDpEis4ybQewy', 'christian@email.com', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (8, 'test', '$2y$10$ZKo8N0xwhh9ln1QV8OtsGuCXeAzfhon7mNM0W5FqAlUA0qsDKCOtK', 'email@email.com', 'author_8_082026.png', 'According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don&#039;t care what humans think is impossible.'),
-(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', '');
+(11, 'maruis', '$2y$10$M2A9UyZxjKNLJ2YSVeUA2.E21G6yuexpBqQgPdpBng3kGvzsZBog6', 'marius@email.com', 'author_11.png', ''),
+(20, 'dannyapi', '$2y$10$UtIFqSAHi3/x1xHwHb8nLesf0YkrGW0T3c27/xNwYcNy8sFndDR8W', 'dannyapi@email.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -877,6 +915,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `api_keys`
+--
+ALTER TABLE `api_keys`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_api_keys_to_user` (`user_id`);
+
+--
 -- Indexes for table `application_data`
 --
 ALTER TABLE `application_data`
@@ -1007,10 +1052,16 @@ ALTER TABLE `wiki_tag`
 --
 
 --
+-- AUTO_INCREMENT for table `api_keys`
+--
+ALTER TABLE `api_keys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `application_data`
 --
 ALTER TABLE `application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -1022,37 +1073,37 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `dialogue_window`
 --
 ALTER TABLE `dialogue_window`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `element_info`
 --
 ALTER TABLE `element_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `element_lookup_info`
 --
 ALTER TABLE `element_lookup_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `element_to_application_data`
 --
 ALTER TABLE `element_to_application_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `field_info`
 --
 ALTER TABLE `field_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `form_info`
 --
 ALTER TABLE `form_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `menu_items`
@@ -1082,13 +1133,13 @@ ALTER TABLE `table_columns`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `wiki_article`
 --
 ALTER TABLE `wiki_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `wiki_sortby_info`
@@ -1100,11 +1151,17 @@ ALTER TABLE `wiki_sortby_info`
 -- AUTO_INCREMENT for table `wiki_tag`
 --
 ALTER TABLE `wiki_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `api_keys`
+--
+ALTER TABLE `api_keys`
+  ADD CONSTRAINT `fk_api_keys_to_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `dialogue_window`
@@ -1155,7 +1212,7 @@ ALTER TABLE `wiki_article`
 --
 ALTER TABLE `wiki_article_to_tag`
   ADD CONSTRAINT `fk_article_to_tag_article_id` FOREIGN KEY (`article_id`) REFERENCES `wiki_article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_article_to_tag_tag_id` FOREIGN KEY (`wiki_tag_id`) REFERENCES `wiki_tag` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_article_to_tag_tag_id` FOREIGN KEY (`wiki_tag_id`) REFERENCES `wiki_tag` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `wiki_rating`

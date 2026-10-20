@@ -149,7 +149,7 @@ class ElementHandler
                     $app_data = $api_key;
                     break;
                 default:
-                    $app_data = "{$var} not recognized!";
+                    $app_data = "{$var} not recognized!"; 
                     break;
             }
             // Add the appData to the $element_info

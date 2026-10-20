@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <style>
+        .row {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .form {
+            display: grid;
+            grid-template-columns: max-content 250px;
+            gap: 8px 12px;
+            align-items: center;
+        }
+
+        .form label {
+            text-align: right;
+        }
+
+        .form .full {
+            grid-column: 2;
+            justify-self: start;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="form element_info" id="element_info">
+            <label for="parent_value">Parent ID:</label>
+            <input type="text" id="parent_value">
+
+            <label for="current_id">Current ID:</label>
+            <input type="text" id="current_id">
+
+            <label for="element_name">Element Name:</label>
+            <input type="text" id="element_name">
+
+            <label for="html_tag">HTML Tag:</label>
+            <input type="text" id="html_tag">
+
+            <label for="html_class">HTML Class:</label>
+            <input type="text" id="html_class">
+
+            <label for="html_id">HTML ID:</label>
+            <input type="text" id="html_id">
+
+            <label for="php_class">PHP Class:</label>
+            <input type="text" id="php_class">
+
+            <label for="text">Text:</label>
+            <input type="text" id="text">
+
+            <label for="type">Type:</label>
+            <select name="element_type" id="element_type">
+                <option value="Element">Element</option>
+                <option value="Form">Form</option>
+                <option value="Field">Field</option>
+            </select>
+
+            <input type="button" value="add" class="full">
+        </div>
+
+        <div class="form form_info" id="form_info">
+            <label for="action">Action:</label>
+            <input type="text" id="action">
+
+            <label for="method">Method:</label>
+            <input type="text" id="method">
+
+            <label for="label">Label:</label>
+            <input type="text" id="label">
+
+            <label for="submit_caption">Submit Caption:</label>
+            <input type="text" id="submit_caption">
+
+            <label for="enctype">enctype:</label>
+            <input type="text" id="enctype">
+
+            <label for="submit_class">Submit Class:</label>
+            <input type="text" id="submit_class">
+        </div>
+    </div>
+</body>
+<script>
+    let element_info = document.getElementById("element_info");
+    let form_info = document.getElementById("form_info");
+    let element_type = document.getElementById("element_type")
+    form_info.style.visibility ='hidden'
+
+    element_type.addEventListener("change", (event) =>{
+        let selected = event.target.value;
+        if (selected == 'Form')
+        {
+            console.log(selected);
+            form_info.style.visibility ='visible'
+        }
+        if (selected == 'Element'){
+            form_info.style.visibility ='hidden'
+        }
+    }
+    )
+</script>
+
+</html>
