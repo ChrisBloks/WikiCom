@@ -2,6 +2,7 @@
 
 namespace Wiki\system\handlers;
 
+use Config;
 use Exception;
 use Wiki\models\ModelSelector;
 use Wiki\tools\traits\tSingleton;
@@ -137,14 +138,28 @@ class ArticleHandler
                     $validation_result['field_inputs']['articleimg'] = isset($article_info['imgFileName']) ? $article_info['imgFileName'] : '';
                 }
 
-                $update_result = ModelSelector::getArticleModel()->saveExistingArticleInfo(
-                    article_id: $article_id,
-                    article_title: $validation_result['field_inputs']['title'],
-                    article_bodytext: $validation_result['field_inputs']['bodytext'],
-                    article_codeblock: $validation_result['field_inputs']['codeblock'] ?? '',
-                    imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
-                    user_id: $user_id
-                );
+                if ($_SESSION['userLevel'] & Config::LVL_ADMIN) {
+                    $article_info = ModelSelector::getArticleModel()->fetchArticleById($article_id);
+                    $update_result = ModelSelector::getArticleModel()->saveExistingArticleInfo(
+                        article_id: $article_id,
+                        article_title: $validation_result['field_inputs']['title'],
+                        article_bodytext: $validation_result['field_inputs']['bodytext'],
+                        article_codeblock: $validation_result['field_inputs']['codeblock'] ?? '',
+                        imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
+                        user_id: $article_info['user_id']
+                    );
+                } else {
+                    $update_result = ModelSelector::getArticleModel()->saveExistingArticleInfo(
+                        article_id: $article_id,
+                        article_title: $validation_result['field_inputs']['title'],
+                        article_bodytext: $validation_result['field_inputs']['bodytext'],
+                        article_codeblock: $validation_result['field_inputs']['codeblock'] ?? '',
+                        imgFileName: $validation_result['field_inputs']['articleimg'] ?? '',
+                        user_id: $user_id
+                    );
+                }
+
+
 
                 if ($update_result === false) {
                     $validation_result['ok'] = false;
@@ -169,7 +184,7 @@ class ArticleHandler
         if (!$article) {
             throw new Exception("Article not found");
         }
-        if ($userId != $article['user_id']) {
+        if ($userId != $article['user_id'] & ($_SESSION['userLevel'] & Config::LVL_ADMIN)) {
             throw new Exception("Article does not match to user!");
         }
 

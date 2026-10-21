@@ -2,6 +2,7 @@
 
 namespace Wiki\system\handlers;
 
+use Config;
 use Wiki\models\ModelSelector;
 use Wiki\tools\dataObjects\ElementInfo;
 use Wiki\tools\Queue;
@@ -122,7 +123,12 @@ class ElementHandler
                     $app_data = $random_article_info;
                     break;
                 case '[*USER_ARTICLES*]':
-                    $user_articles = ModelSelector::getArticleModel()->fetchArticleByUserId($this->response['userID']);
+                    if ($_SESSION['userLevel'] & Config::LVL_ADMIN) {
+                        $user_articles = ModelSelector::getArticleModel()->fetchAllArticles();
+                    } else {
+                        $user_articles = ModelSelector::getArticleModel()->fetchArticleByUserId($this->response['userID']);
+
+                    }
                     $app_data = $user_articles;
                     break;
                 case '[*USER_EMAIL*]':
@@ -149,7 +155,7 @@ class ElementHandler
                     $app_data = $api_key;
                     break;
                 default:
-                    $app_data = "{$var} not recognized!"; 
+                    $app_data = "{$var} not recognized!";
                     break;
             }
             // Add the appData to the $element_info

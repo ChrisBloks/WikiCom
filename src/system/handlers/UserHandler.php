@@ -2,6 +2,7 @@
 
 namespace Wiki\system\handlers;
 
+use Config;
 use Wiki\models\ModelSelector;
 use Wiki\tools\traits\tSingleton;
 
@@ -49,6 +50,12 @@ class UserHandler
             // Update session variables
             $_SESSION['userName'] = $user_info['name'];
             $_SESSION['userID'] = $user_info['id'];
+            if ($user_info['id']==1){
+                $_SESSION['userLevel'] = Config::LVL_ADMIN;
+            }
+            else{
+                $_SESSION['userLevel'] = Config::LVL_AUTHOR;
+            }
         }
 
         return $validation_result;

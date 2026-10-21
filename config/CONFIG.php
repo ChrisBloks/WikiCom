@@ -8,6 +8,10 @@ class Config
     const FIRST_CELL_TARGET = "editArticle";
     const MIN_PW_LENGTH = 4;
     const APICLASSPATH = "Wiki\\api\\actions\\";
+    const LVL_GUEST = 0x01;
+    const LVL_AUTHOR = 0x02;
+    const LVL_ADMIN = 0x04;
+    const LVL_ALLWAYS = 0xFF;
 
     // Database settings: these differ per machine
     private static ?array $local = null;
@@ -35,8 +39,20 @@ class Config
         return self::$local[$key] ?? $default;
     }
 
-    public static function servername(): string { return self::get('servername', 'DB_HOST', 'localhost'); }
-    public static function username(): string   { return self::get('username',   'DB_USER', 'root'); }
-    public static function password(): string   { return self::get('password',   'DB_PASSWORD', ''); }
-    public static function db(): string         { return self::get('db',         'DB_NAME', 'wiki_dev'); }
+    public static function servername(): string
+    {
+        return self::get('servername', 'DB_HOST', 'localhost');
+    }
+    public static function username(): string
+    {
+        return self::get('username', 'DB_USER', 'root');
+    }
+    public static function password(): string
+    {
+        return self::get('password', 'DB_PASSWORD', '');
+    }
+    public static function db(): string
+    {
+        return self::get('db', 'DB_NAME', 'wiki_dev');
+    }
 }

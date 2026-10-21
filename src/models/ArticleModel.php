@@ -56,6 +56,33 @@ class ArticleModel extends BaseModel
     }
 
     /**
+     * Fetches an article from the database with given id
+     * @return array|false a single article of form [article.title, user.name, article.bodytext, article.codeblock, article.imgFileName, article.lateEdit]
+     */
+    public function fetchAllArticles(): array|false
+    {
+        $sql = "SELECT
+                    article.id,
+                    article.title,
+                        user.name,
+                        article.bodytext,
+                        article.codeblock,
+                        article.imgFileName,
+                    article.lastEdit,
+                    article.user_id,
+                    COALESCE(v_article_avg_rating.AVGrating, 0) AS rating,
+                    v_article_avg_rating.Nratings AS n_ratings
+                FROM
+                    wiki_article AS article
+                JOIN USER ON article.user_id = user.id
+                JOIN v_article_avg_rating ON article.id = v_article_avg_rating.id";
+
+        $result = $this->crud->selectMany(sql: $sql, params: []);
+
+        return $result;
+    }
+
+    /**
      * Fetches an article with the given user id
      * @param int $user_id
      * @return array|false a single article of form [id, title, lastEdit]
@@ -398,7 +425,7 @@ class ArticleModel extends BaseModel
         return $this->crud->selectMany($sql, []);
     }
 
-        public function fetchArticleByIdAPI(int $article_id): array|false
+    public function fetchArticleByIdAPI(int $article_id): array|false
     {
         $sql = "SELECT `article`.`title`,
                         `article`.`bodytext`,
