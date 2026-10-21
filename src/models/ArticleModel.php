@@ -387,7 +387,7 @@ class ArticleModel extends BaseModel
         $sql = "SELECT `article`.`title`,
                         `article`.`bodytext`,
                         `article`.`codeblock`,
-                        `article`.`imgFileName` 
+                        `article`.`imgFileName` AS 'img'
                         FROM `wiki_article` as `article`";
         return $this->crud->selectMany($sql, []);
     }

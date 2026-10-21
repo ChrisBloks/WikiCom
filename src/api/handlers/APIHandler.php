@@ -28,6 +28,7 @@ class APIHandler
             'getArticlesByTag' => 'JsonGetArticlesByTag',
             'getArticlesByUserTag' => 'JsonGetArticlesByUserTag',
             'getArticleById' => 'JsonGetArticleById',
+            'getAllArticlesXML' => 'XmlGetAllArticles',
         ];
     }
 
