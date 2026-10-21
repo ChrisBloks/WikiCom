@@ -33,8 +33,7 @@ export const HistoryNavigation = {
                 if (action == 'article' || action == 'editArticle'){ // if the target action is an article, require an articleID
                     url += '&articleID=' + event.state.article_id;
                 }
-                console.log(url);
-                //navigation.navigate(url);
+                navigation.navigate(url);
             
             }
         );
