@@ -33,8 +33,8 @@ class ButtonField extends BaseField
                         'id="' . $this->id . '"'.
                         'class="'. $element_info['html_class'] .'"
                         '. HtmlUtils::addAttrs($element_info['attributes'] ?? []) .
-                        'type="'.$field_info['type'].'" '.
-                        'value="'.$field_info['value'].'" '.
+                        'type="'.($field_info['type']?? " ").'" '.
+                        'value="'.($field_info['value'] ?? " ").'" '.
                         '>';
 
         $this->html .= ($field_info['text'] ?? ($element_info['text']?? ""));

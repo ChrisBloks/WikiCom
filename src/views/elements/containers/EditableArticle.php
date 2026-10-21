@@ -18,17 +18,17 @@ class EditableArticle extends Form {
         foreach($element_info['sub_fields'] as $sub_field){
             // Add title 
             if($sub_field['field_info']['field_name'] == 'title'){
-                $sub_field['field_info']['value'] = $element_info['article_info']['title'];
+                $sub_field['field_info']['value'] = ($element_info['article_info']['title'] ?? "");
             }
 
             // Add bodytext
             if($sub_field['field_info']['field_name'] == 'bodytext'){
-                $sub_field['field_info']['text'] = $element_info['article_info']['bodytext'];
+                $sub_field['field_info']['text'] = ($element_info['article_info']['bodytext']?? "");
             }
 
             // Add codeblock
             if($sub_field['field_info']['field_name'] == 'codeblock'){
-                $sub_field['field_info']['text'] = $element_info['article_info']['codeblock'];
+                $sub_field['field_info']['text'] = ($element_info['article_info']['codeblock']?? "");
             }
         }
 
