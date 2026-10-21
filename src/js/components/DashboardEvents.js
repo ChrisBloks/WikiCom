@@ -6,6 +6,7 @@ import { AjaxForms } from "../services/AjaxForms.js";
 import { ajaxGET } from "../services/Ajax.js";
 import { ResponseHandler } from "../ResponseHandler.js";
 import { bindCellLink } from "../utils/bindCellLink.js";
+import { Toasts } from "./Toasts.js";
 
 
 export const DashboardEvents = {
@@ -91,9 +92,7 @@ export const DashboardEvents = {
             onSuccess: function (result) {
                 if (result.name) {
                     document.querySelector(".userNameDisplay").textContent = result.name;
-                    document.querySelector(
-                        `[data-user-id="${result.user_id}"]`,
-                    ).textContent = result.name;
+
                 }
                 if (result.email) {
                     document.querySelector(".userEmailDisplay").textContent = result.email;
@@ -108,14 +107,23 @@ export const DashboardEvents = {
         // ============================================================
         // API Key info model event
         // ============================================================
-        AjaxForms.bind("#apiKeyModal form", {
-            onSuccess: function (result) {
-                if (result.api_key){
-                    document.getElementById("api_key_field").value = result.api_key;
-                }
-            },
-        });
-
+        let api_field = document.getElementById('api_key_field');
+        api_field.readOnly = true;
+        if (!api_field.value) {
+            AjaxForms.bind("#apiKeyModal form", {
+                onSuccess: function (result) {
+                    if (result.api_key) {
+                        document.getElementById("api_key_field").value = result.api_key;
+                    }
+                },
+            });
+        } else {
+            let form = document.querySelector("#apiKeyModal form");
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                Toasts.show("message", "Api key already exists!");
+            })
+        }
         // ============================================================
         // Edit user password model event
         // ============================================================
