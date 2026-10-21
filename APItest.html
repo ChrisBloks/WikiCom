@@ -1,12 +1,12 @@
 <!doctype html>
 <script>
-    // const body = { action: "getAllUsers" };
-    // const body = { action: "getAllArticles" };
-    // const body = { action: "getAllTags" };
-    // const body = { action: "getArticlesByUser", userId: 1 };
-    // const body = { action: "getArticlesByTag", tag: 'code' };
-    // const body = { action: "getArticlesByUserTag", userId: 1, tag: 'code' };
-    const body = { action: "getAllArticlesXML", api_key:"$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm"};
+    // const body = { action: "getAllUsersXML" , api_key:"$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm"};
+    // const body = { action: "getAllArticles" , api_key:"$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm"};
+    // const body = { action: "getAllTagsXML" , api_key:"$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm"};
+    // const body = { action: "getArticlesByUserXML", userId: 1 , api_key:"$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm"};
+    // const body = { action: "getArticlesByTagXML", tag: 'code' , api_key:"$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm"};
+    const body = { action: "getArticlesByUserTagXML", userId: 1, tag: 'code', api_key:"$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm" };
+    // const body = { action: "getAllArticlesXML", api_key:"$2y$10$aSmIfCFbGXk9sNO3TqLB1OKEW75Cb79GnrDigXUpHRuxha45RyxYm"};
     (async () => {
         try {
             const r = await fetch("main.php?reqType=API", {

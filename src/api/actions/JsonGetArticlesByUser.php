@@ -7,7 +7,6 @@ use Wiki\models\ModelSelector,
 class JsonGetArticlesByUser extends BaseJsonAction
 {
 
-
     protected function _getData(): bool
     {
         $this->data = ModelSelector::getArticleModel()->fetchArticlesByUserIdAPI(user_id: $this->request['userId']);

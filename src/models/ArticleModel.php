@@ -403,7 +403,7 @@ class ArticleModel extends BaseModel
         $sql = "SELECT `article`.`title`,
                         `article`.`bodytext`,
                         `article`.`codeblock`,
-                        `article`.`imgFileName` 
+                        `article`.`imgFileName` AS 'img'
                         FROM `wiki_article` as `article` 
                         WHERE `article`.`id`=:article_id";
         $params = ['article_id' => $article_id];
@@ -415,7 +415,7 @@ class ArticleModel extends BaseModel
         $sql = "SELECT `article`.`title`,
                         `article`.`bodytext`,
                         `article`.`codeblock`,
-                        `article`.`imgFileName` 
+                        `article`.`imgFileName` AS 'img'
                         FROM `wiki_article` as `article` 
                         WHERE `user_id`=:user_id";
         $params = ['user_id' => $user_id];
@@ -428,7 +428,7 @@ class ArticleModel extends BaseModel
                     `article`.`title`,
                         `article`.`bodytext`,
                         `article`.`codeblock`,
-                        `article`.`imgFileName` 
+                        `article`.`imgFileName` AS 'img'
                 FROM
                     `wiki_article` as `article`
                 LEFT JOIN wiki_article_to_tag wat ON
@@ -447,7 +447,7 @@ class ArticleModel extends BaseModel
                     `article`.`title`,
                         `article`.`bodytext`,
                         `article`.`codeblock`,
-                        `article`.`imgFileName` 
+                        `article`.`imgFileName` AS 'img'
                 FROM
                     `wiki_article` as `article`
                 LEFT JOIN wiki_article_to_tag wat ON

@@ -28,7 +28,12 @@ class APIHandler
             'getArticlesByTag' => 'JsonGetArticlesByTag',
             'getArticlesByUserTag' => 'JsonGetArticlesByUserTag',
             'getArticleById' => 'JsonGetArticleById',
+            'getAllUsersXML' => 'XmlGetAllUsers',
+            'getAllTagsXML' => 'XmlGetAllTags',
+            'getArticlesByTagXML' => 'XmlGetArticlesByTag',
             'getAllArticlesXML' => 'XmlGetAllArticles',
+            'getArticlesByUserXML' => 'XmlGetArticlesByUser',
+            'getArticlesByUserTagXML' => 'XmlGetArticlesByUserTag'
         ];
     }
 
@@ -83,6 +88,10 @@ class APIHandler
         if ($this->handler) {
             $api_check = ModelSelector::getUserInfoModel()->addCountAPIKey($this->api_key);
             if ($api_check) {
+                if ($this->handler->execute() == false) {
+                    header("Content-type: application/json");
+                    echo 'Not found in Database';
+                }
                 return $this->handler->execute();
             } else {
                 header("Content-type: application/json");
